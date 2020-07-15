@@ -1,5 +1,7 @@
 package Controller.Servlets;
 
+import Controller.Config;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +11,9 @@ import java.io.IOException;
 
 @WebServlet(name = "QuizSummaryServlet")
 public class QuizSummaryServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getParameter(Config.CURRENT_QUIZES);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
