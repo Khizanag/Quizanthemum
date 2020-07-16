@@ -12,9 +12,9 @@ public class Quiz {
     private List<Question> questions;
     private int maxScore = 0;
 
-    public Quiz(String author, String name, String iconUrl) {
+    public Quiz(String author, String name, String iconUrl, Date createDate) {
         this.author = author;
-        createDate = new Date();
+        this.createDate = createDate;
         this.name = name;
         this.iconUrl = iconUrl;
         questions = new ArrayList<>();
@@ -25,6 +25,11 @@ public class Quiz {
         maxScore += question.getMaxScore();
     }
 
+    public int getSize() {
+        return questions.size();
+    }
+
+    // quizEvent-ში მინდა ეს
     public int getScore() {
         int score = 0;
         for(Question q : questions) {
