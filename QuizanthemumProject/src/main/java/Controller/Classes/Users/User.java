@@ -1,5 +1,8 @@
 package Controller.Classes.Users;
 
+import Controller.Classes.Challenge;
+import Controller.Classes.Quiz.QuizEvent;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +20,8 @@ public class User {
     private Date birthDate;
     private Date registrationDate;
     private List<User> friends;
+    private List<QuizEvent> quizEvents;
+    private List<Challenge> challenges;
 
     public User(int userID, String name, String lastName, String username, String city,
                 String county, String mobileNumber, String email, Date birthDate,
@@ -77,7 +82,6 @@ public class User {
     public List<User> getFriends() {
         return friends;
     }
-
 
     boolean isWriter(){
         return false;
