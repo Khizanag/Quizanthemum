@@ -31,9 +31,10 @@
 
 .header-left {
     display: flex;
+    position: absolute;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    left: 0;
 }
 
 .logo {
@@ -43,6 +44,32 @@
 .logo-text {
     font-family: "Comic Sans MS", cursive, sans-serif;
     color: #f07237;
+}
+
+.header-right {
+    display: flex;
+    position: absolute;
+    margin-top: 15px;
+    right: 0;
+}
+
+.icon-cirkle {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa {
+    color: white;
+    line-height: 30px;
+}
+
+.icon-cirkle:hover {
+    background-color: #ee802f;
 }
 
 .nav-section {
@@ -112,7 +139,7 @@
 .info-title {
     color: #d48a33;
     font-family: "Comic Sans MS", cursive, sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     text-transform: capitalize;
 }
 
