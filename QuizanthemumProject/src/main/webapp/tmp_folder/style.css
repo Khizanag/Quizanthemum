@@ -4,12 +4,6 @@
     box-sizing: border-box;
 }
 
-.line-section { 
-    width: 100%;
-    height: 5px; 
-    background-color: #d48a33;
-}
-
 .container {
     width: 1250px;
     /* width: 960px; */
@@ -18,15 +12,11 @@
 
 .banner-section {
     width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .banner {
     width: 100%;
-    max-height: 300px;
-    min-height: 300px;
+    max-height: 500px;
 }
 
 .header-section { 
@@ -52,7 +42,7 @@
 
 .logo-text {
     font-family: "Comic Sans MS", cursive, sans-serif;
-    color: #b3bdbe;
+    color: #f07237;
 }
 
 .nav-section {
@@ -87,14 +77,74 @@
     color: #d48a33;
 }
 
+.main-section {
+    background-color: #002c2f;
+    width: 100%;
+    height: 400px;
+}
+
+.top-quiz-items {
+    display: grid;
+}
 
 
+.info-items {
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: 400px 400px 400px;
+    justify-content: center;
+}
 
+.info-item {
+    margin: 40px;
+    width: 300px;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+}
 
+.info-text {
+    text-align: left;
+    margin-left: 14px;
+    font-family: serif;
+}
 
+.info-title {
+    color: #d48a33;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 14px;
+    text-transform: capitalize;
+}
 
+.author {
+    font-size: 14px;
+    color:#b3bdbe;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
+.info-paragraf {
+    font-size: 12px;
+    color:red;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
+.info-image {
+    width: 80%;
+    background-size: cover;
+}
+
+.info-image.a {
+    background-image: url('images/homepage/a.jpg');
+}
+.info-image.b {
+    background-image: url('images/homepage/b.jpg');
+}
+.info-image.c {
+    background-image: url('images/homepage/c.jpg');
+}
+.info-image.d {
+    background-image: url('images/homepage/d.jpg');
+}
 
 
 /* FOOOTER */
