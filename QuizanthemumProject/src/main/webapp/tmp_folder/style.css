@@ -66,6 +66,7 @@
 .fa {
     color: white;
     line-height: 30px;
+    text-decoration: none;
 }
 
 .icon-cirkle:hover {
