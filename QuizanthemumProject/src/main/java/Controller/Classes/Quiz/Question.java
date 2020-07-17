@@ -29,9 +29,14 @@ public class Question {
     private Type type;
 
     /*
+    true if question has to be graded automatically, false otherwise
+     */
+    private boolean autoGraded;
+
+    /*
     maximum score for given question
      */
-    private int maxScore;
+    private double maxScore;
 
     /*
     question header statement as text, instruction.
@@ -77,12 +82,12 @@ public class Question {
     /*
     correct answer for MATCHING questions
      */
-    private Set<Pair<String>> matchingAnswer;
+    private Set<Pair<String>> matchingAnswers;
 
     /*
     correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
      */
-    private Set<String> multiAnswer;
+    private Set<String> multiAnswers;
 
 
     /* getter and setter methods */
@@ -95,12 +100,20 @@ public class Question {
         return type;
     }
 
-    public int getMaxScore() {
+    public double getMaxScore() {
         return maxScore;
     }
 
     public void setMaxScore(int maxScore) {
         this.maxScore = maxScore;
+    }
+
+    public boolean isAutoGraded() {
+        return autoGraded;
+    }
+
+    public void setAutoGraded(boolean autoGraded) {
+        this.autoGraded = autoGraded;
     }
 
     public String getHeaderStatement() {
@@ -167,20 +180,20 @@ public class Question {
         this.textAnswer = textAnswer;
     }
 
-    public Set<Pair<String>> getMatchingAnswer() {
-        return matchingAnswer;
+    public Set<Pair<String>> getMatchingAnswers() {
+        return matchingAnswers;
     }
 
-    public void setMatchingAnswer(Set<Pair<String>> matchingAnswer) {
-        this.matchingAnswer = matchingAnswer;
+    public void setMatchingAnswers(Set<Pair<String>> matchingAnswers) {
+        this.matchingAnswers = matchingAnswers;
     }
 
-    public Set<String> getMultiAnswer() {
-        return multiAnswer;
+    public Set<String> getMultiAnswers() {
+        return multiAnswers;
     }
 
-    public void setMultiAnswer(Set<String> multiAnswer) {
-        this.multiAnswer = multiAnswer;
+    public void setMultiAnswers(Set<String> multiAnswers) {
+        this.multiAnswers = multiAnswers;
     }
 
 }
