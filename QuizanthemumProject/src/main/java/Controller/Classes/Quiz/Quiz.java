@@ -33,7 +33,7 @@ public class Quiz {
     public int getScore() {
         int score = 0;
         for(Question q : questions) {
-            score += q.getScore();
+            score += q.getMaxScore();
         }
         return score;
     }
