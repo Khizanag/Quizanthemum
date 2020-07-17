@@ -1,4 +1,6 @@
-package Model;
+package Model.Managers;
 
 public class ChallengeManager {
+
+
 }
