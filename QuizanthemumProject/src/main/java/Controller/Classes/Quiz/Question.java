@@ -1,6 +1,6 @@
 package Controller.Classes.Quiz;
 
-import Tools.StringPair;
+import Tools.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +23,8 @@ public class Question {
     private String textAnswer;
     private String correctTextAnswer;
 
-    private Set<StringPair> matchingAnswer;
-    private Set<StringPair> correctMatchingAnswer;
+    private Set<Pair<String>> matchingAnswer;
+    private Set<Pair<String>> correctMatchingAnswer;
 
     private Set<String> multiAnswer;
     private Set<String> correctMultiAnswer;
@@ -43,6 +43,7 @@ public class Question {
         types.add(MULTI_CHOICE);
         types.add(MULTI_ANSWER);
         types.add(PICTURE);
+        types.add(MULTI_CHOICE_MULTI_ANSWER);
         // TODO add more types
         return types;
     }
