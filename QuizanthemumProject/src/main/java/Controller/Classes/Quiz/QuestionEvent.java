@@ -8,31 +8,20 @@ public class QuestionEvent {
 
     /* private variables */
 
-    /*
-    user score in this question
-     */
+    // user score in this question
     private double userScore;
 
-    /*
-    question on which given event is connected
-     */
+    // question on which given event is connected
     private Question question;
 
-    /*
-    correct answer for STANDARD, FILL_BLANK, PICTURE and MULTI_CHOICE questions
-     */
+    // correct answer for STANDARD, FILL_BLANK, PICTURE and MULTI_CHOICE questions
     private String userTextAnswer;
 
-    /*
-    correct answer for MATCHING questions
-     */
+    // correct answer for MATCHING questions
     private Set<Pair<String>> userMatchingAnswers;
 
-    /*
-    correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
-     */
+    // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
     private Set<String> userMultiAnswers;
-
 
     /* getter and setter methods */
 
