@@ -3,7 +3,7 @@ package Controller.Classes.Users;
 import java.util.Date;
 import java.util.List;
 
-public class Administrator extends User {
+public class Administrator extends Writer {
 
     public Administrator(int userID, String name, String lastName, String username, String city,
                   String county, String mobileNumber, String email, Date birthDate,
