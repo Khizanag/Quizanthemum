@@ -10,9 +10,7 @@ public class Question {
 
     /* private variables */
 
-    /*
-    question types
-     */
+    // question types
     public enum Type {
         STANDARD,
         FILL_BLANK,
@@ -23,72 +21,46 @@ public class Question {
         MATCHING
     }
 
-    /*
-    type of given question
-     */
+    // type of given question
     private Type type;
 
-    /*
-    true if question has to be graded automatically, false otherwise
-     */
+    // true if question has to be graded automatically, false otherwise
     private boolean autoGraded;
 
-    /*
-    maximum score for given question
-     */
+    // maximum score for given question
     private double maxScore;
 
-    /*
-    question header statement as text, instruction.
-    for instance: 'match pictures given below to their definitions'
-     */
+    // question header statement as text, instruction.
+    // for instance: 'match pictures given below to their definitions'
     private String headerStatement;
 
-    /*
-    question statement as text
-     */
+    // question statement as text
     private String textStatement;
 
-    /*
-    multiple choice statement
-     */
+    // multiple choice statement
     private List<String> multiChoiceStatement;
 
-    /*
-    multiple answers number
-     */
+    // multiple answers number
     private int multiAnswersNum;
 
-    /*
-    picture statement
-     */
+    // picture statement
     private String pictureURL;
 
-    /*
-    matching options left
-     */
+    // matching options left
     private List<String> matchingLeft;
 
-    /*
-    matching options right
-     */
+    // matching options right
     private List<String> matchingRight;
 
-    /*
-    correct answer for STANDARD, FILL_BLANK, PICTURE and MULTI_CHOICE questions
-     */
+    // correct answer for STANDARD, FILL_BLANK, PICTURE and MULTI_CHOICE questions
     private String textAnswer;
 
-    /*
-    correct answer for MATCHING questions
-     */
+    // correct answer for MATCHING questions
+    // key is from left options, value is from right options
     private Set<Pair<String>> matchingAnswers;
 
-    /*
-    correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
-     */
+    // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
     private Set<String> multiAnswers;
-
 
     /* getter and setter methods */
 

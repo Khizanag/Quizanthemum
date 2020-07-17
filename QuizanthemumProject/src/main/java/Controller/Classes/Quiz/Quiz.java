@@ -10,7 +10,7 @@ public class Quiz {
     private String name;
     private String iconUrl;
     private List<Question> questions;
-    private int maxScore = 0;
+    private double maxScore = 0;
 
     public Quiz(String author, String name, String iconUrl, Date createDate) {
         this.author = author;
@@ -29,12 +29,14 @@ public class Quiz {
         return questions.size();
     }
 
-    // quizEvent-ში მინდა ეს
-    public int getScore() {
-        int score = 0;
-        for(Question q : questions) {
-            score += q.getMaxScore();
-        }
-        return score;
+    public Question getQuestion(int idx) {
+        return questions.get(idx);
+    }
+
+    /*
+    returns maximum possible score for given quiz
+     */
+    public double getMaxScore() {
+        return maxScore;
     }
 }
