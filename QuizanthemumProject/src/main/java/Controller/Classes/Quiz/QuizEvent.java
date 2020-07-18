@@ -64,6 +64,9 @@ public class QuizEvent {
         return startDate;
     }
 
+    // TODO
+    private boolean isgraded;
+
 
     /* public methods */
 

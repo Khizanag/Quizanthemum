@@ -23,6 +23,9 @@ public class QuestionEvent {
     // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
     private Set<String> userMultiAnswers;
 
+    // TODO
+    private boolean isgraded;
+
 
     /* constructor */
 
