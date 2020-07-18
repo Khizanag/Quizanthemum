@@ -29,12 +29,9 @@ input[type=text]:focus{
     border: none;
     border-radius: 5px;
   }
-.banner-section {
+.slider {
     width: 100%;
-}
-.banner {
-    width: 100%;
-    max-height: 500px;
+    background-color: #002c2f;
 }
 .main-section {
     background-color: #002c2f;
