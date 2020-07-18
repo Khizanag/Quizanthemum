@@ -1,0 +1,207 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 1250px;
+    /* width: 960px; */
+    margin: auto;
+}
+
+.banner-section {
+    width: 100%;
+}
+
+.banner {
+    width: 100%;
+    max-height: 500px;
+}
+
+.header-section { 
+    background-color: #002c2f;
+    width: 100%;
+    height: 60px;
+}
+
+.header {
+    position: relative;
+}
+
+.header-left {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+}
+
+.logo {
+    width: 60px;
+}
+
+.logo-text {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #f07237;
+}
+
+.header-right {
+    display: flex;
+    position: absolute;
+    margin-top: 15px;
+    right: 0;
+}
+
+.icon-cirkle {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa {
+    color: white;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.icon-cirkle:hover {
+    background-color: #ee802f;
+}
+
+.nav-section {
+    background-color: #02171a;
+    width: 100%;
+    height: 60px;
+}
+
+.nav {
+    position: absolute;
+}
+
+.nav-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style-type: none;
+    line-height: 60px;
+}
+
+.nav-item {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #b3bdbe;
+    font-size: 14x;
+    font-weight: bold;
+    margin-right: 20px;
+    text-decoration: none;
+    
+}
+
+.nav-item:hover {
+    color: #d48a33;
+}
+
+.main-section {
+    background-color: #002c2f;
+    width: 100%;
+    height: 400px;
+}
+
+.top-quiz-items {
+    display: grid;
+}
+
+
+.info-items {
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: 400px 400px 400px;
+    justify-content: center;
+}
+
+.info-item {
+    margin: 40px;
+    width: 300px;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+}
+
+.info-text {
+    text-align: left;
+    margin-left: 14px;
+    font-family: serif;
+}
+
+.info-title {
+    color: #d48a33;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.author {
+    font-size: 14px;
+    color:#b3bdbe;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.info-paragraf {
+    font-size: 12px;
+    color:red;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.info-image {
+    width: 80%;
+    background-size: cover;
+}
+
+.info-image.a {
+    background-image: url('images/homepage/a.jpg');
+}
+.info-image.b {
+    background-image: url('images/homepage/b.jpg');
+}
+.info-image.c {
+    background-image: url('images/homepage/c.jpg');
+}
+.info-image.d {
+    background-image: url('images/homepage/d.jpg');
+}
+
+
+/* FOOOTER */
+.footer-section {
+    background-color: #02171a;
+    width: 100%;
+    height: 60px;
+}
+
+.footer-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+
+.footer {
+    line-height: 60px;
+    font-size: 14px;
+    position: absolute;
+    color: #b3bdbe;
+}
+
+.footer.left {
+    position: absolute;
+    left: 0;
+}
+
+.footer.rigth {
+    right: 0;
+}
+
