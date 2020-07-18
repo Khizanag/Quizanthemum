@@ -8,11 +8,7 @@
 	<link rel="stylesheet" href="../styles/common.css">
 	<link rel="stylesheet" href="../styles/logIn.css">
 	<link rel="stylesheet" href="../styles/breakpoints.css">
-
-
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 </head>
 <body>
     <header class= "header-section">
@@ -71,8 +67,24 @@
             </div>
             <hr>
             <p>ახალი პროგილის შქმნა გულისხმობს, რომ თქვენ ეთანხმებით ჩვენს
-				<a href="https://policies.google.com/">წესებსა და მოთხოვნებს</a>.
+				<a href="#rules" data-rules-target="#rules">წესებსა და მოთხოვნებს</a>.
 			</p>
+			<div class="rules" id="rules">
+				<div class="rules-header">
+					<div class="title">დაიცვი წესები თორე დაგენძრევა</div>
+					<input type="button" close-rules class="close-button" value="X">
+				</div>
+				<div class="rules-body">
+					იტოგში მისმინე!<br><br>
+					წესები წესები წესები წესები წესები წესები წესები წესები
+					წესები წესები წესები წესები წესები წესები წესები წესები
+					წესები წესები წესები წესები წესები წესები წესები წესები
+					წესები წესები წესები წესები წესები წესები წესები წესები
+					წესები წესები წესები წესები წესები წესები წესები წესები
+					წესები წესები წესები წესები წესები წესები წესები წესები
+				</div>
+				<div id="popup"></div>
+			</div>
             <button type="submit" class="button">რეგისტრაცია</button>
         </div>
         
@@ -94,3 +106,4 @@
 		</div>
 	</footer>
 </body>
+<script src="../javascript/registration-popup.js"></script>
