@@ -64,9 +64,6 @@ public class QuizEvent {
         return startDate;
     }
 
-    // TODO
-    private boolean isgraded;
-
 
     /* public methods */
 
@@ -84,7 +81,7 @@ public class QuizEvent {
 
     // returns current question event to user to fill it
     public QuestionEvent getNextQuestionEvent() {
-        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx));
+        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx), new Date());
         questionIdx += 1;
         return currentQuestionEvent;
     }

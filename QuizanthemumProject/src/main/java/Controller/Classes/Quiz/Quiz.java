@@ -27,14 +27,16 @@ public class Quiz {
     private List<Question> questions;
 
     // maximum possible score
-    private double maxScore = 0;
+    private double maxScore;
 
 
     /* constructor */
 
-    public Quiz(String author) {
+    public Quiz(String author, Date createDate) {
         this.author = author;
+        this.createDate = createDate;
         questions = new ArrayList<>();
+        maxScore = 0;
     }
 
 

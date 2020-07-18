@@ -2,11 +2,18 @@ package Controller.Classes.Quiz;
 
 import Tools.Pair;
 
+import java.util.Date;
 import java.util.Set;
 
 public class QuestionEvent {
 
     /* private variables */
+
+    // question start date
+    private Date startDate;
+
+    // question start date
+    private Date endDate;
 
     // user score in this question
     private double userScore;
@@ -23,15 +30,20 @@ public class QuestionEvent {
     // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
     private Set<String> userMultiAnswers;
 
-    // TODO
-    private boolean isgraded;
-
 
     /* constructor */
 
-    public QuestionEvent(Question question) {
+    public QuestionEvent(Question question, Date startDate) {
         this.question = question;
+        this.startDate = startDate;
         userScore = 0;
+    }
+
+    /* public methods */
+
+    // finishes question event
+    public void finishQuestionEvent(){
+        endDate = new Date();
     }
 
 
@@ -53,6 +65,7 @@ public class QuestionEvent {
     /* score computing methods */
 
     // returns user's score
+    // called after question is graded
     public double getUserScore() {
         return userScore;
     }

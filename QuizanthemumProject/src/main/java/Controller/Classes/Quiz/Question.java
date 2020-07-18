@@ -3,6 +3,7 @@ package Controller.Classes.Quiz;
 import Tools.Pair;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -23,11 +24,14 @@ public class Question {
 
     /* private variables */
 
+    // question id
+    private int ID;
+
     // type of given question
     private Type type;
 
     // true if question has to be graded automatically, false otherwise
-    private boolean autoGraded;
+    private boolean isAutoGraded;
 
     // maximum score for given question
     private double maxScore;
@@ -37,6 +41,12 @@ public class Question {
 
     // question source
     private String source;
+
+    // creation date
+    private Date creationDate; // TODO
+
+    // owner quiz
+    private Quiz quiz;
 
     /* statements */
 
@@ -81,61 +91,86 @@ public class Question {
     /* constructors */
 
     // default constructor
-    public Question(Type type, boolean autoGraded, double maxScore, String headerStatement, String comment, String source) {
+    private Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement,
+                     String comment, String source, Quiz quiz, Date creationDate) {
+        this.ID = ID;
         this.type = type;
-        this.autoGraded = autoGraded;
+        this.isAutoGraded = isAutoGraded;
         this.maxScore = maxScore;
         this.headerStatement = headerStatement;
         this.comment = comment;
         this.source = source;
+        this.quiz = quiz;
+        this.creationDate = creationDate;
     }
 
     // constructor for standard or picture question
     // for picture question picture url is given as text statement
-    public Question(Type type, boolean autoGraded, double maxScore, String headerStatement, String comment, String source,
-                    String textStatement, String textAnswer) {
-        this(type, autoGraded, maxScore, headerStatement, comment, source);
+    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, String textStatement, String textAnswer) {
+        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.textStatement = textStatement;
         this.textAnswer = textAnswer;
     }
 
     // constructor for fill blank question
-    public Question(Type type, boolean autoGraded, double maxScore, String headerStatement, String comment, String source,
-                    List<String> fillBlankStatements, List<String> fillBlankAnswers) {
-        this(type, autoGraded, maxScore, headerStatement, comment, source);
+    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, List<String> fillBlankStatements, List<String> fillBlankAnswers) {
+        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.fillBlankStatements = fillBlankStatements;
         this.fillBlankAnswers = fillBlankAnswers;
     }
 
     // constructor for multiple choice question
-    public Question(Type type, boolean autoGraded, double maxScore, String headerStatement, String comment, String source,
-                    List<String> multiChoiceStatements, String textAnswer) {
-        this(type, autoGraded, maxScore, headerStatement, comment, source);
+    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, List<String> multiChoiceStatements, String textAnswer) {
+        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.multiChoiceStatements = multiChoiceStatements;
         this.textAnswer = textAnswer;
     }
 
     // constructor for multiple answer question
-    public Question(Type type, boolean autoGraded, double maxScore, String headerStatement, String comment, String source,
-                    String textStatement, Set<String> multiAnswers) {
-        this(type, autoGraded, maxScore, headerStatement, comment, source);
+    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, String textStatement, Set<String> multiAnswers) {
+        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.textStatement = textStatement;
         this.multiAnswers = multiAnswers;
     }
 
-    // constructor for multiple choice  multiple answer question
-    public Question(Type type, boolean autoGraded, double maxScore, String headerStatement, String comment, String source,
-                    List<String> multiChoiceStatements, Set<String> multiAnswers) {
-        this(type, autoGraded, maxScore, headerStatement, comment, source);
+    // constructor for multiple choice multiple answer question
+    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, List<String> multiChoiceStatements, Set<String> multiAnswers) {
+        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.multiChoiceStatements = multiChoiceStatements;
         this.multiAnswers = multiAnswers;
     }
 
     // constructor for matching question
-    public Question(Type type, boolean autoGraded, double maxScore, String headerStatement, String comment, String source,
-                    List<String> matchingLeft, List<String> matchingRight, Set<Pair<String>> matchingAnswers) {
-        this(type, autoGraded, maxScore, headerStatement, comment, source);
+    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, List<String> matchingLeft, List<String> matchingRight, Set<Pair<String>> matchingAnswers) {
+        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
+        this.matchingLeft = matchingLeft;
+        this.matchingRight = matchingRight;
+        this.matchingAnswers = matchingAnswers;
+    }
 
+    // constructor for all questions united
+    // used while getting data from database
+    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, String textStatement, List<String> multiChoiceStatements, List<String> fillBlankStatements,
+                    List<String> matchingLeft, List<String> matchingRight, String textAnswer, List<String> fillBlankAnswers,
+                    Set<Pair<String>> matchingAnswers, Set<String> multiAnswers) {
+
+        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
+        this.textStatement = textStatement;
+        this.multiChoiceStatements = multiChoiceStatements;
+        this.textAnswer = textAnswer;
+        this.fillBlankStatements = fillBlankStatements;
+        this.fillBlankAnswers = fillBlankAnswers;
+        this.matchingLeft = matchingLeft;
+        this.matchingRight = matchingRight;
+        this.matchingAnswers = matchingAnswers;
+        this.multiAnswers = multiAnswers;
     }
 
     /* getter and setter methods */
@@ -149,7 +184,7 @@ public class Question {
     }
 
     public boolean isAutoGraded() {
-        return autoGraded;
+        return isAutoGraded;
     }
 
     public String getHeaderStatement() {
@@ -194,6 +229,22 @@ public class Question {
 
     public String getSource() {
         return source;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public List<String> getFillBlankStatements() {
+        return fillBlankStatements;
+    }
+
+    public List<String> getFillBlankAnswers() {
+        return fillBlankAnswers;
     }
 
 }
