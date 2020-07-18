@@ -34,7 +34,7 @@
 .header-right {
     display: flex;
     position: absolute;
-    margin-top: 15px;
+    margin-top: 10px;
     right: 0;
 }
 .icon-cirkle {
@@ -50,6 +50,7 @@
     color: white;
     line-height: 30px;
     text-decoration: none;
+    font-size: 20px;
 }
 .icon-cirkle:hover {
     background-color: #ee802f;
@@ -68,6 +69,7 @@
     justify-content: center;
     list-style-type: none;
     line-height: 60px;
+    position: relative;
 }
 .nav-item {
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -82,7 +84,9 @@
     color: #d48a33;
 }
 
-
+.manu {
+    position: relative;
+}
 
 
 /* FOOOTER */
