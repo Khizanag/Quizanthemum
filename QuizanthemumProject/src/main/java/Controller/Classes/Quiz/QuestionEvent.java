@@ -23,12 +23,16 @@ public class QuestionEvent {
     // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
     private Set<String> userMultiAnswers;
 
-    /* getter and setter methods */
+
+    /* constructor */
 
     public QuestionEvent(Question question) {
         this.question = question;
         userScore = 0;
     }
+
+
+    /* getter and setter methods */
 
     public void setUserTextAnswer(String userTextAnswer) {
         this.userTextAnswer = userTextAnswer;
@@ -45,22 +49,23 @@ public class QuestionEvent {
 
     /* score computing methods */
 
+    // returns user's score
     public double getUserScore() {
         return userScore;
     }
 
     /*
-    manually set user score.
-    used when question is not automatically graded
+     * manually set user score.
+     * used when question is not automatically graded
      */
     public void setUserScore(double userScore) {
         this.userScore = userScore;
     }
 
     /*
-    compares user's answer with real answer and grades.
-    correct answer is graded as maximum score.
-    incorrect answer is graded as 0.
+     * compares user's answer with real answer and grades.
+     * correct answer is graded as maximum score.
+     * incorrect answer is graded as 0.
      */
     public void gradeTextAnswer() {
         if(userTextAnswer.equals(question.getTextAnswer())) {
@@ -69,8 +74,8 @@ public class QuestionEvent {
     }
 
     /*
-    compares user's answers with real ones and grades.
-    score depends on number of correct answers.
+     * compares user's answers with real ones and grades.
+     * score depends on number of correct answers.
      */
     public void gradeMultiAnswer() {
         int correctAnswersNum = 0;
@@ -83,8 +88,8 @@ public class QuestionEvent {
     }
 
     /*
-    compares user's matching pairs with real ones and grades.
-    score depends on number of correct matches.
+     * compares user's matching pairs with real ones and grades.
+     * score depends on number of correct matches.
      */
     public void gradeMatchingAnswer() {
         int correctAnswersNum = 0;

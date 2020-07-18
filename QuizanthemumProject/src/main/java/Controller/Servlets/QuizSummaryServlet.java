@@ -13,7 +13,7 @@ import java.io.IOException;
 public class QuizSummaryServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getParameter(Config.CURRENT_QUIZES);
+        request.getParameter(Config.CURRENT_QUIZES_STR);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
