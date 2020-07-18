@@ -1,6 +1,6 @@
 package Controller;
 
-import Controller.Classes.Quiz.QuizEvent;
+import Configs.Config;
 import Model.DatabaseConnector;
 import Model.Managers.ChallengeManager;
 import Model.Managers.QuestionManager;

@@ -1,6 +1,6 @@
 package Controller.Servlets;
 
-import Controller.Config;
+import Configs.Config;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
