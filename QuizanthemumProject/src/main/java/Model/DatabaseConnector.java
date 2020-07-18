@@ -1,5 +1,7 @@
 package Model;
 
+import Configs.Config;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,13 +10,7 @@ import java.sql.SQLException;
  * this is a singleton class.
  * To get connection you should use getInstance() method.
  */
-public class DatabaseConnector {
-
-    /* Database info */
-    public static final String USERNAME = "root";
-    public static final String PASSWORD = "paroli12345678";
-    public static final String URL = "jdbc:mysql://localhost:3306/";
-    public static final String DATABASE_NAME = "intelij_db";
+public class DatabaseConnector implements Config {
 
     private static Connection connection = null;
 
@@ -42,4 +38,5 @@ public class DatabaseConnector {
             System.out.println("Error during closing Database connection in 'DatabaseConnector'");
         }
     }
+
 }
