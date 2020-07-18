@@ -37,6 +37,7 @@ public class QuizEvent {
     private double userTotalScore;
 
 
+    /* constructor */
 
     public QuizEvent(User user, Quiz quiz) {
         this.user = user;
@@ -44,9 +45,31 @@ public class QuizEvent {
         questionEvents = new ArrayList<QuestionEvent>();
     }
 
+
+    /* getter and setter methods */
+
+    public double getUserScore() {
+        return userTotalScore;
+    }
+
+    public Date getFinishDate() {
+        return finishDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+
+    /* public methods */
+
     // starts quiz
-    public void startQuiz(Date startDate) {
-        this.startDate = startDate;
+    public void startQuiz() {
+        startDate = new Date();
         questionIdx = 0;
         userTotalScore = 0;
     }
@@ -70,25 +93,9 @@ public class QuizEvent {
     }
 
     // sets quiz status as finished
-    public void finishQuiz(Date finishDate) {
+    public void finishQuiz() {
         isFinished = true;
-        this.finishDate = finishDate;
+        finishDate = new Date();
     }
 
-    // returns user's score in given quiz
-    public double getUserScore() {
-        return userTotalScore;
-    }
-
-    public Date getFinishDate() {
-        return finishDate;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
 }

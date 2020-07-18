@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class Question {
 
-    /* private variables */
+    /* public variables */
 
     // question types
     public enum Type {
@@ -20,6 +20,8 @@ public class Question {
         PICTURE,
         MATCHING
     }
+
+    /* private variables */
 
     // type of given question
     private Type type;
@@ -62,11 +64,15 @@ public class Question {
     // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
     private Set<String> multiAnswers;
 
-    /* getter and setter methods */
+
+    /* constructor */
 
     public Question(Type type) {
         this.type = type;
     }
+
+
+    /* getter and setter methods */
 
     public Type getType() {
         return type;
