@@ -36,7 +36,6 @@ public class QuizEvent {
     // counts user's total score
     private double userTotalScore;
 
-
     /* constructor */
 
     public QuizEvent(User user, Quiz quiz) {

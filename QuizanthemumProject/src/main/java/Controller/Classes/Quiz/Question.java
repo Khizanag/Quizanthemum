@@ -9,26 +9,13 @@ import java.util.Set;
 
 public class Question {
 
-    /* public variables */
-
-    // question types
-    public enum Type {
-        STANDARD,
-        FILL_BLANK,
-        MULTI_CHOICE,
-        MULTI_ANSWER,
-        MULTI_CHOICE_MULTI_ANSWER,
-        PICTURE,
-        MATCHING
-    }
-
     /* private variables */
 
     // question id
     private int ID;
 
     // type of given question
-    private Type type;
+    private int type;
 
     // true if question has to be graded automatically, false otherwise
     private boolean isAutoGraded;
@@ -43,12 +30,14 @@ public class Question {
     private String source;
 
     // creation date
-    private Date creationDate; // TODO
+    private Date creationDate;
 
     // owner quiz
     private Quiz quiz;
 
     /* statements */
+
+    private boolean isPictureQuestion;
 
     // question header statement as text, instruction.
     // for instance: 'match pictures given below to their definitions'
@@ -74,6 +63,9 @@ public class Question {
 
     /* answers */
 
+    // if user can see pictures in the mulitple answers
+    private boolean isPictureAnswer;
+
     // correct answer for STANDARD, PICTURE and MULTI_CHOICE questions
     private String textAnswer;
 
@@ -87,12 +79,13 @@ public class Question {
     // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
     private Set<String> multiAnswers;
 
+    // TODO change hashset -> treeset
 
     /* constructors */
 
     // default constructor
-    private Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement,
-                     String comment, String source, Quiz quiz, Date creationDate) {
+    private Question(int ID, int type, boolean isAutoGraded, double maxScore,
+                     String headerStatement, String comment, String source, Quiz quiz, Date creationDate) {
         this.ID = ID;
         this.type = type;
         this.isAutoGraded = isAutoGraded;
@@ -102,80 +95,79 @@ public class Question {
         this.source = source;
         this.quiz = quiz;
         this.creationDate = creationDate;
+        this.isPictureQuestion = false;
+        this.isPictureAnswer = false;
     }
 
-    // constructor for standard or picture question
+    // constructor for STANDARD question
     // for picture question picture url is given as text statement
-    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, String textStatement, String textAnswer) {
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
+                    boolean isPictureQuestion, String headerStatement, String comment,
+                    String source, Date creationDate, Quiz quiz, String textStatement, String textAnswer) {
         this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.textStatement = textStatement;
         this.textAnswer = textAnswer;
+        this.isPictureQuestion = isPictureQuestion;
     }
 
-    // constructor for fill blank question
-    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, List<String> fillBlankStatements, List<String> fillBlankAnswers) {
+    // constructor for FILL_BLANK question
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
+                    String headerStatement, String comment, String source, Date creationDate,
+                    Quiz quiz, List<String> fillBlankStatements, List<String> fillBlankAnswers) {
         this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.fillBlankStatements = fillBlankStatements;
         this.fillBlankAnswers = fillBlankAnswers;
     }
 
-    // constructor for multiple choice question
-    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, List<String> multiChoiceStatements, String textAnswer) {
+    // constructor for MULTIPLE_CHOICE question
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
+                    boolean isPictureQuestion, String headerStatement, String comment,
+                    String source, Date creationDate, Quiz quiz, List<String> multiChoiceStatements,
+                    boolean isPictureAnswer, String textAnswer) {
         this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.multiChoiceStatements = multiChoiceStatements;
         this.textAnswer = textAnswer;
+        this.isPictureQuestion = isPictureQuestion;
+        this.isPictureAnswer = isPictureAnswer;
     }
 
-    // constructor for multiple answer question
-    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
+    // constructor for MULTIPLE_ANSWER question
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
+                    boolean isPictureQuestion, String headerStatement, String comment, String source,
                     Date creationDate, Quiz quiz, String textStatement, Set<String> multiAnswers) {
         this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.textStatement = textStatement;
         this.multiAnswers = multiAnswers;
+        this.isPictureQuestion = isPictureQuestion;
     }
 
-    // constructor for multiple choice multiple answer question
-    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, List<String> multiChoiceStatements, Set<String> multiAnswers) {
+    // constructor for MULTIPLE_CHOICE_MULTIPLE_ANSWER question
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore, boolean isPictureQuestion,
+                    String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, List<String> multiChoiceStatements,
+                    boolean isPictureAnswer, Set<String> multiAnswers) {
         this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.multiChoiceStatements = multiChoiceStatements;
         this.multiAnswers = multiAnswers;
+        this.isPictureQuestion = isPictureQuestion;
+        this.isPictureAnswer = isPictureAnswer;
     }
 
-    // constructor for matching question
-    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, List<String> matchingLeft, List<String> matchingRight, Set<Pair<String>> matchingAnswers) {
+    // constructor for MATCHING question
+    // TODO make pictures in matchings
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
+                    String headerStatement, String comment, String source,
+                    Date creationDate, Quiz quiz, List<String> matchingLeft,
+                    List<String> matchingRight, Set<Pair<String>> matchingAnswers) {
         this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
         this.matchingLeft = matchingLeft;
         this.matchingRight = matchingRight;
         this.matchingAnswers = matchingAnswers;
-    }
-
-    // constructor for all questions united
-    // used while getting data from database
-    public Question(int ID, Type type, boolean isAutoGraded, double maxScore, String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, String textStatement, List<String> multiChoiceStatements, List<String> fillBlankStatements,
-                    List<String> matchingLeft, List<String> matchingRight, String textAnswer, List<String> fillBlankAnswers,
-                    Set<Pair<String>> matchingAnswers, Set<String> multiAnswers) {
-
-        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
-        this.textStatement = textStatement;
-        this.multiChoiceStatements = multiChoiceStatements;
-        this.textAnswer = textAnswer;
-        this.fillBlankStatements = fillBlankStatements;
-        this.fillBlankAnswers = fillBlankAnswers;
-        this.matchingLeft = matchingLeft;
-        this.matchingRight = matchingRight;
-        this.matchingAnswers = matchingAnswers;
-        this.multiAnswers = multiAnswers;
     }
 
     /* getter and setter methods */
 
-    public Type getType() {
+    public int getType() {
         return type;
     }
 
@@ -245,6 +237,14 @@ public class Question {
 
     public List<String> getFillBlankAnswers() {
         return fillBlankAnswers;
+    }
+
+    public boolean isPictureQuestion() {
+        return isPictureQuestion;
+    }
+
+    public boolean isPictureAnswer() {
+        return isPictureAnswer;
     }
 
 }
