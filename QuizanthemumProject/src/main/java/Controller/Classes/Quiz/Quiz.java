@@ -8,76 +8,57 @@ public class Quiz {
 
     /* private variables */
 
-    // quiz owner user
-    private String author;
-
-    // quiz creation date
-    private Date createDate;
-
-    // quiz name
-    private String name;
-
-    // url for quiz icon
-    private String iconUrl;
-
-    // quiz description
-    private String description;
-
-    // list of questions in quiz
+    private final String name;
+    private final String description;
+    private final String iconUrl;         // url for quiz icon
+    private final boolean mustShuffleQuestions;
+    private final String comment;
+    private final String author;          // quiz creator user
+    private Date creationDate;
     private List<Question> questions;
+    private double maxScore;    // maximum possible score
 
-    // maximum possible score
-    private double maxScore;
-
-
-    /* constructor */
-
-    public Quiz(String author, Date createDate) {
-        this.author = author;
-        this.createDate = createDate;
-        questions = new ArrayList<>();
-        maxScore = 0;
+    /* Quiz constructor for creating Quiz object using database information, about already published quiz */
+    public Quiz(String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment,
+                String author, Date creationDate, List<Question> questions, int totalScore) {
+        this(name, description, iconUrl, mustShuffleQuestions, comment,  author, true);
+        this.creationDate = creationDate;
+        this.questions = questions;
+        this.maxScore = totalScore;
     }
 
-
-    /* getter and setter methods */
-
-    public String getAuthor() {
-        return author;
+    /*
+        Quiz constructor for creating Quiz object initially,
+        while this quiz is not still published, and is not saved into database.
+         Note: after entirely creating this object, it should be stored into database
+     */
+    public Quiz(String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, String author){
+        this(name, description, iconUrl, mustShuffleQuestions, comment, author, true);
+        this.questions = new ArrayList<>();
+        this.maxScore = 0;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    /* helper constructor used by other public constructors */
+    private Quiz(String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, String author, boolean isPrivate){
         this.name = name;
-    }
-
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
+        this.iconUrl = iconUrl;
+        this.mustShuffleQuestions = mustShuffleQuestions;
+        this.comment = comment;
+        this.author = author;
     }
 
-    public double getMaxScore() {
-        return maxScore;
-    }
+    /* getter methods */
 
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public double getMaxScore() { return maxScore; }
+    public Date getCreateDate() { return creationDate; }
+    public int getQuestionsCount() { return questions.size(); }
+    public Question getQuestion(int idx) { return questions.get(idx); }
+    public String getAuthor() {  return author; }
+
+    public String getIconUrl() { return iconUrl; }
 
     /* public methods */
 
@@ -86,18 +67,8 @@ public class Quiz {
         maxScore += question.getMaxScore();
     }
 
-    // saves create date
     public void finishCreatingQuiz() {
-        createDate = new Date();
+        creationDate = new Date();
     }
 
-    // returns number of questions in quiz
-    public int getSize() {
-        return questions.size();
-    }
-
-    // returns question on given index
-    public Question getQuestion(int idx) {
-        return questions.get(idx);
-    }
 }

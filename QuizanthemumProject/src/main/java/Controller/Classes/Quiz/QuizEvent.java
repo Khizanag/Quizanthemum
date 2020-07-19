@@ -75,7 +75,7 @@ public class QuizEvent {
 
     // true if quiz has more questions. false otherwise
     public boolean hasNext() {
-        return questionIdx < quiz.getSize();
+        return questionIdx < quiz.getQuestionsCount();
     }
 
     // returns current question event to user to fill it
