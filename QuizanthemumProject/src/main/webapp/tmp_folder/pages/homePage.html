@@ -19,6 +19,7 @@
 		  	window.location.href = "sign-in.html";
 		} 
 		function openSearch() {
+			window.localStorage.setItem('item', document.getElementById('search-input').value);
 			window.location.href = "search.html";		  	
 		}
 	</script> 
@@ -47,6 +48,7 @@
 					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
 					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
 					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
+					<a class="nav-item" target="_self" href="quizCreation.html">CREATE QUIZ</a>
 				</ul>
 			</nav>
 			<div class="search-items">

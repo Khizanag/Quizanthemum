@@ -27,7 +27,7 @@ public interface QuestionTableConfig {
     //    String QUESTION_TABLE_COLUMN_12_STATEMENT_0 = "STATEMENT_0";
     //    ...
     //    String QUESTION_TABLE_COLUMN_27_STATEMENT_15 = "STATEMENT_15";
-    public static final String QUESTION_TABLE_ITH_STATEMENT_TEXT = "STATEMENT_";
+    String QUESTION_TABLE_ITH_STATEMENT_TEXT = "STATEMENT_";
 
     /* answers */
 

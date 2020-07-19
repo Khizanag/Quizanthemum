@@ -19,26 +19,26 @@ public class WebServletCreateListener implements ServletContextListener, Config 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
-
+        // TODO uncomment
         // set connection
-        Connection connection = DatabaseConnector.getInstance();
-        context.setAttribute(CONNECTION_STR, connection);
+//        Connection connection = DatabaseConnector.getInstance();
+//        context.setAttribute(CONNECTION_STR, connection);
 
         // set challenge manager
-        ChallengeManager challengeManager = new ChallengeManager();
-        context.setAttribute(CHALLENGE_MANAGER_STR, challengeManager);
+//        ChallengeManager challengeManager = new ChallengeManager();
+//        context.setAttribute(CHALLENGE_MANAGER_STR, challengeManager);
 
         // set question manager
-        QuestionManager questionManager = new QuestionManager();
-        context.setAttribute(QUESTION_MANAGER_STR, questionManager);
+//        QuestionManager questionManager = new QuestionManager();
+//        context.setAttribute(QUESTION_MANAGER_STR, questionManager);
 
         // set quiz event manager
-        QuizEventManager quizEventManager = new QuizEventManager();
-        context.setAttribute(QUIZ_EVENT_MANAGER_STR, quizEventManager);
+//        QuizEventManager quizEventManager = new QuizEventManager();
+//        context.setAttribute(QUIZ_EVENT_MANAGER_STR, quizEventManager);
 
         // set quiz manager
-        QuizManager quizManager = new QuizManager();
-        context.setAttribute(QUIZ_MANAGER_STR, quizManager);
+//        QuizManager quizManager = new QuizManager();
+//        context.setAttribute(QUIZ_MANAGER_STR, quizManager);
     }
 
     @Override

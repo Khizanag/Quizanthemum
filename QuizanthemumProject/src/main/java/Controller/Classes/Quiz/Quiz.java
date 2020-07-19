@@ -1,86 +1,80 @@
 package Controller.Classes.Quiz;
 
+import Controller.Classes.Users.User;
+import Controller.Classes.Users.Writer;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Quiz {
 
-    /* private variables */
+    /* private instance variables */
 
-    // quiz ID
-    private int ID;
-
-    // quiz owner user
-    private String author;
-
-    // quiz creation date
-    private Date createDate;
-
-    // quiz name
-    private String name;
-
-    // url for quiz icon
-    private String iconUrl;
-
-    // quiz description
-    private String description;
-
-    // list of questions in quiz
+    private final int id;
+    private final String name;
+    private final String description;
+    private final String iconUrl;                           // url for quiz icon
+    private final boolean mustShuffleQuestions;
+    private final String comment;
+    private final Writer author;                            // quiz creator user
+    private Date creationDate;
     private List<Question> questions;
+    private double maxScore;                            // maximum possible score
 
-    // maximum possible score
-    private double maxScore;
-
-
-    /* constructor */
-
-    public Quiz(String author, Date createDate) {
-        this.author = author;
-        this.createDate = createDate;
-        questions = new ArrayList<>();
-        maxScore = 0;
+    /* Quiz constructor for creating Quiz object using database information, about already published quiz */
+    public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment,
+                Writer author, Date creationDate, List<Question> questions, int maxScore) {
+        this(id, name, description, iconUrl, mustShuffleQuestions, comment,  author, true);
+        this.creationDate = creationDate;
+        this.questions = questions;
+        this.maxScore = maxScore;
     }
 
-
-    /* getter and setter methods */
-
-    public String getAuthor() {
-        return author;
+    /*
+        Quiz constructor for creating Quiz object initially,
+        while this quiz is not still published, and is not saved into database.
+         Note: after entirely creating this object, it should be stored into database
+     */
+    public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, Writer author){
+        this(id, name, description, iconUrl, mustShuffleQuestions, comment, author, true);
+        this.questions = new ArrayList<>();
+        this.maxScore = 0;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    /* helper constructor used by other public constructors */
+    private Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, Writer author, boolean isPrivate){
+        this.id = id;
         this.name = name;
-    }
-
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
+        this.iconUrl = iconUrl;
+        this.mustShuffleQuestions = mustShuffleQuestions;
+        this.comment = comment;
+        this.author = author;
     }
 
-    public double getMaxScore() {
-        return maxScore;
-    }
+    /* getter methods */
+    public int getID() { return ID; }
 
+    public String getName() { return name; }
+
+    public String getDescription() { return description; }
+
+    public String getIconUrl(){ return iconUrl; }
+
+    public boolean mustShuffleQuestions(){ return mustShuffleQuestions; }
+
+    public String getComment(){ return comment; }
+
+    public double getMaxScore() { return maxScore; }
+
+    public Date getCreationDate() { return creationDate; }
+
+    public int getQuestionsCount() { return questions.size(); }
+
+    public Question getQuestion(int idx) { return questions.get(idx); }
+
+    public User getAuthor() {  return author; }
 
     /* public methods */
 
@@ -89,22 +83,8 @@ public class Quiz {
         maxScore += question.getMaxScore();
     }
 
-    // saves create date
     public void finishCreatingQuiz() {
-        createDate = new Date();
+        creationDate = new Date();
     }
 
-    // returns number of questions in quiz
-    public int getSize() {
-        return questions.size();
-    }
-
-    // returns question on given index
-    public Question getQuestion(int idx) {
-        return questions.get(idx);
-    }
-
-    public int getID() {
-        return ID;
-    }
 }
