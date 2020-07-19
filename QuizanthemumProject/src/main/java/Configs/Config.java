@@ -9,6 +9,7 @@ public interface Config {
     public static final String QUESTION_MANAGER_STR = "question manager";
     public static final String QUIZ_EVENT_MANAGER_STR = "quiz event manager";
     public static final String QUIZ_MANAGER_STR = "quiz manager";
+    public static final String USER_MANAGER_STR = "user_manager";
 
     /* Database info */
     public static final String USERNAME = "root";
