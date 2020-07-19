@@ -3,6 +3,7 @@ package Model.Managers;
 import Model.DatabaseConnector;
 import org.graalvm.compiler.code.DataSection;
 
+import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +13,7 @@ public class ChallengeManager {
     // saved connection to use in the future for working with database
     private final Connection connection;
     private Statement statement;
+    private ServletContext context;
 
     public ChallengeManager(){
         this.connection = DatabaseConnector.getInstance();
@@ -22,6 +24,10 @@ public class ChallengeManager {
         }
     }
 
+    public void setContext(ServletContext context){
+        this.context = context;
+    }
+
     public void insertChallenge(){
         String query = "INSERT INTO(" +
                 "challengeID, " +
@@ -30,5 +36,10 @@ public class ChallengeManager {
                 "challengingDate)" +
                 "VALUES (" + "" +
                 ")\n";
+        try {
+            statement.execute(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

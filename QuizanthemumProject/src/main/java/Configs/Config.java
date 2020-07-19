@@ -7,6 +7,7 @@ public interface Config {
     String CONNECTION_STR = "connection for database";
     String CHALLENGE_MANAGER_STR = "challenge manager";
     String QUESTION_MANAGER_STR = "question manager";
+    String QUESTION_EVENT_MANAGER_STR = "question_event_manager";
     String QUIZ_EVENT_MANAGER_STR = "quiz event manager";
     String QUIZ_MANAGER_STR = "quiz manager";
     String USER_MANAGER_STR = "user_manager";

@@ -5,10 +5,8 @@ import Configs.QuizTableConfig;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Users.User;
-import Controller.Classes.Users.Writer;
 import Model.DatabaseConnector;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -19,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.*;
-import static Configs.QuizTableConfig.*;
 
 public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
@@ -49,7 +46,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             String comment = set.getString(QUIZ_TABLE_COLUMN_6_COMMENT);
             int authorID = set.getInt(QUIZ_TABLE_COLUMN_7_AUTHOR_ID);
             UserManager userManager = (UserManager) context.getAttribute(USER_MANAGER_STR);
-            Writer author = (Writer)userManager.getUser(authorID);
+            User author = (User)userManager.getUser(authorID);
             Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE); // TODO check with sql or util
             List<Question> questions = getQuizQuestions(id);
             int maxScore = set.getInt(QUIZ_TABLE_COLUMN_9_MAX_SCORE);
@@ -63,7 +60,6 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
     private List<Question> getQuizQuestions(int id){
         List<Question> questions = new ArrayList<>();
-        // TODO
         String query = "SELECT " + QUESTION_TABLE_COLUMN_1_ID +
                 "FROM " + QUESTIONS_TABLE_NAME +
                 "WHERE " + QUESTION_TABLE_COLUMN_9_QUIZ_ID + " = " + id + ";\n";
@@ -82,7 +78,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     }
 
     public void insertQuiz(Quiz quiz){
-        // TODO
+
     }
 
     public int getNewQuizID(){

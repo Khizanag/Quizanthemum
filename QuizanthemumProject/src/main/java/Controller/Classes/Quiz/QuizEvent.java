@@ -12,29 +12,14 @@ public class QuizEvent {
 
     /* private variables */
 
-    // quiz that user is taking
-    private final Quiz quiz;
-
-    // user which is taking quiz
-    private final User user;
-
-    // quiz starting date
-    private Date startDate;
-
-    // quiz status: is it active or already finished
-    private boolean isFinished;
-
-    // quiz finishing date
-    private Date finishDate;
-
-    // keeps track of current question
-    private int questionIdx;
-
-    // keeps filled question events
-    private final List<QuestionEvent> questionEvents;
-
-    // counts user's total score
-    private double userTotalScore;
+    private final Quiz quiz;                                       // quiz that user is taking
+    private final User user;                                      // user which is taking quiz
+    private Date startDate;                                      // quiz starting date
+    private boolean isFinished;                                 // quiz status: is it active or already finished
+    private Date finishDate;                                      // quiz finishing date
+    private int questionIdx;                                       // keeps track of current question
+    private final List<QuestionEvent> questionEvents; // keeps filled question events
+    private double userTotalScore;                          // counts user's total score
 
     /* constructor */
 
