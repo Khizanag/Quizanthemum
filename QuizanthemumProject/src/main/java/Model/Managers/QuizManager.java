@@ -8,10 +8,7 @@ import Controller.Classes.Users.User;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -62,7 +59,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         List<Question> questions = new ArrayList<>();
         String query = "SELECT " + QUESTION_TABLE_COLUMN_1_ID +
                 "FROM " + QUESTIONS_TABLE_NAME +
-                "WHERE " + QUESTION_TABLE_COLUMN_9_QUIZ_ID + " = " + id + ";\n";
+                "WHERE " + QUESTION_TABLE_COLUMN_11_QUIZ_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
@@ -78,11 +75,27 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     }
 
     public void insertQuiz(Quiz quiz){
-
+        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, quiz.getID());
+            pstmt.setString(2, quiz.getName());
+            pstmt.setString(3, quiz.getDescription());
+            pstmt.setString(4, quiz.getIconUrl());
+            pstmt.setBoolean(5, quiz.mustShuffleQuestions());
+            pstmt.setString(6, quiz.getComment());
+            pstmt.setInt(7, quiz.getAuthor().getUserID());
+            pstmt.setDate(8, new java.sql.Date(quiz.getCreationDate().getTime()));
+            pstmt.setDouble(9, quiz.getMaxScore());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Question Manager Class");
+        }
     }
 
+
     public int getNewQuizID(){
-        return -1; // TODO
+        return -1; // TODO sequence
     }
 
     public void setContext(ServletContext context){ this.context = context; }

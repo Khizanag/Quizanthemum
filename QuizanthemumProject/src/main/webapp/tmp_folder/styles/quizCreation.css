@@ -29,12 +29,16 @@ a{
 a:hover  {
     color: teal;
 }
-.combo-box{
+.drop-down{
     width: 100%;
     background: #f1f1f1;
     border-radius: 5px;
     padding: 15px;
     margin: 5px 0 22px 0;
+}
+
+.input-items{
+    margin-top: 22px;
 }
 
 input[type=text], input[type=password] {
@@ -55,7 +59,7 @@ input[type=text]:focus, input[type=password]:focus {
 .button {
     cursor: pointer;
     background-color: #f07237;
-    color: #b3bdbe;
+    color: white;
     font-size: larger;
     font-weight: 600;
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -64,4 +68,24 @@ input[type=text]:focus, input[type=password]:focus {
     width: 100%;
     margin-top: 5px;
     border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.upload-image-section{
+    margin: 5px 0 22px 0;
+}
+#photo-url{
+    width: 60%;
+}
+.checkbox{
+    width: 15px;
+    height: 15px;
+    margin-bottom: 15px;
+}
+.addQuestion{
+    width:100%;
+    margin-bottom: 5px;
+}
+.finish {
+    width: 100%;
 }

@@ -48,6 +48,12 @@
 		</div>
 	</div>
 
+	<form action="searching" class="searching-section">
+		<div class="container">
+			<div class="searching-for" id="searching-for"></div>
+		</div>
+	</form>
+
 	<footer	class= "footer-section">
 		<div class= "container">
 			<div class= "footer-items">
@@ -61,3 +67,10 @@
 		</div>
 	</footer>
 </body>
+
+<script>
+	let e = document.createElement('div');
+	e.className='bla'
+	e.innerHTML = window.localStorage.getItem('item');
+	document.getElementById('searching-for').appendChild(e);
+</script>

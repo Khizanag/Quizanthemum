@@ -2,7 +2,7 @@ package Configs;
 
 public interface QuizTableConfig {
 
-    String QUIZ_TABLE_NAME = "quizes";
+    String QUIZ_TABLE_NAME = "quizzes";
 
     String QUIZ_TABLE_COLUMN_1_ID = "ID";
     String QUIZ_TABLE_COLUMN_2_NAME = "NAME";

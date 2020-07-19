@@ -41,6 +41,23 @@
     p{
         text-align: center;
     }
+    .upload-image-section{
+        height: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .upload {
+        width: 100%;
+        text-align: center;
+    }
+    .addQuestion{
+        width: 100%;
+        text-align: center;
+    }
+    #photo-url{
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 500px)
