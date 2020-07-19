@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Registrations </title>
+    <link rel="icon" type="image/png" href="../images/common/icon.png"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../styles/common.css">
+	<link rel="stylesheet" href="../styles/quizCreation.css">
+    <link rel="stylesheet" href="../styles/breakpoints.css">
+	<link rel="stylesheet" href="../styles/rules.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <header class= "header-section">
+        <div class="container header">
+            <div class="header-left">
+                <img class="logo"src="../images/common/icon.png">
+				<h1 class="logo-text">Quizanthemum</h1>
+			</div>
+			
+			<ul class="header-right">
+				<div class= "icon-cirkle">
+					<a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
+				</div>
+				<div class= "icon-cirkle">
+					<a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
+				</div>
+				<div class= "icon-cirkle">
+					<a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
+				</div>
+			</ul>	
+
+        </div>
+    </header>
+
+    <div class="nav-section">
+		<div class="container">
+			<nav class="nav">
+				<ul class="nav-items">
+					<a class="nav-item" target="_self" href="homePage.html">HOME</a>
+					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
+					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
+					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
+				</ul>
+			</nav>
+		</div>
+    </div>  
+    
+    <form class="creation-section">
+        <div class="container">
+            <h2>შექმენი შენი ქვიზი</h2>
+            <p>ქვიზის შესაქმნელად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+            <hr>
+
+            <div class="input-items" id="input-items">
+                <label for="name"><b>ქვიზის სახელი</b></label>
+                <input type="text" placeholder="შეიყვანეთ ქვიზის დასახელება" name="name" id="name" required>
+
+                <label for="desctiption"><b>ქვიზის აღწერა</b></label>
+                <input type="text" placeholder="გთხოვთ შეუყვანოთ თქვენი ქვიზის ზოგადი აღწერა" 
+                        name="desctiption" id="desctiption" required>
+            </div>
+            <hr>
+            <div id="rules-id">
+                <p>კითხვების შეყვანამდე გაეცანით მათი შექმნის 
+                    <a href="#rules" data-rules-target="#rules">წესებსა და მოთხოვნებს</a>.
+                </p>
+                <div class="rules" id="rules">
+                    <div class="rules-header">
+                        <div class="title">დაიცვი წესები თორე დაგენძრევა</div>
+                        <input type="button" close-rules class="close-button" value="X">
+                    </div>
+                    <div class="rules-body">
+                        იტოგში მისმინე!<br><br>
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                        წესები წესები წესები წესები წესები წესები წესები წესები
+                    </div>
+                </div>
+                <div id="popup"></div>
+            </div>
+            <button type="button" class="button" onclick="createQuizElems()">გაგრძელება</button>
+        </div>
+    </form>
+
+	<footer	class= "footer-section">
+		<div class= "container">
+			<div class= "footer-items">
+				<div class= "footer left">
+					All Right Reserved
+				</div>
+				<div class= "footer rigth">
+					Quizanthemum By Our Team
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+<script>
+    function createQuizElems() {
+        let pop = document.getElementById("rules-id"); 
+        pop.innerHTML='';
+        let e = document.getElementById("input-items"); 
+        e.innerHTML='';
+        let elem = document.createElement('div');
+        elem.innerHTML=newQuestion();
+        e.appendChild(elem);
+    }
+
+    function newQuestion() {
+        return `<label for="type"><b>შეკითხვის ტიპი</b></label>
+                <select class="combo-box" name="quizType" id="quizType">
+                    <option value="ცაიელი">-</option>
+                    <option value="ტესტი">ტესტი</option>
+                    <option value="ღია კითხვა">ღია კითხვა</option>
+                    <option value="დასაწყვილებელი">დასაწყვილებელი</option>
+                    <option value="ფოტოებიანი">ფოტოებიანი</option>
+                </select>`;
+    }
+</script>
+<script src="../javascript/registration-popup.js"></script>
