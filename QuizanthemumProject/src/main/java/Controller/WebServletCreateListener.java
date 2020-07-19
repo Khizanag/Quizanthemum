@@ -1,11 +1,9 @@
 package Controller;
 
 import Configs.Config;
+import Controller.Classes.Quiz.QuestionEvent;
 import Model.DatabaseConnector;
-import Model.Managers.ChallengeManager;
-import Model.Managers.QuestionManager;
-import Model.Managers.QuizEventManager;
-import Model.Managers.QuizManager;
+import Model.Managers.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -21,24 +19,33 @@ public class WebServletCreateListener implements ServletContextListener, Config 
         ServletContext context = sce.getServletContext();
         // TODO uncomment
         // set connection
-//        Connection connection = DatabaseConnector.getInstance();
-//        context.setAttribute(CONNECTION_STR, connection);
+        Connection connection = DatabaseConnector.getInstance();
+        context.setAttribute(CONNECTION_STR, connection);
 
         // set challenge manager
-//        ChallengeManager challengeManager = new ChallengeManager();
-//        context.setAttribute(CHALLENGE_MANAGER_STR, challengeManager);
+        ChallengeManager challengeManager = new ChallengeManager();
+        context.setAttribute(CHALLENGE_MANAGER_STR, challengeManager);
+        challengeManager.setContext(context);
 
         // set question manager
-//        QuestionManager questionManager = new QuestionManager();
-//        context.setAttribute(QUESTION_MANAGER_STR, questionManager);
+        QuestionManager questionManager = new QuestionManager();
+        context.setAttribute(QUESTION_MANAGER_STR, questionManager);
+        questionManager.setContext(context);
 
         // set quiz event manager
-//        QuizEventManager quizEventManager = new QuizEventManager();
-//        context.setAttribute(QUIZ_EVENT_MANAGER_STR, quizEventManager);
+        QuizEventManager quizEventManager = new QuizEventManager();
+        context.setAttribute(QUIZ_EVENT_MANAGER_STR, quizEventManager);
+        quizEventManager.setContext(context);
 
         // set quiz manager
-//        QuizManager quizManager = new QuizManager();
-//        context.setAttribute(QUIZ_MANAGER_STR, quizManager);
+        QuizManager quizManager = new QuizManager();
+        context.setAttribute(QUIZ_MANAGER_STR, quizManager);
+        quizManager.setContext(context);
+
+        // set question event manager
+        QuestionEventManager questionEventManager = new QuestionEventManager();
+        context.setAttribute(QUESTION_EVENT_MANAGER_STR, questionEventManager);
+        questionEventManager.setContext(context);
     }
 
     @Override

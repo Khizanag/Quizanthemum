@@ -1,7 +1,6 @@
 package Controller.Classes.Quiz;
 
 import Controller.Classes.Users.User;
-import Controller.Classes.Users.Writer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,14 +16,14 @@ public class Quiz {
     private final String iconUrl;                           // url for quiz icon
     private final boolean mustShuffleQuestions;
     private final String comment;
-    private final Writer author;                            // quiz creator user
+    private final User author;                            // quiz creator user
     private Date creationDate;
     private List<Question> questions;
     private double maxScore;                            // maximum possible score
 
     /* Quiz constructor for creating Quiz object using database information, about already published quiz */
     public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment,
-                Writer author, Date creationDate, List<Question> questions, int maxScore) {
+                User author, Date creationDate, List<Question> questions, int maxScore) {
         this(id, name, description, iconUrl, mustShuffleQuestions, comment,  author, true);
         this.creationDate = creationDate;
         this.questions = questions;
@@ -36,14 +35,14 @@ public class Quiz {
         while this quiz is not still published, and is not saved into database.
          Note: after entirely creating this object, it should be stored into database
      */
-    public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, Writer author){
+    public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author){
         this(id, name, description, iconUrl, mustShuffleQuestions, comment, author, true);
         this.questions = new ArrayList<>();
         this.maxScore = 0;
     }
 
     /* helper constructor used by other public constructors */
-    private Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, Writer author, boolean isPrivate){
+    private Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author, boolean isPrivate){
         this.id = id;
         this.name = name;
         this.description = description;
