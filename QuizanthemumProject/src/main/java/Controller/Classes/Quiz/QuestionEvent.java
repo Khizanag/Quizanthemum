@@ -15,6 +15,8 @@ public class QuestionEvent {
     // question start date
     private Date endDate;
 
+    private boolean isGraded; // TODO
+
     // user score in this question
     private double userScore;
 
@@ -100,7 +102,7 @@ public class QuestionEvent {
                 correctAnswersNum += 1;
             }
         }
-        userScore = question.getMaxScore() * correctAnswersNum / question.getMultiAnswersNum();
+        userScore = question.getMaxScore() * correctAnswersNum / question.getAnswersCount();
     }
 
     /*
@@ -114,7 +116,7 @@ public class QuestionEvent {
                 correctAnswersNum += 1;
             }
         }
-        userScore = question.getMaxScore() * correctAnswersNum / question.getMultiAnswersNum();
+        userScore = question.getMaxScore() * correctAnswersNum / question.getAnswersCount();
     }
 
 }

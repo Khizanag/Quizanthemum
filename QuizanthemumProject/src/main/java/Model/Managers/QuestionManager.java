@@ -6,25 +6,22 @@ import Controller.Classes.Quiz.QuestionType;
 import Controller.Classes.Quiz.Quiz;
 import Configs.Config;
 import Model.DatabaseConnector;
-import Tools.Pair;
 
 import javax.servlet.ServletContext;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class QuestionManager implements Config, QuestionTableConfig, QuestionType {
 
-    private final Connection connection;
-    private Statement statement;
+    private Connection connection;
+    private Statement connectionStatement;
     private ServletContext context;
 
     public QuestionManager(){
         this.connection = DatabaseConnector.getInstance();
         try {
-            statement = connection.createStatement();
+            connectionStatement = connection.createStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -35,17 +32,75 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
     }
 
     public void insertQuestion(Question question){
+        String query = getQuestionQueryText(question);
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            setQueryParameters(question, pstmt);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Question Manager Class");
+        }
+    }
 
+    private void setQueryParameters(Question question, PreparedStatement pstmt) {
+        try {
+            pstmt.setInt(1, question.getID());
+            pstmt.setInt(2, question.getType());
+            pstmt.setBoolean(3, question.isAutoGraded());
+            pstmt.setDouble(4, question.getMaxScore());
+            pstmt.setString(5, question.getHeaderStatement());
+            pstmt.setString(6, question.getComment());
+            pstmt.setString(7, question.getSource());
+            pstmt.setDate(8, new java.sql.Date(question.getCreationDate().getTime()));
+            pstmt.setInt(9, question.getQuiz().getID());
+            pstmt.setBoolean(10, question.isPictureQuestion());
+            pstmt.setInt(11, question.getStatementsCount());
+
+            List<String> statements = question.getStatements();
+            for(int i = 0; i < STATEMENTS_NUM; i++) {
+                if (i < statements.size()) {
+                    pstmt.setString(STATEMENT_START_COL + i, statements.get(i));
+                } else {
+                    pstmt.setString(STATEMENT_START_COL + i, null);
+                }
+            }
+
+            pstmt.setBoolean(28, question.isPictureAnswer());
+            pstmt.setInt(29, question.getAnswersCount());
+
+            List<String> answers = question.getAnswers();
+            for(int i = 0; i < ANSWERS_NUM; i++) {
+                if (i < answers.size()) {
+                    pstmt.setString(ANSWER_START_COL + i, answers.get(i));
+                } else {
+                    pstmt.setString(ANSWER_START_COL + i, null);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    private String getQuestionQueryText(Question question) {
+        String query = "INSERT INTO " + QUESTIONS_TABLE_NAME;
+        query += " VALUES (?";
+        for (int i = 1; i < COLUMN_COUNT; i++) {
+            query += ", ?";
+        }
+        query += ");\n";
+        return query;
     }
 
     public Question getQuestion(int id){
+
         String query = "SELECT * " +
                 "FROM " + QUESTIONS_TABLE_NAME +
                 "WHERE id = " + id + ";\n";
-        try {
-            ResultSet set = statement.executeQuery(query);
-            set.getString("id");
 
+        try {
+            ResultSet set = connectionStatement.executeQuery(query);
+
+            set.getString(QUESTION_TABLE_COLUMN_1_ID);
             int type = set.getInt(QUESTION_TABLE_COLUMN_2_TYPE);
             boolean isAutoGraded = set.getBoolean(QUESTION_TABLE_COLUMN_3_IS_AUTO_GRADED);
             double maxScore = set.getDouble(QUESTION_TABLE_COLUMN_4_MAX_SCORE);
@@ -53,91 +108,30 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             String comment = set.getString(QUESTION_TABLE_COLUMN_6_COMMENT);
             String source = set.getString(QUESTION_TABLE_COLUMN_7_SOURCE);
             Date creationDate = set.getDate(QUESTION_TABLE_COLUMN_8_CREATION_DATE);
-            QuizManager quizManager = (QuizManager) context.getAttribute(QUIZ_MANAGER_STR);
             int quizID = set.getInt(QUESTION_TABLE_COLUMN_9_QUIZ_ID);
+            QuizManager quizManager = (QuizManager) context.getAttribute(QUIZ_MANAGER_STR);
             Quiz quiz = quizManager.getQuiz(quizID);
-            String textStatement = set.getString(QUESTION_TABLE_COLUMN_10_TEXT_STATEMENT);
-            boolean isPictureQuestion = set.getBoolean(QUESTION_TABLE_COLUMN_11_IS_PICTURE_QUESTION);
-            int numChoiceStatements = set.getInt(QUESTION_TABLE_COLUMN_12_NUM_CHOICE_STATEMENTS);
-            String textAnswer = set.getString(QUESTION_TABLE_COLUMN_29_TEXT_ANSWER);
-            boolean isPictureAnswer = set.getBoolean(QUESTION_TABLE_COLUMN_30_IS_PICTURE_ANSWER);
-            int numAnswers = set.getInt(QUESTION_TABLE_COLUMN_31_NUM_ANSWERS);
 
-            switch (type) {
-                case STANDARD:
-                    return new Question(id, type, isAutoGraded, maxScore, isPictureQuestion, headerStatement, comment, source, creationDate, quiz, textStatement, textAnswer);
-
-                case FILL_BLANK:
-                    List<String> fillBlankStatements = getStatementsList(set, numChoiceStatements);
-                    List<String> fillBlankAnswers = getAnswersList(set, numAnswers);
-                    return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quiz, fillBlankStatements, fillBlankAnswers);
-
-                case MULTI_CHOICE:
-                    List<String> multiChoiceStatements = getStatementsList(set, numChoiceStatements);
-                    return new Question(id, type, isAutoGraded, maxScore, isPictureQuestion, headerStatement, comment, source, creationDate, quiz, multiChoiceStatements, isPictureAnswer, textAnswer);
-
-                case MULTI_ANSWER:
-                    Set<String> multiAnswers = new TreeSet<>();
-                    for (int i = 0; i < numAnswers; i++) {
-                        String ithStatement = set.getString(QUESTION_TABLE_ITH_ANSWER_TEXT + i);
-                        multiAnswers.add(ithStatement);
-                    }
-                    return new Question(id, type, isAutoGraded, maxScore, isPictureQuestion, headerStatement, comment, source, creationDate, quiz, textStatement, multiAnswers);
-
-                case MULTI_CHOICE_MULTI_ANSWER:
-                    List<String> multiMultiChoiceStatements = getStatementsList(set, numChoiceStatements);
-                    Set<String> multiMultiAnswers = new TreeSet<>();
-                    for (int i = 0; i < numAnswers; i++) {
-                        String ithStatement = set.getString(QUESTION_TABLE_ITH_ANSWER_TEXT + i);
-                        multiMultiAnswers.add(ithStatement);
-                    }
-                    return new Question(id, type, isAutoGraded, maxScore, isPictureQuestion, headerStatement, comment, source, creationDate, quiz, multiMultiChoiceStatements, isPictureAnswer, multiMultiAnswers);
-
-                case MATCHING:
-                    List<String> matchingLeft = new ArrayList<>();
-                    List<String> matchingRight = new ArrayList<>();
-                    for(int i = 0; i < numChoiceStatements; i+=2){
-                        String leftStatement = set.getString(QUESTION_TABLE_ITH_CHOICE_TEXT + i);
-                        String rightStatement = set.getString(QUESTION_TABLE_ITH_CHOICE_TEXT + (i +1));
-                        matchingLeft.add(leftStatement);
-                        matchingRight.add(rightStatement);
-                    }
-                    // TODO how treeset works with pair<String>
-                    Set<Pair<String>> matchingAnswers = new TreeSet<>();
-                    for(int i = 0; i < numAnswers; i+=2){
-                        String leftAnswer = set.getString(QUESTION_TABLE_ITH_ANSWER_TEXT + i);
-                        String rightAnswer = set.getString(QUESTION_TABLE_ITH_ANSWER_TEXT + (i +1));
-                        matchingAnswers.add(new Pair<String>(leftAnswer, rightAnswer));
-                    }
-                    return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quiz, matchingLeft, matchingRight, matchingAnswers);
-
-                default:
-                    return null;
+            boolean isPictureQuestion = set.getBoolean(QUESTION_TABLE_COLUMN_10_IS_PICTURE_STATEMENT);
+            int numStatements = set.getInt(QUESTION_TABLE_COLUMN_11_NUM_STATEMENTS);
+            List<String> statements = new ArrayList<>();
+            for (int i = 0; i < numStatements; i++) {
+                statements.add(set.getString(QUESTION_TABLE_ITH_STATEMENT_TEXT + i));
             }
+
+            boolean isPictureAnswer = set.getBoolean(QUESTION_TABLE_COLUMN_28_IS_PICTURE_ANSWER);
+            int numAnswers = set.getInt(QUESTION_TABLE_COLUMN_29_NUM_ANSWERS);
+            List<String> answers = new ArrayList<>();
+            for (int i = 0; i < numAnswers; i++) {
+                answers.add(set.getString(QUESTION_TABLE_ITH_ANSWER_TEXT + i));
+            }
+
+            return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source,
+                                creationDate, quiz, isPictureQuestion, isPictureAnswer, statements, answers);
+
         } catch (SQLException unused) { }
-        return null;
+
+        return null; // never reached
     }
 
-    private List<String> getStatementsList(ResultSet set, int num){
-        return getStatementAnswerList(set, num, true);
-    }
-
-    private List<String> getAnswersList(ResultSet set, int num){
-        return getStatementAnswerList(set, num, false);
-    }
-
-    private List<String> getStatementAnswerList(ResultSet set, int num, boolean isStatement){
-        List<String> list = new ArrayList<>();
-        try{
-            for(int i = 0; i < num; i++){
-                String columnLabel = isStatement ? QUESTION_TABLE_ITH_CHOICE_TEXT : QUESTION_TABLE_ITH_ANSWER_TEXT;
-                String ithStatement = set.getString(columnLabel + i);
-                list.add(ithStatement);
-            }
-            return list;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
-    }
 }

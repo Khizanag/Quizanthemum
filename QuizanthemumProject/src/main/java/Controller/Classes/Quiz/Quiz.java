@@ -54,6 +54,7 @@ public class Quiz {
     }
 
     /* getter methods */
+    public int getID() { return ID; }
 
     public String getName() { return name; }
 
