@@ -1,11 +1,5 @@
 package Controller.Classes;
 
-import Controller.Classes.Quiz.QuizEvent;
-import Controller.Classes.Users.User;
-import Model.Managers.ChallengeManager;
-
-import java.util.Date;
-
 public class Challenge {
 //
 //    private final int ID;

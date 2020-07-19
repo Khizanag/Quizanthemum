@@ -16,6 +16,7 @@ public class WebServletCreateListener implements ServletContextListener, Config 
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        /*
         ServletContext context = sce.getServletContext();
         // TODO uncomment
         // set connection
@@ -46,6 +47,8 @@ public class WebServletCreateListener implements ServletContextListener, Config 
         QuestionEventManager questionEventManager = new QuestionEventManager();
         context.setAttribute(QUESTION_EVENT_MANAGER_STR, questionEventManager);
         questionEventManager.setContext(context);
+
+         */
     }
 
     @Override
