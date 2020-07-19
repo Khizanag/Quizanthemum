@@ -9,17 +9,17 @@ import java.util.List;
 
 public class User {
 
-    private int userID;
-    private String name;
-    private String lastName;
-    private String username;
-    private String city;
-    private String country;
-    private String mobileNumber;
-    private String email;
-    private Date birthDate;
-    private Date registrationDate;
-    private List<User> friends;
+    private final int userID;
+    private final String name;
+    private final String lastName;
+    private final String username;
+    private final String city;
+    private final String country;
+    private final String mobileNumber;
+    private final String email;
+    private final Date birthDate;
+    private final Date registrationDate;
+    private final List<User> friends;
     private List<QuizEvent> quizEvents;
     private List<Challenge> challenges;
 

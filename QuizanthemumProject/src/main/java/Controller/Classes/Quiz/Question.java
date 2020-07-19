@@ -12,28 +12,28 @@ public class Question {
     /* private variables */
 
     // question id
-    private int ID;
+    private final int ID;
 
     // type of given question
-    private int type;
+    private final int type;
 
     // true if question has to be graded automatically, false otherwise
-    private boolean isAutoGraded;
+    private final boolean isAutoGraded;
 
     // maximum score for given question
-    private double maxScore;
+    private final double maxScore;
 
     // author's comment on question
-    private String comment;
+    private final String comment;
 
     // question source
-    private String source;
+    private final String source;
 
     // creation date
-    private Date creationDate;
+    private final Date creationDate;
 
     // owner quiz
-    private Quiz quiz;
+    private final Quiz quiz;
 
     /* statements */
 
@@ -41,7 +41,7 @@ public class Question {
 
     // question header statement as text, instruction.
     // for instance: 'match pictures given below to their definitions'
-    private String headerStatement;
+    private final String headerStatement;
 
     // question statement as text
     private String textStatement;
