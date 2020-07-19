@@ -73,14 +73,24 @@ input[type=text]:focus, input[type=password]:focus {
 
 .upload-image-section{
     margin: 5px 0 22px 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 #photo-url{
-    width: 60%;
+    width: 100%;
+    margin: 0 0 10px 0;
 }
 .checkbox{
     width: 15px;
     height: 15px;
     margin-bottom: 15px;
+}
+.upload {
+    width: 100%;
+    height: 45px;
+    font-size: medium;
+    margin: 0 0 5px 0;
 }
 .addQuestion{
     width:100%;
