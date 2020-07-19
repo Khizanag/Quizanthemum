@@ -71,16 +71,11 @@ input[type=text]:focus, input[type=password]:focus {
     margin-bottom: 10px;
 }
 
-.upload {
-    width: 20%;
-    color: white;
-    font-size: small;
-}
 .upload-image-section{
     margin: 5px 0 22px 0;
 }
 #photo-url{
-    width: 71%;
+    width: 60%;
 }
 .checkbox{
     width: 15px;
