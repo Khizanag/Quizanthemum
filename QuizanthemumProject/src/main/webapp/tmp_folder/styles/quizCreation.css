@@ -107,15 +107,16 @@ input[type=text]:focus, input[type=password]:focus {
     padding: 13px;
     width: 10%;
     margin: 5px 0 22px 0;
-}
-.wrong-ans-container {
-    width: 70%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 #wrong-ans-div{
-    width: 70%;
+    width: 50%;
+    position: relative;
 }
 #wrong-ans{
-    width: 70%;
+    width: 85%;
 }
 #output {
     margin-bottom: 10px;

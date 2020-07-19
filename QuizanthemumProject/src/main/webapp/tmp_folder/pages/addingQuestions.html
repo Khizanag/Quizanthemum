@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Registrations </title>
+    <title> Adding Questions </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../styles/common.css">
@@ -115,13 +115,13 @@
 			window.location.href = "addingQuestions.html";
         }
 	}
+	
 	function addNextWrongAns() {
-		let parent = document.getElementById('wrong-ans-div');
+		let parent = document.getElementById('added-wrongs');
 		let e = document.createElement('div');
-		e.className = 'wrong-ans-container';
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი"'+
-        'name="wrong-ans" id="wrong-ans" required>';
+		let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი"'+
+		'name="wrong-ans" id="wrong-ans" required>';
 		e.innerHTML += toAdd;
-		parent.before(e);
+		parent.insertBefore(e, null);
 	}
 </script>
