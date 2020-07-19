@@ -4,22 +4,16 @@ import Configs.QuestionTableConfig;
 import Configs.QuizTableConfig;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.Quiz;
-import Controller.Classes.Users.User;
 import Controller.Classes.Users.Writer;
 import Model.DatabaseConnector;
 
-import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.*;
-import static Configs.QuizTableConfig.*;
 
 public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
@@ -82,11 +76,27 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     }
 
     public void insertQuiz(Quiz quiz){
-        // TODO
+        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, quiz.getID());
+            pstmt.setString(2, quiz.getName());
+            pstmt.setString(3, quiz.getDescription());
+            pstmt.setString(4, quiz.getIconUrl());
+            pstmt.setBoolean(5, quiz.mustShuffleQuestions());
+            pstmt.setString(6, quiz.getComment());
+            pstmt.setInt(7, quiz.getAuthor().getUserID());
+            pstmt.setDate(8, new java.sql.Date(quiz.getCreationDate().getTime()));
+            pstmt.setDouble(9, quiz.getMaxScore());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Question Manager Class");
+        }
     }
 
+
     public int getNewQuizID(){
-        return -1; // TODO
+        return -1; // TODO sequence
     }
 
     public void setContext(ServletContext context){ this.context = context; }
