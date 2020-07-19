@@ -95,4 +95,5 @@ public class User {
         friends.add(user);
     }
 
+    public int getUserID() { return userID; }
 }
