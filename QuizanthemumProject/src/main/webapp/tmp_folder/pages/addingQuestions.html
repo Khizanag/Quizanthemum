@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Search </title>
+    <title> Registrations </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../styles/common.css">
-	<link rel="stylesheet" href="../styles/search.css">
-
+	<link rel="stylesheet" href="../styles/quizCreation.css">
+    <link rel="stylesheet" href="../styles/breakpoints.css">
+	<link rel="stylesheet" href="../styles/rules.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 </head>
 <body>
     <header class= "header-section">
@@ -46,13 +45,15 @@
 				</ul>
 			</nav>
 		</div>
-	</div>
-
-	<form action="searching" class="searching-section">
-		<div class="container">
-			<div class="searching-for" id="searching-for"></div>
-		</div>
-	</form>
+    </div>  
+    
+    <form class="creation-section">
+        <div class="container">
+            <h2>შეკითხვა</h2>
+            <p>შეკითხვის დასამატებლას შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+            <hr>
+        </div>
+    </form>
 
 	<footer	class= "footer-section">
 		<div class= "container">
@@ -65,12 +66,6 @@
 				</div>
 			</div>
 		</div>
-	</footer>
+    </footer>
+    
 </body>
-
-<script>
-	let e = document.createElement('div');
-	e.className='bla'
-	e.innerHTML = window.localStorage.getItem('item');
-	document.getElementById('searching-for').appendChild(e);
-</script>

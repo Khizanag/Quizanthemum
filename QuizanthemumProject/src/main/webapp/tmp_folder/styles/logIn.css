@@ -56,3 +56,6 @@ input[type=text]:focus, input[type=password]:focus {
     margin-top: 5px;
     border-radius: 5px;
 }
+.input-items {
+    margin-top: 22px;
+}
