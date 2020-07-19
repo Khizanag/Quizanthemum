@@ -29,7 +29,7 @@ a{
 a:hover  {
     color: teal;
 }
-.combo-box{
+.drop-down{
     width: 100%;
     background: #f1f1f1;
     border-radius: 5px;
@@ -59,7 +59,7 @@ input[type=text]:focus, input[type=password]:focus {
 .button {
     cursor: pointer;
     background-color: #f07237;
-    color: #b3bdbe;
+    color: white;
     font-size: larger;
     font-weight: 600;
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -86,4 +86,11 @@ input[type=text]:focus, input[type=password]:focus {
     width: 15px;
     height: 15px;
     margin-bottom: 15px;
+}
+.addQuestion{
+    width:100%;
+    margin-bottom: 5px;
+}
+.finish {
+    width: 100%;
 }

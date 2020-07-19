@@ -142,10 +142,10 @@
     };
 
     function checkAndRedirect() {
-        let name = document.getElementById('name').value == '';
-        let description = document.getElementById('description').value == '';
-        let url = document.getElementById('photo-url').value == '';
-        if(!(name && description && url)) {
+        let name = document.getElementById('name').value != '';
+        let description = document.getElementById('description').value != '';
+        let url = document.getElementById('photo-url').value != '';
+        if((name && description && url)) {
             window.location.href = "addingQuestions.html";
         }
         // window.location.href = "addingQuestions.html";
