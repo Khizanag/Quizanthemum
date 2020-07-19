@@ -49,12 +49,14 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             pstmt.setBoolean(3, question.isAutoGraded());
             pstmt.setDouble(4, question.getMaxScore());
             pstmt.setString(5, question.getHeaderStatement());
-            pstmt.setString(6, question.getComment());
-            pstmt.setString(7, question.getSource());
-            pstmt.setDate(8, new java.sql.Date(question.getCreationDate().getTime()));
-            pstmt.setInt(9, question.getQuiz().getID());
-            pstmt.setBoolean(10, question.isPictureQuestion());
-            pstmt.setInt(11, question.getStatementsCount());
+            pstmt.setString(6, question.getTextStatement());
+            pstmt.setString(7, question.getPictureStatementURL());
+            pstmt.setString(8, question.getComment());
+            pstmt.setString(9, question.getSource());
+            pstmt.setDate(10, new java.sql.Date(question.getCreationDate().getTime()));
+            pstmt.setInt(11, question.getQuiz().getID());
+            pstmt.setBoolean(12, question.isPictureQuestion());
+            pstmt.setInt(13, question.getStatementsCount());
 
             List<String> statements = question.getStatements();
             for(int i = 0; i < STATEMENTS_NUM; i++) {
@@ -65,8 +67,8 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
                 }
             }
 
-            pstmt.setBoolean(28, question.isPictureAnswer());
-            pstmt.setInt(29, question.getAnswersCount());
+            pstmt.setBoolean(30, question.isPictureAnswer());
+            pstmt.setInt(31, question.getAnswersCount());
 
             List<String> answers = question.getAnswers();
             for(int i = 0; i < ANSWERS_NUM; i++) {
@@ -94,7 +96,6 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
     public Question getQuestion(int id){
 
         String query = "SELECT * " +
-                "FROM " + QUESTIONS_TABLE_NAME +
                 "WHERE id = " + id + ";\n";
 
         try {
@@ -105,29 +106,31 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             boolean isAutoGraded = set.getBoolean(QUESTION_TABLE_COLUMN_3_IS_AUTO_GRADED);
             double maxScore = set.getDouble(QUESTION_TABLE_COLUMN_4_MAX_SCORE);
             String headerStatement = set.getString(QUESTION_TABLE_COLUMN_5_HEADER_STATEMENT);
-            String comment = set.getString(QUESTION_TABLE_COLUMN_6_COMMENT);
-            String source = set.getString(QUESTION_TABLE_COLUMN_7_SOURCE);
-            Date creationDate = set.getDate(QUESTION_TABLE_COLUMN_8_CREATION_DATE);
-            int quizID = set.getInt(QUESTION_TABLE_COLUMN_9_QUIZ_ID);
+            String textStatement = set.getString(QUESTION_TABLE_COLUMN_6_HEADER_STATEMENT);
+            String pictureStatementURL = set.getString(QUESTION_TABLE_COLUMN_7_HEADER_STATEMENT);
+            String comment = set.getString(QUESTION_TABLE_COLUMN_8_COMMENT);
+            String source = set.getString(QUESTION_TABLE_COLUMN_9_SOURCE);
+            Date creationDate = set.getDate(QUESTION_TABLE_COLUMN_10_CREATION_DATE);
+            int quizID = set.getInt(QUESTION_TABLE_COLUMN_11_QUIZ_ID);
             QuizManager quizManager = (QuizManager) context.getAttribute(QUIZ_MANAGER_STR);
             Quiz quiz = quizManager.getQuiz(quizID);
 
-            boolean isPictureQuestion = set.getBoolean(QUESTION_TABLE_COLUMN_10_IS_PICTURE_STATEMENT);
-            int numStatements = set.getInt(QUESTION_TABLE_COLUMN_11_NUM_STATEMENTS);
+            boolean isPictureQuestion = set.getBoolean(QUESTION_TABLE_COLUMN_12_IS_PICTURE_STATEMENT);
+            int numStatements = set.getInt(QUESTION_TABLE_COLUMN_13_NUM_STATEMENTS);
             List<String> statements = new ArrayList<>();
             for (int i = 0; i < numStatements; i++) {
                 statements.add(set.getString(QUESTION_TABLE_ITH_STATEMENT_TEXT + i));
             }
 
-            boolean isPictureAnswer = set.getBoolean(QUESTION_TABLE_COLUMN_28_IS_PICTURE_ANSWER);
-            int numAnswers = set.getInt(QUESTION_TABLE_COLUMN_29_NUM_ANSWERS);
+            boolean isPictureAnswer = set.getBoolean(QUESTION_TABLE_COLUMN_30_IS_PICTURE_ANSWER);
+            int numAnswers = set.getInt(QUESTION_TABLE_COLUMN_31_NUM_ANSWERS);
             List<String> answers = new ArrayList<>();
             for (int i = 0; i < numAnswers; i++) {
                 answers.add(set.getString(QUESTION_TABLE_ITH_ANSWER_TEXT + i));
             }
 
-            return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source,
-                                creationDate, quiz, isPictureQuestion, isPictureAnswer, statements, answers);
+            return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quiz,
+                    isPictureQuestion, isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
 
         } catch (SQLException unused) { }
 
