@@ -10,7 +10,7 @@ public class QuestionEvent {
     /* private variables */
 
     // question start date
-    private Date startDate;
+    private final Date startDate;
 
     // question start date
     private Date endDate;
@@ -19,7 +19,7 @@ public class QuestionEvent {
     private double userScore;
 
     // question on which given event is connected
-    private Question question;
+    private final Question question;
 
     // correct answer for STANDARD, FILL_BLANK, PICTURE and MULTI_CHOICE questions
     private String userTextAnswer;

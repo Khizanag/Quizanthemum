@@ -23,7 +23,7 @@ import static Configs.QuizTableConfig.*;
 
 public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
-    private Connection connection;
+    private final Connection connection;
     private Statement statement;
     private ServletContext context;
 

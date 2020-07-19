@@ -1,5 +1,8 @@
 package Model.Managers;
 
+import Model.DatabaseConnector;
+import org.graalvm.compiler.code.DataSection;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -7,11 +10,11 @@ import java.sql.Statement;
 public class ChallengeManager {
 
     // saved connection to use in the future for working with database
-    private Connection connection;
+    private final Connection connection;
     private Statement statement;
 
-    public ChallengeManager(Connection connection){
-        this.connection = connection;
+    public ChallengeManager(){
+        this.connection = DatabaseConnector.getInstance();
         try {
             this.statement = connection.createStatement();
         } catch (SQLException throwables) {

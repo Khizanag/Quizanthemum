@@ -13,10 +13,10 @@ public class QuizEvent {
     /* private variables */
 
     // quiz that user is taking
-    private Quiz quiz;
+    private final Quiz quiz;
 
     // user which is taking quiz
-    private User user;
+    private final User user;
 
     // quiz starting date
     private Date startDate;
@@ -31,7 +31,7 @@ public class QuizEvent {
     private int questionIdx;
 
     // keeps filled question events
-    private List<QuestionEvent> questionEvents;
+    private final List<QuestionEvent> questionEvents;
 
     // counts user's total score
     private double userTotalScore;

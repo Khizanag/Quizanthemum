@@ -17,7 +17,7 @@ import java.util.*;
 
 public class QuestionManager implements Config, QuestionTableConfig, QuestionType {
 
-    private Connection connection;
+    private final Connection connection;
     private Statement statement;
     private ServletContext context;
 

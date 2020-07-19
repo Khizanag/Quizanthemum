@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Writer extends User {
 
-    private List<Quiz> createdQuizes;
+    private final List<Quiz> createdQuizes;
 
     public Writer(int userID, String name, String lastName, String username, String city,
                   String county, String mobileNumber, String email, Date birthDate,
