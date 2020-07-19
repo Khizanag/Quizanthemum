@@ -71,7 +71,7 @@ public class QuizEvent {
 
     // returns current question event to user to fill it
     public QuestionEvent getNextQuestionEvent() {
-        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx), new Date());
+        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx), false, new Date());
         questionIdx += 1;
         return currentQuestionEvent;
     }

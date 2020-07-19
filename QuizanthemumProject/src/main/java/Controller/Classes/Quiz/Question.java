@@ -21,8 +21,8 @@ public final class Question {
 
     private final boolean isPictureQuestion;       // question statement is given as picture
     private final String headerStatement;          // question header statement as text, instruction.
-    private final String textStatement;          // question header statement as text, instruction.
-    private final String pictureStatementURL;          // question header statement as text, instruction.
+    private final String textStatement;            // question header statement as text, instruction.
+    private final String pictureStatementURL;      // question header statement as text, instruction.
     private final List<String> statements;         // statement for all type of questions
 
     /* answers */
