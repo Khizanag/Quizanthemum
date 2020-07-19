@@ -21,6 +21,8 @@ public final class Question {
 
     private final boolean isPictureQuestion;       // question statement is given as picture
     private final String headerStatement;          // question header statement as text, instruction.
+    private final String textStatement;          // question header statement as text, instruction.
+    private final String pictureStatementURL;          // question header statement as text, instruction.
     private final List<String> statements;         // statement for all type of questions
 
     /* answers */
@@ -30,9 +32,9 @@ public final class Question {
 
     /* constructor */
 
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore, String headerStatement,
-                    String comment, String source, Date creationDate, Quiz quiz, boolean isPictureQuestion,
-                    boolean isPictureAnswer, List<String> statements, List<String> answers) {
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
+                    String source, Date creationDate, Quiz quiz, boolean isPictureQuestion, boolean isPictureAnswer,
+                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
         this.ID = ID;
         this.type = type;
         this.isAutoGraded = isAutoGraded;
@@ -44,6 +46,8 @@ public final class Question {
         this.creationDate = creationDate;
         this.isPictureQuestion = isPictureQuestion;
         this.isPictureAnswer = isPictureAnswer;
+        this.textStatement = textStatement;
+        this.pictureStatementURL = pictureStatementURL;
         this.statements = statements;
         this.answers = answers;
     }
@@ -57,8 +61,6 @@ public final class Question {
     public boolean isAutoGraded() { return isAutoGraded; }
 
     public String getHeaderStatement() { return headerStatement; }
-
-    public String getTextStatement() { return statements.get(0); }
 
     public String getComment() { return comment; }
 
@@ -77,6 +79,10 @@ public final class Question {
     /* statement getters */
 
     public int getStatementsCount() { return statements.size(); }
+
+    public String getTextStatement() { return textStatement; }
+
+    public String getPictureStatementURL() { return pictureStatementURL; }
 
     // for multi-choice and fill-blank questions
     public List<String> getStatements() { return statements; }

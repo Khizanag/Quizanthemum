@@ -60,7 +60,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         // TODO
         String query = "SELECT " + QUESTION_TABLE_COLUMN_1_ID +
                 "FROM " + QUESTIONS_TABLE_NAME +
-                "WHERE " + QUESTION_TABLE_COLUMN_9_QUIZ_ID + " = " + id + ";\n";
+                "WHERE " + QUESTION_TABLE_COLUMN_11_QUIZ_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
