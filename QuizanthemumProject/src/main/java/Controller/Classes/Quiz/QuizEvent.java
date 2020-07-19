@@ -1,6 +1,5 @@
 package Controller.Classes.Quiz;
 
-import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Users.User;
 
 import java.util.ArrayList;

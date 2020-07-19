@@ -1,5 +1,7 @@
 package Model.Managers;
 
+import Model.DatabaseConnector;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,8 +12,8 @@ public class ChallengeManager {
     private Connection connection;
     private Statement statement;
 
-    public ChallengeManager(Connection connection){
-        this.connection = connection;
+    public ChallengeManager(){
+        this.connection = DatabaseConnector.getInstance();
         try {
             this.statement = connection.createStatement();
         } catch (SQLException throwables) {

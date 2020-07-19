@@ -8,6 +8,9 @@ public class Quiz {
 
     /* private variables */
 
+    // quiz ID
+    private int ID;
+
     // quiz owner user
     private String author;
 
@@ -99,5 +102,9 @@ public class Quiz {
     // returns question on given index
     public Question getQuestion(int idx) {
         return questions.get(idx);
+    }
+
+    public int getID() {
+        return ID;
     }
 }

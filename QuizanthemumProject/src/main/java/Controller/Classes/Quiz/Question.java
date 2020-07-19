@@ -2,90 +2,37 @@ package Controller.Classes.Quiz;
 
 import Tools.Pair;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class Question {
+public final class Question {
 
     /* private variables */
 
-    // question id
-    private int ID;
-
-    // type of given question
-    private int type;
-
-    // true if question has to be graded automatically, false otherwise
-    private boolean isAutoGraded;
-
-    // maximum score for given question
-    private double maxScore;
-
-    // author's comment on question
-    private String comment;
-
-    // question source
-    private String source;
-
-    // creation date
-    private Date creationDate;
-
-    // owner quiz
-    private Quiz quiz;
+    private final int ID;
+    private final int type;
+    private final boolean isAutoGraded;            // true if question has to be graded automatically, false otherwise
+    private final double maxScore;                 // maximum score for given question
+    private final String comment;                  // author's comment on question
+    private final String source;                   // question source. link, book...
+    private final Date creationDate;
+    private final Quiz quiz;                       // question owner quiz
 
     /* statements */
 
-    private boolean isPictureQuestion;
-
-    // question header statement as text, instruction.
-    // for instance: 'match pictures given below to their definitions'
-    private String headerStatement;
-
-    // question statement as text
-    private String textStatement;
-
-    // multiple choice statement
-    private List<String> multiChoiceStatements;
-
-    // list of statements for FILL_BLANK question
-    // text fields are going to appear between them
-    private List<String> fillBlankStatements;
-
-    // matching options left
-    // size should be equal to matchingRight size
-    private List<String> matchingLeft;
-
-    // matching options right
-    // size should be equal to matchingLeft size
-    private List<String> matchingRight;
+    private final boolean isPictureQuestion;       // question statement is given as picture
+    private final String headerStatement;          // question header statement as text, instruction.
+    private final List<String> statements;         // statement for all type of questions
 
     /* answers */
 
-    // if user can see pictures in the mulitple answers
-    private boolean isPictureAnswer;
+    private final boolean isPictureAnswer;         // if user can see pictures in possible answers
+    private final List<String> answers;            // list of answers for all type of questions
 
-    // correct answer for STANDARD, PICTURE and MULTI_CHOICE questions
-    private String textAnswer;
+    /* constructor */
 
-    // list of answers for FILL_BLANK question
-    private List<String> fillBlankAnswers;
-
-    // correct answer for MATCHING questions
-    // key is from left options, value is from right options
-    private Set<Pair<String>> matchingAnswers;
-
-    // correct answer for MULTI_ANSWER and MULTI_CHOICE_MULTI_ANSWER questions
-    private Set<String> multiAnswers;
-
-    // TODO change hashset -> treeset
-
-    /* constructors */
-
-    // default constructor
-    private Question(int ID, int type, boolean isAutoGraded, double maxScore,
-                     String headerStatement, String comment, String source, Quiz quiz, Date creationDate) {
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore, String headerStatement,
+                    String comment, String source, Date creationDate, Quiz quiz, boolean isPictureQuestion,
+                    boolean isPictureAnswer, List<String> statements, List<String> answers) {
         this.ID = ID;
         this.type = type;
         this.isAutoGraded = isAutoGraded;
@@ -95,156 +42,88 @@ public class Question {
         this.source = source;
         this.quiz = quiz;
         this.creationDate = creationDate;
-        this.isPictureQuestion = false;
-        this.isPictureAnswer = false;
-    }
-
-    // constructor for STANDARD question
-    // for picture question picture url is given as text statement
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
-                    boolean isPictureQuestion, String headerStatement, String comment,
-                    String source, Date creationDate, Quiz quiz, String textStatement, String textAnswer) {
-        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
-        this.textStatement = textStatement;
-        this.textAnswer = textAnswer;
-        this.isPictureQuestion = isPictureQuestion;
-    }
-
-    // constructor for FILL_BLANK question
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
-                    String headerStatement, String comment, String source, Date creationDate,
-                    Quiz quiz, List<String> fillBlankStatements, List<String> fillBlankAnswers) {
-        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
-        this.fillBlankStatements = fillBlankStatements;
-        this.fillBlankAnswers = fillBlankAnswers;
-    }
-
-    // constructor for MULTIPLE_CHOICE question
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
-                    boolean isPictureQuestion, String headerStatement, String comment,
-                    String source, Date creationDate, Quiz quiz, List<String> multiChoiceStatements,
-                    boolean isPictureAnswer, String textAnswer) {
-        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
-        this.multiChoiceStatements = multiChoiceStatements;
-        this.textAnswer = textAnswer;
         this.isPictureQuestion = isPictureQuestion;
         this.isPictureAnswer = isPictureAnswer;
+        this.statements = statements;
+        this.answers = answers;
     }
 
-    // constructor for MULTIPLE_ANSWER question
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
-                    boolean isPictureQuestion, String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, String textStatement, Set<String> multiAnswers) {
-        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
-        this.textStatement = textStatement;
-        this.multiAnswers = multiAnswers;
-        this.isPictureQuestion = isPictureQuestion;
-    }
+    /* getter methods */
 
-    // constructor for MULTIPLE_CHOICE_MULTIPLE_ANSWER question
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore, boolean isPictureQuestion,
-                    String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, List<String> multiChoiceStatements,
-                    boolean isPictureAnswer, Set<String> multiAnswers) {
-        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
-        this.multiChoiceStatements = multiChoiceStatements;
-        this.multiAnswers = multiAnswers;
-        this.isPictureQuestion = isPictureQuestion;
-        this.isPictureAnswer = isPictureAnswer;
-    }
+    public int getType() { return type; }
 
-    // constructor for MATCHING question
-    // TODO make pictures in matchings
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore,
-                    String headerStatement, String comment, String source,
-                    Date creationDate, Quiz quiz, List<String> matchingLeft,
-                    List<String> matchingRight, Set<Pair<String>> matchingAnswers) {
-        this(ID, type, isAutoGraded, maxScore, headerStatement, comment, source, quiz, creationDate);
-        this.matchingLeft = matchingLeft;
-        this.matchingRight = matchingRight;
-        this.matchingAnswers = matchingAnswers;
-    }
+    public double getMaxScore() { return maxScore; }
 
-    /* getter and setter methods */
+    public boolean isAutoGraded() { return isAutoGraded; }
 
-    public int getType() {
-        return type;
-    }
+    public String getHeaderStatement() { return headerStatement; }
 
-    public double getMaxScore() {
-        return maxScore;
-    }
+    public String getTextStatement() { return statements.get(0); }
 
-    public boolean isAutoGraded() {
-        return isAutoGraded;
-    }
+    public String getComment() { return comment; }
 
-    public String getHeaderStatement() {
-        return headerStatement;
-    }
+    public String getSource() { return source; }
 
-    public String getTextStatement() {
-        return textStatement;
-    }
+    public Date getCreationDate() { return creationDate; }
 
-    public List<String> getMultiChoiceStatements() {
-        return multiChoiceStatements;
-    }
+    public Quiz getQuiz() { return quiz; }
 
-    public int getMultiAnswersNum() {
-        return multiAnswers.size();
-    }
+    public boolean isPictureQuestion() { return isPictureQuestion; }
 
+    public boolean isPictureAnswer() { return isPictureAnswer; }
+
+    public int getID() { return ID; }
+
+    /* statement getters */
+
+    public int getStatementsCount() { return statements.size(); }
+
+    // for multi-choice and fill-blank questions
+    public List<String> getStatements() { return statements; }
+
+    // returns left side of matching statement
     public List<String> getMatchingLeft() {
-        return matchingLeft;
+        List<String> leftMatching = new ArrayList<>();
+        for (int i = 0; i < statements.size(); i+=2) {
+            leftMatching.add(statements.get(i));
+        }
+        Collections.shuffle(leftMatching);
+        return leftMatching;
     }
 
+    // returns left side of matching statement
     public List<String> getMatchingRight() {
-        return matchingRight;
+        List<String> rightMatching = new ArrayList<>();
+        for (int i = 1; i < statements.size(); i+=2) {
+            rightMatching.add(statements.get(i));
+        }
+        Collections.shuffle(rightMatching);
+        return rightMatching;
     }
 
-    public String getTextAnswer() {
-        return textAnswer;
-    }
+    /* answer getters */
+
+    public int getAnswersCount() { return answers.size(); }
+
+    public String getTextAnswer() { return answers.get(0); }
+
+    public List<String> getAnswers() { return answers; }
 
     public Set<Pair<String>> getMatchingAnswers() {
+        Set<Pair<String>> matchingAnswers = new TreeSet<>();
+        for (int i = 0; i < statements.size(); i+=2) {
+            matchingAnswers.add(new Pair<>(answers.get(i), answers.get(i+1)));
+        }
         return matchingAnswers;
     }
 
+    // for multi-choice and fill-blank questions
     public Set<String> getMultiAnswers() {
+        Set<String> multiAnswers = new TreeSet<>();
+        for (int i = 0; i < statements.size(); i++) {
+            multiAnswers.add(answers.get(i));
+        }
         return multiAnswers;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public List<String> getFillBlankStatements() {
-        return fillBlankStatements;
-    }
-
-    public List<String> getFillBlankAnswers() {
-        return fillBlankAnswers;
-    }
-
-    public boolean isPictureQuestion() {
-        return isPictureQuestion;
-    }
-
-    public boolean isPictureAnswer() {
-        return isPictureAnswer;
     }
 
 }
