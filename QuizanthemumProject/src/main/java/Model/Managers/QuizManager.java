@@ -4,7 +4,7 @@ import Configs.QuestionTableConfig;
 import Configs.QuizTableConfig;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.Quiz;
-import Controller.Classes.Users.User;
+import Controller.OtherClasses.User;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
@@ -84,7 +84,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             pstmt.setString(4, quiz.getIconUrl());
             pstmt.setBoolean(5, quiz.mustShuffleQuestions());
             pstmt.setString(6, quiz.getComment());
-            pstmt.setInt(7, quiz.getAuthor().getUserID());
+            pstmt.setInt(7, quiz.getAuthor().getId());
             pstmt.setDate(8, new java.sql.Date(quiz.getCreationDate().getTime()));
             pstmt.setDouble(9, quiz.getMaxScore());
             pstmt.executeUpdate();

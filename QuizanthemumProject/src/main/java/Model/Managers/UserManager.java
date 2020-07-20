@@ -1,6 +1,6 @@
 package Model.Managers;
 
-import Controller.Classes.Users.User;
+import Controller.OtherClasses.User;
 
 public class UserManager {
 
