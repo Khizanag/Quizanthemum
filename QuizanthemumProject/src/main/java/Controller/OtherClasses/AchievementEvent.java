@@ -2,27 +2,28 @@ package Controller.OtherClasses;
 
 import java.util.Date;
 
+// TODO are only ID-s enough?
 public class AchievementEvent {
 
     private final int id;
-    private final Achievement achievement;
-    private final User user;
+    private final int achievementID;
+    private final int userID;
     private final Date achieveDate;
 
-    public AchievementEvent(int id, Achievement achievement, User user, Date achieveDate){
+    public AchievementEvent(int id, int achievementID, int userID, Date achieveDate){
         this.id = id;
-        this.achievement = achievement;
-        this.user = user;
+        this.achievementID = achievementID;
+        this.userID = userID;
         this.achieveDate = achieveDate;
     }
 
     /* getter methods */
 
-    public int getId() { return id; }
+    public int getID() { return id; }
 
-    public Achievement getAchievement() { return achievement; }
+    public int getAchievementID() { return achievementID; }
 
-    public User getUser() { return user; }
+    public int getUserID() { return userID; }
 
     public Date getAchieveDate() { return achieveDate; }
 }

@@ -49,7 +49,7 @@ public class AchievementsManager implements AchievementTableConfig {
                     achievement.getIconURL() +
                 ");";
         try {
-            ResultSet set = statement.executeQuery(query);
+            statement.execute(query);
         } catch (SQLException throwable) { }
     }
 
