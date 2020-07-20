@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> Registrations </title>
+    <title> Adding Questions </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../styles/common.css">
@@ -59,8 +59,8 @@
 					<option value="0">-</option>
 					<option value="1">ტესტური</option>
 					<option value="2">ღია შეკითხვა</option>
-					<option value="3">დააკომენტარეთ და დაგაწყვილებთ</option>
-					<option value="4">ფოტო შმოტო</option>
+					<option value="3">დასაწყვილებელი</option>
+					<option value="4">გამოტოვებები</option>
 				</select>
 				<div id="current-question-type"></div>
 				<button class="button finish" type="button">დასრულება</button>
@@ -94,6 +94,9 @@
 		if($("#questions-type option:selected").val() == 2) {
 			$('#current-question-type').load('./questionTypes/open.html');
 		}
+		if($("#questions-type option:selected").val() == 3) {
+			$('#current-question-type').load('./questionTypes/matching.html');
+		}
 	}
 	function uploadImage(event) {
         if(document.getElementById('photo-url').value != "") {
@@ -115,13 +118,13 @@
 			window.location.href = "addingQuestions.html";
         }
 	}
+	
 	function addNextWrongAns() {
-		let parent = document.getElementById('wrong-ans-div');
+		let parent = document.getElementById('added-wrongs');
 		let e = document.createElement('div');
-		e.className = 'wrong-ans-container';
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი"'+
-        'name="wrong-ans" id="wrong-ans" required>';
+		let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი"'+
+		'name="wrong-ans" id="wrong-ans" required>';
 		e.innerHTML += toAdd;
-		parent.before(e);
+		parent.insertBefore(e, null);
 	}
 </script>

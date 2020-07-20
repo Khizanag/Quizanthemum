@@ -30,14 +30,16 @@
 
     <label for="wrong-ans"><b>სავარაუდო(არასწორი) პასუხი</b></label>
     <div id="wrong-ans-div">
-            <input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" 
+        <div id="added-wrongs">
+            <input type="text"  placeholder="გთხოვთ შეიყვანოთ სავარაუდო პასუხი" 
             name="wrong-ans" id="wrong-ans" required>
-            <button type="button" 
-                    id="add-worng-ans-btn" 
-                    class="button"
-                    onclick="addNextWrongAns()"> 
-            + 
-            </button>
+        </div>
+        <button type="button" 
+                id="add-worng-ans-btn" 
+                class="button"
+                onclick="addNextWrongAns()"> 
+        + 
+        </button>
         </div>
     </div>
 
