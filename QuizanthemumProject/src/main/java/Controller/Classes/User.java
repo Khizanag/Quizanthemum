@@ -1,6 +1,5 @@
-package Controller.Classes.Users;
+package Controller.Classes;
 
-import Controller.Classes.Challenge;
 import Controller.Classes.Quiz.QuizEvent;
 import Controller.OtherClasses.Achievements;
 
@@ -117,4 +116,7 @@ public class User {
         challenges.add(challenge);
     }
 
+    public int getId() {
+        return id;
+    }
 }

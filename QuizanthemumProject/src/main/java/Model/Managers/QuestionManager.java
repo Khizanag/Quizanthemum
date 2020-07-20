@@ -22,8 +22,8 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
         this.connection = DatabaseConnector.getInstance();
         try {
             connectionStatement = connection.createStatement();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -44,7 +44,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
 
     private void setQueryParameters(Question question, PreparedStatement pstmt) {
         try {
-            pstmt.setInt(1, question.getID());
+            pstmt.setInt(1, question.getId());
             pstmt.setInt(2, question.getType());
             pstmt.setBoolean(3, question.isAutoGraded());
             pstmt.setDouble(4, question.getMaxScore());
@@ -54,7 +54,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             pstmt.setString(8, question.getComment());
             pstmt.setString(9, question.getSource());
             pstmt.setDate(10, new java.sql.Date(question.getCreationDate().getTime()));
-            pstmt.setInt(11, question.getQuiz().getID());
+            pstmt.setInt(11, question.getQuiz().getId());
             pstmt.setBoolean(12, question.isPictureQuestion());
             pstmt.setInt(13, question.getStatementsCount());
 
@@ -95,8 +95,8 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
 
     public Question getQuestion(int id){
 
-        String query = "SELECT * " +
-                "WHERE id = " + id + ";\n";
+        String query = "SELECT * FROM " + QUESTIONS_TABLE_NAME +
+                " WHERE" + QUESTION_TABLE_COLUMN_1_ID + " = " + id + ";\n";
 
         try {
             ResultSet set = connectionStatement.executeQuery(query);

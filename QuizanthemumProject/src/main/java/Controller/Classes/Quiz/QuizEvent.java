@@ -1,6 +1,6 @@
 package Controller.Classes.Quiz;
 
-import Controller.Classes.Users.User;
+import Controller.Classes.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,41 +11,48 @@ public class QuizEvent {
 
     /* private variables */
 
-    private final Quiz quiz;                                       // quiz that user is taking
-    private final User user;                                      // user which is taking quiz
-    private Date startDate;                                      // quiz starting date
-    private boolean isFinished;                                 // quiz status: is it active or already finished
-    private Date finishDate;                                      // quiz finishing date
-    private int questionIdx;                                       // keeps track of current question
-    private final List<QuestionEvent> questionEvents; // keeps filled question events
-    private double userTotalScore;                          // counts user's total score
+    private final int id;
+    private final Quiz quiz;                                    // quiz that user is taking
+    private final User user;                                    // user which is taking quiz
+    private Date startDate;                                     // quiz starting date
+    private Date finishDate;                                    // quiz finishing date
+    private int questionIdx;                                    // keeps track of current question
+    private final List<QuestionEvent> questionEvents;           // keeps filled question events
+    private double userTotalScore;                              // counts user's total score
 
     /* constructor */
 
-    public QuizEvent(User user, Quiz quiz) {
+    public QuizEvent(int id, User user, Quiz quiz) {
+        this.id = id;
         this.user = user;
         this.quiz = quiz;
         questionEvents = new ArrayList<QuestionEvent>();
     }
 
+    // create from database
+    public QuizEvent(int id, User user, Quiz quiz, Date startDate, Date finishDate,
+                     List<QuestionEvent> questionEvents, double userTotalScore) {
+        this.id = id;
+        this.user = user;
+        this.quiz = quiz;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.questionEvents = questionEvents;
+        this.userTotalScore = userTotalScore;
+    }
+
 
     /* getter and setter methods */
 
-    public double getUserScore() {
-        return userTotalScore;
-    }
+    public double getUserScore() { return userTotalScore; }
 
-    public Date getFinishDate() {
-        return finishDate;
-    }
+    public Date getFinishDate() { return finishDate; }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 
-    public Date getStartDate() {
-        return startDate;
-    }
+    public Quiz getQuiz() { return quiz; }
+
+    public Date getStartDate() { return startDate; }
 
 
     /* public methods */
@@ -64,9 +71,15 @@ public class QuizEvent {
 
     // returns current question event to user to fill it
     public QuestionEvent getNextQuestionEvent() {
-        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx), new Date());
+        int questionEventId = getNextQuestionEventId();
+        QuestionEvent currentQuestionEvent = new QuestionEvent(questionEventId, id, quiz.getQuestion(questionIdx), false, new Date());
         questionIdx += 1;
         return currentQuestionEvent;
+    }
+
+    private int getNextQuestionEventId() {
+        // TODO ბაზიდან სექუენსით
+        return 0;
     }
 
     // adds already filled question in question events history
@@ -77,8 +90,10 @@ public class QuizEvent {
 
     // sets quiz status as finished
     public void finishQuiz() {
-        isFinished = true;
         finishDate = new Date();
     }
 
+    public int getId() {
+        return id;
+    }
 }

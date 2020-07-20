@@ -3,6 +3,7 @@ package Configs;
 public interface QuestionTableConfig {
 
     /* question's table */
+    String QUESTIONS_TABLE_NAME = "questions";
 
     int COLUMN_COUNT = 47;
     int STATEMENT_START_COL = 14;

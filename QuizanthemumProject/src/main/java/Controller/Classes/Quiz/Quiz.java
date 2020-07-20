@@ -1,6 +1,6 @@
 package Controller.Classes.Quiz;
 
-import Controller.Classes.Users.User;
+import Controller.Classes.User;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,7 +53,7 @@ public class Quiz {
     }
 
     /* getter methods */
-    public int getID() { return id; }
+    public int getId() { return id; }
 
     public String getName() { return name; }
 
