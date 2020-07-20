@@ -23,39 +23,48 @@
   width:250px;
   height: 250px;
   border-radius: 50%;
-  /* margin-top: 10px;
-  margin-bottom: 10px; */
 }
 .profile-info-container{
   width:100%;
   height: 350px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  justify-items: center;
   background-color: #002e30;
   object-fit: cover;
   align-items: center;
 }
 .profile-info{
   height: 350px;
-  align-self: center;
   display: flex;
   flex-direction:column;
   justify-content:space-between;
-  position: relative;
   align-items: center;
   font-family:'Rowdies', cursive;;
   text-align: center;
-  color:#f5e8b5;
-  box-shadow: 0 0 100px rgba(0,0,0,0.4);
+  color:#ffcc66;
+  /* box-shadow: 0 0 100px rgba(0,0,0,0.4); */
   padding:10px;
+  margin-left: 40%;
 }
 .profile-details-info{
-  position: absolute;
+  height:350px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family:'Rowdies', cursive;;
+  text-align: center;
+  color:#ffcc66;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding:10px;
+}
+.creation-date,.quizzes-played,.challenges-played,.challenges-won{
+
 }
 .profile-cover-photo img{
-  
-    width: 970px;
-    height: 115px;
+      width: 970px;
+      height: 115px;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
