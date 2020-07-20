@@ -50,14 +50,27 @@
     .upload {
         width: 100%;
         text-align: center;
+        margin-right: 0;
     }
     .addQuestion{
         width: 100%;
         text-align: center;
     }
+    .upload-image-container{
+        height: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
     #photo-url{
         width: 100%;
     }
+    #url-button#url-button{
+        width: 100%;
+        margin-right: 0;
+        margin-top: 5px;
+    }
+
 }
 
 @media only screen and (max-width: 500px)
@@ -93,5 +106,17 @@
     }
     .footer.rigth {
         position: relative;
+    }
+    #wrong-ans{
+        width: 100%;
+        margin: 0;
+        margin-top: 5px;
+    }
+    #wrong-ans-div{
+        width: 100%;
+    }
+    #add-worng-ans-btn{
+        position: relative;
+        width: 100%;
     }
 }

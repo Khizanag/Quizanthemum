@@ -59,8 +59,8 @@
 					<option value="0">-</option>
 					<option value="1">ტესტური</option>
 					<option value="2">ღია შეკითხვა</option>
-					<option value="3">დააკომენტარეთ და დაგაწყვილებთ</option>
-					<option value="4">ფოტო შმოტო</option>
+					<option value="3">დასაწყვილებელი</option>
+					<option value="4">გამოტოვებები</option>
 				</select>
 				<div id="current-question-type"></div>
 				<button class="button finish" type="button">დასრულება</button>
@@ -93,6 +93,9 @@
 		}
 		if($("#questions-type option:selected").val() == 2) {
 			$('#current-question-type').load('./questionTypes/open.html');
+		}
+		if($("#questions-type option:selected").val() == 3) {
+			$('#current-question-type').load('./questionTypes/matching.html');
 		}
 	}
 	function uploadImage(event) {
