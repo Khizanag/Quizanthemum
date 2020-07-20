@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Quizanthemum </title>
+    <link rel="icon" type="image/png" href="../images/common/icon.png"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../styles/common.css">
+	<link rel="stylesheet" href="../styles/homePage.css">
+	<link rel="stylesheet" href="../styles/breakpoints.css">
+  <link rel="stylesheet" href="../styles/profilePage.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../javascript/friends-popup.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+	<script>
+		$(document).ready(function(){
+			$('.slider-quiz-homepage').load("../slider/slider-quiz-homepage.html");
+		});
+
+		function openRegistration() {
+		  	window.location.href = "sign-in.html";
+		} 
+		function openSearch() {
+			window.location.href = "search.html";		  	
+		}
+	</script> 
+
+</head>
+<body>
+    <header class= "header-section">
+        <div class="container header">
+            <div class="header-left">
+                <img class="logo" src="../images/common/icon.png">
+			        	<h1 class="logo-text">Quizanthemum</h1>
+			      </div>
+			
+            <ul class="header-right">
+              <img class = "profile-picture" src = "../images/common/defProfPic.jpg">
+              <span class = "profile-name-text">Ze K1ng</span>
+            </ul>	
+        </div>
+    </header>
+
+	<div class="nav-section">
+		<div class="container manu">
+			<nav class="nav">
+				<ul class="nav-items">
+					<a class="nav-item" target="_self" href="homePage.html">HOME</a>
+					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
+					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
+          <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
+          <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
+        </ul>
+			</nav>
+			<div class="search-items">
+				<input type="text" id="search-input" placeholder="რა გაინტერესებთ..." name="search">
+				<button type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
+			</div>
+		</div>
+	</div>
+  
+  <div class="friends-list-popup" id="friends-list-popup-id">
+    <div class="overlay"></div>
+    <div class="content">
+      <div class="close-btn" onclick="popupfriendList()">&times;</div>
+      <h1 style="color:orange">მეგობრები</h1>
+      <br>
+      <div class = "friend-list-row">
+        <span>მეგობარი0</span>
+        <div class = "friend-challenge-remove-btns">
+          <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
+          <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
+        </div>
+      </div>
+      <div class = "friend-list-row">
+        <span>მეგობარი1</span>
+        <div class = "friend-challenge-remove-btns">
+          <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
+          <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
+        </div>
+      </div>
+      <div class = "friend-list-row">
+        <span>მეგობარი2</span>
+        <div class = "friend-challenge-remove-btns">
+          <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
+          <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class ="profile-info-container">
+    <!-- <div class="cover-photo">
+      <img class = "profile-cover-photo" src= "../images/common/defCover.jpg" alt="SO MUCH EMPTY">
+    </div> -->
+    
+    <div class = "profile-info">
+      <img class = "profile-picture-big" src = "../images/common/defProfPic.jpg">
+      <div class="profile-name">Ze K1ng</div>
+      <div class="profile-details">Ex-President Of USA</div>
+      <div class="user-details">ADministrator</div>
+    </div>
+    <div class="profile-details-info">
+      <div class="creation-date">Profile created on Sunday,Jule 19 , 22:10</div>
+      <div class="user-ranking">Rank:Infinity</div>
+      <div class = "quizzes-played">Quizzes Played : 0</div>
+      <div class =  "challenges-played">Challenges Played: 0 </div>
+      <div class="challenges-won">Challenges Won: 0</div>
+      <div class="quizzes-made">Quizzes Made: 0 </div>
+    </div>
+  </div>
+
+  <div class = "top-quizzes-banner">
+    <div class="players-top-quizzes">
+      Your Top Played Quizzes 
+    </div>
+  </div>
+	<div class="slider-quiz-homepage"></div>
+
+
+	<footer	class= "footer-section">
+		<div class= "container">
+			<div class= "footer-items">
+				<div class= "footer left">
+					All Right Reserved
+				</div>
+				<div class= "footer rigth">
+					Quizanthemum By Our Team
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>

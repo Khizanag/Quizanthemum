@@ -1,0 +1,184 @@
+.profile-picture{
+  width:40px;
+  height:40px;
+  border-radius: 50%;
+  margin-right:20px; 
+  overflow: hidden;
+}
+.header-right{
+  width: 240px;
+  display: flex;
+  align-items: center;
+}
+.profile-name-text{
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: #f5e8b5;
+  font-size: 14x;
+  font-weight: bold;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.profile-picture-big{
+  width:250px;
+  height: 250px;
+  border-radius: 50%;
+}
+.profile-info-container{
+  width:100%;
+  height: 350px;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  background-color: #002e30;
+  object-fit: cover;
+  align-items: center;
+}
+.profile-info{
+  height: 350px;
+  display: flex;
+  flex-direction:column;
+  justify-content:space-between;
+  align-items: center;
+  font-family:'Rowdies', cursive;;
+  text-align: center;
+  color:#ffcc66;
+  /* box-shadow: 0 0 100px rgba(0,0,0,0.4); */
+  padding:10px;
+  margin-left: 40%;
+}
+.profile-details-info{
+  height:350px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family:'Rowdies', cursive;;
+  text-align: center;
+  color:#ffcc66;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding:10px;
+}
+.creation-date,.quizzes-played,.challenges-played,.challenges-won{
+
+}
+.profile-cover-photo img{
+      width: 970px;
+      height: 115px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.friend-list-btn{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    color: #b3bdbe;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+}
+.friend-list-btn:hover {
+  color: #d48a33;
+}
+
+.friends-list-popup .overlay {  
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100vw;
+  height:100vh;
+  background:rgba(0,0,0,0.7);
+  z-index:1;
+  display:none;
+}
+
+.friends-list-popup .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:#fff;
+  width:500px;
+  height:250px;
+  z-index:2;
+  text-align:center;
+  padding:20px;
+  box-sizing:border-box;
+  font-family:"Open Sans",sans-serif;
+  overflow: auto;
+}
+
+.friends-list-popup .close-btn {
+  cursor:pointer;
+  position:absolute;
+  right:20px;
+  top:20px;
+  width:30px;
+  height:30px;
+  background:#222;
+  color:#fff;
+  font-size:25px;
+  font-weight:600;
+  line-height:30px;
+  text-align:center;
+  border-radius:50%;
+}
+
+.friends-list-popup.active .overlay {
+  display:block;
+}
+
+.friends-list-popup.active .content {
+  transition:all 300ms ease-in-out;
+  transform:translate(-50%,-50%) scale(1);
+}
+
+.friend-list-row{
+ display: flex;
+ justify-content: space-evenly;
+ font-family: 'Courier New', Courier, monospace;
+  margin-top: 10px;
+}
+.challenge-btn, .remove-btn{
+  box-shadow:inset 0px 1px 0px 0px #f9eca0;
+	background:linear-gradient(to bottom, #f0c911 5%, #f2ab1e 100%);
+	background-color:#f0c911;
+	border-radius:6px;
+	border:1px solid #e65f44;
+	display:inline-block;
+	cursor:pointer;
+	color:#c92200;
+	font-family:sans-serif;
+	font-size:10px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #ded17c;
+  outline: none;
+}
+.challenge-btn:hover, .remove-btn:hover {
+	background:linear-gradient(to bottom, #f2ab1e 5%, #f0c911 100%);
+	background-color:#f2ab1e;
+}
+.challenge-btn:hover, .remove-btn:active {
+	position:relative;
+	top:1px;
+}
+.top-quizzes-banner{
+  width: 100%;
+  height: 50px;
+  background-color: #00802b;
+  text-align: center;
+  font-family:'Rowdies', cursive;;
+  line-height: 50px;
+}
