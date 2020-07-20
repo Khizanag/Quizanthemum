@@ -71,9 +71,15 @@ public class QuizEvent {
 
     // returns current question event to user to fill it
     public QuestionEvent getNextQuestionEvent() {
-        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx), false, new Date());
+        int questionEventId = getNextQuestionEventId();
+        QuestionEvent currentQuestionEvent = new QuestionEvent(questionEventId, id, quiz.getQuestion(questionIdx), false, new Date());
         questionIdx += 1;
         return currentQuestionEvent;
+    }
+
+    private int getNextQuestionEventId() {
+        // TODO ბაზიდან სექუენსით
+        return 0;
     }
 
     // adds already filled question in question events history

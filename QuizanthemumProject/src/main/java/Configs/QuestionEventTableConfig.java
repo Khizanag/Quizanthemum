@@ -1,9 +1,31 @@
 package Configs;
 
+import Controller.Classes.Quiz.Question;
+
+import java.util.Date;
+import java.util.List;
+
 public interface QuestionEventTableConfig {
+
+    int USER_ANSWER_START_COL = 8;
+    int USER_ANSWERS_NUM = 16;
+    int QUESTION_EVENTS_TABLE_NUM_COLUMNS = 23;
 
     String QUESTION_EVENTS_TABLE_NAME = "question_events";
 
     String QUESTION_EVENT_TABLE_COLUMN_1_ID = "ID";
     String QUESTION_EVENT_TABLE_COLUMN_2_QUIZ_EVENT_ID = "QUIZ_EVENT_ID";
+    String QUESTION_EVENT_TABLE_COLUMN_3_START_DATE = "START_DATE";
+    String QUESTION_EVENT_TABLE_COLUMN_4_END_DATE = "END_DATE";
+    String QUESTION_EVENT_TABLE_COLUMN_5_IS_ALREADY_GRADED = "IS_ALREADY_GRADED";
+    String QUESTION_EVENT_TABLE_COLUMN_6_USER_SCORE = "USER_SCORE";
+    String QUESTION_EVENT_TABLE_COLUMN_7_QUESTION_ID = "QUESTION_ID";
+
+    /* user answers */
+
+    //    String QUESTION_EVENT_TABLE_COLUMN_8_ANSWER_0 = "USER_ANSWER_0";
+    //    ...
+    //    String QUESTION_EVENT_TABLE_COLUMN_23_ANSWER_15 = "USER_ANSWER_15";
+    String QUESTION_EVENT_TABLE_ITH_ANSWER_TEXT = "USER_ANSWER_";
+
 }

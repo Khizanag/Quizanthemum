@@ -44,7 +44,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
 
     private void setQueryParameters(Question question, PreparedStatement pstmt) {
         try {
-            pstmt.setInt(1, question.getID());
+            pstmt.setInt(1, question.getId());
             pstmt.setInt(2, question.getType());
             pstmt.setBoolean(3, question.isAutoGraded());
             pstmt.setDouble(4, question.getMaxScore());
@@ -96,7 +96,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
     public Question getQuestion(int id){
 
         String query = "SELECT * FROM " + QUESTIONS_TABLE_NAME +
-                " WHERE id = " + id + ";\n";
+                " WHERE" + QUESTION_TABLE_COLUMN_1_ID + " = " + id + ";\n";
 
         try {
             ResultSet set = connectionStatement.executeQuery(query);

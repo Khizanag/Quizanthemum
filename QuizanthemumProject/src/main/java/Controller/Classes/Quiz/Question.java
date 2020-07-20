@@ -8,7 +8,7 @@ public final class Question {
 
     /* private variables */
 
-    private final int ID;
+    private final int id;
     private final int type;
     private final boolean isAutoGraded;            // true if question has to be graded automatically, false otherwise
     private final double maxScore;                 // maximum score for given question
@@ -32,10 +32,10 @@ public final class Question {
 
     /* constructor */
 
-    public Question(int ID, int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
+    public Question(int id, int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
                     String source, Date creationDate, Quiz quiz, boolean isPictureQuestion, boolean isPictureAnswer,
                     String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
-        this.ID = ID;
+        this.id = id;
         this.type = type;
         this.isAutoGraded = isAutoGraded;
         this.maxScore = maxScore;
@@ -74,7 +74,7 @@ public final class Question {
 
     public boolean isPictureAnswer() { return isPictureAnswer; }
 
-    public int getID() { return ID; }
+    public int getId() { return id; }
 
     /* statement getters */
 

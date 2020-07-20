@@ -11,7 +11,8 @@ public class QuestionEvent {
 
     /* private variables */
 
-//    private final int id; // TODO vin madzlevs am id-s?
+    private final int id;
+    private final int quizEventId;
     private final Date startDate;       // question start date
     private Date endDate;               // question end date
     private boolean isAlreadyGraded;
@@ -22,11 +23,26 @@ public class QuestionEvent {
 
     /* constructor */
 
-    public QuestionEvent(Question question, boolean isAlreadyGraded, Date startDate) {
+    public QuestionEvent(int id, int quizEventId, Question question, boolean isAlreadyGraded, Date startDate) {
+        this.id = id;
+        this.quizEventId = quizEventId;
         this.question = question;
         this.isAlreadyGraded = isAlreadyGraded;
         this.startDate = startDate;
         userScore = 0;
+    }
+
+    // constructor for database
+    public QuestionEvent(int id, int quizEventId, Question question, boolean isAlreadyGraded, Date startDate,
+                         Date endDate, double userScore, List<String> userAnswers) {
+        this.id = id;
+        this.quizEventId = quizEventId;
+        this.question = question;
+        this.isAlreadyGraded = isAlreadyGraded;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.userScore = userScore;
+        this.userAnswers = userAnswers;
     }
 
     /* public methods */
@@ -43,6 +59,13 @@ public class QuestionEvent {
         this.userAnswers = userAnswers;
     }
 
+    public int getId() { return id; }
+
+    public int getQuizEventId() { return quizEventId; }
+
+    public int getQuestionId() { return question.getId(); }
+
+    public List<String> getUserAnswers() { return userAnswers; }
 
     /* score computing methods */
 
@@ -119,4 +142,5 @@ public class QuestionEvent {
     public boolean isAlreadyGraded() {
         return isAlreadyGraded;
     }
+
 }
