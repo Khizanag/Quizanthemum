@@ -1,6 +1,6 @@
 package Configs;
 
-public interface AchievementTableConfig {
+public interface AchievementsTableConfig {
 
     String ACHIEVEMENT_TABLE_NAME = "achievements";
 

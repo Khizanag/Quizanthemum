@@ -29,7 +29,7 @@ public class ChallengeManager {
     }
 
     public void insertChallenge(){
-        String query = "INSERT INTO(" +
+        String query = "INSERT INTO " +
                 "challengeID, " +
                 "challengerID, challengerQuizEventID, " +
                 "challengedID, challengedQuizEventID, " +
@@ -45,6 +45,6 @@ public class ChallengeManager {
 
     public Challenge getChallenge(int id) {
         return null;
-        // TODO
+        // TODO გიგა
     }
 }
