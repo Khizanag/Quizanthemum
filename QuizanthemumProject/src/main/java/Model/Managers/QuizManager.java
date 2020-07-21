@@ -93,7 +93,6 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         }
     }
 
-
     public int getNewQuizID(){
         return -1; // TODO sequence
     }

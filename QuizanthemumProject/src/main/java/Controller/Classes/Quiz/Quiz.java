@@ -1,10 +1,13 @@
 package Controller.Classes.Quiz;
 
 import Controller.Classes.User;
+import Model.Managers.QuestionManager;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static Configs.Config.QUESTION_MANAGER_STR;
 
 public class Quiz {
 
@@ -33,7 +36,7 @@ public class Quiz {
     /*
         Quiz constructor for creating Quiz object initially,
         while this quiz is not still published, and is not saved into database.
-         Note: after entirely creating this object, it should be stored into database
+        Note: after entirely creating this object, it should be stored into database
      */
     public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author){
         this(id, name, description, iconUrl, mustShuffleQuestions, comment, author, true);

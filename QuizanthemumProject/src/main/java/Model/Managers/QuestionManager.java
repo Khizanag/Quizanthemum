@@ -54,7 +54,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             pstmt.setString(8, question.getComment());
             pstmt.setString(9, question.getSource());
             pstmt.setDate(10, new java.sql.Date(question.getCreationDate().getTime()));
-            pstmt.setInt(11, question.getQuiz().getId());
+            pstmt.setInt(11, question.getQuizId());
             pstmt.setBoolean(12, question.isPictureQuestion());
             pstmt.setInt(13, question.getStatementsCount());
 
@@ -111,9 +111,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             String comment = set.getString(QUESTION_TABLE_COLUMN_8_COMMENT);
             String source = set.getString(QUESTION_TABLE_COLUMN_9_SOURCE);
             Date creationDate = set.getDate(QUESTION_TABLE_COLUMN_10_CREATION_DATE);
-            int quizID = set.getInt(QUESTION_TABLE_COLUMN_11_QUIZ_ID);
-            QuizManager quizManager = (QuizManager) context.getAttribute(QUIZ_MANAGER_STR);
-            Quiz quiz = quizManager.getQuiz(quizID);
+            int quizId = set.getInt(QUESTION_TABLE_COLUMN_11_QUIZ_ID);
 
             boolean isPictureQuestion = set.getBoolean(QUESTION_TABLE_COLUMN_12_IS_PICTURE_STATEMENT);
             int numStatements = set.getInt(QUESTION_TABLE_COLUMN_13_NUM_STATEMENTS);
@@ -129,7 +127,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
                 answers.add(set.getString(QUESTION_TABLE_ITH_ANSWER_TEXT + i));
             }
 
-            return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quiz,
+            return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId,
                     isPictureQuestion, isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
 
         } catch (SQLException unused) { }

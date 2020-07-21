@@ -11,7 +11,7 @@ public class QuestionEvent {
 
     /* private variables */
 
-    private final int id;
+    private int id;
     private final int quizEventId;
     private final Date startDate;       // question start date
     private Date endDate;               // question end date
@@ -23,8 +23,7 @@ public class QuestionEvent {
 
     /* constructor */
 
-    public QuestionEvent(int id, int quizEventId, Question question, boolean isAlreadyGraded, Date startDate) {
-        this.id = id;
+    public QuestionEvent(int quizEventId, Question question, boolean isAlreadyGraded, Date startDate) {
         this.quizEventId = quizEventId;
         this.question = question;
         this.isAlreadyGraded = isAlreadyGraded;
@@ -35,11 +34,9 @@ public class QuestionEvent {
     // constructor for database
     public QuestionEvent(int id, int quizEventId, Question question, boolean isAlreadyGraded, Date startDate,
                          Date endDate, double userScore, List<String> userAnswers) {
+
+        this(quizEventId, question, isAlreadyGraded, startDate);
         this.id = id;
-        this.quizEventId = quizEventId;
-        this.question = question;
-        this.isAlreadyGraded = isAlreadyGraded;
-        this.startDate = startDate;
         this.endDate = endDate;
         this.userScore = userScore;
         this.userAnswers = userAnswers;
