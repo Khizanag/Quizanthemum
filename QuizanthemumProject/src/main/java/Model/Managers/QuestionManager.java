@@ -3,7 +3,6 @@ package Model.Managers;
 import Configs.QuestionTableConfig;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.QuestionType;
-import Controller.Classes.Quiz.Quiz;
 import Configs.Config;
 import Model.DatabaseConnector;
 

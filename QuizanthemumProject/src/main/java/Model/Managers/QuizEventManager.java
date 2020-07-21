@@ -1,5 +1,6 @@
 package Model.Managers;
 
+import Configs.QuestionEventTableConfig;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
@@ -13,11 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Configs.Config.*;
-import static Configs.QuestionEventTableConfig.QUESTION_EVENT_TABLE_COLUMN_1_ID;
-import static Configs.QuestionEventTableConfig.QUESTION_EVENT_TABLE_COLUMN_2_QUIZ_EVENT_ID;
 import static Configs.QuizEventTableConfig.*;
 
-public class QuizEventManager {
+public class QuizEventManager implements QuestionEventTableConfig {
 
     private ServletContext context;
     private Connection connection;
