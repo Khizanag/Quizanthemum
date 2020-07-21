@@ -1,9 +1,4 @@
-package Controller.OtherClasses;
-
-import Controller.Classes.Quiz.QuizEvent;
-import Model.Managers.ChallengeManager;
-
-import java.util.Date;
+package Controller.Classes.OtherClasses;
 
 public class Challenge {
 

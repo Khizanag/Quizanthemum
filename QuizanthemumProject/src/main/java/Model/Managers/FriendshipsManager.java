@@ -1,20 +1,12 @@
 package Model.Managers;
 
-import Configs.AchievementTableConfig;
 import Configs.Config;
 import Configs.FriendshipsTableConfig;
-import Controller.OtherClasses.Achievement;
-import Controller.OtherClasses.AchievementEvent;
-import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
-
-import static Configs.AchievementEventTableConfig.*;
 
 public class FriendshipsManager implements Config, FriendshipsTableConfig {
 

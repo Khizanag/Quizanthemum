@@ -2,7 +2,7 @@ package Configs;
 
 public interface FriendshipsTableConfig {
 
-    String FRIENDSHIPS_TABLE_NAME = "friendship";
+    String FRIENDSHIPS_TABLE_NAME = "friendships";
 
     String FRIENDSHIPS_TABLE_COLUMN_1_ID = "ID";
     String FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID = "FIRST_FRIEND_ID";

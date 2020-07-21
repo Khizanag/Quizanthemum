@@ -1,8 +1,7 @@
-package Controller.OtherClasses;
+package Controller.Classes.OtherClasses;
 
 import Controller.Classes.Quiz.QuizEvent;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

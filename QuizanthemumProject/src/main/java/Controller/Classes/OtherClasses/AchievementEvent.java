@@ -1,4 +1,4 @@
-package Controller.OtherClasses;
+package Controller.Classes.OtherClasses;
 
 import java.util.Date;
 
