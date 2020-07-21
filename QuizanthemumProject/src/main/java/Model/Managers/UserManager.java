@@ -1,8 +1,6 @@
 package Model.Managers;
 
-import Configs.QuestionTableConfig;
-import Configs.UsersTableConfig;
-import Controller.Classes.OtherClasses.Challenge;
+import Configs.*;
 import Controller.Classes.OtherClasses.User;
 import Controller.Classes.OtherClasses.Achievement;
 import Model.DatabaseConnector;
@@ -16,7 +14,8 @@ import java.util.List;
 import static Configs.QuizEventTableConfig.*;
 
 
-public class UserManager implements UsersTableConfig, QuestionTableConfig {
+public class UserManager implements UsersTableConfig, QuestionTableConfig,
+        ChallengesTableConfig, AchievementEventTableConfig, FriendshipsTableConfig {
 
     private final Connection connection;
     private Statement statement;
@@ -48,26 +47,53 @@ public class UserManager implements UsersTableConfig, QuestionTableConfig {
             String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
             Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
             Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
-            List<User> friends = getUserFriends(id);
+            List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, friends);
+                    birthDate, registrationDate, friendIDs);
         } catch (SQLException throwables) { }
         return null;
     }
 
-    public List<Achievement> getUserAchievements(int id) {
-        return null;
-        // TODO
+    public List<Integer> getUserAchievementIDs(int id) {
+        List<Integer> achievementIDs = new ArrayList<>();
+        String query = "SELECT " + ACHIEVEMENT_EVENT_TABLE_COLUMN_1_ID +
+                " FROM " + ACHIEVEMENT_EVENT_TABLE_NAME +
+                " WHERE " + ACHIEVEMENT_EVENT_TABLE_COLUMN_3_USER_ID + " = " + id + ";\n";
+        try {
+            ResultSet set = statement.executeQuery(query);
+            while(set.next()){
+                int achievementID = set.getInt(ACHIEVEMENT_EVENT_TABLE_COLUMN_1_ID);
+                achievementIDs.add(achievementID);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return achievementIDs;
     }
 
-    public List<Challenge> getUserChallenges(int id) {
-        return null;
-        // TODO
+    // returns challenges where given user has participated
+    // TODO review api for example if we need only finished challenges
+    public List<Integer> getUserChallengeIDs(int id) {
+        List<Integer> challengeIDs = new ArrayList<>();
+        String query = "SELECT " + CHALLENGES_TABLE_COLUMN_1_ID +
+                " FROM " + CHALLENGES_TABLE_NAME +
+                " WHERE " + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID + " = " + id +
+                " OR " + CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID + " = " + id + ";\n";
+        try {
+            ResultSet set = statement.executeQuery(query);
+            while(set.next()){
+                int challengeID = set.getInt(CHALLENGES_TABLE_COLUMN_1_ID);
+                challengeIDs.add(challengeID);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return challengeIDs;
     }
 
-    public List<Integer> getUserQuizEventIds(int id) {
-        List<Integer> quizEventIds = new ArrayList<>();
+    public List<Integer> getUserQuizEventIDs(int id) {
+        List<Integer> quizEventIDs = new ArrayList<>();
         String query = "SELECT " + QUIZ_EVENT_TABLE_COLUMN_1_ID +
                 " FROM " + QUIZ_EVENTS_TABLE_NAME +
                 " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + id + ";\n";
@@ -75,17 +101,35 @@ public class UserManager implements UsersTableConfig, QuestionTableConfig {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
                 int quizEventId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_1_ID);
-                quizEventIds.add(quizEventId);
+                quizEventIDs.add(quizEventId);
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        return quizEventIds;
+        return quizEventIDs;
     }
 
-    public List<User> getUserFriends(int id) {
-        return null;
-        // TODO პროცედურით
+    public List<Integer> getUserFriends(int id) {
+        List<Integer> friendIDs = new ArrayList<>();
+        String unionColumnName = "friend";
+        String query = "SELECT " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " AS " + unionColumnName +
+                " FROM " + FRIENDSHIPS_TABLE_NAME +
+                " WHERE " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " = " + id +
+                " UNION " +
+                "SELECT " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " AS " + unionColumnName +
+                " FROM " + FRIENDSHIPS_TABLE_NAME +
+                " WHERE " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + id +
+                ";\n";
+        try {
+            ResultSet set = statement.executeQuery(query);
+            while(set.next()){
+                int friendID = set.getInt(unionColumnName);
+                friendIDs.add(friendID);
+            }
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return friendIDs;
     }
 
     public void insertUser(User user) {
