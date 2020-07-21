@@ -1,12 +1,5 @@
 package Configs;
 
-import Controller.Classes.Quiz.QuestionEvent;
-import Controller.Classes.Quiz.Quiz;
-import Controller.Classes.User;
-
-import java.util.Date;
-import java.util.List;
-
 public interface QuizEventTableConfig {
 
     String QUIZ_EVENTS_TABLE_NAME = "quiz_events";

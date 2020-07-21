@@ -18,9 +18,4 @@ public interface Config {
     String URL = "jdbc:mysql://localhost:3306/";
     String DATABASE_NAME = "intelij_db";
 
-    String CHALLENGES_TABLE_NAME = "challenges";
-    String QUESTION_EVENTS_TABLE_NAME = "question_events";
-
-    String FRIENDSHIP_TABLE_NAME = "friendships";
-
 }

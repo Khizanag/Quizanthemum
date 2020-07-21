@@ -1,13 +1,10 @@
 package Controller.Classes.Quiz;
 
-import Controller.Classes.User;
-import Model.Managers.QuestionManager;
+import Controller.Classes.OtherClasses.User;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static Configs.Config.QUESTION_MANAGER_STR;
 
 public class Quiz {
 

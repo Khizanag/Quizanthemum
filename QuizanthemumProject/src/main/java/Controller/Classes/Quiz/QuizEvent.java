@@ -1,6 +1,7 @@
 package Controller.Classes.Quiz;
 
-import Controller.Classes.User;
+
+import Controller.Classes.OtherClasses.User;
 
 import java.util.ArrayList;
 import java.util.Date;

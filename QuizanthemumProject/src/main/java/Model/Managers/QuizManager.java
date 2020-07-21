@@ -4,7 +4,7 @@ import Configs.QuestionTableConfig;
 import Configs.QuizTableConfig;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.Quiz;
-import Controller.Classes.User;
+import Controller.Classes.OtherClasses.User;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;

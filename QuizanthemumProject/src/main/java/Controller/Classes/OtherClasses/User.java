@@ -1,7 +1,6 @@
-package Controller.Classes;
+package Controller.OtherClasses;
 
 import Controller.Classes.Quiz.QuizEvent;
-import Controller.OtherClasses.Achievements;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,10 +9,11 @@ import java.util.List;
 public class User {
 
     private final int id;
-    private final String firstName;
-    private final String lastName;
     private final String username;
     private final String passwordHash;
+    private final String firstName;
+    private final String lastName;
+    private final int role;
     private final String city;
     private final String country;
     private final String mobileNumber;
@@ -22,17 +22,20 @@ public class User {
     private final Date registrationDate;
     private final List<User> friends;
     private List<QuizEvent> quizEvents;
-    private int wonChallengesCount;
     private List<Challenge> challenges;
-    private List<Achievements> achievements;
+    private List<Achievement> achievements;
 
-    public User(int id, String firstName, String lastName, String username,
-                String password, String  city, String county, String mobileNumber, String email,
+    public User(int id, String username, String password, String firstName, String lastName,
+                int role, String  city, String county, String mobileNumber, String email,
                 Date birthDate, Date registrationDate, List<User> friends){
         this.id = id;
+        this.username = username;
+        // TODO create passwordHash
+        this.passwordHash = password;
+        String passwordHash;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
+        this.role = role;
         this.city = city;
         this.country = county;
         this.mobileNumber = mobileNumber;
@@ -40,11 +43,13 @@ public class User {
         passwordHash = hashFunction(password);
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
+        this.friends = friends;
+    }
 
-        if(friends != null)
-            this.friends = friends;
-        else
-            this.friends = new ArrayList<>();
+    public int getId(){ return id; }
+
+    public String getUsername() {
+        return username;
     }
 
     private String hashFunction(String password) {
@@ -58,10 +63,6 @@ public class User {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public String getCity() {
@@ -92,10 +93,6 @@ public class User {
         return friends;
     }
 
-    boolean isWriter(){
-        return false;
-    }
-
     boolean isAdministrator(){
         return false;
     }
@@ -106,7 +103,7 @@ public class User {
 
     public void challengeOtherUser(Challenge challenge){
         // insert challenge into database
-        if(challenge == null)
+        if(challenges == null)
             updateChallengesInfo();
         challenges.add(challenge);
     }
@@ -115,13 +112,14 @@ public class User {
         // TODO
     }
 
+
     public void wasChallenged(Challenge challenge){
         if(challenge == null)
             updateChallengesInfo();
         challenges.add(challenge);
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 

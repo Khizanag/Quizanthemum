@@ -1,12 +1,10 @@
 package Model.Managers;
 
-import Configs.UserTableConfig;
-import Controller.Classes.Challenge;
-import Controller.Classes.Quiz.Question;
-import Controller.Classes.Quiz.Quiz;
-import Controller.Classes.Quiz.QuizEvent;
-import Controller.Classes.User;
-import Controller.OtherClasses.Achievements;
+import Configs.QuestionTableConfig;
+import Configs.UsersTableConfig;
+import Controller.Classes.OtherClasses.Challenge;
+import Controller.Classes.OtherClasses.User;
+import Controller.Classes.OtherClasses.Achievement;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
@@ -15,12 +13,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Configs.Config.QUESTION_EVENTS_TABLE_NAME;
-import static Configs.Config.QUESTION_MANAGER_STR;
 import static Configs.QuizEventTableConfig.*;
 
 
-public class UserManager implements UserTableConfig {
+public class UserManager implements UsersTableConfig, QuestionTableConfig {
 
     private final Connection connection;
     private Statement statement;
@@ -41,27 +37,26 @@ public class UserManager implements UserTableConfig {
                 "WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
-            String firstName = set.getString(USERS_TABLE_COLUMN_2_FIRST_NAME);
-            String lastName = set.getString(USERS_TABLE_COLUMN_3_LAST_NAME);
-            String username = set.getString(USERS_TABLE_COLUMN_4_USERNAME);
-            String passwordHash = set.getString(USERS_TABLE_COLUMN_5_PASSWORD);
-            String city = set.getString(USERS_TABLE_COLUMN_6_CITY);
-            String country = set.getString(USERS_TABLE_COLUMN_7_COUNTRY);
-            String mobileNumber = set.getString(USERS_TABLE_COLUMN_8_MOBILE_NUMBER);
+            String username = set.getString(USERS_TABLE_COLUMN_2_USERNAME);
+            String passwordHash = set.getString(USERS_TABLE_COLUMN_3_PASSWORD_HASH);
+            String firstName = set.getString(USERS_TABLE_COLUMN_4_FIRST_NAME);
+            String lastName = set.getString(USERS_TABLE_COLUMN_5_LAST_NAME);
+            int role = set.getInt(USERS_TABLE_COLUMN_6_ROLE);
+            String city = set.getString(USERS_TABLE_COLUMN_7_CITY);
+            String country = set.getString(USERS_TABLE_COLUMN_8_COUNTRY);
             String email = set.getString(USERS_TABLE_COLUMN_9_EMAIL);
-            Date birthDate = set.getDate(USERS_TABLE_COLUMN_10_BIRTH_DATE);
-            Date registrationDate = set.getDate(USERS_TABLE_COLUMN_11_REGISTRATION_DATE);
+            String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
+            Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
+            Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
             List<User> friends = getUserFriends(id);
 
-            return new User(id, firstName, lastName, username, passwordHash, city, country, mobileNumber, email,
+            return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
                     birthDate, registrationDate, friends);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException throwables) { }
         return null;
     }
 
-    public List<Achievements> getUserAchievements(int id) {
+    public List<Achievement> getUserAchievements(int id) {
         return null;
         // TODO
     }
@@ -74,8 +69,8 @@ public class UserManager implements UserTableConfig {
     public List<Integer> getUserQuizEventIds(int id) {
         List<Integer> quizEventIds = new ArrayList<>();
         String query = "SELECT " + QUIZ_EVENT_TABLE_COLUMN_1_ID +
-                "FROM " + QUIZ_EVENTS_TABLE_NAME +
-                "WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + id + ";\n";
+                " FROM " + QUIZ_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
