@@ -13,7 +13,7 @@ public class User {
     private final String firstName;
     private final String lastName;
     private final String username;
-    private final String password;
+    private final String passwordHash;
     private final String city;
     private final String country;
     private final String mobileNumber;
@@ -37,7 +37,7 @@ public class User {
         this.country = county;
         this.mobileNumber = mobileNumber;
         this.email = email;
-        this.password = password;
+        passwordHash = hashFunction(password);
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
 
@@ -45,6 +45,11 @@ public class User {
             this.friends = friends;
         else
             this.friends = new ArrayList<>();
+    }
+
+    private String hashFunction(String password) {
+        // TODO
+        return password;
     }
 
     public String getFirstName() {
@@ -107,7 +112,7 @@ public class User {
     }
 
     private void updateChallengesInfo(){
-
+        // TODO
     }
 
     public void wasChallenged(Challenge challenge){
@@ -118,5 +123,13 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public boolean isCorrectPassword (String password) {
+        return passwordHash.equals(hashFunction(password));
     }
 }

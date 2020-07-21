@@ -1,8 +1,8 @@
 package Model.Managers;
 
+import Configs.QuestionEventTableConfig;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.QuestionEvent;
-import Controller.Classes.Quiz.Quiz;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
@@ -12,9 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.QUESTION_MANAGER_STR;
-import static Configs.QuestionEventTableConfig.*;
 
-public class QuestionEventManager {
+public class QuestionEventManager implements QuestionEventTableConfig {
 
     private ServletContext context;
     private Connection connection;

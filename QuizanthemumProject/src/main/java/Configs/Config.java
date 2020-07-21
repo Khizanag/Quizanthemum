@@ -20,6 +20,7 @@ public interface Config {
 
     String CHALLENGES_TABLE_NAME = "challenges";
     String QUESTION_EVENTS_TABLE_NAME = "question_events";
-    String USERS_TABLE_NAME = "users";
+
+    String FRIENDSHIP_TABLE_NAME = "friendships";
 
 }

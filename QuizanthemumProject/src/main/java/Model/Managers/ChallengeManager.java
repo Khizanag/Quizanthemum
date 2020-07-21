@@ -1,7 +1,7 @@
 package Model.Managers;
 
+import Controller.Classes.Challenge;
 import Model.DatabaseConnector;
-import org.graalvm.compiler.code.DataSection;
 
 import javax.servlet.ServletContext;
 import java.sql.Connection;
@@ -41,5 +41,10 @@ public class ChallengeManager {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public Challenge getChallenge(int id) {
+        return null;
+        // TODO
     }
 }
