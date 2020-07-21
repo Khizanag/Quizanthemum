@@ -1,6 +1,6 @@
 package Model.Managers;
 
-import Controller.Classes.Challenge;
+import Controller.Classes.OtherClasses.Challenge;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
