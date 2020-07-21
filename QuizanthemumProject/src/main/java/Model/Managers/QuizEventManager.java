@@ -1,6 +1,7 @@
 package Model.Managers;
 
 import Configs.QuestionEventTableConfig;
+import Controller.Classes.OtherClasses.User;
 import Controller.Classes.Quiz.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
