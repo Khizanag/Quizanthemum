@@ -1,6 +1,6 @@
 package Model.Managers;
 
-import Configs.AchievementTableConfig;
+import Configs.AchievementsTableConfig;
 import Controller.Classes.OtherClasses.Achievement;
 import Model.DatabaseConnector;
 
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class AchievementsManager implements AchievementTableConfig {
+public class AchievementsManager implements AchievementsTableConfig {
 
     private ServletContext context;
     private Connection connection;
