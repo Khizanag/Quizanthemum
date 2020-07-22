@@ -1,12 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: gigakhizanishvili
-  Date: 7/22/20
-  Time: 04:08
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<html lang="en">--%>
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
@@ -19,11 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            $('.slider').load("web/slider/slider.html");
+            $('.slider').load("web/slider/slider.jsp");
         });
 
         function openRegistration() {
-            window.location.href = "sign-in.html";
+            window.location.href = "web/pages/SignIn.jsp";
         }
         function openSearch() {
             window.localStorage.setItem('item', document.getElementById('search-input').value);
@@ -51,11 +43,11 @@
     <div class="container manu">
         <nav class="nav">
             <ul class="nav-items">
-                <a class="nav-item" target="_self" href="web/pages/homePage.html">HOME</a>
+                <a class="nav-item" target="_self" href="./">HOME</a>
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-                <a class="nav-item" target="_self" href="quizCreation.html">CREATE QUIZ</a>
+                <a class="nav-item" target="_self" href="web/pages/QuizCreation.jsp">CREATE QUIZ</a>
             </ul>
         </nav>
         <div class="search-items">
