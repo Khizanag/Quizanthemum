@@ -5,6 +5,7 @@ import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.ChallengeManager;
 import Model.Managers.QuizEventManager;
 import Model.Managers.QuizManager;
+import Model.Managers.UserManager;
 
 import java.sql.Date;
 
@@ -68,12 +69,32 @@ public class Challenge implements Config {
         return challengerUserID;
     }
 
+    public User getChallengerUser(){
+        if(challengerUser == null) {
+            UserManager userManager = (UserManager) manager.getContext().getAttribute(USER_MANAGER_STR);
+            challengerUser = userManager.getUser(challengerUserID);
+        }
+        return challengerUser;
+    }
+
+    public User getChallengedUser(){
+        if(challengedUser == null) {
+            UserManager userManager = (UserManager) manager.getContext().getAttribute(USER_MANAGER_STR);
+            challengedUser = userManager.getUser(challengedUserID);
+        }
+        return challengedUser;
+    }
+
     public int getChallengedUserID() {
         return challengedUserID;
     }
 
     public int getChallengerQuizEventID() {
         return challengerQuizEventID;
+    }
+
+    public int getChallengedQuizEventID() {
+        return challengedQuizEventID;
     }
 
     public QuizEvent getChallengerQuizEvent() {
@@ -96,8 +117,8 @@ public class Challenge implements Config {
         return challengingDate;
     }
 
-    public int getChallengedQuizEventID() {
-        return challengedQuizEventID;
+    public Date getAcceptingDate(){
+        return acceptingDate;
     }
 
     public boolean isFinished(){
@@ -105,7 +126,9 @@ public class Challenge implements Config {
     }
 
     public void accept(Date acceptingDate){
+        this.isFinished = true;
         this.acceptingDate = acceptingDate;
+
         // TODO change in database
     }
 

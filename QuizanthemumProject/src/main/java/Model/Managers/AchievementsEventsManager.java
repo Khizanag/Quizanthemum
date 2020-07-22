@@ -27,6 +27,14 @@ public class AchievementsEventsManager implements AchievementsTableConfig {
         } catch (SQLException unused) { }
     }
 
+    public void setContext(ServletContext context){
+        this.context = context;
+    }
+
+    public ServletContext getContext(){
+        return context;
+    }
+
     public AchievementEvent getAchievement(int id){
         String query = "SELECT * " +
                 " FROM " + ACHIEVEMENT_EVENT_TABLE_NAME +

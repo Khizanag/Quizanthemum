@@ -50,4 +50,9 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
 //        } catch (SQLException throwable) { }
 //    }
 
+    public int getFriendsCount(int ID){
+        // TODO
+        return -1;
+    }
+
 }
