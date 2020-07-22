@@ -29,10 +29,8 @@ public class User {
                 Date birthDate, Date registrationDate, List<Integer> friendIDs){
         this.id = id;
         this.username = username;
-        // TODO create passwordHash
-        this.passwordHash = password;
+        this.passwordHash = hashFunction(password);
         this.friendIDs = friendIDs;
-        String passwordHash;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -40,7 +38,6 @@ public class User {
         this.country = county;
         this.mobileNumber = mobileNumber;
         this.email = email;
-        passwordHash = hashFunction(password);
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
     }

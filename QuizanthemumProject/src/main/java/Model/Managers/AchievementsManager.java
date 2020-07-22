@@ -56,5 +56,6 @@ public class AchievementsManager implements AchievementsTableConfig {
     public void setContext(ServletContext context){
         this.context = context;
     }
+    public ServletContext getContext(){ return this.context; }
 
 }

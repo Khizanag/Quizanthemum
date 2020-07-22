@@ -9,7 +9,7 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <welcome-file-list>
-    <welcome-file>HomePage.jsp</welcome-file>
+    <welcome-file>/web/pages/HomePage.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>
