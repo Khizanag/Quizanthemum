@@ -1,5 +1,5 @@
 // https://www.youtube.com/watch?v=MBaw_6cPmAw used
-const openRulesEvent = document.querySelectorAll('[data-friend-list]');
+const openRulesEvent = document.querySelectorAll('[data-rules-target]');
 const closeRulesEvent = document.querySelectorAll('[close-rules]');
 const popUpElem = document.getElementById('popup');
 

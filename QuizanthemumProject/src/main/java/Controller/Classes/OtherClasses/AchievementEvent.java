@@ -2,7 +2,6 @@ package Controller.Classes.OtherClasses;
 
 import java.util.Date;
 
-// TODO are only ID-s enough?
 public class AchievementEvent {
 
     private final int id;

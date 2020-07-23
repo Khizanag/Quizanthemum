@@ -19,19 +19,18 @@ public class User {
     private final String email;
     private final Date birthDate;
     private final Date registrationDate;
-    private final List<User> friends;
+    private final List<Integer> friendIDs;
     private List<QuizEvent> quizEvents;
     private List<Challenge> challenges;
     private List<Achievement> achievements;
 
     public User(int id, String username, String password, String firstName, String lastName,
                 int role, String  city, String county, String mobileNumber, String email,
-                Date birthDate, Date registrationDate, List<User> friends){
+                Date birthDate, Date registrationDate, List<Integer> friendIDs){
         this.id = id;
         this.username = username;
-        // TODO create passwordHash
-        this.passwordHash = password;
-        String passwordHash;
+        this.passwordHash = hashFunction(password);
+        this.friendIDs = friendIDs;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -39,10 +38,8 @@ public class User {
         this.country = county;
         this.mobileNumber = mobileNumber;
         this.email = email;
-        passwordHash = hashFunction(password);
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
-        this.friends = friends;
     }
 
     public int getId(){ return id; }
@@ -88,16 +85,16 @@ public class User {
         return registrationDate;
     }
 
-    public List<User> getFriends() {
-        return friends;
+    public List<Integer> getFriendIDs() {
+        return friendIDs;
     }
 
     boolean isAdministrator(){
         return false;
     }
 
-    void addFriend(User user){
-        friends.add(user);
+    void addFriend(int friendId){
+        friendIDs.add(friendId);
     }
 
     public void challengeOtherUser(Challenge challenge){

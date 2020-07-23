@@ -1,6 +1,6 @@
 package Model.Managers;
 
-import Configs.AchievementTableConfig;
+import Configs.AchievementsTableConfig;
 import Controller.Classes.OtherClasses.AchievementEvent;
 
 import javax.servlet.ServletContext;
@@ -13,18 +13,26 @@ import java.util.Date;
 import static Configs.AchievementEventTableConfig.*;
 import static Configs.Config.CONNECTION_STR;
 
-public class AchievementEventsManager implements AchievementTableConfig {
+public class AchievementsEventsManager implements AchievementsTableConfig {
 
     private ServletContext context;
     private Connection connection;
     private Statement statement;
 
-    public AchievementEventsManager(ServletContext context){
+    public AchievementsEventsManager(ServletContext context){
         this.context = context;
         this.connection = (Connection) context.getAttribute(CONNECTION_STR);
         try {
             statement = connection.createStatement();
         } catch (SQLException unused) { }
+    }
+
+    public void setContext(ServletContext context){
+        this.context = context;
+    }
+
+    public ServletContext getContext(){
+        return context;
     }
 
     public AchievementEvent getAchievement(int id){

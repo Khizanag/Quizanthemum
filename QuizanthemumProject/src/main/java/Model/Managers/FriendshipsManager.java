@@ -22,6 +22,7 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
         } catch (SQLException unused) { }
     }
 
+    // TODO გიგა
 //    public AchievementEvent getFriendship(int id){
 //        String query = "SELECT * " +
 //                " FROM " + FRIEND +
@@ -48,5 +49,10 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
 //            statement.execute(query);
 //        } catch (SQLException throwable) { }
 //    }
+
+    public int getFriendsCount(int ID){
+        // TODO
+        return -1;
+    }
 
 }
