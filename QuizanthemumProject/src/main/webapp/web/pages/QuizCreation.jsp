@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
     <title> Creating Quiz </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
     <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/quizCreation.css">
@@ -36,7 +36,7 @@
     <div class="container">
         <nav class="nav">
             <ul class="nav-items">
-                <a class="nav-item" target="_self" href="homePage.html">HOME</a>
+                <a class="nav-item" target="_self" href="/">HOME</a>
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
