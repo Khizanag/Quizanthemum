@@ -47,27 +47,28 @@
     </div>
 </div>
 
-<form class="creation-section">
-    <div class="container">
-        <h2>შეკითხვა</h2>
-        <p>შეკითხვის დასამატებლაd შეავსეთ ქვემოთ მოყვანილი ველები.</p>
-        <hr>
+<div class="page-holder">
+    <form class="creation-section">
+        <div class="container">
+            <h2>შეკითხვა</h2>
+            <p>შეკითხვის დასამატებლაd შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+            <hr>
 
-        <div class="input-items" id="input-items">
-            <label for="selectior"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
-            <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
-                <option value="0">-</option>
-                <option value="1">ტესტური</option>
-                <option value="2">ღია შეკითხვა</option>
-                <option value="3">დასაწყვილებელი</option>
-                <option value="4">გამოტოვებები</option>
-            </select>
-            <div id="current-question-type"></div>
-            <button class="button finish" type="button">დასრულება</button>
+            <div class="input-items" id="input-items">
+                <label for="selectior"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
+                <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
+                    <option value="0">-</option>
+                    <option value="1">ტესტური</option>
+                    <option value="2">ღია შეკითხვა</option>
+                    <option value="3">დასაწყვილებელი</option>
+                    <option value="4">გამოტოვებები</option>
+                </select>
+                <div id="current-question-type"></div>
+                <button class="button finish" type="button">დასრულება</button>
+            </div>
         </div>
-    </div>
-</form>
-
+    </form>
+</div>
 <footer	class= "footer-section">
     <div class= "container">
         <div class= "footer-items">

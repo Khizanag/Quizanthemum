@@ -56,104 +56,105 @@
         </div>
     </div>
 </div>
+<div class="page-holder">
+    <div class="slider"></div>
 
-<div class="slider"></div>
-
-<div class="main-section">
-    <div class="container">
-        <div class= "info-items">
-            <div class="info-item">
-                <image class= "info-image a"></image>
-                <div class= "info-text">
-                    <h3 class= "info-title">
-                        კაიაჟერი ვოიაჟერი
-                    </h3>
-                    <div class="author"> ვინცხა ვინცხა</div>
-                    <p class="info-paragraf">
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                    </p>
+    <div class="main-section">
+        <div class="container">
+            <div class= "info-items">
+                <div class="info-item">
+                    <image class= "info-image a"></image>
+                    <div class= "info-text">
+                        <h3 class= "info-title">
+                            კაიაჟერი ვოიაჟერი
+                        </h3>
+                        <div class="author"> ვინცხა ვინცხა</div>
+                        <p class="info-paragraf">
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="info-item">
-                <image class= "info-image b"></image>
-                <div class= "info-text">
-                    <h3 class= "info-title">
-                        კაიაჟერი ვოიაჟერი
-                    </h3>
-                    <div class="author"> ვინცხა ვინცხა</div>
-                    <p class="info-paragraf">
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                    </p>
+                <div class="info-item">
+                    <image class= "info-image b"></image>
+                    <div class= "info-text">
+                        <h3 class= "info-title">
+                            კაიაჟერი ვოიაჟერი
+                        </h3>
+                        <div class="author"> ვინცხა ვინცხა</div>
+                        <p class="info-paragraf">
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="info-item">
-                <image class= "info-image c"></image>
-                <div class= "info-text">
-                    <h3 class= "info-title">
-                        კაიაჟერი ვოიაჟერი
-                    </h3>
-                    <div class="author"> ვინცხა ვინცხა</div>
-                    <p class="info-paragraf">
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                    </p>
+                <div class="info-item">
+                    <image class= "info-image c"></image>
+                    <div class= "info-text">
+                        <h3 class= "info-title">
+                            კაიაჟერი ვოიაჟერი
+                        </h3>
+                        <div class="author"> ვინცხა ვინცხა</div>
+                        <p class="info-paragraf">
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="info-item">
-                <image class= "info-image d"></image>
-                <div class= "info-text">
-                    <h3 class= "info-title">
-                        კაიაჟერი ვოიაჟერი
-                    </h3>
-                    <div class="author"> ვინცხა ვინცხა</div>
-                    <p class="info-paragraf">
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                    </p>
+                <div class="info-item">
+                    <image class= "info-image d"></image>
+                    <div class= "info-text">
+                        <h3 class= "info-title">
+                            კაიაჟერი ვოიაჟერი
+                        </h3>
+                        <div class="author"> ვინცხა ვინცხა</div>
+                        <p class="info-paragraf">
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="info-item">
-                <image class= "info-image c"></image>
-                <div class= "info-text">
-                    <h3 class= "info-title">
-                        კაიაჟერი ვოიაჟერი
-                    </h3>
-                    <div class="author"> ვინცხა ვინცხა</div>
-                    <p class="info-paragraf">
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                    </p>
+                <div class="info-item">
+                    <image class= "info-image c"></image>
+                    <div class= "info-text">
+                        <h3 class= "info-title">
+                            კაიაჟერი ვოიაჟერი
+                        </h3>
+                        <div class="author"> ვინცხა ვინცხა</div>
+                        <p class="info-paragraf">
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="info-item">
-                <image class= "info-image d"></image>
-                <div class= "info-text">
-                    <h3 class= "info-title">
-                        კაიაჟერი ვოიაჟერი
-                    </h3>
-                    <div class="author"> ვინცხა ვინცხა</div>
-                    <p class="info-paragraf">
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                    </p>
+                <div class="info-item">
+                    <image class= "info-image d"></image>
+                    <div class= "info-text">
+                        <h3 class= "info-title">
+                            კაიაჟერი ვოიაჟერი
+                        </h3>
+                        <div class="author"> ვინცხა ვინცხა</div>
+                        <p class="info-paragraf">
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer	class= "footer-section">
+        <div class= "container">
+            <div class= "footer-items">
+                <div class= "footer left">
+                    All Right Reserved
+                </div>
+                <div class= "footer rigth">
+                    Quizanthemum By Our Team
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
-
-<footer	class= "footer-section">
-    <div class= "container">
-        <div class= "footer-items">
-            <div class= "footer left">
-                All Right Reserved
-            </div>
-            <div class= "footer rigth">
-                Quizanthemum By Our Team
-            </div>
-        </div>
-    </div>
-</footer>
 </body>

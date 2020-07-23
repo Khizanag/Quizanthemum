@@ -65,7 +65,6 @@
         <p>არ გაქვს პროფილი? <a href="Registration.jsp">ახალი პროფილის შექმნა</a>.</p>
     </div>
 </form>
-
 <footer	class= "footer-section">
     <div class= "container">
         <div class= "footer-items">
