@@ -1,12 +1,11 @@
 /* BODY*/
 .registration-section {
     width: 100%;
-    min-height: 457px; /*TODO*/
     background-color: #002c2f;
 }
 .sign-in-section {
     width: 100%;
-    min-height: 457px; /*TODO*/
+    height: 600px;
     background-color: #002c2f;
 }
 h2{

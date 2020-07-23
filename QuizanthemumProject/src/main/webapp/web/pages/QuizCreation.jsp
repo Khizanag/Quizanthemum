@@ -46,7 +46,7 @@
 </div>
 
 <form id="creation-section" class="creation-section">
-    <div class="container">
+    <div class="container bla">
         <h2>შექმენი შენი ქვიზი</h2>
         <p>ქვიზის შესაქმნელად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
         <hr>
