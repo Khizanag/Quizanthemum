@@ -51,7 +51,7 @@ input[type=text]:focus, input[type=password]:focus. input[type=date]:focus {
 .button {
     cursor: pointer;
     background-color: #f07237;
-    color: #b3bdbe;
+    color: white;
     font-size: larger;
     font-weight: 600;
     font-family: "Comic Sans MS", cursive, sans-serif;
