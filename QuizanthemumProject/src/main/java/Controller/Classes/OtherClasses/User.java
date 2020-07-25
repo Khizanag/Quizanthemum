@@ -2,6 +2,8 @@ package Controller.Classes.OtherClasses;
 
 import Controller.Classes.Quiz.QuizEvent;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class User {
 
     public User(int id, String username, String password, String firstName, String lastName,
                 int role, String  city, String county, String mobileNumber, String email,
-                Date birthDate, Date registrationDate, List<Integer> friendIDs){
+                Date birthDate, Date registrationDate, List<Integer> friendIDs) throws NoSuchAlgorithmException {
         this.id = id;
         this.username = username;
         this.passwordHash = hashFunction(password);
@@ -48,10 +50,30 @@ public class User {
         return username;
     }
 
-    private String hashFunction(String password) {
-        // TODO
-        return password;
+    private String hashFunction(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA");
+        md.update(password.getBytes());
+        byte[] hash = md.digest();
+        String hashed = hexToString(hash);
+        return hashed;
     }
+
+    /*
+	 * Given a byte[] array, produces a hex String,
+	 * such as "234a6f". with 2 chars for each byte in the array.
+	 * helper method for hash function
+	 */
+    public static String hexToString(byte[] bytes) {
+        StringBuffer buff = new StringBuffer();
+        for (int i=0; i<bytes.length; i++) {
+            int val = bytes[i];
+            val = val & 0xff;  // remove higher bits, sign
+            if (val<16) buff.append('0'); // leading 0
+            buff.append(Integer.toString(val, 16));
+        }
+        return buff.toString();
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -123,7 +145,7 @@ public class User {
         return passwordHash;
     }
 
-    public boolean isCorrectPassword (String password) {
+    public boolean isCorrectPassword (String password) throws NoSuchAlgorithmException {
         return passwordHash.equals(hashFunction(password));
     }
 }
