@@ -154,10 +154,6 @@ input[type=text]:focus, input[type=password]:focus {
     border-left-color: transparent;
     margin: 5px;
 }
-:before {
-    content: "";
-    box-sizing: border-box;
-}
 .arrow:before{
     right: 0;
     top: 3.5px;
