@@ -58,11 +58,18 @@
                     Accusantium assumenda doloremque eaque harum iste laborum optio rem,
                     repellendus sed voluptate. Accusantium ad asperiores expedita
                     maiores nobis repellendus repudiandae, sint vero?
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Accusantium assumenda doloremque eaque harum iste laborum optio rem,
+                    repellendus sed voluptate. Accusantium ad asperiores expedita
+                    maiores nobis repellendus repudiandae, sint vero?
                 </div>
             </div>
-
         </div>
-        <button class="button" type="button" onclick="checkAndRedirect()" style="margin-top: 30px">ქვიზის დაწყება</button>
+        <p style="margin-top: 10px; margin-bottom: 0; color:white"> ქვიზი შექმნილია: 01.08.2020 </p>
+        <button class="button" type="button"
+                style="margin-top: 10px">
+            ქვიზის დაწყება
+        </button>
     </div>
 </form>
 

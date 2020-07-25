@@ -94,12 +94,14 @@ input[type=text]:focus{
     text-align: center;
     border: 1px solid transparent;
     border-radius: 5px;
+    cursor: pointer;
 }
 .logIn{
     background-color: #f07237;
     color: white;
     font-size: medium;
     font-family: "Comic Sans MS", cursive, sans-serif;
+    cursor: pointer;
 }
 .logIn:hover{
     background-color: #b3bdbe;

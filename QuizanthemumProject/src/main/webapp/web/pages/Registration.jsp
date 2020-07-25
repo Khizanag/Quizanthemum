@@ -55,36 +55,36 @@
             <div class="input-item">
                 <label><b>სახელი</b></label>
                 <input type="text" placeholder="შეიყვანეთ თქვენი სახელი"
-                       name="name" id="registration_first_name" required
+                       name="registration_first_name" id="registration_first_name" required
                 >
                 <label><b>გვარი</b></label>
                 <input type="text" placeholder="შეიყვანეთ თქვენი გვარი"
-                       name="name" id="registration_last_name" required
+                       name="registration_last_name" id="registration_last_name" required
                 >
             </div>
 
             <div class="input-item" style="width: 30%">
             <label><b>დაბადების თარიღი</b></label>
-            <input type="date" name="trip-start"
+            <input type="date" name="registration_birth_date"
                    value="2020-08-01" id="registration_birth_date"
                     style="width: 100%; padding: 15px; margin: 5px 0 22px 0; display: inline-block;
                     border: none; background: #f1f1f1; border-radius: 5px;">
             </div>
             <label><b>მომხმარებლის სახელი (USER NAME)</b></label>
             <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი"
-                   name="name" id="registration_username" required>
+                   name="registration_username" id="registration_username" required>
 
             <label for="email"><b>იმეილი</b></label>
-            <input type="text" placeholder="შეიყვანეთ იმეილი" name="email"
+            <input type="text" placeholder="შეიყვანეთ იმეილი" name="registration_email"
                    id="registration_email" required>
 
             <label for="psw"><b>პაროლი</b></label>
-            <input type="password" placeholder="შეიყვანეთ პაროლი" name="psw"
-                   id="registration_password" required>
+            <input type="password" placeholder="შეიყვანეთ პაროლი"
+                   name="registration_password" id="registration_password" required>
 
             <label for="psw-repeat"><b>გაიმეორეთ პაროლი</b></label>
-            <input type="password" placeholder="გთხოვთ თავიდან შეიყვანოთ პაროლი" name="psw-repeat"
-                   id="psw-repeat" required>
+            <input type="password" placeholder="გთხოვთ თავიდან შეიყვანოთ პაროლი"
+                   name="psw-repeat" id="psw-repeat" required>
         </div>
         <hr>
         <p>ახალი პროგილის შქმნა გულისხმობს, რომ თქვენ ეთანხმებით ჩვენს
@@ -112,7 +112,7 @@
 <%--            </div>--%>
 <%--        </div>--%>
 <%--        <div id="popup"></div>--%>
-        <button type="submit" class="button">რეგისტრაცია</button>
+        <button type="submit" class="button" >რეგისტრაცია</button>
     </div>
 
     <div class="container signin">

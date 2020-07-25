@@ -33,7 +33,7 @@
         </div>
 
         <ul class="header-right">
-            <input type="button" class="button logIn" value="შესვლა" onClick="openRegistration()">
+            <button class="button logIn" onClick="openRegistration()">შესვლა</button>
         </ul>
 
     </div>
