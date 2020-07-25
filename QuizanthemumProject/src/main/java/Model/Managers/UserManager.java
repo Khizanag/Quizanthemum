@@ -6,6 +6,7 @@ import Controller.Classes.OtherClasses.Achievement;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class UserManager implements UsersTableConfig, QuestionTableConfig,
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
                     birthDate, registrationDate, friendIDs);
-        } catch (SQLException throwables) { }
+        } catch (SQLException | NoSuchAlgorithmException throwables) { }
         return null;
     }
 
