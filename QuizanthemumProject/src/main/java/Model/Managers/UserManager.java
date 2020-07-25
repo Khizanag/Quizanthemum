@@ -52,7 +52,7 @@ public class UserManager implements UsersTableConfig, QuestionTableConfig,
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
                     birthDate, registrationDate, friendIDs);
-        } catch (SQLException | NoSuchAlgorithmException throwables) { }
+        } catch (SQLException throwables) { }
         return null;
     }
 
@@ -152,5 +152,10 @@ public class UserManager implements UsersTableConfig, QuestionTableConfig,
         } catch (SQLException e) {
             System.out.println("Insertion Error. User Manager Class");
         }
+    }
+
+    public int getNextID(){
+        // TODO
+        return 1;
     }
 }

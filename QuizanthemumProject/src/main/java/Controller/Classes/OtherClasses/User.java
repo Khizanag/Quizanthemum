@@ -28,7 +28,7 @@ public class User {
 
     public User(int id, String username, String password, String firstName, String lastName,
                 int role, String  city, String county, String mobileNumber, String email,
-                Date birthDate, Date registrationDate, List<Integer> friendIDs) throws NoSuchAlgorithmException {
+                Date birthDate, Date registrationDate, List<Integer> friendIDs) {
         this.id = id;
         this.username = username;
         this.passwordHash = hashFunction(password);
@@ -50,8 +50,11 @@ public class User {
         return username;
     }
 
-    private String hashFunction(String password) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA");
+    private String hashFunction(String password) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA");
+        } catch (NoSuchAlgorithmException e) { }
         md.update(password.getBytes());
         byte[] hash = md.digest();
         String hashed = hexToString(hash);
@@ -147,5 +150,27 @@ public class User {
 
     public boolean isCorrectPassword (String password) throws NoSuchAlgorithmException {
         return passwordHash.equals(hashFunction(password));
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", registrationDate=" + registrationDate +
+                ", friendIDs=" + friendIDs +
+                ", quizEvents=" + quizEvents +
+                ", challenges=" + challenges +
+                ", achievements=" + achievements +
+                '}';
     }
 }

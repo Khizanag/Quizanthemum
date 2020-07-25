@@ -44,7 +44,7 @@
         </nav>
     </div>
 </div>
-<form class="registration-section">
+<form class="registration-section" action="../../RegistrationServlet" method="get">
     <div class="container">
         <h2>რეგისტრაცია</h2>
         <p>გთხოვთ შეავსოთ ფორმა პროფილის შესაქმნელად.</p>
