@@ -1,6 +1,7 @@
 package Controller;
 
 import Configs.Config;
+import Controller.Classes.Quiz.QuestionEvent;
 import Model.DatabaseConnector;
 import Model.Managers.*;
 
@@ -15,7 +16,8 @@ public class WebServletCreateListener implements ServletContextListener, Config 
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-//        ServletContext context = sce.getServletContext();
+
+        //        ServletContext context = sce.getServletContext();
 //
 //        // Connection should be set at first, other managers are using it
 //        Connection connection = DatabaseConnector.getInstance();

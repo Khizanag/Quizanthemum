@@ -6,6 +6,7 @@ import Controller.Classes.OtherClasses.Achievement;
 import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -150,5 +151,10 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         } catch (SQLException e) {
             System.out.println("Insertion Error. User Manager Class");
         }
+    }
+
+    public int getNextID(){
+        // TODO
+        return 1;
     }
 }

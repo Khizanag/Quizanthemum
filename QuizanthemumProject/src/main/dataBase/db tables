@@ -1,0 +1,179 @@
+use quizanthemum;
+
+-- ********************************************************************************
+create table users(
+                      id smallint primary key,
+                      username varchar(64) unique key,
+                      password varchar(64) not null,
+                      first_name varchar(64) not null,
+                      last_name varchar(64) not null,
+                      role smallint not null,
+                      city varchar(32),
+                      country varchar(32),
+                      phone_number varchar(32),
+                      email varchar(64) not null,
+                      birth_date date,
+                      registration_date date
+);
+-- ***********************************************************************
+create table quizzes(
+                        ID smallint primary key,
+                        NAME varchar(64),
+                        DESCRIPTION text,
+                        ICON_URL varchar(256),
+                        MUST_SHUFFLE_QUESTIONS boolean not null ,
+                        COMMENT varchar(256),
+                        AUTHOR_ID smallint,
+                        constraint foreign key (AUTHOR_ID)
+                            references users(id) on update cascade on delete restrict,
+                        CREATION_DATE date,
+                        MAX_SCORE smallint
+);
+-- *************************************************************************************
+create table quiz_events(
+                            id smallint primary key,
+                            quiz_id smallint not null,
+                            user_id smallint not null,
+                            start_date date,
+                            finish_date date,
+                            total_score smallint,
+                            constraint foreign key (quiz_id)
+                                references quizzes(id) on update cascade on delete restrict,
+                            constraint foreign key (user_id)
+                                references users(id) on update cascade on delete restrict
+);
+-- ***********************************************************************************
+create table questions(
+                          id smallint primary key,
+                          type smallint not null,
+                          is_auto_graded boolean,
+                          max_score smallint,
+                          header_statement text,
+                          text_statement text,
+                          picture_statement_url varchar(256),
+                          comment varchar(256),
+                          source varchar(256),
+                          creation_date date,
+                          quiz_id smallint,
+                          constraint foreign key (quiz_id)
+                              references quizzes(id) on update cascade on delete restrict,
+                          is_picture_statement boolean,
+                          num_statements smallint,
+                          statement_0 varchar(64),
+                          statement_1 varchar(64),
+                          statement_2 varchar(64),
+                          statement_3 varchar(64),
+                          statement_4 varchar(64),
+                          statement_5 varchar(64),
+                          statement_6 varchar(64),
+                          statement_7 varchar(64),
+                          statement_8 varchar(64),
+                          statement_9 varchar(64),
+                          statement_10 varchar(64),
+                          statement_11 varchar(64),
+                          statement_12 varchar(64),
+                          statement_13 varchar(64),
+                          statement_14 varchar(64),
+                          statement_15 varchar(64),
+                          is_picture_answer boolean,
+                          num_answers smallint,
+                          answer_0 varchar(64),
+                          answer_1 varchar(64),
+                          answer_2 varchar(64),
+                          answer_3 varchar(64),
+                          answer_4 varchar(64),
+                          answer_5 varchar(64),
+                          answer_6 varchar(64),
+                          answer_7 varchar(64),
+                          answer_8 varchar(64),
+                          answer_9 varchar(64),
+                          answer_10 varchar(64),
+                          answer_11 varchar(64),
+                          answer_12 varchar(64),
+                          answer_13 varchar(64),
+                          answer_14 varchar(64),
+                          answer_15 varchar(64)
+);
+-- ************************************************************************************
+create table question_events(
+                                id smallint primary key,
+                                quiz_event_id smallint not null,
+                                constraint foreign key (quiz_event_id)
+                                    references quiz_events(id) on update cascade on delete restrict,
+                                start_date date,
+                                end_date date,
+                                is_already_graded boolean,
+                                user_score smallint,
+                                question_id smallint not null,
+                                constraint foreign key (question_id)
+                                    references questions(id) on update cascade on delete restrict,
+                                user_answer_0 text,
+                                user_answer_1 varchar(64),
+                                user_answer_2 varchar(64),
+                                user_answer_3 varchar(64),
+                                user_answer_4 varchar(64),
+                                user_answer_5 varchar(64),
+                                user_answer_6 varchar(64),
+                                user_answer_7 varchar(64),
+                                user_answer_8 varchar(64),
+                                user_answer_9 varchar(64),
+                                user_answer_10 varchar(64),
+                                user_answer_11 varchar(64),
+                                user_answer_12 varchar(64),
+                                user_answer_13 varchar(64),
+                                user_answer_14 varchar(64),
+                                user_answer_15 varchar(64)
+);
+-- ************************************************************************************
+create table friendships(
+                            id smallint primary key,
+                            first_friend_id smallint,
+                            constraint foreign key (first_friend_id)
+                                references users(id) on update cascade on delete restrict,
+                            second_friend_id smallint,
+                            constraint foreign key (second_friend_id)
+                                references users(id) on update cascade on delete restrict,
+                            make_friend_date date
+);
+-- *************************************************************************************
+create table challenges(
+                           id smallint primary key,
+                           challenger_user_id smallint not null,
+                           constraint foreign key (challenger_user_id)
+                               references users(id) on update cascade on delete restrict,
+                           challenged_user_id smallint not null,
+                           constraint foreign key (challenged_user_id)
+                               references users(id) on update cascade on delete restrict,
+                           challenger_quiz_event_id smallint,
+                           challenged_quiz_event_id smallint,
+                           is_finished boolean,
+                           winner_id smallint,
+                           challenging_date date,
+                           accepting_date date
+);
+-- ***********************************************************************************
+create table achievements(
+                             id smallint primary key,
+                             title varchar(64),
+                             description varchar(64),
+                             icon_url varchar(256)
+);
+-- ***********************************************************************************
+create table achievements_table(
+                                   id smallint primary key,
+                                   achievement_id smallint not null,
+                                   constraint foreign key (achievement_id)
+                                       references achievements(id) on update cascade on delete restrict,
+                                   user_id smallint not null,
+                                   constraint foreign key (user_id)
+                                       references users(id) on update cascade on delete restrict,
+                                   achieve_date date
+);
+-- ***********************************************************************************
+
+/*  drop table if exists questions;
+    drop table if exists quiz_events;
+    drop table if exists quizzes;
+    drop table if exists users;
+    drop table if exists question_events;
+*/

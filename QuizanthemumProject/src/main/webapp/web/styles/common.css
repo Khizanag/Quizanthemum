@@ -8,6 +8,7 @@
     width: 960px;
     margin: auto;
 }
+
 .header-section { 
     background-color: #002c2f;
     width: 100%;
@@ -74,7 +75,7 @@
 .nav-item {
     font-family: "Comic Sans MS", cursive, sans-serif;
     color: #b3bdbe;
-    font-size: 14x;
+    font-size: 14px;
     font-weight: bold;
     margin-right: 20px;
     text-decoration: none;

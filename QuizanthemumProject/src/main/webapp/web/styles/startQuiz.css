@@ -1,0 +1,29 @@
+.info-holder {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+.quiz-main-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 5%;
+}
+
+.text-holder {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.author {
+    color: #ff751a;
+    font-size: x-large;
+}
+.description {
+    color: white;
+    margin: 25px;
+}

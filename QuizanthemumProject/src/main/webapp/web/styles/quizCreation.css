@@ -1,7 +1,6 @@
 /* BODY*/
 .creation-section {
     width: 100%;
-    min-height: 457px; /*TODO*/
     background-color: #002c2f;
 }
 h2{
@@ -154,10 +153,6 @@ input[type=text]:focus, input[type=password]:focus {
     border-bottom-color: transparent;
     border-left-color: transparent;
     margin: 5px;
-}
-:before {
-    content: "";
-    box-sizing: border-box;
 }
 .arrow:before{
     right: 0;
