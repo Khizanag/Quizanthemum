@@ -27,17 +27,17 @@
         }
     </script>
 
-    <%
-        if(request.getServletContext().getAttribute("logedInUser") == null){
-            for(Cookie cookie : request.getCookies()){
-                if(cookie.getName().equals("logedInUserID")){
-                    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
-                    User logedInUser = usersManager.getUser(Integer.parseInt(cookie.getValue()));
-                    request.getServletContext().setAttribute("logedInUser", logedInUser);
-                }
-            }
-        }
-    %>
+<%--    <%--%>
+<%--        if(request.getServletContext().getAttribute("logedInUser") == null){--%>
+<%--            for(Cookie cookie : request.getCookies()){--%>
+<%--                if(cookie.getName().equals("logedInUserID")){--%>
+<%--                    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);--%>
+<%--                    User logedInUser = usersManager.getUser(Integer.parseInt(cookie.getValue()));--%>
+<%--                    request.getServletContext().setAttribute("logedInUser", logedInUser);--%>
+<%--                }--%>
+<%--            }--%>
+<%--        }--%>
+<%--    %>--%>
 
 </head>
 <body>
