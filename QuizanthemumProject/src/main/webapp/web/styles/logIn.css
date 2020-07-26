@@ -5,7 +5,6 @@
 }
 .sign-in-section {
     width: 100%;
-    height: 600px;
     background-color: #002c2f;
 }
 h2{
@@ -33,7 +32,8 @@ a{
 a:hover  {
     color: teal;
 }
-input[type=text], input[type=password], input[type=date] {
+input[type=text], input[type=password],
+input[type=email], input[type=date] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -41,9 +41,10 @@ input[type=text], input[type=password], input[type=date] {
     border: none;
     background: #f1f1f1;
     border-radius: 5px;
-
 }
-input[type=text]:focus, input[type=password]:focus. input[type=date]:focus {
+
+input[type=text]:focus, input[type=password]:focus,
+input[type=email]:focus, input[type=date]:focus {
     background-color: rgb(221, 221, 221);
     outline: none;
 }

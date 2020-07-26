@@ -48,6 +48,7 @@
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
                 <a class="nav-item" target="_self" href="web/pages/QuizCreation.jsp">CREATE QUIZ</a>
+                <a class="nav-item" target="_self" href="web/pages/StartQuiz.jsp">სატესტო</a>
             </ul>
         </nav>
         <div class="search-items">

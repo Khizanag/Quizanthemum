@@ -66,19 +66,17 @@
             <div class="input-item" style="width: 30%">
             <label><b>დაბადების თარიღი</b></label>
             <input type="date" name="registration_birth_date"
-                   value="2020-08-01" id="registration_birth_date"
-                    style="width: 100%; padding: 15px; margin: 5px 0 22px 0; display: inline-block;
-                    border: none; background: #f1f1f1; border-radius: 5px;">
+                   value="2020-08-01" id="registration_birth_date">
             </div>
-            <label><b>მომხმარებლის სახელი (USER NAME)</b></label>
+            <label><b>მომხმარებლის სახელი (USERNAME)</b></label>
             <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი"
                    name="registration_username" id="registration_username" required>
 
-            <label for="email"><b>იმეილი</b></label>
-            <input type="text" placeholder="შეიყვანეთ იმეილი" name="registration_email"
+            <label><b>E-mail</b></label>
+            <input type="email" placeholder="შეიყვანეთ email" name="registration_email"
                    id="registration_email" required>
 
-            <label for="psw"><b>პაროლი</b></label>
+            <label><b>პაროლი</b></label>
             <input type="password" placeholder="შეიყვანეთ პაროლი"
                    name="registration_password" id="registration_password" required>
 
@@ -88,31 +86,10 @@
         </div>
         <hr>
         <p>ახალი პროგილის შქმნა გულისხმობს, რომ თქვენ ეთანხმებით ჩვენს
-            <a href="#rules" data-rules-target="#rules">წესებსა და მოთხოვნებს</a>.
+            <a href="https://sites.google.com/site/lawdeepsearch/CivilCodeofGeorgia"
+               target="_blank">წესებსა და მოთხოვნებს</a>.
         </p>
-<%--        <div class="rules" id="rules">--%>
-<%--            <div class="rules-header">--%>
-<%--                <div class="title">დაიცვი წესები თორე დაგენძრევა</div>--%>
-<%--                <input type="button" close-rules class="close-button" value="X">--%>
-<%--            </div>--%>
-<%--            <div class="rules-body">--%>
-<%--                იტოგში მისმინე!<br><br>--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--                წესები წესები წესები წესები წესები წესები წესები წესები--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--        <div id="popup"></div>--%>
-        <button type="submit" class="button" >რეგისტრაცია</button>
+        <button type="submit" class="button" onclick="checkAndRedirect()">რეგისტრაცია</button>
     </div>
 
     <div class="container signin">
@@ -135,29 +112,26 @@
 </body>
 
 <script >
-    const openRulesEvent = document.querySelectorAll('[data-rules-target]');
-    const closeRulesEvent = document.querySelectorAll('[close-rules]');
-    const popUpElem = document.getElementById('popup');
+    function checkAndRedirect() {
+        let f_name = document.getElementById("registration_first_name").value !== '';
+        let l_name = document.getElementById("registration_last_name").value !== '';
+        let username = document.getElementById("registration_username").value !== '';
+        let email = document.getElementById("registration_email").value !== '';
+        let password = document.getElementById("registration_password").value ;
+        let rep_pwd = document.getElementById("psw-repeat").value;
 
-    openRulesEvent.forEach(button => {
-        button.addEventListener('click', () => {
-            const rules = document.querySelector(button.dataset.rulesTarget);
-            if (rules == null) {
-                return;
-            }
-            rules.classList.add('active');
-            popUpElem.classList.add('active');
-        });
-    });
+        console.log("pas: ", password)
+        console.log("rep_pwd: ", rep_pwd)
 
-    closeRulesEvent.forEach(button => {
-        button.addEventListener('click', () => {
-            const rules = button.closest('.rules');
-            if (rules == null) {
-                return;
-            }
-            rules.classList.remove('active');
-            popUpElem.classList.remove('active');
-        });
-    });
+        if(password != rep_pwd) {
+            alert( "\n" + "პაროლი და განმეორებით შეყვანილი პაროლი არ ემთხვევა" + "\n" +
+                   "\n" + "გთხოვთ გადაამოწმოთ შეყვანილი მონაცემები");
+            return;
+        }
+
+        if (f_name && l_name && username && email && password !== '') {
+            // window.location.href = "";
+            //TODO
+        }
+    }
 </script>
