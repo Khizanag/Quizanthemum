@@ -14,20 +14,19 @@ import java.util.List;
 import static Configs.QuizEventTableConfig.*;
 
 
-public class UserManager implements UsersTableConfig, QuestionTableConfig,
+public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         ChallengesTableConfig, AchievementEventTableConfig, FriendshipsTableConfig {
 
     private final Connection connection;
     private Statement statement;
     private ServletContext context;
 
-    public UserManager(){
+    public UsersManager(ServletContext context){
+        this.context = context;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException throwables) { }
     }
 
     public User getUser(int id){

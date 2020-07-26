@@ -42,7 +42,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             boolean mustShuffleQuestions = set.getBoolean(QUIZ_TABLE_COLUMN_5_MUST_SHUFFLE_QUESTIONS);
             String comment = set.getString(QUIZ_TABLE_COLUMN_6_COMMENT);
             int authorID = set.getInt(QUIZ_TABLE_COLUMN_7_AUTHOR_ID);
-            UserManager userManager = (UserManager) context.getAttribute(USER_MANAGER_STR);
+            UsersManager userManager = (UsersManager) context.getAttribute(USERS_MANAGER_STR);
             User author = (User)userManager.getUser(authorID);
             Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE); // TODO check with sql or util
             List<Question> questions = getQuizQuestions(id);

@@ -2,10 +2,9 @@ package Controller.Classes.OtherClasses;
 
 import Configs.Config;
 import Controller.Classes.Quiz.QuizEvent;
-import Model.Managers.ChallengeManager;
+import Model.Managers.ChallengesManager;
 import Model.Managers.QuizEventManager;
-import Model.Managers.QuizManager;
-import Model.Managers.UserManager;
+import Model.Managers.UsersManager;
 
 import java.sql.Date;
 
@@ -14,7 +13,7 @@ public class Challenge implements Config {
     private int ID;
     private boolean isFinished;
     private int winnerUserID;
-    private final ChallengeManager manager;
+    private final ChallengesManager manager;
 
     // challenger info
     private final int challengerUserID;
@@ -31,7 +30,7 @@ public class Challenge implements Config {
     private Date acceptingDate;
 
     public Challenge(int ID, int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
-                     boolean isFinished, int winnerUserID, Date challengingDate, Date acceptingDate, ChallengeManager manager){
+                     boolean isFinished, int winnerUserID, Date challengingDate, Date acceptingDate, ChallengesManager manager){
         this.ID = ID;
         this.challengerUserID = challengerUserID;
         this.challengedUserID = challengedUserID;
@@ -46,7 +45,7 @@ public class Challenge implements Config {
 
     /* this constructor could be called immediately after user challenges someone and it is not accepted yet */
     public Challenge(int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
-                     Date challengingDate, ChallengeManager manager){
+                     Date challengingDate, ChallengesManager manager){
         this(-1, challengerUserID, challengedUserID, challengerQuizEventID, challengedQuizEventID,
                 false, -1, challengingDate, null, manager);
     }
@@ -61,7 +60,7 @@ public class Challenge implements Config {
         return winnerUserID;
     }
 
-    public ChallengeManager getManager() {
+    public ChallengesManager getManager() {
         return manager;
     }
 
@@ -71,7 +70,7 @@ public class Challenge implements Config {
 
     public User getChallengerUser(){
         if(challengerUser == null) {
-            UserManager userManager = (UserManager) manager.getContext().getAttribute(USER_MANAGER_STR);
+            UsersManager userManager = (UsersManager) manager.getContext().getAttribute(USERS_MANAGER_STR);
             challengerUser = userManager.getUser(challengerUserID);
         }
         return challengerUser;
@@ -79,7 +78,7 @@ public class Challenge implements Config {
 
     public User getChallengedUser(){
         if(challengedUser == null) {
-            UserManager userManager = (UserManager) manager.getContext().getAttribute(USER_MANAGER_STR);
+            UsersManager userManager = (UsersManager) manager.getContext().getAttribute(USERS_MANAGER_STR);
             challengedUser = userManager.getUser(challengedUserID);
         }
         return challengedUser;

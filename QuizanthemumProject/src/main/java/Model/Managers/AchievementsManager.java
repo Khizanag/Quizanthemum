@@ -17,7 +17,8 @@ public class AchievementsManager implements AchievementsTableConfig {
     private Connection connection;
     private Statement statement;
 
-    public AchievementsManager(){
+    public AchievementsManager(ServletContext context){
+        this.context = context;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
