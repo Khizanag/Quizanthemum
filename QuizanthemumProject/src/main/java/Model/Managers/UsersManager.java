@@ -157,4 +157,18 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         // TODO
         return 1;
     }
+
+    public boolean isUsernameFree(String username){
+        return true;
+
+//        String query = "SELECT COUNT(1) as count"
+//                + " FROM " + USERS_TABLE_NAME
+//                + " WHERE username = " + username + ";\n";
+//        try {
+//            ResultSet resultSet = statement.executeQuery(query);
+//            int numUsernames = resultSet.getInt("count");
+//            return numUsernames == 0;
+//        } catch (SQLException unused) { }
+//        return false;
+    }
 }

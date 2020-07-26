@@ -44,12 +44,16 @@
         </nav>
     </div>
 </div>
-<form class="registration-section" action="../../RegistrationServlet" method="get">
+<form class="registration-section" action="../../Registration" method="get">
     <div class="container">
         <h2>რეგისტრაცია</h2>
         <p>გთხოვთ შეავსოთ ფორმა პროფილის შესაქმნელად.</p>
         <hr>
-
+        <%
+            if(request.getServletContext().getAttribute("errorMessage") != null) { %>
+                <p class="error_message"> ${errorMessage}</p> <%
+            }
+        %>
         <div class="input-items">
 
             <div class="input-item">
