@@ -34,8 +34,22 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         String query = "SELECT * " +
                 "FROM " + USERS_TABLE_NAME +
                 "WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+        return getUserWithQuery(query);
+    }
+
+    public User getUser(String username){
+        String query = "SELECT * " +
+                " FROM " + USERS_TABLE_NAME +
+                " WHERE username = " + username + ";";
+        return getUserWithQuery(query);
+    }
+
+    private User getUserWithQuery(String query){
         try {
             ResultSet set = statement.executeQuery(query);
+            if(!set.next())
+                return null;
+            int id = set.getInt(USERS_TABLE_COLUMN_1_ID);
             String username = set.getString(USERS_TABLE_COLUMN_2_USERNAME);
             String passwordHash = set.getString(USERS_TABLE_COLUMN_3_PASSWORD_HASH);
             String firstName = set.getString(USERS_TABLE_COLUMN_4_FIRST_NAME);
@@ -51,7 +65,9 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
                     birthDate, registrationDate, friendIDs);
-        } catch (SQLException throwables) { }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return null;
     }
 
@@ -163,16 +179,11 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     public boolean isUsernameFree(String username){
-        return true;
-
-//        String query = "SELECT COUNT(1) as count"
-//                + " FROM " + USERS_TABLE_NAME
-//                + " WHERE username = " + username + ";\n";
-//        try {
-//            ResultSet resultSet = statement.executeQuery(query);
-//            int numUsernames = resultSet.getInt("count");
-//            return numUsernames == 0;
-//        } catch (SQLException unused) { }
-//        return false;
+        return getUser(username) == null;
     }
+
+    public boolean isValidLoginAttempt(String username, String password) {
+        return getUser(username).isCorrectPassword(password);
+    }
+
 }

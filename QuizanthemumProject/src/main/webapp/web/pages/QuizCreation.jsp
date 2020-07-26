@@ -1,3 +1,6 @@
+<%@ page import="Controller.Classes.OtherClasses.User" %>
+<%@ page import="Model.Managers.UsersManager" %>
+<%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -8,6 +11,18 @@
     <link rel="stylesheet" href="../styles/quizCreation.css">
     <link rel="stylesheet" href="../styles/breakpoints.css">
     <link rel="stylesheet" href="../styles/rules.css">
+
+    <%
+        if(request.getServletContext().getAttribute("logedInUser") == null){
+            for(Cookie cookie : request.getCookies()){
+                if(cookie.getName().equals("logedInUserID")){
+                    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
+                    User logedInUser = usersManager.getUser(Integer.parseInt(cookie.getValue()));
+                    request.getServletContext().setAttribute("logedInUser", logedInUser);
+                }
+            }
+        }
+    %>
 </head>
 <body>
 <header class= "header-section">
