@@ -1,6 +1,9 @@
-use quizanthemum;
+use quizanthemum_schema;
 
--- ********************************************************************************
+
+
+
+# ****************************************  USERS  ****************************************
 create table users(
                       id smallint primary key,
                       username varchar(64) unique key,
@@ -10,12 +13,16 @@ create table users(
                       role smallint not null,
                       city varchar(32),
                       country varchar(32),
-                      phone_number varchar(32),
                       email varchar(64) not null,
+                      phone_number varchar(32),
                       birth_date date,
                       registration_date date
 );
--- ***********************************************************************
+
+
+
+# ************************************  QUIZZES  ***********************************
+
 create table quizzes(
                         ID smallint primary key,
                         NAME varchar(64),
@@ -29,7 +36,11 @@ create table quizzes(
                         CREATION_DATE date,
                         MAX_SCORE smallint
 );
--- *************************************************************************************
+
+
+
+# *****************************************  QUIZ_EVENTS  ********************************************
+
 create table quiz_events(
                             id smallint primary key,
                             quiz_id smallint not null,
@@ -42,7 +53,11 @@ create table quiz_events(
                             constraint foreign key (user_id)
                                 references users(id) on update cascade on delete restrict
 );
--- ***********************************************************************************
+
+
+
+# *****************************************  QUESTIONS  ******************************************
+
 create table questions(
                           id smallint primary key,
                           type smallint not null,
@@ -94,7 +109,11 @@ create table questions(
                           answer_14 varchar(64),
                           answer_15 varchar(64)
 );
--- ************************************************************************************
+
+
+
+# ********************************************  QUESTION_EVENTS  ****************************************
+
 create table question_events(
                                 id smallint primary key,
                                 quiz_event_id smallint not null,
@@ -124,7 +143,11 @@ create table question_events(
                                 user_answer_14 varchar(64),
                                 user_answer_15 varchar(64)
 );
--- ************************************************************************************
+
+
+
+# ******************************************  FRIENDSHIPS  ******************************************
+
 create table friendships(
                             id smallint primary key,
                             first_friend_id smallint,
@@ -135,7 +158,11 @@ create table friendships(
                                 references users(id) on update cascade on delete restrict,
                             make_friend_date date
 );
--- *************************************************************************************
+
+
+
+# *******************************************  CHALLENGES  ******************************************
+
 create table challenges(
                            id smallint primary key,
                            challenger_user_id smallint not null,
@@ -151,15 +178,23 @@ create table challenges(
                            challenging_date date,
                            accepting_date date
 );
--- ***********************************************************************************
+
+
+
+# ***********************************************  ACHIEVEMENTS  ***********************************************
+
 create table achievements(
                              id smallint primary key,
                              title varchar(64),
                              description varchar(64),
                              icon_url varchar(256)
 );
--- ***********************************************************************************
-create table achievements_table(
+
+
+
+# *********************************************  ACHIEVEMENT_EVENTS  *********************************************
+
+create table achievement_events(
                                    id smallint primary key,
                                    achievement_id smallint not null,
                                    constraint foreign key (achievement_id)
@@ -169,11 +204,23 @@ create table achievements_table(
                                        references users(id) on update cascade on delete restrict,
                                    achieve_date date
 );
--- ***********************************************************************************
 
-/*  drop table if exists questions;
-    drop table if exists quiz_events;
-    drop table if exists quizzes;
-    drop table if exists users;
-    drop table if exists question_events;
-*/
+
+
+# ************************************************** DROP TABLES  *************************************************
+
+#     drop table if exists question_events;
+#     drop table if exists questions;
+#     drop table if exists quiz_events;
+#     drop table if exists quizzes;
+#     drop table if exists friendships;
+#     drop table if exists challenges;
+#     drop table if exists achievement_events;
+#     drop table if exists achievements;
+#     drop table if exists users;
+
+
+
+# ***************************************************  FOR TESTING  **************************************************
+
+# select * from users;
