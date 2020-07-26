@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.StringTokenizer;
 
 import static Configs.UserRoles.USER;
 
@@ -35,10 +36,15 @@ public class RegistrationServlet extends HttpServlet implements Config {
         String country = request.getParameter("registration_country");
         String mobilePhone = request.getParameter("registration_phone_numer");
         String birthDateStr = request.getParameter("registration_birth_date");
-        Date birthDate = /* TODO */ new Date();
+        StringTokenizer strTok = new StringTokenizer(birthDateStr, "-");
+        int year = Integer.parseInt(strTok.nextToken());
+        int month = Integer.parseInt(strTok.nextToken());
+        int day = Integer.parseInt(strTok.nextToken());
+        // 1900 is base year, month should be between [0-11]
+        Date birthDate = new Date(year-1900, month-1, day);
         Date registrationDate = new Date();
 
-        User newUser = new User(-1, username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, null);
+        User newUser = new User(id, username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, null);
 
         String errorMessage = "";
 
@@ -47,8 +53,10 @@ public class RegistrationServlet extends HttpServlet implements Config {
         }
 
         if(errorMessage.isEmpty()){ // there were no errors during registration
-            Cookie userIDCookie = new Cookie("currentUserID", ""+id);
+            userManager.insertUser(newUser);
+            Cookie userIDCookie = new Cookie("logedInUserID", ""+id);
             response.addCookie(userIDCookie);
+            request.getServletContext().setAttribute("logedInUser", newUser);
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.html");
         } else {
@@ -56,6 +64,5 @@ public class RegistrationServlet extends HttpServlet implements Config {
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/web/pages/Registration.jsp");
         }
-//                userManager.insertUser(newUser);
     }
 }

@@ -21,6 +21,10 @@ public interface Config {
     String USERNAME = "root";
     String PASSWORD = "paroli12345678";
     String URL = "jdbc:mysql://localhost:3306/";
-    String DATABASE_NAME = "intelij_db";
+    String DATABASE_NAME = "quizanthemum_schema";
+
+
+    /** Used when creating Object, before inserting into database */
+    int DEFAULT_ID = -1;
 
 }
