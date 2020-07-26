@@ -57,14 +57,16 @@
         %>
 
         <div class="input-items">
-            <label for="email"><b>იმეილი</b></label>
-            <input type="text" placeholder="შეიყვანეთ იმეილი" name="email" id="email" required>
+            <label><b>E-mail</b></label>
+            <input type="email" placeholder="შეიყვანეთ email"
+                   name="log_in_email" id="log_in_email" required>
 
-            <label for="psw"><b>პაროლი</b></label>
-            <input type="password" placeholder="შეიყვანეთ პაროლი" name="psw" id="psw" required>
+            <label><b>პაროლი</b></label>
+            <input type="password" placeholder="შეიყვანეთ პაროლი"
+                   name="log_in_password" id="log_in_password" required>
 
         </div>
-        <button type="submit" class="button">შესვლა</button>
+        <button type="submit" class="button" onclick="checkAndRedirect()">შესვლა</button>
     </div>
 
     <div class="container signin">
@@ -84,3 +86,15 @@
     </div>
 </footer>
 </body>
+
+<script>
+    function checkAndRedirect() {
+        let email = document.getElementById("log_in_email").value !== '';
+        let password = document.getElementById("log_in_password").value !== '';
+
+        if (email && password) {
+            // window.location.href = "";
+            //TODO
+        }
+    }
+</script>
