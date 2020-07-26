@@ -52,6 +52,7 @@
         <%
             if(request.getServletContext().getAttribute("errorMessage") != null) { %>
                 <p class="error_message"> ${errorMessage}</p> <%
+                request.removeAttribute("errorMessage");
             }
         %>
         <div class="input-items">
