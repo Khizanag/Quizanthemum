@@ -36,5 +36,5 @@ public class LogInServlet extends HttpServlet implements Config {
             response.setHeader("Location", "http://localhost:8080/web/pages/SignIn.jsp");
         }
     }
-    
+
 }
