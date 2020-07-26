@@ -48,7 +48,7 @@
 </div>
 
 <div class="page-holder">
-    <form class="creation-section">
+    <form class="add-question-section">
         <div class="container">
             <h2>შეკითხვა</h2>
             <p>შეკითხვის დასამატებლაd შეავსეთ ქვემოთ მოყვანილი ველები.</p>
@@ -130,5 +130,20 @@
             'name="wrong-ans" id="wrong-ans" required>';
         e.innerHTML += toAdd;
         parent.insertBefore(e, null);
+    }
+    
+    function addToFill() {
+        let text = document.getElementById("toFill").value;
+        let prev = document.getElementById("fill-question").value;
+        document.getElementById("fill-question").innerText = prev + ' ' + text;
+        document.getElementById("toFill").value = '';
+    }
+
+    function addFillWith() {
+        let text = document.getElementById("fillWith").value;
+        let prev = document.getElementById("fill-question").value;
+        if(text === '') return;
+        document.getElementById("fill-question").innerText = prev + ' (&_' + text + '_&)';
+        document.getElementById("fillWith").value = '';
     }
 </script>
