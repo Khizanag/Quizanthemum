@@ -78,7 +78,7 @@ input[type=text]:focus, input[type=password]:focus {
 .upload-image-container {
     width: 100%;
 }
-#photo-url{
+#quiz_icon_url{
     width: 30%;
     margin-bottom: 0;
 }
@@ -101,6 +101,7 @@ input[type=text]:focus, input[type=password]:focus {
 .finish {
     width: 100%;
 }
+
 #add-worng-ans-btn {
     font-size: medium;
     padding: 13px;

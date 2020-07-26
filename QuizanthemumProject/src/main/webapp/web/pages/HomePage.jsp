@@ -48,6 +48,7 @@
             <h1 class="logo-text">Quizanthemum</h1>
         </div>
 
+
         <ul class="header-right">
             <button class="button logIn" onClick="openRegistration()">შესვლა</button>
         </ul>

@@ -26,5 +26,4 @@ public interface Config {
 
     /** Used when creating Object, before inserting into database */
     int DEFAULT_ID = -1;
-
 }
