@@ -13,13 +13,13 @@ import java.util.Date;
 import static Configs.AchievementEventTableConfig.*;
 import static Configs.Config.CONNECTION_STR;
 
-public class AchievementsEventsManager implements AchievementsTableConfig {
+public class AchievementEventsManager implements AchievementsTableConfig {
 
     private ServletContext context;
     private Connection connection;
     private Statement statement;
 
-    public AchievementsEventsManager(ServletContext context){
+    public AchievementEventsManager(ServletContext context){
         this.context = context;
         this.connection = (Connection) context.getAttribute(CONNECTION_STR);
         try {

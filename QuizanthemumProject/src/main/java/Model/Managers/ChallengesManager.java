@@ -7,14 +7,14 @@ import Model.DatabaseConnector;
 import javax.servlet.ServletContext;
 import java.sql.*;
 
-public class ChallengeManager implements ChallengesTableConfig {
+public class ChallengesManager implements ChallengesTableConfig {
 
     // saved connection to use in the future for working with database
     private final Connection connection;
     private Statement statement;
     private ServletContext context;
 
-    public ChallengeManager(){
+    public ChallengesManager(){
         this.connection = DatabaseConnector.getInstance();
         try {
             this.statement = connection.createStatement();

@@ -44,7 +44,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
             QuizManager quizManager = (QuizManager) context.getAttribute(QUIZ_MANAGER_STR);
             Quiz quiz = quizManager.getQuiz(quizId);
             int userId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_3_USER_ID);
-            UserManager userManager = (UserManager) context.getAttribute(USER_MANAGER_STR);
+            UsersManager userManager = (UsersManager) context.getAttribute(USERS_MANAGER_STR);
             User user = userManager.getUser(userId);
             java.util.Date startDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_4_START_DATE);
             java.util.Date finishDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE);

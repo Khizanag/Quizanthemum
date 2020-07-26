@@ -15,20 +15,19 @@ import java.util.List;
 import static Configs.QuizEventTableConfig.*;
 
 
-public class UserManager implements UsersTableConfig, QuestionTableConfig,
+public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         ChallengesTableConfig, AchievementEventTableConfig, FriendshipsTableConfig {
 
     private final Connection connection;
     private Statement statement;
     private ServletContext context;
 
-    public UserManager(){
+    public UsersManager(ServletContext context){
+        this.context = context;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException throwables) { }
     }
 
     public User getUser(int id){
@@ -157,5 +156,19 @@ public class UserManager implements UsersTableConfig, QuestionTableConfig,
     public int getNextID(){
         // TODO
         return 1;
+    }
+
+    public boolean isUsernameFree(String username){
+        return true;
+
+//        String query = "SELECT COUNT(1) as count"
+//                + " FROM " + USERS_TABLE_NAME
+//                + " WHERE username = " + username + ";\n";
+//        try {
+//            ResultSet resultSet = statement.executeQuery(query);
+//            int numUsernames = resultSet.getInt("count");
+//            return numUsernames == 0;
+//        } catch (SQLException unused) { }
+//        return false;
     }
 }
