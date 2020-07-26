@@ -61,13 +61,12 @@
 </div>
 
 
-<form id="creation-section" class="creation-section">
+<form class="start-quiz-section">
     <div class="container">
-        <h2>ქვიზის სახელი</h2>
         <div class="info-holder">
             <img src="../images/homepage/c.jpg" class="quiz-main-img">
             <div class="text-holder">
-                <div type="text" class="author"> ავტორის სახელი და გვარი </div>
+                <h2>ქვიზის სახელი</h2>
                 <div type="text" class="description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Accusantium assumenda doloremque eaque harum iste laborum optio rem,
@@ -80,7 +79,8 @@
                 </div>
             </div>
         </div>
-        <p style="margin-top: 10px; margin-bottom: 0; color:white"> ქვიზი შექმნილია: 01.08.2020 </p>
+        <p type="text" class="author"> ავტორის სახელი და გვარი </p>
+        <p style=" margin-bottom: 0; color:white"> ქვიზი შექმნილია: 01.08.2020 </p>
         <button class="button" type="button"
                 style="margin-top: 10px">
             ქვიზის დაწყება
