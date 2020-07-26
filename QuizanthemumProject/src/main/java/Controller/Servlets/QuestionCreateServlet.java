@@ -23,7 +23,7 @@ public class QuestionCreateServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuestionManager questionManager = (QuestionManager) request.getServletContext().getAttribute(QUESTION_MANAGER_STR);
-
+        // TODO ID დავთვალო ბაზიდან და გავატანო კონსტრუქტორს
         int type = Integer.parseInt(request.getParameter("question_type"));
         boolean isAutoGraded = Boolean.parseBoolean(request.getParameter("question_is_auto_graded"));
         double maxScore = Double.parseDouble(request.getParameter("question_max_score"));
@@ -53,7 +53,7 @@ public class QuestionCreateServlet extends HttpServlet {
                 quizId, isPictureQuestion, isPictureAnswer, textStatement, pictureStatementUrl, statements, answers);
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
-        response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.html"); // TODO
+        response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.html"); // TODO valid address
 
 
 //        questionManager.insertQuestion(newQuestion);
