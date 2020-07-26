@@ -17,7 +17,7 @@ public class User {
     private final int role;
     private final String city;
     private final String country;
-    private final String mobileNumber;
+    private final String phoneNumber;
     private final String email;
     private final Date birthDate;
     private final Date registrationDate;
@@ -27,21 +27,21 @@ public class User {
     private List<Achievement> achievements;
 
     public User(int id, String username, String password, String firstName, String lastName,
-                int role, String  city, String county, String mobileNumber, String email,
+                int role, String  city, String county, String phoneNumber, String email,
                 Date birthDate, Date registrationDate, List<Integer> friendIDs) {
         this.id = id;
         this.username = username;
         this.passwordHash = hashFunction(password);
-        this.friendIDs = friendIDs;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.city = city;
         this.country = county;
-        this.mobileNumber = mobileNumber;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
+        this.friendIDs = friendIDs;
     }
 
     public int getId(){ return id; }
@@ -78,6 +78,14 @@ public class User {
     }
 
 
+    public int getID() {
+        return id;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -85,6 +93,8 @@ public class User {
     public String getLastName() {
         return lastName;
     }
+
+    public int getRole(){ return role; }
 
     public String getCity() {
         return city;
@@ -95,7 +105,7 @@ public class User {
     }
 
     public String getMobileNumber() {
-        return mobileNumber;
+        return phoneNumber;
     }
 
     public String getEmail() {
@@ -110,7 +120,11 @@ public class User {
         return registrationDate;
     }
 
+
     public List<Integer> getFriendIDs() {
+        if(friendIDs == null){
+            // TODO get ids from base
+        }
         return friendIDs;
     }
 
@@ -140,15 +154,7 @@ public class User {
         challenges.add(challenge);
     }
 
-    public int getID() {
-        return id;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public boolean isCorrectPassword (String password) throws NoSuchAlgorithmException {
+    public boolean isCorrectPassword (String password) {
         return passwordHash.equals(hashFunction(password));
     }
 
@@ -163,7 +169,7 @@ public class User {
                 ", role=" + role +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
+                ", mobileNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", birthDate=" + birthDate +
                 ", registrationDate=" + registrationDate +
