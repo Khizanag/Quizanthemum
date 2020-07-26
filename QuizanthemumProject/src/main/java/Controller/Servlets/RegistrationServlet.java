@@ -33,12 +33,12 @@ public class RegistrationServlet extends HttpServlet implements Config {
         String email = request.getParameter("registration_email");
         String city = request.getParameter("registration_city");
         String country = request.getParameter("registration_country");
-        String mobilePhone = request.getParameter("registration_phone_numer");
+        String mobilePhone = request.getParameter("registration_phone_number");
         String birthDateStr = request.getParameter("registration_birth_date");
         Date birthDate = /* TODO */ new Date();
         Date registrationDate = new Date();
 
-        User newUser = new User(-1, username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, null);
+        User newUser = new User(id, username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, null);
 
         String errorMessage = "";
 
