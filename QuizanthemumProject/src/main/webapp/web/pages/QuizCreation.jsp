@@ -52,14 +52,15 @@
         <hr>
 
         <div class="input-items" id="input-items">
-            <label for="name"><b>ქვიზის სახელი</b></label>
-            <input type="text" placeholder="შეიყვანეთ ქვიზის დასახელება" name="name" id="name" required>
+            <label><b>ქვიზის სახელი</b></label>
+            <input type="text" placeholder="შეიყვანეთ ქვიზის დასახელება"
+                   name="quiz_name" id="quiz_name" required>
 
             <label for="description"><b>ქვიზის აღწერა</b></label>
             <input type="text" placeholder="გთხოვთ შეუყვანოთ თქვენი ქვიზის ზოგადი აღწერა"
-                   name="description" id="description" required>
+                   name="quiz_description" id="quiz_description" required>
 
-            <label for="image"><b>ატვირთეთ ქვიზის ლოგო/აიქონი</b></label>
+            <label><b>ატვირთეთ ქვიზის ლოგო/აიქონი</b></label>
             <div class="upload-image-section">
                 <input type="file"  accept="image/*" name="image" id="file"
                        onchange="loadFile(event)"
@@ -71,7 +72,7 @@
                            onclick="uploadImage(event)" id="url-button">
                         შეიყვანეთ URL ასატვირთად
                     </label>
-                    <input type="text" placeholder="ფოტოს URL" name="photo-url" id="photo-url" required>
+                    <input type="text" placeholder="ფოტოს URL" name="quiz_icon_url" id="quiz_icon_url" required>
                 </div>
                 <img id="output" width="100" />
             </div>
@@ -80,8 +81,9 @@
             <input type="text" placeholder="როგორ გსურთ მონაცემების კონსტრუირება"
                    name="description" id="description">
 
-            <label for="boolean"><b>კითხვების თანმიმდევრობის აუტომატური გენერირება</b></label>
-            <input class="checkbox" type="checkbox" name="checkbox" id="checkbox" checked>
+            <label><b>კითხვების თანმიმდევრობის აუტომატური გენერირება</b></label>
+            <input class="checkbox" type="checkbox"
+                   name="quiz_comment" id="quiz_comment" checked>
         </div>
         <hr>
 
@@ -104,23 +106,23 @@
 </body>
 <script>
     function uploadImage(event) {
-        if(document.getElementById('photo-url').value != "") {
+        if(document.getElementById('quiz_icon_url').value != "") {
             var image = document.getElementById('output');
             image.height = 100;
-            image.src = document.getElementById('photo-url').value;
+            image.src = document.getElementById('quiz_icon_url').value;
         }
     }
     let loadFile = function(event) {
         var image = document.getElementById('output');
         image.height = 100;
         image.src = URL.createObjectURL(event.target.files[0]);
-        document.getElementById('photo-url').value = image.src;
+        document.getElementById('quiz_icon_url').value = image.src;
     };
 
     function checkAndRedirect() {
-        let name = document.getElementById('name').value != '';
-        let description = document.getElementById('description').value != '';
-        let url = document.getElementById('photo-url').value != '';
+        let name = document.getElementById('quiz_name').value !== '';
+        let description = document.getElementById('quiz_description').value !== '';
+        let url = document.getElementById('quiz_icon_url').value !== '';
         if((name && description && url)) {
             window.location.href = "AddingQuestions.jsp";
         }
