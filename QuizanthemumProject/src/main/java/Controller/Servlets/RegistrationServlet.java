@@ -44,7 +44,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
         Date birthDate = new Date(year-1900, month-1, day);
         Date registrationDate = new Date();
 
-        User newUser = new User(-1, username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, null);
+        User newUser = new User(DEFAULT_ID, username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, null);
 
         String errorMessage = "";
 
@@ -53,6 +53,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
         }
 
         if(errorMessage.isEmpty()){ // there were no errors during registration
+            userManager.insertUser(newUser);
             Cookie userIDCookie = new Cookie("currentUserID", ""+id);
             response.addCookie(userIDCookie);
             response.setStatus(HttpServletResponse.SC_FOUND);//302
@@ -62,7 +63,5 @@ public class RegistrationServlet extends HttpServlet implements Config {
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/web/pages/Registration.jsp");
         }
-
-        userManager.insertUser(newUser);
     }
 }

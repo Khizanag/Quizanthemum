@@ -133,23 +133,27 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     public void insertUser(User user) {
-        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
+            System.out.println("pstmt done");
             pstmt.setInt(1, user.getId());
-            pstmt.setString(2, user.getFirstName());
-            pstmt.setString(3, user.getLastName());
-            pstmt.setString(4, user.getUsername());
-            pstmt.setString(5, user.getPasswordHash());
-            pstmt.setString(6, user.getCity());
-            pstmt.setString(7, user.getCountry());
-            pstmt.setString(8, user.getMobileNumber());
+            pstmt.setString(2, user.getUsername());
+            pstmt.setString(3, user.getPasswordHash());
+            pstmt.setString(4, user.getFirstName());
+            pstmt.setString(5, user.getLastName());
+            pstmt.setInt(6, user.getRole());
+            pstmt.setString(7, user.getCity());
+            pstmt.setString(8, user.getCountry());
             pstmt.setString(9, user.getEmail());
-            pstmt.setDate(10, new java.sql.Date(user.getBirthDate().getTime()));
-            pstmt.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
+            pstmt.setString(10, user.getMobileNumber());
+            pstmt.setDate(11, new java.sql.Date(user.getBirthDate().getTime()));
+            pstmt.setDate(12, new java.sql.Date(user.getRegistrationDate().getTime()));
+            System.out.println("before execute update");
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Insertion Error. User Manager Class");
+            e.printStackTrace();
         }
     }
 
