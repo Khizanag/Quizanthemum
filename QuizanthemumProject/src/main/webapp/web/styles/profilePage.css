@@ -41,7 +41,6 @@
   display: flex;
   justify-content: space-between;
   justify-items: center;
-  background-color: #002e30;
   object-fit: cover;
   align-items: center;
 }
@@ -154,7 +153,7 @@
     overflow: hidden;
     font-family: "Comic Sans MS", cursive, sans-serif;
     color: #b3bdbe;
-    font-size: 20px;
+    font-size: 16.5px;
     font-weight: bold;
     outline: none;
 }
@@ -188,7 +187,7 @@
   text-align:center;
   padding:20px;
   box-sizing:border-box;
-  font-family:"Open Sans",sans-serif;
+  font-family:"Comic Sans MS", cursive, sans-serif
   overflow: auto;
 }
 .change-image-popup .overlay {
@@ -323,9 +322,8 @@
   height: 50px;
   background-color: #ff751a;
   color:white;
-
+  font-family:"Comic Sans MS", cursive, sans-serif;
   text-align: center;
-  font-family:"Open Sans", sans-serif;
   line-height: 50px;
   margin-top:5%;
 
@@ -346,8 +344,8 @@
 }
 .top-quiz-item {
   margin: 40px;
-  width: 600px;
-  height: 200px;
+  width: 550px;
+  height: 150px;
   display: flex;
   justify-content: space-around;
   cursor: pointer;
@@ -386,7 +384,7 @@
   align-items: center;
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: large;
-  font-weight: 550;
+  font-weight:bold;
   color:rgb(255, 117, 26);
 }
 .quiz-small-description-block h3{
