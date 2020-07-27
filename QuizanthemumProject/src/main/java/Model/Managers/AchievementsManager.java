@@ -1,10 +1,9 @@
 package Model.Managers;
 
 import Configs.AchievementsTableConfig;
-import Controller.Classes.OtherClasses.Achievement;
+import Controller.Classes.User.Achievement;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,5 +1,6 @@
-package Controller.Classes.OtherClasses;
+package Controller.Classes.User;
 
+import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.QuizEvent;
 
 import java.security.MessageDigest;

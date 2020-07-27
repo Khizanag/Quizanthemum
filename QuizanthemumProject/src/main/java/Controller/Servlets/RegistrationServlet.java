@@ -1,7 +1,7 @@
 package Controller.Servlets;
 
 import Configs.Config;
-import Controller.Classes.OtherClasses.User;
+import Controller.Classes.User.User;
 import Model.DatabaseConnector;
 import Model.Managers.UsersManager;
 
@@ -55,6 +55,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             int ID = userManager.insertUser(newUser);
 
             request.getServletContext().setAttribute("logedInUser", newUser);
+            request.getServletContext().removeAttribute(errorMessage);
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", "" + ID));
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", newUser.getPasswordHash()));
 

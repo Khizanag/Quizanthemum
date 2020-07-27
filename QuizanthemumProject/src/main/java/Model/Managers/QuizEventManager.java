@@ -1,13 +1,12 @@
 package Model.Managers;
 
 import Configs.QuestionEventTableConfig;
-import Controller.Classes.OtherClasses.User;
-import Controller.Classes.Quiz.QuestionEvent;
+import Controller.Classes.User.User;
+import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

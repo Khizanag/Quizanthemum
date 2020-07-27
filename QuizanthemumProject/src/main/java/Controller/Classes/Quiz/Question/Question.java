@@ -1,4 +1,4 @@
-package Controller.Classes.Quiz;
+package Controller.Classes.Quiz.Question;
 
 import Tools.Pair;
 

@@ -1,7 +1,7 @@
 package Controller.Servlets;
 
 import Configs.Config;
-import Controller.Classes.OtherClasses.User;
+import Controller.Classes.User.User;
 import Model.Managers.UsersManager;
 
 import javax.servlet.ServletContext;
@@ -36,6 +36,7 @@ public class LogInServlet extends HttpServlet implements Config {
 
         if(targetUser != null && targetUser.isCorrectPassword(password)){
             request.getServletContext().setAttribute("logedInUser", targetUser);
+            context.removeAttribute("errorMessage");
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", ""+targetUser.getID()));
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", targetUser.getPasswordHash()));
             response.setStatus(HttpServletResponse.SC_FOUND);//302

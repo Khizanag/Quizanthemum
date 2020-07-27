@@ -1,7 +1,6 @@
 package Controller;
 
 import Configs.Config;
-import Controller.Classes.Quiz.QuestionEvent;
 import Model.DatabaseConnector;
 import Model.Managers.*;
 
@@ -9,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.sql.Connection;
 
 @WebListener
 public class WebServletCreateListener implements ServletContextListener, Config {

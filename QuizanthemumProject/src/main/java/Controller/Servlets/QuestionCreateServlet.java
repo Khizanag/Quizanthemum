@@ -1,12 +1,9 @@
 package Controller.Servlets;
 
-import Controller.Classes.OtherClasses.User;
-import Controller.Classes.Quiz.Question;
+import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Quiz;
 import Model.Managers.QuestionManager;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Configs.AttributesKeysConfig.CREATING_QUIZ_STR;
 import static Configs.Config.QUESTION_MANAGER_STR;
 
 @WebServlet(name = "QuestionCreateServlet", urlPatterns = "/QuestionCreated")

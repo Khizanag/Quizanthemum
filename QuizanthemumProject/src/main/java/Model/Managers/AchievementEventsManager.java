@@ -1,10 +1,9 @@
 package Model.Managers;
 
 import Configs.AchievementsTableConfig;
-import Controller.Classes.OtherClasses.AchievementEvent;
+import Controller.Classes.User.AchievementEvent;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +11,6 @@ import java.sql.Statement;
 import java.util.Date;
 
 import static Configs.AchievementEventTableConfig.*;
-import static Configs.Config.CONNECTION_STR;
 
 public class AchievementEventsManager implements AchievementsTableConfig {
 

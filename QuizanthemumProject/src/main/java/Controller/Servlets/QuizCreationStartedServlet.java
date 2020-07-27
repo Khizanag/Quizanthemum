@@ -1,6 +1,6 @@
 package Controller.Servlets;
 
-import Controller.Classes.OtherClasses.User;
+import Controller.Classes.User.User;
 import Controller.Classes.Quiz.Quiz;
 import Model.Managers.QuizManager;
 import Model.Managers.UsersManager;

@@ -2,6 +2,7 @@ package Controller.Classes.OtherClasses;
 
 import Configs.Config;
 import Controller.Classes.Quiz.QuizEvent;
+import Controller.Classes.User.User;
 import Model.Managers.ChallengesManager;
 import Model.Managers.QuizEventManager;
 import Model.Managers.UsersManager;
