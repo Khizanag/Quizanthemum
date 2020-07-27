@@ -17,13 +17,6 @@ public interface Config {
 
     String CURRENT_QUIZES_STR = "currently started quizes by user";
 
-    /* Database info */
-    String USERNAME = "root";
-    String PASSWORD = "Pass_word1";
-    String URL = "jdbc:mysql://localhost:3306/";
-    String DATABASE_NAME = "quizanthemum_schema";
-
-
     /** Used when creating Object, before inserting into database */
     int DEFAULT_ID = -1;
 }
