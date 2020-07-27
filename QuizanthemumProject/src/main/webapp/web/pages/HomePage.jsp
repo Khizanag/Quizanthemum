@@ -27,17 +27,17 @@
         }
     </script>
 
-    <%
-        if(request.getServletContext().getAttribute("logedInUser") == null){
-            for(Cookie cookie : request.getCookies()){
-                if(cookie.getName().equals("logedInUserID")){
-                    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
-                    User logedInUser = usersManager.getUser(Integer.parseInt(cookie.getValue()));
-                    request.getServletContext().setAttribute("logedInUser", logedInUser);
-                }
-            }
-        }
-    %>
+<%--    <%--%>
+<%--        if(request.getServletContext().getAttribute("logedInUser") == null){--%>
+<%--            for(Cookie cookie : request.getCookies()){--%>
+<%--                if(cookie.getName().equals("logedInUserID")){--%>
+<%--                    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);--%>
+<%--                    User logedInUser = usersManager.getUser(Integer.parseInt(cookie.getValue()));--%>
+<%--                    request.getServletContext().setAttribute("logedInUser", logedInUser);--%>
+<%--                }--%>
+<%--            }--%>
+<%--        }--%>
+<%--    %>--%>
 
 </head>
 <body>
@@ -47,6 +47,7 @@
             <img class="logo" src="web/images/common/icon.png">
             <h1 class="logo-text">Quizanthemum</h1>
         </div>
+
 
         <ul class="header-right">
             <button class="button logIn" onClick="openRegistration()">შესვლა</button>
