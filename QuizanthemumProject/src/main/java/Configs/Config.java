@@ -19,8 +19,8 @@ public interface Config {
 
     /* Database info */
     String USERNAME = "root";
-    String PASSWORD = "paroli12345678";
+    String PASSWORD = "Pass_word1";
     String URL = "jdbc:mysql://localhost:3306/";
-    String DATABASE_NAME = "intelij_db";
+    String DATABASE_NAME = "quizantemum";
 
 }

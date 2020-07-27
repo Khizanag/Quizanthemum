@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
@@ -7,19 +6,19 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../styles/common.css">
 	<link rel="stylesheet" href="../styles/homePage.css">
-	<link rel="stylesheet" href="../styles/breakpoints.css">
-  <link rel="stylesheet" href="../styles/profilePage.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../js/friends-popup.js"></script>
+    <link rel="stylesheet" href="../styles/breakpoints.css">
+    <link rel="stylesheet" href="../styles/quizzSummaryPage.css">
+    <link rel="stylesheet" href="../styles/profilePage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../js/profileStuff.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
-	<script>
-		$(document).ready(function(){
-			$('.slider-quiz-homepage').load("../slider/slider-quiz-homepage.html");
-		});
+  <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
+  <script>
 
-		function openRegistration() {
-		  	window.location.href = "sign-in.html";
-		} 
+
+    function gotoProfPage() {
+      window.location.href="profilePageLogged.jsp";
+    }
 		function openSearch() {
 			window.location.href = "search.html";		  	
 		}
@@ -35,8 +34,8 @@
 			      </div>
 			
             <ul class="header-right">
-              <img class = "profile-picture" src = "../images/common/defProfPic.jpg">
-              <span class = "profile-name-text">Ze K1ng</span>
+              <img class = "profile-picture" src = "../images/common/defProfPic.jpg" onclick="redirectToProfPage()">
+              <span class = "profile-name-text" onclick="redirectToProfPage()">Ze K1ng</span>
             </ul>	
         </div>
     </header>
@@ -90,33 +89,86 @@
     </div>
   </div>
 
-  <div class ="profile-info-container">
-    <!-- <div class="cover-photo">
-      <img class = "profile-cover-photo" src= "../images/common/defCover.jpg" alt="SO MUCH EMPTY">
-    </div> -->
-    
-    <div class = "profile-info">
-      <img class = "profile-picture-big" src = "../images/common/defProfPic.jpg">
-      <div class="profile-name">Ze K1ng</div>
-      <div class="profile-details">Ex-President Of USA</div>
-      <div class="user-details">ADministrator</div>
+  <main>
+    <div class ="quiz-summary-wrapper">
+      <div class = "quiz-container">
+        <div class="quizz-main">
+          <img class="quizz-img" src="../slider/img/Quiz2.jpg">
+          <div class="quiz-description">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, dolorum odit velit at magni molestias ab et nihil eaque voluptas, numquam possimus. Temporibus expedita minima repellat esse commodi soluta dignissimos?
+          </div>
+        </div>
+        <div class="overall-quiz-details">
+          <p>Your Score 15/20</p>
+        </div>
+        <div class="questions">
+          <div class="question">
+            <h3>Question 1</h3>
+            <p>Question content</p>
+            <div class="answers">
+              <span>
+                <span>Correct Answers:</span>
+                <div class = "correct-answers">
+                  <p>asdasda</p>
+                </div>
+              </span>
+              <span>
+                <span>Your Answers:</span>
+                <div class = "user-answers">
+                  <p>asdasda</p>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="question">
+            <h3>Question 2</h3>
+            <p>Question content</p>
+            <div class="answers">
+              <span>
+                <span>Correct Answers:</span>
+                <div class = "correct-answers">
+                  <p>aandandas</p>
+                  <p>aandandas</p>
+                  <p>aandandas</p>
+                  <p>asdasda</p>
+                </div>
+              </span>
+              <span>
+                <span>Your Answers:</span>
+                <div class = "user-answers">
+                  <p>asdasda</p>
+                  <p>asadasdasda</p><p>asadasdasda</p><p>asadasdasda</p>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="question">
+            <h3>Question 3</h3>
+            <p>Question content</p>
+            <div class="answers">
+              <span>
+                <span>Correct Answers:</span>
+                <div class = "correct-answers">
+                  <p>asdasda</p>
+                  <p>asadasdasda</p>
+                </div>
+              </span>
+              <span>
+                <span>Your Answers:</span>
+                <div class = "user-answers">
+                  <p>asdasda</p>
+                  <p>asadasdasda</p>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="back-to-prof-page" id="back-to-prof-page-id" onclick="gotoProfPage()">
+            <span>Back To My Profile</span>
+        </button>
+      </div>
     </div>
-    <div class="profile-details-info">
-      <div class="creation-date">Profile created on Sunday,Jule 19 , 22:10</div>
-      <div class="user-ranking">Rank:Infinity</div>
-      <div class = "quizzes-played">Quizzes Played : 0</div>
-      <div class =  "challenges-played">Challenges Played: 0 </div>
-      <div class="challenges-won">Challenges Won: 0</div>
-      <div class="quizzes-made">Quizzes Made: 0 </div>
-    </div>
-  </div>
-
-  <div class = "top-quizzes-banner">
-    <div class="players-top-quizzes">
-      Your Top Played Quizzes 
-    </div>
-  </div>
-	<div class="slider-quiz-homepage"></div>
+  </main>
 
 
 	<footer	class= "footer-section">

@@ -26,7 +26,13 @@
 function popupfriendList(){
   document.getElementById("friends-list-popup-id").classList.toggle("active");
 }
+
 function removeFriend(d){
   $(d).parent().parent().remove();
-  
+}
+function redirectToQuiz(){
+  window.location.href="quizzSummaryPage.jsp";
+}
+function redirectToProfPage(){
+  window.location.href="profilePageLogged.jsp";
 }
