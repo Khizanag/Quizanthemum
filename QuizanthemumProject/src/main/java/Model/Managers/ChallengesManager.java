@@ -9,22 +9,18 @@ import java.sql.*;
 
 public class ChallengesManager implements ChallengesTableConfig {
 
-    // saved connection to use in the future for working with database
+    private final ManagersManager manager;
     private final Connection connection;
     private Statement statement;
-    private ServletContext context;
 
-    public ChallengesManager(){
+    public ChallengesManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             this.statement = connection.createStatement();
         } catch (SQLException throwables) {
             System.out.println("Error during creating statement in constructor of 'ChallengeManager'");
         }
-    }
-
-    public void setContext(ServletContext context){
-        this.context = context;
     }
 
     public void insertChallenge(){
@@ -48,7 +44,8 @@ public class ChallengesManager implements ChallengesTableConfig {
                 + " WHERE " + CHALLENGES_TABLE_COLUMN_1_ID + " = " + ID + ";";
         try {
             ResultSet resultSet = statement.executeQuery(query);
-            // resultSet.next(); // TODO არვიცი საჭიროა თუ არა
+            if(!resultSet.next())
+                throw new SQLException();
             int challengerUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID);
             int challengedUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID);
             int challengerQuizEventID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_4_CHALLENGER_QUIZ_EVENT_ID);
@@ -62,7 +59,4 @@ public class ChallengesManager implements ChallengesTableConfig {
         return null;
     }
 
-    public ServletContext getContext(){
-        return context;
-    }
 }

@@ -21,10 +21,10 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     private final Connection connection;
     private Statement statement;
-    private ServletContext context;
+    private ManagersManager manager;
 
-    public UsersManager(ServletContext context){
-        this.context = context;
+    public UsersManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();

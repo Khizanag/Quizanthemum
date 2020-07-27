@@ -13,21 +13,18 @@ import java.util.Date;
 
 public class QuestionManager implements Config, QuestionTableConfig, QuestionType {
 
+    private ManagersManager manager;
     private Connection connection;
     private Statement connectionStatement;
-    private ServletContext context;
 
-    public QuestionManager(){
+    public QuestionManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             connectionStatement = connection.createStatement();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-    }
-
-    public void setContext(ServletContext context){
-        this.context = context;
     }
 
     public int insertQuestion(Question question){

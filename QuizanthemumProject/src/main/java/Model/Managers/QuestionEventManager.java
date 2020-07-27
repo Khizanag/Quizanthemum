@@ -15,11 +15,12 @@ import static Configs.Config.QUESTION_MANAGER_STR;
 
 public class QuestionEventManager implements QuestionEventTableConfig {
 
-    private ServletContext context;
+    private ManagersManager manager;
     private Connection connection;
     private Statement statement;
 
-    public QuestionEventManager(){
+    public QuestionEventManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
@@ -27,6 +28,8 @@ public class QuestionEventManager implements QuestionEventTableConfig {
             throwable.printStackTrace();
         }
     }
+
+    public ManagersManager getManager(){ return this.manager; }
 
     public void setQuestionEvent(QuestionEvent questionEvent) {
         String query = getQuestionEventQueryText(questionEvent);
@@ -79,7 +82,7 @@ public class QuestionEventManager implements QuestionEventTableConfig {
             double userScore = set.getDouble(QUESTION_EVENT_TABLE_COLUMN_6_USER_SCORE);
             int questionId = set.getInt(QUESTION_EVENT_TABLE_COLUMN_7_QUESTION_ID);
 
-            QuestionManager questionManager = (QuestionManager) context.getAttribute(QUESTION_MANAGER_STR);
+            QuestionManager questionManager = (QuestionManager) manager.getManager(QUESTION_MANAGER_STR);
             Question question = questionManager.getQuestion(questionId);
             List<String> userAnswers = new ArrayList<>();
             for (int i = 0; i < question.getAnswersCount(); i++) {
@@ -93,7 +96,4 @@ public class QuestionEventManager implements QuestionEventTableConfig {
         return null; // never reached
     }
 
-    public void setContext(ServletContext context){
-        this.context = context;
-    }
 }

@@ -19,9 +19,10 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
     private final Connection connection;
     private Statement statement;
-    private ServletContext context;
+    private ManagersManager manager;
 
-    public QuizManager(){
+    public QuizManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
@@ -29,6 +30,8 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             throwables.printStackTrace();
         }
     }
+
+    public ManagersManager getManager(){ return this.manager; }
 
     public Quiz getQuiz(int id){
         String query = "SELECT * " +
@@ -42,7 +45,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             boolean mustShuffleQuestions = set.getBoolean(QUIZ_TABLE_COLUMN_5_MUST_SHUFFLE_QUESTIONS);
             String comment = set.getString(QUIZ_TABLE_COLUMN_6_COMMENT);
             int authorID = set.getInt(QUIZ_TABLE_COLUMN_7_AUTHOR_ID);
-            UsersManager userManager = (UsersManager) context.getAttribute(USERS_MANAGER_STR);
+            UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
             User author = (User)userManager.getUser(authorID);
             Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE); // TODO check with sql or util
             List<Question> questions = getQuizQuestions(id);
@@ -64,7 +67,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
                 int questionID = set.getInt(QUESTION_TABLE_COLUMN_1_ID);
-                QuestionManager questionManager = (QuestionManager) context.getAttribute(QUESTION_MANAGER_STR);
+                QuestionManager questionManager = (QuestionManager)manager.getManager(QUESTION_MANAGER_STR);
                 Question question = questionManager.getQuestion(questionID);
                 questions.add(question);
             }
@@ -94,6 +97,4 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         }
         return DEFAULT_ID;
     }
-    
-    public void setContext(ServletContext context){ this.context = context; }
 }
