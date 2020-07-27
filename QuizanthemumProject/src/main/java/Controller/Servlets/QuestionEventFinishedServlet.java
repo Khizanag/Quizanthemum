@@ -4,6 +4,7 @@ import Controller.Classes.OtherClasses.User;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
+import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.QuestionEventManager;
 import Model.Managers.QuestionManager;
 import Model.Managers.QuizManager;
@@ -31,7 +32,8 @@ public class QuestionEventFinishedServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuestionEventManager questionEventManager = (QuestionEventManager) request.getServletContext().getAttribute(QUESTION_EVENT_MANAGER_STR);
 
-        int quizEventId = Integer.parseInt(request.getParameter("question_event_quiz_event_id"));
+        QuizEvent quizEvent = (QuizEvent) request.getAttribute("question_event_quiz");
+        int quizEventId = quizEvent.getId();
         Question question = (Question) request.getAttribute("question_event_question");
         boolean isAlreadyGraded = Boolean.parseBoolean(request.getParameter("question_event_is_already_graded"));
         Date startDate = (Date) request.getAttribute("question_event_start_date");
@@ -47,8 +49,12 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         newQuestionEvent.finishQuestionEvent();
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
-        response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.html"); // TODO valid address
+        if (quizEvent.hasNext()) {
+            response.setHeader("Location", "http://localhost:8080/web/pages/next-question.html"); // TODO valid address. next question
+        } else {
+            response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
+        }
 
-//        questionEventManager.setQuestionEvent(newQuestionEvent);
+//        questionEventManager.setQuestionEvent(newQuestionEvent); // TODO or add all question events at the end (quiz finished)
     }
 }
