@@ -50,7 +50,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             // 1900 is base year, month should be between [0-11]
             Date birthDate = new Date(year-1900, month-1, day);
             Date registrationDate = new Date();
-            User newUser = new User(DEFAULT_ID, username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, null);
+            User newUser = new User(username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
             int ID = userManager.insertUser(newUser);
             Cookie userIDCookie = new Cookie("logedInUserID", ""+ID);
             response.addCookie(userIDCookie);

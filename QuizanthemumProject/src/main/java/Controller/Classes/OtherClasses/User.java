@@ -4,34 +4,55 @@ import Controller.Classes.Quiz.QuizEvent;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static Configs.Config.DEFAULT_ID;
+
 public class User {
 
-    private final int id;
-    private final String username;
-    private final String passwordHash;
-    private final String firstName;
-    private final String lastName;
-    private final int role;
-    private final String city;
-    private final String country;
-    private final String phoneNumber;
-    private final String email;
-    private final Date birthDate;
-    private final Date registrationDate;
-    private final List<Integer> friendIDs;
+    private int id;
+    private String username;
+    private String passwordHash;
+    private String firstName;
+    private String lastName;
+    private int role;
+    private String city;
+    private String country;
+    private String phoneNumber;
+    private String email;
+    private Date birthDate;
+    private Date registrationDate;
+    private List<Integer> friendIDs;
     private List<QuizEvent> quizEvents;
     private List<Challenge> challenges;
     private List<Achievement> achievements;
 
-    public User(int id, String username, String password, String firstName, String lastName,
+    // for creating object from DB
+    public User(int id, String username, String passwordHash, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
                 Date birthDate, Date registrationDate, List<Integer> friendIDs) {
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, friendIDs);
         this.id = id;
-        this.username = username;
+        this.passwordHash = passwordHash;
+        this.friendIDs = friendIDs;
+    }
+
+    // for first time creating
+    public User(String username, String password, String firstName, String lastName,
+                int role, String  city, String county, String phoneNumber, String email,
+                Date birthDate, Date registrationDate){
+        this.id = DEFAULT_ID;
         this.passwordHash = hashFunction(password);
+        this.friendIDs = new ArrayList<>();
+    }
+
+    // helper constructor used by other ones
+    private User(String username, String firstName, String lastName,
+                 int role, String  city, String county, String phoneNumber, String email,
+                 Date birthDate, Date registrationDate, List<Integer> friendIDs){
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
@@ -41,7 +62,6 @@ public class User {
         this.email = email;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
-        this.friendIDs = friendIDs;
     }
 
     public int getId(){ return id; }
