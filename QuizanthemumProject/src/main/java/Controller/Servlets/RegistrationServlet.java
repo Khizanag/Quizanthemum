@@ -59,7 +59,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", newUser.getPasswordHash()));
 
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.jsp");
+            response.setHeader("Location", "http://localhost:8080/web/pages/profilePageLogged.jsp");
         } else {
             request.getServletContext().setAttribute("errorMessage", errorMessage);
             response.setStatus(HttpServletResponse.SC_FOUND);//302
