@@ -2,9 +2,7 @@ package Model;
 
 import Configs.Config;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * this is a singleton class.
@@ -37,6 +35,21 @@ public class DatabaseConnector implements Config {
         } catch (SQLException throwables) {
             System.out.println("Error during closing Database connection in 'DatabaseConnector'");
         }
+    }
+
+    public static int getLastInsertID(){
+        DatabaseConnector.getInstance(); // to be sure that connection is not null
+        String query = "SELECT LAST_INSERT_ID() AS LAST_INSERT_ID;";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            if(rs.next()){
+                return rs.getInt("LAST_INSERT_ID");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return DEFAULT_ID;
     }
 
 }
