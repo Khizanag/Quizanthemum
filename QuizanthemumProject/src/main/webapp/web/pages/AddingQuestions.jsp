@@ -71,19 +71,6 @@
     </form>
 </div>
     <jsp:include page="Footer.jsp"></jsp:include>
-<%--<footer	class= "footer-section">--%>
-<%--    <div class= "container">--%>
-<%--        <div class= "footer-items">--%>
-<%--            <div class= "footer left">--%>
-<%--                All Right Reserved--%>
-<%--            </div>--%>
-<%--            <div class= "footer rigth">--%>
-<%--                Quizanthemum By Our Team--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</footer>--%>
-
 </body>
 
 <script language="JavaScript" type="text/javascript">
@@ -124,7 +111,6 @@
             window.location.href = "web/pages/addingQuestions.jsp";
         }
     }
-
     function addNextWrongAns() {
         let parent = document.getElementById('added-wrongs');
         let e = document.createElement('div');

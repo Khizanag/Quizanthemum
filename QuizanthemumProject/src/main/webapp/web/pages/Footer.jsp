@@ -7,12 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="icon" type="image/png" href="../images/common/icon.png"/>
-<link rel="stylesheet" href="../styles/common.css">
-<link rel="stylesheet" href="../styles/logIn.css">
-<link rel="stylesheet" href="../styles/breakpoints.css">
-
 <footer	class= "footer-section">
     <div class= "container">
         <div class= "footer-items">
