@@ -23,6 +23,8 @@ public class ChallengesManager implements ChallengesTableConfig {
         }
     }
 
+    public ManagersManager getManager(){ return this.manager; }
+
     public void insertChallenge(){
         String query = "INSERT INTO " + CHALLENGES_TABLE_NAME
                 + " VALUES (" + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID

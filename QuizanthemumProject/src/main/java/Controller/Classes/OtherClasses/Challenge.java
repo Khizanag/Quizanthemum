@@ -70,7 +70,7 @@ public class Challenge implements Config {
 
     public User getChallengerUser(){
         if(challengerUser == null) {
-            UsersManager userManager = (UsersManager) manager.getContext().getAttribute(USERS_MANAGER_STR);
+            UsersManager userManager = (UsersManager) manager.getManager().getManager(USERS_MANAGER_STR);
             challengerUser = userManager.getUser(challengerUserID);
         }
         return challengerUser;
@@ -78,7 +78,7 @@ public class Challenge implements Config {
 
     public User getChallengedUser(){
         if(challengedUser == null) {
-            UsersManager userManager = (UsersManager) manager.getContext().getAttribute(USERS_MANAGER_STR);
+            UsersManager userManager = (UsersManager) manager.getManager().getManager(USERS_MANAGER_STR);
             challengedUser = userManager.getUser(challengedUserID);
         }
         return challengedUser;
@@ -98,7 +98,7 @@ public class Challenge implements Config {
 
     public QuizEvent getChallengerQuizEvent() {
         if(challengerQuizEvent == null) {
-            QuizEventManager quizEventManager = (QuizEventManager) manager.getContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
+            QuizEventManager quizEventManager = (QuizEventManager) manager.getManager().getManager(QUIZ_EVENT_MANAGER_STR);
             challengerQuizEvent = quizEventManager.getQuizEvent(challengerUserID);
         }
         return challengerQuizEvent;
@@ -106,7 +106,7 @@ public class Challenge implements Config {
 
     public QuizEvent getChallengedQuizEvent() {
         if(challengerQuizEvent == null) {
-            QuizEventManager quizEventManager = (QuizEventManager) manager.getContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
+            QuizEventManager quizEventManager = (QuizEventManager) manager.getManager().getManager(QUIZ_EVENT_MANAGER_STR);
             challengedQuizEvent = quizEventManager.getQuizEvent(challengedUserID);
         }
         return challengedQuizEvent;

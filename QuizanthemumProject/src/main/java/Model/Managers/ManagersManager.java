@@ -4,6 +4,7 @@ import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Map;
 
 import static Configs.Config.*;
@@ -15,8 +16,9 @@ public class ManagersManager {
 
     public ManagersManager(ServletContext context){
         this.context = context;
+        this.managers = new HashMap<>();
 
-        // Connection should be set at first, other managers are using it
+        // Connection should be set at first, other managers are using it // not anymore
         Connection connection = DatabaseConnector.getInstance();
         context.setAttribute(CONNECTION_STR, connection);
 

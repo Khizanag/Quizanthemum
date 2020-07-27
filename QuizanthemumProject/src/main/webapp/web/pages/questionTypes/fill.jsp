@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><hr>
-<form action="../../../QuestionCreated" method="get">
+<form action="../../QuestionCreated" method="get">
     <div class="input-items" id="input-items">
         <label><b>შეყვანილი ტექსტის მიმდინარე მდგომარეობა</b></label>
         <textarea class="entered-text" id="fill-question"disabled></textarea>
