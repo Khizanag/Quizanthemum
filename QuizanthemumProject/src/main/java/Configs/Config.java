@@ -2,7 +2,6 @@ package Configs;
 
 public interface Config {
 
-
     /* context key strings for manager attributes*/
     String ACHIEVEMENT_EVENTS_MANAGER_STR = "achievement_events_manager";
     String ACHIEVEMENTS_MANAGER_STR = "achievements_manager";
@@ -19,12 +18,9 @@ public interface Config {
     String CURRENT_QUIZES_STR = "currently started quizes by user";
 
     /* Database info */
-    String USERNAME = "dima";
-    String PASSWORD = "DimaDima_123";
+    String USERNAME = "root";
+    String PASSWORD = "Pass_word1";
     String URL = "jdbc:mysql://localhost:3306/";
-    String DATABASE_NAME = "demodb";
+    String DATABASE_NAME = "quizantemum";
 
-
-    /** Used when creating Object, before inserting into database */
-    int DEFAULT_ID = -1;
 }
