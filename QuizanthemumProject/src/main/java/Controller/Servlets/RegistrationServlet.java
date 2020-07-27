@@ -33,6 +33,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
         if(!userManager.isUsernameFree(username)){
             errorMessage = "მომხმარებლის ეს სახელი (username) უკვე დაკავებულია სხვა მომხმარებლის მიერ. გთხოვთ, აარჩიოთ სხვა username.";
         }
+        System.out.println("doget in registration, before adding if");
 
         if(errorMessage.isEmpty()){ // there were no errors during registration
             String password = request.getParameter("registration_password");
@@ -58,7 +59,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", newUser.getPasswordHash()));
 
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.html");
+            response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.jsp");
         } else {
             request.getServletContext().setAttribute("errorMessage", errorMessage);
             response.setStatus(HttpServletResponse.SC_FOUND);//302

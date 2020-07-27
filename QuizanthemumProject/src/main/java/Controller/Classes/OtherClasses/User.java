@@ -33,7 +33,7 @@ public class User {
     public User(int id, String username, String passwordHash, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
                 Date birthDate, Date registrationDate, List<Integer> friendIDs) {
-        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, friendIDs);
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate);
         this.id = id;
         this.passwordHash = passwordHash;
         this.friendIDs = friendIDs;
@@ -43,6 +43,7 @@ public class User {
     public User(String username, String password, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
                 Date birthDate, Date registrationDate){
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate);
         this.id = DEFAULT_ID;
         this.passwordHash = hashFunction(password);
         this.friendIDs = new ArrayList<>();
@@ -51,7 +52,7 @@ public class User {
     // helper constructor used by other ones
     private User(String username, String firstName, String lastName,
                  int role, String  city, String county, String phoneNumber, String email,
-                 Date birthDate, Date registrationDate, List<Integer> friendIDs){
+                 Date birthDate, Date registrationDate){
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

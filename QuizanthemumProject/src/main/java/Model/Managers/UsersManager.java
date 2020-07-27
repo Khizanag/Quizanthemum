@@ -153,9 +153,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     public int insertUser(User user) {
         String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
+            System.out.println("tring to insert user");
             PreparedStatement pstmt = connection.prepareStatement(query);
-//            System.out.println("pstmt done");
-//            pstmt.setString(1, "null");
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPasswordHash());
             pstmt.setString(3, user.getFirstName());
