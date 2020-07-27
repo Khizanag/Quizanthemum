@@ -20,6 +20,14 @@ public class LogInServlet extends HttpServlet implements Config {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("test") == null){
+            System.out.println("att TEST is null");
+            request.getSession().setAttribute("test", "zamtaria magari");
+        } else {
+            System.out.println(request.getSession().getAttribute("test"));
+        }
+
+
         ServletContext context = request.getServletContext();
         String username = request.getParameter("log_in_username");
         String password = request.getParameter("log_in_password");
@@ -27,7 +35,6 @@ public class LogInServlet extends HttpServlet implements Config {
         User targetUser = usersManager.getUser(username);
 
         if(targetUser != null && targetUser.isCorrectPassword(password)){
-
             request.getServletContext().setAttribute("logedInUser", targetUser);
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", ""+targetUser.getID()));
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", targetUser.getPasswordHash()));

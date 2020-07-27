@@ -81,8 +81,8 @@ public class QuizEventManager implements QuestionEventTableConfig {
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, quizEvent.getId());
-            pstmt.setInt(2, quizEvent.getQuiz().getId());
-            pstmt.setInt(3, quizEvent.getUser().getId());
+            pstmt.setInt(2, quizEvent.getQuiz().getID());
+            pstmt.setInt(3, quizEvent.getUser().getID());
             pstmt.setDate(4, new java.sql.Date(quizEvent.getStartDate().getTime()));
             pstmt.setDate(5, new java.sql.Date(quizEvent.getFinishDate().getTime()));
             pstmt.setDouble(6, quizEvent.getUserScore());

@@ -74,28 +74,26 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         return questions;
     }
 
-    public void insertQuiz(Quiz quiz){
-        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+    public int insertQuiz(Quiz quiz){
+        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setInt(1, quiz.getId());
-            pstmt.setString(2, quiz.getName());
-            pstmt.setString(3, quiz.getDescription());
-            pstmt.setString(4, quiz.getIconUrl());
-            pstmt.setBoolean(5, quiz.mustShuffleQuestions());
-            pstmt.setString(6, quiz.getComment());
-            pstmt.setInt(7, quiz.getAuthor().getId());
-            pstmt.setDate(8, new java.sql.Date(quiz.getCreationDate().getTime()));
-            pstmt.setDouble(9, quiz.getMaxScore());
+            pstmt.setString(1, quiz.getName());
+            pstmt.setString(2, quiz.getDescription());
+            pstmt.setString(3, quiz.getIconUrl());
+            pstmt.setBoolean(4, quiz.mustShuffleQuestions());
+            pstmt.setString(5, quiz.getComment());
+            pstmt.setInt(6, quiz.getAuthor().getID());
+            pstmt.setDate(7, new java.sql.Date(quiz.getCreationDate().getTime()));
+            pstmt.setDouble(8, quiz.getMaxScore());
             pstmt.executeUpdate();
+            int ID = DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
             System.out.println("Insertion Error. Quiz Manager Class");
+            e.printStackTrace();
         }
+        return DEFAULT_ID;
     }
-
-    public int getNewQuizID(){
-        return -1; // TODO sequence
-    }
-
+    
     public void setContext(ServletContext context){ this.context = context; }
 }

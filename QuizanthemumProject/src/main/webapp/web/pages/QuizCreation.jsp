@@ -24,90 +24,91 @@
         }
     %>
 </head>
+
 <body>
-<header class= "header-section">
-    <div class="container header">
-        <div class="header-left">
-            <img class="logo"src="../images/common/icon.png">
-            <h1 class="logo-text">Quizanthemum</h1>
-        </div>
-
-        <ul class="header-right">
-            <div class= "icon-cirkle">
-                <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
+    <header class= "header-section">
+        <div class="container header">
+            <div class="header-left">
+                <img class="logo"src="../images/common/icon.png">
+                <h1 class="logo-text">Quizanthemum</h1>
             </div>
-            <div class= "icon-cirkle">
-                <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
-            </div>
-            <div class= "icon-cirkle">
-                <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
-            </div>
-        </ul>
 
-    </div>
-</header>
-
-<div class="nav-section">
-    <div class="container">
-        <nav class="nav">
-            <ul class="nav-items">
-                <a class="nav-item" target="_self" href="/">HOME</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-            </ul>
-        </nav>
-    </div>
-</div>
-
-<form id="creation-section" class="creation-section">
-    <div class="container bla">
-        <h2>შექმენი შენი ქვიზი</h2>
-        <p>ქვიზის შესაქმნელად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
-        <hr>
-
-        <div class="input-items" id="input-items">
-            <label><b>ქვიზის სახელი</b></label>
-            <input type="text" placeholder="შეიყვანეთ ქვიზის დასახელება"
-                   name="quiz_name" id="quiz_name" required>
-
-            <label for="description"><b>ქვიზის აღწერა</b></label>
-            <input type="text" placeholder="გთხოვთ შეუყვანოთ თქვენი ქვიზის ზოგადი აღწერა"
-                   name="quiz_description" id="quiz_description" required>
-
-            <label><b>ატვირთეთ ქვიზის ლოგო/აიქონი</b></label>
-            <div class="upload-image-section">
-                <input type="file"  accept="image/*" name="image" id="file"
-                       onchange="loadFile(event)"
-                       style="display: none;"
-                >
-                <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
-                <div class="upload-image-container">
-                    <label class="button upload" type="button"
-                           onclick="uploadImage(event)" id="url-button">
-                        შეიყვანეთ URL ასატვირთად
-                    </label>
-                    <input type="text" placeholder="ფოტოს URL" name="quiz_icon_url" id="quiz_icon_url" required>
+            <ul class="header-right">
+                <div class= "icon-cirkle">
+                    <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
                 </div>
-                <img id="output" width="100" />
-            </div>
-
-            <label for="description"><b>კომენტარი ოპტიმიზაციისთვის</b></label>
-            <input type="text" placeholder="როგორ გსურთ მონაცემების კონსტრუირება"
-                   name="description" id="description">
-
-            <label><b>კითხვების თანმიმდევრობის აუტომატური გენერირება</b></label>
-            <input class="checkbox" type="checkbox"
-                   name="quiz_comment" id="quiz_comment" checked>
+                <div class= "icon-cirkle">
+                    <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
+                </div>
+                <div class= "icon-cirkle">
+                    <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
+                </div>
+            </ul>
         </div>
-        <hr>
+    </header>
 
-        <button class="button" type="button" onclick="checkAndRedirect()">გაგრძელება</button>
+    <div class="nav-section">
+        <div class="container">
+            <nav class="nav">
+                <ul class="nav-items">
+                    <a class="nav-item" target="_self" href="/">HOME</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
+                </ul>
+            </nav>
+        </div>
     </div>
-</form>
+<%--    <form class="registration-section"                             action="../../Registration" method="get">--%>
+    <form id="creation-section" class="creation-section" action="../../QuizCreationStarted" method="get">
+        <div class="container bla">
+            <h2>შექმენი შენი ქვიზი</h2>
+            <p>ქვიზის შესაქმნელად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+            <hr>
+
+            <div class="input-items" id="input-items">
+                <label><b>ქვიზის სახელი</b></label>
+                <input type="text" placeholder="შეიყვანეთ ქვიზის დასახელება"
+                       name="quiz_name" id="quiz_name" required>
+
+                <label for="description"><b>ქვიზის აღწერა</b></label>
+                <input type="text" placeholder="გთხოვთ შეუყვანოთ თქვენი ქვიზის ზოგადი აღწერა"
+                       name="quiz_description" id="quiz_description" required>
+
+                <label><b>ატვირთეთ ქვიზის ლოგო/აიქონი</b></label>
+                <div class="upload-image-section">
+                    <input type="file"  accept="image/*" name="image" id="file"
+                           onchange="loadFile(event)"
+                           style="display: none;"
+                    >
+                    <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
+                    <div class="upload-image-container">
+                        <label class="button upload" type="button"
+                               onclick="uploadImage(event)" id="url-button">
+                            შეიყვანეთ URL ასატვირთად
+                        </label>
+                        <input type="text" placeholder="ფოტოს URL" name="quiz_icon_url" id="quiz_icon_url" required>
+                    </div>
+                    <img id="output" width="100" />
+                </div>
+
+                <label for="description"><b>კომენტარი ოპტიმიზაციისთვის</b></label>
+                <input type="text" placeholder="როგორ გსურთ მონაცემების კონსტრუირება"
+                       name="description" id="description">
+
+                <label><b>კითხვების თანმიმდევრობის აუტომატური გენერირება</b></label>
+                <input class="checkbox" type="checkbox"
+                       name="quiz_comment" id="quiz_comment" checked>
+            </div>
+            <hr>
+
+            <button class="button" type="submit">გაგრძელება</button>
+        </div>
+    </form>
 
     <jsp:include page="Footer.jsp"></jsp:include>
 </body>
+
 <script>
     function uploadImage(event) {
         if(document.getElementById('quiz_icon_url').value != "") {
@@ -123,12 +124,12 @@
         document.getElementById('quiz_icon_url').value = image.src;
     };
 
-    function checkAndRedirect() {
-        let name = document.getElementById('quiz_name').value !== '';
-        let description = document.getElementById('quiz_description').value !== '';
-        let url = document.getElementById('quiz_icon_url').value !== '';
-        if((name && description && url)) {
-            window.location.href = "AddingQuestions.jsp";
-        }
-    }
+    // function checkAndRedirect() {
+    //     let name = document.getElementById('quiz_name').value !== '';
+    //     let description = document.getElementById('quiz_description').value !== '';
+    //     let url = document.getElementById('quiz_icon_url').value !== '';
+    //     if((name && description && url)) {
+    //         window.location.href = "AddingQuestions.jsp";
+    //     }
+    // }
 </script>

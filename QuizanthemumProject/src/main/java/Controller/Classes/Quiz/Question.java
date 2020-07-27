@@ -65,6 +65,8 @@ public final class Question {
 
     /* getter methods */
 
+    public int getID() { return id; }
+
     public int getType() { return type; }
 
     public double getMaxScore() { return maxScore; }
@@ -85,7 +87,10 @@ public final class Question {
 
     public boolean isPictureAnswer() { return isPictureAnswer; }
 
-    public int getId() { return id; }
+    /* SETTERS */
+    public void setID(int ID){
+        this.id = ID;
+    }
 
     /* statement getters */
 

@@ -24,7 +24,7 @@ create table users(
 # ************************************  QUIZZES  ***********************************
 
 create table quizzes(
-                        ID smallint primary key,
+                        ID smallint primary key AUTO_INCREMENT,
                         NAME varchar(64),
                         DESCRIPTION text,
                         ICON_URL varchar(256),
@@ -42,7 +42,7 @@ create table quizzes(
 # *****************************************  QUIZ_EVENTS  ********************************************
 
 create table quiz_events(
-                            id smallint primary key,
+                            id smallint primary key AUTO_INCREMENT,
                             quiz_id smallint not null,
                             user_id smallint not null,
                             start_date date,
@@ -59,7 +59,7 @@ create table quiz_events(
 # *****************************************  QUESTIONS  ******************************************
 
 create table questions(
-                          id smallint primary key,
+                          id smallint primary key auto_increment,
                           type smallint not null,
                           is_auto_graded boolean,
                           max_score smallint,
@@ -115,7 +115,7 @@ create table questions(
 # ********************************************  QUESTION_EVENTS  ****************************************
 
 create table question_events(
-                                id smallint primary key,
+                                id smallint primary key auto_increment,
                                 quiz_event_id smallint not null,
                                 constraint foreign key (quiz_event_id)
                                     references quiz_events(id) on update cascade on delete restrict,
@@ -149,7 +149,7 @@ create table question_events(
 # ******************************************  FRIENDSHIPS  ******************************************
 
 create table friendships(
-                            id smallint primary key,
+                            id smallint primary key auto_increment,
                             first_friend_id smallint,
                             constraint foreign key (first_friend_id)
                                 references users(id) on update cascade on delete restrict,
@@ -164,7 +164,7 @@ create table friendships(
 # *******************************************  CHALLENGES  ******************************************
 
 create table challenges(
-                           id smallint primary key,
+                           id smallint primary key auto_increment,
                            challenger_user_id smallint not null,
                            constraint foreign key (challenger_user_id)
                                references users(id) on update cascade on delete restrict,
@@ -184,7 +184,7 @@ create table challenges(
 # ***********************************************  ACHIEVEMENTS  ***********************************************
 
 create table achievements(
-                             id smallint primary key,
+                             id smallint primary key auto_increment,
                              title varchar(64),
                              description varchar(64),
                              icon_url varchar(256)
@@ -195,7 +195,7 @@ create table achievements(
 # *********************************************  ACHIEVEMENT_EVENTS  *********************************************
 
 create table achievement_events(
-                                   id smallint primary key,
+                                   id smallint primary key auto_increment,
                                    achievement_id smallint not null,
                                    constraint foreign key (achievement_id)
                                        references achievements(id) on update cascade on delete restrict,

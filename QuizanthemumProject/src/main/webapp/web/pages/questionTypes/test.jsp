@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <hr>
 <div class="input-items" id="input-items">
     <label for="question"><b>შეკითხვა</b></label>
