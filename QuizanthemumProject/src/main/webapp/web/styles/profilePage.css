@@ -352,8 +352,9 @@
   justify-content: space-around;
   cursor: pointer;
   align-items: center;
+  align-content: center;
  transition: transform .2s;
-
+ border: 1px solid #ff751a;
 }
 .quiz-small-image{
   width: 100px;
@@ -372,9 +373,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-content: center;
   overflow: hidden;
   margin-left: 15px;
   font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.quiz-small-description-block h3{
+  margin-top: 5%;
 }
 .quiz-score{
   width: 100px;
