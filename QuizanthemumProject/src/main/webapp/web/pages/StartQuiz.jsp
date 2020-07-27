@@ -63,7 +63,7 @@
 
 <form class="start-quiz-section">
     <div class="container">
-        <div class="info-holder">
+        <div class="start-quiz-holder">
             <img src="../images/homepage/c.jpg" class="quiz-main-img">
             <div class="text-holder">
                 <h2>ქვიზის სახელი</h2>

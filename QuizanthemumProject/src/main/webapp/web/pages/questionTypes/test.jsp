@@ -20,7 +20,8 @@
                    onclick="uploadImage(event)" id="url-button">
                 შეიყვანეთ URL ასატვირთად
             </label>
-            <input type="text" placeholder="ფოტოს URL" name="photo-url" id="photo-url" required>
+            <input type="text" placeholder="ფოტოს URL"
+                   name="question_image_url" id="question_image_url" required>
         </div>
         <img id="output" width="100" />
     </div>
@@ -47,7 +48,6 @@
 <button class="button addQuestion"
         type="button"
         onclick="checkAndRedirect()">
-    შემდეგი შეკითხვის დამატება
+    შემდეგი შეკითხვის
 </button>
-</div>
 <hr>

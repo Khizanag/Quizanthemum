@@ -78,7 +78,11 @@ input[type=text]:focus, input[type=password]:focus {
 .upload-image-container {
     width: 100%;
 }
-#photo-url{
+#quiz_icon_url {
+    width: 30%;
+    margin-bottom: 0;
+}
+#question_image_url{
     width: 30%;
     margin-bottom: 0;
 }
@@ -101,6 +105,9 @@ input[type=text]:focus, input[type=password]:focus {
 .finish {
     width: 100%;
 }
+
+
+/* test question part*/
 #add-worng-ans-btn {
     font-size: medium;
     padding: 13px;
@@ -121,6 +128,9 @@ input[type=text]:focus, input[type=password]:focus {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+
+/* matching question part*/
 .matching-elems-secton{
     width: 100%;
     display: flex;
@@ -168,4 +178,66 @@ input[type=text]:focus, input[type=password]:focus {
 }
 .arr-left {
     transform: rotate(45deg);
+}
+
+
+/* fill question part*/
+.entered-text {
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 16px;
+    color: black;
+}
+
+.fill-items-cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.main-text-cont {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.correct-ans-cont {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.toFill-text {
+    width: 100%;
+    height: 80px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    resize: none;
+}
+
+.fillWith-text{
+    width: 100%;
+    height: 80px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    resize: none;
 }

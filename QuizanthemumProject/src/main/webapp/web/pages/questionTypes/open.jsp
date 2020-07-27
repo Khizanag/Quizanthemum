@@ -7,7 +7,7 @@
     <input type="text" placeholder="გთხოვთ შეუყვანოთ მითითება მომხმარებლისთვის"
            name="description" id="description" required>
 
-    <label for="image"><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
+    <label><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
     <div class="upload-image-section">
         <input type="file"  accept="image/*" name="image" id="file"
                onchange="loadFile(event)"
@@ -19,14 +19,15 @@
                    onclick="uploadImage(event)" id="url-button">
                 შეიყვანეთ URL ასატვირთად
             </label>
-            <input type="text" placeholder="ფოტოს URL" name="photo-url" id="photo-url" required>
+            <input type="text" placeholder="ფოტოს URL"
+                   name="question_image_url" id="question_image_url" required>
         </div>
         <img id="output" width="100" />
     </div>
     <button class="button addQuestion"
             type="button"
             onclick="checkAndRedirect()">
-        შემდეგი შეკითხვის დამატება დამატება
+        შემდეგი შეკითხვის დამატება
     </button>
 </div>
 <hr>

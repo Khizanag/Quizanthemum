@@ -71,7 +71,8 @@
             <div class="input-item" style="width: 30%">
             <label><b>დაბადების თარიღი</b></label>
             <input type="date" name="registration_birth_date"
-                   value="2020-08-01" id="registration_birth_date">
+                   value="2000-01-01" id="registration_birth_date"
+                    min= "1980-01-01" max="2020-01-01">
             </div>
             <label><b>მომხმარებლის სახელი (USERNAME)</b></label>
             <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი"
