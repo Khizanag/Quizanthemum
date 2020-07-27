@@ -57,9 +57,9 @@
         %>
 
         <div class="input-items">
-            <label><b>E-mail</b></label>
-            <input type="email" placeholder="შეიყვანეთ email"
-                   name="log_in_email" id="log_in_email" required>
+            <label><b>Username</b></label>
+            <input type="text" placeholder="შეიყვანეთ username"
+                   name="log_in_username" id="log_in_username" required>
 
             <label><b>პაროლი</b></label>
             <input type="password" placeholder="შეიყვანეთ პაროლი"

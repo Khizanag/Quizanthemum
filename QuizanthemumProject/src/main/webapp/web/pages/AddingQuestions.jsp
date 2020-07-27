@@ -55,7 +55,7 @@
             <hr>
 
             <div class="input-items" id="input-items">
-                <label for="selectior"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
+                <label for="selector"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
                 <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
                     <option value="0">-</option>
                     <option value="1">ტესტური</option>
