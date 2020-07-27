@@ -127,9 +127,6 @@
         let password = document.getElementById("registration_password").value ;
         let rep_pwd = document.getElementById("psw-repeat").value;
 
-        console.log("pas: ", password)
-        console.log("rep_pwd: ", rep_pwd)
-
         if(password != rep_pwd) {
             alert( "\n" + "პაროლი და განმეორებით შეყვანილი პაროლი არ ემთხვევა" + "\n" +
                    "\n" + "გთხოვთ გადაამოწმოთ შეყვანილი მონაცემები");

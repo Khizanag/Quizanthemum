@@ -52,8 +52,8 @@
             }
 
         }
-	</script> 
-
+	</script>
+    <jsp:include page="LogedInHandler.jsp"></jsp:include>
 </head>
 <body>
     <header class= "header-section">
