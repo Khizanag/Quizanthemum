@@ -1,3 +1,5 @@
+package Controller.Classes.OtherClasses;
+
 import java.sql.*;
 
 import static Configs.Config.*;

@@ -131,4 +131,23 @@ public class Challenge implements Config {
         // TODO change in database
     }
 
+    @Override
+    public String toString() {
+        return "Challenge{" +
+                "ID=" + ID +
+                ", isFinished=" + isFinished +
+                ", winnerUserID=" + winnerUserID +
+                ", manager=" + manager +
+                ", challengerUserID=" + challengerUserID +
+                ", challengerUser=" + challengerUser +
+                ", challengerQuizEventID=" + challengerQuizEventID +
+                ", challengerQuizEvent=" + challengerQuizEvent +
+                ", challengingDate=" + challengingDate +
+                ", challengedUserID=" + challengedUserID +
+                ", challengedQuizEventID=" + challengedQuizEventID +
+                ", challengedUser=" + challengedUser +
+                ", challengedQuizEvent=" + challengedQuizEvent +
+                ", acceptingDate=" + acceptingDate +
+                '}';
+    }
 }

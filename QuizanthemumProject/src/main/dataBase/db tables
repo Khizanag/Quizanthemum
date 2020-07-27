@@ -5,7 +5,7 @@ use quizanthemum_schema;
 
 # ****************************************  USERS  ****************************************
 create table users(
-                      id smallint primary key,
+                      id smallint primary key AUTO_INCREMENT,
                       username varchar(64) unique key,
                       password varchar(64) not null,
                       first_name varchar(64) not null,
@@ -206,7 +206,6 @@ create table achievement_events(
 );
 
 
-
 # ************************************************** DROP TABLES  *************************************************
 
 #     drop table if exists question_events;
@@ -223,4 +222,4 @@ create table achievement_events(
 
 # ***************************************************  FOR TESTING  **************************************************
 
-# select * from users;
+select * from users;
