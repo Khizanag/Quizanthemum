@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<form class="sign-in-section">
+<form class="sign-in-section" action="../../LogInServlet" method="get">
     <div class="container">
         <h2>შესვლა</h2>
         <p>გთხოვთ შეიყვანოთ მითითებული მონაცემები პროფილზე შესასვლელად.</p>

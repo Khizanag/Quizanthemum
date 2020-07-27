@@ -13,19 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "LogInServlet")
+@WebServlet(name = "LogInServlet", urlPatterns = "/LogInServlet")
 public class LogInServlet extends HttpServlet implements Config {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("***** LogInServlet");
         ServletContext context = request.getServletContext();
         String username = request.getParameter("log_in_username");
+        System.out.println("username : " + username);
         String password = request.getParameter("log_in_password");
+        System.out.println("password : " + password);
         UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
         User targetUser = usersManager.getUser(username);
-        if(targetUser.isCorrectPassword(password)){
+        System.out.println("tartHash : "+ targetUser.getPasswordHash());
+        if(targetUser != null && targetUser.isCorrectPassword(password)){
             request.getServletContext().setAttribute("logedInUser", targetUser);
             response.addCookie(new Cookie("logedInUserID", ""+targetUser.getID()));
             response.setStatus(HttpServletResponse.SC_FOUND);//302
