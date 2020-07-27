@@ -18,6 +18,10 @@ public class User {
     private String firstName;
     private String lastName;
     private int role;
+    private int quizzesPlayed;
+    private int quizzesMade;
+    private int challengesPlayed;
+    private int challengesWon;
     private String city;
     private String country;
     private String phoneNumber;
@@ -63,6 +67,10 @@ public class User {
         this.email = email;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
+        this.challengesPlayed=0;
+        this.challengesWon=0;
+        this.quizzesMade=0;
+        this.quizzesPlayed=0;
     }
 
     public int getId(){ return id; }
@@ -116,6 +124,14 @@ public class User {
     }
 
     public int getRole(){ return role; }
+
+    public int getQuizzesPlayed(){ return quizzesPlayed; }
+
+    public int getChallengesPlayed(){ return challengesPlayed; }
+
+    public int getQuizzesMade(){ return quizzesMade; }
+
+    public int getChallengesWon(){ return challengesWon; }
 
     public String getCity() {
         return city;
