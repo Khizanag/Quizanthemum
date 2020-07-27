@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static Configs.Config.DEFAULT_ID;
 import static Configs.QuizEventTableConfig.*;
 
 
@@ -31,20 +32,21 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     public User getUser(int id){
-        String query = "SELECT * " +
-                "FROM " + USERS_TABLE_NAME +
-                "WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+        String query = "SELECT *" +
+                " FROM " + USERS_TABLE_NAME +
+                " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + id + ";\n";
         return getUserWithQuery(query);
     }
 
     public User getUser(String username){
         String query = "SELECT * " +
                 " FROM " + USERS_TABLE_NAME +
-                " WHERE username = " + username + ";";
+                " WHERE username = '" + username + "';";
         return getUserWithQuery(query);
     }
 
     private User getUserWithQuery(String query){
+        System.out.println("getUserWithQuery: query: " + query);
         try {
             ResultSet set = statement.executeQuery(query);
             if(!set.next())
@@ -148,34 +150,32 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return friendIDs;
     }
 
-    public void insertUser(User user) {
-        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+    public int insertUser(User user) {
+        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
-            System.out.println("pstmt done");
-            pstmt.setInt(1, user.getId());
-            pstmt.setString(2, user.getUsername());
-            pstmt.setString(3, user.getPasswordHash());
-            pstmt.setString(4, user.getFirstName());
-            pstmt.setString(5, user.getLastName());
-            pstmt.setInt(6, user.getRole());
-            pstmt.setString(7, user.getCity());
-            pstmt.setString(8, user.getCountry());
-            pstmt.setString(9, user.getEmail());
-            pstmt.setString(10, user.getMobileNumber());
-            pstmt.setDate(11, new java.sql.Date(user.getBirthDate().getTime()));
-            pstmt.setDate(12, new java.sql.Date(user.getRegistrationDate().getTime()));
+//            System.out.println("pstmt done");
+//            pstmt.setString(1, "null");
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, user.getPasswordHash());
+            pstmt.setString(3, user.getFirstName());
+            pstmt.setString(4, user.getLastName());
+            pstmt.setInt(5, user.getRole());
+            pstmt.setString(6, user.getCity());
+            pstmt.setString(7, user.getCountry());
+            pstmt.setString(8, user.getEmail());
+            pstmt.setString(9, user.getMobileNumber());
+            pstmt.setDate(10, new java.sql.Date(user.getBirthDate().getTime()));
+            pstmt.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
             System.out.println("before execute update");
             pstmt.executeUpdate();
+
+            return DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
             System.out.println("Insertion Error. User Manager Class");
             e.printStackTrace();
         }
-    }
-
-    public int getNextID(){
-        // TODO
-        return 1;
+        return DEFAULT_ID;
     }
 
     public boolean isUsernameFree(String username){

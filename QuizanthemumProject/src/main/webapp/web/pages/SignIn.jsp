@@ -44,16 +44,22 @@
     </div>
 </div>
 
-<form class="sign-in-section">
+<form class="sign-in-section" action="../../LogInServlet" method="get">
     <div class="container">
         <h2>შესვლა</h2>
         <p>გთხოვთ შეიყვანოთ მითითებული მონაცემები პროფილზე შესასვლელად.</p>
         <hr>
+        <%
+            if(request.getServletContext().getAttribute("errorMessage") != null) { %>
+                <p class="error_message"> ${errorMessage}</p> <%
+                request.removeAttribute("errorMessage");
+            }
+        %>
 
         <div class="input-items">
-            <label><b>E-mail</b></label>
-            <input type="email" placeholder="შეიყვანეთ email"
-                   name="log_in_email" id="log_in_email" required>
+            <label><b>Username</b></label>
+            <input type="text" placeholder="შეიყვანეთ username"
+                   name="log_in_username" id="log_in_username" required>
 
             <label><b>პაროლი</b></label>
             <input type="password" placeholder="შეიყვანეთ პაროლი"
