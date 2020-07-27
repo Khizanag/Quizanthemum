@@ -19,6 +19,8 @@ body {
     height: 60px;
 }
 .header {
+    display: flex;
+    justify-content: space-between;
     position: relative;
 }
 .header-left {

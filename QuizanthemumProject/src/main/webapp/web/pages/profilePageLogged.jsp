@@ -43,11 +43,14 @@
             }
         }
         function submitPhoto(){
-            let image = document.getElementById("small-prof-pic-id");
-            image.src = document.getElementById('photo-url').value;
-            image = document.getElementById("prof-pic-big-id");
-            image.src = document.getElementById('photo-url').value;
-            changeImage();
+            if(document.getElementById('photo-url').value != ""){
+                let image = document.getElementById("small-prof-pic-id");
+                image.src = document.getElementById('photo-url').value;
+                image = document.getElementById("prof-pic-big-id");
+                image.src = document.getElementById('photo-url').value;
+                changeImage();
+            }
+
         }
 	</script> 
 
@@ -71,11 +74,11 @@
 		<div class="container manu">
 			<nav class="nav">
 				<ul class="nav-items">
-                    <a class="nav-item" target="_self" href="./">HOME</a>
+                    <a class="nav-item" target="_self" href="/">HOME</a>
                     <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
                     <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
                     <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-                    <a class="nav-item" target="_self" href="web/pages/QuizCreation.jsp">CREATE QUIZ</a>
+                    <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">CREATE QUIZ</a>
                     <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
                 </ul>
 			</nav>
@@ -94,21 +97,21 @@
       <br>
         <div class="friends-list">
             <div class = "friend-list-row">
-                <span>მეგობარი0</span>
+                <span class="friend-name">მეგობარი0</span>
                 <div class = "friend-challenge-remove-btns">
                     <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
                     <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
                 </div>
             </div>
             <div class = "friend-list-row">
-                <span>მეგობარი1</span>
+                <span class="friend-name">მეგობარი1</span>
                 <div class = "friend-challenge-remove-btns">
                     <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
                     <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
                 </div>
             </div>
             <div class = "friend-list-row">
-                <span>მეგობარი2</span>
+                <span class="friend-name">მეგობარი2</span>
                 <div class = "friend-challenge-remove-btns">
                     <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
                     <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
@@ -122,7 +125,7 @@
         <div class="overlay"></div>
         <div class="content">
             <div class="close-btn" onclick="changeImage()">&times;</div>
-            <h2>ატვირთე ფოტო</h2>
+            <h2 style="color:white">ატვირთე ფოტო</h2>
             <br>
             <div class="upload-image-section-cl">
                 <input type="file"  accept="image/*" name="image" id="file"
@@ -142,38 +145,37 @@
         </div>
     </div>
 
-  <div class ="profile-info-container">
-    <!-- <div class="cover-photo">
-      <img class = "profile-cover-photo" src= "../images/common/defCover.jpg" alt="SO MUCH EMPTY">
-    </div> -->
-    <div class ="profile-details-info">
-        <div class="creation-date">Profile created on Sunday,Jule 19 , 22:10</div>
-        <div class="user-first-name">First Name: D</div>
-        <div class = "user-last-name">Last Name: G</div>
-        <div class =  "user-email">Mail: dgogi@gmail.com </div>
-        <div class="user-mobile">Mobile Number: ******** </div>
-        <div class="user-country">Country:Georgia  </div>
-        <div class="user-city">City:Tbilisi</div>
+    <div class = "profile-info-wrapper">
+        <div class ="profile-info-container">
+            <div class ="profile-details-info">
+                <div class="user-first-name">First Name: D</div>
+                <div class = "user-last-name">Last Name: G</div>
+                <div class =  "user-email">Mail: dgogi@gmail.com </div>
+                <div class="user-mobile">Mobile Number: ******** </div>
+                <div class="user-country">Country: Georgia  </div>
+                <div class="user-city">City: Tbilisi</div>
+            </div>
+            <div class = "profile-info">
+                <img class = "profile-picture-big" id="prof-pic-big-id"src = "../images/common/defProfPic.jpg" onerror="this.src='../images/common/defProfPic.jpg';">
+                <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
+                <div class="profile-name">Ze K1ng</div>
+                <div class="profile-details">Ex-President Of USA</div>
+                <div class="user-details">ADministrator</div>
+            </div>
+            <div class="profile-details-info">
+                <div class="user-ranking">Rank:Infinity</div>
+                <div class = "quizzes-played">Quizzes Played : 0</div>
+                <div class =  "challenges-played">Challenges Played: 0</div>
+                <div class="challenges-won">Challenges Won: 0</div>
+                <div class="quizzes-made">Quizzes Made: 0 </div>
+            </div>
+        </div>
+
     </div>
-    <div class = "profile-info">
-        <img class = "profile-picture-big" id="prof-pic-big-id"src = "../images/common/defProfPic.jpg" onerror="this.src='../images/common/defProfPic.jpg';">
-        <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
-        <div class="profile-name">Ze K1ng</div>
-        <div class="profile-details">Ex-President Of USA</div>
-        <div class="user-details">ADministrator</div>
-    </div>
-    <div class="profile-details-info">
-      <div class="user-ranking">Rank:Infinity</div>
-      <div class = "quizzes-played">Quizzes Played : 0</div>
-      <div class =  "challenges-played">Challenges Played: 0</div>
-      <div class="challenges-won">Challenges Won: 0</div>
-      <div class="quizzes-made">Quizzes Made: 0 </div>
-    </div>
-  </div>
 
   <div class = "top-quizzes-banner">
     <div class="players-top-quizzes">
-      Your Top Played Quizzes 
+      Your Top Played Quizzes
     </div>
   </div>
     <main class="main">
@@ -191,20 +193,7 @@
                             ასლდ;ა
                         </p>
                     </div>
-                </div>
-                <div class="top-quiz-item" onclick="redirectToQuiz()">
-                    <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
-                    <div class= "quiz-small-description-block">
-                        <h3 class= "quiz-title" >
-                            სახელი
-                        </h3>
-                        <br>
-                        <p class="quiz-small-description">
-                            აღწერა ჯნსდანსდნასდ
-                            ასდაკსდალკსდ;ლაკდს
-                            ასლდ;ა
-                        </p>
-                    </div>
+                    <div class = "quiz-score">20/20</div>
                 </div>
                 <div class="top-quiz-item" onclick="redirectToQuiz()">
                     <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
@@ -218,20 +207,35 @@
                             ასლდ;ა
                         </p>
                     </div>
+                    <div class = "quiz-score">20/20</div>
                 </div>
                 <div class="top-quiz-item" onclick="redirectToQuiz()">
                     <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
                     <div class= "quiz-small-description-block">
                         <h3 class= "quiz-title" >
                             სახელი
-                        </h3>
-                        <br>
+                        </h3><br>
                         <p class="quiz-small-description">
                             აღწერა ჯნსდანსდნასდ
                             ასდაკსდალკსდ;ლაკდს
                             ასლდ;ა
                         </p>
                     </div>
+                    <div class = "quiz-score">20/20</div>
+                </div>
+                <div class="top-quiz-item" onclick="redirectToQuiz()">
+                    <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
+                    <div class= "quiz-small-description-block">
+                        <h3 class= "quiz-title" >
+                            სახელი
+                        </h3><br>
+                        <p class="quiz-small-description">
+                            აღწერა ჯნსდანსდნასდ
+                            ასდაკსდალკსდ;ლაკდს
+                            ასლდ;ა
+                        </p>
+                    </div>
+                    <div class = "quiz-score">20/20</div>
                 </div>
             </div>
         </div>

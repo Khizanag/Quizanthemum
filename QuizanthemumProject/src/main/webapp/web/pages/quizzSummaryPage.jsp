@@ -44,12 +44,12 @@
 		<div class="container manu">
 			<nav class="nav">
 				<ul class="nav-items">
-					<a class="nav-item" target="_self" href="homePage.html">HOME</a>
-					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-          <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-					<a class="nav-item" target="_self" href="quizCreation.html">CREATE QUIZ</a>
-          <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
+					< <a class="nav-item" target="_self" href="/">HOME</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
+                    <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">CREATE QUIZ</a>
+                    <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
         </ul>
 			</nav>
 			<div class="search-items">

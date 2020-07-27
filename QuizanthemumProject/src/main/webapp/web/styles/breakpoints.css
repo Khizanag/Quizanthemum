@@ -25,6 +25,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        position: absolute;
     }
     .header-left {
         position: relative;

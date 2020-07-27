@@ -11,15 +11,19 @@
   width: 240px;
   display: flex;
   align-items: center;
+  position: absolute;
+  float: right;
 }
 .profile-name-text{
   font-family: "Comic Sans MS", cursive, sans-serif;
-  color: #f5e8b5;
+  color: orange;
   font-size: 14px;
   font-weight: bold;
   margin-right: 20px;
   text-decoration: none;
   cursor: pointer;
+  font-size: larger;
+  font-weight: 600;
 }
 
 .profile-picture-big{
@@ -27,8 +31,12 @@
   height: 250px;
   border-radius: 50%;
 }
+.profile-info-wrapper{
+  display:flex;
+  justify-content: center;
+}
 .profile-info-container{
-  width:100%;
+  width:960px;
   height: 350px;
   display: flex;
   justify-content: space-between;
@@ -45,11 +53,13 @@
   align-items: center;
   font-family:"Comic Sans MS", cursive, sans-serif;
   text-align: center;
-  color:white;
+  color:orange;
   /* box-shadow: 0 0 100px rgba(0,0,0,0.4); */
   padding:10px;
-  margin-right: 13%;
+  margin-right: 3%;
   position: relative;
+  font-size: large;
+  font-weight: 600;
 }
 .profile-details-info{
   height:350px;
@@ -59,8 +69,9 @@
   align-items: flex-start;
   font-family:"Comic Sans MS", cursive, sans-serif;
   font-size: large;
+  font-weight: 600;
   text-align: center;
-  color:white;
+  color:orange;
   padding:15px;
 }
 .creation-date,.quizzes-played,.challenges-played,.challenges-won{
@@ -89,8 +100,7 @@
   border-radius: 5px;
   cursor: pointer;
   align-self:center;
-  color: wheat;
-  cursor: pointer;
+  color: #f07237;
   align-content: center;
   display: flex;
   justify-content: center;
@@ -124,8 +134,12 @@
   -moz-border-radius: 25px;
   border-radius: 25px;
 }
-.profile-info:hover .image {
-  opacity: 0.3;
+.profile-info:hover .profile-picture-big {
+  transition: .3s;
+  opacity: 0.2;
+}
+.friend-name{
+  color:white;
 }
 
 .profile-info:hover .changeImageHoverBtn {
@@ -167,7 +181,7 @@
   top:20%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
-  background:#fff;
+  background:#002e30;
   width:500px;
   height:550px;
   z-index:2;
@@ -195,7 +209,7 @@
   top:20%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
-  background:#fff;
+  background:#002e30;
   width:500px;
   height:550px;
   z-index:2;
@@ -296,8 +310,10 @@
 	position:relative;
 	top:1px;
 }
+
 .main{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #002e30;
@@ -306,54 +322,67 @@
   width: 100%;
   height: 50px;
   background-color: #ff751a;
+  color:white;
 
   text-align: center;
   font-family:"Open Sans", sans-serif;
   line-height: 50px;
   margin-top:5%;
-  color:white;
 
 }
 
 .top-quizzes-container{
   width:960px;
   display:flex;
+  justify-content: center;
   align-items: center;
   align-content: center;
 }
 .top-quiz-items {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 .top-quiz-item {
   margin: 40px;
-  width: 300px;
-  height: 300px;
+  width: 600px;
+  height: 200px;
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
   cursor: pointer;
+  align-items: center;
  transition: transform .2s;
 
 }
 .quiz-small-image{
-  height:200px;
+  width: 100px;
+  height:100px;
 }
 .top-quiz-item:hover{
-  -webkit-box-shadow: 3px 3px 5px 6px rgb(255, 204, 0, 0.1);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    3px 3px 5px 6px rgb(255, 204, 0, 0.1);  /* Firefox 3.5 - 3.6 */
-  box-shadow:         3px 3px 5px 6px rgb(255, 204, 0, 0.1);  /* Opera 10.5, IE 9, Firefox 4+, Chrome*/
+  -webkit-box-shadow: 3px 3px 5px 6px rgb(255, 117, 26,.4);  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px rgb(255, 117, 26, .4);  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px rgb(255, 117, 26, .4);  /* Opera 10.5, IE 9, Firefox 4+, Chrome*/
   transform: scale(1.1);
 }
 .quiz-small-description-block{
+  width:300px;
+  height:100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   margin-left: 15px;
   font-family: "Comic Sans MS", cursive, sans-serif;
-
+}
+.quiz-score{
+  width: 100px;
+  align-items: center;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: large;
+  font-weight: 550;
+  color:rgb(255, 117, 26);
 }
 .quiz-small-description-block h3{
   cursor: pointer;
@@ -439,6 +468,7 @@
   margin-top: 5px;
   border-radius: 5px;
   margin-bottom: 10px;
+  outline:none;
 }
 
 .upload-image-section{
