@@ -43,7 +43,6 @@ public class QuizCreateServlet extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.html"); // TODO valid address
 
-
 //        quizManager.insertQuiz(newQuiz);
     }
 }

@@ -55,8 +55,8 @@
             <hr>
 
             <div class="input-items" id="input-items">
+                <label for="selector"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
                 <label><b>აირჩიეთ შეკითხვის ტიპი</b></label>
-
                 <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
                     <option value="0">-</option>
                     <option value="1">ტესტური</option>
@@ -70,18 +70,19 @@
         </div>
     </form>
 </div>
-<footer	class= "footer-section">
-    <div class= "container">
-        <div class= "footer-items">
-            <div class= "footer left">
-                All Right Reserved
-            </div>
-            <div class= "footer rigth">
-                Quizanthemum By Our Team
-            </div>
-        </div>
-    </div>
-</footer>
+    <jsp:include page="Footer.jsp"></jsp:include>
+<%--<footer	class= "footer-section">--%>
+<%--    <div class= "container">--%>
+<%--        <div class= "footer-items">--%>
+<%--            <div class= "footer left">--%>
+<%--                All Right Reserved--%>
+<%--            </div>--%>
+<%--            <div class= "footer rigth">--%>
+<%--                Quizanthemum By Our Team--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</footer>--%>
 
 </body>
 
@@ -132,7 +133,7 @@
         e.innerHTML += toAdd;
         parent.insertBefore(e, null);
     }
-    
+
     function addToFill() {
         let text = document.getElementById("toFill").value;
         let prev = document.getElementById("fill-question").value;

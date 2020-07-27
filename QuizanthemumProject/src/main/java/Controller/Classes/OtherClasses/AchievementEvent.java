@@ -25,4 +25,14 @@ public class AchievementEvent {
     public int getUserID() { return userID; }
 
     public Date getAchieveDate() { return achieveDate; }
+
+    @Override
+    public String toString() {
+        return "AchievementEvent{" +
+                "id=" + id +
+                ", achievementID=" + achievementID +
+                ", userID=" + userID +
+                ", achieveDate=" + achieveDate +
+                '}';
+    }
 }

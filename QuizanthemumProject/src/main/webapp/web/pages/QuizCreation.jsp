@@ -106,18 +106,7 @@
     </div>
 </form>
 
-<footer	class= "footer-section">
-    <div class= "container">
-        <div class= "footer-items">
-            <div class= "footer left">
-                All Right Reserved
-            </div>
-            <div class= "footer rigth">
-                Quizanthemum By Our Team
-            </div>
-        </div>
-    </div>
-</footer>
+    <jsp:include page="Footer.jsp"></jsp:include>
 </body>
 <script>
     function uploadImage(event) {

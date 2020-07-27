@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
@@ -7,20 +6,18 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="../styles/common.css">
 	<link rel="stylesheet" href="../styles/homePage.css">
-  <link rel="stylesheet" href="../styles/breakpoints.css">
-  <link rel="stylesheet" href="../styles/quizzSummaryPage.css">
-  <link rel="stylesheet" href="../styles/profilePage.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../js/friends-popup.js"></script>
+    <link rel="stylesheet" href="../styles/breakpoints.css">
+    <link rel="stylesheet" href="../styles/quizzSummaryPage.css">
+    <link rel="stylesheet" href="../styles/profilePage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../js/profileStuff.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
   <script>
-		$(document).ready(function(){
-			$('.slider-quiz-homepage').load("../slider/slider-quiz-homepage.html");
-		});
+
 
     function gotoProfPage() {
-      window.location.href="profilePage-logged.html";
+      window.location.href="profilePageLogged.jsp";
     }
 		function openSearch() {
 			window.location.href = "search.html";		  	
@@ -37,8 +34,8 @@
 			      </div>
 			
             <ul class="header-right">
-              <img class = "profile-picture" src = "../images/common/defProfPic.jpg">
-              <span class = "profile-name-text">Ze K1ng</span>
+              <img class = "profile-picture" src = "../images/common/defProfPic.jpg" onclick="redirectToProfPage()">
+              <span class = "profile-name-text" onclick="redirectToProfPage()">Ze K1ng</span>
             </ul>	
         </div>
     </header>
@@ -47,12 +44,12 @@
 		<div class="container manu">
 			<nav class="nav">
 				<ul class="nav-items">
-					<a class="nav-item" target="_self" href="homePage.html">HOME</a>
-					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-					<a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-          <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-					<a class="nav-item" target="_self" href="quizCreation.html">CREATE QUIZ</a>
-          <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
+					< <a class="nav-item" target="_self" href="/">HOME</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
+                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
+                    <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">CREATE QUIZ</a>
+                    <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
         </ul>
 			</nav>
 			<div class="search-items">
@@ -102,7 +99,7 @@
           </div>
         </div>
         <div class="overall-quiz-details">
-          <p>Your Score 13/20</p>
+          <p>Your Score 15/20</p>
         </div>
         <div class="questions">
           <div class="question">
@@ -167,7 +164,7 @@
           </div>
         </div>
         <button class="back-to-prof-page" id="back-to-prof-page-id" onclick="gotoProfPage()">
-          Back To My Profile
+            <span>Back To My Profile</span>
         </button>
       </div>
     </div>
