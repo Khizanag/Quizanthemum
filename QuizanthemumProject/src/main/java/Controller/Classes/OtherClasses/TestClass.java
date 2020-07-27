@@ -1,10 +1,13 @@
 package Controller.Classes.OtherClasses;
 
+import Configs.LocalDatabaseConfig;
+
+import javax.ejb.Local;
 import java.sql.*;
 
 import static Configs.Config.*;
 
-public class TestClass {
+public class TestClass implements LocalDatabaseConfig {
 
     public static void main(String[] args){
         System.setProperty("jdbc.drivers", "sun.jdbc.odbc.JdbcodbcDriver");

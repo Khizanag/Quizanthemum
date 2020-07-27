@@ -20,20 +20,19 @@ public class LogInServlet extends HttpServlet implements Config {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("***** LogInServlet");
         ServletContext context = request.getServletContext();
         String username = request.getParameter("log_in_username");
-        System.out.println("username : " + username);
         String password = request.getParameter("log_in_password");
-        System.out.println("password : " + password);
         UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
         User targetUser = usersManager.getUser(username);
-        System.out.println("tartHash : "+ targetUser.getPasswordHash());
+
         if(targetUser != null && targetUser.isCorrectPassword(password)){
+
             request.getServletContext().setAttribute("logedInUser", targetUser);
-            response.addCookie(new Cookie("logedInUserID", ""+targetUser.getID()));
+            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", ""+targetUser.getID()));
+            response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", targetUser.getPasswordHash()));
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/web/pages/profilePage-logged.html");
+            response.setHeader("Location", "http://localhost:8080/web/pages/profilePageLogged.jsp");
         } else {
             context.setAttribute("errorMessage", "მომხმარებლის სახელი ან პაროლი არასწორია. სცადეთ თავიდან.");
             response.setStatus(HttpServletResponse.SC_FOUND);//302

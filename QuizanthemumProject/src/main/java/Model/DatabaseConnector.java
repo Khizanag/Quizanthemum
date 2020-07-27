@@ -1,14 +1,17 @@
 package Model;
 
 import Configs.Config;
+import Configs.LocalDatabaseConfig;
 
 import java.sql.*;
+
+import static Configs.Config.DEFAULT_ID;
 
 /**
  * this is a singleton class.
  * To get connection you should use getInstance() method.
  */
-public class DatabaseConnector implements Config {
+public class DatabaseConnector implements LocalDatabaseConfig {
 
     private static Connection connection = null;
 
