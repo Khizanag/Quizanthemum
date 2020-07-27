@@ -21,4 +21,14 @@ public final class Achievement {
     public String getDescription() { return description; }
 
     public String getIconURL() { return iconURL; }
+
+    @Override
+    public String toString() {
+        return "Achievement{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", iconURL='" + iconURL + '\'' +
+                '}';
+    }
 }
