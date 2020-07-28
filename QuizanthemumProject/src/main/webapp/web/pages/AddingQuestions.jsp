@@ -128,7 +128,7 @@
             let parent = document.getElementById('added-wrongs');
             let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
             let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_' + numWrongAnswers + '" id="wrong-ans-' + numWrongAnswers + '" required>';
-            parent.innerHTML += toAdd;
+            parent.innerHTML += toAdd;  
             document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
         }
 

@@ -4,7 +4,7 @@
     <hr>
     <div class="input-items" id="input-items">
         <label for="question_statement"><b>შეკითხვა</b></label>
-        <input type="text" placeholder="შეიყვანეთ შეკითხვა" name="question_statement" id="question_statement" required>
+        <input type="text" placeholder="შეიყვანეთ შეკითხვა" name="statement_text" id="question_statement" required>
 
         <label for="description"><b>ავტორის რჩევა</b></label>
         <input type="text" placeholder="გთხოვთ შეუყვანოთ მითითება მომხმარებლისთვის"
@@ -23,7 +23,7 @@
                     შეიყვანეთ URL ასატვირთად
                 </label>
                 <input type="text" placeholder="ფოტოს URL"
-                       name="question_image_url" id="question_image_url" required>
+                       name="question_image_url" id="image_url" required>
             </div>
             <img id="output" width="100" />
         </div>
@@ -42,12 +42,6 @@
         </div>
 
     </div>
-
-    <hr><div class="point-holder">
-        <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
-        <input type="number" placeholder="ქულა"
-               id="question_point" name="question_point"
-               min="1" max="16" required>
 
         <label for="source"><b>წყარო</b></label>
         <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
