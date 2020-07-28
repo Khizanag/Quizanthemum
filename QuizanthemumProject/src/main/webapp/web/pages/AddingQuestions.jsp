@@ -81,7 +81,7 @@
             document.getElementById('current-question-type').innerHTML='';
         }
         if($("#questions-type option:selected").val() == 1) {
-            $('#current-question-type').load('./questionTypes/OpenAnswer.jsp');
+            $('#current-question-type').load('./questionTypes/OpenAnswerQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 2) {
             $('#current-question-type').load('./questionTypes/FillTextQuestionPage.jsp');

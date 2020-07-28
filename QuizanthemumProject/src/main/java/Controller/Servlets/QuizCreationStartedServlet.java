@@ -43,15 +43,9 @@ public class QuizCreationStartedServlet extends HttpServlet {
         User author = (User) request.getServletContext().getAttribute("logedInUser");
 
         Quiz newQuiz = new Quiz(name, description, iconUrl, mustShuffleQuestions, comment, author);
+        
+        request.getServletContext().setAttribute(QUIZ_CREATING_NOW, newQuiz);
 
-        int ID = quizManager.insertQuiz(newQuiz);
-        newQuiz.setID(ID);
-        System.out.println("quiz inserted into database");
-
-        request.setAttribute("startedCreatingOfQuiz", ID);
-        request.setAttribute(CREATING_QUIZ_STR, newQuiz);
-
-        response.setHeader("CREATING_QUIZ_NAME_STR", "CREATING_QUIZ_WITH_ID_" + ID);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
 

@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.QUESTION_MANAGER_STR;
+import static Configs.Config.QUIZ_CREATING_NOW;
 
 @WebServlet(name = "QuestionCreatedServlet", urlPatterns = "/QuestionCreated")
 public class QuestionCreatedServlet extends HttpServlet {
@@ -26,14 +27,10 @@ public class QuestionCreatedServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("QuestionCreated Servlet");
-//        String quizName = response.getHeader("CREATING_QUIZ_NAME_STR");
-//        System.out.println("quizName in questionCreateServ : " + quizName);
-//        Quiz currentQuiz = (Quiz) getServletContext().getAttribute(quizName);
-//        if(currentQuiz == null) System.out.println("PZDC: quiz is null in QuestionCreatedServlet get attr");
 
         QuestionManager questionManager = (QuestionManager) request.getServletContext().getAttribute(QUESTION_MANAGER_STR);
 
-        int type = 1; //Integer.parseInt(request.getParameter("questions-type"));
+        int type = Integer.parseInt(request.getParameter("type"));
         System.out.println("question type is -> " + type);
         boolean isAutoGraded = Boolean.parseBoolean(request.getParameter("isAutoGraded"));
         double maxScore = 1; //Double.parseDouble(request.getParameter("question_max_score"));
@@ -62,8 +59,10 @@ public class QuestionCreatedServlet extends HttpServlet {
                 -1, isPictureQuestion, isPictureAnswer, textStatement, pictureStatementUrl, statements, answers);
         System.out.println("new question created in java");
 
-//        currentQuiz.addQuestion(newQuestion);
-//        System.out.println("question added into quiz");
+        Quiz currentQuiz = (Quiz) request.getServletContext().getAttribute(QUIZ_CREATING_NOW);
+
+        currentQuiz.addQuestion(newQuestion);
+        System.out.println("question added into quiz");
 
         // TODO if finished quiz
         response.setStatus(HttpServletResponse.SC_FOUND);//302

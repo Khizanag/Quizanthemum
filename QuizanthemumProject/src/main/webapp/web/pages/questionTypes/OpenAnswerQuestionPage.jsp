@@ -22,7 +22,7 @@
                     შეიყვანეთ URL ასატვირთად
                 </label>
                 <input type="text" placeholder="ფოტოს URL"
-                       name="image_url" id="mage_url" required>
+                       name="image_url" id="image_url">
             </div>
             <img id="output" width="100" />
         </div>
@@ -35,8 +35,10 @@
         <input type="text" placeholder="სურვილისამებრ მიუთითეთ კომენტარი..."
                name="comment" id="comment">
 
-        <input  type="hidden" name="num_statements" value="0"></input>
-        <input type="hidden" name="num_answers" value="0"></input>
+        <%--   HIDDEN VARIABLES     --%>
+        <input type="hidden" name="type" value="1">
+        <input  type="hidden" name="num_statements" value="0">
+        <input type="hidden" name="num_answers" value="0">
 
         <button class="button addQuestion" type="submit"> შემდეგი შეკითხვის დამატება </button>
     </div>
