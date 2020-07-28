@@ -72,6 +72,10 @@ public class QuestionEvent {
         return userScore;
     }
 
+    public boolean isAutoGraded() { return question.isAutoGraded(); }
+
+    public int getType() { return question.getType(); }
+
     /*
      * manually set user score.
      * used when question is not automatically graded
