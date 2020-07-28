@@ -1,14 +1,9 @@
 package Controller.Servlets;
 
-import Controller.Classes.OtherClasses.User;
 import Controller.Classes.Quiz.Question;
 import Controller.Classes.Quiz.QuestionEvent;
-import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.QuestionEventManager;
-import Model.Managers.QuestionManager;
-import Model.Managers.QuizManager;
-import Model.Managers.UsersManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.*;
+import static Controller.Classes.Quiz.QuestionType.*;
 
 @WebServlet(name = "QuestionEventFinishedServlet")
 public class QuestionEventFinishedServlet extends HttpServlet {
@@ -48,6 +44,10 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         newQuestionEvent.setUserAnswers(userAnswers);
         newQuestionEvent.finishQuestionEvent();
 
+        if(newQuestionEvent.isAutoGraded()) {
+            gradeQuestionEvent(newQuestionEvent);
+        }
+
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNext()) {
             response.setHeader("Location", "http://localhost:8080/web/pages/next-question.html"); // TODO valid address. next question
@@ -55,6 +55,24 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
         }
 
+        quizEvent.setFilledQuestionEvent(newQuestionEvent);
 //        questionEventManager.setQuestionEvent(newQuestionEvent); // TODO or add all question events at the end (quiz finished)
+    }
+
+    private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {
+        switch (newQuestionEvent.getType()) {
+            case MULTI_ANSWER:
+            case MULTI_CHOICE_MULTI_ANSWER:
+            case FILL_BLANK:
+                newQuestionEvent.autoGradeMultiAnswer();
+                break;
+            case MATCHING:
+                newQuestionEvent.autoGradeMatchingAnswer();
+                break;
+            case STANDARD:
+            case MULTI_CHOICE:
+            default:
+                newQuestionEvent.autoGradeTextAnswer();
+        }
     }
 }

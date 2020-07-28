@@ -78,9 +78,9 @@ public class QuizEvent {
     }
 
     // adds already filled question in question events history
-    public void setFilledQuestionEvent(QuestionEvent qe) {
-        questionEvents.add(qe);
-        userTotalScore += qe.getUserScore();
+    public void setFilledQuestionEvent(QuestionEvent newQuestionEvent) {
+        questionEvents.add(newQuestionEvent);
+        userTotalScore += newQuestionEvent.getUserScore();
     }
 
     // sets quiz status as finished
