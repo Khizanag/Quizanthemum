@@ -87,7 +87,7 @@
             $('#current-question-type').load('./questionTypes/FillTextQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 3) {
-            $('#current-question-type').load('./questionTypes/MultiChoiceQuestion.jsp');
+            $('#current-question-type').load('./questionTypes/MultiChoiceQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 4) {
             $('#current-question-type').load('./questionTypes/MultiOpenAnswersQuestionPage.jsp');
@@ -125,10 +125,12 @@
     function addNextWrongAns() {
         let parent = document.getElementById('added-wrongs');
         let e = document.createElement('div');
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი"'+
-            'name="wrong-ans" id="wrong-ans" required>';
+        let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
+        console.log("numWrongAnswers: " + numWrongAnswers);
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_'+numWrongAnswers+'" id="wrong-ans-'+numWrongAnswers+'" required>';
         e.innerHTML += toAdd;
         parent.insertBefore(e, null);
+        document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
     }
 
     function addToFill() {

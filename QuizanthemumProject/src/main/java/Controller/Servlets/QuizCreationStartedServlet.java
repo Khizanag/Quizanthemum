@@ -43,7 +43,7 @@ public class QuizCreationStartedServlet extends HttpServlet {
         User author = (User) request.getServletContext().getAttribute("logedInUser");
 
         Quiz newQuiz = new Quiz(name, description, iconUrl, mustShuffleQuestions, comment, author);
-        
+
         request.getServletContext().setAttribute(QUIZ_CREATING_NOW, newQuiz);
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302

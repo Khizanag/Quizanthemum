@@ -43,16 +43,18 @@ public class QuestionCreatedServlet extends HttpServlet {
         String textStatement = request.getParameter("statement_text");
         String pictureStatementUrl = request.getParameter("image_url");
 
-        int numStatements = Integer.parseInt(request.getParameter("num_statements"));
-        List<String> statements = new ArrayList<>();
-        for (int i = 0; i < numStatements; i++) {
-            statements.add(request.getParameter("statement_" + i));
-        }
-
         int numAnswers = Integer.parseInt(request.getParameter("num_answers"));
         List<String> answers = new ArrayList<>();
+        List<String> statements = new ArrayList<>();
         for (int i = 0; i < numAnswers; i++) {
-            answers.add(request.getParameter("answer_" + i));
+            String s = request.getParameter("answer_" + i);
+            answers.add(s);
+            statements.add(s);
+        }
+
+        int numStatements = Integer.parseInt(request.getParameter("num_statements"));
+        for (int i = 0; i < numStatements; i++) {
+            statements.add(request.getParameter("statement_" + i));
         }
 
         Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate,
