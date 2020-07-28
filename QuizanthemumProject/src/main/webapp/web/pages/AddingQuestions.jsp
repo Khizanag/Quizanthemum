@@ -62,10 +62,9 @@
                         <option value="0">-</option>
                         <option value="1">ღია პასუხი</option>
                         <option value="2">გამოტოვებების შევსება</option>
-                        <option value="3">სტანდარტული ტესტური კითხვა</option>
-                        <option value="4">ღია მრავალპასუხიანი</option>
-                        <option value="5">ტესტური კითხვა რამდენიმე სწორი პასუხით</option>
-                        <option value="6">დასაწყვილებელი</option>
+                        <option value="3">ტესტური კითხვა</option>
+                        <option value="4">რამდენიმე პასუხიანი ტესტური კითხვა</option>
+                        <option value="5">დასაწყვილებელი</option>
                     </select>
                     <div id="current-question-type"></div>
                     <button class="button finish" type="button">დასრულება</button>
@@ -82,21 +81,18 @@
             document.getElementById('current-question-type').innerHTML='';
         }
         if($("#questions-type option:selected").val() == 1) {
-            $('#current-question-type').load('./questionTypes/OpenAnswer.jsp');
+            $('#current-question-type').load('./questionTypes/OpenAnswerPage.jsp');
         }
         if($("#questions-type option:selected").val() == 2) {
             $('#current-question-type').load('./questionTypes/FillTextQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 3) {
-            $('#current-question-type').load('./questionTypes/MultiChoiceQuestion.jsp');
+            $('#current-question-type').load('./questionTypes/MultiChoiceQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 4) {
-            $('#current-question-type').load('./questionTypes/MultiOpenAnswersQuestionPage.jsp');
-        }
-        if($("#questions-type option:selected").val() == 5) {
             $('#current-question-type').load('./questionTypes/MultiChoiceMultiAnswerQuestionPage.jsp');
         }
-        if($("#questions-type option:selected").val() == 6) {
+        if($("#questions-type option:selected").val() == 5) {
             $('#current-question-type').load('./questionTypes/MatchingQuestionPage.jsp');
         }
     }
@@ -123,13 +119,24 @@
             window.location.href = "web/pages/addingQuestions.jsp";
         }
     }
+    let wrongSingleId = 1;
     function addNextWrongAns() {
         let parent = document.getElementById('added-wrongs');
-        let e = document.createElement('div');
         let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი"'+
-            'name="wrong-ans" id="wrong-ans" required>';
-        e.innerHTML += toAdd;
-        parent.insertBefore(e, null);
+            'name="wrong-answer-' + wrongSingleId +
+            '" id="wrong-answer" required>';
+        parent.innerHTML += toAdd;
+        wrongSingleId++;
+    }
+
+    let correctMultiId = 1;
+    function addNextCorrectAns() {
+        let parent = document.getElementById('added-correct');
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი"'+
+            'name="correct-answer-' + correctMultiId +
+            '" id="correct-answer" required>';
+        parent.innerHTML += toAdd;
+        wrongSingleId++;
     }
 
     function addToFill() {
@@ -145,5 +152,26 @@
         if(text === '') return;
         document.getElementById("fill-question").innerText = prev + ' {(<_' + text + '_>)})';
         document.getElementById("fillWith").value = '';
+    }
+
+    let matchId = 5;
+    function addNextMatching() {
+        let parent = document.getElementById('matching-elems-container');
+
+        let toAdd = '<div class="matchin-pair">\n' +
+            '                <input type="text" placeholder="რას ვაწყვილებთ"\n' +
+            '                       name="matching-elem" id="' + matchId +
+            '                       " class="matching-elem" required>\n' +
+            '                <div class="arrow-container">\n' +
+            '                    <i class="arrow arr-right"></i>\n' +
+            '                    <i class="arrow arr-left"></i>\n' +
+            '                </div>\n' +
+            '                <input type="text" placeholder="რასთან ვაწყვილებთ"\n' +
+            '                       name="matching-elem" id="' + (matchId+1) +
+            '                       " class="matching-elem" required>\n' +
+            '            </div>'
+        matchId += 2;
+
+        parent.innerHTML += toAdd;
     }
 </script>

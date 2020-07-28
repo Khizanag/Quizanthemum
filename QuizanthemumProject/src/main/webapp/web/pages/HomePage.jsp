@@ -73,6 +73,7 @@
                 <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
                 <a class="nav-item" target="_self" href="web/pages/QuizCreation.jsp">CREATE QUIZ</a>
                 <a class="nav-item" target="_self" href="web/pages/StartQuiz.jsp">სატესტო</a>
+                <a class="nav-item" target="_self" href="web/pages/pasuxebi.jsp">კითხვები</a>
             </ul>
         </nav>
         <div class="search-items">

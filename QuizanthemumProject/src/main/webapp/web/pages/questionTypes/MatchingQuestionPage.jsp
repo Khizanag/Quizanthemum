@@ -3,7 +3,7 @@
 <div class="input-items" id="input-items">
 
     <div class="matching-elems-secton">
-        <div class="matching-elems-container">
+        <div class="matching-elems-container" id="matching-elems-container">
             <label for="matching-elem"><b>მეზობელ ველებში შეიყვანეთ წყვილი</b></label>
             <div class="matchin-pair">
                 <input type="text" placeholder="რას ვაწყვილებთ"
@@ -34,7 +34,12 @@
                 +
             </button>
         </div>
-
+        <div class="point-holder">
+            <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 5-მდე</b></label>
+            <input type="number" placeholder="ქულა"
+                   id="question_point" name="question_point"
+                   min="1" max="16" required>
+        </div>
     </div>
 
     <button class="button addQuestion"
