@@ -123,7 +123,6 @@
             window.location.href = "web/pages/addingQuestions.jsp";
         }
     }
-
     function addNextWrongAns() {
         let parent = document.getElementById('added-wrongs');
         let e = document.createElement('div');

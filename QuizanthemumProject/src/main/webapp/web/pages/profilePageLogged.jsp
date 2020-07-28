@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="Controller.Classes.OtherClasses.User" %>
+<html lang="ka">
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
@@ -7,14 +9,17 @@
 	<link rel="stylesheet" href="../styles/common.css">
 	<link rel="stylesheet" href="../styles/homePage.css">
 	<link rel="stylesheet" href="../styles/breakpoints.css">
+
 <%--    <link rel="stylesheet" href="../styles/quizCreation.css">--%>
 
     <link rel="stylesheet" href="../styles/profilePage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="../js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
-	<script>
-        document.cookie = "AC-C=ac-c;expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/;SameSite=Lax";
+    <% User user = (User)request.getServletContext().getAttribute("logedInUser");%>
+    <script>
+
+        <jsp:include page="LogedInHandler.jsp"></jsp:include>
 
         function openSearch() {
 			window.location.href = "search.html";		  	
@@ -50,10 +55,8 @@
                 image.src = document.getElementById('photo-url').value;
                 changeImage();
             }
-
         }
-	</script> 
-
+	</script>
 </head>
 <body>
     <header class= "header-section">
@@ -64,8 +67,8 @@
 			      </div>
 
             <ul class="header-right">
-                <img class = "profile-picture" id="small-prof-pic-id" src = "../images/common/defProfPic.jpg" onerror="this.src='../images/common/defProfPic.jpg';" onclick="redirectToProfPage()">
-                <span class = "profile-name-text" onclick="redirectToProfPage()">Ze K1ng</span>
+                <img class = "profile-picture" id="small-prof-pic-id" src="" onerror="this.src='../images/common/defProfPic.jpg';" onclick="redirectToProfPage()">
+                <span class = "profile-name-text" onclick="redirectToProfPage()"><%=user.getUsername()%></span>
             </ul>
         </div>
     </header>
@@ -148,26 +151,56 @@
     <div class = "profile-info-wrapper">
         <div class ="profile-info-container">
             <div class ="profile-details-info">
-                <div class="user-first-name">First Name: D</div>
-                <div class = "user-last-name">Last Name: G</div>
-                <div class =  "user-email">Mail: dgogi@gmail.com </div>
-                <div class="user-mobile">Mobile Number: ******** </div>
-                <div class="user-country">Country: Georgia  </div>
-                <div class="user-city">City: Tbilisi</div>
+                <div class="user-first-name"><%="სახელი: "+user.getFirstName()%></div>
+                <div class = "user-last-name"><%="გვარი: "+user.getLastName()%></div>
+                <div class =  "user-email"><%="ელ-ფოსტა: "+user.getEmail()%></div>
+                <% String mobNum = user.getMobileNumber();
+                    if(mobNum == null){
+                        mobNum = "*******";
+                    }
+                    String country = user.getCountry();
+                    if(country == null) {
+                        country = "Unknown";
+                    }
+                    String city = user.getCity();
+                    if(city == null){
+                        city = "Unknown";
+                    }
+                %>
+                <div class="user-mobile"><%="მობ.ნომერი: "+mobNum%></div>
+                <div class="user-country"><%="ქვეყანა: "+ country%></div>
+                <div class="user-city"><%="ქალაქი: "+city %></div>
             </div>
             <div class = "profile-info">
                 <img class = "profile-picture-big" id="prof-pic-big-id"src = "../images/common/defProfPic.jpg" onerror="this.src='../images/common/defProfPic.jpg';">
                 <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
-                <div class="profile-name">Ze K1ng</div>
-                <div class="profile-details">Ex-President Of USA</div>
-                <div class="user-details">ADministrator</div>
+                <div class="profile-name"><%=user.getUsername()%></div>
+                <%
+                    int role = user.getRole();
+                    String status="";
+                    if(role==1){
+                        status="Default User";
+                    }else if(role==2){
+                        status="Moderator";
+                    }else if(role ==3){
+                        status="Administrator";
+                    }
+                %>
+                <div class="user-details"><%=status%></div>
             </div>
             <div class="profile-details-info">
-                <div class="user-ranking">Rank:Infinity</div>
-                <div class = "quizzes-played">Quizzes Played : 0</div>
-                <div class =  "challenges-played">Challenges Played: 0</div>
-                <div class="challenges-won">Challenges Won: 0</div>
-                <div class="quizzes-made">Quizzes Made: 0 </div>
+                <div class = "quizzes-played"><%="ნათამაშები ქვიზები: "+user.getQuizzesPlayed()%></div>
+                <div class =  "challenges-played"><%="ნათამაშები ჩელენჯები: "+user.getChallengesPlayed()%></div>
+                <div class="challenges-won"><%="მოგებული ჩელენჯები: "+user.getChallengesWon()%></div>
+                <%
+                    if(role>1){
+                        out.print("<div class='quizzes-made'> ");
+                        out.print("შედგენილი ქვიზები: ");
+                        out.print(user.getQuizzesMade());
+                        out.print("</div>");
+                    }
+                %>
+                <div class = "Creation-date"><%="პროფილის შექმნის თარიღი: <br><br>"+user.getRegistrationDate()%></div>
             </div>
         </div>
 
@@ -175,7 +208,7 @@
 
   <div class = "top-quizzes-banner">
     <div class="players-top-quizzes">
-      Your Top Played Quizzes
+        ნათამაშები ტოპ ქვიზები
     </div>
   </div>
     <main class="main">
@@ -253,3 +286,4 @@
 		</div>
 	</footer>
 </body>
+</html>
