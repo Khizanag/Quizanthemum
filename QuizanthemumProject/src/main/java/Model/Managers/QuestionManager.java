@@ -2,7 +2,7 @@ package Model.Managers;
 
 import Configs.QuestionTableConfig;
 import Controller.Classes.Quiz.Question.Question;
-import Controller.Classes.Quiz.Question.QuestionType;
+import Controller.Classes.Quiz.Question.QuestionTypes;
 import Configs.Config;
 import Model.DatabaseConnector;
 
@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
-public class QuestionManager implements Config, QuestionTableConfig, QuestionType {
+public class QuestionManager implements Config, QuestionTableConfig, QuestionTypes {
 
     private ManagersManager manager;
     private Connection connection;
