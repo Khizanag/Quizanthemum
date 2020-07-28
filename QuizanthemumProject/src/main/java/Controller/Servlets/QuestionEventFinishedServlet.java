@@ -49,14 +49,13 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         }
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
-        if (quizEvent.hasNext()) {
+        if (quizEvent.hasNextQuestion()) {
             response.setHeader("Location", "http://localhost:8080/web/pages/next-question.html"); // TODO valid address. next question
         } else {
             response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
         }
 
         quizEvent.setFilledQuestionEvent(newQuestionEvent);
-//        questionEventManager.setQuestionEvent(newQuestionEvent); // TODO or add all question events at the end (quiz finished)
     }
 
     private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {

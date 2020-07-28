@@ -18,6 +18,7 @@ public class QuizEvent {
     private Date startDate;                                     // quiz starting date
     private Date finishDate;                                    // quiz finishing date
     private int questionIdx;                                    // keeps track of current question
+    private int questionEventIdx;                               // keeps track of current question event
     private final List<QuestionEvent> questionEvents;           // keeps filled question events
     private double userTotalScore;                              // counts user's total score
 
@@ -66,8 +67,16 @@ public class QuizEvent {
     }
 
     // true if quiz has more questions. false otherwise
-    public boolean hasNext() {
+    public boolean hasNextQuestion() {
         return questionIdx < quiz.getQuestionsCount();
+    }
+
+    public void resetQuestionEventIterator() {
+        questionEventIdx = 0;
+    }
+
+    public boolean hasNextQuestionEvent() {
+        return questionEventIdx < questionEvents.size();
     }
 
     // returns current question event to user to fill it
