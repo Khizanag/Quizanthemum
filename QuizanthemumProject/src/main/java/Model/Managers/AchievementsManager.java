@@ -1,10 +1,9 @@
 package Model.Managers;
 
 import Configs.AchievementsTableConfig;
-import Controller.Classes.OtherClasses.Achievement;
+import Controller.Classes.User.Achievement;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,12 +12,12 @@ import java.sql.Statement;
 
 public class AchievementsManager implements AchievementsTableConfig {
 
-    private ServletContext context;
+    private ManagersManager manager;
     private Connection connection;
     private Statement statement;
 
-    public AchievementsManager(ServletContext context){
-        this.context = context;
+    public AchievementsManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
@@ -53,10 +52,5 @@ public class AchievementsManager implements AchievementsTableConfig {
             statement.execute(query);
         } catch (SQLException throwable) { }
     }
-
-    public void setContext(ServletContext context){
-        this.context = context;
-    }
-    public ServletContext getContext(){ return this.context; }
 
 }

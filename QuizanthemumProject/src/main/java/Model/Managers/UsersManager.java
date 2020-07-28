@@ -1,12 +1,9 @@
 package Model.Managers;
 
 import Configs.*;
-import Controller.Classes.OtherClasses.User;
-import Controller.Classes.OtherClasses.Achievement;
+import Controller.Classes.User.User;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,10 +18,10 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     private final Connection connection;
     private Statement statement;
-    private ServletContext context;
+    private ManagersManager manager;
 
-    public UsersManager(ServletContext context){
-        this.context = context;
+    public UsersManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();

@@ -1,13 +1,12 @@
 package Model.Managers;
 
 import Configs.QuestionEventTableConfig;
-import Controller.Classes.OtherClasses.User;
-import Controller.Classes.Quiz.QuestionEvent;
+import Controller.Classes.User.User;
+import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,12 @@ import static Configs.QuizEventTableConfig.*;
 
 public class QuizEventManager implements QuestionEventTableConfig {
 
-    private ServletContext context;
+    private ManagersManager manager;
     private Connection connection;
     private Statement statement;
 
-    public QuizEventManager(){
+    public QuizEventManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
@@ -30,9 +30,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
         }
     }
 
-    public void setContext(ServletContext context){
-        this.context = context;
-    }
+    public ManagersManager getmanager(){ return this.manager; }
 
     public QuizEvent getQuizEvent(int id) {
         String query = "SELECT * " +
@@ -41,10 +39,10 @@ public class QuizEventManager implements QuestionEventTableConfig {
         try {
             ResultSet set = statement.executeQuery(query);
             int quizId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID);
-            QuizManager quizManager = (QuizManager) context.getAttribute(QUIZ_MANAGER_STR);
+            QuizManager quizManager = (QuizManager) manager.getManager(QUIZ_MANAGER_STR);
             Quiz quiz = quizManager.getQuiz(quizId);
             int userId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_3_USER_ID);
-            UsersManager userManager = (UsersManager) context.getAttribute(USERS_MANAGER_STR);
+            UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
             User user = userManager.getUser(userId);
             java.util.Date startDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_4_START_DATE);
             java.util.Date finishDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE);
@@ -66,7 +64,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
                 int questionEventID = set.getInt(QUESTION_EVENT_TABLE_COLUMN_1_ID);
-                QuestionEventManager questionEventManager = (QuestionEventManager) context.getAttribute(QUESTION_EVENT_MANAGER_STR);
+                QuestionEventManager questionEventManager = (QuestionEventManager) manager.getManager(QUESTION_EVENT_MANAGER_STR);
                 QuestionEvent questionEvent = questionEventManager.getQuestionEvent(questionEventID);
                 questionEvents.add(questionEvent);
             }
@@ -81,8 +79,8 @@ public class QuizEventManager implements QuestionEventTableConfig {
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setInt(1, quizEvent.getId());
-            pstmt.setInt(2, quizEvent.getQuiz().getId());
-            pstmt.setInt(3, quizEvent.getUser().getId());
+            pstmt.setInt(2, quizEvent.getQuiz().getID());
+            pstmt.setInt(3, quizEvent.getUser().getID());
             pstmt.setDate(4, new java.sql.Date(quizEvent.getStartDate().getTime()));
             pstmt.setDate(5, new java.sql.Date(quizEvent.getFinishDate().getTime()));
             pstmt.setDouble(6, quizEvent.getUserScore());
