@@ -1,9 +1,8 @@
 package Controller.Servlets;
 
-import Controller.Classes.OtherClasses.User;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
-import Model.Managers.QuestionEventManager;
+import Controller.Classes.User.User;
 import Model.Managers.QuizEventManager;
 import Model.Managers.QuizManager;
 

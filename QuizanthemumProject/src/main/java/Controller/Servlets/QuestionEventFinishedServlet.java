@@ -1,7 +1,7 @@
 package Controller.Servlets;
 
-import Controller.Classes.Quiz.Question;
-import Controller.Classes.Quiz.QuestionEvent;
+import Controller.Classes.Quiz.Question.Question;
+import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.QuestionEventManager;
 
@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.*;
-import static Controller.Classes.Quiz.QuestionType.*;
+import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 
 @WebServlet(name = "QuestionEventFinishedServlet")
 public class QuestionEventFinishedServlet extends HttpServlet {

@@ -1,7 +1,5 @@
 package Controller.Servlets;
 
-import Controller.Classes.Quiz.Question;
-import Controller.Classes.Quiz.QuestionEvent;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.QuestionEventManager;
 import Model.Managers.QuizEventManager;
@@ -12,9 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import static Configs.Config.QUESTION_EVENT_MANAGER_STR;
 import static Configs.Config.QUIZ_EVENT_MANAGER_STR;
