@@ -133,7 +133,7 @@ public final class Question {
 
     public Set<Pair<String>> getMatchingAnswers() {
         Set<Pair<String>> matchingAnswers = new TreeSet<>();
-        for (int i = 0; i < statements.size(); i+=2) {
+        for (int i = 0; i < answers.size(); i+=2) {
             matchingAnswers.add(new Pair<>(answers.get(i), answers.get(i+1)));
         }
         return matchingAnswers;
@@ -142,7 +142,7 @@ public final class Question {
     // for multi-choice and fill-blank questions
     public Set<String> getMultiAnswers() {
         Set<String> multiAnswers = new TreeSet<>();
-        for (int i = 0; i < statements.size(); i++) {
+        for (int i = 0; i < answers.size(); i++) {
             multiAnswers.add(answers.get(i));
         }
         return multiAnswers;

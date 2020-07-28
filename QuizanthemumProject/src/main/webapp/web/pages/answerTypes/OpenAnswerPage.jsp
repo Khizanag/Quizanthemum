@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<form class="add-question-section">
+<form class="add-question-section" action="/QuestionEventFinished" method="get">
     <div class="container">
         <h2>შეკითხვა (აქ იქნება N)</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, ea
@@ -64,7 +64,7 @@
             <textarea class="ans-toFill" id="ans-toFill"></textarea>
             <p> შეყვანილია <span>0</span> სიტყვა</p>
         </div><hr>
-        <button class="button" type="button"> პასუხის დადასტურება </button>
+        <button class="button" type="submit"> პასუხის დადასტურება </button>
     </div>
 </form>
 
