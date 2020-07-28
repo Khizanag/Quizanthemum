@@ -56,7 +56,7 @@
             perspiciatis quasi. Accusantium alias aliquid animi at error,
             exercitationem modi porro quas ratione
             sapiente tempore veniam vero voluptate? </p>
-        <p>ავტორის მინიშნება/მოთხოვნა, მაგალითად: (კაიაჟერს ერითმება)</p>
+        <p>ავტორის მინიშნება/მოთხოვნა, მაგალითად: (აირჩიეთ ერთი ან მეტი პასუხი)</p>
         <hr>
         <div class="input-items" id="input-items">
             <input type="checkbox" id="1" name="test_answer_1">
@@ -66,7 +66,11 @@
             <input type="checkbox" id="3" name="test_answer_3">
             <label for="3"><b> შაურმა თიმთიმ თაურმა </b></label><br>
             <input type="checkbox" id="4" name="test_answer_4">
-            <label for="4"><b> ძმდებო ძღმდებო </b></label><br><br>
+            <label for="4"><b> ძმდებო ძღმდებო </b></label><br>
+            <input type="checkbox" id="5" name="test_answer_5">
+            <label for="5"><b> შაურმა თიმთიმ თაურმა </b></label><br>
+            <input type="checkbox" id="6" name="test_answer_6">
+            <label for="6"><b> ძმდებო ძღმდებო </b></label><br><br>
         </div><hr>
         <button class="button" type="button"> პასუხის დადასტურება </button>
     </div>
@@ -74,9 +78,3 @@
 
 <jsp:include page="../Footer.jsp"></jsp:include>
 </body>
-
-<script>
-    $('input[type="checkbox"]').on('change', function() {
-        $('input[type="checkbox"]').not(this).prop('checked', false);
-    });
-</script>
