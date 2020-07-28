@@ -1,4 +1,4 @@
-package Controller.Classes.OtherClasses;
+package Controller.Classes.User;
 
 public final class Achievement {
 

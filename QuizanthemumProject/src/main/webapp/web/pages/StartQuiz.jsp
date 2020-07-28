@@ -1,5 +1,5 @@
 <%@ page import="Model.Managers.UsersManager" %>
-<%@ page import="Controller.Classes.OtherClasses.User" %>
+<%@ page import="Controller.Classes.User.User" %>
 <%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>

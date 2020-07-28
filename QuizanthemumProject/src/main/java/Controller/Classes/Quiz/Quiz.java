@@ -1,16 +1,19 @@
 package Controller.Classes.Quiz;
 
-import Controller.Classes.OtherClasses.User;
+import Controller.Classes.Quiz.Question.Question;
+import Controller.Classes.User.User;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static Configs.Config.DEFAULT_ID;
+
 public class Quiz {
 
     /* private instance variables */
 
-    private final int id;
+    private int id;
     private final String name;
     private final String description;
     private final String iconUrl;                           // url for quiz icon
@@ -35,10 +38,11 @@ public class Quiz {
         while this quiz is not still published, and is not saved into database.
         Note: after entirely creating this object, it should be stored into database
      */
-    public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author){
-        this(id, name, description, iconUrl, mustShuffleQuestions, comment, author, true);
+    public Quiz(String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author){
+        this(DEFAULT_ID, name, description, iconUrl, mustShuffleQuestions, comment, author, true);
         this.questions = new ArrayList<>();
         this.maxScore = 0;
+        this.creationDate = new Date();
     }
 
     /* helper constructor used by other public constructors */
@@ -53,7 +57,7 @@ public class Quiz {
     }
 
     /* getter methods */
-    public int getId() { return id; }
+    public int getID() { return id; }
 
     public String getName() { return name; }
 
@@ -75,9 +79,16 @@ public class Quiz {
 
     public User getAuthor() {  return author; }
 
+    /* SETTERS */
+    public void setID(int ID){
+        this.id = ID;
+    }
+
     /* public methods */
 
     public void addQuestion(Question question) {
+        if(questions == null)
+            questions = new ArrayList<>();
         questions.add(question);
         maxScore += question.getMaxScore();
     }

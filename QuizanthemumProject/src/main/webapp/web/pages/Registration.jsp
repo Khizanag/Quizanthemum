@@ -44,6 +44,7 @@
         </nav>
     </div>
 </div>
+
 <form class="registration-section" action="../../Registration" method="get">
     <div class="container">
         <h2>რეგისტრაცია</h2>

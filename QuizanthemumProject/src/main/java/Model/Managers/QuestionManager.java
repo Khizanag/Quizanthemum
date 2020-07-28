@@ -1,23 +1,23 @@
 package Model.Managers;
 
 import Configs.QuestionTableConfig;
-import Controller.Classes.Quiz.Question;
-import Controller.Classes.Quiz.QuestionType;
+import Controller.Classes.Quiz.Question.Question;
+import Controller.Classes.Quiz.Question.QuestionTypes;
 import Configs.Config;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
 
-public class QuestionManager implements Config, QuestionTableConfig, QuestionType {
+public class QuestionManager implements Config, QuestionTableConfig, QuestionTypes {
 
+    private ManagersManager manager;
     private Connection connection;
     private Statement connectionStatement;
-    private ServletContext context;
 
-    public QuestionManager(){
+    public QuestionManager(ManagersManager manager){
+        this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
         try {
             connectionStatement = connection.createStatement();
@@ -26,36 +26,34 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
         }
     }
 
-    public void setContext(ServletContext context){
-        this.context = context;
-    }
-
-    public void insertQuestion(Question question){
+    public int insertQuestion(Question question){
         String query = getQuestionQueryText(question);
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             setQueryParameters(question, pstmt);
             pstmt.executeUpdate();
+            return DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
             System.out.println("Insertion Error. Question Manager Class");
+            e.printStackTrace();
         }
+        return DEFAULT_ID;
     }
 
     private void setQueryParameters(Question question, PreparedStatement pstmt) {
         try {
-            pstmt.setInt(1, question.getId());
-            pstmt.setInt(2, question.getType());
-            pstmt.setBoolean(3, question.isAutoGraded());
-            pstmt.setDouble(4, question.getMaxScore());
-            pstmt.setString(5, question.getHeaderStatement());
-            pstmt.setString(6, question.getTextStatement());
-            pstmt.setString(7, question.getPictureStatementURL());
-            pstmt.setString(8, question.getComment());
-            pstmt.setString(9, question.getSource());
-            pstmt.setDate(10, new java.sql.Date(question.getCreationDate().getTime()));
-            pstmt.setInt(11, question.getQuizId());
-            pstmt.setBoolean(12, question.isPictureQuestion());
-            pstmt.setInt(13, question.getStatementsCount());
+            pstmt.setInt(1, question.getType());
+            pstmt.setBoolean(2, question.isAutoGraded());
+            pstmt.setDouble(3, question.getMaxScore());
+            pstmt.setString(4, question.getHeaderStatement());
+            pstmt.setString(5, question.getTextStatement());
+            pstmt.setString(6, question.getPictureStatementURL());
+            pstmt.setString(7, question.getComment());
+            pstmt.setString(8, question.getSource());
+            pstmt.setDate(9, new java.sql.Date(question.getCreationDate().getTime()));
+            pstmt.setInt(10, question.getQuizId());
+            pstmt.setBoolean(11, question.isPictureQuestion());
+            pstmt.setInt(12, question.getStatementsCount());
 
             List<String> statements = question.getStatements();
             for(int i = 0; i < STATEMENTS_NUM; i++) {
@@ -84,7 +82,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
 
     private String getQuestionQueryText(Question question) {
         String query = "INSERT INTO " + QUESTIONS_TABLE_NAME;
-        query += " VALUES (?";
+        query += " VALUES (null";
         for (int i = 1; i < COLUMN_COUNT; i++) {
             query += ", ?";
         }

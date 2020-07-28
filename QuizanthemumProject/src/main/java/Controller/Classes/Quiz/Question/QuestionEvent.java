@@ -1,4 +1,4 @@
-package Controller.Classes.Quiz;
+package Controller.Classes.Quiz.Question;
 
 import Tools.Pair;
 
@@ -60,7 +60,7 @@ public class QuestionEvent {
 
     public int getQuizEventId() { return quizEventId; }
 
-    public int getQuestionId() { return question.getId(); }
+    public int getQuestionId() { return question.getID(); }
 
     public List<String> getUserAnswers() { return userAnswers; }
 

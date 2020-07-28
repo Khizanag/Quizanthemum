@@ -1,5 +1,6 @@
-package Controller.Classes.OtherClasses;
+package Controller.Classes.User;
 
+import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.QuizEvent;
 
 import java.security.MessageDigest;
@@ -73,11 +74,6 @@ public class User {
         this.quizzesPlayed=0;
     }
 
-    public int getId(){ return id; }
-
-    public String getUsername() {
-        return username;
-    }
 
     private String hashFunction(String password) {
         MessageDigest md = null;
@@ -95,6 +91,7 @@ public class User {
 	 * such as "234a6f". with 2 chars for each byte in the array.
 	 * helper method for hash function
 	 */
+
     public static String hexToString(byte[] bytes) {
         StringBuffer buff = new StringBuffer();
         for (int i=0; i<bytes.length; i++) {
@@ -106,9 +103,12 @@ public class User {
         return buff.toString();
     }
 
-
     public int getID() {
         return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPasswordHash() {

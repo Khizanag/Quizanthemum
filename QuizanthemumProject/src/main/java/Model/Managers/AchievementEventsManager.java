@@ -1,9 +1,9 @@
 package Model.Managers;
 
 import Configs.AchievementsTableConfig;
-import Controller.Classes.OtherClasses.AchievementEvent;
+import Controller.Classes.User.AchievementEvent;
+import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,28 +11,19 @@ import java.sql.Statement;
 import java.util.Date;
 
 import static Configs.AchievementEventTableConfig.*;
-import static Configs.Config.CONNECTION_STR;
 
 public class AchievementEventsManager implements AchievementsTableConfig {
 
-    private ServletContext context;
+    private ManagersManager manager;
     private Connection connection;
     private Statement statement;
 
-    public AchievementEventsManager(ServletContext context){
-        this.context = context;
-        this.connection = (Connection) context.getAttribute(CONNECTION_STR);
+    public AchievementEventsManager(ManagersManager manager){
+        this.manager = manager;
+        this.connection = DatabaseConnector.getInstance();
         try {
             statement = connection.createStatement();
         } catch (SQLException unused) { }
-    }
-
-    public void setContext(ServletContext context){
-        this.context = context;
-    }
-
-    public ServletContext getContext(){
-        return context;
     }
 
     public AchievementEvent getAchievement(int id){

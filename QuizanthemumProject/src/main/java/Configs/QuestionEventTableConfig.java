@@ -1,10 +1,5 @@
 package Configs;
 
-import Controller.Classes.Quiz.Question;
-
-import java.util.Date;
-import java.util.List;
-
 public interface QuestionEventTableConfig {
 
     int USER_ANSWER_START_COL = 8;
