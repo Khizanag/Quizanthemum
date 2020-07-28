@@ -54,7 +54,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             pstmt.setInt(10, question.getQuizId());
             pstmt.setBoolean(11, question.isPictureQuestion());
             pstmt.setInt(12, question.getStatementsCount());
-
+            pstmt.setInt(13, question.getStatementsCount());
             List<String> statements = question.getStatements();
             for(int i = 0; i < STATEMENTS_NUM; i++) {
                 if (i < statements.size()) {
@@ -68,8 +68,9 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             pstmt.setInt(31, question.getAnswersCount());
 
             List<String> answers = question.getAnswers();
+            int numAnswers = answers.size();
             for(int i = 0; i < ANSWERS_NUM; i++) {
-                if (i < answers.size()) {
+                if (i < numAnswers) {
                     pstmt.setString(ANSWER_START_COL + i, answers.get(i));
                 } else {
                     pstmt.setString(ANSWER_START_COL + i, null);

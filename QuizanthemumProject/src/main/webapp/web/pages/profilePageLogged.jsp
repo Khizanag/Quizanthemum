@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Controller.Classes.OtherClasses.User" %>
+<%@ page import="Controller.Classes.User.User" %>
 <html lang="ka">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="../styles/homePage.css">
 	<link rel="stylesheet" href="../styles/breakpoints.css">
 
-<%--    <link rel="stylesheet" href="../styles/quizCreation.css">--%>
+    <link rel="stylesheet" href="../styles/quizCreation.css">
 
     <link rel="stylesheet" href="../styles/profilePage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -19,7 +19,7 @@
     <% User user = (User)request.getServletContext().getAttribute("logedInUser");%>
     <script>
 
-        <jsp:include page="LogedInHandler.jsp"></jsp:include>
+<%--        <jsp:include page="LogedInHandler.jsp"></jsp:include>--%>
 
         function openSearch() {
 			window.location.href = "search.html";		  	
@@ -58,6 +58,7 @@
         }
 	</script>
 </head>
+
 <body>
     <header class= "header-section">
         <div class="container header">
@@ -109,15 +110,15 @@
             <div class = "friend-list-row">
                 <span class="friend-name">მეგობარი1</span>
                 <div class = "friend-challenge-remove-btns">
-                    <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
-                    <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
+                    <button class="challenge-btn" id="challenge-btn-id-1" onclick="challengeFriend()">Challenge</button>
+                    <button class="remove-btn" id="remove-btn-id-1" onclick="removeFriend(this)">Remove</button>
                 </div>
             </div>
             <div class = "friend-list-row">
                 <span class="friend-name">მეგობარი2</span>
                 <div class = "friend-challenge-remove-btns">
-                    <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
-                    <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
+                    <button class="challenge-btn" id="challenge-btn-id-2" onclick="challengeFriend()">Challenge</button>
+                    <button class="remove-btn" id="remove-btn-id-2" onclick="removeFriend(this)">Remove</button>
                 </div>
             </div>
         </div>

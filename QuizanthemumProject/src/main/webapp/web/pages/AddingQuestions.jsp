@@ -49,15 +49,14 @@
     </div>
 
     <div class="page-holder">
-        <form class="add-question-section">
+<%--        <form class="add-question-section" action="../../QuestionCreated" method="get">--%>
             <div class="container">
                 <h2>შეკითხვა</h2>
-                <p>შეკითხვის დასამატებლაd შეავსეთ ქვემოთ მოყვანილი ველები.</p>
-                <hr>
+                <p>შეკითხვის დასამატებლად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+                <hr>s
 
                 <div class="input-items" id="input-items">
                     <label for="questions-type"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
-                    <label><b>აირჩიეთ შეკითხვის ტიპი</b></label>
                     <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
                         <option value="0">-</option>
                         <option value="1">ღია პასუხი</option>
@@ -68,10 +67,10 @@
                         <option value="6">დასაწყვილებელი</option>
                     </select>
                     <div id="current-question-type"></div>
-                    <button class="button finish" type="button">დასრულება</button>
+                    <button class="button finish" type="button" onclick="redirectToQuizFinishedPage()">დასრულება</button>
                 </div>
             </div>
-        </form>
+<%--        </form>--%>
     </div>
     <jsp:include page="Footer.jsp"></jsp:include>
 </body>
@@ -120,7 +119,7 @@
         let name = document.getElementById('question').value != '';
         let description = document.getElementById('description').value != '';
         if((name && description)) {
-            window.location.href = "web/pages/addingQuestions.jsp";
+            window.location.href = "web/pages/AddingQuestions.jsp";
         }
     }
     function addNextWrongAns() {
@@ -146,4 +145,9 @@
         document.getElementById("fill-question").innerText = prev + ' {(<_' + text + '_>)})';
         document.getElementById("fillWith").value = '';
     }
+
+    function redirectToQuizFinishedPage(){
+        window.location.href = "/QuizCreationFinished";
+    }
+
 </script>
