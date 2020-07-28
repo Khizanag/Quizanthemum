@@ -19,6 +19,7 @@ public class QuizEvent {
     private Date startDate;                                     // quiz starting date
     private Date finishDate;                                    // quiz finishing date
     private int questionIdx;                                    // keeps track of current question
+    private int questionEventIdx;                               // keeps track of current question event
     private final List<QuestionEvent> questionEvents;           // keeps filled question events
     private double userTotalScore;                              // counts user's total score
 
@@ -67,21 +68,35 @@ public class QuizEvent {
     }
 
     // true if quiz has more questions. false otherwise
-    public boolean hasNext() {
+    public boolean hasNextQuestion() {
         return questionIdx < quiz.getQuestionsCount();
     }
 
+    public void resetQuestionEventIterator() {
+        questionEventIdx = 0;
+    }
+
+    public boolean hasNextQuestionEvent() {
+        return questionEventIdx < questionEvents.size();
+    }
+
     // returns current question event to user to fill it
-    public QuestionEvent getNextQuestionEvent() {
+    public QuestionEvent getNextEmptyQuestionEvent() {
         QuestionEvent currentQuestionEvent = new QuestionEvent(id, quiz.getQuestion(questionIdx), false, new Date());
         questionIdx += 1;
         return currentQuestionEvent;
     }
 
+    public QuestionEvent getNextFilledQuestionEvent() {
+        QuestionEvent currentQuestionEvent = questionEvents.get(questionEventIdx);
+        questionEventIdx += 1;
+        return currentQuestionEvent;
+    }
+
     // adds already filled question in question events history
-    public void setFilledQuestionEvent(QuestionEvent qe) {
-        questionEvents.add(qe);
-        userTotalScore += qe.getUserScore();
+    public void setFilledQuestionEvent(QuestionEvent newQuestionEvent) {
+        questionEvents.add(newQuestionEvent);
+        userTotalScore += newQuestionEvent.getUserScore();
     }
 
     // sets quiz status as finished
