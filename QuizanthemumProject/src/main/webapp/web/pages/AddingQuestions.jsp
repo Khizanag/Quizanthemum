@@ -53,7 +53,7 @@
             <div class="container">
                 <h2>შეკითხვა</h2>
                 <p>შეკითხვის დასამატებლად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
-                <hr>s
+                <hr>
 
                 <div class="input-items" id="input-items">
                     <label for="questions-type"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
