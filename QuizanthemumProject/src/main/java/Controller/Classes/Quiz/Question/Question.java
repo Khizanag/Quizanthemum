@@ -8,14 +8,14 @@ public final class Question {
 
     /* private variables */
 
-    private int id;
+    private int ID;
     private final int type;
-    private final boolean isAutoGraded;            // true if question has to be graded automatically, false otherwise
-    private final double maxScore;                 // maximum score for given question
-    private final String comment;                  // author's comment on question
-    private final String source;                   // question source. link, book...
+    private final boolean isAutoGraded;   // true if question has to be graded automatically, false otherwise
+    private final double maxScore;         // maximum score for given question
+    private final String comment;           // author's comment on question
+    private final String source;               // question source. link, book...
     private final Date creationDate;
-    private final int quizId;                      // question owner quiz
+    private int quizID;                            // question owner quiz
 
     /* statements */
 
@@ -33,7 +33,7 @@ public final class Question {
     /* constructor */
 
     public Question(int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
-                    String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
+                    String source, Date creationDate, int quizID, boolean isPictureQuestion, boolean isPictureAnswer,
                     String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
         this.type = type;
         this.isAutoGraded = isAutoGraded;
@@ -41,7 +41,7 @@ public final class Question {
         this.headerStatement = headerStatement;
         this.comment = comment;
         this.source = source;
-        this.quizId = quizId;
+        this.quizID = quizID;
         this.creationDate = creationDate;
         this.isPictureQuestion = isPictureQuestion;
         this.isPictureAnswer = isPictureAnswer;
@@ -52,20 +52,20 @@ public final class Question {
     }
 
     // constructor for database (id is added)
-    public Question(int id, int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
+    public Question(int ID, int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
                     String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
                     String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
 
         this(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId, isPictureQuestion,
                 isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
-        this.id = id;
+        this.ID = ID;
     }
 
 
 
     /* getter methods */
 
-    public int getID() { return id; }
+    public int getID() { return ID; }
 
     public int getType() { return type; }
 
@@ -81,7 +81,7 @@ public final class Question {
 
     public Date getCreationDate() { return creationDate; }
 
-    public int getQuizId() { return quizId; }
+    public int getQuizID() { return quizID; }
 
     public boolean isPictureQuestion() { return isPictureQuestion; }
 
@@ -89,8 +89,9 @@ public final class Question {
 
     /* SETTERS */
     public void setID(int ID){
-        this.id = ID;
+        this.ID = ID;
     }
+    public void setQuizID(int quizID){ this.quizID = quizID; }
 
     /* statement getters */
 

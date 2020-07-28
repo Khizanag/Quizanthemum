@@ -42,12 +42,13 @@ public class DatabaseConnector implements LocalDatabaseConfig {
 
     public static int getLastInsertID(){
         DatabaseConnector.getInstance(); // to be sure that connection is not null
-        String query = "SELECT LAST_INSERT_ID() AS LAST_INSERT_ID;";
+        String query = "SELECT LAST_INSERT_ID() AS ID;";
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             if(rs.next()){
-                return rs.getInt("LAST_INSERT_ID");
+                System.out.println("selected last_insert_id = " + rs.getInt("ID"));
+                return rs.getInt("ID");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

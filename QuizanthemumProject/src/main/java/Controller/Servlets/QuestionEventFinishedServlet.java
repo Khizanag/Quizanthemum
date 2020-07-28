@@ -2,6 +2,7 @@ package Controller.Servlets;
 
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Question.QuestionEvent;
+import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.QuestionEventManager;
 

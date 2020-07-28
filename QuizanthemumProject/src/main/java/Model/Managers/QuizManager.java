@@ -89,7 +89,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             pstmt.setDate(7, new java.sql.Date(quiz.getCreationDate().getTime()));
             pstmt.setDouble(8, quiz.getMaxScore());
             pstmt.executeUpdate();
-            int ID = DatabaseConnector.getLastInsertID();
+            return DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
             System.out.println("Insertion Error. Quiz Manager Class");
             e.printStackTrace();

@@ -49,15 +49,14 @@
     </div>
 
     <div class="page-holder">
-        <form class="add-question-section">
+<%--        <form class="add-question-section" action="../../QuestionCreated" method="get">--%>
             <div class="container">
                 <h2>შეკითხვა</h2>
-                <p>შეკითხვის დასამატებლაd შეავსეთ ქვემოთ მოყვანილი ველები.</p>
-                <hr>
+                <p>შეკითხვის დასამატებლად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+                <hr>s
 
                 <div class="input-items" id="input-items">
                     <label for="questions-type"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
-                    <label><b>აირჩიეთ შეკითხვის ტიპი</b></label>
                     <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
                         <option value="0">-</option>
                         <option value="1">ღია პასუხი</option>
@@ -67,10 +66,10 @@
                         <option value="5">დასაწყვილებელი</option>
                     </select>
                     <div id="current-question-type"></div>
-                    <button class="button finish" type="button">დასრულება</button>
+                    <button class="button finish" type="button" onclick="redirectToQuizFinishedPage()">დასრულება</button>
                 </div>
             </div>
-        </form>
+<%--        </form>--%>
     </div>
     <jsp:include page="Footer.jsp"></jsp:include>
 </body>
@@ -81,7 +80,7 @@
             document.getElementById('current-question-type').innerHTML='';
         }
         if($("#questions-type option:selected").val() == 1) {
-            $('#current-question-type').load('./questionTypes/OpenAnswerPage.jsp');
+            $('#current-question-type').load('./questionTypes/OpenAnswerQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 2) {
             $('#current-question-type').load('./questionTypes/FillTextQuestionPage.jsp');
@@ -116,17 +115,16 @@
         let name = document.getElementById('question').value != '';
         let description = document.getElementById('description').value != '';
         if((name && description)) {
-            window.location.href = "web/pages/addingQuestions.jsp";
+            window.location.href = "web/pages/AddingQuestions.jsp";
         }
     }
     let wrongSingleId = 1;
     function addNextWrongAns() {
         let parent = document.getElementById('added-wrongs');
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი"'+
-            'name="wrong-answer-' + wrongSingleId +
-            '" id="wrong-answer" required>';
+        let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_'+numWrongAnswers+'" id="wrong-ans-'+numWrongAnswers+'" required>';
         parent.innerHTML += toAdd;
-        wrongSingleId++;
+        document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
     }
 
     let correctMultiId = 1;
@@ -136,7 +134,7 @@
             'name="correct-answer-' + correctMultiId +
             '" id="correct-answer" required>';
         parent.innerHTML += toAdd;
-        wrongSingleId++;
+        correctMultiId++;
     }
 
     function addToFill() {
@@ -152,6 +150,10 @@
         if(text === '') return;
         document.getElementById("fill-question").innerText = prev + ' {(<_' + text + '_>)})';
         document.getElementById("fillWith").value = '';
+    }
+
+    function redirectToQuizFinishedPage(){
+        window.location.href = "/QuizCreationFinished";
     }
 
     let matchId = 5;
@@ -174,4 +176,5 @@
 
         parent.innerHTML += toAdd;
     }
+
 </script>

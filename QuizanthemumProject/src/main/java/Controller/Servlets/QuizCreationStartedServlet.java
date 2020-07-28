@@ -44,20 +44,8 @@ public class QuizCreationStartedServlet extends HttpServlet {
 
         Quiz newQuiz = new Quiz(name, description, iconUrl, mustShuffleQuestions, comment, author);
 
-        int ID = quizManager.insertQuiz(newQuiz);
-        newQuiz.setID(ID);
-        System.out.println("quiz inserted into database");
-        request.setAttribute("startedCreatingOfQuiz", ID);
-        request.setAttribute(CREATING_QUIZ_STR, newQuiz);
-//        System.out.println("now will forwarded to AddingQuestions.jsp");
-//        if(request.getRequestDispatcher("../../AddingQuestions.jsp") == null){
-//            System.out.println("PZDC: dispacheri nullia in QUIZ_creationStartedServlet");
-//        } else {
-//            System.out.println("dispacheri nulli araa in QUIZ_creationStartedServlet");
-//        }
-//        request.getRequestDispatcher("/Users/gigakhizanishvili/Programming/GitHub/Quizanthemum/QuizanthemumProject/src/main/webapp/web/pages/AddingQuestions.jsp").forward(request, response);
+        request.getServletContext().setAttribute(QUIZ_CREATING_NOW, newQuiz);
 
-        response.setHeader("CREATING_QUIZ_NAME_STR", "CREATING_QUIZ_WITH_ID_" + ID);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
 
