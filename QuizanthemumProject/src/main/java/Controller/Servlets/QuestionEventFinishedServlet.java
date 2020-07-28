@@ -28,7 +28,7 @@ public class QuestionEventFinishedServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuestionEventManager questionEventManager = (QuestionEventManager) request.getServletContext().getAttribute(QUESTION_EVENT_MANAGER_STR);
 
-        QuizEvent quizEvent = (QuizEvent) request.getAttribute("question_event_quiz");
+        QuizEvent quizEvent = (QuizEvent) request.getAttribute("quiz_event");
         int quizEventId = quizEvent.getId();
         Question question = (Question) request.getAttribute("question_event_question");
         boolean isAlreadyGraded = Boolean.parseBoolean(request.getParameter("question_event_is_already_graded"));
@@ -50,6 +50,7 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
+            request.setAttribute("question_event_question", quizEvent.getNextEmptyQuestionEvent());
             response.setHeader("Location", "http://localhost:8080/web/pages/next-question.html"); // TODO valid address. next question
         } else {
             response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz

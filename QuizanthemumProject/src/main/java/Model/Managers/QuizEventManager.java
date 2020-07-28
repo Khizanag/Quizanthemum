@@ -92,4 +92,8 @@ public class QuizEventManager implements QuestionEventTableConfig {
         }
     }
 
+    public int getNewQuizEventID(){
+        return -1; // TODO sequence
+    }
+
 }

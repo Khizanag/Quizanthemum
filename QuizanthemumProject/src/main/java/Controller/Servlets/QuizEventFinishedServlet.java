@@ -30,12 +30,12 @@ public class QuizEventFinishedServlet extends HttpServlet {
         QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
         QuestionEventManager questionEventManager = (QuestionEventManager) request.getServletContext().getAttribute(QUESTION_EVENT_MANAGER_STR);
 
-        QuizEvent quizEvent = (QuizEvent) request.getAttribute("quiz_event_quiz");
+        QuizEvent quizEvent = (QuizEvent) request.getAttribute("quiz_event");
 
         quizEvent.finishQuiz();
         quizEvent.resetQuestionEventIterator();
         while (quizEvent.hasNextQuestionEvent()) {
-            questionEventManager.setQuestionEvent(quizEvent.getNextQuestionEvent());
+            questionEventManager.setQuestionEvent(quizEvent.getNextFilledQuestionEvent());
         }
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
