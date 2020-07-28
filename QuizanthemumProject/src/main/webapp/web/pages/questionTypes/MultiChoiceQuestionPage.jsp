@@ -32,11 +32,11 @@
         <input type="text" placeholder="გთხოვთ შეიყვანოთ სწორი პასუხი"
                name="answer_0" id="correct-answer" required>
 
-        <label for="wrong-answer-0"><b>სავარაუდო(არასწორი) პასუხი</b></label>
+        <label for="wrong-answer"><b>სავარაუდო(არასწორი) პასუხი</b></label>
         <div id="wrong-ans-div">
             <div id="added-wrongs">
                 <input type="text"  placeholder="გთხოვთ შეიყვანოთ სავარაუდო პასუხი"
-                       name="statement_0" id="wrong-answer-0" required>
+                       name="statement_0" id="wrong-answer" required>
             </div>
             <button type="button" id="add-wrong-ans-btn" class="button" onclick="addNextWrongAns()"> + </button>
         </div>
@@ -62,6 +62,14 @@
         <input  type="hidden" name="num_statements" value="1" id="num_statements_in_multi_choice">
         <input type="hidden" name="num_answers" value="1">
 
+    </div>
+
+    <hr>
+    <div class="point-holder">
+        <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
+        <input type="number" placeholder="ქულა"
+               id="question_point" name="question_point"
+               min="1" max="16" required>
     </div>
 
     <button class="button addQuestion"

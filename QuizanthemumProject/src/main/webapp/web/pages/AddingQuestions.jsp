@@ -122,16 +122,25 @@
             window.location.href = "web/pages/AddingQuestions.jsp";
         }
     }
-    function addNextWrongAns() {
-        let parent = document.getElementById('added-wrongs');
-        let e = document.createElement('div');
-        let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
-        console.log("numWrongAnswers: " + numWrongAnswers);
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_'+numWrongAnswers+'" id="wrong-ans-'+numWrongAnswers+'" required>';
-        e.innerHTML += toAdd;
-        parent.insertBefore(e, null);
-        document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
-    }
+
+        let wrongSingleId = 1;
+        function addNextWrongAns() {
+            let parent = document.getElementById('added-wrongs');
+            let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
+            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_' + numWrongAnswers + '" id="wrong-ans-' + numWrongAnswers + '" required>';
+            parent.innerHTML += toAdd;
+            document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
+        }
+
+        let correctMultiId = 1;
+        function addNextCorrectAns() {
+            let parent = document.getElementById('added-correct');
+            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი"' +
+                'name="correct-answer-' + correctMultiId +
+                '" id="correct-answer" required>';
+            parent.innerHTML += toAdd;
+            correctMultiId++;
+        }
 
     function addToFill() {
         let text = document.getElementById("toFill").value;
@@ -150,6 +159,28 @@
 
     function redirectToQuizFinishedPage(){
         window.location.href = "/QuizCreationFinished";
+    }
+
+
+    let matchId = 5;
+    function addNextMatching() {
+        let parent = document.getElementById('matching-elems-container');
+
+        let toAdd = '<div class="matchin-pair">\n' +
+            '                <input type="text" placeholder="რას ვაწყვილებთ"\n' +
+            '                       name="matching-elem" id="' + matchId +
+            '                       " class="matching-elem" required>\n' +
+            '                <div class="arrow-container">\n' +
+            '                    <i class="arrow arr-right"></i>\n' +
+            '                    <i class="arrow arr-left"></i>\n' +
+            '                </div>\n' +
+            '                <input type="text" placeholder="რასთან ვაწყვილებთ"\n' +
+            '                       name="matching-elem" id="' + (matchId+1) +
+            '                       " class="matching-elem" required>\n' +
+            '            </div>'
+        matchId += 2;
+
+        parent.innerHTML += toAdd;
     }
 
 </script>
