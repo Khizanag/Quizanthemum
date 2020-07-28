@@ -61,9 +61,10 @@
                         <option value="0">-</option>
                         <option value="1">ღია პასუხი</option>
                         <option value="2">გამოტოვებების შევსება</option>
-                        <option value="3">ტესტური კითხვა</option>
-                        <option value="4">რამდენიმე პასუხიანი ტესტური კითხვა</option>
-                        <option value="5">დასაწყვილებელი</option>
+                        <option value="3">სტანდარტული ტესტური კითხვა</option>
+                        <option value="4">ღია მრავალპასუხიანი</option>
+                        <option value="5">ტესტური კითხვა რამდენიმე სწორი პასუხით</option>
+                        <option value="6">დასაწყვილებელი</option>
                     </select>
                     <div id="current-question-type"></div>
                     <button class="button finish" type="button" onclick="redirectToQuizFinishedPage()">დასრულება</button>
@@ -89,9 +90,12 @@
             $('#current-question-type').load('./questionTypes/MultiChoiceQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 4) {
-            $('#current-question-type').load('./questionTypes/MultiChoiceMultiAnswerQuestionPage.jsp');
+            $('#current-question-type').load('./questionTypes/MultiOpenAnswersQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 5) {
+            $('#current-question-type').load('./questionTypes/MultiChoiceMultiAnswerQuestionPage.jsp');
+        }
+        if($("#questions-type option:selected").val() == 6) {
             $('#current-question-type').load('./questionTypes/MatchingQuestionPage.jsp');
         }
     }
@@ -118,24 +122,25 @@
             window.location.href = "web/pages/AddingQuestions.jsp";
         }
     }
-    let wrongSingleId = 1;
-    function addNextWrongAns() {
-        let parent = document.getElementById('added-wrongs');
-        let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_'+numWrongAnswers+'" id="wrong-ans-'+numWrongAnswers+'" required>';
-        parent.innerHTML += toAdd;
-        document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
-    }
 
-    let correctMultiId = 1;
-    function addNextCorrectAns() {
-        let parent = document.getElementById('added-correct');
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი"'+
-            'name="correct-answer-' + correctMultiId +
-            '" id="correct-answer" required>';
-        parent.innerHTML += toAdd;
-        correctMultiId++;
-    }
+        let wrongSingleId = 1;
+        function addNextWrongAns() {
+            let parent = document.getElementById('added-wrongs');
+            let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
+            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_' + numWrongAnswers + '" id="wrong-ans-' + numWrongAnswers + '" required>';
+            parent.innerHTML += toAdd;
+            document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
+        }
+
+        let correctMultiId = 1;
+        function addNextCorrectAns() {
+            let parent = document.getElementById('added-correct');
+            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი"' +
+                'name="correct-answer-' + correctMultiId +
+                '" id="correct-answer" required>';
+            parent.innerHTML += toAdd;
+            correctMultiId++;
+        }
 
     function addToFill() {
         let text = document.getElementById("toFill").value;
@@ -155,6 +160,7 @@
     function redirectToQuizFinishedPage(){
         window.location.href = "/QuizCreationFinished";
     }
+
 
     let matchId = 5;
     function addNextMatching() {
