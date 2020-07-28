@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="Controller.Classes.OtherClasses.User" %>
+<%@ page import="Controller.Classes.User.User" %>
 <html lang="ka">
 <head>
     <meta charset="UTF-8">
