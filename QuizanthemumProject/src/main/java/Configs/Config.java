@@ -21,5 +21,8 @@ public interface Config {
     String CURRENT_QUIZES_STR = "currently started quizes by user";
 
     /** Used when creating Object, before inserting into database */
-    int DEFAULT_ID = -1234;
+    int DEFAULT_ID = -1;
+
+    String LOGGED_IN_USER_ID_STR = "Quizanthemum-loged-in-user-ID";
+    String LOGGED_IN_USER_PASSWORD_HASH_STR = "Quizanthemum-loged-in-user-password-hash";
 }

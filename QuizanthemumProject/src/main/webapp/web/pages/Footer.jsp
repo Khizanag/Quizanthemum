@@ -6,20 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="/web/styles/Footer.css">
 
-<footer	class= "footer-section">
-    <div class= "footer-content">
-        <div class= "footer-items-left">
-            <span >
-                Quizanthemum By Our Team
-            </span>
-            <span>
+<footer	class= "footer-section" style="position: relative; bottom: -60px; margin: auto;">
+    <div class= "container">
+        <div class= "footer-items">
+            <div class= "footer">
                 All Rights Reserved
-            </span>
-        </div>
-        <div class = "footer-items-right">
-            <ul class="social-icons">
+            </div>
+
+            <ul class="social-media-icons">
+                <div class= "icon-cirkle">
+                    <a class="fa fa-twitter" target="_blank" href="https://twitter.com/"></a>
+                </div>
                 <div class= "icon-cirkle">
                     <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
                 </div>
@@ -29,7 +27,14 @@
                 <div class= "icon-cirkle">
                     <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
                 </div>
+                <div class= "icon-cirkle">
+                    <a class="fa fa-google"  target="_blank" href="https://www.youtube.com/"></a>
+                </div>
             </ul>
+
+            <div class= "footer">
+                Quizanthemum By Our Team
+            </div>
         </div>
     </div>
 </footer>

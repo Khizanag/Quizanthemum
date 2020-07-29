@@ -43,7 +43,6 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     private User getUserWithQuery(String query){
-        System.out.println("getUserWithQuery: query: " + query);
         try {
             ResultSet set = statement.executeQuery(query);
             if(!set.next())
@@ -150,7 +149,6 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     public int insertUser(User user) {
         String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
-            System.out.println("tring to insert user");
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPasswordHash());
@@ -163,7 +161,6 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             pstmt.setString(9, user.getMobileNumber());
             pstmt.setDate(10, new java.sql.Date(user.getBirthDate().getTime()));
             pstmt.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
-            System.out.println("before execute update");
             pstmt.executeUpdate();
 
             return DatabaseConnector.getLastInsertID();

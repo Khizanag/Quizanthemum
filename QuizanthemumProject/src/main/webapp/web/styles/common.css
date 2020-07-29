@@ -53,6 +53,13 @@ html body {
     width: auto;
 }
 
+.social-media-icons{
+    display: flex;
+    align-content: space-between;
+    width: auto;
+    margin: auto;
+}
+
 .icon-cirkle {
     width: 30px;
     height: 30px;
@@ -110,22 +117,6 @@ html body {
     position: relative;
 }
 
-.button {
-    cursor: pointer;
-    background-color: #f07237;
-    color: white;
-    font-size: larger;
-    font-weight: 600;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    padding: 15px 15px;
-    border: none;
-    width: 100%;
-    margin-top: 5px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
 .upload {
     width: 226.44px;
     height: 45px;
@@ -143,6 +134,95 @@ html body {
     width: 30%;
     margin-bottom: 0;
 }
+
+.displayer-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#log-in-button{
+    height: 30px;
+    background-color: #f07237;
+    color: white;
+    font-size: medium;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    cursor: pointer;
+}
+
+#log-in-button:hover{
+    background-color: #b3bdbe;
+    color: #f07237;
+}
+
+/* BUTTON */
+
+.button{
+    text-align: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    outline:none;
+}
+
+.button {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.5);
+    overflow: hidden;
+}
+
+.button a{
+    color: rgba(51,51,51,1);
+    text-decoration: none;
+    display: block;
+}
+.button::before, .button::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255,255,255,0.25);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-transform: translate(-100%,0);
+    transform: translate(-100%,0);
+    -webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+    transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+.button::after{
+    -webkit-transition-delay: 0.1s; /* Safari */
+    transition-delay: 0.1s;
+}
+.button:hover::before, .button:hover::after {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.button {
+    cursor: pointer;
+    background-color: #f07237;
+    color: white;
+    font-size: larger;
+    font-weight: 600;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    padding: 5px 20px;
+    border: none;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    outline:none;
+}
+
 
 
 /* FOOOTER */
