@@ -14,7 +14,15 @@
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
-
+<script>
+    function logout(){
+        const logoutForm = document.getElementById("logoutForm");
+        logoutForm.action="../../LogOutServlet"
+        const currUrl = document.getElementById("currentUrl");
+        currUrl.value=window.location.href;
+        logoutForm.submit();
+    }
+</script>
 <div class="nav-section">
     <div class="container manu">
         <nav class="nav">
@@ -31,6 +39,12 @@
                 <% }
                 %>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
+                    <%if(user != null){%>
+                <form id="logoutForm">
+                    <a class="nav-item" target="_sefl" id="logout-id" onclick="logout()" style="cursor: pointer;">გამოსვლა</a>
+                    <input type="hidden" name="currentUrl" id="currentUrl"/>
+                </form>
+                <%} %>
             </ul>
         </nav>
         <div class="search-items">
