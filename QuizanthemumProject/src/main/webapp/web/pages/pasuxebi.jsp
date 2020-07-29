@@ -17,7 +17,7 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <div class="page-holder">
+    <div class="page-holder" style=" min-height: 100vh;">
         <form class="add-question-section">
             <div class="container">
                 <h2>შეკითხვა</h2>
@@ -42,6 +42,7 @@
         </form>
     </div>
     <jsp:include page="Footer.jsp"></jsp:include>
+
 </body>
 
 <script language="JavaScript" type="text/javascript">

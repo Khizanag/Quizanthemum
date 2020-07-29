@@ -44,7 +44,7 @@ public class QuizCreationFinishedServlet extends HttpServlet {
             questionManager.insertQuestion(question);
             System.out.println(i + "-th question added into database");
         }
-
+        quiz.finishCreatingQuiz();
         context.removeAttribute(QUIZ_CREATING_NOW);
 
 //        response.setStatus(HttpServletResponse.SC_FOUND);//302

@@ -1,5 +1,6 @@
 package Controller.Servlets;
 
+import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
@@ -9,6 +10,7 @@ import Model.Managers.QuizManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -17,8 +19,8 @@ import static Configs.Config.*;
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 import static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_CHOICE;
 
-@WebServlet(name = "QuizEventStartServlet")
-public class QuizEventStartServlet {
+@WebServlet(name = "QuizEventStartServlet", urlPatterns = "/QuizEventStartServlet")
+public class QuizEventStartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -27,26 +29,26 @@ public class QuizEventStartServlet {
 
         // TODO if already is playing
 
-        // TODO yvelaferi contextis atributebshi chavyaro da ara ise
-
         QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
-
         User user = (User) request.getAttribute("quiz_event_start_user");
-        int quizID = Integer.parseInt(request.getParameter("quiz_event_quiz_id"));
+
+        int quizID = 3;//Integer.parseInt(request.getParameter("quiz_event_quiz_id"));
         Quiz quiz = quizManager.getQuiz(quizID);
+        Question bla = quiz.getQuestion(0);
 
         QuizEvent quizEvent = new QuizEvent(quizEventManager.getNewQuizEventID(), user, quiz);
         quizEvent.startQuiz();
 
-        request.setAttribute("quiz_event", quizEvent);
+        request.getServletContext().setAttribute("quiz_event", quizEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
             QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
-            request.setAttribute("question_event", nextQuestionEvent);
-            response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
+            request.getServletContext().setAttribute("question_event", nextQuestionEvent);
+            int type = nextQuestionEvent.getType();
+            response.setHeader("Location", getNextQuestionLink(type));
         } else {
-            response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
+            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp"); // TODO valid address. end quiz
         }
 
     }

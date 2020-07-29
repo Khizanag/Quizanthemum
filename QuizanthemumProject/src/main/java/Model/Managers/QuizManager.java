@@ -33,11 +33,16 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     public ManagersManager getManager(){ return this.manager; }
 
     public Quiz getQuiz(int id){
-        String query = "SELECT * " +
-                "FROM " + QUIZ_TABLE_NAME +
-                "WHERE " + QUIZ_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+        String query = "SELECT *" +
+                " FROM " + QUIZ_TABLE_NAME +
+                " WHERE " + QUIZ_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+
+
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement myStatement = connection.createStatement();
+            ResultSet set = myStatement.executeQuery(query);
+            if(!set.next())
+                return null;
             String name = set.getString(QUIZ_TABLE_COLUMN_2_NAME);
             String description = set.getString(QUIZ_TABLE_COLUMN_3_DESCRIPTION);
             String iconUrl = set.getString(QUIZ_TABLE_COLUMN_4_ICON_URL);
@@ -46,9 +51,10 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             int authorID = set.getInt(QUIZ_TABLE_COLUMN_7_AUTHOR_ID);
             UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
             User author = (User)userManager.getUser(authorID);
-            Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE); // TODO check with sql or util
+            Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE);
             List<Question> questions = getQuizQuestions(id);
             int maxScore = set.getInt(QUIZ_TABLE_COLUMN_9_MAX_SCORE);
+            myStatement.close();
 
             return new Quiz(id, name, description, iconUrl, mustShuffleQuestions, comment, author, creationDate, questions, maxScore);
         } catch (SQLException throwables) {
@@ -60,13 +66,15 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     private List<Question> getQuizQuestions(int id){
         List<Question> questions = new ArrayList<>();
         String query = "SELECT " + QUESTION_TABLE_COLUMN_1_ID +
-                "FROM " + QUESTIONS_TABLE_NAME +
-                "WHERE " + QUESTION_TABLE_COLUMN_11_QUIZ_ID + " = " + id + ";\n";
+                " FROM " + QUESTIONS_TABLE_NAME +
+                " WHERE " + QUESTION_TABLE_COLUMN_11_QUIZ_ID + " = " + id + ";\n";
+
         try {
             ResultSet set = statement.executeQuery(query);
+            QuestionManager questionManager = (QuestionManager)manager.getManager(QUESTION_MANAGER_STR);
             while(set.next()){
                 int questionID = set.getInt(QUESTION_TABLE_COLUMN_1_ID);
-                QuestionManager questionManager = (QuestionManager)manager.getManager(QUESTION_MANAGER_STR);
+                System.out.println(questionID);
                 Question question = questionManager.getQuestion(questionID);
                 questions.add(question);
             }

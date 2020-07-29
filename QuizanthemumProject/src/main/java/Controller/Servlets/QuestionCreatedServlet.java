@@ -43,7 +43,6 @@ public class QuestionCreatedServlet extends HttpServlet {
         boolean isPictureAnswer = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_answer"));
         String textStatement = request.getParameter("statement_text");
         String pictureStatementUrl = request.getParameter("image_url");
-        int numUsersMultiAnswers = 1;
 
         int numAnswers = Integer.parseInt(request.getParameter("num_answers"));
         int numStatements = Integer.parseInt(request.getParameter("num_statements"));

@@ -40,7 +40,7 @@ public class QuestionEventManager implements QuestionEventTableConfig {
             pstmt.setDate(4, new java.sql.Date(questionEvent.getEndDate().getTime()));
             pstmt.setBoolean(5, questionEvent.isAlreadyGraded());
             pstmt.setDouble(6, questionEvent.getUserScore());
-            pstmt.setInt(7, questionEvent.getQuestionId());
+            pstmt.setInt(7, questionEvent.getQuestion().getID());
 
             List<String> userAnswers = questionEvent.getUserAnswers();
             for(int i = 0; i < USER_ANSWERS_NUM; i++) {
