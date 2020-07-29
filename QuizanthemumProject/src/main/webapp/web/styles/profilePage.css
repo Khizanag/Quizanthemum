@@ -9,13 +9,6 @@
   cursor: pointer;
 }
 
-.header-right{
-  width: 240px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  float: right;
-}
 .profile-name-text{
   font-family: "Comic Sans MS", cursive, sans-serif;
   color: orange;

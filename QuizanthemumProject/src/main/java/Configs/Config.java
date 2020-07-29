@@ -21,5 +21,5 @@ public interface Config {
     String CURRENT_QUIZES_STR = "currently started quizes by user";
 
     /** Used when creating Object, before inserting into database */
-    int DEFAULT_ID = -1234;
+    int DEFAULT_ID = -1;
 }

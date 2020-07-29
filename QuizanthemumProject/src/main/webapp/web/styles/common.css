@@ -53,6 +53,13 @@ html body {
     width: auto;
 }
 
+.social-media-icons{
+    display: flex;
+    align-content: space-between;
+    width: auto;
+    margin: auto;
+}
+
 .icon-cirkle {
     width: 30px;
     height: 30px;
@@ -154,24 +161,17 @@ html body {
 }
 
 .footer-items {
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    position: relative;
+    align-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .footer {
     line-height: 60px;
     font-size: 14px;
-    position: absolute;
     color: #b3bdbe;
-}
-
-.footer.left {
-    position: absolute;
-    left: 0;
-}
-
-.footer.rigth {
-    right: 0;
 }

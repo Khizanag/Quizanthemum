@@ -10,10 +10,29 @@
 <footer	class= "footer-section" style="position: relative; bottom: -60px; margin: auto;">
     <div class= "container">
         <div class= "footer-items">
-            <div class= "footer left">
+            <div class= "footer">
                 All Rights Reserved
             </div>
-            <div class= "footer rigth">
+
+            <ul class="social-media-icons">
+                <div class= "icon-cirkle">
+                    <a class="fa fa-twitter" target="_blank" href="https://twitter.com/"></a>
+                </div>
+                <div class= "icon-cirkle">
+                    <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
+                </div>
+                <div class= "icon-cirkle">
+                    <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
+                </div>
+                <div class= "icon-cirkle">
+                    <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
+                </div>
+                <div class= "icon-cirkle">
+                    <a class="fa fa-google"  target="_blank" href="https://www.youtube.com/"></a>
+                </div>
+            </ul>
+
+            <div class= "footer">
                 Quizanthemum By Our Team
             </div>
         </div>
