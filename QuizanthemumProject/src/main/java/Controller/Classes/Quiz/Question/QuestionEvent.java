@@ -62,7 +62,7 @@ public class QuestionEvent {
 
     public int getQuizEventId() { return quizEventId; }
 
-    public int getQuestionId() { return question.getID(); }
+    public Question getQuestion() { return question; }
 
     public List<String> getUserAnswers() { return userAnswers; }
 
@@ -78,9 +78,7 @@ public class QuestionEvent {
     public boolean isAutoGraded() { return question.isAutoGraded(); }
 
     public int getType() {
-        System.out.println("oooooo");
         int type = question.getType();
-        System.out.println("uuuuuu");
         return  type;
     }
 

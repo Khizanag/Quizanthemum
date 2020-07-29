@@ -36,25 +36,17 @@ public class QuizEventStartServlet extends HttpServlet {
         int quizID = 3;//Integer.parseInt(request.getParameter("quiz_event_quiz_id"));
         Quiz quiz = quizManager.getQuiz(quizID);
         Question bla = quiz.getQuestion(0);
-        if(bla == null) {
-            System.out.println("cudi var");
-        } else {
-            System.out.println("kai var");
-        }
 
         QuizEvent quizEvent = new QuizEvent(quizEventManager.getNewQuizEventID(), user, quiz);
         quizEvent.startQuiz();
 
-        request.setAttribute("quiz_event", quizEvent);
+        request.getServletContext().setAttribute("quiz_event", quizEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
             QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
-            request.setAttribute("question_event", nextQuestionEvent);
-            System.out.println("aaaaa");
+            request.getServletContext().setAttribute("question_event", nextQuestionEvent);
             int type = nextQuestionEvent.getType();
-            System.out.println("bbbbb");
             response.setHeader("Location", getNextQuestionLink(type));
-            System.out.println("ccccc");
         } else {
             response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp"); // TODO valid address. end quiz
         }
