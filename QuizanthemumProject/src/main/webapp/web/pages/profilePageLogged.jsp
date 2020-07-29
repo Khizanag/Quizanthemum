@@ -64,38 +64,12 @@
 
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
-  
-  <div class="friends-list-popup" id="friends-list-popup-id">
-    <div class="overlay"></div>
-    <div class="content">
-      <div class="close-btn" onclick="popupfriendList()">&times;</div>
-      <h1 style="color:orange">მეგობრები</h1>
-      <br>
-        <div class="friends-list">
-            <div class = "friend-list-row">
-                <span class="friend-name">მეგობარი0</span>
-                <div class = "friend-challenge-remove-btns">
-                    <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
-                    <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
-                </div>
-            </div>
-            <div class = "friend-list-row">
-                <span class="friend-name">მეგობარი1</span>
-                <div class = "friend-challenge-remove-btns">
-                    <button class="challenge-btn" id="challenge-btn-id-1" onclick="challengeFriend()">Challenge</button>
-                    <button class="remove-btn" id="remove-btn-id-1" onclick="removeFriend(this)">Remove</button>
-                </div>
-            </div>
-            <div class = "friend-list-row">
-                <span class="friend-name">მეგობარი2</span>
-                <div class = "friend-challenge-remove-btns">
-                    <button class="challenge-btn" id="challenge-btn-id-2" onclick="challengeFriend()">Challenge</button>
-                    <button class="remove-btn" id="remove-btn-id-2" onclick="removeFriend(this)">Remove</button>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
+    <jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
+
+    <script>console.log("vnaxot nalia tu ara"); </script>
+    <% if(user == null){ %>
+        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"></jsp:include>
+    <% } else { %>
 
     <div class="change-image-popup" id="change-image">
         <div class="overlay"></div>
@@ -109,10 +83,10 @@
                        style="display: none;"
                 >
                 <label class="button upload upl-btn" type="button" for="file">ატვირთე ფოტო</label>
-                    <label class="button upload" type="button"
-                           onclick="uploadImage(event)" id="url-button" style="width:300px">
-                        ან შეიყვანეთ ლინკი ასატვირთად
-                    </label>
+                <label class="button upload" type="button"
+                       onclick="uploadImage(event)" id="url-button" style="width:300px">
+                    ან შეიყვანეთ ლინკი ასატვირთად
+                </label>
                 <input type="text" placeholder="ფოტოს URL" name="photo-url" id="photo-url" required style="width:200px" >
                 <img id="output" src="" style="width:300px;height:220px;margin-top: 5px;">
                 <button class="button upload upl-btn" onclick="submitPhoto()">Submit</button>
@@ -179,11 +153,11 @@
 
     </div>
 
-  <div class = "top-quizzes-banner">
-    <div class="players-top-quizzes">
-        ნათამაშები ტოპ ქვიზები
+    <div class = "top-quizzes-banner">
+        <div class="players-top-quizzes">
+            ნათამაშები ტოპ ქვიზები
+        </div>
     </div>
-  </div>
     <main class="main">
         <div class="top-quizzes-container">
             <div class= "top-quiz-items">
@@ -246,6 +220,9 @@
             </div>
         </div>
     </main>
+
+    <% } %>
+
 	<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 </html>

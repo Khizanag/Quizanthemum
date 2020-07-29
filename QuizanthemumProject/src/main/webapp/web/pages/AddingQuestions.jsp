@@ -18,30 +18,28 @@
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <div class="page-holder">
-<%--        <form class="add-question-section" action="../../QuestionCreated" method="get">--%>
-            <div class="container">
-                <h2>შეკითხვა</h2>
-                <p>შეკითხვის დასამატებლად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
-                <hr>
+        <div class="container">
+            <h2>შეკითხვა</h2>
+            <p>შეკითხვის დასამატებლად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+            <hr>
 
-                <div class="input-items" id="input-items">
-                    <label for="questions-type"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
-                    <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
-                        <option value="0">-</option>
-                        <option value="1">ღია პასუხი</option>
-                        <option value="2">გამოტოვებების შევსება</option>
-                        <option value="3">სტანდარტული ტესტური კითხვა</option>
-                        <option value="4">ღია მრავალპასუხიანი</option>
-                        <option value="5">ტესტური კითხვა რამდენიმე სწორი პასუხით</option>
-                        <option value="6">დასაწყვილებელი</option>
-                    </select>
-                    <div id="current-question-type"></div>
-                    <button class="button finish" type="button" onclick="redirectToQuizFinishedPage()">დასრულება</button>
-                </div>
+            <div class="input-items" id="input-items">
+                <label for="questions-type"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
+                <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
+                    <option value="0">-</option>
+                    <option value="1">ღია პასუხი</option>
+                    <option value="2">გამოტოვებების შევსება</option>
+                    <option value="3">სტანდარტული ტესტური კითხვა</option>
+                    <option value="4">ღია მრავალპასუხიანი</option>
+                    <option value="5">ტესტური კითხვა რამდენიმე სწორი პასუხით</option>
+                    <option value="6">დასაწყვილებელი</option>
+                </select>
+                <div id="current-question-type"></div>
+                <button class="button finish" type="button" onclick="redirectToQuizFinishedPage()">დასრულება</button>
             </div>
-<%--        </form>--%>
+        </div>
     </div>
-    <jsp:include page="Footer.jsp"></jsp:include>
+    <jsp:include page="./Footer.jsp"></jsp:include>
 </body>
 
 <script language="JavaScript" type="text/javascript">
@@ -92,29 +90,27 @@
         }
     }
 
-        let wrongSingleId = 1;
         function addNextWrongAns() {
             let parent = document.getElementById('added-wrongs');
-            let numWrongAnswers = parseInt(document.getElementById('num_statements_in_multi_choice').value);
+            let numWrongAnswers = parseInt(document.getElementById('num_statements_elem').value);
             let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_' + numWrongAnswers + '" id="wrong-ans-' + numWrongAnswers + '" required>';
             parent.innerHTML += toAdd;
-            document.getElementById('num_statements_in_multi_choice').value = numWrongAnswers + 1;
+            document.getElementById('num_statements_elem').value = numWrongAnswers + 1;
         }
 
-        let correctMultiId = 1;
         function addNextCorrectAns() {
             let parent = document.getElementById('added-correct');
-            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი"' +
-                'name="correct-answer-' + correctMultiId +
-                '" id="correct-answer" required>';
+            let numCorrectAnswers = parseInt(document.getElementById('num_answers_elem').value);
+            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_' + numCorrectAnswers + '" id="correct-ans-' + numCorrectAnswers + '" required>';
             parent.innerHTML += toAdd;
-            correctMultiId++;
+            document.getElementById('num_answers_elem').value = numCorrectAnswers + 1;
         }
 
     function addToFill() {
         let text = document.getElementById("toFill").value;
         let prev = document.getElementById("fill-question").value;
         document.getElementById("fill-question").innerText = prev + ' ' + text;
+        document.getElementById("statement_text_elem_in_match").value = prev + ' ' + text;
         document.getElementById("toFill").value = '';
     }
 
@@ -122,7 +118,8 @@
         let text = document.getElementById("fillWith").value;
         let prev = document.getElementById("fill-question").value;
         if(text === '') return;
-        document.getElementById("fill-question").innerText = prev + ' {(<_' + text + '_>)})';
+        document.getElementById("fill-question").innerText = prev + '{(<_' + text + '_>)})';
+        document.getElementById("statement_text_elem_in_match").value = prev + '{(<_' + text + '_>)})';
         document.getElementById("fillWith").value = '';
     }
 

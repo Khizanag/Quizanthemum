@@ -33,8 +33,9 @@ public final class Question {
     /* constructor */
 
     public Question(int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
-                    String source, Date creationDate, int quizID, boolean isPictureQuestion, boolean isPictureAnswer,
+                    String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
                     String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
+
         this.type = type;
         this.isAutoGraded = isAutoGraded;
         this.maxScore = maxScore;
@@ -59,6 +60,7 @@ public final class Question {
         this(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId, isPictureQuestion,
                 isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
         this.ID = ID;
+
     }
 
 
@@ -134,7 +136,7 @@ public final class Question {
 
     public Set<Pair<String>> getMatchingAnswers() {
         Set<Pair<String>> matchingAnswers = new TreeSet<>();
-        for (int i = 0; i < statements.size(); i+=2) {
+        for (int i = 0; i < answers.size(); i+=2) {
             matchingAnswers.add(new Pair<>(answers.get(i), answers.get(i+1)));
         }
         return matchingAnswers;
@@ -143,10 +145,9 @@ public final class Question {
     // for multi-choice and fill-blank questions
     public Set<String> getMultiAnswers() {
         Set<String> multiAnswers = new TreeSet<>();
-        for (int i = 0; i < statements.size(); i++) {
+        for (int i = 0; i < answers.size(); i++) {
             multiAnswers.add(answers.get(i));
         }
         return multiAnswers;
     }
-
 }

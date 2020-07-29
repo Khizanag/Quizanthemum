@@ -27,6 +27,13 @@
             <img id="output" width="100" />
         </div>
 
+        <hr><div class="point-holder">
+        <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
+        <input type="number" placeholder="ქულა"
+               id="question_point" name="max_score"
+               min="1" max="16" required>
+        </div> <hr>
+
         <label for="source"><b>წყარო</b></label>
         <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
                name="source" id="source">

@@ -1,5 +1,6 @@
 package Controller.Servlets;
 
+import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
 import Controller.Classes.User.User;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static Configs.Config.*;
+import static Controller.Classes.Quiz.Question.QuestionTypes.*;
+import static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_CHOICE;
 
 @WebServlet(name = "QuizEventStartServlet")
 public class QuizEventStartServlet {
@@ -21,6 +24,10 @@ public class QuizEventStartServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // TODO if already is playing
+
+        // TODO yvelaferi contextis atributebshi chavyaro da ara ise
 
         QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
@@ -35,11 +42,31 @@ public class QuizEventStartServlet {
         request.setAttribute("quiz_event", quizEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
-            request.setAttribute("question_event_question", quizEvent.getNextEmptyQuestionEvent());
-            response.setHeader("Location", "http://localhost:8080/web/pages/quiestion#1.html"); // TODO valid address. first question
+            QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
+            request.setAttribute("question_event", nextQuestionEvent);
+            response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
             response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
         }
 
+    }
+
+    private String getNextQuestionLink(int type) {
+        switch (type) {
+            case MULTI_ANSWER:
+                return "http://localhost:8080/web/pages/answerTypes/MultiOpenAnswerPage.jsp";
+            case MULTI_CHOICE_MULTI_ANSWER:
+                return "http://localhost:8080/web/pages/answerTypes/MultiChoiceMultiAnswerAnswerPage.jsp";
+            case FILL_BLANK:
+                return "http://localhost:8080/web/pages/answerTypes/FillTextAnswerPage.jsp";
+            case MATCHING:
+                return "http://localhost:8080/web/pages/answerTypes/MatchingAnswerPage.jsp";
+            case STANDARD:
+                return "http://localhost:8080/web/pages/answerTypes/OpenAnswerPage.jsp";
+            case MULTI_CHOICE:
+                return "http://localhost:8080/web/pages/answerTypes/MultiChoiceAnswerPage.jsp";
+            default:
+                return "error";
+        }
     }
 }

@@ -252,8 +252,3 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     width: 40%;
     margin-bottom: 10px;
 }
-
-.footer-section{
-    position: fixed;
-    bottom: 0;
-}

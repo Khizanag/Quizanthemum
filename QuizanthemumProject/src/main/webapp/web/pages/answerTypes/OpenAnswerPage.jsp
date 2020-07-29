@@ -11,40 +11,9 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-<header class= "header-section">
-    <div class="container header">
-        <div class="header-left">
-            <img class="logo"src="../../images/common/icon.png">
-            <h1 class="logo-text">Quizanthemum</h1>
-        </div>
 
-        <ul class="header-right">
-            <div class= "icon-cirkle">
-                <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
-            </div>
-            <div class= "icon-cirkle">
-                <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
-            </div>
-            <div class= "icon-cirkle">
-                <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
-            </div>
-        </ul>
-
-    </div>
-</header>
-
-<div class="nav-section">
-    <div class="container">
-        <nav class="nav">
-            <ul class="nav-items">
-                <a class="nav-item" target="_self" href="/">HOME</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-            </ul>
-        </nav>
-    </div>
-</div>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
 <form class="add-question-section">
     <div class="container">
@@ -64,12 +33,13 @@
             <textarea class="ans-toFill" id="ans-toFill"></textarea>
             <p> შეყვანილია <span>0</span> სიტყვა</p>
         </div><hr>
-        <button class="button" type="button"> პასუხის დადასტურება </button>
+        <button class="button" type="submit"> პასუხის დადასტურება </button>
     </div>
 </form>
 
 <jsp:include page="../Footer.jsp"></jsp:include>
 </body>
+
 <script>
     document.querySelector("textarea").addEventListener('keyup', count);
 

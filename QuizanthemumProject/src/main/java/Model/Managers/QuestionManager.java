@@ -75,6 +75,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
                     pstmt.setString(ANSWER_START_COL + i - 1, null);
                 }
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

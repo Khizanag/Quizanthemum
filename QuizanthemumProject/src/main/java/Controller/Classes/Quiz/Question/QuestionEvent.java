@@ -82,6 +82,7 @@ public class QuestionEvent {
      */
     public void setUserScore(double userScore) {
         this.userScore = userScore;
+        isAlreadyGraded = true;
     }
 
     /*
@@ -93,6 +94,7 @@ public class QuestionEvent {
         if(userAnswers.get(0).equals(question.getTextAnswer())) {
             userScore = question.getMaxScore();
         }
+        isAlreadyGraded = true;
     }
 
     /*
@@ -111,6 +113,8 @@ public class QuestionEvent {
             }
         }
         userScore = question.getMaxScore() * correctAnswersNum / question.getStatementsCount();
+        isAlreadyGraded = true;
+
     }
 
     /*
@@ -130,6 +134,8 @@ public class QuestionEvent {
             }
         }
         userScore = question.getMaxScore() * correctAnswersNum / pairsNum;
+        isAlreadyGraded = true;
+
     }
 
     public Date getEndDate() {
@@ -142,6 +148,11 @@ public class QuestionEvent {
 
     public boolean isAlreadyGraded() {
         return isAlreadyGraded;
+    }
+
+    public int getNumUsersAnswers() {
+        return 1;
+        // TODO with num statements
     }
 
 }
