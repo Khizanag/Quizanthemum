@@ -5,8 +5,8 @@ import java.util.List;
 
 public class FillTextTokenizer {
 
-    public static final String LEFT_BOUND_DELIMS = "{(<_ ";
-    public static final String RIGHT_BOUND_DELIMS = " _>)}";
+    public static final String LEFT_BOUND_DELIMS = "{(<_";
+    public static final String RIGHT_BOUND_DELIMS = "_>)}";
 
     private String text;
     private List<String> tokens;

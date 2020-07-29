@@ -134,14 +134,14 @@
 
         let toAdd = `<div class="matchin-pair">
                             <input type="text" placeholder="რას ვაწყვილებთ"
-                                   name="matching-elem" id="' + numAnswers + '"
+                                   name="' + numAnswers + '" id="' + numAnswers + '"
                                    class="matching-elem" required>
                             <div class="arrow-container">
                                 <i class="arrow arr-right"></i>
                                 <i class="arrow arr-left"></i>
                             </div>
                             <input type="text" placeholder="რასთან ვაწყვილებთ"
-                                   name="matching-elem" id="' + (numAnswers+1) + '"
+                                   name="answer'+ (numAnswers+1) +'" id="' + (numAnswers+1) + '"
                                    class="matching-elem" required>
                         </div>`;
         document.getElementById('matching-num-answers-elem').value = numAnswers + 2;
