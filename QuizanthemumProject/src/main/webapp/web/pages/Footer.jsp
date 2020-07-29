@@ -10,7 +10,7 @@
 <footer	class= "footer-section" style="position: relative; bottom: -60px; margin: auto;">
     <div class= "container">
         <div class= "footer-items">
-            <div class= "footer">
+            <div class= "footer left">
                 All Rights Reserved
             </div>
 
@@ -32,8 +32,8 @@
                 </div>
             </ul>
 
-            <div class= "footer">
-                Quizanthemum By Our Team
+            <div class= "footer rigth">
+                Quizanthemum Page
             </div>
         </div>
     </div>

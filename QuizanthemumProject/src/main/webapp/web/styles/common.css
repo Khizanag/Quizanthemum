@@ -24,6 +24,7 @@ html body {
 
 .header {
     position: relative;
+
 }
 
 .header-left {
@@ -48,22 +49,25 @@ html body {
     display: flex;
     align-content: space-between;
     position: absolute;
-    margin-top: 15px;
     right: 0px;
     width: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .social-media-icons{
     display: flex;
     align-content: space-between;
-    width: auto;
     margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .icon-cirkle {
     width: 30px;
     height: 30px;
-    margin-left: 10px;
+    margin-left: 5px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -250,9 +254,9 @@ html body {
 
 .footer.left {
     position: absolute;
-    left: 0;
+    left: 5px;
 }
 
 .footer.rigth {
-    right: 0;
+    right: 5px;
 }
