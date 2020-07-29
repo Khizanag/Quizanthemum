@@ -16,6 +16,9 @@ input[type=text]{
     margin-right: 5px;
     border-radius: 5px;
 }
+#search-input {
+    margin: 0 0 0 0;
+}
 input[type=text]:focus{
     background-color: rgb(221, 221, 221);
     outline: none;

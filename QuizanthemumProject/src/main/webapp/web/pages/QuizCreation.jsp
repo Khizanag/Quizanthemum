@@ -7,10 +7,9 @@
     <title> Creating Quiz </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="/web/images/common/icon.png"/>
-    <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
-    <link rel="stylesheet" href="/web/styles/rules.css">
+    <link rel="stylesheet" href="/web/styles/common.css">
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
 </head>
@@ -44,7 +43,7 @@
                     <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
                     <div class="upload-image-container">
                         <label class="button upload" type="button"
-                               onclick="uploadImage(event)" id="url-button">
+                               onclick="uploadImage(event)" id="question_image_url">
                             შეიყვანეთ URL ასატვირთად
                         </label>
                         <input type="text" placeholder="ფოტოს URL" name="quiz_icon_url" id="quiz_icon_url" required>

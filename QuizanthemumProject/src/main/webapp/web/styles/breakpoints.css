@@ -51,6 +51,15 @@
     .footer-section{
         position: relative;
     }
+
+    #add-wrong-ans-btn {
+        right: 20px;
+    }
+
+
+    .point-holder {
+        width: 100%;
+    }
 }
 
 
