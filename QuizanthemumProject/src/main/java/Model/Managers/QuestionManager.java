@@ -76,7 +76,6 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
                 }
             }
 
-            pstmt.setInt(48, question.getNumUsersMultiAnswers());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -111,7 +110,6 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             String source = set.getString(QUESTION_TABLE_COLUMN_9_SOURCE);
             Date creationDate = set.getDate(QUESTION_TABLE_COLUMN_10_CREATION_DATE);
             int quizId = set.getInt(QUESTION_TABLE_COLUMN_11_QUIZ_ID);
-            int numUsersMultiAnswers = set.getInt(QUESTION_TABLE_COLUMN_48_NUM_USERS_MULTI_ANSWERS);
 
             boolean isPictureQuestion = set.getBoolean(QUESTION_TABLE_COLUMN_12_IS_PICTURE_STATEMENT);
             int numStatements = set.getInt(QUESTION_TABLE_COLUMN_13_NUM_STATEMENTS);
@@ -128,7 +126,7 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             }
 
             return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId,
-                    isPictureQuestion, isPictureAnswer, textStatement, pictureStatementURL, statements, answers, numUsersMultiAnswers);
+                    isPictureQuestion, isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
 
         } catch (SQLException unused) { }
 

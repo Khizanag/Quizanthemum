@@ -150,8 +150,9 @@ public class QuestionEvent {
         return isAlreadyGraded;
     }
 
-    public int getNumUsersMultiAnswers() {
-        return question.getNumUsersMultiAnswers();
+    public int getNumUsersAnswers() {
+        return 1;
+        // TODO with num statements
     }
 
 }

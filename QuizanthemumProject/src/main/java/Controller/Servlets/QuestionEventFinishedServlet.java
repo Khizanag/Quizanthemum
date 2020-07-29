@@ -31,7 +31,7 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 //
         QuestionEvent questionEvent = (QuestionEvent) request.getAttribute("question_event");
 
-        int numAnswers = questionEvent.getNumUsersMultiAnswers();
+        int numAnswers = questionEvent.getNumUsersAnswers();
         System.out.println(numAnswers);
         List<String> userAnswers = new ArrayList<>();
         for (int i = 0; i < numAnswers; i++) {
