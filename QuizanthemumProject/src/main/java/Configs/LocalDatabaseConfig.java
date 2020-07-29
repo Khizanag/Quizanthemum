@@ -1,7 +1,6 @@
 package Configs;
 
 public interface LocalDatabaseConfig {
-    /* Database info */
 
     // gkhiz
     String USERNAME = "root";

@@ -26,11 +26,24 @@
         </div>
 
         <hr><div class="point-holder">
-            <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
+            <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 1-დან 16-მდე</b></label>
             <input type="number" placeholder="ქულა"
                    id="question_point" name="question_point"
                    min="1" max="16" required>
         </div>
+
+        <label for="source"><b>წყარო</b></label>
+        <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
+               name="source" id="source">
+
+        <label for="comment"><b>კომენტარი</b></label>
+        <input type="text" placeholder="სურვილისამებრ მიუთითეთ კომენტარი..."
+               name="comment" id="comment">
+
+        <%--   HIDDEN VARIABLES     --%>
+        <input type="hidden" name="type" value="2">
+        <input  type="hidden" name="num_statements" value="0">
+        <input type="hidden" name="num_answers" value="0">
 
         <button class="button addQuestion" type="submit">
             შემდეგი შეკითხვის დამატება
