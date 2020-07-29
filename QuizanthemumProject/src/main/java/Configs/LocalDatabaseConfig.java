@@ -13,4 +13,5 @@ public interface LocalDatabaseConfig {
 //    String PASSWORD = "DimaDima_123";
 //    String URL = "jdbc:mysql://localhost:3306/";
 //    String DATABASE_NAME = "demodb";
+
 }

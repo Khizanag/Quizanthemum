@@ -29,12 +29,14 @@ public final class Question {
 
     private final boolean isPictureAnswer;         // if user can see pictures in possible answers
     private final List<String> answers;            // list of answers for all type of questions
+    private final int numUsersMultiAnswers;        // how many answers can user pick
 
     /* constructor */
 
     public Question(int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
-                    String source, Date creationDate, int quizID, boolean isPictureQuestion, boolean isPictureAnswer,
-                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
+                    String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
+                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers, int numUsersMultiAnswers) {
+
         this.type = type;
         this.isAutoGraded = isAutoGraded;
         this.maxScore = maxScore;
@@ -49,16 +51,18 @@ public final class Question {
         this.pictureStatementURL = pictureStatementURL;
         this.statements = statements;
         this.answers = answers;
+        this.numUsersMultiAnswers = numUsersMultiAnswers;
     }
 
     // constructor for database (id is added)
     public Question(int ID, int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
                     String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
-                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
+                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers, int numUsersMultiAnswers) {
 
         this(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId, isPictureQuestion,
-                isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
-        this.ID = ID;
+                isPictureAnswer, textStatement, pictureStatementURL, statements, answers, numUsersMultiAnswers);
+        this.id = id;
+
     }
 
 
@@ -134,7 +138,7 @@ public final class Question {
 
     public Set<Pair<String>> getMatchingAnswers() {
         Set<Pair<String>> matchingAnswers = new TreeSet<>();
-        for (int i = 0; i < statements.size(); i+=2) {
+        for (int i = 0; i < answers.size(); i+=2) {
             matchingAnswers.add(new Pair<>(answers.get(i), answers.get(i+1)));
         }
         return matchingAnswers;
@@ -143,10 +147,13 @@ public final class Question {
     // for multi-choice and fill-blank questions
     public Set<String> getMultiAnswers() {
         Set<String> multiAnswers = new TreeSet<>();
-        for (int i = 0; i < statements.size(); i++) {
+        for (int i = 0; i < answers.size(); i++) {
             multiAnswers.add(answers.get(i));
         }
         return multiAnswers;
     }
 
+    public int getNumUsersMultiAnswers() {
+        return numUsersMultiAnswers;
+    }
 }
