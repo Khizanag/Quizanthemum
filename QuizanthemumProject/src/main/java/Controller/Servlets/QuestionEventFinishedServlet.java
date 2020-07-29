@@ -26,35 +26,37 @@ public class QuestionEventFinishedServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        QuizEvent quizEvent = (QuizEvent) request.getAttribute("question_event_quiz_event");
-
+//        QuizEvent quizEvent = (QuizEvent) request.getAttribute("question_event_quiz_event");
+//
         QuestionEvent questionEvent = (QuestionEvent) request.getAttribute("question_event");
 
-        int numAnswers = Integer.parseInt(request.getParameter("question_event_num_answers"));
+        int numAnswers = questionEvent.getNumUsersMultiAnswers();
+        System.out.println(numAnswers);
         List<String> userAnswers = new ArrayList<>();
         for (int i = 0; i < numAnswers; i++) {
             String nextAns = request.getParameter("question_event_answer_" + i);
-            System.out.println();
+            System.out.println(nextAns);
             userAnswers.add(nextAns);
         }
 
-        questionEvent.setUserAnswers(userAnswers);
-        questionEvent.finishQuestionEvent();
+//        questionEvent.setUserAnswers(userAnswers);
+//        questionEvent.finishQuestionEvent();
+//
+//        if(questionEvent.isAutoGraded()) {
+//            gradeQuestionEvent(questionEvent);
+//        }
+//
+//        quizEvent.setFilledQuestionEvent(questionEvent);
+//        response.setStatus(HttpServletResponse.SC_FOUND);//302
+//        if (quizEvent.hasNextQuestion()) {
+//            QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
+//            request.setAttribute("question_event", nextQuestionEvent);
+//            response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
+//        } else {
+//            response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
+//        }
 
-        if(questionEvent.isAutoGraded()) {
-            gradeQuestionEvent(questionEvent);
-        }
-
-        quizEvent.setFilledQuestionEvent(questionEvent);
-        response.setStatus(HttpServletResponse.SC_FOUND);//302
-        if (quizEvent.hasNextQuestion()) {
-            QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
-            request.setAttribute("question_event", nextQuestionEvent);
-            response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
-        } else {
-            response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
-        }
-
+        System.out.println("question event finished");
     }
 
     private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {

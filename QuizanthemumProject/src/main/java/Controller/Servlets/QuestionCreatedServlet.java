@@ -47,29 +47,7 @@ public class QuestionCreatedServlet extends HttpServlet {
         boolean isPictureAnswer = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_answer"));
         String textStatement = request.getParameter("question_statement");
         String pictureStatementUrl = request.getParameter("question_image_url");
-
-        switch (type){
-            case QuestionTypes.STANDARD:
-                isAutoGraded = false;
-                break;
-            case QuestionTypes.FILL_BLANK:
-                isAutoGraded = true;
-                break;
-            case QuestionTypes.MULTI_CHOICE:
-
-                isAutoGraded = true;
-                break;
-            case QuestionTypes.MULTI_ANSWER:
-                isAutoGraded = true;
-                break;
-            case QuestionTypes.MULTI_CHOICE_MULTI_ANSWER:
-                isAutoGraded = true;
-                break;
-            case QuestionTypes.MATCHING:
-                isAutoGraded = true;
-
-            default: break;
-        }
+        int numUsersMultiAnswers = 1;
 
         int numStatements = 2; //Integer.parseInt(request.getParameter("question_num_statements"));
         List<String> statements = new ArrayList<>();
@@ -77,14 +55,43 @@ public class QuestionCreatedServlet extends HttpServlet {
 //            statements.add(request.getParameter("question_statement_" + i));
 //        }
 
-//        int numAnswers = Integer.parseInt(request.getParameter("question_num_answers"));
+        int numAnswers = 1;//Integer.parseInt(request.getParameter("question_num_answers"));
         List<String> answers = new ArrayList<>();
 //        for (int i = 0; i < numAnswers; i++) {
 //            answers.add(request.getParameter("question_answer_" + i));
 //        }
 
-        Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate,
-                currentQuiz.getID(), isPictureQuestion, isPictureAnswer, textStatement, pictureStatementUrl, statements, answers);
+        switch (type){
+            case QuestionTypes.STANDARD:
+                numUsersMultiAnswers = 1;
+                isAutoGraded = false;
+                break;
+            case QuestionTypes.FILL_BLANK:
+                numUsersMultiAnswers = numAnswers;
+                isAutoGraded = true;
+                break;
+            case QuestionTypes.MULTI_CHOICE:
+                numUsersMultiAnswers = 1;
+                isAutoGraded = true;
+                break;
+            case QuestionTypes.MULTI_ANSWER:
+                numUsersMultiAnswers = Integer.parseInt(request.getParameter("question_num_users_multi_answers"));
+                isAutoGraded = true;
+                break;
+            case QuestionTypes.MULTI_CHOICE_MULTI_ANSWER:
+                numUsersMultiAnswers = Integer.parseInt(request.getParameter("question_num_users_multi_answers"));
+                ;
+                isAutoGraded = true;
+                break;
+            case QuestionTypes.MATCHING:
+                numUsersMultiAnswers = numAnswers;
+                isAutoGraded = true;
+
+            default: break;
+        }
+
+        Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, currentQuiz.getID(),
+                isPictureQuestion, isPictureAnswer, textStatement, pictureStatementUrl, statements, answers, numUsersMultiAnswers);
         System.out.println("new question created in java");
         int questionID = questionManager.insertQuestion(newQuestion);
         System.out.println("question inserted into database");

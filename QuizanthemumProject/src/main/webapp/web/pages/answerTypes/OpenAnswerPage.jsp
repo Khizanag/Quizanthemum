@@ -61,7 +61,7 @@
         <hr>
         <div class="input-items" id="input-items">
             <label><b>შეიყვანეთ თქვენი პასუხი აქ: </b></label>
-            <textarea class="ans-toFill" id="ans-toFill"></textarea>
+            <textarea class="ans-toFill" id="ans-toFill" name="question_event_answer_0"></textarea>
             <p> შეყვანილია <span>0</span> სიტყვა</p>
         </div><hr>
         <button class="button" type="submit"> პასუხის დადასტურება </button>

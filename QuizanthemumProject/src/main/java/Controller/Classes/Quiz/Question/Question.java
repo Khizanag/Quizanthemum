@@ -29,12 +29,13 @@ public final class Question {
 
     private final boolean isPictureAnswer;         // if user can see pictures in possible answers
     private final List<String> answers;            // list of answers for all type of questions
+    private final int numUsersMultiAnswers;        // how many answers can user pick
 
     /* constructor */
 
     public Question(int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
                     String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
-                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
+                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers, int numUsersMultiAnswers) {
         this.type = type;
         this.isAutoGraded = isAutoGraded;
         this.maxScore = maxScore;
@@ -49,15 +50,16 @@ public final class Question {
         this.pictureStatementURL = pictureStatementURL;
         this.statements = statements;
         this.answers = answers;
+        this.numUsersMultiAnswers = numUsersMultiAnswers;
     }
 
     // constructor for database (id is added)
     public Question(int id, int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
                     String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
-                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
+                    String textStatement, String pictureStatementURL, List<String> statements, List<String> answers, int numUsersMultiAnswers) {
 
         this(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId, isPictureQuestion,
-                isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
+                isPictureAnswer, textStatement, pictureStatementURL, statements, answers, numUsersMultiAnswers);
         this.id = id;
     }
 
@@ -148,4 +150,7 @@ public final class Question {
         return multiAnswers;
     }
 
+    public int getNumUsersMultiAnswers() {
+        return numUsersMultiAnswers;
+    }
 }
