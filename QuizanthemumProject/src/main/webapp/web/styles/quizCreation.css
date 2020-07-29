@@ -55,21 +55,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     outline: none;
 }
 
-.button {
-    cursor: pointer;
-    background-color: #f07237;
-    color: white;
-    font-size: larger;
-    font-weight: 600;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    padding: 15px 15px;
-    border: none;
-    width: 100%;
-    margin-top: 5px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
 .upload-image-section{
     width: 100%;
     display: flex;
@@ -91,13 +76,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     height: 15px;
     margin-bottom: 15px;
 }
-.upload {
-    width: 226.44px;
-    height: 45px;
-    font-size: small;
-    text-align: center;
-    margin: 10px 10px 0 0;
-}
+
 .addQuestion{
     width:100%;
     margin-bottom: 5px;

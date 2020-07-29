@@ -54,19 +54,6 @@ input[type=email]:focus, input[type=date]:focus {
     outline: none;
 }
 
-.button {
-    cursor: pointer;
-    background-color: #f07237;
-    color: white;
-    font-size: larger;
-    font-weight: 600;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    padding: 15px 15px;
-    border: none;
-    width: 100%;
-    margin-top: 5px;
-    border-radius: 5px;
-}
 .input-items {
     margin-top: 22px;
 }
