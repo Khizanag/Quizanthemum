@@ -39,6 +39,7 @@ body {
     color: #f07237;
     line-height: 60px;
 }
+
 .header-right {
     display: flex;
     align-content: space-between;
@@ -47,46 +48,6 @@ body {
     right: 0px;
     width: auto;
 }
-
-
-/* --------- */
-
-.menu-button{
-    background-color: transparent;
-    font-size: 15px;
-    padding: 15px;
-    cursor: pointer;
-    border: 1px solid #fff;
-}
-
-.right-menu{
-    position: relative;
-    display: inline-block;
-    float:right;
-}
-
-.dropdown-menu{
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 158px;
-    z-index: 1;
-}
-
-.dropdown-menu a:hover{
-    background-color: #000;
-    color: #fff;
-}
-
-.right-menu:hover .dropdown-menu{
-    display: block;
-}
-
-.right-menu:hover .menu-button{
-    background-color: transparent;
-}
-
-/* --------- */
 
 .icon-cirkle {
     width: 30px;
@@ -201,3 +162,8 @@ body {
 .footer.rigth {
     right: 0;
 }
+
+/*.footer{*/
+/*    position: fixed;*/
+/*    bottom: 0;*/
+/*}*/
