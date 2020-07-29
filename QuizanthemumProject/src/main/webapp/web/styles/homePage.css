@@ -138,8 +138,6 @@ input[type=text]:focus{
     -webkit-transform: translate(0,0);
     transform: translate(0,0);
 }
-
-
 .logIn{
     background-color: #f07237;
     color: white;

@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="../styles/profilePage.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../js/profileStuff.js"></script>
+	<script src="/web/js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
 
-    <jsp:include page="LogedInHandler.jsp"></jsp:include>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
     <% User user = (User)request.getServletContext().getAttribute("logedInUser");%>
 
     <script>
@@ -24,6 +24,7 @@
         function openSearch() {
 			window.location.href = "SearchPage.jsp";
 		}
+
         function changeImage(){
             console.log('asd');
             document.getElementById("change-image").classList.toggle("active");

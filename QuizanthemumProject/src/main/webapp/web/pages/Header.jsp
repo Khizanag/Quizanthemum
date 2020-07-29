@@ -28,16 +28,26 @@
         </div>
 
         <% if(user == null){ %>
-        <ul class="header-right">
-            <button class="button logIn" onClick="openRegistration()">შესვლა</button>
-        </ul>
+            <ul class="header-right">
+                <button class="button logIn" onClick="openRegistration()">შესვლა</button>
+            </ul>
         <% } else { %>
-        <ul class="header-right">
-            <img class = "profile-picture" id="small-prof-pic-id" src="" onerror="this.src='/web/images/common/defProfPic.jpg';" onclick="redirectToProfPage()">
-            <span class = "profile-name-text" onclick="redirectToProfPage()"><%=user.getUsername()%></span>
-        </ul>
-        <% }
-        %>
+            <ul class="header-right">
+                <img class = "profile-picture right-menu" id="small-prof-pic-id" src="" onerror="this.src='/web/images/common/defProfPic.jpg';" onclick="redirectToProfPage()">
+
+                <span class = "profile-name-text" onclick="redirectToProfPage()"><%=user.getUsername()%></span>
+
+<%--                <div class="right-menu">--%>
+<%--                    <button class="menu-button">ps</button>--%>
+<%--                    <div class="dropdown-menu">--%>
+<%--                        <a href="#">პროფილი</a>--%>
+<%--                        <a href="#">პროფილი</a>--%>
+<%--                        <a href="#">პროფილი</a>--%>
+<%--                        <a href="#">პროფილი</a>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+            </ul>
+        <% } %>
 
     </div>
 </header>
