@@ -19,7 +19,7 @@ body {
     height: 60px;
 }
 .header {
-    /*display: flex;*/
+    /*display: flex ;*/
     /*justify-content: space-between;*/
     position: relative;
     /*width: 960px;*/
@@ -41,9 +41,11 @@ body {
 }
 .header-right {
     display: flex;
-    /*position: absolute;*/
+    align-content: space-between;
+    position: absolute;
     margin-top: 15px;
     right: 0px;
+    width: auto;
 }
 
 
