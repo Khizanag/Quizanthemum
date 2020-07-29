@@ -51,28 +51,28 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             pstmt.setString(7, question.getComment());
             pstmt.setString(8, question.getSource());
             pstmt.setDate(9, new java.sql.Date(question.getCreationDate().getTime()));
-            pstmt.setInt(10, question.getQuizId());
+            pstmt.setInt(10, question.getQuizID());
             pstmt.setBoolean(11, question.isPictureQuestion());
             pstmt.setInt(12, question.getStatementsCount());
-
             List<String> statements = question.getStatements();
             for(int i = 0; i < STATEMENTS_NUM; i++) {
                 if (i < statements.size()) {
-                    pstmt.setString(STATEMENT_START_COL + i, statements.get(i));
+                    pstmt.setString(STATEMENT_START_COL + i -1, statements.get(i));
                 } else {
-                    pstmt.setString(STATEMENT_START_COL + i, null);
+                    pstmt.setString(STATEMENT_START_COL + i - 1, null);
                 }
             }
 
-            pstmt.setBoolean(30, question.isPictureAnswer());
-            pstmt.setInt(31, question.getAnswersCount());
+            pstmt.setBoolean(30-1, question.isPictureAnswer());
+            pstmt.setInt(31-1, question.getAnswersCount());
 
             List<String> answers = question.getAnswers();
+            int numAnswers = answers.size();
             for(int i = 0; i < ANSWERS_NUM; i++) {
-                if (i < answers.size()) {
-                    pstmt.setString(ANSWER_START_COL + i, answers.get(i));
+                if (i < numAnswers) {
+                    pstmt.setString(ANSWER_START_COL + i - 1, answers.get(i));
                 } else {
-                    pstmt.setString(ANSWER_START_COL + i, null);
+                    pstmt.setString(ANSWER_START_COL + i - 1, null);
                 }
             }
 

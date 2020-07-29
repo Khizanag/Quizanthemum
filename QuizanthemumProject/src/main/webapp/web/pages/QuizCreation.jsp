@@ -6,60 +6,20 @@
     <meta charset="UTF-8">
     <title> Creating Quiz </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" href="../images/common/icon.png"/>
-    <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/quizCreation.css">
-    <link rel="stylesheet" href="../styles/breakpoints.css">
-    <link rel="stylesheet" href="../styles/rules.css">
+    <link rel="icon" type="image/png" href="/web/images/common/icon.png"/>
+    <link rel="stylesheet" href="/web/styles/common.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
+    <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/rules.css">
 
-    <%
-        if(request.getServletContext().getAttribute("logedInUser") == null){
-            for(Cookie cookie : request.getCookies()){
-                if(cookie.getName().equals("logedInUserID")){
-                    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
-                    User logedInUser = usersManager.getUser(Integer.parseInt(cookie.getValue()));
-                    request.getServletContext().setAttribute("logedInUser", logedInUser);
-                }
-            }
-        }
-    %>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
 </head>
 
 <body>
-    <header class= "header-section">
-        <div class="container header">
-            <div class="header-left">
-                <img class="logo"src="../images/common/icon.png">
-                <h1 class="logo-text">Quizanthemum</h1>
-            </div>
 
-            <ul class="header-right">
-                <div class= "icon-cirkle">
-                    <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
-                </div>
-                <div class= "icon-cirkle">
-                    <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
-                </div>
-                <div class= "icon-cirkle">
-                    <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
-                </div>
-            </ul>
-        </div>
-    </header>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <div class="nav-section">
-        <div class="container">
-            <nav class="nav">
-                <ul class="nav-items">
-                    <a class="nav-item" target="_self" href="/">HOME</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-                </ul>
-            </nav>
-        </div>
-    </div>
-<%--    <form class="registration-section"                             action="../../Registration" method="get">--%>
     <form id="creation-section" class="creation-section" action="../../QuizCreationStarted" method="get">
         <div class="container bla">
             <h2>შექმენი შენი ქვიზი</h2>
@@ -106,7 +66,7 @@
         </div>
     </form>
 
-    <jsp:include page="Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 
 <script>
@@ -124,12 +84,4 @@
         document.getElementById('quiz_icon_url').value = image.src;
     };
 
-    // function checkAndRedirect() {
-    //     let name = document.getElementById('quiz_name').value !== '';
-    //     let description = document.getElementById('quiz_description').value !== '';
-    //     let url = document.getElementById('quiz_icon_url').value !== '';
-    //     if((name && description && url)) {
-    //         window.location.href = "AddingQuestions.jsp";
-    //     }
-    // }
 </script>

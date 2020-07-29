@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.QUESTION_MANAGER_STR;
+import static Configs.Config.QUIZ_CREATING_NOW;
 
 @WebServlet(name = "QuestionCreatedServlet", urlPatterns = "/QuestionCreated")
 public class QuestionCreatedServlet extends HttpServlet {
@@ -27,39 +28,36 @@ public class QuestionCreatedServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("QuestionCreated Servlet");
 
-        String quizName = response.getHeader("CREATING_QUIZ_NAME_STR");
-        System.out.println("quizName in questionCreateServ : " + quizName);
-        Quiz currentQuiz = (Quiz) getServletContext().getAttribute(quizName);
-        if(currentQuiz == null) System.out.println("PZDC: quiz is null in QuestionCreatedServlet get attr");
-
         QuestionManager questionManager = (QuestionManager) request.getServletContext().getAttribute(QUESTION_MANAGER_STR);
 
-        int type = Integer.parseInt(request.getParameter("question-type"));
+        int type = Integer.parseInt(request.getParameter("type"));
         System.out.println("question type is -> " + type);
-        boolean isAutoGraded = true;
-
+        boolean isAutoGraded = Boolean.parseBoolean(request.getParameter("isAutoGraded"));
         double maxScore = 1; //Double.parseDouble(request.getParameter("question_max_score"));
         String headerStatement = request.getParameter("description");
-        String comment = ""; //request.getParameter("question_comment");
-        String source = ""; //request.getParameter("question_source");
+        String comment = request.getParameter("comment");
+        String source = request.getParameter("source");
         Date creationDate = new Date();
         boolean isPictureQuestion = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_question"));
         boolean isPictureAnswer = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_answer"));
-        String textStatement = request.getParameter("question_statement");
-        String pictureStatementUrl = request.getParameter("question_image_url");
+        
+        String textStatement = request.getParameter("statement_text");
+        String pictureStatementUrl = request.getParameter("image_url");
         int numUsersMultiAnswers = 1;
-
-        int numStatements = 2; //Integer.parseInt(request.getParameter("question_num_statements"));
-        List<String> statements = new ArrayList<>();
-//        for (int i = 0; i < numStatements; i++) {
-//            statements.add(request.getParameter("question_statement_" + i));
-//        }
-
-        int numAnswers = 1;//Integer.parseInt(request.getParameter("question_num_answers"));
+      
+        int numAnswers = Integer.parseInt(request.getParameter("num_answers"));
         List<String> answers = new ArrayList<>();
-//        for (int i = 0; i < numAnswers; i++) {
-//            answers.add(request.getParameter("question_answer_" + i));
-//        }
+        List<String> statements = new ArrayList<>();
+        for (int i = 0; i < numAnswers; i++) {
+            String s = request.getParameter("answer_" + i);
+            answers.add(s);
+            statements.add(s);
+        }
+
+        int numStatements = Integer.parseInt(request.getParameter("num_statements"));
+        for (int i = 0; i < numStatements; i++) {
+            statements.add(request.getParameter("statement_" + i));
+        }
 
         switch (type){
             case QuestionTypes.STANDARD:
@@ -80,7 +78,6 @@ public class QuestionCreatedServlet extends HttpServlet {
                 break;
             case QuestionTypes.MULTI_CHOICE_MULTI_ANSWER:
                 numUsersMultiAnswers = Integer.parseInt(request.getParameter("question_num_users_multi_answers"));
-                ;
                 isAutoGraded = true;
                 break;
             case QuestionTypes.MATCHING:
@@ -92,11 +89,10 @@ public class QuestionCreatedServlet extends HttpServlet {
 
         Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, currentQuiz.getID(),
                 isPictureQuestion, isPictureAnswer, textStatement, pictureStatementUrl, statements, answers, numUsersMultiAnswers);
-        System.out.println("new question created in java");
-        int questionID = questionManager.insertQuestion(newQuestion);
-        System.out.println("question inserted into database");
-        newQuestion.setID(questionID);
 
+        System.out.println("new question created in java");
+
+        Quiz currentQuiz = (Quiz) request.getServletContext().getAttribute(QUIZ_CREATING_NOW);
 
         currentQuiz.addQuestion(newQuestion);
         System.out.println("question added into quiz");

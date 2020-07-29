@@ -11,8 +11,12 @@
     <link rel="stylesheet" href="web/styles/common.css">
     <link rel="stylesheet" href="web/styles/homePage.css">
     <link rel="stylesheet" href="web/styles/breakpoints.css">
+    <link rel="stylesheet" href="web/styles/profilePage.css">
+    <link rel="stylesheet" href="web/styles/quizCreation.css">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/web/js/profileStuff.js"></script>
     <script>
         $(document).ready(function(){
             $('.slider').load("web/slider/slider.jsp");
@@ -23,65 +27,20 @@
         }
         function openSearch() {
             window.localStorage.setItem('item', document.getElementById('search-input').value);
-            window.location.href = "search.html";
+            window.location.href = "SearchPage.jsp";
         }
     </script>
 
-    <%
-        if(request.getServletContext().getAttribute("logedInUser") == null){
-            int ID = DEFAULT_ID;
-            String passwordHash = "";
-            for(Cookie cookie : request.getCookies()){
-                if(cookie.getName().equals("Quizanthemum-loged-in-user-ID")){
-                    ID = Integer.parseInt(cookie.getValue());
-                }else if(cookie.getName().equals("Quizanthemum-loged-in-user-password-hash")){
-                    passwordHash = cookie.getValue();
-                }
-            }
-            UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
-            User logedInUser = usersManager.getUser(ID);
-            if(logedInUser != null && logedInUser.getPasswordHash().equals(passwordHash)){
-                request.getServletContext().setAttribute("logedInUser", logedInUser);
-            }
-        }
-    %>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
+    <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
 </head>
+
 <body>
-<header class= "header-section">
-    <div class="container header">
-        <div class="header-left">
-            <img class="logo" src="web/images/common/icon.png">
-            <h1 class="logo-text">Quizanthemum</h1>
-        </div>
 
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-        <ul class="header-right">
-            <button class="button logIn" onClick="openRegistration()">შესვლა</button>
-        </ul>
-
-    </div>
-</header>
-
-<div class="nav-section">
-    <div class="container manu">
-        <nav class="nav">
-            <ul class="nav-items">
-                <a class="nav-item" target="_self" href="./">HOME</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-                <a class="nav-item" target="_self" href="web/pages/QuizCreation.jsp">CREATE QUIZ</a>
-                <a class="nav-item" target="_self" href="web/pages/StartQuiz.jsp">სატესტო</a>
-                <a class="nav-item" target="_self" href="web/pages/pasuxebi.jsp">კითხვები</a>
-            </ul>
-        </nav>
-        <div class="search-items">
-            <input type="text" id="search-input" placeholder="რა გაინტერესებთ..." name="search">
-            <button type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
-        </div>
-    </div>
-</div>
 <div class="page-holder">
     <div class="slider"></div>
 
@@ -170,18 +129,6 @@
         </div>
     </div>
 
-<%--    <footer	class= "footer-section">--%>
-<%--        <div class= "container">--%>
-<%--            <div class= "footer-items">--%>
-<%--                <div class= "footer left">--%>
-<%--                    All Right Reserved--%>
-<%--                </div>--%>
-<%--                <div class= "footer rigth">--%>
-<%--                    Quizanthemum By Our Team--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </footer>--%>
-    <jsp:include page="Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </div>
 </body>

@@ -16,8 +16,10 @@ public interface Config {
     String TAG_EVENTS_MANAGER_STR = "tag_event_manager";
     String USERS_MANAGER_STR = "user_manager";
 
+    String QUIZ_CREATING_NOW = "quiz_which's_creating_is_in_progress";
+
     String CURRENT_QUIZES_STR = "currently started quizes by user";
 
     /** Used when creating Object, before inserting into database */
-    int DEFAULT_ID = -1;
+    int DEFAULT_ID = -1234;
 }

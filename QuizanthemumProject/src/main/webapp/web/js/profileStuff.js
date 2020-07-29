@@ -31,8 +31,8 @@ function removeFriend(d){
   $(d).parent().parent().remove();
 }
 function redirectToQuiz(){
-  window.location.href="quizzSummaryPage.jsp";
+  window.location.href="QuizSummaryPage.jsp";
 }
 function redirectToProfPage(){
-  window.location.href="profilePageLogged.jsp";
+  window.location.href="web/pages/profilePageLogged.jsp";
 }
