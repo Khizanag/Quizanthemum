@@ -40,6 +40,5 @@ public interface QuestionTableConfig {
     //    String QUESTION_TABLE_COLUMN_47_ANSWER_15 = "ANSWER_15";
     String QUESTION_TABLE_ITH_ANSWER_TEXT = "ANSWER_";
 
-    String QUESTION_TABLE_COLUMN_48_NUM_USERS_MULTI_ANSWERS = "NUM_USERS_MULTI_ANSWERS";    // int
 
 }
