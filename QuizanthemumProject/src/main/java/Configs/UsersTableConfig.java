@@ -1,6 +1,6 @@
 package Configs;
 
-public interface UsersTableConfig {
+public interface    UsersTableConfig {
 
     String USERS_TABLE_NAME = "users";
 

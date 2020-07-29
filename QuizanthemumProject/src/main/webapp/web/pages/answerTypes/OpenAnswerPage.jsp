@@ -15,7 +15,7 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-<form class="add-question-section">
+<form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
         <h2>შეკითხვა (აქ იქნება N)</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, ea

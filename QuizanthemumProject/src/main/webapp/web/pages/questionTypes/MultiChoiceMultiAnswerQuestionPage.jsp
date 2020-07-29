@@ -23,7 +23,7 @@
                     შეიყვანეთ URL ასატვირთად
                 </label>
                 <input type="text" placeholder="ფოტოს URL"
-                       name="image_url" id="question_image_url" required>
+                       name="image_url" id="question_image_url">
             </div>
             <img id="output" width="100" />
         </div>

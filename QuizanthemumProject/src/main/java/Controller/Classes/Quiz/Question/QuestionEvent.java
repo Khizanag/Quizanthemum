@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static Controller.Classes.Quiz.Question.QuestionTypes.*;
+
 public class QuestionEvent {
 
     /* private variables */
@@ -66,6 +68,7 @@ public class QuestionEvent {
 
     /* score computing methods */
 
+        // TODO with num statements
     // returns user's score
     // called after question is graded
     public double getUserScore() {
@@ -74,7 +77,12 @@ public class QuestionEvent {
 
     public boolean isAutoGraded() { return question.isAutoGraded(); }
 
-    public int getType() { return question.getType(); }
+    public int getType() {
+        System.out.println("oooooo");
+        int type = question.getType();
+        System.out.println("uuuuuu");
+        return  type;
+    }
 
     /*
      * manually set user score.
@@ -151,8 +159,11 @@ public class QuestionEvent {
     }
 
     public int getNumUsersAnswers() {
-        return 1;
-        // TODO with num statements
+        if(question.getType() == STANDARD || question.getType() == MULTI_CHOICE) {
+            return 1;
+        } else {
+            return question.getStatementsCount();
+        }
     }
 
 }
