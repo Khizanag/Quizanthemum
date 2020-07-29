@@ -19,9 +19,9 @@
     function gotoProfPage() {
       window.location.href="profilePageLogged.jsp";
     }
-		function openSearch() {
-			window.location.href = "SearchPage.jsp";
-		}
+    function openSearch() {
+      window.location.href = "SearchPage.jsp";
+    }
 	</script> 
 
 </head>
