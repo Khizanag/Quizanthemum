@@ -87,7 +87,7 @@ public class QuestionCreatedServlet extends HttpServlet {
             default: break;
         }
 
-        Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, currentQuiz.getID(),
+        Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, -1,
                 isPictureQuestion, isPictureAnswer, textStatement, pictureStatementUrl, statements, answers, numUsersMultiAnswers);
 
         System.out.println("new question created in java");
