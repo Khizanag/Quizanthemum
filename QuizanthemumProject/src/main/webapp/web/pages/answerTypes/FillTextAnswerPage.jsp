@@ -11,40 +11,10 @@
 </head>
 
 <body>
-<header class= "header-section">
-    <div class="container header">
-        <div class="header-left">
-            <img class="logo"src="../../images/common/icon.png">
-            <h1 class="logo-text">Quizanthemum</h1>
-        </div>
 
-        <ul class="header-right">
-            <div class= "icon-cirkle">
-                <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
-            </div>
-            <div class= "icon-cirkle">
-                <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
-            </div>
-            <div class= "icon-cirkle">
-                <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
-            </div>
-        </ul>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    </div>
-</header>
-
-<div class="nav-section">
-    <div class="container">
-        <nav class="nav">
-            <ul class="nav-items">
-                <a class="nav-item" target="_self" href="/">HOME</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-            </ul>
-        </nav>
-    </div>
-</div>
 
 <form class="add-question-section">
     <div class="container">
@@ -58,7 +28,7 @@
     </div>
 </form>
 
-<jsp:include page="../Footer.jsp"></jsp:include>
+    <jsp:include page="../Footer.jsp"></jsp:include>
 </body>
 <script>
     let parent = document.getElementById('input-items');

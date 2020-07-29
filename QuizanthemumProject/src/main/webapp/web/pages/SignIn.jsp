@@ -17,12 +17,10 @@
             <h2>შესვლა</h2>
             <p>გთხოვთ შეიყვანოთ მითითებული მონაცემები პროფილზე შესასვლელად.</p>
             <hr>
-            <%
-                if(request.getServletContext().getAttribute("errorMessage") != null) { %>
-                    <p class="error_message"> ${errorMessage}</p> <%
-                    request.removeAttribute("errorMessage");
-                }
-            %>
+            <% if(request.getServletContext().getAttribute("errorMessage") != null) { %>
+                    <p class="error_message"> ${errorMessage}</p>
+            <% request.removeAttribute("errorMessage");
+                } %>
 
             <div class="input-items">
                 <label><b>Username</b></label>
