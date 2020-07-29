@@ -244,15 +244,5 @@ html body {
 .footer {
     line-height: 60px;
     font-size: 14px;
-    position: absolute;
     color: #b3bdbe;
-}
-
-.footer.left {
-    position: absolute;
-    left: 0;
-}
-
-.footer.rigth {
-    right: 0;
 }
