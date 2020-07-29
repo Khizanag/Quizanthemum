@@ -61,7 +61,7 @@ public final class Question {
 
         this(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId, isPictureQuestion,
                 isPictureAnswer, textStatement, pictureStatementURL, statements, answers, numUsersMultiAnswers);
-        this.id = id;
+        this.ID = ID;
 
     }
 
