@@ -1,3 +1,4 @@
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.MATCHING" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form action="../../QuestionCreated" method="get">
@@ -58,7 +59,7 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="6">
+        <input type="hidden" name="type" value="<%=MATCHING%>">
         <input  type="hidden" name="num_statements" value="0">
         <input type="hidden" name="num_answers" value="4" id="matching-num-answers-elem">
 

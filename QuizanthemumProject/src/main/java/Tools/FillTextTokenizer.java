@@ -5,8 +5,8 @@ import java.util.List;
 
 public class FillTextTokenizer {
 
-    public static final String LEFT_BOUND_DELIMS = "{(<_ ";
-    public static final String RIGHT_BOUND_DELIMS = " _>)}";
+    public static final String LEFT_BOUND_DELIMS = "{(<_";
+    public static final String RIGHT_BOUND_DELIMS = "_>)}";
 
     private String text;
     private List<String> tokens;
@@ -22,7 +22,7 @@ public class FillTextTokenizer {
         tokens = new ArrayList<>();
         boolean nextIsToFill = false;
         int currIndex = 0;
-        while(currIndex < text.length()-1){
+        while(currIndex <= text.length()-1){
             String delims = (nextIsToFill) ? RIGHT_BOUND_DELIMS : LEFT_BOUND_DELIMS;
             int lastIndex = text.indexOf(delims, currIndex);
             if(lastIndex == -1)
