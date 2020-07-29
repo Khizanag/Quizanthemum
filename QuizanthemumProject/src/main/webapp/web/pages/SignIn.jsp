@@ -31,6 +31,8 @@
                 <input type="password" placeholder="შეიყვანეთ პაროლი"
                        name="log_in_password" id="log_in_password" required>
 
+                <p> არ გაქვს პროფილი? <a href="Registration.jsp">დარეგისტრირდი ახლავე</a>.</p>
+
             </div>
             <button type="submit" class="button" onclick="checkAndRedirect()">შესვლა</button>
         </div>
