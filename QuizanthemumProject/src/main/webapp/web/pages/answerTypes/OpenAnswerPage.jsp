@@ -1,3 +1,5 @@
+<%@ page import="Controller.Classes.Quiz.Question.Question" %>
+<%@ page import="Controller.Classes.Quiz.Question.QuestionEvent" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -17,16 +19,11 @@
 
 <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
-        <h2>შეკითხვა (აქ იქნება N)</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, ea
-            natus! Blanditiis distinctio ea earum est, ex fugiat harum impedit iure
-            libero magnam praesentium quos ratione rem rerum sunt
-            voluptate? Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit. Atque expedita porro reiciendis
-            reprehenderit. Cum ducimus ea, eius enim eos est,
-            et eveniet iusto laudantium necessitatibus perspiciatis,
-            porro quae quis sequi?</p>
-        <p>ავტორის მინიშნება/მოთხოვნა, მაგალითად: (შეიყვანეთ მინიმუმ 300 სიტყვა)</p>
+        <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
+        <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
+        <%Question question = questionEvent.getQuestion();%>
+        <p><%=question.getTextStatement()%></p>
+        <p><%=question.getHeaderStatement()%></p>
         <hr>
         <div class="input-items" id="input-items">
             <label><b>შეიყვანეთ თქვენი პასუხი აქ: </b></label>

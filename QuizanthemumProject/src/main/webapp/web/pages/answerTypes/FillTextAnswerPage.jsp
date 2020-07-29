@@ -1,3 +1,5 @@
+<%@ page import="Controller.Classes.Quiz.Question.Question" %>
+<%@ page import="Controller.Classes.Quiz.Question.QuestionEvent" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -16,15 +18,16 @@
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
 
-<form class="add-question-section">
+<form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
-        <h2>შეკითხვა (აქ იქნება N)</h2>
-        <p>შეავსეთ ტექსტში გამოტოვებული სიტყვები</p>
-        <p>ავტორის მინიშნება/მოთხოვნა, მაგალითად: (კისერი გიტეხიათ)</p>
+        <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
+        <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
+        <%Question question = questionEvent.getQuestion();%>
+        <p><%=question.getHeaderStatement()%></p>
         <hr>
         <div class="input-items" id="input-items">
         </div><hr>
-        <button class="button" type="button"> პასუხის დადასტურება </button>
+        <button class="button" type="submit"> პასუხის დადასტურება </button>
     </div>
 </form>
 

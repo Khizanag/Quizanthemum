@@ -19,7 +19,7 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <form class="start-quiz-section" action="../../../QuizEventStartServlet" method ="get">
+    <form class="start-quiz-section" action="../../../QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">
                 <img src="../images/homepage/c.jpg" class="quiz-main-img">
