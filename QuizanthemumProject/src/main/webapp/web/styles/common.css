@@ -19,9 +19,10 @@ body {
     height: 60px;
 }
 .header {
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
     position: relative;
+    /*width: 960px;*/
 }
 .header-left {
     display: flex;
@@ -40,10 +41,11 @@ body {
 }
 .header-right {
     display: flex;
-    position: absolute;
+    /*position: absolute;*/
     margin-top: 15px;
-    right: 0;
+    right: 0px;
 }
+
 .icon-cirkle {
     width: 30px;
     height: 30px;
