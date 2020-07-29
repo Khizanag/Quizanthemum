@@ -92,6 +92,7 @@ input[type=text]:focus{
     width: 100px;
     height: 40px;
     text-align: center;
+    line-height: 40px;
     border: 1px solid transparent;
     border-radius: 5px;
     cursor: pointer;
