@@ -31,7 +31,7 @@
         <div class="input-items" id="input-items">
             <label><b>შეიყვანეთ თქვენი პასუხი აქ: </b></label>
             <textarea class="ans-toFill" id="ans-toFill"></textarea>
-            <p> შეყვანილია <span>0</span> სიტყვა</p>
+            <p> შეყვანილია <span id="words-counter">0</span> სიტყვა</p>
         </div><hr>
         <button class="button" type="submit"> პასუხის დადასტურება </button>
     </div>
@@ -53,6 +53,6 @@
                 resultArray.push(item);
             }
         }
-        document.querySelector("span").innerText = resultArray.length;
+        document.getElementById("words-counter").innerText = resultArray.length;
     }
 </script>
