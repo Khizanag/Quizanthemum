@@ -34,17 +34,16 @@ public class QuestionCreatedServlet extends HttpServlet {
         int type = Integer.parseInt(request.getParameter("type"));
         System.out.println("question type is -> " + type);
         boolean isAutoGraded = Boolean.parseBoolean(request.getParameter("isAutoGraded"));
-        int maxScore = Integer.parseInt(request.getParameter("max_score"));
+        double maxScore = 1; //Double.parseDouble(request.getParameter("question_max_score"));
         String headerStatement = request.getParameter("description");
         String comment = request.getParameter("comment");
         String source = request.getParameter("source");
         Date creationDate = new Date();
-        boolean isPictureQuestion = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_question")); // TODO
-        boolean isPictureAnswer = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_answer"));    // TODO
+        boolean isPictureQuestion = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_question"));
+        boolean isPictureAnswer = false; //Boolean.parseBoolean(request.getParameter("question_is_picture_answer"));
         String textStatement = request.getParameter("statement_text");
         String pictureStatementUrl = request.getParameter("image_url");
-
-
+        int numUsersMultiAnswers = 1;
 
         int numAnswers = Integer.parseInt(request.getParameter("num_answers"));
         int numStatements = Integer.parseInt(request.getParameter("num_statements"));
@@ -86,11 +85,14 @@ public class QuestionCreatedServlet extends HttpServlet {
 
         Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate,
                 -1, isPictureQuestion, isPictureAnswer, textStatement, pictureStatementUrl, statements, answers);
+        System.out.println("new question created in java");
 
         Quiz currentQuiz = (Quiz) request.getServletContext().getAttribute(QUIZ_CREATING_NOW);
 
         currentQuiz.addQuestion(newQuestion);
+        System.out.println("question added into quiz");
 
+        // TODO if finished quiz
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
     }

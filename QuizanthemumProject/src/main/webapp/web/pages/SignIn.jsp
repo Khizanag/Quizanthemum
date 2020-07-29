@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
 </head>
 <body>
-    <jsp:include page="/web/pages/Header2.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="MenuBar.jsp"></jsp:include>
 
     <form class="sign-in-section" action="../../LogInServlet" method="get">

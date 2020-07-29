@@ -19,7 +19,7 @@ import java.util.List;
 import static Configs.Config.*;
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 
-@WebServlet(name = "QuestionEventFinishedServlet")
+@WebServlet(name = "QuestionEventFinishedServlet", urlPatterns = "/QuestionEventFinished")
 public class QuestionEventFinishedServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,37 +27,37 @@ public class QuestionEventFinishedServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        QuestionEventManager questionEventManager = (QuestionEventManager) request.getServletContext().getAttribute(QUESTION_EVENT_MANAGER_STR);
+//        QuizEvent quizEvent = (QuizEvent) request.getAttribute("question_event_quiz_event");
+//
+        QuestionEvent questionEvent = (QuestionEvent) request.getAttribute("question_event");
 
-        QuizEvent quizEvent = (QuizEvent) request.getAttribute("quiz_event");
-        int quizEventId = quizEvent.getId();
-        Question question = (Question) request.getAttribute("question_event_question");
-        boolean isAlreadyGraded = Boolean.parseBoolean(request.getParameter("question_event_is_already_graded"));
-        Date startDate = (Date) request.getAttribute("question_event_start_date");
-
-        int numAnswers = Integer.parseInt(request.getParameter("question_event_num_answers"));
+        int numAnswers = questionEvent.getNumUsersMultiAnswers();
+        System.out.println(numAnswers);
         List<String> userAnswers = new ArrayList<>();
         for (int i = 0; i < numAnswers; i++) {
-            userAnswers.add(request.getParameter("question_event_answer_" + i));
+            String nextAns = request.getParameter("question_event_answer_" + i);
+            System.out.println(nextAns);
+            userAnswers.add(nextAns);
         }
 
-        QuestionEvent newQuestionEvent = new QuestionEvent(quizEventId, question, isAlreadyGraded, startDate);
-        newQuestionEvent.setUserAnswers(userAnswers);
-        newQuestionEvent.finishQuestionEvent();
+//        questionEvent.setUserAnswers(userAnswers);
+//        questionEvent.finishQuestionEvent();
+//
+//        if(questionEvent.isAutoGraded()) {
+//            gradeQuestionEvent(questionEvent);
+//        }
+//
+//        quizEvent.setFilledQuestionEvent(questionEvent);
+//        response.setStatus(HttpServletResponse.SC_FOUND);//302
+//        if (quizEvent.hasNextQuestion()) {
+//            QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
+//            request.setAttribute("question_event", nextQuestionEvent);
+//            response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
+//        } else {
+//            response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
+//        }
 
-        if(newQuestionEvent.isAutoGraded()) {
-            gradeQuestionEvent(newQuestionEvent);
-        }
-
-        response.setStatus(HttpServletResponse.SC_FOUND);//302
-        if (quizEvent.hasNextQuestion()) {
-            request.setAttribute("question_event_question", quizEvent.getNextEmptyQuestionEvent());
-            response.setHeader("Location", "http://localhost:8080/web/pages/next-question.html"); // TODO valid address. next question
-        } else {
-            response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
-        }
-
-        quizEvent.setFilledQuestionEvent(newQuestionEvent);
+        System.out.println("question event finished");
     }
 
     private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {
@@ -74,6 +74,25 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             case MULTI_CHOICE:
             default:
                 newQuestionEvent.autoGradeTextAnswer();
+        }
+    }
+
+    private String getNextQuestionLink(int type) {
+        switch (type) {
+            case MULTI_ANSWER:
+                return "http://localhost:8080/web/pages/answerTypes/MultiOpenAnswerPage.jsp";
+            case MULTI_CHOICE_MULTI_ANSWER:
+                return "http://localhost:8080/web/pages/answerTypes/MultiChoiceMultiAnswerAnswerPage.jsp";
+            case FILL_BLANK:
+                return "http://localhost:8080/web/pages/answerTypes/FillTextAnswerPage.jsp";
+            case MATCHING:
+                return "http://localhost:8080/web/pages/answerTypes/MatchingAnswerPage.jsp";
+            case STANDARD:
+                return "http://localhost:8080/web/pages/answerTypes/OpenAnswerPage.jsp";
+            case MULTI_CHOICE:
+                return "http://localhost:8080/web/pages/answerTypes/MultiChoiceAnswerPage.jsp";
+            default:
+                return "error";
         }
     }
 }

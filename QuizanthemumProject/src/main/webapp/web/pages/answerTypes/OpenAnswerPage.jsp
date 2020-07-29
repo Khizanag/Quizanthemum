@@ -15,29 +15,29 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <form class="add-question-section">
-        <div class="container">
-            <h2>შეკითხვა (აქ იქნება N)</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, ea
-                natus! Blanditiis distinctio ea earum est, ex fugiat harum impedit iure
-                libero magnam praesentium quos ratione rem rerum sunt
-                voluptate? Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Atque expedita porro reiciendis
-                reprehenderit. Cum ducimus ea, eius enim eos est,
-                et eveniet iusto laudantium necessitatibus perspiciatis,
-                porro quae quis sequi?</p>
-            <p>ავტორის მინიშნება/მოთხოვნა, მაგალითად: (შეიყვანეთ მინიმუმ 300 სიტყვა)</p>
-            <hr>
-            <div class="input-items" id="input-items">
-                <label><b>შეიყვანეთ თქვენი პასუხი აქ: </b></label>
-                <textarea class="ans-toFill" id="ans-toFill"></textarea>
-                <p> შეყვანილია <span>0</span> სიტყვა</p>
-            </div><hr>
-            <button class="button" type="submit"> პასუხის დადასტურება </button>
-        </div>
-    </form>
+<form class="add-question-section">
+    <div class="container">
+        <h2>შეკითხვა (აქ იქნება N)</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, ea
+            natus! Blanditiis distinctio ea earum est, ex fugiat harum impedit iure
+            libero magnam praesentium quos ratione rem rerum sunt
+            voluptate? Lorem ipsum dolor sit amet, consectetur
+            adipisicing elit. Atque expedita porro reiciendis
+            reprehenderit. Cum ducimus ea, eius enim eos est,
+            et eveniet iusto laudantium necessitatibus perspiciatis,
+            porro quae quis sequi?</p>
+        <p>ავტორის მინიშნება/მოთხოვნა, მაგალითად: (შეიყვანეთ მინიმუმ 300 სიტყვა)</p>
+        <hr>
+        <div class="input-items" id="input-items">
+            <label><b>შეიყვანეთ თქვენი პასუხი აქ: </b></label>
+            <textarea class="ans-toFill" id="ans-toFill"></textarea>
+            <p> შეყვანილია <span>0</span> სიტყვა</p>
+        </div><hr>
+        <button class="button" type="submit"> პასუხის დადასტურება </button>
+    </div>
+</form>
 
-    <jsp:include page="../Footer.jsp"></jsp:include>
+<jsp:include page="../Footer.jsp"></jsp:include>
 </body>
 
 <script>

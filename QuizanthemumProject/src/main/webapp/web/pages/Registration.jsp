@@ -12,7 +12,7 @@
 
 <body style="padding:0px; margin:0px; font-family:arial,helvetica,sans-serif,verdana,'Open Sans'">
 
-    <jsp:include page="/web/pages/Header2.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <form class="registration-section" action="../../Registration" method="get">

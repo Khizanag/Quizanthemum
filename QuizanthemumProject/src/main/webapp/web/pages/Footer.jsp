@@ -11,7 +11,7 @@
     <div class= "container">
         <div class= "footer-items">
             <div class= "footer left">
-                All Right Reserved
+                All Rights Reserved
             </div>
             <div class= "footer rigth">
                 Quizanthemum By Our Team
