@@ -30,6 +30,8 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
 
         QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");
+        int questionNumber = (int) request.getServletContext().getAttribute("question_number");
+
 
         int numAnswers = questionEvent.getNumUsersAnswers();
         List<String> userAnswers = new ArrayList<>();
@@ -45,14 +47,12 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             gradeQuestionEvent(questionEvent);
         }
 
-        if(quizEvent == null) {
-            System.out.println("quiz event is null");
-        }
         quizEvent.setFilledQuestionEvent(questionEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
             QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
             request.getServletContext().setAttribute("question_event", nextQuestionEvent);
+            request.getServletContext().setAttribute("question_number", questionNumber+1);
             response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
             response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp"); // TODO valid address. end quiz

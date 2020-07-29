@@ -58,10 +58,10 @@
     <input type="text" placeholder="სურვილისამებრ მიუთითეთ კომენტარი..."
            name="comment" id="comment">
 
-        <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="3">
-        <input  type="hidden" name="num_statements" value="1" id="num_statements_in_multi_choice">
-        <input type="hidden" name="num_answers" value="1">
+    <%--   HIDDEN VARIABLES     --%>
+    <input type="hidden" name="type" value="5">
+    <input  type="hidden" name="num_statements" value="1" id="num_statements_elem">
+    <input type="hidden" name="num_answers" value="1" id="num_answers_elem">
 
     </div>
 

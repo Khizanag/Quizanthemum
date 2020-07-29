@@ -24,6 +24,7 @@ html body {
 
 .header {
     position: relative;
+
 }
 
 .header-left {
@@ -48,22 +49,25 @@ html body {
     display: flex;
     align-content: space-between;
     position: absolute;
-    margin-top: 15px;
     right: 0px;
     width: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .social-media-icons{
     display: flex;
     align-content: space-between;
-    width: auto;
     margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .icon-cirkle {
     width: 30px;
     height: 30px;
-    margin-left: 10px;
+    margin-left: 5px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -72,7 +76,6 @@ html body {
 
 .fa {
     color: white;
-    line-height: 30px;
     text-decoration: none;
     font-size: 20px;
 }
@@ -112,15 +115,10 @@ html body {
 .nav-item:hover {
     color: #d48a33;
 }
-
 .manu {
     position: relative;
 }
-
 .upload {
-    width: 226.44px;
-    height: 45px;
-    font-size: small;
     text-align: center;
     margin: 10px 10px 0 0;
 }
@@ -156,6 +154,11 @@ html body {
     color: #f07237;
 }
 
+#search-btn-id {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 /* BUTTON */
 
 .button{
@@ -167,13 +170,25 @@ html body {
 }
 
 .button {
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    -o-transition: all 0.3s;
+
+}
+.button {
+    cursor: pointer;
+    background-color: #f07237;
+    color: white;
+    font-size: medium;
+    font-weight: 600;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    padding: 5px 20px;
+    border: none;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    outline:none;
     transition: all 0.3s;
     position: relative;
-    border: 1px solid rgba(255,255,255,0.5);
     overflow: hidden;
+    padding: 11px    ;
 }
 
 .button a{
@@ -208,20 +223,6 @@ html body {
     transform: translate(0, 0);
 }
 
-.button {
-    cursor: pointer;
-    background-color: #f07237;
-    color: white;
-    font-size: larger;
-    font-weight: 600;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    padding: 5px 20px;
-    border: none;
-    width: 100%;
-    margin-top: 5px;
-    border-radius: 5px;
-    outline:none;
-}
 
 
 
@@ -245,4 +246,13 @@ html body {
     line-height: 60px;
     font-size: 14px;
     color: #b3bdbe;
+}
+
+.footer.left {
+    position: absolute;
+    left: 5px;
+}
+
+.footer.rigth {
+    right: 5px;
 }
