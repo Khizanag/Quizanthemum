@@ -27,8 +27,8 @@ public class QuestionEventFinishedServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        QuizEvent quizEvent = (QuizEvent) request.getAttribute("question_event_quiz_event");
-//
+        QuizEvent quizEvent = (QuizEvent) request.getAttribute("question_event_quiz_event");
+
         QuestionEvent questionEvent = (QuestionEvent) request.getAttribute("question_event");
 
         int numAnswers = questionEvent.getNumUsersAnswers();
@@ -40,22 +40,22 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             userAnswers.add(nextAns);
         }
 
-//        questionEvent.setUserAnswers(userAnswers);
-//        questionEvent.finishQuestionEvent();
-//
-//        if(questionEvent.isAutoGraded()) {
-//            gradeQuestionEvent(questionEvent);
-//        }
-//
-//        quizEvent.setFilledQuestionEvent(questionEvent);
-//        response.setStatus(HttpServletResponse.SC_FOUND);//302
-//        if (quizEvent.hasNextQuestion()) {
-//            QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
-//            request.setAttribute("question_event", nextQuestionEvent);
-//            response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
-//        } else {
-//            response.setHeader("Location", "http://localhost:8080/web/pages/end-quiz.html"); // TODO valid address. end quiz
-//        }
+        questionEvent.setUserAnswers(userAnswers);
+        questionEvent.finishQuestionEvent();
+
+        if(questionEvent.isAutoGraded()) {
+            gradeQuestionEvent(questionEvent);
+        }
+
+        quizEvent.setFilledQuestionEvent(questionEvent);
+        response.setStatus(HttpServletResponse.SC_FOUND);//302
+        if (quizEvent.hasNextQuestion()) {
+            QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
+            request.setAttribute("question_event", nextQuestionEvent);
+            response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
+        } else {
+            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp"); // TODO valid address. end quiz
+        }
 
         System.out.println("question event finished");
     }

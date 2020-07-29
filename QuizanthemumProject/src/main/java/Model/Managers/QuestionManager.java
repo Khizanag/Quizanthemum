@@ -94,12 +94,14 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
     public Question getQuestion(int id){
 
         String query = "SELECT * FROM " + QUESTIONS_TABLE_NAME +
-                " WHERE" + QUESTION_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+                " WHERE " + QUESTION_TABLE_COLUMN_1_ID + " = " + id + ";\n";
 
         try {
-            ResultSet set = connectionStatement.executeQuery(query);
-
-            set.getString(QUESTION_TABLE_COLUMN_1_ID);
+            Statement myStatement = connection.createStatement();
+            ResultSet set = myStatement.executeQuery(query);
+            if(!set.next()) {
+                return null;
+            }
             int type = set.getInt(QUESTION_TABLE_COLUMN_2_TYPE);
             boolean isAutoGraded = set.getBoolean(QUESTION_TABLE_COLUMN_3_IS_AUTO_GRADED);
             double maxScore = set.getDouble(QUESTION_TABLE_COLUMN_4_MAX_SCORE);
@@ -128,9 +130,9 @@ public class QuestionManager implements Config, QuestionTableConfig, QuestionTyp
             return new Question(id, type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate, quizId,
                     isPictureQuestion, isPictureAnswer, textStatement, pictureStatementURL, statements, answers);
 
-        } catch (SQLException unused) { }
-
-        return null; // never reached
+        } catch (SQLException unused) {
+            return null; // never reached
+        }
     }
 
 }
