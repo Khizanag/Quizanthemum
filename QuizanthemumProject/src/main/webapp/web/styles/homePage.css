@@ -88,15 +88,6 @@ input[type=text]:focus{
     background-image: url('../images/homepage/d.jpg');
 }
 
-.button{
-    width: 100px;
-    height: 40px;
-    text-align: center;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .logIn{
     background-color: #f07237;
     color: white;
