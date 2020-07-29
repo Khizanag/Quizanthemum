@@ -6,10 +6,12 @@
 body {
     background-color: #002c2f;
     position: relative;
+    min-height: 100%;
 }
 .container {
      width: 1250px;
     /*width: 960px;*/
+    /*min-height: 100%;*/
     margin: auto;
 }
 
@@ -143,27 +145,26 @@ body {
     position: absolute;
     bottom: 0;
 }
+
 .footer-items {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     position: relative;
 }
+
 .footer {
     line-height: 60px;
     font-size: 14px;
     position: absolute;
     color: #b3bdbe;
 }
+
 .footer.left {
     position: absolute;
     left: 0;
 }
+
 .footer.rigth {
     right: 0;
 }
-
-/*.footer{*/
-/*    position: fixed;*/
-/*    bottom: 0;*/
-/*}*/
