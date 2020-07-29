@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 <link rel="stylesheet" href="/web/styles/common.css">
-<link rel="stylesheet" href="/web/styles/logIn.css">
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
@@ -50,7 +49,7 @@
         </nav>
         <div class="search-items">
             <input type="text" id="search-input" placeholder="რა გაინტერესებთ..." name="search">
-            <button type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
+            <button id="search-btn-id" type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
         </div>
     </div>
 </div>
