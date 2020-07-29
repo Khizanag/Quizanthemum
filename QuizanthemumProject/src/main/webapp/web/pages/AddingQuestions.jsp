@@ -128,23 +128,23 @@
     }
 
 
-    let matchId = 5;
     function addNextMatching() {
         let parent = document.getElementById('matching-elems-container');
+        let numAnswers = parseInt(document.getElementById('matching-num-answers-elem').value);
 
-        let toAdd = '<div class="matchin-pair">\n' +
-            '                <input type="text" placeholder="რას ვაწყვილებთ"\n' +
-            '                       name="matching-elem" id="' + matchId +
-            '                       " class="matching-elem" required>\n' +
-            '                <div class="arrow-container">\n' +
-            '                    <i class="arrow arr-right"></i>\n' +
-            '                    <i class="arrow arr-left"></i>\n' +
-            '                </div>\n' +
-            '                <input type="text" placeholder="რასთან ვაწყვილებთ"\n' +
-            '                       name="matching-elem" id="' + (matchId+1) +
-            '                       " class="matching-elem" required>\n' +
-            '            </div>'
-        matchId += 2;
+        let toAdd = `<div class="matchin-pair">
+                            <input type="text" placeholder="რას ვაწყვილებთ"
+                                   name="matching-elem" id="' + numAnswers + '"
+                                   class="matching-elem" required>
+                            <div class="arrow-container">
+                                <i class="arrow arr-right"></i>
+                                <i class="arrow arr-left"></i>
+                            </div>
+                            <input type="text" placeholder="რასთან ვაწყვილებთ"
+                                   name="matching-elem" id="' + (numAnswers+1) + '"
+                                   class="matching-elem" required>
+                        </div>`;
+        document.getElementById('matching-num-answers-elem').value = numAnswers + 2;
 
         parent.innerHTML += toAdd;
     }
