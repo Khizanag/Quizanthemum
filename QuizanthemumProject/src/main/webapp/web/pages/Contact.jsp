@@ -13,9 +13,12 @@
 <body>
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
-    <br><br>
-    <h2>This page is not implemented yet.</h2>
-    <h2>Here will be info about us.</h2>
+    <div class="displayer-container">
+        <h2>This page is not implemented yet.</h2>
+        <br>
+        <br>
+        <h2 >Here will be info about us.</h2>
+    </div>
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 </html>

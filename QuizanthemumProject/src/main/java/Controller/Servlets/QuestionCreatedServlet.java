@@ -34,7 +34,7 @@ public class QuestionCreatedServlet extends HttpServlet {
         int type = Integer.parseInt(request.getParameter("type"));
         System.out.println("question type is -> " + type);
         boolean isAutoGraded = Boolean.parseBoolean(request.getParameter("isAutoGraded"));
-        double maxScore = 1; //Double.parseDouble(request.getParameter("question_max_score"));
+        int maxScore = Integer.parseInt(request.getParameter("max_score"));
         String headerStatement = request.getParameter("description");
         String comment = request.getParameter("comment");
         String source = request.getParameter("source");
