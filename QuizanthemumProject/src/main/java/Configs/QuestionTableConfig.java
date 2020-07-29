@@ -4,7 +4,7 @@ public interface QuestionTableConfig {
 
     String QUESTIONS_TABLE_NAME = "questions";
 
-    int COLUMN_COUNT = 48;
+    int COLUMN_COUNT = 47;
     int STATEMENT_START_COL = 14;
     int STATEMENTS_NUM = 16;
     int ANSWER_START_COL = 32;

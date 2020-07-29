@@ -17,12 +17,13 @@
 <script>
     function logout(){
         const logoutForm = document.getElementById("logoutForm");
-        logoutForm.action="../../LogOutServlet"
+        logoutForm.action="../../LogOut"
         const currUrl = document.getElementById("currentUrl");
         currUrl.value=window.location.href;
         logoutForm.submit();
     }
 </script>
+
 <div class="nav-section">
     <div class="container manu">
         <nav class="nav">
