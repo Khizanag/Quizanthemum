@@ -9,20 +9,20 @@
 	<link rel="stylesheet" href="../styles/common.css">
 	<link rel="stylesheet" href="../styles/homePage.css">
 	<link rel="stylesheet" href="../styles/breakpoints.css">
-
     <link rel="stylesheet" href="../styles/quizCreation.css">
-
     <link rel="stylesheet" href="../styles/profilePage.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="../js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+
+    <jsp:include page="LogedInHandler.jsp"></jsp:include>
     <% User user = (User)request.getServletContext().getAttribute("logedInUser");%>
+
     <script>
 
-<%--        <jsp:include page="LogedInHandler.jsp"></jsp:include>--%>
-
         function openSearch() {
-			window.location.href = "search.html";		  	
+			window.location.href = "SearchPage.jsp";
 		}
         function changeImage(){
             console.log('asd');
@@ -60,38 +60,9 @@
 </head>
 
 <body>
-    <header class= "header-section">
-        <div class="container header">
-            <div class="header-left">
-                <img class="logo" src="../images/common/icon.png">
-			        	<h1 class="logo-text">Quizanthemum</h1>
-			      </div>
 
-            <ul class="header-right">
-                <img class = "profile-picture" id="small-prof-pic-id" src="" onerror="this.src='../images/common/defProfPic.jpg';" onclick="redirectToProfPage()">
-                <span class = "profile-name-text" onclick="redirectToProfPage()"><%=user.getUsername()%></span>
-            </ul>
-        </div>
-    </header>
-
-	<div class="nav-section">
-		<div class="container manu">
-			<nav class="nav">
-				<ul class="nav-items">
-                    <a class="nav-item" target="_self" href="/">HOME</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-                    <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">CREATE QUIZ</a>
-                    <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
-                </ul>
-			</nav>
-			<div class="search-items">
-				<input type="text" id="search-input" c placeholder="რა გაინტერესებთ..." name="search">
-				<button type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
-			</div>
-		</div>
-	</div>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
   
   <div class="friends-list-popup" id="friends-list-popup-id">
     <div class="overlay"></div>
@@ -274,17 +245,6 @@
             </div>
         </div>
     </main>
-	<footer	class= "footer-section">
-		<div class= "container">
-			<div class= "footer-items">
-				<div class= "footer left">
-					All Right Reserved
-				</div>
-				<div class= "footer rigth">
-					Quizanthemum By Our Team
-				</div>
-			</div>
-		</div>
-	</footer>
+	<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 </html>

@@ -3,8 +3,11 @@
 <%@ page import="static Configs.Config.DEFAULT_ID" %>
 <%@ page import="Controller.Classes.User.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <%
-    if(request.getServletContext().getAttribute("logedInUser") == null){
+    User user = (User) request.getServletContext().getAttribute("logedInUser");
+    if(user== null){
         int ID = DEFAULT_ID;
         String passwordHash = "";
         for(Cookie cookie : request.getCookies()){
@@ -15,9 +18,9 @@
             }
         }
         UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
-        User logedInUser = usersManager.getUser(ID);
-        if(logedInUser != null && logedInUser.getPasswordHash().equals(passwordHash)){
-            request.getServletContext().setAttribute("logedInUser", logedInUser);
+        user = usersManager.getUser(ID);
+        if(user != null && user.getPasswordHash().equals(passwordHash)){
+            request.getServletContext().setAttribute("logedInUser", user);
         }
     }
 %>

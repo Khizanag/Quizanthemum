@@ -22,7 +22,7 @@
                     შეიყვანეთ URL ასატვირთად
                 </label>
                 <input type="text" placeholder="ფოტოს URL"
-                       name="image_url" id="photo_url">
+                       name="image_url" id="photo-url">
             </div>
             <img id="output" width="100" />
         </div>

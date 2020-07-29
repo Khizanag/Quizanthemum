@@ -20,74 +20,14 @@
       window.location.href="profilePageLogged.jsp";
     }
 		function openSearch() {
-			window.location.href = "search.html";		  	
+			window.location.href = "SearchPage.jsp";
 		}
 	</script> 
 
 </head>
 <body>
-    <header class= "header-section">
-        <div class="container header">
-            <div class="header-left">
-                <img class="logo" src="../images/common/icon.png">
-			        	<h1 class="logo-text">Quizanthemum</h1>
-			      </div>
-			
-            <ul class="header-right">
-              <img class = "profile-picture" src = "../images/common/defProfPic.jpg" onclick="redirectToProfPage()">
-              <span class = "profile-name-text" onclick="redirectToProfPage()">Ze K1ng</span>
-            </ul>	
-        </div>
-    </header>
-
-	<div class="nav-section">
-		<div class="container manu">
-			<nav class="nav">
-				<ul class="nav-items">
-					< <a class="nav-item" target="_self" href="/">HOME</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">QUIZ LIST</a>
-                    <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">ABOUT US</a>
-                    <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">CREATE QUIZ</a>
-                    <button class="friend-list-btn" id="friend-list-btn-id" onclick="popupfriendList()">Friends</button>
-        </ul>
-			</nav>
-			<div class="search-items">
-				<input type="text" id="search-input" placeholder="რა გაინტერესებთ..." name="search">
-				<button type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
-			</div>
-		</div>
-	</div>
-  
-  <div class="friends-list-popup" id="friends-list-popup-id">
-    <div class="overlay"></div>
-    <div class="content">
-      <div class="close-btn" onclick="popupfriendList()">&times;</div>
-      <h1 style="color:orange">მეგობრები</h1>
-      <br>
-      <div class = "friend-list-row">
-        <span>მეგობარი0</span>
-        <div class = "friend-challenge-remove-btns">
-          <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
-          <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
-        </div>
-      </div>
-      <div class = "friend-list-row">
-        <span>მეგობარი1</span>
-        <div class = "friend-challenge-remove-btns">
-          <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
-          <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
-        </div>
-      </div>
-      <div class = "friend-list-row">
-        <span>მეგობარი2</span>
-        <div class = "friend-challenge-remove-btns">
-          <button class="challenge-btn" id="challenge-btn-id" onclick="challengeFriend()">Challenge</button>
-          <button class="remove-btn" id="remove-btn-id" onclick="removeFriend(this)">Remove</button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
   <main>
     <div class ="quiz-summary-wrapper">
@@ -169,18 +109,5 @@
       </div>
     </div>
   </main>
-
-
-	<footer	class= "footer-section">
-		<div class= "container">
-			<div class= "footer-items">
-				<div class= "footer left">
-					All Right Reserved
-				</div>
-				<div class= "footer rigth">
-					Quizanthemum By Our Team
-				</div>
-			</div>
-		</div>
-	</footer>
+  <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
