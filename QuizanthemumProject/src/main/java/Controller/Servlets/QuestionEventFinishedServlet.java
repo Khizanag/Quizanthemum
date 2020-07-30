@@ -34,11 +34,24 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
 
         int numAnswers = questionEvent.getNumUsersAnswers();
+        System.out.println("num ans: " + numAnswers);
         List<String> userAnswers = new ArrayList<>();
+
         for (int i = 0; i < numAnswers; i++) {
-            String nextAns = request.getParameter("question_event_answer_" + i);
-            userAnswers.add(nextAns);
+            if (questionEvent.getType() == MULTI_CHOICE || questionEvent.getType() == MULTI_CHOICE_MULTI_ANSWER) {
+                String nextAns = request.getParameter("question_event_multi_answer_" + i);
+                if(nextAns != null) {
+                    userAnswers.add(nextAns);
+                    System.out.println(nextAns);
+                }
+            } else {
+                String nextAns = request.getParameter("question_event_answer_" + i);
+                userAnswers.add(nextAns);
+                System.out.println(nextAns);
+            }
         }
+
+
 
         questionEvent.setUserAnswers(userAnswers);
         questionEvent.finishQuestionEvent();
