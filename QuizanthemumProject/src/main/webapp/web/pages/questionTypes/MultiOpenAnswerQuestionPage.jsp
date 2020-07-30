@@ -1,3 +1,4 @@
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_ANSWER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><hr>
 
 <form action="../../../QuestionCreated" method="get">
@@ -11,39 +12,38 @@
 
         <div class="numbers-holder">
             <div class="num-ans-holder">
-                <label for="num_ans"><b>შეიყვანეთ შესაძლო პასუხების რაოდენობა</b></label>
+                <label for="num_answers_in_multi_open_question"><b>შეიყვანეთ შესაძლო პასუხების რაოდენობა</b></label>
                 <input type="number" placeholder="პასუხების რაოდენობა"
-                       id="num_ans" name="num_ans"
+                       id="num_answers_in_multi_open_question" name="num_answers"
                        min="1" max="16" onchange="addAnswerInputs()" required>
             </div>
 
             <div class="num-holder">
-                <label for="num"><b>შეიყვანეთ სასურველი პასუხების რაოდენობა</b></label>
+                <label for="num_statements_in_multi_open_question"><b>შეიყვანეთ სასურველი პასუხების რაოდენობა</b></label>
                 <input type="number" placeholder="პასუხების რაოდენობა"
-                       id="num" name="num"
+                       id="num_statements_in_multi_open_question" name="num_statements"
                        min="1" max="16" required>
             </div>
         </div>
 
-
         <div id="added-correct-answers-holder"></div>
-<%--        <label><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>--%>
-<%--        <div class="upload-image-section">--%>
-<%--            <input type="file"  accept="image/*" name="image" id="file"--%>
-<%--                   onchange="loadFile(event)"--%>
-<%--                   style="display: none;"--%>
-<%--            >--%>
-<%--            <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>--%>
-<%--            <div class="upload-image-container">--%>
-<%--                <label class="button upload" type="button"--%>
-<%--                       onclick="uploadImage(event)" id="url-button">--%>
-<%--                    შეიყვანეთ URL ასატვირთად--%>
-<%--                </label>--%>
-<%--                <input type="text" placeholder="ფოტოს URL"--%>
-<%--                       name="image_url" id="photo-url">--%>
-<%--            </div>--%>
-<%--            <img id="output" width="100" />--%>
-<%--        </div>--%>
+        <label><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
+        <div class="upload-image-section">
+            <input type="file"  accept="image/*" name="image" id="file"
+                   onchange="loadFile(event)"
+                   style="display: none;"
+            >
+            <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
+            <div class="upload-image-container">
+                <label class="button upload" type="button"
+                       onclick="uploadImage(event)" id="url-button">
+                    შეიყვანეთ URL ასატვირთად
+                </label>
+                <input type="text" placeholder="ფოტოს URL"
+                       name="image_url" id="photo-url">
+            </div>
+            <img id="output" width="100" />
+        </div>
 
         <hr><div class="point-holder">
             <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
@@ -61,9 +61,7 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="1">
-        <input  type="hidden" name="num_statements" value="0">
-        <input type="hidden" name="num_answers" value="0">
+        <input type="hidden" name="type" value="<%=MULTI_ANSWER%>">
 
         <button class="button addQuestion" type="submit"> შემდეგი შეკითხვის დამატება </button>
     </div>
