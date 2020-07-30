@@ -108,10 +108,10 @@
 
     function multiOpenAnsAdder() {
         let parent = document.getElementById('added-correct');
-        let numCorrectAnswers = parseInt(document.getElementById('num_answers_elem').value);
+        let numCorrectAnswers = parseInt(document.getElementById('num_answers_in_multi_opens_question').value);
         let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
         parent.innerHTML += toAdd;
-        document.getElementById('num_answers_elem').value = numCorrectAnswers + 1;
+        document.getElementById('num_answers_in_multi_opens_question').value = numCorrectAnswers + 1;
     }
 
 
@@ -159,15 +159,14 @@
     }
 
     function addAnswerInputs() {
-        let numAnswer = parseInt(document.getElementById('num_answers_in_multi_open_question').value);
+        let numAnswer = document.getElementById('num_ans').value;
         let parent = document.getElementById('added-correct-answers-holder');
         parent.innerHTML = '';
         for (let i = 0; i < numAnswer; i++) {
-            parent.innerHTML += `<input style="width: 50%; margin-right: 10px;"
-                type="text" name="answer_` + i + `"
-                id="multy_open_` + i + `" placeholder="შეიყვანეთ ერთ-ერთი სწორი პასუხი">`;
+            parent.innerHTML += '<input style="width: 50%; margin-right: 10px;"' +
+                ' type="text" name="answer_' + i + '"' +
+                'id="multy_open_' + i + '" placeholder="შეიყვანეთ ერთ-ერთი სწორი პასუხი">';
         }
-        document.getElementById('num_answers_in_multi_open_question').value = numAnswer + 1;
     }
 
 
