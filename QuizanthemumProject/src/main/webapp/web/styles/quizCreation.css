@@ -1,7 +1,6 @@
 /* BODY*/
 .creation-section {
     width: 100%;
-    min-height: 457px; /*TODO*/
     background-color: #002c2f;
 }
 h2{
@@ -41,7 +40,7 @@ a:hover  {
     margin-top: 22px;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=number] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -51,24 +50,9 @@ input[type=text], input[type=password] {
     border-radius: 5px;
 
 }
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     background-color: rgb(221, 221, 221);
     outline: none;
-}
-
-.button {
-    cursor: pointer;
-    background-color: #f07237;
-    color: white;
-    font-size: larger;
-    font-weight: 600;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-    padding: 15px 15px;
-    border: none;
-    width: 100%;
-    margin-top: 5px;
-    border-radius: 5px;
-    margin-bottom: 10px;
 }
 
 .upload-image-section{
@@ -76,25 +60,25 @@ input[type=text]:focus, input[type=password]:focus {
     display: flex;
     flex-direction: column;
 }
-.upload-image-container {
-    width: 100%;
+
+#quiz_icon_url {
+    width: 30%;
+    margin: 0;
 }
-#photo-url{
+#question_image_url{
     width: 30%;
     margin-bottom: 0;
+}
+
+.upload-image-container {
+    margin-top: 10px;
 }
 .checkbox{
     width: 15px;
     height: 15px;
     margin-bottom: 15px;
 }
-.upload {
-    width: 226.44px;
-    height: 45px;
-    font-size: small;
-    text-align: center;
-    margin: 10px 10px 0 0;
-}
+
 .addQuestion{
     width:100%;
     margin-bottom: 5px;
@@ -102,7 +86,9 @@ input[type=text]:focus, input[type=password]:focus {
 .finish {
     width: 100%;
 }
-#add-worng-ans-btn {
+
+/* test question part*/
+#add-wrong-ans-btn {
     font-size: medium;
     padding: 13px;
     width: 10%;
@@ -115,13 +101,37 @@ input[type=text]:focus, input[type=password]:focus {
     width: 50%;
     position: relative;
 }
-#wrong-ans{
+#wrong-answer {
     width: 85%;
 }
 #output {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+/* multi answer test question part*/
+#add-correct-ans-btn {
+    font-size: medium;
+    padding: 13px;
+    width: 10%;
+    margin: 5px 0 22px 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+#correct-ans-div{
+    width: 50%;
+    position: relative;
+}
+#correct-answer{
+    width: 85%;
+}
+#output {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* matching question part*/
 .matching-elems-secton{
     width: 100%;
     display: flex;
@@ -155,10 +165,6 @@ input[type=text]:focus, input[type=password]:focus {
     border-left-color: transparent;
     margin: 5px;
 }
-:before {
-    content: "";
-    box-sizing: border-box;
-}
 .arrow:before{
     right: 0;
     top: 3.5px;
@@ -173,4 +179,89 @@ input[type=text]:focus, input[type=password]:focus {
 }
 .arr-left {
     transform: rotate(45deg);
+}
+
+
+/* fill question part*/
+.entered-text {
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 16px;
+    color: black;
+}
+
+.fill-items-cont {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.main-text-cont {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.correct-ans-cont {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.toFill-text {
+    width: 100%;
+    height: 80px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    resize: none;
+}
+
+.fillWith-text{
+    width: 100%;
+    height: 80px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+    resize: none;
+}
+
+.point-holder {
+    margin-top: 10px;
+    width: 50%;
+    flex-direction: column;
+}
+
+#question_point {
+    width: 40%;
+    margin-bottom: 10px;
+}
+
+.num-ans-holder {
+    margin-top: 10px;
+    width: 50%;
+    flex-direction: column;
+}
+
+#num_ans {
+    width: 40%;
+    margin-bottom: 10px;
 }

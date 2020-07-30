@@ -1,8 +1,11 @@
-use quizanthemum;
+use quizanthemum_schema;
 
--- ********************************************************************************
+
+
+
+# ****************************************  USERS  ****************************************
 create table users(
-                      id smallint primary key,
+                      id smallint primary key AUTO_INCREMENT,
                       username varchar(64) unique key,
                       password varchar(64) not null,
                       first_name varchar(64) not null,
@@ -10,14 +13,18 @@ create table users(
                       role smallint not null,
                       city varchar(32),
                       country varchar(32),
-                      phone_number varchar(32),
                       email varchar(64) not null,
+                      phone_number varchar(32),
                       birth_date date,
                       registration_date date
 );
--- ***********************************************************************
+
+
+
+# ************************************  QUIZZES  ***********************************
+
 create table quizzes(
-                        ID smallint primary key,
+                        ID smallint primary key AUTO_INCREMENT,
                         NAME varchar(64),
                         DESCRIPTION text,
                         ICON_URL varchar(256),
@@ -29,9 +36,13 @@ create table quizzes(
                         CREATION_DATE date,
                         MAX_SCORE smallint
 );
--- *************************************************************************************
+
+
+
+# *****************************************  QUIZ_EVENTS  ********************************************
+
 create table quiz_events(
-                            id smallint primary key,
+                            id smallint primary key AUTO_INCREMENT,
                             quiz_id smallint not null,
                             user_id smallint not null,
                             start_date date,
@@ -42,9 +53,13 @@ create table quiz_events(
                             constraint foreign key (user_id)
                                 references users(id) on update cascade on delete restrict
 );
--- ***********************************************************************************
+
+
+
+# *****************************************  QUESTIONS  ******************************************
+
 create table questions(
-                          id smallint primary key,
+                          id smallint primary key auto_increment,
                           type smallint not null,
                           is_auto_graded boolean,
                           max_score smallint,
@@ -94,9 +109,13 @@ create table questions(
                           answer_14 varchar(64),
                           answer_15 varchar(64)
 );
--- ************************************************************************************
+
+
+
+# ********************************************  QUESTION_EVENTS  ****************************************
+
 create table question_events(
-                                id smallint primary key,
+                                id smallint primary key auto_increment,
                                 quiz_event_id smallint not null,
                                 constraint foreign key (quiz_event_id)
                                     references quiz_events(id) on update cascade on delete restrict,
@@ -124,9 +143,13 @@ create table question_events(
                                 user_answer_14 varchar(64),
                                 user_answer_15 varchar(64)
 );
--- ************************************************************************************
+
+
+
+# ******************************************  FRIENDSHIPS  ******************************************
+
 create table friendships(
-                            id smallint primary key,
+                            id smallint primary key auto_increment,
                             first_friend_id smallint,
                             constraint foreign key (first_friend_id)
                                 references users(id) on update cascade on delete restrict,
@@ -135,9 +158,13 @@ create table friendships(
                                 references users(id) on update cascade on delete restrict,
                             make_friend_date date
 );
--- *************************************************************************************
+
+
+
+# *******************************************  CHALLENGES  ******************************************
+
 create table challenges(
-                           id smallint primary key,
+                           id smallint primary key auto_increment,
                            challenger_user_id smallint not null,
                            constraint foreign key (challenger_user_id)
                                references users(id) on update cascade on delete restrict,
@@ -151,16 +178,24 @@ create table challenges(
                            challenging_date date,
                            accepting_date date
 );
--- ***********************************************************************************
+
+
+
+# ***********************************************  ACHIEVEMENTS  ***********************************************
+
 create table achievements(
-                             id smallint primary key,
+                             id smallint primary key auto_increment,
                              title varchar(64),
                              description varchar(64),
                              icon_url varchar(256)
 );
--- ***********************************************************************************
-create table achievements_table(
-                                   id smallint primary key,
+
+
+
+# *********************************************  ACHIEVEMENT_EVENTS  *********************************************
+
+create table achievement_events(
+                                   id smallint primary key auto_increment,
                                    achievement_id smallint not null,
                                    constraint foreign key (achievement_id)
                                        references achievements(id) on update cascade on delete restrict,
@@ -169,11 +204,22 @@ create table achievements_table(
                                        references users(id) on update cascade on delete restrict,
                                    achieve_date date
 );
--- ***********************************************************************************
 
-/*  drop table if exists questions;
-    drop table if exists quiz_events;
-    drop table if exists quizzes;
-    drop table if exists users;
-    drop table if exists question_events;
-*/
+
+# ************************************************** DROP TABLES  *************************************************
+
+#     drop table if exists question_events;
+#     drop table if exists questions;
+#     drop table if exists quiz_events;
+#     drop table if exists quizzes;
+#     drop table if exists friendships;
+#     drop table if exists challenges;
+#     drop table if exists achievement_events;
+#     drop table if exists achievements;
+#     drop table if exists users;
+
+
+
+# ***************************************************  FOR TESTING  **************************************************
+
+select * from users;

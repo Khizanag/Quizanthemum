@@ -16,6 +16,9 @@ input[type=text]{
     margin-right: 5px;
     border-radius: 5px;
 }
+#search-input {
+    margin: 0 0 0 0;
+}
 input[type=text]:focus{
     background-color: rgb(221, 221, 221);
     outline: none;
@@ -86,22 +89,4 @@ input[type=text]:focus{
 }
 .info-image.d {
     background-image: url('../images/homepage/d.jpg');
-}
-
-.button{
-    width: 100px;
-    height: 40px;
-    text-align: center;
-    border: 1px solid transparent;
-    border-radius: 5px;
-}
-.logIn{
-    background-color: #f07237;
-    color: white;
-    font-size: medium;
-    font-family: "Comic Sans MS", cursive, sans-serif;
-}
-.logIn:hover{
-    background-color: #b3bdbe;
-    color: #f07237;
 }

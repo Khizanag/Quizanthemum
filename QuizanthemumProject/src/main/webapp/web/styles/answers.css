@@ -1,0 +1,51 @@
+.input-items {
+    min-height: 400px;
+}
+.ans-toFill {
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+    margin: 10px 0 0 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    resize: inherit;
+    font-size: 16px;
+    color: black;
+}
+
+.matching-elem {
+    width: 40%;
+    height: 50px;
+    margin: 10px;
+    text-align: center;
+    font-size: medium;
+    cursor: pointer;
+    color: black;
+    border: none;
+    border-radius: 5px;
+}
+
+.matching-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+input[type=checkbox] {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.my_input {
+    padding: 15px;
+    text-align: center;
+    height: 20px;
+    border-radius: 5px;
+    border: none;
+    margin: 5px;
+}
+
+b{
+    cursor: pointer;
+}
