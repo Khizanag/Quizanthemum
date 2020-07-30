@@ -90,21 +90,31 @@
         }
     }
 
-        function addNextWrongAns() {
-            let parent = document.getElementById('added-wrongs');
-            let numWrongAnswers = parseInt(document.getElementById('num_statements_elem').value);
-            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_' + numWrongAnswers + '" id="wrong-answer" required>';
-            parent.innerHTML += toAdd;
-            document.getElementById('num_statements_elem').value = numWrongAnswers + 1;
-        }
+    function addNextWrongAns() {
+        let parent = document.getElementById('added-wrongs');
+        let numWrongAnswers = parseInt(document.getElementById('num_statements_elem').value);
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_' + numWrongAnswers + '" id="wrong-answer" required>';
+        parent.innerHTML += toAdd;
+        document.getElementById('num_statements_elem').value = numWrongAnswers + 1;
+    }
 
-        function addNextCorrectAns() {
-            let parent = document.getElementById('added-correct');
-            let numCorrectAnswers = parseInt(document.getElementById('num_answers_elem').value);
-            let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
-            parent.innerHTML += toAdd;
-            document.getElementById('num_answers_elem').value = numCorrectAnswers + 1;
-        }
+    function addNextCorrectAns() {
+        let parent = document.getElementById('added-correct');
+        let numCorrectAnswers = parseInt(document.getElementById('num_answers_elem').value);
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
+        parent.innerHTML += toAdd;
+        document.getElementById('num_answers_elem').value = numCorrectAnswers + 1;
+    }
+
+    function multiOpenAnsAdder() {
+        let parent = document.getElementById('added-correct');
+        let numCorrectAnswers = parseInt(document.getElementById('num_answers_elem').value);
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
+        parent.innerHTML += toAdd;
+        document.getElementById('num_answers_elem').value = numCorrectAnswers + 1;
+    }
+
+
 
     function addToFill() {
         let text = document.getElementById("toFill").value;
