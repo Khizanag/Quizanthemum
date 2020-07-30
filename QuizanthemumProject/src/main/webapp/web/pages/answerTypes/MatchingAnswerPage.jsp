@@ -1,3 +1,6 @@
+<%@ page import="Controller.Classes.Quiz.Question.Question" %>
+<%@ page import="Controller.Classes.Quiz.Question.QuestionEvent" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -14,33 +17,29 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <form class="add-question-section">
+    <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
         <div class="container">
-            <h2>შეკითხვა (აქ იქნება N)</h2>
-            <p> დააწყვილეთ ქვემოთ მოყვანილი სიტყვები აზრობრივარ</p>
-            <p>ავტორის მინიშნება/მოთხოვნა, მაგალითად: (ძაღლი -> შინაური ცხოველი)</p>
+            <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
+            <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
+            <%Question question = questionEvent.getQuestion();%>
+            <%List<String> left = question.getMatchingLeft();%>
+            <%List<String> right = question.getMatchingRight();%>
+            <p><%=question.getHeaderStatement()%></p>
             <hr>
             <div class="input-items" id="input-items">
                 <div class="matching-holder">
-                    <input type="button" name="matching-elem" value="შიკოლათი"
-                           id="1" class="matching-elem" onclick="doMatch(1)" >
-                    <input type="button" name="matching-elem" value="კოკაკოლა"
-                           id="2" class="matching-elem" onclick="doMatch(2)" >
-                    <input type="button" name="matching-elem" value="რეკორდი მაქვს"
-                           id="3" class="matching-elem" onclick="doMatch(3)" >
-                    <input type="button" name="matching-elem" value="ძმაო"
-                           id="4" class="matching-elem" onclick="doMatch(4)" >
-                    <input type="button" name="matching-elem" value="ჩემო"
-                           id="5" class="matching-elem" onclick="doMatch(5)" >
-                    <input type="button" name="matching-elem" value="მოხსნილი"
-                           id="6" class="matching-elem" onclick="doMatch(6)" >
-                    <input type="button" name="matching-elem" value="ხაშურის ლიმონათი"
-                           id="7" class="matching-elem" onclick="doMatch(7)" >
-                    <input type="button" name="matching-elem" value="მარმალათი"
-                           id="8" class="matching-elem" onclick="doMatch(8)" >
+                    <% for(int i = 0; i < question.getStatementsCount(); i++) { %>
+                        <% if(i%2 == 0) { %>
+                            <input type="button" name="matching-elem" value=<%=left.get(i/2)%>
+                            id=<%=i+1%> class="matching-elem" onclick="doMatch(<%=i+1%>)" >
+                        <% } else { %>
+                            <input type="button" name="matching-elem" value=<%=right.get(i/2)%>
+                            id=<%=i+1%> class="matching-elem" onclick="doMatch(<%=i+1%>)" >
+                        <% } %>
+                    <% } %>
                 </div>
             </div><hr>
-            <button class="button" type="button"> პასუხის დადასტურება </button>
+            <button class="button" type="submit"> პასუხის დადასტურება </button>
         </div>
     </form>
 
