@@ -18,26 +18,19 @@
 
 <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
-<%--        <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>--%>
-<%--        <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>--%>
-<%--        <%Question question = questionEvent.getQuestion();%>--%>
-<%--        <p><%=question.getTextStatement()%></p>--%>
-<%--        <p><%=question.getHeaderStatement()%></p>--%>
-<%--        <hr>--%>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                A blanditiis corporis, eos molestias neque quas quibusdam
-                repellendus unde. At eius enim illo itaque laudantium
-                odit perspiciatis
-                quia repellendus temporibus totam.</p>
-            <p> მინიშნება მინიშნება მინიშნება მინიშნება მინიშნება მინიშნება</p>
-            <hr>
+        <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
+        <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
+        <%Question question = questionEvent.getQuestion();%>
+        <p><%=question.getTextStatement()%></p>
+        <p><%=question.getHeaderStatement()%></p>
+        <hr>
         <div class="input-items" id="input-items">
-            <label><b> შეიყვანეთ {{აქ ეწერება რამდენიც}} პასუხი </b></label>
+            <label><b> შეიყვანეთ <%=question.getStatementsCount()%> პასუხი </b></label>
             <div style="display: flex; flex-direction: column; margin-top: 10px">
-            <% for(int i = 1; i <= 5; i ++) {%>
+            <% for(int i = 0; i < question.getStatementsCount(); i ++) {%>
                 <input style="width: 50%" type="text" id="<%=i%>"
-                       name="question_event_multi_open_answer_<%=i%>"
-                       placeholder="შეიყვანეთ პასუხი N <%=i%>">
+                       name="question_event_answer_<%=i%>"
+                       placeholder="შეიყვანეთ პასუხი N <%=i+1%>">
             <% } %>
             </div>
         </div><hr>

@@ -61,7 +61,7 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="1">
+        <input type="hidden" name="type" value="4">
         <input  type="hidden" name="num_statements" value="0">
         <input type="hidden" name="num_answers" value="0">
 

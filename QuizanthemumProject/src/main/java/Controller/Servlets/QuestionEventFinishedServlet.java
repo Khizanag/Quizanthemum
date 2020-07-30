@@ -54,12 +54,17 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             userAnswers = getUserMatchingAnswers(userAnswers, matchingColors);
         }
 
+        // TODO remove. useful for testing
+        System.out.println("_____");
+        for(int i = 0; i < userAnswers.size(); i++) {
+            System.out.println(userAnswers.get(i));
+        }
+        System.out.println("_____");
+
+
         questionEvent.setUserAnswers(userAnswers);
         questionEvent.finishQuestionEvent();
-
-        if(questionEvent.isAutoGraded()) {
-            gradeQuestionEvent(questionEvent);
-        }
+        gradeQuestionEvent(questionEvent);
 
         quizEvent.setFilledQuestionEvent(questionEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
@@ -94,13 +99,18 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         switch (newQuestionEvent.getType()) {
             case MULTI_ANSWER:
             case MULTI_CHOICE_MULTI_ANSWER:
-            case FILL_BLANK:
                 newQuestionEvent.autoGradeMultiAnswer();
+                break;
+            case FILL_BLANK:
+                newQuestionEvent.autoGradeFillBlank();
                 break;
             case MATCHING:
                 newQuestionEvent.autoGradeMatchingAnswer();
                 break;
             case STANDARD:
+                if (!newQuestionEvent.isAutoGraded()) {
+                    break;
+                }
             case MULTI_CHOICE:
             default:
                 newQuestionEvent.autoGradeTextAnswer();

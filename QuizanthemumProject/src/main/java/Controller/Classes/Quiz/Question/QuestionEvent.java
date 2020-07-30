@@ -103,6 +103,18 @@ public class QuestionEvent {
         isAlreadyGraded = true;
     }
 
+    public void autoGradeFillBlank() {
+        int correctAnswersNum = 0;
+        for(int i = 0; i < userAnswers.size(); i++) {
+            if(userAnswers.get(i).equals(userAnswers.get(i))) {
+                correctAnswersNum++;
+            }
+        }
+        isAlreadyGraded = true;
+        userScore = question.getMaxScore() * correctAnswersNum / question.getStatementsCount();
+
+    }
+
     /*
      * compares user's answers with real ones and grades.
      * score depends on number of correct answers.
