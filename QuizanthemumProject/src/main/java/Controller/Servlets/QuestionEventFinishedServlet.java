@@ -1,11 +1,8 @@
 package Controller.Servlets;
 
-import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Question.QuestionEvent;
-import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
-import Model.Managers.QuestionEventManager;
-import Model.Managers.QuizManager;
+import Tools.Pair;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,11 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-import static Configs.Config.*;
+
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 
 @WebServlet(name = "QuestionEventFinishedServlet", urlPatterns = "/QuestionEventFinished")
@@ -37,32 +32,27 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         int numAnswers = questionEvent.getNumUsersAnswers();
         System.out.println("num ans: " + numAnswers);
         List<String> userAnswers = new ArrayList<>();
+        List<String> matchingColors = new ArrayList<>();
 
         for (int i = 0; i < numAnswers; i++) {
             if (questionEvent.getType() == MULTI_CHOICE || questionEvent.getType() == MULTI_CHOICE_MULTI_ANSWER) {
                 String nextAns = request.getParameter("question_event_multi_answer_" + i);
                 if(nextAns != null) {
                     userAnswers.add(nextAns);
-                    System.out.println(nextAns);
                 }
             } else {
                 String nextAns = request.getParameter("question_event_answer_" + i);
                 userAnswers.add(nextAns);
-                System.out.println(nextAns);
-
                 if(questionEvent.getType() == MATCHING) {
                     String nextColor = request.getParameter("question_event_matching_color_" + i);
-                    System.out.println(nextColor);
+                    matchingColors.add(nextColor);
                 }
             }
         }
 
-        // TODO remove
-        QuizManager man = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
-        System.out.println("______________________");
-        System.out.println(man.getAllQuizzes().size());
-        System.out.println("______________________");
-
+        if(questionEvent.getType() == MATCHING) {
+            userAnswers = getUserMatchingAnswers(userAnswers, matchingColors);
+        }
 
         questionEvent.setUserAnswers(userAnswers);
         questionEvent.finishQuestionEvent();
@@ -83,6 +73,21 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         }
 
         System.out.println("question event finished");
+    }
+
+    private List<String> getUserMatchingAnswers(List<String> userAnswers, List<String> matchingColors) {
+        Map<String, String> map = new TreeMap<>();
+        List<String> cleanedAnswers = new ArrayList<>();
+        for(int i = 0; i < userAnswers.size(); i+=2) {
+            map.put(matchingColors.get(i), userAnswers.get(i));
+        }
+        for(int i = 1; i < userAnswers.size(); i+=2) {
+            if(map.containsKey(matchingColors.get(i))) {
+                cleanedAnswers.add(map.get(matchingColors.get(i)));
+                cleanedAnswers.add(userAnswers.get(i));
+            }
+        }
+        return cleanedAnswers;
     }
 
     private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {
