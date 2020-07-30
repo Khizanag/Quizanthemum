@@ -33,13 +33,12 @@
                     <input type="text" placeholder="რასთან ვაწყვილებთ"
                            name="answer_3" id="answer_3" class="matching-elem" required>
                 </div>
-
+                <button type="button"
+                        id="add-correct-ans-btn" class="button"
+                        onclick="addNextMatching()">
+                    +
+                </button>
             </div>
-            <button type="button"
-                    id="add-correct-ans-btn" class="button" 
-                    onclick="addNextMatching()">
-                +
-            </button>
         </div>
       
         <hr><div class="point-holder">

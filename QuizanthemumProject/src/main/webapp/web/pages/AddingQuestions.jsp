@@ -57,7 +57,7 @@
             $('#current-question-type').load('./questionTypes/MultiChoiceQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 4) {
-            $('#current-question-type').load('./questionTypes/MultiOpenAnswersQuestionPage.jsp');
+            $('#current-question-type').load('./questionTypes/MultiOpenAnswerQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 5) {
             $('#current-question-type').load('./questionTypes/MultiChoiceMultiAnswerQuestionPage.jsp');
@@ -127,7 +127,6 @@
         window.location.href = "/QuizCreationFinished";
     }
 
-
     function addNextMatching() {
         let parent = document.getElementById('matching-elems-container');
         let numAnswers = parseInt(document.getElementById('matching-num-answers-elem').value);
@@ -148,5 +147,17 @@
 
         parent.innerHTML += toAdd;
     }
+
+    function addAnswerInputs() {
+        let numAnswer = document.getElementById('num_ans').value;
+        let parent = document.getElementById('added-correct-answers-holder');
+        parent.innerHTML = '';
+        for (let i = 0; i < numAnswer; i++) {
+            parent.innerHTML += '<input style="width: 50%; margin-right: 10px;"' +
+                ' type="text" name="multy_open_' + i + '"' +
+                'id="multy_open_' + i + '" placeholder="შეიყვანეთ ერთ-ერთი სწორი პასუხი">';
+        }
+    }
+
 
 </script>
