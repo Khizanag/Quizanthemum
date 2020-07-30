@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<html lang="ka">
 <head>
     <meta charset="UTF-8">
     <title> Adding Questions </title>
@@ -41,7 +41,7 @@
     </div>
     <jsp:include page="./Footer.jsp"></jsp:include>
 </body>
-
+</html>
 <script language="JavaScript" type="text/javascript">
     function doIt() {
         if($("#questions-type option:selected").val() == 0) {
