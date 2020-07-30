@@ -86,7 +86,7 @@
         let name = document.getElementById('question').value != '';
         let description = document.getElementById('description').value != '';
         if((name && description)) {
-            window.location.href = "web/pages/AddingQuestions.jsp";
+            window.location.href = "/web/pages/AddingQuestions.jsp";
         }
     }
 
@@ -118,8 +118,8 @@
         let text = document.getElementById("fillWith").value;
         let prev = document.getElementById("fill-question").value;
         if(text === '') return;
-        document.getElementById("fill-question").innerText = prev + '{(<_' + text + '_>)})';
-        document.getElementById("statement_text_elem_in_match").value = prev + '{(<_' + text + '_>)})';
+        document.getElementById("fill-question").innerText = prev + '{(<_' + text + '_>)}';
+        document.getElementById("statement_text_elem_in_match").value = prev + '{(<_' + text + '_>)}';
         document.getElementById("fillWith").value = '';
     }
 
@@ -133,14 +133,14 @@
 
         let toAdd = `<div class="matchin-pair">
                             <input type="text" placeholder="რას ვაწყვილებთ"
-                                   name="matching-elem" id="' + numAnswers + '"
+                                   name="answer_` + numAnswers + `" id="` + numAnswers + `"
                                    class="matching-elem" required>
                             <div class="arrow-container">
                                 <i class="arrow arr-right"></i>
                                 <i class="arrow arr-left"></i>
                             </div>
                             <input type="text" placeholder="რასთან ვაწყვილებთ"
-                                   name="matching-elem" id="' + (numAnswers+1) + '"
+                                   name="answer_`+ (numAnswers+1) +`" id="` + (numAnswers+1) + `"
                                    class="matching-elem" required>
                         </div>`;
         document.getElementById('matching-num-answers-elem').value = numAnswers + 2;
