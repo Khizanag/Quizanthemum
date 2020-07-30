@@ -1,3 +1,4 @@
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_ANSWER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><hr>
 
 <form action="../../../QuestionCreated" method="get">
@@ -12,7 +13,7 @@
         <div class="num-holder">
             <label for="num"><b>შეიყვანეთ სასურველი პასუხების რაოდენობა</b></label>
             <input type="number" placeholder="პასუხების რაოდენობა"
-                   id="num" name="num"
+                   id="num" name="num_statements"
                    min="1" max="16" required>
         </div>
 
@@ -40,9 +41,8 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="4">
-        <input  type="hidden" name="num_statements" value="1" id="num_statements_elem">
-        <input type="hidden" name="num_answers" value="1" id="num_answers_elem">
+        <input type="hidden" name="type" value="<%=MULTI_ANSWER%>">
+        <input type="hidden" name="num_answers" value="0" id="num_answers_in_multi_opens_question">
 
         <button class="button addQuestion" type="submit"> შემდეგი შეკითხვის დამატება </button>
     </div>
