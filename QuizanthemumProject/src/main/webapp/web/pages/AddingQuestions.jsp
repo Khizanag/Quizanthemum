@@ -86,7 +86,7 @@
         let name = document.getElementById('question').value != '';
         let description = document.getElementById('description').value != '';
         if((name && description)) {
-            window.location.href = "web/pages/AddingQuestions.jsp";
+            window.location.href = "/web/pages/AddingQuestions.jsp";
         }
     }
 
