@@ -12,13 +12,13 @@
 .profile-name-text{
   font-family: "Comic Sans MS", cursive, sans-serif;
   color: orange;
-  font-size: 14px;
-  font-weight: bold;
   margin-right: 20px;
   text-decoration: none;
   cursor: pointer;
   font-size: larger;
   font-weight: 600;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-picture-big{

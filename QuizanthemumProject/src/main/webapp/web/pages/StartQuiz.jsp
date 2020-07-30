@@ -19,7 +19,14 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <form class="start-quiz-section" action="../../../QuizEventStartServlet" method ="get">
+    <% if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
+        <div style="text-align: center">
+            <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">ქვიზი წარმატებით შეიქმნა.</p>
+        </div>
+    <% request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
+    }%>
+
+    <form class="start-quiz-section" action="../../../QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">
                 <img src="../images/homepage/c.jpg" class="quiz-main-img">

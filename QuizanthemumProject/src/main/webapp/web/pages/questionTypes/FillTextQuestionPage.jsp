@@ -1,3 +1,4 @@
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.FILL_BLANK" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><hr>
 <form action="../../QuestionCreated" method="get">
     <div class="input-items" id="input-items">
@@ -5,24 +6,6 @@
         <label for="description"><b>მითითება</b></label>
         <input type="text" placeholder="გთხოვთ შეიყვანოთ მითითება მომხმარებლისთვის"
                name="description" id="description" required>
-
-<%--        <label><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>--%>
-<%--        <div class="upload-image-section">--%>
-<%--            <input type="file"  accept="image/*" name="image" id="file"--%>
-<%--                   onchange="loadFile(event)"--%>
-<%--                   style="display: none;"--%>
-<%--            >--%>
-<%--            <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>--%>
-<%--            <div class="upload-image-container">--%>
-<%--                <label class="button upload" type="button"--%>
-<%--                       onclick="uploadImage(event)" id="url-button">--%>
-<%--                    შეიყვანეთ URL ასატვირთად--%>
-<%--                </label>--%>
-<%--                <input type="text" placeholder="ფოტოს URL"--%>
-<%--                       name="image_url" id="photo-url">--%>
-<%--            </div>--%>
-<%--            <img id="output" width="100" />--%>
-<%--        </div>--%>
 
         <label><b>შეყვანილი ტექსტის მიმდინარე მდგომარეობა</b></label>
         <textarea class="entered-text" id="fill-question"disabled></textarea>
@@ -64,7 +47,7 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="2">
+        <input type="hidden" name="type" value="<%=FILL_BLANK%>">
         <input  type="hidden" name="num_statements" value="0">
         <input type="hidden" name="num_answers" value="0">
         <input type="hidden" name="image_url" value="">

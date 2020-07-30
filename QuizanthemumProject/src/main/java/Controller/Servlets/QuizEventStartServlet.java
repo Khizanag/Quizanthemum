@@ -19,7 +19,7 @@ import static Configs.Config.*;
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 import static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_CHOICE;
 
-@WebServlet(name = "QuizEventStartServlet", urlPatterns = "/QuizEventStartServlet")
+@WebServlet(name = "QuizEventStartServlet", urlPatterns = "/QuizEventStart")
 public class QuizEventStartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -33,7 +33,7 @@ public class QuizEventStartServlet extends HttpServlet {
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
         User user = (User) request.getAttribute("quiz_event_start_user");
 
-        int quizID = 5;//Integer.parseInt(request.getParameter("quiz_event_quiz_id"));
+        int quizID = 13;//Integer.parseInt(request.getParameter("quiz_event_quiz_id"));
         Quiz quiz = quizManager.getQuiz(quizID);
 
         QuizEvent quizEvent = new QuizEvent(quizEventManager.getNewQuizEventID(), user, quiz);
@@ -44,6 +44,7 @@ public class QuizEventStartServlet extends HttpServlet {
         if (quizEvent.hasNextQuestion()) {
             QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
             request.getServletContext().setAttribute("question_event", nextQuestionEvent);
+            request.getServletContext().setAttribute("question_number", 1);
             int type = nextQuestionEvent.getType();
             response.setHeader("Location", getNextQuestionLink(type));
         } else {

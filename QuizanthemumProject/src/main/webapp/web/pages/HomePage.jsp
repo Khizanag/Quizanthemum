@@ -41,7 +41,6 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-<div class="page-holder">
     <div class="slider"></div>
 
     <div class="main-section">
@@ -127,7 +126,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </div>

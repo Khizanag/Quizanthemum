@@ -60,16 +60,18 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     display: flex;
     flex-direction: column;
 }
-.upload-image-container {
-    width: 100%;
-}
+
 #quiz_icon_url {
     width: 30%;
-    margin-bottom: 0;
+    margin: 0;
 }
 #question_image_url{
     width: 30%;
     margin-bottom: 0;
+}
+
+.upload-image-container {
+    margin-top: 10px;
 }
 .checkbox{
     width: 15px;
@@ -84,7 +86,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
 .finish {
     width: 100%;
 }
-
 
 /* test question part*/
 #add-wrong-ans-btn {
@@ -202,6 +203,7 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     align-items: center;
     justify-content: space-around;
     flex-direction: row;
+    margin-bottom: 10px;
 }
 
 .main-text-cont {
@@ -249,6 +251,17 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
 }
 
 #question_point {
+    width: 40%;
+    margin-bottom: 10px;
+}
+
+.num-ans-holder {
+    margin-top: 10px;
+    width: 50%;
+    flex-direction: column;
+}
+
+#num_ans {
     width: 40%;
     margin-bottom: 10px;
 }

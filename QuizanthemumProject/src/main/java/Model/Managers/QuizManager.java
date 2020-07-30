@@ -74,7 +74,6 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             QuestionManager questionManager = (QuestionManager)manager.getManager(QUESTION_MANAGER_STR);
             while(set.next()){
                 int questionID = set.getInt(QUESTION_TABLE_COLUMN_1_ID);
-                System.out.println(questionID);
                 Question question = questionManager.getQuestion(questionID);
                 questions.add(question);
             }
