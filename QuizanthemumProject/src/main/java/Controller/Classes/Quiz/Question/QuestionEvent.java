@@ -157,8 +157,10 @@ public class QuestionEvent {
     }
 
     public int getNumUsersAnswers() {
-        if(question.getType() == STANDARD || question.getType() == MULTI_CHOICE) {
+        if(question.getType() == STANDARD) {
             return 1;
+        } else if (question.getType() == FILL_BLANK){
+            return question.getAnswersCount();
         } else {
             return question.getStatementsCount();
         }

@@ -22,14 +22,15 @@
             <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
             <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
             <%Question question = questionEvent.getQuestion();%>
-            <%List<String> statements = question.getStatements();%>
+            <%List<String> statements = question.getShuffledStatements();%>
             <p><%=question.getTextStatement()%></p>
             <p><%=question.getHeaderStatement()%></p>
             <hr>
             <div class="input-items" id="input-items">
                 <% for(int i = 0; i < question.getStatementsCount(); i++) { %>
-                <input type="checkbox" id=<%=i%> name="question_event_answer_<%=i%>"
-                       onclick="selectOnlyThis(this)">
+                <input type="hidden" name="real_value" />
+                <input type="checkbox" id="<%=i%>" name="question_event_multi_answer_<%=i%>"
+                       onclick="selectOnlyThis(this)" value="<%=statements.get(i)%>">
                 <label for=<%=i%>><b> <%=statements.get(i)%> </b></label><br>
                 <% } %>
             </div><hr>

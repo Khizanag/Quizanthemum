@@ -103,8 +103,15 @@ public final class Question {
 
     public String getPictureStatementURL() { return pictureStatementURL; }
 
-    // for multi-choice and fill-blank questions
+    // for fill-blank questions
     public List<String> getStatements() { return statements; }
+
+    // for multi-choice
+    public List<String> getShuffledStatements() {
+        List<String> shuffled = statements;
+        Collections.shuffle(shuffled);
+        return shuffled;
+    }
 
     // returns left side of matching statement
     public List<String> getMatchingLeft() {

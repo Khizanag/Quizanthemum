@@ -31,13 +31,12 @@
             <div>
             <p class="condensedlines"><%=statements.get(0)%>
             <% for(int i = 1; i < question.getStatementsCount(); i++) { %>
-                <input class="my_input" type="" id="'
-                    <%=i-1%> + '" name="answer_fill_' <%=i-1%> +'">
+                <input class="my_input" type="" id="question_event_answer_<%=i-1%>" name="question_event_answer_<%=i-1%>">
                 <%=statements.get(i)%>
             <% } %>
             <% if(question.getAnswersCount() == question.getStatementsCount()) { %>
-                <input class="my_input" type="" id="'
-                <%=question.getAnswersCount()-1%> + '" name="answer_fill_' <%=question.getAnswersCount()-1%> +'">
+                <input class="my_input" type="" id="question_event_answer_<%=question.getAnswersCount()-1%>"
+                       name="question_event_answer_<%=question.getAnswersCount()-1%>">
             <% } %>
             </p>
             </div>
