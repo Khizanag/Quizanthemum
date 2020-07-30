@@ -5,6 +5,7 @@ import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.QuestionEventManager;
+import Model.Managers.QuizManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,9 +49,19 @@ public class QuestionEventFinishedServlet extends HttpServlet {
                 String nextAns = request.getParameter("question_event_answer_" + i);
                 userAnswers.add(nextAns);
                 System.out.println(nextAns);
+
+                if(questionEvent.getType() == MATCHING) {
+                    String nextColor = request.getParameter("question_event_matching_color_" + i);
+                    System.out.println(nextColor);
+                }
             }
         }
 
+        // TODO remove
+        QuizManager man = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
+        System.out.println("______________________");
+        System.out.println(man.getAllQuizzes().size());
+        System.out.println("______________________");
 
 
         questionEvent.setUserAnswers(userAnswers);
