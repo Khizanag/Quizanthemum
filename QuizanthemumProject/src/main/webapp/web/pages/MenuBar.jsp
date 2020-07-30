@@ -34,7 +34,6 @@
                     if(user != null){ %>
                 <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                 <a class="nav-item" target="_self" href="/web/pages/StartQuiz.jsp">სატესტო</a>
-                <a class="nav-item" target="_self" href="/web/pages/pasuxebi.jsp">კითხვები</a>
                 <a class="nav-item" target="_sefl" id="friend-list-btn-id" onclick="popupfriendList()" style="cursor: pointer;">მეგობრები</a>
                 <% }
                 %>

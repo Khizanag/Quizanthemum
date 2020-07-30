@@ -254,3 +254,14 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     width: 40%;
     margin-bottom: 10px;
 }
+
+.num-ans-holder {
+    margin-top: 10px;
+    width: 50%;
+    flex-direction: column;
+}
+
+#num_ans {
+    width: 40%;
+    margin-bottom: 10px;
+}
