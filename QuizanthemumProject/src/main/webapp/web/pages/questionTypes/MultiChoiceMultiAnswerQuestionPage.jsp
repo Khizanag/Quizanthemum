@@ -52,7 +52,7 @@
         <input type="number" placeholder="ქულა"
                id="question_point" name="max_score"
                min="1" max="16" required>
-    </div> <hr>
+        </div><hr>
 
         <label for="source"><b>წყარო</b></label>
         <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
