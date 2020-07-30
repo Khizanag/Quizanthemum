@@ -27,4 +27,6 @@ public interface Config {
     String LOGGED_IN_USER_PASSWORD_HASH_STR = "Quizanthemum-loged-in-user-password-hash";
 
     String LAST_CREATED_QUIZ = "quiz-that-was-created-lastly";
+
+    String QUIZ_TO_DISPLAY = "quiz-that-should-be-displayed-in-quiz-start-page";
 }

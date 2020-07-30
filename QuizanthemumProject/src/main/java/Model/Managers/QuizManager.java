@@ -32,9 +32,12 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
     public ManagersManager getManager(){ return this.manager; }
 
-    public List<Quiz> getAllQuizzes() { // TODO top 10
+    public List<Quiz> getMostPopularQuizzes(int numQuizzes) {
         List<Quiz> quizzes = new ArrayList<>();
-        String query = "SELECT * FROM " + QUIZ_TABLE_NAME + " ;\n";
+        String query = "SELECT * FROM " + QUIZ_TABLE_NAME
+                + " ORDER BY CREATION_DATE DESC"
+                + "  LIMIT " + numQuizzes
+                + ";\n";
         try {
             Statement qStatement = connection.createStatement();
             ResultSet set = qStatement.executeQuery(query);
