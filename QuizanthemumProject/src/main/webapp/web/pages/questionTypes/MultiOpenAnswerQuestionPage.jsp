@@ -9,12 +9,22 @@
         <input type="text" placeholder="გთხოვთ შეიყვანოთ მითითება მომხმარებლისთვის"
                name="description" id="description" required>
 
-        <div class="num-ans-holder">
-            <label for="num_ans"><b>შეიყვანეთ სასურველი პასუხების რაოდენობა</b></label>
-            <input type="number" placeholder="პასუხების რაოდენობა"
-                   id="num_ans" name="num_ans"
-                   min="1" max="16" onchange="addAnswerInputs()" required>
+        <div class="numbers-holder">
+            <div class="num-ans-holder">
+                <label for="num_ans"><b>შეიყვანეთ შესაძლო პასუხების რაოდენობა</b></label>
+                <input type="number" placeholder="პასუხების რაოდენობა"
+                       id="num_ans" name="num_ans"
+                       min="1" max="16" onchange="addAnswerInputs()" required>
+            </div>
+
+            <div class="num-holder">
+                <label for="num"><b>შეიყვანეთ სასურველი პასუხების რაოდენობა</b></label>
+                <input type="number" placeholder="პასუხების რაოდენობა"
+                       id="num" name="num"
+                       min="1" max="16" required>
+            </div>
         </div>
+
 
         <div id="added-correct-answers-holder"></div>
 <%--        <label><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>--%>
