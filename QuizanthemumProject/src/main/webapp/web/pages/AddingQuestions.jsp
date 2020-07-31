@@ -79,7 +79,7 @@
         var image = document.getElementById('output');
         image.height = 100;
         image.src = URL.createObjectURL(event.target.files[0]);
-        document.getElementById('photo-url').value = image.src;
+        document.getElementById('photo-url').value = $('img')[0].getAttribute('src');
     };
 
     function checkAndRedirect() {

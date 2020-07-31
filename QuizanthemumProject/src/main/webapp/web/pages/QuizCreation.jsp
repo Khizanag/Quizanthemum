@@ -80,7 +80,7 @@
         var image = document.getElementById('output');
         image.height = 100;
         image.src = URL.createObjectURL(event.target.files[0]);
-        document.getElementById('quiz_icon_url').value = image.src;
+        document.getElementById('quiz_icon_url').value = $('img')[0].getAttribute('src');
     };
 
 </script>
