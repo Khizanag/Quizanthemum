@@ -76,7 +76,7 @@ input[type=text]:focus{
 }
 .info-image {
     width: 180px;
-    height:140px
+    height:140px;
     background-size: cover;
 }
 .info-image.a {
