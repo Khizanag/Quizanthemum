@@ -1,3 +1,4 @@
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_CHOICE_MULTI_ANSWER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form action="../../QuestionCreated" method="get">
@@ -63,7 +64,7 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="5">
+        <input type="hidden" name="type" value="<%=MULTI_CHOICE_MULTI_ANSWER%>">
         <input  type="hidden" name="num_statements" value="1" id="num_statements_elem">
         <input type="hidden" name="num_answers" value="1" id="num_answers_elem">
 
