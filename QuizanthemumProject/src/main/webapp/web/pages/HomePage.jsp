@@ -2,6 +2,11 @@
 <%@ page import="Model.Managers.UsersManager" %>
 <%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
 <%@ page import="static Configs.Config.DEFAULT_ID" %>
+<%@ page import="Controller.Classes.Quiz.Quiz" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="Model.Managers.QuizManager" %>
+<%@ page import="static Configs.Config.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -35,7 +40,12 @@
     <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
 </head>
-
+<%
+    ServletContext context = request.getServletContext();
+    ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+    QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+    List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
+%>
 <body>
 
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
@@ -46,87 +56,23 @@
     <div class="main-section">
         <div class="container">
             <div class= "info-items">
+                <% for(Quiz currQuiz:topQuizzes){ %>
+
                 <div class="info-item">
-                    <image class= "info-image a"></image>
+                    <img class= "info-image a" src="<%=currQuiz.getIconUrl()%>"  onerror="this.src='/web/images/common/Quiz1.jpg';"></img>
                     <div class= "info-text">
                         <h3 class= "info-title">
-                            კაიაჟერი ვოიაჟერი
+                            <%=currQuiz.getName()%>
                         </h3>
                         <div class="author"> ვინცხა ვინცხა</div>
                         <p class="info-paragraf">
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
+                            <%=currQuiz.getDescription()%>
                         </p>
                     </div>
                 </div>
-                <div class="info-item">
-                    <image class= "info-image b"></image>
-                    <div class= "info-text">
-                        <h3 class= "info-title">
-                            კაიაჟერი ვოიაჟერი
-                        </h3>
-                        <div class="author"> ვინცხა ვინცხა</div>
-                        <p class="info-paragraf">
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        </p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <image class= "info-image c"></image>
-                    <div class= "info-text">
-                        <h3 class= "info-title">
-                            კაიაჟერი ვოიაჟერი
-                        </h3>
-                        <div class="author"> ვინცხა ვინცხა</div>
-                        <p class="info-paragraf">
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        </p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <image class= "info-image d"></image>
-                    <div class= "info-text">
-                        <h3 class= "info-title">
-                            კაიაჟერი ვოიაჟერი
-                        </h3>
-                        <div class="author"> ვინცხა ვინცხა</div>
-                        <p class="info-paragraf">
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        </p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <image class= "info-image c"></image>
-                    <div class= "info-text">
-                        <h3 class= "info-title">
-                            კაიაჟერი ვოიაჟერი
-                        </h3>
-                        <div class="author"> ვინცხა ვინცხა</div>
-                        <p class="info-paragraf">
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        </p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <image class= "info-image d"></image>
-                    <div class= "info-text">
-                        <h3 class= "info-title">
-                            კაიაჟერი ვოიაჟერი
-                        </h3>
-                        <div class="author"> ვინცხა ვინცხა</div>
-                        <p class="info-paragraf">
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                            ძან მაგარი ქვიზია ძან მაგარი ქვიზია ძან მაგარი ქვიზია
-                        </p>
-                    </div>
-                </div>
+                <%}%>
             </div>
         </div>
-
+    </div>
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
-</div>
 </body>

@@ -75,7 +75,8 @@ input[type=text]:focus{
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 .info-image {
-    width: 100%;
+    width: 180px;
+    height:140px
     background-size: cover;
 }
 .info-image.a {
