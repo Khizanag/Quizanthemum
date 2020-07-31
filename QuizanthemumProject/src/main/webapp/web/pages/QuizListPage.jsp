@@ -36,12 +36,11 @@
                 <h2>ქვიზები</h2>
             </div>
         </div>
-        <form id="QuizzListForm" >
         <div class="top-quizzes-list-container">
             <div class= "top-quiz-list-items">
             <% for(Quiz currQuiz:topQuizzes){ %>
                 <div class="top-quiz-list-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
-                        <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>"  onerror="this.src='/web/images/common/Quiz1.jpg';" >
+                        <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
                         <div class= "quiz-list-small-description-block">
                             <h3 class= "quiz-title" >
                                 <%=currQuiz.getName()%>
@@ -56,20 +55,21 @@
             <%}%>
             </div>
         </div>
+        <form id="to_display_start_quiz_form" action="StartQuiz.jsp" method="get">
+            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
         </form>
     </div>
 </div>
 <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 <script>
-    //TODO !!!
     function redirectToQuizStart(id){
         console.log(id);
         const inp=document.getElementById("currQuizId"+id);
         inp.value=id;
         console.log(inp);
-        const form = document.getElementById("QuizzListForm");
-        form.action="QuizEventStartServlet";
+        const form = document.getElementById("to_display_start_quiz_form");
+        document.getElementById("to_display_start_quiz_elem").value = id;
         form.submit();
     }
 </script>

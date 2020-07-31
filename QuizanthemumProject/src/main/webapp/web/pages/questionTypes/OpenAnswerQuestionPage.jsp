@@ -1,3 +1,4 @@
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.STANDARD" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><hr>
 
 <form action="../../../QuestionCreated" method="get">
@@ -9,19 +10,22 @@
         <input type="text" placeholder="გთხოვთ შეიყვანოთ მითითება მომხმარებლისთვის"
                name="description" id="description" required>
 
-        <div class="num-holder">
-            <label for="num"><b>შეიყვანეთ სასურველი პასუხების რაოდენობა</b></label>
-            <input type="number" placeholder="პასუხების რაოდენობა"
-                   id="num" name="num_statements"
-                   min="1" max="16" required>
-        </div>
-
-        <div id="correct-ans-div">
-            <div id="added-correct">
-                <input type="text"  placeholder="გთხოვთ შეიყვანოთ სავარაუდო პასუხი"
-                       name="answer_0" id="correct-answer" required>
+        <label><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
+        <div class="upload-image-section">
+            <input type="file"  accept="image/*" name="image" id="file"
+                   onchange="loadFile(event)"
+                   style="display: none;"
+            >
+            <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
+            <div class="upload-image-container">
+                <label class="button upload" type="button"
+                       onclick="uploadImage(event)" id="url-button">
+                    შეიყვანეთ URL ასატვირთად
+                </label>
+                <input type="text" placeholder="ფოტოს URL"
+                       name="image_url" id="photo-url">
             </div>
-            <button type="button" id="add-correct-ans-btn" class="button" onclick="multiOpenAnsAdder()"> + </button>
+            <img id="output" width="100" />
         </div>
 
         <hr><div class="point-holder">
@@ -40,9 +44,9 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="4">
-        <input  type="hidden" name="num_statements" value="1" id="num_statements_elem">
-        <input type="hidden" name="num_answers" value="1" id="num_answers_elem">
+        <input type="hidden" name="type" value="<%=STANDARD%>">
+        <input  type="hidden" name="num_statements" value="0">
+        <input type="hidden" name="num_answers" value="0">
 
         <button class="button addQuestion" type="submit"> შემდეგი შეკითხვის დამატება </button>
     </div>
