@@ -23,7 +23,7 @@
         });
 
         function openRegistration() {
-            window.location.href = "web/pages/SignIn.jsp";
+            window.location.href = "/web/pages/SignIn.jsp";
         }
         function openSearch() {
             window.localStorage.setItem('item', document.getElementById('search-input').value);

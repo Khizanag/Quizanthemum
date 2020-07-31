@@ -11,12 +11,12 @@
     <title> Quizanthemum </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/homePage.css">
-    <link rel="stylesheet" href="../styles/breakpoints.css">
-    <link rel="stylesheet" href="../styles/quizzSummaryPage.css">
-    <link rel="stylesheet" href="../styles/profilePage.css">
-    <link rel="stylesheet" href="../styles/ContactPage.css">
+    <link rel="stylesheet" href="/web/styles/common.css">
+    <link rel="stylesheet" href="/web/styles/homePage.css">
+    <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/quizzSummaryPage.css">
+    <link rel="stylesheet" href="/web/styles/profilePage.css">
+    <link rel="stylesheet" href="/web/styles/ContactPage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">

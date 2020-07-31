@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 <link rel="stylesheet" href="/web/styles/common.css">
+<link rel="stylesheet" href="/web/styles/logIn.css">
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
@@ -28,11 +29,14 @@
         <nav class="nav">
             <ul class="nav-items">
                 <a class="nav-item" target="_self" href="/">მთავარი</a>
+
                 <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
+
                 <%
                     if(user != null){ %>
                 <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                 <a class="nav-item" target="_self" href="/web/pages/StartQuiz.jsp">სატესტო</a>
+                <a class="nav-item" target="_self" href="/web/pages/pasuxebi.jsp">კითხვები</a>
                 <a class="nav-item" target="_sefl" id="friend-list-btn-id" onclick="popupfriendList()" style="cursor: pointer;">მეგობრები</a>
                 <% }
                 %>
@@ -47,7 +51,7 @@
         </nav>
         <div class="search-items">
             <input type="text" id="search-input" placeholder="რა გაინტერესებთ..." name="search">
-            <button id="search-btn-id" type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
+            <button type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
         </div>
     </div>
 </div>

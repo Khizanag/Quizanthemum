@@ -174,7 +174,7 @@
   flex-direction: column;
 
   position:absolute;
-  top:20%;
+  top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
   background:#002e30;
@@ -202,7 +202,7 @@
   flex-direction: column;
 
   position:absolute;
-  top:20%;
+  top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
   background:#002e30;
@@ -370,12 +370,7 @@
 }
 
 /*TODO there was error*/
-/*.top-quiz-item:hover{*/
-/*  -webkit-box-shadow: 3px 3px 5px 6px rgb(255, 117, 26,.4);  !* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ *!*/
-/*  -moz-box-shadow:    3px 3px 5px 6px rgb(255, 117, 26, .4);  !* Firefox 3.5 - 3.6 *!*/
-/*  box-shadow:         3px 3px 5px 6px rgb(255, 117, 26, .4);  !* Opera 10.5, IE 9, Firefox 4+, Chrome*!*/
-/*  transform: scale(1.1);*/
-/*}*/
+
 
 .quiz-small-description-block{
   width:300px;
@@ -411,7 +406,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+ align-items: center;
 }
 .preview-image-class{
   margin-top: 5px;
@@ -443,7 +438,7 @@
 .upl-btn::before, .upl-btn::after{
   content: '';
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   width: 100%;
   height: 100%;
