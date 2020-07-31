@@ -41,7 +41,7 @@
             <div class= "top-quiz-list-items">
             <% for(Quiz currQuiz:topQuizzes){ %>
                 <div class="top-quiz-list-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
-                        <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>"  onerror="this.src='../slider/img/Quiz1.jpg';" >
+                        <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>"  onerror="this.src='/web/images/common/Quiz1.jpg';" >
                         <div class= "quiz-list-small-description-block">
                             <h3 class= "quiz-title" >
                                 <%=currQuiz.getName()%>
