@@ -44,7 +44,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     private User getUserWithQuery(String query){
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
             if(!set.next())
                 return null;
             int id = set.getInt(USERS_TABLE_COLUMN_1_ID);
