@@ -1,10 +1,8 @@
 package Controller.Servlets;
 
-import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Question.QuestionEvent;
-import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.Quiz.QuizEvent;
-import Model.Managers.QuestionEventManager;
+import Tools.Pair;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
-import static Configs.Config.*;
+
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 
 @WebServlet(name = "QuestionEventFinishedServlet", urlPatterns = "/QuestionEventFinished")
@@ -34,18 +30,45 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
 
         int numAnswers = questionEvent.getNumUsersAnswers();
+        int numStatements = questionEvent.getQuestion().getStatementsCount();
+        System.out.println("num ans: " + numAnswers);
         List<String> userAnswers = new ArrayList<>();
+        List<String> matchingColors = new ArrayList<>();
+
         for (int i = 0; i < numAnswers; i++) {
-            String nextAns = request.getParameter("question_event_answer_" + i);
-            userAnswers.add(nextAns);
+            if(questionEvent.getType() == MULTI_ANSWER && i >= numStatements) {
+                break;
+            }
+            if (questionEvent.getType() == MULTI_CHOICE || questionEvent.getType() == MULTI_CHOICE_MULTI_ANSWER) {
+                String nextAns = request.getParameter("question_event_multi_answer_" + i);
+                if(nextAns != null) {
+                    userAnswers.add(nextAns);
+                }
+            } else {
+                String nextAns = request.getParameter("question_event_answer_" + i);
+                userAnswers.add(nextAns);
+                if(questionEvent.getType() == MATCHING) {
+                    String nextColor = request.getParameter("question_event_matching_color_" + i);
+                    matchingColors.add(nextColor);
+                }
+            }
         }
+
+        if(questionEvent.getType() == MATCHING) {
+            userAnswers = getUserMatchingAnswers(userAnswers, matchingColors);
+        }
+
+        // TODO remove. useful for testing
+        System.out.println("_____");
+        for(int i = 0; i < userAnswers.size(); i++) {
+            System.out.println(userAnswers.get(i));
+        }
+        System.out.println("_____");
+
 
         questionEvent.setUserAnswers(userAnswers);
         questionEvent.finishQuestionEvent();
-
-        if(questionEvent.isAutoGraded()) {
-            gradeQuestionEvent(questionEvent);
-        }
+        gradeQuestionEvent(questionEvent);
 
         quizEvent.setFilledQuestionEvent(questionEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
@@ -61,17 +84,37 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         System.out.println("question event finished");
     }
 
+    private List<String> getUserMatchingAnswers(List<String> userAnswers, List<String> matchingColors) {
+        Map<String, String> map = new TreeMap<>();
+        List<String> cleanedAnswers = new ArrayList<>();
+        for(int i = 0; i < userAnswers.size(); i+=2) {
+            map.put(matchingColors.get(i), userAnswers.get(i));
+        }
+        for(int i = 1; i < userAnswers.size(); i+=2) {
+            if(map.containsKey(matchingColors.get(i))) {
+                cleanedAnswers.add(map.get(matchingColors.get(i)));
+                cleanedAnswers.add(userAnswers.get(i));
+            }
+        }
+        return cleanedAnswers;
+    }
+
     private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {
         switch (newQuestionEvent.getType()) {
             case MULTI_ANSWER:
             case MULTI_CHOICE_MULTI_ANSWER:
-            case FILL_BLANK:
                 newQuestionEvent.autoGradeMultiAnswer();
+                break;
+            case FILL_BLANK:
+                newQuestionEvent.autoGradeFillBlank();
                 break;
             case MATCHING:
                 newQuestionEvent.autoGradeMatchingAnswer();
                 break;
             case STANDARD:
+                if (!newQuestionEvent.isAutoGraded()) {
+                    break;
+                }
             case MULTI_CHOICE:
             default:
                 newQuestionEvent.autoGradeTextAnswer();

@@ -103,13 +103,25 @@ public class QuestionEvent {
         isAlreadyGraded = true;
     }
 
+    public void autoGradeFillBlank() {
+        int correctAnswersNum = 0;
+        for(int i = 0; i < userAnswers.size(); i++) {
+            if(userAnswers.get(i).equals(userAnswers.get(i))) {
+                correctAnswersNum++;
+            }
+        }
+        isAlreadyGraded = true;
+        userScore = question.getMaxScore() * correctAnswersNum / question.getStatementsCount();
+
+    }
+
     /*
      * compares user's answers with real ones and grades.
      * score depends on number of correct answers.
      */
     public void autoGradeMultiAnswer() {
         Set<String> userAnswerSet = new TreeSet<>();
-        for (int i = 0; i < question.getAnswersCount(); i++) {
+        for (int i = 0; i < userAnswers.size(); i++) {
             userAnswerSet.add(userAnswers.get(i));
         }
         int correctAnswersNum = 0;
@@ -157,8 +169,10 @@ public class QuestionEvent {
     }
 
     public int getNumUsersAnswers() {
-        if(question.getType() == STANDARD || question.getType() == MULTI_CHOICE) {
+        if(question.getType() == STANDARD) {
             return 1;
+        } else if (question.getType() == FILL_BLANK){
+            return question.getAnswersCount();
         } else {
             return question.getStatementsCount();
         }

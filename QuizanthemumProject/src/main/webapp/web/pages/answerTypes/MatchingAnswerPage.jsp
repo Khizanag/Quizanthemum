@@ -17,7 +17,7 @@
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
+    <form class="add-question-section" id="matching-form" action="../../../QuestionEventFinished" method="get">
         <div class="container">
             <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
             <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
@@ -27,19 +27,22 @@
             <p><%=question.getHeaderStatement()%></p>
             <hr>
             <div class="input-items" id="input-items">
-                <div class="matching-holder">
+                <div class="matching-holder" id="matching-holder">
                     <% for(int i = 0; i < question.getStatementsCount(); i++) { %>
                         <% if(i%2 == 0) { %>
-                            <input type="button" name="matching-elem" value=<%=left.get(i/2)%>
-                            id=<%=i+1%> class="matching-elem" onclick="doMatch(<%=i+1%>)" >
+                            <input type="label" name="question_event_answer_<%=i%>" value="<%=left.get(i/2)%>"
+                            id="<%=i+1%>" class="matching-elem" onclick="doMatch(<%=i+1%>)" readonly>
+                            <input type="hidden" id="color<%=i+1%>" name="question_event_matching_color_<%=i%>">
                         <% } else { %>
-                            <input type="button" name="matching-elem" value=<%=right.get(i/2)%>
-                            id=<%=i+1%> class="matching-elem" onclick="doMatch(<%=i+1%>)" >
-                        <% } %>
+                            <input type="label" name="question_event_answer_<%=i%>" value="<%=right.get(i/2)%>"
+                            id="<%=i+1%>" class="matching-elem" onclick="doMatch(<%=i+1%>)" readonly>
+                            <input type="hidden" id="color<%=i+1%>" name="question_event_matching_color_<%=i%>">
+                    <% } %>
                     <% } %>
                 </div>
             </div><hr>
             <button class="button" type="submit"> პასუხის დადასტურება </button>
+            <input type="hidden" name="answers" id="answers">
         </div>
     </form>
 
@@ -47,14 +50,9 @@
 </body>
 
 <script>
-    function getRandomColor() {
-        let letters = '0123456789ABCDEF';
-        let color = '#33';
-        for (let i = 0; i < 4; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
+
+    let colors = ["#616A6B" , "#9B59B6", "#3498DB", "#17A589",
+                    "#D35400", "#F39C12", "#1B4F72", "#C0392B"];
 
     let numClick = 0;
     let prevId = 0;
@@ -64,6 +62,7 @@
 
         if (id == prevId && !before) {
             document.getElementById(id).style.backgroundColor = "#ffffff";
+            document.getElementById("color" + id).value = "#ffffff";
             before = true;
         } else before = false;
 
@@ -73,12 +72,14 @@
         }
 
         if (numClick % 2 == 0 && id != prevId) {
-            color = getRandomColor();
+            color = colors.pop();
             document.getElementById(id).style.backgroundColor = color;
+            document.getElementById("color" + id).value = color;
         } else {
             if (id % 2 != prevId % 2) {
                 document.getElementById(id).style.backgroundColor = color;
-                color = getRandomColor();
+                document.getElementById("color" + id).value = color;
+                color = colors.pop();
             }
         }
         prevId = id;

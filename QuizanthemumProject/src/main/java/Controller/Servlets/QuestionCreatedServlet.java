@@ -75,7 +75,9 @@ public class QuestionCreatedServlet extends HttpServlet {
         for (int i = 0; i < numAnswers; i++) {
             String s = request.getParameter("answer_" + i);
             answers.add(s);
-            statements.add(s);
+            if(type != QuestionTypes.MULTI_ANSWER) {
+                statements.add(s);
+            }
         }
 
         for (int i = 0; i < numStatements; i++) {

@@ -34,16 +34,13 @@ public class QuizCreationFinishedServlet extends HttpServlet {
         System.out.println("quiz inserted into database");
         quiz.setID(ID);
 
-        System.out.println("quizID = " + ID);
-
         int numQuestions = quiz.getQuestionsCount();
         for(int i = 0; i < numQuestions; i++){
             Question question = quiz.getQuestion(i);
             question.setQuizID(ID);
-            System.out.println("question get quiz id = " + question.getQuizID());
             questionManager.insertQuestion(question);
-            System.out.println(i + "-th question added into database");
         }
+
         quiz.finishCreatingQuiz();
         context.removeAttribute(QUIZ_CREATING_NOW);
 

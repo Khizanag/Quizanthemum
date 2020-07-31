@@ -29,8 +29,9 @@
         <nav class="nav">
             <ul class="nav-items">
                 <a class="nav-item" target="_self" href="/">მთავარი</a>
-<%--                <a class="nav-item" target="_self" href="https://www.youtube.com/?hl=ka&gl=GE">TOP USERS</a>--%>
-                <a class="nav-item" target="_self" href="/web/pages/QuizzesPage.jsp">ქვიზები</a>
+
+                <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
+
                 <%
                     if(user != null){ %>
                 <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>

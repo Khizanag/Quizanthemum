@@ -13,9 +13,8 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+<jsp:include page="/web/pages/Header.jsp"></jsp:include>
+<jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
 <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
@@ -26,9 +25,14 @@
         <p><%=question.getHeaderStatement()%></p>
         <hr>
         <div class="input-items" id="input-items">
-            <label><b>შეიყვანეთ თქვენი პასუხი აქ: </b></label>
-            <textarea class="ans-toFill" id="question_event_answer_0" name="question_event_answer_0"></textarea>
-            <p> შეყვანილია <span id="words-counter">0</span> სიტყვა</p>
+            <label><b> შეიყვანეთ <%=question.getStatementsCount()%> პასუხი </b></label>
+            <div style="display: flex; flex-direction: column; margin-top: 10px">
+            <% for(int i = 0; i < question.getStatementsCount(); i ++) {%>
+                <input style="width: 50%" type="text" id="<%=i%>"
+                       name="question_event_answer_<%=i%>"
+                       placeholder="შეიყვანეთ პასუხი N <%=i+1%>">
+            <% } %>
+            </div>
         </div><hr>
         <button class="button" type="submit"> პასუხის დადასტურება </button>
     </div>
@@ -38,18 +42,5 @@
 </body>
 
 <script>
-    document.querySelector("textarea").addEventListener('keyup', count);
 
-    function count(){
-        let resultArray = [];
-        let str = this.value.replace(/[\t\n\r\.\?\!]/gm,' ');
-        let wordArray = str.split(" ");
-        for (let i = 0; i < wordArray.length; i++) {
-            let item = wordArray[i].trim();
-            if(item.length > 0){
-                resultArray.push(item);
-            }
-        }
-        document.getElementById("words-counter").innerText = resultArray.length;
-    }
 </script>

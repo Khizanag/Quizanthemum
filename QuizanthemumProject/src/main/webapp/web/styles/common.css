@@ -49,7 +49,7 @@ html body {
     display: flex;
     align-content: space-between;
     position: absolute;
-    right: 0px;
+    right: 0;
     width: auto;
     justify-content: center;
     align-items: center;
@@ -254,5 +254,6 @@ html body {
 }
 
 .footer.rigth {
+    position: absolute;
     right: 5px;
 }

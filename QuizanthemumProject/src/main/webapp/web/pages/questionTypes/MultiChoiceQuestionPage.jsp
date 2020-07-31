@@ -30,7 +30,7 @@
         <hr><p></p>
         <label for="correct-answer"><b>სწორი პასუხი</b></label>
         <input type="text" placeholder="გთხოვთ შეიყვანოთ სწორი პასუხი"
-               name="answer_0" id="correct-answer" required>
+               name="answer_0" id="correct-answer" style="width: 100%" required>
 
         <label for="wrong-answer"><b>სავარაუდო(არასწორი) პასუხი</b></label>
         <div id="wrong-ans-div">

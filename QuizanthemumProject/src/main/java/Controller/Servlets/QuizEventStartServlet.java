@@ -33,7 +33,8 @@ public class QuizEventStartServlet extends HttpServlet {
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
         User user = (User) request.getAttribute("quiz_event_start_user");
 
-        int quizID = 4;//Integer.parseInt(request.getParameter("quiz_event_quiz_id"));
+
+        int quizID = 20; //Integer.parseInt(request.getParameter("quiz_event_quiz_id"));
         Quiz quiz = quizManager.getQuiz(quizID);
 
         QuizEvent quizEvent = new QuizEvent(quizEventManager.getNewQuizEventID(), user, quiz);

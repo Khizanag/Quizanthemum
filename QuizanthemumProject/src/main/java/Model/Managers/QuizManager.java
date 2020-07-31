@@ -32,6 +32,37 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
     public ManagersManager getManager(){ return this.manager; }
 
+    public List<Quiz> getMostPopularQuizzes(int numQuizzes) {
+        List<Quiz> quizzes = new ArrayList<>();
+        String query = "SELECT * FROM " + QUIZ_TABLE_NAME
+                + " ORDER BY CREATION_DATE DESC"
+                + "  LIMIT " + numQuizzes
+                + ";\n";
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                int id = set.getInt(QUIZ_TABLE_COLUMN_1_ID);
+                String name = set.getString(QUIZ_TABLE_COLUMN_2_NAME);
+                String description = set.getString(QUIZ_TABLE_COLUMN_3_DESCRIPTION);
+                String iconUrl = set.getString(QUIZ_TABLE_COLUMN_4_ICON_URL);
+                boolean mustShuffleQuestions = set.getBoolean(QUIZ_TABLE_COLUMN_5_MUST_SHUFFLE_QUESTIONS);
+                String comment = set.getString(QUIZ_TABLE_COLUMN_6_COMMENT);
+                int authorID = set.getInt(QUIZ_TABLE_COLUMN_7_AUTHOR_ID);
+                UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
+                User author = (User)userManager.getUser(authorID);
+                Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE);
+                List<Question> questions = getQuizQuestions(id);
+                int maxScore = set.getInt(QUIZ_TABLE_COLUMN_9_MAX_SCORE);
+                quizzes.add(new Quiz(id, name, description, iconUrl, mustShuffleQuestions, comment, author, creationDate, questions, maxScore));
+            }
+            qStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return quizzes;
+    }
+
     public Quiz getQuiz(int id){
         String query = "SELECT *" +
                 " FROM " + QUIZ_TABLE_NAME +
