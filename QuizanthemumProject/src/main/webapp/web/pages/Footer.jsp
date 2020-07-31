@@ -16,6 +16,9 @@
 
             <ul class="social-media-icons">
                 <div class= "icon-cirkle">
+                    <a class="fa fa-github" target="_blank" href="https://github.com/Khizanag/Quizanthemum/"></a>
+                </div>
+                <div class= "icon-cirkle">
                     <a class="fa fa-twitter" target="_blank" href="https://twitter.com/"></a>
                 </div>
                 <div class= "icon-cirkle">
