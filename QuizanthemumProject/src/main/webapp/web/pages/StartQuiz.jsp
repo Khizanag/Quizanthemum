@@ -1,6 +1,10 @@
 <%@ page import="Model.Managers.UsersManager" %>
 <%@ page import="Controller.Classes.User.User" %>
 <%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
+<%@ page import="Controller.Classes.Quiz.Quiz" %>
+<%@ page import="Model.Managers.QuizManager" %>
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="static Configs.Config.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -25,32 +29,31 @@
         </div>
     <% request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
     }%>
-
+    <%
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+        QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+        Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
+    %>
     <form class="start-quiz-section" action="../../../QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">
-                <img src="../images/homepage/c.jpg" class="quiz-main-img">
+                <img src="<%=quiz.getIconUrl()%>" class="quiz-main-img" onerror="this.src='/web/images/common/Quiz1.jpg';">
                 <div class="text-holder">
-                    <h2>ქვიზის სახელი</h2>
+                    <h2><%=quiz.getName()%></h2>
                     <div type="text" class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Accusantium assumenda doloremque eaque harum iste laborum optio rem,
-                        repellendus sed voluptate. Accusantium ad asperiores expedita
-                        maiores nobis repellendus repudiandae, sint vero?
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Accusantium assumenda doloremque eaque harum iste laborum optio rem,
-                        repellendus sed voluptate. Accusantium ad asperiores expedita
-                        maiores nobis repellendus repudiandae, sint vero?
+                        <%=quiz.getDescription()%>
                     </div>
                 </div>
             </div>
-            <p type="text" class="author"> ავტორის სახელი და გვარი </p>
-            <p style=" margin-bottom: 0; color:white"> ქვიზი შექმნილია: 01.08.2020 </p>
+            <p type="text" class="author"> Quiz by: <%=quiz.getAuthor().getFirstName()%> <%=quiz.getAuthor().getLastName()%></p>
+            <p style=" margin-bottom: 0; color:white"> ქვიზი შექმნილია: <%=quiz.getCreationDate()%> </p>
             <button class="button" type="submit"
                     style="margin-top: 10px">
                 ქვიზის დაწყება
             </button>
         </div>
+        <input type="hidden" value="<%=quiz.getID()%>" name="quiz_id">
     </form>
 
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
