@@ -30,11 +30,15 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
 
         int numAnswers = questionEvent.getNumUsersAnswers();
+        int numStatements = questionEvent.getQuestion().getStatementsCount();
         System.out.println("num ans: " + numAnswers);
         List<String> userAnswers = new ArrayList<>();
         List<String> matchingColors = new ArrayList<>();
 
         for (int i = 0; i < numAnswers; i++) {
+            if(questionEvent.getType() == MULTI_ANSWER && i >= numStatements) {
+                break;
+            }
             if (questionEvent.getType() == MULTI_CHOICE || questionEvent.getType() == MULTI_CHOICE_MULTI_ANSWER) {
                 String nextAns = request.getParameter("question_event_multi_answer_" + i);
                 if(nextAns != null) {

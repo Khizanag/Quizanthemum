@@ -121,7 +121,7 @@ public class QuestionEvent {
      */
     public void autoGradeMultiAnswer() {
         Set<String> userAnswerSet = new TreeSet<>();
-        for (int i = 0; i < question.getAnswersCount(); i++) {
+        for (int i = 0; i < userAnswers.size(); i++) {
             userAnswerSet.add(userAnswers.get(i));
         }
         int correctAnswersNum = 0;

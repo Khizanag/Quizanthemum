@@ -75,13 +75,13 @@ public class QuestionCreatedServlet extends HttpServlet {
         for (int i = 0; i < numAnswers; i++) {
             String s = request.getParameter("answer_" + i);
             answers.add(s);
-            statements.add(s);
+            if(type != QuestionTypes.MULTI_ANSWER) {
+                statements.add(s);
+            }
         }
 
-        if(type != QuestionTypes.MULTI_ANSWER){
-            for (int i = 0; i < numStatements; i++) {
-                statements.add(request.getParameter("statement_" + i));
-            }
+        for (int i = 0; i < numStatements; i++) {
+            statements.add(request.getParameter("statement_" + i));
         }
 
         Question newQuestion = new Question(type, isAutoGraded, maxScore, headerStatement, comment, source, creationDate,
