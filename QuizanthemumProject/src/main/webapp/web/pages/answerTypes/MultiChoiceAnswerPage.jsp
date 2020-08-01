@@ -15,8 +15,7 @@
 
 <style>
     .question-img {
-        width: 200px;
-        height: 200px;
+        width: 40%;
         margin-top: 10px;
     }
 </style>
