@@ -38,6 +38,7 @@
                 <% }
                 %>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
+                <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
                     <%if(user != null){%>
                 <form id="logoutForm">
                     <a class="nav-item" target="_sefl" id="logout-id" onclick="logout()" style="cursor: pointer;">გამოსვლა</a>

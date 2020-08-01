@@ -12,7 +12,6 @@ html body {
 .container {
      /*width: 1250px;*/
     width: 960px;
-    min-height: 100% !important;
     margin: auto;
 }
 
