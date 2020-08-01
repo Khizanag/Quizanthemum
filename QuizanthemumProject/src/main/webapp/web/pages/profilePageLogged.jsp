@@ -189,7 +189,7 @@
                 <%}%>
             </div>
         </div>
-        <form id="to_display_start_quiz_form" action="StartQuiz.jsp" method="get">
+        <form id="to_display_start_quiz_form" action="QuizSummaryPage.jsp" method="get">
             <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
         </form>
     </main>
