@@ -17,6 +17,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/web/js/profileStuff.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
@@ -26,17 +27,55 @@
             <img class="logo" src="/web/images/common/icon.png">
             <h1 class="logo-text">Quizanthemum</h1>
         </div>
-
         <% if(user == null){ %>
             <ul class="header-right">
                 <button class="log-in-button button logIn" onClick="openRegistration()">შესვლა</button>
             </ul>
         <% } else { %>
             <ul class="header-right">
-                <img class = "profile-picture right-menu" id="small-prof-pic-id" src="" onerror="this.src='/web/images/common/defProfPic.jpg';" href=""onclick="redirectToProfPage()">
-                <span class = "profile-name-text" onclick="redirectToProfPage()"><%=user.getUsername()%></span>
+                <img class = "profile-picture right-menu" id="small-prof-pic-id" src="" onerror="this.src='/web/images/common/defProfPic.jpg';" href=""onclick="openSidebar()">
+                <span class = "profile-name-text" onclick="openSidebar()"><%=user.getUsername()%></span>
             </ul>
         <% } %>
-
     </div>
 </header>
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a  onclick="popupfriendList()" style="cursor:pointer;">
+        <i class="material-icons my-mat-icon">people_outline</i>
+        მეგობრები
+    </a>
+
+    <a href="profilePageLogged.jsp">
+        <i class="material-icons my-mat-icon">account_box</i>
+        პროფილზე დაბრუნება
+    </a>
+
+
+    <form id="logoutForm">
+        <a onclick="logout()" style="cursor:pointer;">
+            <i class="material-icons my-mat-icon">arrow_back</i>
+            გასვლა
+        </a>
+        <input type="hidden" name="currentUrl" id="currentUrl"/>
+    </form>
+
+</div>
+
+
+<script>
+    function openSidebar() {
+        document.getElementById("mySidebar").style.width = "300px";
+        document.getElementById("mySidebar").style.marginLeft="150px";
+        document.getElementById("mySidebar").style.border="1px dashed #f07237";
+
+    }
+
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("mySidebar").style.marginLeft = "0";
+        document.getElementById("mySidebar").style.border="";
+
+    }
+</script>
