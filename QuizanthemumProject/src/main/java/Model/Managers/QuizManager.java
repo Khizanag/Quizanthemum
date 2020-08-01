@@ -115,17 +115,18 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     }
 
     public int insertQuiz(Quiz quiz){
-        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, quiz.getName());
-            pstmt.setString(2, quiz.getDescription());
-            pstmt.setString(3, quiz.getIconUrl());
-            pstmt.setBoolean(4, quiz.mustShuffleQuestions());
-            pstmt.setString(5, quiz.getComment());
-            pstmt.setInt(6, quiz.getAuthor().getID());
-            pstmt.setDate(7, new java.sql.Date(quiz.getCreationDate().getTime()));
-            pstmt.setDouble(8, quiz.getMaxScore());
+            pstmt.setInt(2, quiz.getCategory().getID());
+            pstmt.setString(3, quiz.getDescription());
+            pstmt.setString(4, quiz.getIconUrl());
+            pstmt.setBoolean(5, quiz.mustShuffleQuestions());
+            pstmt.setString(6, quiz.getComment());
+            pstmt.setInt(7, quiz.getAuthor().getID());
+            pstmt.setDate(8, new java.sql.Date(quiz.getCreationDate().getTime()));
+            pstmt.setDouble(9, quiz.getMaxScore());
             pstmt.executeUpdate();
             return DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
