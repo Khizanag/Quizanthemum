@@ -4,31 +4,16 @@
 <form action="../../QuestionCreated" method="get">
     <hr>
     <div class="input-items" id="input-items">
-        <label for="question_statement"><b>შეკითხვა</b></label>
-        <input type="text" placeholder="შეიყვანეთ შეკითხვა" name="statement_text" id="question_statement" required>
+        <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"/>
+        <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
 
         <label for="description"><b>ავტორის რჩევა</b></label>
         <input type="text" placeholder="გთხოვთ შეუყვანოთ მითითება მომხმარებლისთვის"
                name="description" id="description" required>
 
-        <label for="file"><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
-        <div class="upload-image-section">
-            <input type="file"  accept="image/*" name="image" id="file"
-                   onchange="loadFile(event)"
-                   style="display: none;"
-            >
-            <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
-            <div class="upload-image-container">
-                <label class="button upload" type="button"
-                       onclick="uploadImage(event)" id="url-button">
-                    შეიყვანეთ URL ასატვირთად
-                </label>
-                <input type="text" placeholder="ფოტოს URL"
-                       name="image_url" id="question_image_url">
-            </div>
-            <img id="output" width="100" />
-        </div>
-        <hr><p></p>
+            <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
+
+            <hr><p></p>
 
         <label><b>სწორი პასუხი</b></label>
         <div id="correct-ans-div">

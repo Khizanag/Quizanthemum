@@ -3,9 +3,9 @@
 <form action="../../QuestionCreated" method="get">
     <div class="input-items" id="input-items">
 
-        <label for="description"><b>მითითება</b></label>
-        <input type="text" placeholder="გთხოვთ შეიყვანოთ მითითება მომხმარებლისთვის"
-               name="description" id="description" required>
+        <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"/>
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
+
 
         <label><b>შეყვანილი ტექსტის მიმდინარე მდგომარეობა</b></label>
         <textarea class="entered-text" id="fill-question"disabled></textarea>
@@ -31,20 +31,10 @@
             </div>
         </div>
 
-        <hr><div class="point-holder">
-            <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 1-დან 16-მდე</b></label>
-            <input type="number" placeholder="ქულა"
-                   id="question_point" name="max_score"
-                   min="1" max="16" required>
-        </div>
+        <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"/>
 
-        <label for="source"><b>წყარო</b></label>
-        <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
-               name="source" id="source">
-
-        <label for="comment"><b>კომენტარი</b></label>
-        <input type="text" placeholder="სურვილისამებრ მიუთითეთ კომენტარი..."
-               name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
         <input type="hidden" name="type" value="<%=FILL_BLANK%>">

@@ -54,9 +54,36 @@ public class CategoriesManager implements CategoriesTableConfig {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if(resultSet.next()){
-                String name = resultSet.getString(CATEGORIES_TABLE_COLUMN_2_NAME);
-                return new Category(ID, name);
+               return buildCategory(resultSet);
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Category> getCategories(){
+        String query = "SELECT *"
+                + " FROM " + CATEGORIES_TABLE_NAME;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            List<Category> categories = new ArrayList<>();
+            while(resultSet.next()){
+                categories.add(buildCategory(resultSet));
+            }
+            return categories;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null; // error has occured
+    }
+
+    private Category buildCategory(ResultSet resultSet){
+        try {
+            int ID = resultSet.getInt(CATEGORIES_TABLE_COLUMN_1_ID);
+            String name = resultSet.getString(CATEGORIES_TABLE_COLUMN_2_NAME);
+            return new Category(ID, name);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
