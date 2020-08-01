@@ -23,15 +23,15 @@
 }
 .overall-quiz-details{
   font-size: 50px;
-  font-stretch: wider;
-  font-family: 'Ranchers', cursive;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   color:#f1f1f1;
   height: 50px;
   margin-bottom: 20px;
 }
 .quizz-img{
-  width:70%;
-  height:400px;
+  width:520px;
+  height:460px;
+  margin-right: 20px  ;
 }
 .quiz-description{
   display: flex;
