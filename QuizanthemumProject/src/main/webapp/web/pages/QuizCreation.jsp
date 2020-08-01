@@ -30,6 +30,8 @@
                 <input type="text" placeholder="შეიყვანეთ ქვიზის დასახელება"
                        name="quiz_name" id="quiz_name" required>
 
+                <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"/>
+
                 <label for="description"><b>ქვიზის აღწერა</b></label>
                 <input type="text" placeholder="გთხოვთ შეუყვანოთ თქვენი ქვიზის ზოგადი აღწერა"
                        name="quiz_description" id="quiz_description" required>
@@ -42,7 +44,7 @@
                     >
                     <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
                     <div class="upload-image-container">
-                        <label class="button upload" type="button"
+                        <label class="url-button upload" type="button"
                                onclick="uploadImage(event)" id="question_image_url">
                             შეიყვანეთ URL ასატვირთად
                         </label>

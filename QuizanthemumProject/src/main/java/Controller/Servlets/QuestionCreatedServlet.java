@@ -6,6 +6,7 @@ import Controller.Classes.Quiz.Quiz;
 import Model.Managers.QuestionManager;
 import Tools.FillTextTokenizer;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,9 +34,10 @@ public class QuestionCreatedServlet extends HttpServlet {
 
         int type = Integer.parseInt(request.getParameter("type"));
         System.out.println("question type is -> " + type);
-        boolean isAutoGraded = Boolean.parseBoolean(request.getParameter("isAutoGraded"));
+        boolean isAutoGraded = (type == QuestionTypes.STANDARD) ? false : true;
         int maxScore = Integer.parseInt(request.getParameter("max_score"));
-        String headerStatement = request.getParameter("description");
+        String headerStatement = new String(request.getParameter("description").getBytes("UTF-8"));
+        System.out.println("header GEORGED: " + headerStatement);
         String comment = request.getParameter("comment");
         String source = request.getParameter("source");
         Date creationDate = new Date();
@@ -94,7 +96,9 @@ public class QuestionCreatedServlet extends HttpServlet {
         System.out.println("question added into quiz");
 
         // TODO if finished quiz
-        response.setStatus(HttpServletResponse.SC_FOUND);//302
-        response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
+//        response.setStatus(HttpServletResponse.SC_FOUND);//302
+//        response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/AddingQuestions.jsp");
+        dispatcher.forward(request, response);
     }
 }

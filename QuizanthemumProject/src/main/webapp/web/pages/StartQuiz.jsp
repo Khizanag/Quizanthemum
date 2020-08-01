@@ -54,12 +54,14 @@
                     </div>
                 </div>
             </div>
+
             <p style="color:white"> ავტორი: <%=quiz.getAuthor().getFirstName()%> <%=quiz.getAuthor().getLastName()%></p>
             <div class="quiz-date-and-rait-holder">
                 <p style=" margin-bottom: 0; color:white"> შექმნილია: <%=quiz.getCreationDate()%> </p>
 <%--            <p style=" margin-bottom: 0; color:white"> ქვიზის რეიტინგი: <%=quiz.getRaiting()%>/5</p>--%>
                 <p style=" margin-bottom: 0; color:white"> ქვიზის რეიტინგი: 4/5</p>
             </div>
+
             <button class="button" type="submit"
                     style="margin-top: 10px">
                 ქვიზის დაწყება

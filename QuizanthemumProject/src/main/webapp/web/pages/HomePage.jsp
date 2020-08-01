@@ -57,8 +57,7 @@
     }
 </style>
 <body>
-
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+<jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <div class="slider"></div>
@@ -123,5 +122,13 @@
             document.getElementById(indexLeft).style.display = 'none';
             indexLeft++;
         }
+    }
+
+    function redirectToQuizStart(id){
+        const inp=document.getElementById("currQuizId"+id);
+        inp.value=id;
+        const form = document.getElementById("to_display_start_quiz_form");
+        document.getElementById("to_display_start_quiz_elem").value = id;
+        form.submit();
     }
 </script>

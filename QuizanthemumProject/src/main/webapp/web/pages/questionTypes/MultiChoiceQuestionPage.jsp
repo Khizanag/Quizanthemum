@@ -4,30 +4,9 @@
 <form action="../../QuestionCreated" method="get">
     <hr>
     <div class="input-items" id="input-items">
-        <label for="question_statement"><b>შეკითხვა</b></label>
-        <input type="text" placeholder="შეიყვანეთ შეკითხვა" name="statement_text" id="question_statement" required>
-
-        <label for="description"><b>ავტორის რჩევა</b></label>
-        <input type="text" placeholder="გთხოვთ შეუყვანოთ მითითება მომხმარებლისთვის"
-               name="description" id="description" required>
-
-        <label for="file"><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
-        <div class="upload-image-section">
-            <input type="file"  accept="image/*" name="image" id="file"
-                   onchange="loadFile(event)"
-                   style="display: none;"
-            >
-            <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
-            <div class="upload-image-container">
-                <label class="button upload" type="button"
-                       onclick="uploadImage(event)" id="url-button">
-                    შეიყვანეთ URL ასატვირთად
-                </label>
-                <input type="text" placeholder="ფოტოს URL"
-                       name="image_url" id="photo-url">
-            </div>
-            <img id="output" width="100" />
-        </div>
+        <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
         <hr><p></p>
         <label for="correct-answer"><b>სწორი პასუხი</b></label>
         <input type="text" placeholder="გთხოვთ შეიყვანოთ სწორი პასუხი"
@@ -44,27 +23,16 @@
 
     </div>
 
-    <hr><div class="point-holder">
-    <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
-    <input type="number" placeholder="ქულა"
-           id="question_point" name="max_score"
-           min="1" max="16" required>
-    </div> <hr>
-
-    <label for="source"><b>წყარო</b></label>
-    <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
-           name="source" id="source">
-
-    <label for="comment"><b>კომენტარი</b></label>
-    <input type="text" placeholder="სურვილისამებრ მიუთითეთ კომენტარი..."
-           name="comment" id="comment">
+    <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"/>
+    <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"/>
+    <jsp:include page="/web/pages/PartPages/CommenSectionInQuestionCreationPage.jsp"/>
 
     <%--   HIDDEN VARIABLES     --%>
     <input type="hidden" name="type" value="<%=MULTI_CHOICE%>">
     <input  type="hidden" name="num_statements" value="1" id="num_statements_elem">
     <input type="hidden" name="num_answers" value="1" id="num_answers_elem">
 
-    </div>
+<%--    </div>--%>
 
     <button class="button addQuestion"
             type="submit">

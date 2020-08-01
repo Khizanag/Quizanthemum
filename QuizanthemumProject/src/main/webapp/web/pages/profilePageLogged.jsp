@@ -1,6 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Controller.Classes.User.User" %>
-<html lang="ka">
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="Model.Managers.QuizManager" %>
+<%@ page import="Controller.Classes.Quiz.Quiz" %>
+<%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
+<%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
+<%@ page import="java.util.List" %>
+
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
@@ -152,7 +158,12 @@
         </div>
 
     </div>
-
+    <%
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+        QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+        List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
+    %>
     <div class = "top-quizzes-banner">
         <div class="players-top-quizzes">
             ნათამაშები ტოპ ქვიზები
@@ -161,68 +172,40 @@
     <main class="main">
         <div class="top-quizzes-container">
             <div class= "top-quiz-items">
-                <div class="top-quiz-item" onclick="redirectToQuiz()">
-                    <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
-                    <div class= "quiz-small-description-block">
-                        <h3 class= "quiz-title" >
-                            სახელი
-                        </h3><br>
-                        <p class="quiz-small-description">
-                            აღწერა ჯნსდანსდნასდ
-                            ასდაკსდალკსდ;ლაკდს
-                            ასლდ;ა
-                        </p>
+                <% for(Quiz currQuiz:topQuizzes){ %>
+                    <div class="top-quiz-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
+                        <img class= "quiz-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
+                        <div class= "quiz-small-description-block">
+                            <h3 class= "quiz-title" >
+                                <%=currQuiz.getName()%>
+                            </h3><br>
+                            <p class="quiz-small-description">
+                                <%=currQuiz.getDescription()%>
+                            </p>
+                        </div>
+                        <div class = "quiz-score"><%=currQuiz.getMaxScore()%></div>
+                        <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
                     </div>
-                    <div class = "quiz-score">20/20</div>
-                </div>
-                <div class="top-quiz-item" onclick="redirectToQuiz()">
-                    <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
-                    <div class= "quiz-small-description-block">
-                        <h3 class= "quiz-title" >
-                            სახელი
-                        </h3><br>
-                        <p class="quiz-small-description">
-                            აღწერა ჯნსდანსდნასდ
-                            ასდაკსდალკსდ;ლაკდს
-                            ასლდ;ა
-                        </p>
-                    </div>
-                    <div class = "quiz-score">20/20</div>
-                </div>
-                <div class="top-quiz-item" onclick="redirectToQuiz()">
-                    <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
-                    <div class= "quiz-small-description-block">
-                        <h3 class= "quiz-title" >
-                            სახელი
-                        </h3><br>
-                        <p class="quiz-small-description">
-                            აღწერა ჯნსდანსდნასდ
-                            ასდაკსდალკსდ;ლაკდს
-                            ასლდ;ა
-                        </p>
-                    </div>
-                    <div class = "quiz-score">20/20</div>
-                </div>
-                <div class="top-quiz-item" onclick="redirectToQuiz()">
-                    <img class= "quiz-small-image" src="../slider/img/Quiz1.jpg" onclick="redirectToQuiz()">
-                    <div class= "quiz-small-description-block">
-                        <h3 class= "quiz-title" >
-                            სახელი
-                        </h3><br>
-                        <p class="quiz-small-description">
-                            აღწერა ჯნსდანსდნასდ
-                            ასდაკსდალკსდ;ლაკდს
-                            ასლდ;ა
-                        </p>
-                    </div>
-                    <div class = "quiz-score">20/20</div>
-                </div>
+                <%}%>
             </div>
         </div>
+        <form id="to_display_start_quiz_form" action="QuizSummaryPage.jsp" method="get">
+            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+        </form>
     </main>
 
     <% } %>
 
 	<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
-</html>
+<script>
+    function redirectToQuizStart(id){
+        console.log(id);
+        const inp=document.getElementById("currQuizId"+id);
+        inp.value=id;
+        console.log(inp);
+        const form = document.getElementById("to_display_start_quiz_form");
+        document.getElementById("to_display_start_quiz_elem").value = id;
+        form.submit();
+    }
+</script>

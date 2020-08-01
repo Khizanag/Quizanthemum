@@ -30,6 +30,10 @@ public class ManagersManager {
         context.setAttribute(ACHIEVEMENTS_MANAGER_STR, achievementsManager);
         managers.put(ACHIEVEMENTS_MANAGER_STR, achievementsManager);
 
+        CategoriesManager categoriesManager = new CategoriesManager(this);
+        context.setAttribute(CATEGORIES_MANAGER_STR, categoriesManager);
+        managers.put(CATEGORIES_MANAGER_STR, categoriesManager);
+
         ChallengesManager challengesManager = new ChallengesManager(this);
         context.setAttribute(CHALLENGE_MANAGER_STR, challengesManager);
         managers.put(CHALLENGE_MANAGER_STR, challengesManager);

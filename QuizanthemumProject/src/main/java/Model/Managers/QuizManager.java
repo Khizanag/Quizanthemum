@@ -2,11 +2,13 @@ package Model.Managers;
 
 import Configs.QuestionTableConfig;
 import Configs.QuizTableConfig;
+import Controller.Classes.OtherClasses.Category;
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.User.User;
 import Model.DatabaseConnector;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,19 +44,8 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             Statement qStatement = connection.createStatement();
             ResultSet set = qStatement.executeQuery(query);
             while(set.next()) {
-                int id = set.getInt(QUIZ_TABLE_COLUMN_1_ID);
-                String name = set.getString(QUIZ_TABLE_COLUMN_2_NAME);
-                String description = set.getString(QUIZ_TABLE_COLUMN_3_DESCRIPTION);
-                String iconUrl = set.getString(QUIZ_TABLE_COLUMN_4_ICON_URL);
-                boolean mustShuffleQuestions = set.getBoolean(QUIZ_TABLE_COLUMN_5_MUST_SHUFFLE_QUESTIONS);
-                String comment = set.getString(QUIZ_TABLE_COLUMN_6_COMMENT);
-                int authorID = set.getInt(QUIZ_TABLE_COLUMN_7_AUTHOR_ID);
-                UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
-                User author = (User)userManager.getUser(authorID);
-                Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE);
-                List<Question> questions = getQuizQuestions(id);
-                int maxScore = set.getInt(QUIZ_TABLE_COLUMN_9_MAX_SCORE);
-                quizzes.add(new Quiz(id, name, description, iconUrl, mustShuffleQuestions, comment, author, creationDate, questions, maxScore));
+                Quiz newQuiz = buildQuizFromResultSet(set);
+                quizzes.add(newQuiz);
             }
             qStatement.close();
         } catch (SQLException throwables) {
@@ -67,27 +58,36 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         String query = "SELECT *" +
                 " FROM " + QUIZ_TABLE_NAME +
                 " WHERE " + QUIZ_TABLE_COLUMN_1_ID + " = " + id + ";\n";
-
-
         try {
             Statement myStatement = connection.createStatement();
             ResultSet set = myStatement.executeQuery(query);
-            if(!set.next())
-                return null;
+            if(set.next())
+                return buildQuizFromResultSet(set);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    private Quiz buildQuizFromResultSet(ResultSet set){
+        try {
+            int id = set.getInt(QUIZ_TABLE_COLUMN_1_ID);
             String name = set.getString(QUIZ_TABLE_COLUMN_2_NAME);
-            String description = set.getString(QUIZ_TABLE_COLUMN_3_DESCRIPTION);
-            String iconUrl = set.getString(QUIZ_TABLE_COLUMN_4_ICON_URL);
-            boolean mustShuffleQuestions = set.getBoolean(QUIZ_TABLE_COLUMN_5_MUST_SHUFFLE_QUESTIONS);
-            String comment = set.getString(QUIZ_TABLE_COLUMN_6_COMMENT);
-            int authorID = set.getInt(QUIZ_TABLE_COLUMN_7_AUTHOR_ID);
+            int categoryID = set.getInt(QUIZ_TABLE_COLUMN_3_CATEGORY_ID);
+            CategoriesManager categoriesManager = (CategoriesManager) manager.getManager(CATEGORIES_MANAGER_STR);
+            Category category = categoriesManager.getCategory(categoryID);
+            String description = set.getString(QUIZ_TABLE_COLUMN_4_DESCRIPTION);
+            String iconUrl = set.getString(QUIZ_TABLE_COLUMN_5_ICON_URL);
+            boolean mustShuffleQuestions = set.getBoolean(QUIZ_TABLE_COLUMN_6_MUST_SHUFFLE_QUESTIONS);
+            String comment = set.getString(QUIZ_TABLE_COLUMN_7_COMMENT);
+            int authorID = set.getInt(QUIZ_TABLE_COLUMN_8_AUTHOR_ID);
             UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
             User author = (User)userManager.getUser(authorID);
-            Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_8_CREATION_DATE);
+            Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_9_CREATION_DATE);
             List<Question> questions = getQuizQuestions(id);
-            int maxScore = set.getInt(QUIZ_TABLE_COLUMN_9_MAX_SCORE);
-            myStatement.close();
+            int maxScore = set.getInt(QUIZ_TABLE_COLUMN_10_MAX_SCORE);
 
-            return new Quiz(id, name, description, iconUrl, mustShuffleQuestions, comment, author, creationDate, questions, maxScore);
+            return new Quiz(id, name, category, description, iconUrl, mustShuffleQuestions, comment, author, creationDate, questions, maxScore);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -115,17 +115,18 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     }
 
     public int insertQuiz(Quiz quiz){
-        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, quiz.getName());
-            pstmt.setString(2, quiz.getDescription());
-            pstmt.setString(3, quiz.getIconUrl());
-            pstmt.setBoolean(4, quiz.mustShuffleQuestions());
-            pstmt.setString(5, quiz.getComment());
-            pstmt.setInt(6, quiz.getAuthor().getID());
-            pstmt.setDate(7, new java.sql.Date(quiz.getCreationDate().getTime()));
-            pstmt.setDouble(8, quiz.getMaxScore());
+            pstmt.setInt(2, quiz.getCategory().getID());
+            pstmt.setString(3, quiz.getDescription());
+            pstmt.setString(4, quiz.getIconUrl());
+            pstmt.setBoolean(5, quiz.mustShuffleQuestions());
+            pstmt.setString(6, quiz.getComment());
+            pstmt.setInt(7, quiz.getAuthor().getID());
+            pstmt.setDate(8, new java.sql.Date(quiz.getCreationDate().getTime()));
+            pstmt.setDouble(9, quiz.getMaxScore());
             pstmt.executeUpdate();
             return DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
