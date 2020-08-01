@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <p type="text" class="author"> Quiz by: <%=quiz.getAuthor().getFirstName()%> <%=quiz.getAuthor().getLastName()%></p>
+            <p type="text" class="author"> Quiz by: <%=quiz.getAuthor().getUsername()%></p>
             <p style=" margin-bottom: 0; color:white"> ქვიზი შექმნილია: <%=quiz.getCreationDate()%> </p>
             <button class="button" type="submit"
                     style="margin-top: 10px">

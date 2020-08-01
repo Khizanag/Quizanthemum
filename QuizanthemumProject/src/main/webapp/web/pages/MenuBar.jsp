@@ -35,18 +35,11 @@
                 <%
                     if(user != null){ %>
                 <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
-                <a class="nav-item" target="_self" href="/web/pages/StartQuiz.jsp">სატესტო</a>
+<%--                <a class="nav-item" target="_self" href="/web/pages/StartQuiz.jsp">სატესტო</a>--%>
                 <a class="nav-item" target="_self" href="/web/pages/pasuxebi.jsp">კითხვები</a>
-                <a class="nav-item" target="_sefl" id="friend-list-btn-id" onclick="popupfriendList()" style="cursor: pointer;">მეგობრები</a>
                 <% }
                 %>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
-                    <%if(user != null){%>
-                <form id="logoutForm">
-                    <a class="nav-item" target="_sefl" id="logout-id" onclick="logout()" style="cursor: pointer;">გამოსვლა</a>
-                    <input type="hidden" name="currentUrl" id="currentUrl"/>
-                </form>
-                <%} %>
             </ul>
         </nav>
         <div class="search-items">
