@@ -2,6 +2,7 @@ package Model.Managers;
 
 import Configs.CategoriesTableConfig;
 import Configs.QuestionEventTableConfig;
+import Controller.Classes.OtherClasses.Category;
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Question.QuestionEvent;
 import Model.DatabaseConnector;
@@ -25,4 +26,7 @@ public class CategoriesManager implements CategoriesTableConfig {
 
     public ManagersManager getManager(){ return this.manager; }
 
+    public void insertCategory(Category category){
+
+    }
 }
