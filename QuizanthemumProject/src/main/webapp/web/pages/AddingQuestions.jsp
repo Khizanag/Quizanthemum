@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="../styles/breakpoints.css">
     <link rel="stylesheet" href="../styles/rules.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    request.setCharacterEncoding("UTF-8");
 </head>
 
 <body>

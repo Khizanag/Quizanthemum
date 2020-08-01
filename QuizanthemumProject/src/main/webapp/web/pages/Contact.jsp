@@ -22,12 +22,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    request.setCharacterEncoding("UTF-8");
 <head>
     <title>Contact</title>
 </head>
 <body>
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+
     <br><br>
     <div class="full-wrapper">
         <div class = "header-wrapper">

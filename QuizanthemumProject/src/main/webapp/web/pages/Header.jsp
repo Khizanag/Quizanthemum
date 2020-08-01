@@ -18,6 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/web/js/profileStuff.js"></script>
 
+request.setCharacterEncoding("UTF-8");
+
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
 <header class= "header-section">

@@ -47,7 +47,6 @@ public class QuizCreationFinishedServlet extends HttpServlet {
         context.setAttribute(LAST_CREATED_QUIZ, quiz);
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
-        // TODO
-
+        response.setHeader("Location", "http://localhost:8080/web/pages/StartQuiz.jsp");
     }
 }

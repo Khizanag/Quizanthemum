@@ -29,4 +29,6 @@ public interface Config {
     String LAST_CREATED_QUIZ = "quiz-that-was-created-lastly";
 
     String QUIZ_TO_DISPLAY = "quiz-that-should-be-displayed-in-quiz-start-page";
+
+    String QUIZANTHEMUM_EMAIL = "quizanthemum.gmail.com";
 }

@@ -35,7 +35,8 @@ public class QuestionCreatedServlet extends HttpServlet {
         System.out.println("question type is -> " + type);
         boolean isAutoGraded = (type == QuestionTypes.STANDARD) ? false : true;
         int maxScore = Integer.parseInt(request.getParameter("max_score"));
-        String headerStatement = request.getParameter("description");
+        String headerStatement = new String(request.getParameter("description").getBytes("UTF-8"));
+        System.out.println("header GEORGED: " + headerStatement);
         String comment = request.getParameter("comment");
         String source = request.getParameter("source");
         Date creationDate = new Date();
