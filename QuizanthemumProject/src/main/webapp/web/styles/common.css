@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-html body {
+html {
     background-color: #002c2f;
     position: relative;
     height: 100% !important;
@@ -12,7 +12,6 @@ html body {
 .container {
      /*width: 1250px;*/
     width: 960px;
-    min-height: 100% !important;
     margin: auto;
 }
 

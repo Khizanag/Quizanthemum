@@ -12,16 +12,22 @@
     <link rel="stylesheet" href="../../styles/answers.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
+<style>
+    .question-img {
+        width:40%;
+        margin-top: 10px;
+    }
+</style>
 <body>
-
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+<jsp:include page="/web/pages/Header.jsp"></jsp:include>
+<jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
 <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
         <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
         <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
         <%Question question = questionEvent.getQuestion();%>
+        <img src="<%=question.getPictureStatementURL()%>" class="question-img">
         <p><%=question.getTextStatement()%></p>
         <p><%=question.getHeaderStatement()%></p>
         <hr>

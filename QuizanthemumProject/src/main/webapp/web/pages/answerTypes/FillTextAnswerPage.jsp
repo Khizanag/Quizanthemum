@@ -41,12 +41,9 @@
             </p>
             </div>
         </div><hr>
-        <div class="input-items" id="input-items">
-        </div><hr>
         <button class="button" type="submit"> პასუხის დადასტურება </button>
     </div>
 </form>
-
     <jsp:include page="../Footer.jsp"></jsp:include>
 </body>
 <%--<script>--%>

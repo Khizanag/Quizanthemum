@@ -41,13 +41,23 @@
             <% for(Quiz currQuiz:topQuizzes){ %>
                 <div class="top-quiz-list-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
                         <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
-                        <div class= "quiz-list-small-description-block">
-                            <h3 class= "quiz-title" >
+                        <div class= "quiz-list-small-description-block" style="position: relative">
+                            <h3 class= "quiz-title" style="font-size: 16px">
                                 <%=currQuiz.getName()%>
-                            </h3><br>
-                            <p class="quiz-small-description">
+                            </h3>
+                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
                               <%=currQuiz.getDescription()%>
                             </p>
+                            <div class="raiting-icons-holder" style="position: absolute; bottom: 5px; color:white">
+                                <ul class="raiting-icons" id="stars-holder">
+                                    <% for(int i = 1; i <= 3; i++) { %>
+                                        <a class="fa fa-star" style="margin-right: 2px;"></a>
+                                    <%}%>
+                                    <% for(int i = 4; i <= 5; i++) { %>
+                                        <a class="fa fa-star-o" style="margin-right: 2px;"></a>
+                                    <%}%>
+                                </ul>
+                            </div>
                         </div>
                     <div class = "quiz-score"><%=currQuiz.getMaxScore()%></div>
                     <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
