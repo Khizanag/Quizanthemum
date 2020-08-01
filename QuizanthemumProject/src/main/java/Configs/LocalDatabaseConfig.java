@@ -14,7 +14,6 @@ public interface LocalDatabaseConfig {
     String URL = "jdbc:mysql://localhost:3306/";
     String DATABASE_NAME = "demodb";
 
-
 //    // ishal
 //    String USERNAME = "shaliba";
 //    String PASSWORD = "Shaliba-1";
@@ -22,9 +21,9 @@ public interface LocalDatabaseConfig {
 //    String DATABASE_NAME = "demodb";
 
 //     dgogi
-    String USERNAME = "root";
-    String PASSWORD = "Pass_word1";
-    String URL = "jdbc:mysql://localhost:3306/";
-    String DATABASE_NAME = "quizanthemum_schema";
+//    String USERNAME = "root";
+//    String PASSWORD = "Pass_word1";
+//    String URL = "jdbc:mysql://localhost:3306/";
+//    String DATABASE_NAME = "quizanthemum_schema";
 
 }
