@@ -1,5 +1,6 @@
 package Controller.Classes.Quiz;
 
+import Controller.Classes.OtherClasses.Category;
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.User.User;
 
@@ -15,6 +16,7 @@ public class Quiz {
 
     private int id;
     private final String name;
+    private final Category category;
     private final String description;
     private final String iconUrl;                           // url for quiz icon
     private final boolean mustShuffleQuestions;
@@ -25,9 +27,9 @@ public class Quiz {
     private double maxScore;                            // maximum possible score
 
     /* Quiz constructor for creating Quiz object using database information, about already published quiz */
-    public Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment,
+    public Quiz(int id, String name, Category category, String description, String iconUrl, boolean mustShuffleQuestions, String comment,
                 User author, Date creationDate, List<Question> questions, int maxScore) {
-        this(id, name, description, iconUrl, mustShuffleQuestions, comment,  author, true);
+        this(id, name, category, description, iconUrl, mustShuffleQuestions, comment,  author, true);
         this.creationDate = creationDate;
         this.questions = questions;
         this.maxScore = maxScore;
@@ -38,17 +40,18 @@ public class Quiz {
         while this quiz is not still published, and is not saved into database.
         Note: after entirely creating this object, it should be stored into database
      */
-    public Quiz(String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author){
-        this(DEFAULT_ID, name, description, iconUrl, mustShuffleQuestions, comment, author, true);
+    public Quiz(String name, Category category, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author){
+        this(DEFAULT_ID, name, category, description, iconUrl, mustShuffleQuestions, comment, author, true);
         this.questions = new ArrayList<>();
         this.maxScore = 0;
         this.creationDate = new Date();
     }
 
     /* helper constructor used by other public constructors */
-    private Quiz(int id, String name, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author, boolean isPrivate){
+    private Quiz(int id, String name, Category category, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author, boolean isPrivate){
         this.id = id;
         this.name = name;
+        this.category = category;
         this.description = description;
         this.iconUrl = iconUrl;
         this.mustShuffleQuestions = mustShuffleQuestions;
@@ -57,11 +60,13 @@ public class Quiz {
     }
 
     /* getter methods */
-    public int getID() { return id; }
+    public int getID() { return this.id; }
 
-    public String getName() { return name; }
+    public String getName() { return this.name; }
 
-    public String getDescription() { return description; }
+    public Category getCategory(){ return this.category; }
+
+    public String getDescription() { return this.description; }
 
     public String getIconUrl(){ return iconUrl; }
 

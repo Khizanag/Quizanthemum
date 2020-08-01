@@ -26,6 +26,7 @@ create table users(
 create table quizzes(
                         ID smallint primary key AUTO_INCREMENT,
                         NAME varchar(64),
+                        CATEGORY_ID int,
                         DESCRIPTION text,
                         ICON_URL varchar(256),
                         MUST_SHUFFLE_QUESTIONS boolean not null ,
@@ -187,6 +188,7 @@ CREATE TABLE categories(
 );
 
 
+
 # ***********************************************  ACHIEVEMENTS  ***********************************************
 
 create table achievements(
@@ -212,6 +214,7 @@ create table achievement_events(
 );
 
 
+
 # ************************************************** DROP TABLES  *************************************************
 
     drop table if exists question_events;
@@ -223,6 +226,7 @@ create table achievement_events(
     drop table if exists achievement_events;
     drop table if exists achievements;
     drop table if exists users;
+
 
 
 # ***************************************************  FOR TESTING  **************************************************
