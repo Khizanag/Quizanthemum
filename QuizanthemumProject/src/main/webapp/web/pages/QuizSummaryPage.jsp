@@ -1,4 +1,9 @@
-<%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
+<%@ page import="Model.Managers.QuizManager" %>
+<%@ page import="Controller.Classes.Quiz.Quiz" %>
+<%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
+<%@ page import="Controller.Classes.User.User" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -15,7 +20,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
   <script>
+    <%
+            ServletContext context = request.getServletContext();
+            ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+            QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+            Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
+            User user = (User)request.getServletContext().getAttribute("logedInUser");
 
+    %>
 
     function gotoProfPage() {
       window.location.href="profilePageLogged.jsp";
@@ -34,13 +46,13 @@
     <div class ="quiz-summary-wrapper">
       <div class = "quiz-container">
         <div class="quizz-main">
-          <img class="quizz-img" src="../slider/img/Quiz2.jpg">
+          <img class="quizz-img" src="<%=quiz.getIconUrl()%>"  onerror="this.src='/web/images/common/Quiz1.jpg';">
           <div class="quiz-description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, dolorum odit velit at magni molestias ab et nihil eaque voluptas, numquam possimus. Temporibus expedita minima repellat esse commodi soluta dignissimos?
+              <%=quiz.getDescription()%>
           </div>
         </div>
         <div class="overall-quiz-details">
-          <p>Your Score 15/20</p>
+          <p>Your Score 0/<%=quiz.getMaxScore()%></p>
         </div>
         <div class="questions">
           <div class="question">

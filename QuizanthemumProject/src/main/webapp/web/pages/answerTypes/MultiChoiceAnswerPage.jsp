@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
     <link rel="stylesheet" href="/web/styles/answers.css">
 </head>
+
+<style>
+    .question-img {
+        width: 40%;
+        margin-top: 10px;
+    }
+</style>
 <body>
 
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
@@ -23,6 +30,8 @@
             <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
             <%Question question = questionEvent.getQuestion();%>
             <%List<String> statements = question.getShuffledStatements();%>
+
+            <img src="<%=question.getPictureStatementURL()%>" class="question-img">
             <p><%=question.getTextStatement()%></p>
             <p><%=question.getHeaderStatement()%></p>
             <hr>

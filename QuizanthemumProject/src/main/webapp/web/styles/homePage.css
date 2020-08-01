@@ -52,6 +52,9 @@ input[type=text]:focus{
     height: 100px;
     display: flex;
     flex-direction: row;
+    cursor: pointer;
+}
+.info-item:hover{
 }
 .info-text {
     text-align: left;
@@ -63,11 +66,6 @@ input[type=text]:focus{
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-size: 18px;
     text-transform: capitalize;
-}
-.author {
-    font-size: 14px;
-    color:#b3bdbe;
-    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 .info-paragraf {
     font-size: 12px;

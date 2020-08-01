@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 <link rel="stylesheet" href="/web/styles/common.css">
-<link rel="stylesheet" href="/web/styles/logIn.css">
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
@@ -32,21 +31,12 @@
 
                 <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
 
-                <%
-                    if(user != null){ %>
+                <% if(user != null){ %>
                 <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
-                <a class="nav-item" target="_self" href="/web/pages/StartQuiz.jsp">სატესტო</a>
+                <% } %>
                 <a class="nav-item" target="_self" href="/web/pages/pasuxebi.jsp">კითხვები</a>
-                <a class="nav-item" target="_sefl" id="friend-list-btn-id" onclick="popupfriendList()" style="cursor: pointer;">მეგობრები</a>
-                <% }
-                %>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
-                    <%if(user != null){%>
-                <form id="logoutForm">
-                    <a class="nav-item" target="_sefl" id="logout-id" onclick="logout()" style="cursor: pointer;">გამოსვლა</a>
-                    <input type="hidden" name="currentUrl" id="currentUrl"/>
-                </form>
-                <%} %>
+                <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
             </ul>
         </nav>
         <div class="search-items">

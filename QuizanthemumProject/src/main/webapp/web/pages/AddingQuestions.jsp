@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../styles/breakpoints.css">
     <link rel="stylesheet" href="../styles/rules.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
 </head>
 
 <body>
@@ -35,7 +36,8 @@
                     <option value="6">დასაწყვილებელი</option>
                 </select>
                 <div id="current-question-type"></div>
-                <button class="button finish" type="button" onclick="redirectToQuizFinishedPage()">დასრულება</button>
+                <button class="button finish" type="button" id="submit-button-id"
+                       onclick="redirectToQuizFinishedPage()">დასრულება</button>
             </div>
         </div>
     </div>
@@ -45,24 +47,31 @@
 <script language="JavaScript" type="text/javascript">
     function doIt() {
         if($("#questions-type option:selected").val() == 0) {
+            document.getElementById('submit-button-id').style.visibility = 'visible';
             document.getElementById('current-question-type').innerHTML='';
         }
         if($("#questions-type option:selected").val() == 1) {
+            document.getElementById('submit-button-id').style.visibility = 'hidden';
             $('#current-question-type').load('./questionTypes/OpenAnswerQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 2) {
+            document.getElementById('submit-button-id').style.visibility = 'hidden';
             $('#current-question-type').load('./questionTypes/FillTextQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 3) {
+            document.getElementById('submit-button-id').style.visibility = 'hidden';
             $('#current-question-type').load('./questionTypes/MultiChoiceQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 4) {
+            document.getElementById('submit-button-id').style.visibility = 'hidden';
             $('#current-question-type').load('./questionTypes/MultiOpenAnswerQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 5) {
+            document.getElementById('submit-button-id').style.visibility = 'hidden';
             $('#current-question-type').load('./questionTypes/MultiChoiceMultiAnswerQuestionPage.jsp');
         }
         if($("#questions-type option:selected").val() == 6) {
+            document.getElementById('submit-button-id').style.visibility = 'hidden';
             $('#current-question-type').load('./questionTypes/MatchingQuestionPage.jsp');
         }
     }

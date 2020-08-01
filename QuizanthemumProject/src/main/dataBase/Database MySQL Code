@@ -1,4 +1,16 @@
 use quizanthemum_schema;
+# ************************************************** DROP TABLES  *************************************************
+
+    drop table if exists question_events;
+    drop table if exists questions;
+    drop table if exists quiz_events;
+    drop table if exists quizzes;
+    drop table if exists friendships;
+    drop table if exists challenges;
+    drop table if exists achievement_events;
+    drop table if exists achievements;
+    drop table if exists users;
+
 
 
 
@@ -26,6 +38,7 @@ create table users(
 create table quizzes(
                         ID smallint primary key AUTO_INCREMENT,
                         NAME varchar(64),
+                        CATEGORY_ID int,
                         DESCRIPTION text,
                         ICON_URL varchar(256),
                         MUST_SHUFFLE_QUESTIONS boolean not null ,
@@ -180,6 +193,13 @@ create table challenges(
 );
 
 
+# *******************************************  CATEGORIES  ******************************************
+CREATE TABLE categories(
+    id int primary key auto_increment,
+    name varchar(64)
+);
+
+
 
 # ***********************************************  ACHIEVEMENTS  ***********************************************
 
@@ -206,20 +226,18 @@ create table achievement_events(
 );
 
 
-# ************************************************** DROP TABLES  *************************************************
-
-#     drop table if exists question_events;
-#     drop table if exists questions;
-#     drop table if exists quiz_events;
-#     drop table if exists quizzes;
-#     drop table if exists friendships;
-#     drop table if exists challenges;
-#     drop table if exists achievement_events;
-#     drop table if exists achievements;
-#     drop table if exists users;
 
 
 
 # ***************************************************  FOR TESTING  **************************************************
 
-select * from users;
+SELECT * FROM achievement_events;
+SELECT * FROM achievements;
+SELECT * FROM categories;
+SELECT * FROM challenges;
+SELECT * FROM friendships;
+SELECT * FROM question_events;
+SELECT * FROM questions;
+SELECT * FROM quiz_events;
+SELECT * FROM quizzes;
+SELECT * FROM users;

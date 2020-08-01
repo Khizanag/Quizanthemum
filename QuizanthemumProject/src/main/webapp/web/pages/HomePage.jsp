@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="web/styles/breakpoints.css">
     <link rel="stylesheet" href="web/styles/profilePage.css">
     <link rel="stylesheet" href="web/styles/quizCreation.css">
+    <link rel="stylesheet" href="web/styles/scroll.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -46,33 +47,90 @@
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
     List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
 %>
+<style>
+    .section-header {
+        padding: 20px;
+    }
+    h3 {
+        color: #f07237;
+        font-size: x-large;
+    }
+</style>
 <body>
-
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+<jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <div class="slider"></div>
 
-    <div class="main-section">
-        <div class="container">
-            <div class= "info-items">
-                <% for(Quiz currQuiz:topQuizzes){ %>
-
-                <div class="info-item">
-                    <img class= "info-image a" src="<%=currQuiz.getIconUrl()%>"  onerror="this.src='/web/images/common/Quiz1.jpg';"></img>
-                    <div class= "info-text">
-                        <h3 class= "info-title">
+    <div class="just-added-section">
+        <div class="container" style="position: relative; overflow: hidden">
+            <h3 class="section-header">ბოლოს დამატებული ქვიზები</h3>
+            <div class="scroll-block">
+                <% for(int i=0;i<topQuizzes.size();i++){ Quiz currQuiz = topQuizzes.get(i); %>
+                <div class="top-quiz-list-item" id="<%=i%>" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
+                    <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
+                    <div class= "quiz-list-small-description-block" style="position: relative">
+                        <h3 class= "quiz-title" style="font-size: 16px; text-align: center">
                             <%=currQuiz.getName()%>
                         </h3>
-                        <div class="author"> ვინცხა ვინცხა</div>
-                        <p class="info-paragraf">
+                        <p class="quiz-small-description" style="width: 282px;">
                             <%=currQuiz.getDescription()%>
                         </p>
+                        <div class="raiting-icons-holder" style="position: absolute; bottom: 5px; color:white">
+                            <ul class="raiting-icons" id="stars-holder">
+                                <% for(int j = 1; j <= 3; j++) { %>
+                                <a class="fa fa-star" style="margin-right: 2px;"></a>
+                                <%}%>
+                                <% for(int j = 4; j <= 5; j++) { %>
+                                <a class="fa fa-star-o" style="margin-right: 2px;"></a>
+                                <%}%>
+                            </ul>
+                        </div>
                     </div>
+                    <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
                 </div>
                 <%}%>
             </div>
+            <div class="scroll-arrow leftarr" onclick="scrlLeft(<%=topQuizzes.size()%>)">
+                <p style="color:white; font-size: xx-large"> < </p>
+            </div>
+            <div class="scroll-arrow rightarr" onclick="scrollRight(<%=topQuizzes.size()%>)">
+                <p style="color:white; font-size: xx-large"> > </p>
+            </div>
+            <form id="to_display_start_quiz_form" action="/web/pages/StartQuiz.jsp" method="get">
+                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+            </form>
         </div>
     </div>
+
+
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
+
+<script>
+    let indexLeft = 0;
+    let indexRight = 0;
+    function scrlLeft(numElems) {
+        if(indexLeft != 0 && numElems > 3) {
+            console.log(indexLeft);
+            document.getElementById(indexLeft-1).style.display = 'block';
+            indexLeft--;
+        }
+    }
+
+    function scrollRight(numElems) {
+        indexRight = numElems-1;
+        if(indexRight != indexLeft+2) {
+            document.getElementById(indexLeft).style.display = 'none';
+            indexLeft++;
+        }
+    }
+
+    function redirectToQuizStart(id){
+        const inp=document.getElementById("currQuizId"+id);
+        inp.value=id;
+        const form = document.getElementById("to_display_start_quiz_form");
+        document.getElementById("to_display_start_quiz_elem").value = id;
+        form.submit();
+    }
+</script>

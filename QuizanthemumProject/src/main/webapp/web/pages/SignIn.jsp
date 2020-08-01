@@ -37,9 +37,6 @@
             <button type="submit" class="button" onclick="checkAndRedirect()">შესვლა</button>
         </div>
 
-        <div class="container signin">
-            <p>არ გაქვს პროფილი? <a href="Registration.jsp">ახალი პროფილის შექმნა</a>.</p>
-        </div>
     </form>
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
