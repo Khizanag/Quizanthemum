@@ -169,8 +169,28 @@ html body {
     outline:none;
 }
 
-.button {
-
+.url-button{
+    cursor: pointer;
+    background-color: #f07237;
+    color: white;
+    font-size: medium;
+    font-weight: 600;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    padding: 5px 20px;
+    border: none;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    outline:none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    padding: 11px    ;
+}
+.url-button a{
+    color: rgba(51,51,51,1);
+    text-decoration: none;
+    display: block;
 }
 .button {
     cursor: pointer;
