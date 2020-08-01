@@ -22,22 +22,16 @@
     List<Category> categories = categoriesManager.getCategories();
 %>
 
-<%--<div class="page-holder">--%>
-<%--    <div class="container">--%>
-        <div class="input-items" id="input-items">
-            <label for="category"><b>აირჩიეთ კატეგორია</b></label>
-            <select onchange="doIt()" class="drop-down" name="category" id="category">
+<%--<div class="input-items" id="input-items">--%>
+    <label for="category"><b>აირჩიეთ კატეგორია</b></label>
+    <select class="drop-down" name="category" id="category">
 
-                <%
-                    for(Category category : categories){
-                %>
-                    <option value="<%=category.getID()%>"><%=category.getName()%></option>
-                <%
-                    }
-                %>
-            </select>
-<%--            <div id="current-question-type"></div>--%>
-<%--            <button class="button finish" type="button" onclick="redirectToQuizFinishedPage()">დასრულება</button>--%>
-        </div>
-<%--    </div>--%>
+        <%
+            for(Category category : categories){
+        %>
+            <option value="<%=category.getID()%>"><%=category.getName()%></option>
+        <%
+            }
+        %>
+    </select>
 <%--</div>--%>

@@ -3,7 +3,6 @@
 
 <form action="../../../QuestionCreated" method="get">
     <div class="input-items" id="input-items">
-        <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"/>
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>

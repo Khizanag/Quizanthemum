@@ -4,7 +4,6 @@
 <form action="../../QuestionCreated" method="get">
     <hr>
     <div class="input-items" id="input-items">
-        <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"/>
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
 
         <label for="description"><b>ავტორის რჩევა</b></label>

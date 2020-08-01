@@ -3,9 +3,7 @@
 <form action="../../QuestionCreated" method="get">
     <div class="input-items" id="input-items">
 
-        <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"/>
         <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
-
 
         <label><b>შეყვანილი ტექსტის მიმდინარე მდგომარეობა</b></label>
         <textarea class="entered-text" id="fill-question"disabled></textarea>

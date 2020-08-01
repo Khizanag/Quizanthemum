@@ -5,7 +5,6 @@
 
     <hr>
     <div class="input-items" id="input-items">
-        <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"/>
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
 
         <div class="matching-elems-secton">
@@ -39,7 +38,7 @@
                 </button>
             </div>
         </div>
-        
+
         <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/CommenSectionInQuestionCreationPage.jsp"/>

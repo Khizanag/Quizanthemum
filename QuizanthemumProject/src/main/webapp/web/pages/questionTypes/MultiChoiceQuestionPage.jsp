@@ -4,10 +4,9 @@
 <form action="../../QuestionCreated" method="get">
     <hr>
     <div class="input-items" id="input-items">
-        <jsp:include page="/web/pages/PartPages/CategoriesForQuestions.jsp"></jsp:include>
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
-        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"></jsp:include>
-        <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"></jsp:include>
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
         <hr><p></p>
         <label for="correct-answer"><b>სწორი პასუხი</b></label>
         <input type="text" placeholder="გთხოვთ შეიყვანოთ სწორი პასუხი"
@@ -24,9 +23,9 @@
 
     </div>
 
-    <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"></jsp:include>
-    <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"></jsp:include>
-    <jsp:include page="/web/pages/PartPages/CommenSectionInQuestionCreationPage.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"/>
+    <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"/>
+    <jsp:include page="/web/pages/PartPages/CommenSectionInQuestionCreationPage.jsp"/>
 
     <%--   HIDDEN VARIABLES     --%>
     <input type="hidden" name="type" value="<%=MULTI_CHOICE%>">
