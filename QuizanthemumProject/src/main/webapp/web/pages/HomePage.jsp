@@ -58,21 +58,36 @@
             <div class= "info-items">
                 <% for(Quiz currQuiz:topQuizzes){ %>
 
-                <div class="info-item">
+                <div class="info-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
                     <img class= "info-image a" src="<%=currQuiz.getIconUrl()%>"  onerror="this.src='/web/images/common/Quiz1.jpg';"></img>
                     <div class= "info-text">
                         <h3 class= "info-title">
                             <%=currQuiz.getName()%>
                         </h3>
-                        <div class="author"> ვინცხა ვინცხა</div>
+                        <div class="author">ავტორი: <%=currQuiz.getAuthor().getUsername()%></div>
                         <p class="info-paragraf">
                             <%=currQuiz.getDescription()%>
                         </p>
                     </div>
+                    <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
+
                 </div>
                 <%}%>
+                <form id="to_display_start_quiz_form" action="web/pages/StartQuiz.jsp" method="get">
+                    <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+                </form>
             </div>
         </div>
     </div>
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
+
+<script>
+    function redirectToQuizStart(id){
+        const inp=document.getElementById("currQuizId"+id);
+        inp.value=id;
+        const form = document.getElementById("to_display_start_quiz_form");
+        document.getElementById("to_display_start_quiz_elem").value = id;
+        form.submit();
+    }
+</script>
