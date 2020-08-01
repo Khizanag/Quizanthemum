@@ -11,6 +11,7 @@
 <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 <link rel="stylesheet" href="/web/styles/common.css">
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
+<link rel="stylesheet" href="/web/styles/MenuBar.css">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 <script>
@@ -29,12 +30,26 @@
             <ul class="nav-items">
                 <a class="nav-item" target="_self" href="/">მთავარი</a>
 
-                <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
+                <div class="dropdown">
+                    <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
+                    <div class="dropdown-content">
+                        <a class="nav-item grayeble" target="_self" href="#">უახლესი</a>
+                        <a class="nav-item grayeble" target="_self" href="#">პოპულარული</a>
+                        <a class="nav-item grayeble" target="_self" href="#">საუკეთესო</a>
+                        <a class="nav-item grayeble" target="_self" href="#">მარტივები</a>
+                        <a class="nav-item grayeble" target="_self" href="#">რთულები</a>
+                    </div>
+                </div>
 
                 <% if(user != null)%>
                     <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
                 <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
+
+
+
+
+
             </ul>
         </nav>
         <div class="search-items">
@@ -49,6 +64,6 @@
 
 <style>
     nav a:hover{
-        background-color: #777;
+        /*background-color: #777;*/
     }
 </style>
