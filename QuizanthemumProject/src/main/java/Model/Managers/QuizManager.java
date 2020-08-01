@@ -135,4 +135,23 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         }
         return DEFAULT_ID;
     }
+
+    public List<Quiz> getCategoryQuizzes(Category category) {
+        String query = "SELECT * "
+                + " FROM " + QUIZ_TABLE_NAME
+                + " WHERE " + QUIZ_TABLE_COLUMN_3_CATEGORY_ID + " = " + category.getID()
+                + ";\n";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            List<Quiz> quizzes  = new ArrayList<>();
+            while(resultSet.next()){
+                quizzes.add(buildQuizFromResultSet(resultSet));
+            }
+            return quizzes;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }

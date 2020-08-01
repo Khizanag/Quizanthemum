@@ -1,4 +1,10 @@
-<%@ page import="Controller.Classes.User.User" %><%--
+<%@ page import="Controller.Classes.User.User" %>
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="Model.Managers.CategoriesManager" %>
+<%@ page import="Controller.Classes.OtherClasses.Category" %>
+<%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
+<%@ page import="static Configs.Config.CATEGORIES_MANAGER_STR" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/27/20
@@ -24,6 +30,12 @@
     }
 </script>
 
+<%
+    ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
+    CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
+    List<Category> categories = categoriesManager.getCategories();
+%>
+
 <div class="nav-section">
     <div class="container manu">
         <nav class="nav">
@@ -45,13 +57,13 @@
                 <div class="dropdown">
                     <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">კატეგორიები</a>
                     <div class="dropdown-content">
-                        <% if(user != null)%>
-                        <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
-                        <a class="nav-item grayeble" target="_self" href="#">უახლესი</a>
-                        <a class="nav-item grayeble" target="_self" href="#">პოპულარული</a>
-                        <a class="nav-item grayeble" target="_self" href="#">საუკეთესო</a>
-                        <a class="nav-item grayeble" target="_self" href="#">მარტივები</a>
-                        <a class="nav-item grayeble" target="_self" href="#">რთულები</a>
+                        <% for(Category category : categories){ %>
+                            <a class="nav-item grayeble" target="_self" href="#" value="<%=category.getID()%>"onclick="displayCategoryFromMenuBar(<%=category.getID()%>)"><%=category.getName()%></a>
+                        <% } %>
+
+                        <form id="categories-form" action="DisplayCategory" method="get">
+                            <input type="hidden" id="chosen-category" name="chosen-category">
+                        </form>
                     </div>
                 </div>
                 <a class="nav-item" target="_self" href="/web/pages/Blog.jsp">ბლოგი</a>
@@ -67,3 +79,10 @@
 </div>
 
 <jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
+
+<script>
+    function displayCategoryFromMenuBar(ID){
+        document.getElementById('chosen-category').value = ID;
+        document.getElementById('categories-form').submit();
+    }
+</script>
