@@ -64,7 +64,6 @@
 
     <div class="just-added-section">
         <div class="container" style="position: relative; overflow: hidden">
-
             <h3 class="section-header">ბოლოს დამატებული ქვიზები</h3>
             <div class="scroll-block">
                 <% for(int i=0;i<topQuizzes.size();i++){ Quiz currQuiz = topQuizzes.get(i); %>
@@ -92,12 +91,15 @@
                 </div>
                 <%}%>
             </div>
-            <div class="scroll-arrow leftarr" onclick="scrlLeft()">
+            <div class="scroll-arrow leftarr" onclick="scrlLeft(<%=topQuizzes.size()%>)">
                 <p style="color:white; font-size: xx-large"> < </p>
             </div>
             <div class="scroll-arrow rightarr" onclick="scrollRight(<%=topQuizzes.size()%>)">
                 <p style="color:white; font-size: xx-large"> > </p>
             </div>
+            <form id="to_display_start_quiz_form" action="/web/pages/StartQuiz.jsp" method="get">
+                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+            </form>
         </div>
     </div>
 
@@ -108,8 +110,8 @@
 <script>
     let indexLeft = 0;
     let indexRight = 0;
-    function scrlLeft() {
-        if(indexLeft != 0) {
+    function scrlLeft(numElems) {
+        if(indexLeft != 0 && numElems > 3) {
             console.log(indexLeft);
             document.getElementById(indexLeft-1).style.display = 'block';
             indexLeft--;

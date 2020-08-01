@@ -33,7 +33,6 @@
         <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"/>
 
-
         <%--   HIDDEN VARIABLES     --%>
         <input type="hidden" name="type" value="<%=FILL_BLANK%>">
         <input  type="hidden" name="num_statements" value="0">
@@ -46,5 +45,4 @@
         </button>
     </div>
 </form>
-<hr>
 

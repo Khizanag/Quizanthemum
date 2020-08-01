@@ -17,5 +17,4 @@
 
         <button class="button addQuestion" type="submit"> შემდეგი შეკითხვის დამატება </button>
     </div>
-    <hr>
 </form>
