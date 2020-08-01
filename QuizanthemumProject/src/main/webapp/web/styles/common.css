@@ -252,6 +252,8 @@ html body {
     z-index: 1; /* Stay on top */
     top: 0;
     right:0;
+    display: flex;
+    flex-direction: column;
     background-color: #312450;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
@@ -268,8 +270,14 @@ html body {
     display: block;
     transition: 0.3s;
     cursor: pointer;
-}
+    align-items: center;
+    display: flex;
 
+}
+.my-mat-icon{
+
+    margin-right: 10px;
+}
 /* When you mouse over the navigation links, change their color */
 .sidebar a:hover {
     color: #f1f1f1;

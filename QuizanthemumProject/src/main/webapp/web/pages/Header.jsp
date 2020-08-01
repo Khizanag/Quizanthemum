@@ -17,6 +17,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/web/js/profileStuff.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
@@ -40,18 +41,31 @@
 </header>
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a  onclick="popupfriendList()" style="cursor:pointer;">მეგობრები</a>
-    <a href="profilePageLogged.jsp">პროფილზე დაბრუნება</a>
+    <a  onclick="popupfriendList()" style="cursor:pointer;">
+        <i class="material-icons my-mat-icon">people_outline</i>
+        მეგობრები
+    </a>
+
+    <a href="profilePageLogged.jsp">
+        <i class="material-icons my-mat-icon">account_box</i>
+        პროფილზე დაბრუნება
+    </a>
+
+
     <form id="logoutForm">
-        <a onclick="logout()" style="cursor:pointer;">გასვლა</a>
+        <a onclick="logout()" style="cursor:pointer;">
+            <i class="material-icons my-mat-icon">arrow_back</i>
+            გასვლა
+        </a>
         <input type="hidden" name="currentUrl" id="currentUrl"/>
     </form>
+
 </div>
 
 
 <script>
     function openSidebar() {
-        document.getElementById("mySidebar").style.width = "200px";
+        document.getElementById("mySidebar").style.width = "300px";
         document.getElementById("mySidebar").style.marginLeft="150px";
         document.getElementById("mySidebar").style.border="1px dashed #f07237";
 
