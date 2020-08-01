@@ -31,10 +31,8 @@
 
                 <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
 
-                <% if(user != null){ %>
-                <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
-                <% } %>
-                <a class="nav-item" target="_self" href="/web/pages/pasuxebi.jsp">კითხვები</a>
+                <% if(user != null)%>
+                    <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
                 <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
             </ul>
@@ -47,3 +45,10 @@
 </div>
 
 <jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
+
+
+<style>
+    nav a:hover{
+        background-color: #777;
+    }
+</style>
