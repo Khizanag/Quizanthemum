@@ -19,6 +19,8 @@
 <script src="/web/js/profileStuff.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<% request.setCharacterEncoding("UTF-8"); %>
+
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
 <header class= "header-section">

@@ -1,7 +1,10 @@
 package Controller.Servlets;
 
+import Controller.Classes.OtherClasses.Category;
 import Controller.Classes.User.User;
 import Controller.Classes.Quiz.Quiz;
+import Model.Managers.CategoriesManager;
+import Model.Managers.ManagersManager;
 import Model.Managers.QuizManager;
 import Model.Managers.UsersManager;
 
@@ -22,7 +25,7 @@ public class QuizCreationStartedServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        //Your code
+        //Your code // TODO deletable???
     }
 
     @Override
@@ -32,17 +35,19 @@ public class QuizCreationStartedServlet extends HttpServlet {
 
     @Override
     protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
-        UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
+        ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
+        CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
 
         String name = request.getParameter("quiz_name");
+        int categoryID = Integer.parseInt(request.getParameter("category")); // TODO
+        Category category = categoriesManager.getCategory(categoryID);
         String description = request.getParameter("quiz_description");
         String iconUrl = request.getParameter("quiz_icon_url");
         boolean mustShuffleQuestions = Boolean.parseBoolean(request.getParameter("quiz_must_shuffle_questions"));
         String comment = request.getParameter("quiz_comment");
         User author = (User) request.getServletContext().getAttribute("logedInUser");
 
-        Quiz newQuiz = new Quiz(name, description, iconUrl, mustShuffleQuestions, comment, author);
+        Quiz newQuiz = new Quiz(name, category, description, iconUrl, mustShuffleQuestions, comment, author);
 
         request.getServletContext().setAttribute(QUIZ_CREATING_NOW, newQuiz);
 

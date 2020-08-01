@@ -16,19 +16,22 @@
 
             <ul class="social-media-icons">
                 <div class= "icon-cirkle">
+                    <a class="fa fa-github" target="_blank" href="https://github.com/Khizanag/Quizanthemum/"></a>
+                </div>
+                <div class= "icon-cirkle">
                     <a class="fa fa-twitter" target="_blank" href="https://twitter.com/"></a>
                 </div>
                 <div class= "icon-cirkle">
                     <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/"></a>
                 </div>
                 <div class= "icon-cirkle">
-                    <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/"></a>
+                    <a class="fa fa-facebook"  target="_blank" href="https://www.facebook.com/Quizanthemum/"></a>
                 </div>
                 <div class= "icon-cirkle">
                     <a class="fa fa-youtube"  target="_blank" href="https://www.youtube.com/"></a>
                 </div>
                 <div class= "icon-cirkle">
-                    <a class="fa fa-google"  target="_blank" href="https://www.youtube.com/"></a>
+                    <a class="fa fa-google"  target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to=quizanthemum@gmail.com&su=&body="></a>
                 </div>
             </ul>
 
