@@ -15,7 +15,7 @@
     >
     <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
     <div class="upload-image-container">
-        <label class="button upload" type="button"
+        <label class="url-button upload" type="button"
                onclick="uploadImage(event)" id="url-button">
             შეიყვანეთ URL ასატვირთად
         </label>

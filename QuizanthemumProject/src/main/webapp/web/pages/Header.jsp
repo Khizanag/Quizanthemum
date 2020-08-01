@@ -47,8 +47,8 @@
         მეგობრები
     </a>
 
-    <a href="profilePageLogged.jsp">
-        <i class="material-icons my-mat-icon">account_box</i>
+    <a href="/web/pages/profilePageLogged.jsp">
+        <i class="material-icons my-mat-icon" >account_box</i>
         პროფილზე დაბრუნება
     </a>
 

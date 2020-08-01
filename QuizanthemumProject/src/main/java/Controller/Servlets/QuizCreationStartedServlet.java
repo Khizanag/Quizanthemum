@@ -39,7 +39,7 @@ public class QuizCreationStartedServlet extends HttpServlet {
         CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
 
         String name = request.getParameter("quiz_name");
-        int categoryID = Integer.parseInt(request.getParameter("category")); // TODO
+        int categoryID = 1; //Integer.parseInt(request.getParameter("category")); // TODO
         Category category = categoriesManager.getCategory(categoryID);
         String description = request.getParameter("quiz_description");
         String iconUrl = request.getParameter("quiz_icon_url");

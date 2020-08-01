@@ -31,13 +31,10 @@
 
                 <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
 
-                <%
-                if(user != null){ %>
+                <% if(user != null){ %>
                 <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                 <% } %>
                 <a class="nav-item" target="_self" href="/web/pages/pasuxebi.jsp">კითხვები</a>
-                <% }
-                %>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
                 <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
             </ul>

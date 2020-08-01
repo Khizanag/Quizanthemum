@@ -53,5 +53,4 @@
         <input type="hidden" name="num_answers" value="1" id="num_answers_elem">
 
     <button class="button addQuestion" type="submit">შემდეგი შეკითხვის დამატება</button>
-    <hr>
 </form>
