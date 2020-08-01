@@ -5,6 +5,7 @@ public interface Config {
     /* context key strings for manager attributes*/
     String ACHIEVEMENT_EVENTS_MANAGER_STR = "achievement_events_manager";
     String ACHIEVEMENTS_MANAGER_STR = "achievements_manager";
+    String CATEGORIES_MANAGER_STR = "categories_manager";
     String CONNECTION_STR = "connection for database";
     String CHALLENGE_MANAGER_STR = "challenge manager";
     String FRIENDSHIPS_MANAGER_STR = "friendships_manager";
@@ -25,10 +26,7 @@ public interface Config {
 
     String LOGGED_IN_USER_ID_STR = "Quizanthemum-loged-in-user-ID";
     String LOGGED_IN_USER_PASSWORD_HASH_STR = "Quizanthemum-loged-in-user-password-hash";
-
     String LAST_CREATED_QUIZ = "quiz-that-was-created-lastly";
-
     String QUIZ_TO_DISPLAY = "quiz-that-should-be-displayed-in-quiz-start-page";
 
-    String QUIZANTHEMUM_EMAIL = "quizanthemum.gmail.com";
 }
