@@ -33,6 +33,8 @@
                 <div class="dropdown">
                     <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">ქვიზები</a>
                     <div class="dropdown-content">
+                        <% if(user != null)%>
+                            <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                         <a class="nav-item grayeble" target="_self" href="#">უახლესი</a>
                         <a class="nav-item grayeble" target="_self" href="#">პოპულარული</a>
                         <a class="nav-item grayeble" target="_self" href="#">საუკეთესო</a>
@@ -40,16 +42,21 @@
                         <a class="nav-item grayeble" target="_self" href="#">რთულები</a>
                     </div>
                 </div>
-
-                <% if(user != null)%>
-                    <a class="nav-item" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
+                <div class="dropdown">
+                    <a class="nav-item" target="_self" href="/web/pages/QuizListPage.jsp">კატეგორიები</a>
+                    <div class="dropdown-content">
+                        <% if(user != null)%>
+                        <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
+                        <a class="nav-item grayeble" target="_self" href="#">უახლესი</a>
+                        <a class="nav-item grayeble" target="_self" href="#">პოპულარული</a>
+                        <a class="nav-item grayeble" target="_self" href="#">საუკეთესო</a>
+                        <a class="nav-item grayeble" target="_self" href="#">მარტივები</a>
+                        <a class="nav-item grayeble" target="_self" href="#">რთულები</a>
+                    </div>
+                </div>
+                <a class="nav-item" target="_self" href="/web/pages/Blog.jsp">ბლოგი</a>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
                 <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
-
-
-
-
-
             </ul>
         </nav>
         <div class="search-items">
@@ -60,10 +67,3 @@
 </div>
 
 <jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
-
-
-<style>
-    nav a:hover{
-        /*background-color: #777;*/
-    }
-</style>

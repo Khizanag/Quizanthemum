@@ -28,3 +28,14 @@ nav.a{
     cursosr: pointer;
 }
 
+.dropdown{
+    cursor: pointer;
+}
+
+.dropdown:hover{
+    background-color: #777;
+}
+
+.nav-item:hover{
+    background-color: #777;
+}
