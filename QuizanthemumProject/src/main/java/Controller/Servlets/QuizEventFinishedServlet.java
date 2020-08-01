@@ -34,7 +34,7 @@ public class QuizEventFinishedServlet extends HttpServlet {
         }
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
-        response.setHeader("Location", "http://localhost:8080/web/pages/quiz_summary.html"); // TODO valid address. quiz summary
+        response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID()); // TODO valid address. quiz summary
 
         quizEventManager.insertQuizEvent(quizEvent);
     }

@@ -91,7 +91,7 @@
                 </div>
                 <%}%>
             </div>
-            <div class="scroll-arrow leftarr" onclick="scrlLeft(<%=topQuizzes.size()%>)">
+            <div class="scroll-arrow leftarr" onclick="scrlLeft()">
                 <p style="color:white; font-size: xx-large"> < </p>
             </div>
             <div class="scroll-arrow rightarr" onclick="scrollRight(<%=topQuizzes.size()%>)">
@@ -110,8 +110,8 @@
 <script>
     let indexLeft = 0;
     let indexRight = 0;
-    function scrlLeft(numElems) {
-        if(indexLeft != 0 && numElems > 3) {
+    function scrlLeft() {
+        if(indexLeft != 0) {
             console.log(indexLeft);
             document.getElementById(indexLeft-1).style.display = 'block';
             indexLeft--;

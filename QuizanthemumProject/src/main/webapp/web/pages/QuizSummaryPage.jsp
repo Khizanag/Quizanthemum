@@ -3,7 +3,8 @@
 <%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="Controller.Classes.Quiz.Quiz" %>
 <%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
-<%@ page import="Controller.Classes.User.User" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
+<%@ page import="Controller.Classes.User.User" %>
+<%@ page import="Controller.Classes.Quiz.QuizEvent" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -25,6 +26,7 @@
             ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
             QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
             Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
+            QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
             User user = (User)request.getServletContext().getAttribute("logedInUser");
 
     %>
@@ -52,7 +54,7 @@
           </div>
         </div>
         <div class="overall-quiz-details">
-          <p>Your Score 0/<%=quiz.getMaxScore()%></p>
+          <p>Your Score: <%=quizEvent.getUserScore()%>/<%=quiz.getMaxScore()%></p>
         </div>
         <div class="questions">
           <div class="question">

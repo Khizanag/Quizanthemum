@@ -78,7 +78,7 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             request.getServletContext().setAttribute("question_number", questionNumber+1);
             response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
-            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp"); // TODO valid address. end quiz
+            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID()); // TODO valid address. end quiz
         }
 
         System.out.println("question event finished");
