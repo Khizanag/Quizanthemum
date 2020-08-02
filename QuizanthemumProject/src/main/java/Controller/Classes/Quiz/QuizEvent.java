@@ -29,7 +29,7 @@ public class QuizEvent {
         this.id = id;
         this.user = user;
         this.quiz = quiz;
-        questionEvents = new ArrayList<QuestionEvent>();
+        questionEvents = new ArrayList<>();
     }
 
     // create from database
