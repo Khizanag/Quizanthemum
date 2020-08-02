@@ -6,7 +6,7 @@
     <hr>
     <div class="input-items" id="input-items">
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
-
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
         <div class="matching-elems-secton">
             <div class="matching-elems-container" id="matching-elems-container">
                 <label for="matching-elem-0"><b>მეზობელ ველებში შეიყვანეთ წყვილი</b></label> <%-- TODO answer_0 ? --%>

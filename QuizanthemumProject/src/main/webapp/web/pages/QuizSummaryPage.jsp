@@ -4,7 +4,8 @@
 <%@ page import="Controller.Classes.Quiz.Quiz" %>
 <%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
 <%@ page import="Controller.Classes.User.User" %>
-<%@ page import="Controller.Classes.Quiz.QuizEvent" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
+<%@ page import="Controller.Classes.Quiz.QuizEvent" %>
+<%@ page import="java.math.BigDecimal" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -54,7 +55,7 @@
           </div>
         </div>
         <div class="overall-quiz-details">
-          <p>Your Score: <%=quizEvent.getUserScore()%>/<%=quiz.getMaxScore()%></p>
+          <p>Your Score: <%=truncateDecimal(quizEvent.getUserScore(), 2)%>/<%=quiz.getMaxScore()%></p>
         </div>
         <div class="questions">
           <div class="question">
@@ -126,3 +127,18 @@
   </main>
   <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
+
+<script>
+    let score = parseInt(document.getElementById("userScore-id"));
+    console.log("score: ", score);
+</script>
+<%!
+  private static BigDecimal truncateDecimal(double x, int numberofDecimals)
+  {
+    if ( x > 0) {
+      return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_FLOOR);
+    } else {
+      return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_CEILING);
+    }
+  }
+%>

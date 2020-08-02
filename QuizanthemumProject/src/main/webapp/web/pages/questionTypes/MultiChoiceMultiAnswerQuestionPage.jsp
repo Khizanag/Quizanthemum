@@ -5,12 +5,10 @@
     <hr>
     <div class="input-items" id="input-items">
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
 
-        <label for="description"><b>ავტორის რჩევა</b></label>
-        <input type="text" placeholder="გთხოვთ შეუყვანოთ მითითება მომხმარებლისთვის"
-               name="description" id="description" required>
 
-            <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
 
             <hr><p></p>
 
