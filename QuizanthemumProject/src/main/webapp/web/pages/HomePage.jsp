@@ -67,7 +67,7 @@
     }
 </style>
 <body>
-<jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <div class="slider"></div>

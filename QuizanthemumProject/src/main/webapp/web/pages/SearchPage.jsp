@@ -1,10 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: gigakhizanishvili
-  Date: 7/29/20
-  Time: 05:55
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="Controller.Classes.Quiz.Quiz" %>
+<%@ page import="static Configs.Config.QUIZ_CREATING_NOW" %>
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
+<%@ page import="Model.Managers.QuizManager" %>
+<%@ page import="static Configs.Config.*" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Controller.Classes.User.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
@@ -14,27 +15,155 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/search.css">
+    <link rel="stylesheet" href="/web/styles/QuizzesPage.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 </head>
+
+<style>
+    .section-header {
+        padding: 20px;
+    }
+    h3 {
+        color: #f07237;
+        font-size: x-large;
+    }
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .onHover {
+        position: absolute;
+        right: 0;
+        bottom: 15px;
+        display: none;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
+    .found-elems-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
+
 <body>
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <form action="searching" class="searching-section">
-        <div class="container">
-            <div class="searching-for" id="searching-for"></div>
+    <%
+        List<User> users = (List<User>) request.getAttribute("users");
+        List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
+        String searchingFor = (String) request.getAttribute("search");
+        searchingFor = searchingFor.toLowerCase();
+    %>
+
+    <div class="found-quiz-section">
+        <div class="container" style="position: relative;">
+            <h3 class="section-header"> მოიძებნა შემდეგი ქვიზები:</h3>
+            <div class="found-elems-container">
+            <% for(Quiz currQuiz : quizzes) {
+                String name = currQuiz.getName().toLowerCase();
+                String description = currQuiz.getDescription().toLowerCase();
+                if(name.contains(searchingFor) || description.contains(searchingFor)) { %>
+                    <div class="top-quiz-list-item"
+                         onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
+
+                        <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>"
+                             onerror="this.src='/web/images/common/Quiz1.jpg';">
+                        <div class= "quiz-list-small-description-block" style="position: relative">
+                            <h3 class= "quiz-title" style="font-size: 16px">
+                                <%=currQuiz.getName()%>
+                            </h3>
+                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                                <%=currQuiz.getDescription()%>
+                            </p>
+                            <div class="toHover">
+                                <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
+                                    <ul class="raiting-icons" id="stars-holder">
+                                        <% for(int j = 1; j <= 3; j++) { %>
+                                        <a class="fa fa-star" style="margin-right: 2px;"></a>
+                                        <%}%>
+                                        <% for(int j = 4; j <= 5; j++) { %>
+                                        <a class="fa fa-star-o" style="margin-right: 2px;"></a>
+                                        <%}%>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="onHover"> (3/5) </p>
+                        </div>
+                        <div class = "quiz-score"><%=currQuiz.getMaxScore()%></div>
+                        <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
+                    </div>
+                <%}%>
+            <%}%>
+            </div>
+            <form id="to_display_start_quiz_form" action="/web/pages/StartQuiz.jsp" method="get">
+                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+            </form>
         </div>
-    </form>
+    </div>
+
+    <div class="found-quiz-section">
+        <div class="container" style="position: relative;">
+            <h3 class="section-header"> ნაპოვნი მომხმარებლები:</h3>
+            <div class="found-elems-container">
+            <% for(User currUser : users) {
+                String firstName = currUser.getFirstName().toLowerCase();
+                String lastName = currUser.getLastName().toLowerCase();
+                String userName = currUser.getUsername().toLowerCase();
+                if(firstName.contains(searchingFor) || lastName.contains(searchingFor)
+                    || userName.contains(searchingFor)) { %>
+                    <div class="top-quiz-list-item"
+                         onclick="redirectToProfile(<%=currUser.getID()%>)">
+                        <img class= "quiz-list-small-image" src="awefqwefqwef"
+                             onerror="this.src='/web/images/common/defProfPic.jpg';">
+                        <div class= "quiz-list-small-description-block" style="position: relative">
+                            <h3 class= "quiz-title" style="font-size: 16px">
+                                <%=currUser.getUsername()%>
+                            </h3>
+                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                                <%=currUser.getFirstName()%> <%=currUser.getLastName()%>
+                            </p>
+                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                                <%=currUser.getEmail()%>
+                            </p>
+                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                                <%=currUser.getBirthDate()%>
+                            </p>
+                        </div>
+                        <input type="hidden" name="quiz_event_quiz_id" id="currUser<%=currUser.getID()%>"/>
+                    </div>
+                <%}%>
+            <%}%>
+            </div>
+            <form id="to_display_profile_form" action="/web/pages/profilePageLogged.jsp" method="get">
+                <input type="hidden" value="-1" id="to_display_profile_elem" name="user_id">
+            </form>
+        </div>
+    </div>
 
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 
 <script>
-    let e = document.createElement('div');
-    e.className='bla'
-    e.innerHTML = window.localStorage.getItem('item');
-    document.getElementById('searching-for').appendChild(e);
+    function redirectToQuizStart(id){
+        const inp=document.getElementById("currQuizId"+id);
+        inp.value=id;
+        const form = document.getElementById("to_display_start_quiz_form");
+        document.getElementById("to_display_start_quiz_elem").value = id;
+        form.submit();
+    }
+    function redirectToProfile(id){
+        const inp=document.getElementById("currUser"+id);
+        inp.value=id;
+        const form = document.getElementById("to_display_profile_form");
+        document.getElementById("to_display_profile_elem").value = id;
+        form.submit();
+    }
 </script>
