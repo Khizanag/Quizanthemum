@@ -15,9 +15,6 @@
     <link rel="stylesheet" href="/web/styles/QuizzesPage.css">
 </head>
 <style>
-    .quiz-list-holder {
-        width: 100%;
-    }
     .fa:hover {
         color: white;
     }
@@ -45,7 +42,6 @@
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
     List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
-//
 %>
 <div class="quiz-list-holder">
     <div class="full-wrapper">
