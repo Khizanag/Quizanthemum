@@ -31,6 +31,7 @@
         <br>
 
         <%
+            if( waitingChallengedChallenges != null){
             for(int i = 0; i < waitingChallengedChallenges.size(); i++){
                 Challenge challenge = waitingChallengedChallenges.get(i);
                 User challengerUser = challenge.getChallengerUser();
@@ -43,7 +44,7 @@
                 </div>
             </div>
         <% } %>
-
+        <%}%>
 
     </div>
 </div>
