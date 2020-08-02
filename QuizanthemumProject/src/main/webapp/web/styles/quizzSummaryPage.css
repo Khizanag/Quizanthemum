@@ -147,6 +147,14 @@
   align-items: center;
 }
 
+.question-text-statement{
+  display: flex;
+}
+.small-question-image{
+  width: 200px;
+  height: 180px;
+}
+
 /* rating part*/
 .quiz-rating-section {
   height: 80px;
@@ -169,3 +177,4 @@
   unicode-bidi: bidi-override;
   direction: rtl;
 }
+
