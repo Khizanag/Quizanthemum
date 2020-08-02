@@ -102,7 +102,11 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         Map<String, String> map = new TreeMap<>();
         List<String> cleanedAnswers = new ArrayList<>();
         for(int i = 0; i < userAnswers.size(); i+=2) {
-            map.put(matchingColors.get(i), userAnswers.get(i));
+            if(!matchingColors.get(i).equals("")) {
+                System.out.println(userAnswers.get(i));
+                System.out.println("color: " + matchingColors.get(i));
+                map.put(matchingColors.get(i), userAnswers.get(i));
+            }
         }
         for(int i = 1; i < userAnswers.size(); i+=2) {
             if(map.containsKey(matchingColors.get(i))) {
