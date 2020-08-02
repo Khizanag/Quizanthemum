@@ -10,8 +10,8 @@ html {
     /*min-height: 100%;*/
 }
 .container {
-     /*width: 1250px;*/
-    width: 960px;
+     width: 1250px;
+    /*width: 960px;*/
     margin: auto;
 }
 
