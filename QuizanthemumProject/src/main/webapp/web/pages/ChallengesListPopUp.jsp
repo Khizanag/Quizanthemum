@@ -23,13 +23,17 @@
     List<Challenge> waitingChallengerChallenges = (user == null) ? null : user.getWaitingChallengerChallenges();
 %>
 
+<% if(user != null) { %>
+
 <div class="friends-list-popup" id="challenges-list-popup-id">
     <div class="overlay"></div>
     <div class="content">
         <div class="close-btn" onclick="popUpChallengesList()">&times;</div>
         <h1 style="color:orange">გამოწვევები</h1>
-        <br>
 
+        <br>
+        <h2 style="font-size: medium">მეტოქის მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
+        <br> <hr> <br>
         <%
             for(int i = 0; i < waitingChallengedChallenges.size(); i++){
                 Challenge challenge = waitingChallengedChallenges.get(i);
@@ -38,15 +42,35 @@
             <div class = "friend-list-row">
                 <span><%=challengerUser.getUsername()%></span>
                 <div class = "friend-challenge-remove-btns">
-                    <button class="challenge-btn" id="challenge-btn-id-1" onclick="acceptChallenge(this)" style="color: green">დათანხმება</button>
-                    <button class="remove-btn" id="remove-btn-id-1" onclick="rejectChallenge(this)" style="color: red">უარყოფა</button>
+                    <button class="challenge-btn" id="challenge-btn-id-0_" onclick="acceptChallenge(this)" style="color: green">დათანხმება</button>
+                    <button class="remove-btn" id="remove-btn-id-1_" onclick="rejectChallenge(this)" style="color: red">უარყოფა</button>
                 </div>
             </div>
         <% } %>
 
 
+        <br> <br> <br>
+        <h2 style="font-size: medium">მეტოქის მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
+        <br> <hr> <br>
+        <%
+            for(int i = 0; i < waitingChallengerChallenges.size(); i++){
+                Challenge challenge = waitingChallengerChallenges.get(i);
+                User challengerUser = challenge.getChallengedUser();
+        %>
+        <div class = "friend-list-row">
+            <span><%=challengerUser.getUsername()%></span>
+            <div class = "friend-challenge-remove-btns">
+                <button class="challenge-btn" id="challenge-btn-id-1" onclick="acceptChallenge(this)" style="color: green">დათანხმება</button>
+                <button class="remove-btn" id="remove-btn-id-1" onclick="rejectChallenge(this)" style="color: red">უარყოფა</button>
+            </div>
+        </div>
+        <% } %>
+
+
+
     </div>
 </div>
+<% } %>
 
 <script>
     function popUpChallengesList(){
@@ -59,6 +83,6 @@
     }
 
     function rejectChallenge(btn){
-
+        console.log("rejectChallenge");
     }
 </script>
