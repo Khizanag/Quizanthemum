@@ -14,7 +14,7 @@ public class QuestionEvent {
     /* private variables */
 
     private int id;
-    private final int quizEventId;
+    private int quizEventId;
     private final Date startDate;       // question start date
     private Date endDate;               // question end date
     private boolean isAlreadyGraded;
@@ -25,8 +25,8 @@ public class QuestionEvent {
 
     /* constructor */
 
-    public QuestionEvent(int quizEventId, Question question, boolean isAlreadyGraded, Date startDate) {
-        this.quizEventId = quizEventId;
+    public QuestionEvent(Question question, boolean isAlreadyGraded, Date startDate) {
+        this.quizEventId = -1; // valid value will be set after quiz event insertion in database
         this.question = question;
         this.isAlreadyGraded = isAlreadyGraded;
         this.startDate = startDate;
@@ -37,8 +37,9 @@ public class QuestionEvent {
     public QuestionEvent(int id, int quizEventId, Question question, boolean isAlreadyGraded, Date startDate,
                          Date endDate, double userScore, List<String> userAnswers) {
 
-        this(quizEventId, question, isAlreadyGraded, startDate);
+        this(question, isAlreadyGraded, startDate);
         this.id = id;
+        this.quizEventId = quizEventId;
         this.endDate = endDate;
         this.userScore = userScore;
         this.userAnswers = userAnswers;
@@ -170,6 +171,10 @@ public class QuestionEvent {
         userScore = question.getMaxScore() * correctAnswersNum / pairsNum;
         isAlreadyGraded = true;
 
+    }
+
+    public void setQuizEventId (int quizEventId) {
+        this.quizEventId = quizEventId;
     }
 
     public Date getEndDate() {
