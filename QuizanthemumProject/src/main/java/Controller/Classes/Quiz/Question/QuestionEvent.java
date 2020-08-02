@@ -104,8 +104,9 @@ public class QuestionEvent {
 
     public void autoGradeFillBlank() {
         int correctAnswersNum = 0;
+        List<String> realAnswers = question.getAnswers();
         for(int i = 0; i < userAnswers.size(); i++) {
-            if(userAnswers.get(i).equals(userAnswers.get(i))) {
+            if(userAnswers.get(i).equals(realAnswers.get(i))) {
                 correctAnswersNum++;
             }
         }
