@@ -34,21 +34,9 @@
                 <p> არ გაქვს პროფილი? <a href="Registration.jsp">დარეგისტრირდი ახლავე</a>.</p>
 
             </div>
-            <button type="submit" class="button" onclick="checkAndRedirect()">შესვლა</button>
+            <button type="submit" class="button" >შესვლა</button>
         </div>
 
     </form>
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
-
-<script>
-    function checkAndRedirect() {
-        let email = document.getElementById("log_in_email").value !== '';
-        let password = document.getElementById("log_in_password").value !== '';
-
-        if (email && password) {
-            // window.location.href = "";
-            //TODO
-        }
-    }
-</script>

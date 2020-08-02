@@ -79,7 +79,6 @@
             if (id % 2 != prevId % 2) {
                 document.getElementById(id).style.backgroundColor = color;
                 document.getElementById("color" + id).value = color;
-                color = colors.pop();
             }
         }
         prevId = id;

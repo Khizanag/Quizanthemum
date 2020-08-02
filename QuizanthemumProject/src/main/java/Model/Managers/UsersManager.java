@@ -136,7 +136,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
                 " WHERE " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + id +
                 ";\n";
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement newStatement = connection.createStatement();
+            ResultSet set = newStatement.executeQuery(query);
             while(set.next()){
                 int friendID = set.getInt(unionColumnName);
                 friendIDs.add(friendID);

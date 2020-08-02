@@ -2,6 +2,8 @@ package Controller.Servlets;
 
 import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.QuizEvent;
+import Model.Managers.QuestionEventManager;
+import Model.Managers.QuizEventManager;
 import Tools.Pair;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.util.*;
 
 
+import static Configs.Config.QUESTION_EVENT_MANAGER_STR;
+import static Configs.Config.QUIZ_EVENT_MANAGER_STR;
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 
 @WebServlet(name = "QuestionEventFinishedServlet", urlPatterns = "/QuestionEventFinished")
@@ -24,6 +28,8 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
+        QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
+        QuestionEventManager questionEventManager = (QuestionEventManager) request.getServletContext().getAttribute(QUESTION_EVENT_MANAGER_STR);
 
         QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");
         int questionNumber = (int) request.getServletContext().getAttribute("question_number");
@@ -78,7 +84,13 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             request.getServletContext().setAttribute("question_number", questionNumber+1);
             response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
-            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID()); // TODO valid address. end quiz
+            quizEvent.finishQuiz();
+            quizEvent.resetQuestionEventIterator();
+            quizEventManager.insertQuizEvent(quizEvent);
+            while (quizEvent.hasNextQuestionEvent()) {
+                questionEventManager.setQuestionEvent(quizEvent.getNextFilledQuestionEvent());
+            }
+            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID());
         }
 
         System.out.println("question event finished");
