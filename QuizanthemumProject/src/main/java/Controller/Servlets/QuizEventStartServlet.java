@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 import static Configs.Config.*;
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
@@ -37,6 +38,9 @@ public class QuizEventStartServlet extends HttpServlet {
         Quiz quiz = quizManager.getQuiz(quizID);
 
         QuizEvent quizEvent = new QuizEvent(user, quiz);
+        if(quiz.mustShuffleQuestions()) {
+            quizEvent.shuffleQuestions();
+        }
         quizEvent.startQuiz();
 
         request.getServletContext().setAttribute("quiz_event", quizEvent);

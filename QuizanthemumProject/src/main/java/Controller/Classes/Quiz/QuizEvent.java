@@ -108,5 +108,7 @@ public class QuizEvent {
         return id;
     }
 
-    // TODO modify. grading...
+    public void shuffleQuestions() {
+        quiz.shuffleQuestions();
+    }
 }

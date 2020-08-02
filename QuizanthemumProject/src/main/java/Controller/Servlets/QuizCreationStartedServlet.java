@@ -43,7 +43,8 @@ public class QuizCreationStartedServlet extends HttpServlet {
         Category category = categoriesManager.getCategory(categoryID);
         String description = request.getParameter("quiz_description");
         String iconUrl = request.getParameter("quiz_icon_url");
-        boolean mustShuffleQuestions = Boolean.parseBoolean(request.getParameter("quiz_must_shuffle_questions"));
+        String shuffleCheckboxValue = request.getParameter("quiz_must_shuffle");
+        boolean mustShuffleQuestions = (shuffleCheckboxValue != null);
         String comment = request.getParameter("quiz_comment");
         User author = (User) request.getServletContext().getAttribute("logedInUser");
 
