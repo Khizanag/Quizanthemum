@@ -22,16 +22,10 @@
     List<Category> categories = categoriesManager.getCategories();
 %>
 
-<%--<div class="input-items" id="input-items">--%>
-    <label for="category"><b>აირჩიეთ კატეგორია</b></label>
-    <select class="drop-down" name="category" id="category">
+<label for="category"><b>აირჩიეთ კატეგორია</b></label>
+<select class="drop-down" name="category" id="category">
 
-        <%
-            for(Category category : categories){
-        %>
-            <option value="<%=category.getID()%>"><%=category.getName()%></option>
-        <%
-            }
-        %>
-    </select>
-<%--</div>--%>
+    <% for(Category category : categories){ %>
+        <option value="<%=category.getID()%>"><%=category.getName()%></option>
+    <% } %>
+</select>

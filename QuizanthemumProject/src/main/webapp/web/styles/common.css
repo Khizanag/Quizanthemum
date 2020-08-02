@@ -107,13 +107,19 @@ html {
     color: #b3bdbe;
     font-size: 14px;
     font-weight: bold;
-    margin-right: 20px;
+    padding-right: 12px;
+    padding-left: 12px;
     text-decoration: none;
 }
 
 .nav-item:hover {
     color: #d48a33;
 }
+
+.grayeble:hover {
+    background-color: #777;
+}
+
 .manu {
     position: relative;
 }

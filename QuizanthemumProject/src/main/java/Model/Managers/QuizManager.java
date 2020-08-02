@@ -2,6 +2,7 @@ package Model.Managers;
 
 import Configs.QuestionTableConfig;
 import Configs.QuizTableConfig;
+import Configs.QuizEventTableConfig;
 import Controller.Classes.OtherClasses.Category;
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Quiz;
@@ -15,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.*;
+import static Configs.QuizEventTableConfig.QUIZ_EVENTS_TABLE_NAME;
+import static Configs.QuizEventTableConfig.QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID;
 
 public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
@@ -34,12 +37,33 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
     public ManagersManager getManager(){ return this.manager; }
 
-    public List<Quiz> getMostPopularQuizzes(int numQuizzes) {
-        List<Quiz> quizzes = new ArrayList<>();
+    public List<Quiz> getNewestQuizzes(int numQuizzes){
+        return getQuizzesBy(numQuizzes, QUIZ_TABLE_COLUMN_9_CREATION_DATE);
+    }
+
+    public List<Quiz> getMostPopularQuizzes(int numQuizzes) { // TODO TEST THIS
+       String query = "SELECT * "
+               + " FROM " + QUIZ_TABLE_NAME + " as qs"
+               + " ORDER BY (SELECT COUNT(1)"
+               +                    " FROM " + QUIZ_EVENTS_TABLE_NAME + " as qes"
+               +                    " WHERE qs." + QUIZ_TABLE_COLUMN_1_ID + " = " + "qes." + QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID
+               +                    " )"
+               + " LIMIT " + numQuizzes
+               + ";\n";
+       ;
+       return getQuizzesByQuery(query);
+    }
+
+    private List<Quiz> getQuizzesBy(int numQuizzes, String sorterColumnName){
         String query = "SELECT * FROM " + QUIZ_TABLE_NAME
-                + " ORDER BY CREATION_DATE DESC"
+                + " ORDER BY " + sorterColumnName+ " DESC"
                 + "  LIMIT " + numQuizzes
                 + ";\n";
+        return getQuizzesByQuery(query);
+    }
+
+    private List<Quiz> getQuizzesByQuery(String query){
+        List<Quiz> quizzes = new ArrayList<>();
         try {
             Statement qStatement = connection.createStatement();
             ResultSet set = qStatement.executeQuery(query);
@@ -134,5 +158,29 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             e.printStackTrace();
         }
         return DEFAULT_ID;
+    }
+
+    public List<Quiz> getCategoryQuizzes(Category category) {
+        String query = "SELECT * "
+                + " FROM " + QUIZ_TABLE_NAME
+                + " WHERE " + QUIZ_TABLE_COLUMN_3_CATEGORY_ID + " = " + category.getID()
+                + ";\n";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            List<Quiz> quizzes  = new ArrayList<>();
+            while(resultSet.next()){
+                quizzes.add(buildQuizFromResultSet(resultSet));
+            }
+            return quizzes;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Quiz> getQuizzes(int numQuizzes) {
+        String query = "SELECT * FROM " + QUIZ_TABLE_NAME + " LIMIT " + numQuizzes;
+        return getQuizzesByQuery(query);
     }
 }

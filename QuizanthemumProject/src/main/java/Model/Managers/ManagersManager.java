@@ -70,5 +70,4 @@ public class ManagersManager {
     public Object getManager(String managerName){
         return managers.get(managerName);
     }
-
 }

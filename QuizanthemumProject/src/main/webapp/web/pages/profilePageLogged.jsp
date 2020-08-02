@@ -132,11 +132,11 @@
                     int role = user.getRole();
                     String status="";
                     if(role==1){
-                        status="Default User";
+                        status="მომხმარებელი";
                     }else if(role==2){
-                        status="Moderator";
+                        status="მოდერატორი";
                     }else if(role ==3){
-                        status="Administrator";
+                        status="ადმინისტრატორი";
                     }
                 %>
                 <div class="user-details"><%=status%></div>

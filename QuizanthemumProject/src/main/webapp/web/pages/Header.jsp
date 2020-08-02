@@ -30,7 +30,7 @@
         </div>
         <% if(user == null){ %>
             <ul class="header-right">
-                <button class="log-in-button button logIn" onClick="openRegistration()">შესვლა</button>
+                <button class="log-in-button button logIn" onclick="openRegistration()">შესვლა</button>
             </ul>
         <% } else { %>
             <ul class="header-right">
@@ -42,16 +42,16 @@
 </header>
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <a href="/web/pages/profilePageLogged.jsp">
+        <i class="material-icons my-mat-icon">account_box</i>
+        პროფილი
+    </a>
+
     <a  onclick="popupfriendList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">people_outline</i>
         მეგობრები
     </a>
-
-    <a href="/web/pages/profilePageLogged.jsp">
-        <i class="material-icons my-mat-icon" >account_box</i>
-        პროფილზე დაბრუნება
-    </a>
-
 
     <form id="logoutForm">
         <a onclick="logout()" style="cursor:pointer;">
