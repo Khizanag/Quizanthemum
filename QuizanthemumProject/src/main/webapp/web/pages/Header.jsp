@@ -30,7 +30,7 @@
         </div>
         <% if(user == null){ %>
             <ul class="header-right">
-                <button class="log-in-button button logIn" onclick="openRegistration()">შესვლა</button>
+                <button class="log-in-button button logIn" onclick="openRegistration()" style="margin-top: 0;">შესვლა</button>
             </ul>
         <% } else { %>
             <ul class="header-right">
@@ -65,7 +65,7 @@
 
 
 <script>
-    
+
     function openRegistration() {
         window.location.href = "/web/pages/SignIn.jsp";
     }

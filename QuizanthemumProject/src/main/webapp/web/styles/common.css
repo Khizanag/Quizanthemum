@@ -204,7 +204,7 @@ html {
     font-size: medium;
     font-weight: 600;
     font-family: "Comic Sans MS", cursive, sans-serif;
-    padding: 5px 20px;
+    padding: 10px 20px;
     border: none;
     width: 100%;
     margin-top: 5px;
@@ -213,7 +213,6 @@ html {
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
-    padding: 11px    ;
 }
 
 .button a{
