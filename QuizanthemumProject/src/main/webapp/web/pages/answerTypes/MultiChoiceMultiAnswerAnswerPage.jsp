@@ -29,7 +29,8 @@
             <%Question question = questionEvent.getQuestion();%>
             <%List<String> statements = question.getShuffledStatements();%>
 
-            <img src="<%=question.getPictureStatementURL()%>" class="question-img">
+            <img src="<%=question.getPictureStatementURL()%>" class="question-img"
+                 onerror="this.style.display='none'">
             <p><%=question.getTextStatement()%></p>
             <p><%=question.getHeaderStatement()%></p>
             <hr>

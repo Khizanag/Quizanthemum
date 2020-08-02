@@ -91,14 +91,6 @@
         document.getElementById('photo-url').value = $('img')[0].getAttribute('src');
     };
 
-    function checkAndRedirect() {
-        let name = document.getElementById('question').value != '';
-        let description = document.getElementById('description').value != '';
-        if((name && description)) {
-            window.location.href = "/web/pages/AddingQuestions.jsp";
-        }
-    }
-
     function addNextWrongAns() {
         let parent = document.getElementById('added-wrongs');
         let numWrongAnswers = parseInt(document.getElementById('num_statements_elem').value);
