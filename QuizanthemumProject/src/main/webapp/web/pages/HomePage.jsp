@@ -27,14 +27,6 @@
         $(document).ready(function(){
             $('.slider').load("web/slider/slider.jsp");
         });
-
-        function openRegistration() {
-            window.location.href = "/web/pages/SignIn.jsp";
-        }
-        function openSearch() {
-            window.localStorage.setItem('item', document.getElementById('search-input').value);
-            window.location.href = "SearchPage.jsp";
-        }
     </script>
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>

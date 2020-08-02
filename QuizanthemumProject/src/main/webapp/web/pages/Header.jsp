@@ -65,6 +65,16 @@
 
 
 <script>
+    
+    function openRegistration() {
+        window.location.href = "/web/pages/SignIn.jsp";
+    }
+
+    function openSearch() {
+        window.localStorage.setItem('item', document.getElementById('search-input').value);
+        window.location.href = "SearchPage.jsp";
+    }
+
     function openSidebar() {
         document.getElementById("mySidebar").style.width = "300px";
         document.getElementById("mySidebar").style.marginLeft="150px";
