@@ -16,8 +16,8 @@
 <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 
 <%
-//    ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
-//    UsersManager usersManager = (UsersManager)mm.getManager(USERS_MANAGER_STR);
+    ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
+    UsersManager usersManager = (UsersManager)mm.getManager(USERS_MANAGER_STR);
     User user = (User) request.getServletContext().getAttribute("logedInUser");
     List<Challenge> waitingChallengedChallenges = (user == null) ? null : user.getWaitingChallengedChallenges();
     List<Challenge> waitingChallengerChallenges = (user == null) ? null : user.getWaitingChallengerChallenges();
@@ -30,7 +30,8 @@
         <h1 style="color:orange">გამოწვევები</h1>
         <br>
 
-        <% for(int i = 0; i < waitingChallengedChallenges.size(); i++){
+        <%
+            for(int i = 0; i < waitingChallengedChallenges.size(); i++){
                 Challenge challenge = waitingChallengedChallenges.get(i);
                 User challengerUser = challenge.getChallengerUser();
         %>
