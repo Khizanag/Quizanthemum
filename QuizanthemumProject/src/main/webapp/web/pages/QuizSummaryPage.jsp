@@ -5,7 +5,15 @@
 <%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
 <%@ page import="Controller.Classes.User.User" %>
 <%@ page import="Controller.Classes.Quiz.QuizEvent" %>
-<%@ page import="java.math.BigDecimal" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="Controller.Classes.Quiz.Question.Question" %>
+<%@ page import="java.util.*" %>
+<%@ page import="Controller.Classes.Quiz.Question.QuestionEvent" %>
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.STANDARD" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.FILL_BLANK" %>
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.*" %>
+<%@ page import="Tools.Pair" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -29,6 +37,8 @@
             Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
             QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
             User user = (User)request.getServletContext().getAttribute("logedInUser");
+            int questionsNumber= quiz.getQuestionsCount();
+
     %>
 
     function gotoProfPage() {
@@ -54,70 +64,73 @@
           </div>
         </div>
         <div class="overall-quiz-details">
-          <p>Your Score: <%=truncateDecimal(quizEvent.getUserScore(), 2)%>/<%=quiz.getMaxScore()%></p>
+          <p>Your Score: <%=truncateDecimal(quizEvent.getUserScore(), 2)%>/<%=truncateDecimal(quiz.getMaxScore(), 2)%></p>
         </div>
         <div class="questions">
+          <%
+           quizEvent.resetQuestionEventIterator();
+           int i = 0;
+            while(quizEvent.hasNextQuestionEvent()){
+                QuestionEvent qe = quizEvent.getNextFilledQuestionEvent();
+                Question currQuest = qe.getQuestion();
+          %>
           <div class="question">
-            <h3>Question 1</h3>
-            <p>Question content</p>
+            <h3>კითხვა <%=i+1%></h3>
+            <br>
+            <div class="question-text-statement">
+              <% if(currQuest.isPictureQuestion()) { %>
+                <img sr="<%=currQuest.getPictureStatementURL()%>" class ="small-question-image">
+              <%}%>
+             <p><%=currQuest.getTextStatement()%></p>
+            </div>
+            <br>
             <div class="answers">
               <span>
-                <span>Correct Answers:</span>
+                <span>სწორი პასუხები:</span>
                 <div class = "correct-answers">
-                  <p>asdasda</p>
+                  <%
+                    int type = currQuest.getType();
+                    String correctAnswer="" ;
+                    if(type==STANDARD){
+                  %>
+                  <p>No right ans</p>
+                    <%} else if(type ==MATCHING){
+                        Set<Pair<String>> ansPairs= currQuest.getMatchingAnswers();
+                        for(Pair<String> pr :ansPairs ){
+                            String pairs=pr.getFirst()+" : "+pr.getSecond();
+                            out.print("<p>");
+                            out.print(pairs);
+                            out.print("</p>");
+                        }
+                    }else{
+                        List<String> correct_ans = currQuest.getAnswers();
+                        for(String st : correct_ans) {
+                            out.print("<p>");
+                            out.print(st);
+                            out.print("</p>");
+                        }
+                    } %>
                 </div>
               </span>
               <span>
                 <span>Your Answers:</span>
                 <div class = "user-answers">
-                  <p>asdasda</p>
+                    <%
+                        List<String> user_ans =qe.getUserAnswers();
+                        for(String st : user_ans){
+                            out.print("<p>");
+                            out.print(st);
+                            out.print("</p>");
+                        }
+                    %>
                 </div>
               </span>
             </div>
           </div>
-          <div class="question">
-            <h3>Question 2</h3>
-            <p>Question content</p>
-            <div class="answers">
-              <span>
-                <span>Correct Answers:</span>
-                <div class = "correct-answers">
-                  <p>aandandas</p>
-                  <p>aandandas</p>
-                  <p>aandandas</p>
-                  <p>asdasda</p>
-                </div>
-              </span>
-              <span>
-                <span>Your Answers:</span>
-                <div class = "user-answers">
-                  <p>asdasda</p>
-                  <p>asadasdasda</p><p>asadasdasda</p><p>asadasdasda</p>
-                </div>
-              </span>
-            </div>
-          </div>
-          <div class="question">
-            <h3>Question 3</h3>
-            <p>Question content</p>
-            <div class="answers">
-              <span>
-                <span>Correct Answers:</span>
-                <div class = "correct-answers">
-                  <p>asdasda</p>
-                  <p>asadasdasda</p>
-                </div>
-              </span>
-              <span>
-                <span>Your Answers:</span>
-                <div class = "user-answers">
-                  <p>asdasda</p>
-                  <p>asadasdasda</p>
-                </div>
-              </span>
-            </div>
-          </div>
-        </div>
+          <%
+            i++;
+            }
+          %>
         <button class="back-to-prof-page" id="back-to-prof-page-id" onclick="gotoProfPage()">
             <span>Back To My Profile</span>
         </button>

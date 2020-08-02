@@ -146,3 +146,10 @@
   align-content: center;
   align-items: center;
 }
+.question-text-statement{
+  display: flex;
+}
+.small-question-image{
+  width: 200px;
+  height: 180px;
+}
