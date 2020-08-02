@@ -1,6 +1,4 @@
-# Quizanthemum
-OOP 2020 Project
-======================================
+# OOP 2020 Project: Quizanthemum
 
 ## გუნდის შემადგენლობა:
 

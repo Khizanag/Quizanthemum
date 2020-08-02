@@ -74,24 +74,24 @@ public class QuizEventManager implements QuestionEventTableConfig {
         return questionEvents;
     }
 
-    public void insertQuizEvent(QuizEvent quizEvent) {
-        String query = "INSERT INTO " + QUIZ_EVENTS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?);\n";
+    public int insertQuizEvent(QuizEvent quizEvent) {
+
+        System.out.println("inserting quiz event.");
+        String query = "INSERT INTO " + QUIZ_EVENTS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setInt(1, quizEvent.getId());
-            pstmt.setInt(2, quizEvent.getQuiz().getID());
-            pstmt.setInt(3, quizEvent.getUser().getID());
-            pstmt.setDate(4, new java.sql.Date(quizEvent.getStartDate().getTime()));
-            pstmt.setDate(5, new java.sql.Date(quizEvent.getFinishDate().getTime()));
-            pstmt.setDouble(6, quizEvent.getUserScore());
+            pstmt.setInt(1, quizEvent.getQuiz().getID());
+            pstmt.setInt(2, quizEvent.getUser().getID());
+            pstmt.setDate(3, new java.sql.Date(quizEvent.getStartDate().getTime()));
+            pstmt.setDate(4, new java.sql.Date(quizEvent.getFinishDate().getTime()));
+            pstmt.setDouble(5, quizEvent.getUserScore());
             pstmt.executeUpdate();
+            return DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
             System.out.println("Insertion Error. QuizEvent Manager Class");
         }
-    }
-
-    public int getNewQuizEventID(){
-        return -1; // TODO sequence
+        System.out.println("inserted quiz event.");
+        return DEFAULT_ID;
     }
 
 }

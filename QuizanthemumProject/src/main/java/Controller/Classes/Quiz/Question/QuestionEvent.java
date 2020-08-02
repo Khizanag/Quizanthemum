@@ -14,7 +14,7 @@ public class QuestionEvent {
     /* private variables */
 
     private int id;
-    private final int quizEventId;
+    private int quizEventId;
     private final Date startDate;       // question start date
     private Date endDate;               // question end date
     private boolean isAlreadyGraded;
@@ -25,8 +25,8 @@ public class QuestionEvent {
 
     /* constructor */
 
-    public QuestionEvent(int quizEventId, Question question, boolean isAlreadyGraded, Date startDate) {
-        this.quizEventId = quizEventId;
+    public QuestionEvent(Question question, boolean isAlreadyGraded, Date startDate) {
+        this.quizEventId = -1; // valid value will be set after quiz event insertion in database
         this.question = question;
         this.isAlreadyGraded = isAlreadyGraded;
         this.startDate = startDate;
@@ -37,8 +37,9 @@ public class QuestionEvent {
     public QuestionEvent(int id, int quizEventId, Question question, boolean isAlreadyGraded, Date startDate,
                          Date endDate, double userScore, List<String> userAnswers) {
 
-        this(quizEventId, question, isAlreadyGraded, startDate);
+        this(question, isAlreadyGraded, startDate);
         this.id = id;
+        this.quizEventId = quizEventId;
         this.endDate = endDate;
         this.userScore = userScore;
         this.userAnswers = userAnswers;
@@ -121,16 +122,21 @@ public class QuestionEvent {
      */
     public void autoGradeMultiAnswer() {
         Set<String> userAnswerSet = new TreeSet<>();
+
         for (int i = 0; i < userAnswers.size(); i++) {
             userAnswerSet.add(userAnswers.get(i));
         }
         int correctAnswersNum = 0;
-        for (String ans : question.getMultiAnswers()) {
+        int wrongAnswersNum = 0;
+        Set<String> realAnswers = question.getMultiAnswers();
+        for (String ans : realAnswers) {
             if (userAnswerSet.contains(ans)) {
                 correctAnswersNum += 1;
+            } else {
+                wrongAnswersNum++;
             }
         }
-        userScore = question.getMaxScore() * correctAnswersNum / question.getStatementsCount();
+        userScore = question.getMaxScore() * correctAnswersNum / (realAnswers.size() + wrongAnswersNum);
         isAlreadyGraded = true;
 
     }
@@ -141,19 +147,34 @@ public class QuestionEvent {
      */
     public void autoGradeMatchingAnswer() {
         Set<Pair<String>> userMatchingAnswerSet = new TreeSet<>();
+
         for (int i = 0; i < question.getAnswersCount(); i+=2) {
             userMatchingAnswerSet.add(new Pair<>(userAnswers.get(i), userAnswers.get(i+1)));
         }
+
+        for(Pair<String> a : userMatchingAnswerSet) {
+            System.out.println("first: " + a.getFirst());
+            System.out.println("second: " + a.getSecond());
+        }
+
         int correctAnswersNum = 0;
         int pairsNum = question.getAnswersCount() / 2;
+        System.out.println("num matching: " + pairsNum);
+
         for(Pair<String> answer : question.getMatchingAnswers()) {
             if (userMatchingAnswerSet.contains(answer)) {
+                System.out.println("match f: " + answer.getFirst());
+                System.out.println("match s: " + answer.getSecond());
                 correctAnswersNum += 1;
             }
         }
         userScore = question.getMaxScore() * correctAnswersNum / pairsNum;
         isAlreadyGraded = true;
 
+    }
+
+    public void setQuizEventId (int quizEventId) {
+        this.quizEventId = quizEventId;
     }
 
     public Date getEndDate() {

@@ -5,6 +5,7 @@ import Configs.QuestionEventTableConfig;
 import Controller.Classes.OtherClasses.Category;
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Question.QuestionEvent;
+import Controller.Classes.Quiz.Quiz;
 import Model.DatabaseConnector;
 
 import javax.xml.crypto.Data;
@@ -15,6 +16,8 @@ import java.util.List;
 
 import static Configs.Config.DEFAULT_ID;
 import static Configs.Config.QUESTION_MANAGER_STR;
+import static Configs.QuizTableConfig.QUIZ_TABLE_COLUMN_3_CATEGORY_ID;
+import static Configs.QuizTableConfig.QUIZ_TABLE_NAME;
 
 public class CategoriesManager implements CategoriesTableConfig {
 
@@ -89,4 +92,5 @@ public class CategoriesManager implements CategoriesTableConfig {
         }
         return null;
     }
+
 }

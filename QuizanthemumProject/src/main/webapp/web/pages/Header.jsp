@@ -22,15 +22,18 @@
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
+<jsp:include page="/web/pages/FriendsListPopup.jsp"/>
+<jsp:include page="/web/pages/ChallengesListPopUp.jsp"/>
+
 <header class= "header-section">
     <div class="container header">
-        <div class="header-left">
+        <div class="header-left" style="cursor: pointer;" onclick="openMainPage()">
             <img class="logo" src="/web/images/common/icon.png">
             <h1 class="logo-text">Quizanthemum</h1>
         </div>
         <% if(user == null){ %>
             <ul class="header-right">
-                <button class="log-in-button button logIn" onClick="openRegistration()">შესვლა</button>
+                <button class="log-in-button button logIn" onclick="openRegistration()" style="margin-top: 0;">შესვლა</button>
             </ul>
         <% } else { %>
             <ul class="header-right">
@@ -40,18 +43,24 @@
         <% } %>
     </div>
 </header>
+
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <a href="/web/pages/profilePageLogged.jsp">
+        <i class="material-icons my-mat-icon">account_box</i>
+        პროფილი
+    </a>
+
     <a  onclick="popupfriendList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">people_outline</i>
         მეგობრები
     </a>
 
-    <a href="/web/pages/profilePageLogged.jsp">
-        <i class="material-icons my-mat-icon" >account_box</i>
-        პროფილზე დაბრუნება
+    <a  onclick="popUpChallengesList()" style="cursor:pointer;">
+        <i class="material-icons my-mat-icon">vertical_align_center</i>
+        გამოწვევები
     </a>
-
 
     <form id="logoutForm">
         <a onclick="logout()" style="cursor:pointer;">
@@ -65,6 +74,20 @@
 
 
 <script>
+
+    function openMainPage(){
+        window.location.href = "/";
+    }
+
+    function openRegistration() {
+        window.location.href = "/web/pages/SignIn.jsp";
+    }
+
+    function openSearch() {
+        window.localStorage.setItem('item', document.getElementById('search-input').value);
+        window.location.href = "SearchPage.jsp";
+    }
+
     function openSidebar() {
         document.getElementById("mySidebar").style.width = "300px";
         document.getElementById("mySidebar").style.marginLeft="150px";

@@ -7,6 +7,9 @@
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
 
+        <input type="text" placeholder="გთხოვთ შეუყვანოთ მითითება მომხმარებლისთვის"
+               name="description" id="description" required>
+
 
         <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
 

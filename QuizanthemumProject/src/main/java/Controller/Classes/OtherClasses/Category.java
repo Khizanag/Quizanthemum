@@ -25,4 +25,12 @@ public class Category {
     public int getID(){ return this.ID; }
 
     public String getName(){ return this.name; }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -19,14 +19,9 @@ public class LogOutServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("LogOutServlet");
-//        String url = request.getParameter("currentUrl");
-//        String toRemove = "http://localhost:8080/";
-//        url = url.substring(url.indexOf(toRemove) + toRemove.length());
-//        System.out.println("url : " + url);
 
         Cookie[] cookies = request.getCookies();
         if (request.getCookies() != null) {
-            System.out.printf("is not nul; COOKIES");
             for (Cookie cookie : request.getCookies()) {
                 response.addCookie(new Cookie(cookie.getName(), "-1"));
                 if (cookie.getName().equals(LOGGED_IN_USER_ID_STR)) {

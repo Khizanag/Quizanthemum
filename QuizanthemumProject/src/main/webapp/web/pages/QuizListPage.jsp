@@ -27,18 +27,25 @@
     ServletContext context = request.getServletContext();
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-    List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
+    List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
+//
 %>
 <div class="quiz-list-holder">
     <div class="full-wrapper">
         <div class = "header-wrapper">
             <div class = "content-header-container">
-                <h2>ქვიზები</h2>
+                <%
+                    String title = (String) request.getAttribute("title");
+                    if(title != null) { %>
+                    <h2> <%=title%> </h2>
+                <% } else { %>
+                    <h2>ქვიზები</h2>
+                <% } %>
             </div>
         </div>
         <div class="top-quizzes-list-container">
             <div class= "top-quiz-list-items">
-            <% for(Quiz currQuiz:topQuizzes){ %>
+            <% for(Quiz currQuiz: quizzes){ %>
                 <div class="top-quiz-list-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
                         <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
                         <div class= "quiz-list-small-description-block" style="position: relative">
@@ -65,13 +72,14 @@
             <%}%>
             </div>
         </div>
-        <form id="to_display_start_quiz_form" action="StartQuiz.jsp" method="get">
+        <form id="to_display_start_quiz_form" action="/web/pages/StartQuiz.jsp" method="get">
             <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
         </form>
     </div>
 </div>
 <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
+
 <script>
     function redirectToQuizStart(id){
         console.log(id);

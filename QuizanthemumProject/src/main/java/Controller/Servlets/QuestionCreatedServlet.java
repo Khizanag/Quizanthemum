@@ -96,9 +96,7 @@ public class QuestionCreatedServlet extends HttpServlet {
         System.out.println("question added into quiz");
 
         // TODO if finished quiz
-//        response.setStatus(HttpServletResponse.SC_FOUND);//302
-//        response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/AddingQuestions.jsp");
-        dispatcher.forward(request, response);
+        response.setStatus(HttpServletResponse.SC_FOUND);//302
+        response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
     }
 }

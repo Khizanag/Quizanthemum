@@ -25,11 +25,11 @@ public class QuizEvent {
 
     /* constructor */
 
-    public QuizEvent(int id, User user, Quiz quiz) {
-        this.id = id;
+    public QuizEvent(User user, Quiz quiz) {
+        this.id = -1; // will be sat after insertion in database
         this.user = user;
         this.quiz = quiz;
-        questionEvents = new ArrayList<QuestionEvent>();
+        questionEvents = new ArrayList<>();
     }
 
     // create from database
@@ -82,7 +82,7 @@ public class QuizEvent {
 
     // returns current question event to user to fill it
     public QuestionEvent getNextEmptyQuestionEvent() {
-        QuestionEvent currentQuestionEvent = new QuestionEvent(id, quiz.getQuestion(questionIdx), false, new Date());
+        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx), false, new Date());
         questionIdx += 1;
         return currentQuestionEvent;
     }
