@@ -24,13 +24,13 @@
 
 <header class= "header-section">
     <div class="container header">
-        <div class="header-left">
+        <div class="header-left" style="cursor: pointer;" onclick="openMainPage()">
             <img class="logo" src="/web/images/common/icon.png">
             <h1 class="logo-text">Quizanthemum</h1>
         </div>
         <% if(user == null){ %>
             <ul class="header-right">
-                <button class="log-in-button button logIn" onclick="openRegistration()">შესვლა</button>
+                <button class="log-in-button button logIn" onclick="openRegistration()" style="margin-top: 0;">შესვლა</button>
             </ul>
         <% } else { %>
             <ul class="header-right">
@@ -65,6 +65,20 @@
 
 
 <script>
+
+    function openMainPage(){
+        window.location.href = "/";
+    }
+
+    function openRegistration() {
+        window.location.href = "/web/pages/SignIn.jsp";
+    }
+
+    function openSearch() {
+        window.localStorage.setItem('item', document.getElementById('search-input').value);
+        window.location.href = "SearchPage.jsp";
+    }
+
     function openSidebar() {
         document.getElementById("mySidebar").style.width = "300px";
         document.getElementById("mySidebar").style.marginLeft="150px";

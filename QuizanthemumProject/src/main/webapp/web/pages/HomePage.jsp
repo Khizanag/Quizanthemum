@@ -13,12 +13,12 @@
     <title> Quizanthemum </title>
     <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="web/styles/common.css">
-    <link rel="stylesheet" href="web/styles/homePage.css">
-    <link rel="stylesheet" href="web/styles/breakpoints.css">
-    <link rel="stylesheet" href="web/styles/profilePage.css">
-    <link rel="stylesheet" href="web/styles/quizCreation.css">
-    <link rel="stylesheet" href="web/styles/scroll.css">
+    <link rel="stylesheet" href="/web/styles/common.css">
+    <link rel="stylesheet" href="/web/styles/homePage.css">
+    <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/profilePage.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
+    <link rel="stylesheet" href="/web/styles/scroll.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -27,14 +27,6 @@
         $(document).ready(function(){
             $('.slider').load("web/slider/slider.jsp");
         });
-
-        function openRegistration() {
-            window.location.href = "/web/pages/SignIn.jsp";
-        }
-        function openSearch() {
-            window.localStorage.setItem('item', document.getElementById('search-input').value);
-            window.location.href = "SearchPage.jsp";
-        }
     </script>
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>

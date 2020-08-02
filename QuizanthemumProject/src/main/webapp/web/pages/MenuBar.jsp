@@ -45,10 +45,11 @@
                 <div class="dropdown">
                     <a class="nav-item" target="_self" href="../../DisplayQuizzes">ქვიზები</a>
                     <div class="dropdown-content">
-                        <% if(user != null)%>
-                            <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                         <a class="nav-item grayeble" target="_self" href="../../DisplayNewestQuizzes">უახლესი</a>
                         <a class="nav-item grayeble" target="_self" href="../../DisplayMostPopularQuizzes">პოპულარული</a>
+                        <% if(user != null){ %>
+                            <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
+                        <% } %>
                     </div>
                 </div>
                 <div class="dropdown">
