@@ -86,9 +86,11 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         } else {
             quizEvent.finishQuiz();
             quizEvent.resetQuestionEventIterator();
-            quizEventManager.insertQuizEvent(quizEvent);
+            int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
             while (quizEvent.hasNextQuestionEvent()) {
-                questionEventManager.setQuestionEvent(quizEvent.getNextFilledQuestionEvent());
+                QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
+                currQuestionEvent.setQuizEventId(quizEventId);
+                questionEventManager.setQuestionEvent(currQuestionEvent);
             }
             response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID());
         }

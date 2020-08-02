@@ -74,7 +74,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
         return questionEvents;
     }
 
-    public void insertQuizEvent(QuizEvent quizEvent) {
+    public int insertQuizEvent(QuizEvent quizEvent) {
 
         System.out.println("inserting quiz event.");
         String query = "INSERT INTO " + QUIZ_EVENTS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?);\n";
@@ -86,14 +86,12 @@ public class QuizEventManager implements QuestionEventTableConfig {
             pstmt.setDate(4, new java.sql.Date(quizEvent.getFinishDate().getTime()));
             pstmt.setDouble(5, quizEvent.getUserScore());
             pstmt.executeUpdate();
+            return DatabaseConnector.getLastInsertID();
         } catch (SQLException e) {
             System.out.println("Insertion Error. QuizEvent Manager Class");
         }
         System.out.println("inserted quiz event.");
-    }
-
-    public int getNewQuizEventID(){
-        return -1; // TODO sequence
+        return DEFAULT_ID;
     }
 
 }
