@@ -5,6 +5,7 @@ import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.User.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -100,6 +101,18 @@ public class Quiz {
 
     public void finishCreatingQuiz() {
         creationDate = new Date();
+    }
+
+    public void shuffleQuestions() {
+        System.out.println("before:");
+        for (Question q : questions) {
+            System.out.println(q.getTextStatement());
+        }
+        Collections.shuffle(questions);
+        System.out.println("after:");
+        for (Question q : questions) {
+            System.out.println(q.getTextStatement());
+        }
     }
 
 }

@@ -125,13 +125,15 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
                 " WHERE " + QUESTION_TABLE_COLUMN_11_QUIZ_ID + " = " + id + ";\n";
 
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement newStatement = connection.createStatement();
+            ResultSet set = newStatement.executeQuery(query);
             QuestionManager questionManager = (QuestionManager)manager.getManager(QUESTION_MANAGER_STR);
             while(set.next()){
                 int questionID = set.getInt(QUESTION_TABLE_COLUMN_1_ID);
                 Question question = questionManager.getQuestion(questionID);
                 questions.add(question);
             }
+            set.close();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }

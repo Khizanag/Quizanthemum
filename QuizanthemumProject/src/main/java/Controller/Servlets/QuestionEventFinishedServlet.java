@@ -37,7 +37,6 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
         int numAnswers = questionEvent.getNumUsersAnswers();
         int numStatements = questionEvent.getQuestion().getStatementsCount();
-        System.out.println("num ans: " + numAnswers);
         List<String> userAnswers = new ArrayList<>();
         List<String> matchingColors = new ArrayList<>();
 
@@ -63,14 +62,6 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         if(questionEvent.getType() == MATCHING) {
             userAnswers = getUserMatchingAnswers(userAnswers, matchingColors);
         }
-
-        // TODO remove. useful for testing
-        System.out.println("_____");
-        for(int i = 0; i < userAnswers.size(); i++) {
-            System.out.println(userAnswers.get(i));
-        }
-        System.out.println("_____");
-
 
         questionEvent.setUserAnswers(userAnswers);
         questionEvent.finishQuestionEvent();
@@ -103,8 +94,6 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         List<String> cleanedAnswers = new ArrayList<>();
         for(int i = 0; i < userAnswers.size(); i+=2) {
             if(!matchingColors.get(i).equals("")) {
-                System.out.println(userAnswers.get(i));
-                System.out.println("color: " + matchingColors.get(i));
                 map.put(matchingColors.get(i), userAnswers.get(i));
             }
         }
