@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../styles/breakpoints.css">
     <link rel="stylesheet" href="../styles/quizzSummaryPage.css">
     <link rel="stylesheet" href="../styles/profilePage.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="/web/pages/js/profileStuff.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
@@ -47,6 +48,8 @@
     function openSearch() {
       window.location.href = "SearchPage.jsp";
     }
+
+
 	</script> 
 
 </head>
@@ -61,6 +64,20 @@
           <img class="quizz-img" src="<%=quiz.getIconUrl()%>"  onerror="this.src='/web/images/common/Quiz1.jpg';">
           <div class="quiz-description">
               <%=quiz.getDescription()%>
+          </div>
+        </div>
+        <div class="quiz-rating-section">
+          <div class="container">
+            <h2 class="rating-title"> ქვიზის შეფასება </h2>
+            <div class="rating-icons-holder">
+              <ul class="rating-icons">
+                <a class="fa fa-star-o" id="1" onclick="grade(this)"></a>
+                <a class="fa fa-star-o" id="2" onclick="grade(this)"></a>
+                <a class="fa fa-star-o" id="3" onclick="grade(this)"></a>
+                <a class="fa fa-star-o" id="4" onclick="grade(this)"></a>
+                <a class="fa fa-star-o" id="5" onclick="grade(this)"></a>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="overall-quiz-details">
@@ -154,6 +171,16 @@
 <script>
     let score = parseInt(document.getElementById("userScore-id"));
     console.log("score: ", score);
+
+    function grade(elem) {
+      for(let i = 1; i <= 5; i++) {
+        document.getElementById(i).className = "fa fa-star-o";
+      }
+      for(let i = 1; i <= elem.id; i++) {
+        document.getElementById(i).className = "fa fa-star";
+      }
+      console.log(elem.id);
+    }
 </script>
 <%!
   private static BigDecimal truncateDecimal(double x, int numberofDecimals)
