@@ -24,7 +24,7 @@
 
 <header class= "header-section">
     <div class="container header">
-        <div class="header-left">
+        <div class="header-left" style="cursor: pointer;" onclick="openMainPage()">
             <img class="logo" src="/web/images/common/icon.png">
             <h1 class="logo-text">Quizanthemum</h1>
         </div>
@@ -65,6 +65,10 @@
 
 
 <script>
+
+    function openMainPage(){
+        window.location.href = "/";
+    }
 
     function openRegistration() {
         window.location.href = "/web/pages/SignIn.jsp";
