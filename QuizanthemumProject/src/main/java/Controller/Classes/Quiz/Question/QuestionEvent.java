@@ -81,6 +81,14 @@ public class QuestionEvent {
         return  type;
     }
 
+    public Set<Pair<String>> getUserMatchingAnswers() {
+        Set<Pair<String>> userMatchingAnswerSet = new TreeSet<>();
+        for (int i = 0; i < userAnswers.size(); i+=2) {
+            userMatchingAnswerSet.add(new Pair<>(userAnswers.get(i), userAnswers.get(i+1)));
+        }
+        return userMatchingAnswerSet;
+    }
+
     /*
      * manually set user score.
      * used when question is not automatically graded
@@ -145,12 +153,7 @@ public class QuestionEvent {
      * score depends on number of correct matches.
      */
     public void autoGradeMatchingAnswer() {
-        Set<Pair<String>> userMatchingAnswerSet = new TreeSet<>();
-        System.out.println("user size: " + userAnswers.size());
-        System.out.println("real size: " + question.getAnswersCount());
-        for (int i = 0; i < userAnswers.size(); i+=2) {
-            userMatchingAnswerSet.add(new Pair<>(userAnswers.get(i), userAnswers.get(i+1)));
-        }
+        Set<Pair<String>> userMatchingAnswerSet = getUserMatchingAnswers();
 
         int correctAnswersNum = 0;
         int pairsNum = question.getAnswersCount() / 2;
@@ -162,7 +165,6 @@ public class QuestionEvent {
                 }
             }
         }
-        System.out.println("correct answers: " + correctAnswersNum + " from " + pairsNum);
         userScore = question.getMaxScore() * correctAnswersNum / pairsNum;
         isAlreadyGraded = true;
 
