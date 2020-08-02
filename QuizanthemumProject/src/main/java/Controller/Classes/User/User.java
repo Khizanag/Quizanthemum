@@ -2,6 +2,7 @@ package Controller.Classes.User;
 
 import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.QuizEvent;
+import Model.Managers.ManagersManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -68,12 +69,11 @@ public class User {
         this.email = email;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
-        this.challengesPlayed=0;
-        this.challengesWon=0;
-        this.quizzesMade=0;
-        this.quizzesPlayed=0;
+        this.challengesPlayed = 0;
+        this.challengesWon = 0;
+        this.quizzesMade = 0;
+        this.quizzesPlayed = 0;
     }
-
 
     private String hashFunction(String password) {
         MessageDigest md = null;
@@ -160,7 +160,6 @@ public class User {
 
     public List<Integer> getFriendIDs() {
         if(friendIDs == null){
-            // TODO get ids from base
         }
         return friendIDs;
     }
@@ -193,6 +192,33 @@ public class User {
 
     public boolean isCorrectPassword (String password) {
         return passwordHash.equals(hashFunction(password));
+    }
+
+    public List<Challenge> getChallenges(){
+        if(challenges == null){
+            challenges = new ArrayList<>();
+        }
+        return challenges;
+    }
+
+    public List<Challenge> getWaitingChallengedChallenges() {
+        List<Challenge> challenges = new ArrayList<>();
+        for(Challenge challenge: getChallenges()){
+            if(!challenge.isFinished() && challenge.getChallengedUserID() == this.id){
+                challenges.add(challenge);
+            }
+        }
+        return challenges;
+    }
+
+    public List<Challenge> getWaitingChallengerChallenges(){
+        List<Challenge> challenges = new ArrayList<>();
+        for(Challenge challenge: getChallenges()){
+            if(!challenge.isFinished() && challenge.getChallengerUserID() == this.id){
+                challenges.add(challenge);
+            }
+        }
+        return challenges;
     }
 
     @Override

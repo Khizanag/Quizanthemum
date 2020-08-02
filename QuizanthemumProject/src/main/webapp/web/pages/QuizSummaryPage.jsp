@@ -29,7 +29,6 @@
             Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
             QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
             User user = (User)request.getServletContext().getAttribute("logedInUser");
-
     %>
 
     function gotoProfPage() {

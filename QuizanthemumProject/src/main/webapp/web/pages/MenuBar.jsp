@@ -76,8 +76,6 @@
     </div>
 </div>
 
-<jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
-
 <script>
     function displayCategoryFromMenuBar(ID){
         document.getElementById('chosen-category').value = ID;
