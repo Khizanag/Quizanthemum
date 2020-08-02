@@ -23,6 +23,7 @@ public interface Config {
 
     /** Used when creating Object, before inserting into database */
     int DEFAULT_ID = -1;
+    int DEFAULT_NUM_QUEZZES_TO_DISPLAY = 10;
 
     String LOGGED_IN_USER_ID_STR = "Quizanthemum-loged-in-user-ID";
     String LOGGED_IN_USER_PASSWORD_HASH_STR = "Quizanthemum-loged-in-user-password-hash";
