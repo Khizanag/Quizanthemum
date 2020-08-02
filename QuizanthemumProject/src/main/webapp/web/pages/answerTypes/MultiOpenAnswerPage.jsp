@@ -21,6 +21,8 @@
         <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
         <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
         <%Question question = questionEvent.getQuestion();%>
+        <img src="<%=question.getPictureStatementURL()%>" class="question-img"
+             onerror="this.style.display='none'">
         <p><%=question.getTextStatement()%></p>
         <p><%=question.getHeaderStatement()%></p>
         <hr>
