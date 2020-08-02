@@ -113,14 +113,25 @@
                 </div>
               </span>
               <span>
-                <span>Your Answers:</span>
+                <span>თქვენი პასუხები: </span>
                 <div class = "user-answers">
                     <%
-                        List<String> user_ans =qe.getUserAnswers();
-                        for(String st : user_ans){
-                            out.print("<p>");
-                            out.print(st);
-                            out.print("</p>");
+                        if(type ==MATCHING) {
+                            Set<Pair<String>> ansPairs = qe.getUserMatchingAnswers();
+                            for (Pair<String> pr : ansPairs) {
+                                String pairs = pr.getFirst() + " : " + pr.getSecond();
+                                out.print("<p>");
+                                out.print(pairs);
+                                out.print("</p>");
+                            }
+                        }else {
+                            List<String> user_ans = qe.getUserAnswers();
+                            
+                            for (String st : user_ans) {
+                                out.print("<p>");
+                                out.print(st);
+                                out.print("</p>");
+                            }
                         }
                     %>
                 </div>
