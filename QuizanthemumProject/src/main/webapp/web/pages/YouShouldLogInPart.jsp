@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="stylesheet" href="web/styles/common.css">
+<link rel="stylesheet" href="../styles/common.css">
 
 <div class="container">
     <div class="displayer-container">

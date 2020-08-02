@@ -13,6 +13,8 @@
     <orderEntry type="library" name="font-awesome" level="application" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+<<<<<<< HEAD
+=======
     <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
@@ -39,6 +41,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+>>>>>>> 25aebd5af73484dc3677de24a525d8152349e3fb
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
   </component>
 </module>
