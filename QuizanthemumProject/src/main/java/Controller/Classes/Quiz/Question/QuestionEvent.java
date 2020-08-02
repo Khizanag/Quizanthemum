@@ -2,12 +2,10 @@ package Controller.Classes.Quiz.Question;
 
 import Tools.Pair;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
+import static java.lang.Integer.max;
 
 public class QuestionEvent {
 
@@ -83,6 +81,14 @@ public class QuestionEvent {
         return  type;
     }
 
+    public Set<Pair<String>> getUserMatchingAnswers() {
+        Set<Pair<String>> userMatchingAnswerSet = new TreeSet<>();
+        for (int i = 0; i < userAnswers.size(); i+=2) {
+            userMatchingAnswerSet.add(new Pair<>(userAnswers.get(i), userAnswers.get(i+1)));
+        }
+        return userMatchingAnswerSet;
+    }
+
     /*
      * manually set user score.
      * used when question is not automatically graded
@@ -106,8 +112,9 @@ public class QuestionEvent {
 
     public void autoGradeFillBlank() {
         int correctAnswersNum = 0;
+        List<String> realAnswers = question.getAnswers();
         for(int i = 0; i < userAnswers.size(); i++) {
-            if(userAnswers.get(i).equals(userAnswers.get(i))) {
+            if(userAnswers.get(i).equals(realAnswers.get(i))) {
                 correctAnswersNum++;
             }
         }
@@ -126,17 +133,17 @@ public class QuestionEvent {
         for (int i = 0; i < userAnswers.size(); i++) {
             userAnswerSet.add(userAnswers.get(i));
         }
-        int correctAnswersNum = 0;
-        int wrongAnswersNum = 0;
+        int userCorrectAnswers = 0;
         Set<String> realAnswers = question.getMultiAnswers();
         for (String ans : realAnswers) {
             if (userAnswerSet.contains(ans)) {
-                correctAnswersNum += 1;
-            } else {
-                wrongAnswersNum++;
+                userCorrectAnswers++;
             }
         }
-        userScore = question.getMaxScore() * correctAnswersNum / (realAnswers.size() + wrongAnswersNum);
+        int userWrongAnswers = userAnswers.size() - userCorrectAnswers;
+        int userAnswersBalance = userCorrectAnswers - userWrongAnswers;
+
+        userScore = question.getMaxScore() * max(0, userAnswersBalance) / (realAnswers.size());
         isAlreadyGraded = true;
 
     }
@@ -146,26 +153,16 @@ public class QuestionEvent {
      * score depends on number of correct matches.
      */
     public void autoGradeMatchingAnswer() {
-        Set<Pair<String>> userMatchingAnswerSet = new TreeSet<>();
-
-        for (int i = 0; i < question.getAnswersCount(); i+=2) {
-            userMatchingAnswerSet.add(new Pair<>(userAnswers.get(i), userAnswers.get(i+1)));
-        }
-
-        for(Pair<String> a : userMatchingAnswerSet) {
-            System.out.println("first: " + a.getFirst());
-            System.out.println("second: " + a.getSecond());
-        }
+        Set<Pair<String>> userMatchingAnswerSet = getUserMatchingAnswers();
 
         int correctAnswersNum = 0;
         int pairsNum = question.getAnswersCount() / 2;
-        System.out.println("num matching: " + pairsNum);
 
         for(Pair<String> answer : question.getMatchingAnswers()) {
-            if (userMatchingAnswerSet.contains(answer)) {
-                System.out.println("match f: " + answer.getFirst());
-                System.out.println("match s: " + answer.getSecond());
-                correctAnswersNum += 1;
+            for(Pair<String> userAnswer : userMatchingAnswerSet) {
+                if(answer.equals(userAnswer)) {
+                    correctAnswersNum++;
+                }
             }
         }
         userScore = question.getMaxScore() * correctAnswersNum / pairsNum;
