@@ -18,7 +18,24 @@
     .quiz-list-holder {
         width: 100%;
     }
-
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .onHover {
+        position: absolute;
+        right: 0;
+        bottom: 15px;
+        display: none;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
 </style>
 <body>
 <jsp:include page="/web/pages/Header.jsp"></jsp:include>
@@ -55,16 +72,19 @@
                             <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
                               <%=currQuiz.getDescription()%>
                             </p>
-                            <div class="raiting-icons-holder" style="position: absolute; bottom: 5px; color:white">
-                                <ul class="raiting-icons" id="stars-holder">
-                                    <% for(int i = 1; i <= 3; i++) { %>
+                            <div class="toHover">
+                                <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
+                                    <ul class="raiting-icons" id="stars-holder">
+                                        <% for(int j = 1; j <= 3; j++) { %>
                                         <a class="fa fa-star" style="margin-right: 2px;"></a>
-                                    <%}%>
-                                    <% for(int i = 4; i <= 5; i++) { %>
+                                        <%}%>
+                                        <% for(int j = 4; j <= 5; j++) { %>
                                         <a class="fa fa-star-o" style="margin-right: 2px;"></a>
-                                    <%}%>
-                                </ul>
+                                        <%}%>
+                                    </ul>
+                                </div>
                             </div>
+                            <p class="onHover"> (3/5) </p>
                         </div>
                     <div class = "quiz-score"><%=currQuiz.getMaxScore()%></div>
                     <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
