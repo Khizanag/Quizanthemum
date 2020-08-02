@@ -119,7 +119,6 @@ public final class Question {
         for (int i = 0; i < statements.size(); i+=2) {
             leftMatching.add(statements.get(i));
         }
-        Collections.shuffle(leftMatching);
         return leftMatching;
     }
 

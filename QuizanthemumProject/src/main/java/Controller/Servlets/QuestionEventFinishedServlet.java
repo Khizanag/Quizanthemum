@@ -76,12 +76,14 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
             quizEvent.finishQuiz();
-            quizEvent.resetQuestionEventIterator();
-            int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
-            while (quizEvent.hasNextQuestionEvent()) {
-                QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
-                currQuestionEvent.setQuizEventId(quizEventId);
-                questionEventManager.setQuestionEvent(currQuestionEvent);
+            if(!quizEvent.isPracticeMode()){
+                quizEvent.resetQuestionEventIterator();
+                int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
+                while (quizEvent.hasNextQuestionEvent()) {
+                    QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
+                    currQuestionEvent.setQuizEventId(quizEventId);
+                    questionEventManager.setQuestionEvent(currQuestionEvent);
+                }
             }
             response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID());
         }

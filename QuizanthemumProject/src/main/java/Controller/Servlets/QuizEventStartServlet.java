@@ -33,11 +33,11 @@ public class QuizEventStartServlet extends HttpServlet {
         QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
         User user = (User) request.getServletContext().getAttribute("logedInUser");
-
+        boolean practice_mode = (request.getParameter("practice_mode") != null);
         int quizID = Integer.parseInt(request.getParameter("quiz_id"));
         Quiz quiz = quizManager.getQuiz(quizID);
 
-        QuizEvent quizEvent = new QuizEvent(user, quiz);
+        QuizEvent quizEvent = new QuizEvent(user, quiz, practice_mode);
         if(quiz.mustShuffleQuestions()) {
             quizEvent.shuffleQuestions();
         }
@@ -53,7 +53,9 @@ public class QuizEventStartServlet extends HttpServlet {
             response.setHeader("Location", getNextQuestionLink(type));
         } else {
             quizEvent.finishQuiz();
-            quizEventManager.insertQuizEvent(quizEvent);
+            if(!quizEvent.isPracticeMode()) {
+                quizEventManager.insertQuizEvent(quizEvent);
+            }
             response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp");
         }
 
