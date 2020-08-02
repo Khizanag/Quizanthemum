@@ -6,7 +6,7 @@
   align-items: center;
 }
 .quiz-container{
-  width: 960px;
+  width: 1250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -145,4 +145,27 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
+}
+
+/* rating part*/
+.quiz-rating-section {
+  height: 80px;
+}
+.rating-title {
+  display: flex;
+  justify-content: center;
+}
+.rating-icons-holder {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+.rating-icons{
+  display: flex;
+  flex-direction: row;
+}
+.fa{
+  margin-right: 2px;
+  unicode-bidi: bidi-override;
+  direction: rtl;
 }
