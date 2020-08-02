@@ -22,6 +22,9 @@
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
+<jsp:include page="/web/pages/FriendsListPopup.jsp"/>
+<jsp:include page="/web/pages/ChallengesListPopUp.jsp"/>
+
 <header class= "header-section">
     <div class="container header">
         <div class="header-left" style="cursor: pointer;" onclick="openMainPage()">
@@ -40,6 +43,7 @@
         <% } %>
     </div>
 </header>
+
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
@@ -51,6 +55,11 @@
     <a  onclick="popupfriendList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">people_outline</i>
         მეგობრები
+    </a>
+
+    <a  onclick="popUpChallengesList()" style="cursor:pointer;">
+        <i class="material-icons my-mat-icon">vertical_align_center</i>
+        გამოწვევები
     </a>
 
     <form id="logoutForm">

@@ -23,6 +23,7 @@
 //     modal.style.display = "none";
 //   }
 // }
+
 function popupfriendList(){
   document.getElementById("friends-list-popup-id").classList.toggle("active");
 }
