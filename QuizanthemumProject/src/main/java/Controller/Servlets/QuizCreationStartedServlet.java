@@ -50,7 +50,6 @@ public class QuizCreationStartedServlet extends HttpServlet {
         Quiz newQuiz = new Quiz(name, category, description, iconUrl, mustShuffleQuestions, comment, author);
 
         request.getServletContext().setAttribute(QUIZ_CREATING_NOW, newQuiz);
-
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", "http://localhost:8080/web/pages/AddingQuestions.jsp");
 

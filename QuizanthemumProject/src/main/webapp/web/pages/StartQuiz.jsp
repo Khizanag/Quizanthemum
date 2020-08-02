@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
-    <title> Creating Quiz </title>
+    <title> Start Quiz </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
     <link rel="stylesheet" href="/web/styles/common.css">
@@ -26,6 +26,24 @@
         flex-direction: row;
         justify-content: space-between;
     }
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+    }
+    .onHover {
+        display: none;
+        position: absolute;
+        right: 30px;
+        bottom: 150px;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
+
 </style>
 <body>
     <jsp:include page="/web/pages/Header.jsp"></jsp:include>
@@ -58,10 +76,20 @@
             <p style="color:white"> ავტორი: <%=quiz.getAuthor().getFirstName()%> <%=quiz.getAuthor().getLastName()%></p>
             <div class="quiz-date-and-rait-holder">
                 <p style=" margin-bottom: 0; color:white"> შექმნილია: <%=quiz.getCreationDate()%> </p>
-<%--            <p style=" margin-bottom: 0; color:white"> ქვიზის რეიტინგი: <%=quiz.getRaiting()%>/5</p>--%>
-                <p style=" margin-bottom: 0; color:white"> ქვიზის რეიტინგი: 4/5</p>
+                <div class="toHover">
+                    <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
+                        <ul class="raiting-icons" id="stars-holder">
+                            <% for(int j = 1; j <= 3; j++) { %>
+                            <a class="fa fa-star" style="margin-right: 2px;"></a>
+                            <%}%>
+                            <% for(int j = 4; j <= 5; j++) { %>
+                            <a class="fa fa-star-o" style="margin-right: 2px;"></a>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+                <p class="onHover"> ქვიზის რეიტინგი: 3/5 </p>
             </div>
-
             <button class="button" type="submit"
                     style="margin-top: 10px">
                 ქვიზის დაწყება
@@ -69,6 +97,4 @@
         </div>
         <input type="hidden" value="<%=quiz.getID()%>" name="quiz_id">
     </form>
-
-    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
