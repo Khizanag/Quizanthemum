@@ -178,4 +178,9 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         }
         return null;
     }
+
+    public List<Quiz> getQuizzes(int numQuizzes) {
+        String query = "SELECT * FROM " + QUIZ_TABLE_NAME + " LIMIT " + numQuizzes;
+        return getQuizzesByQuery(query);
+    }
 }

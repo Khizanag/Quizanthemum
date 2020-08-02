@@ -34,7 +34,13 @@
     <div class="full-wrapper">
         <div class = "header-wrapper">
             <div class = "content-header-container">
-                <h2>ქვიზები</h2>
+                <%
+                    String title = (String) request.getAttribute("title");
+                    if(title != null) { %>
+                    <h2> <%=title%> </h2>
+                <% } else { %>
+                    <h2>ქვიზები</h2>
+                <% } %>
             </div>
         </div>
         <div class="top-quizzes-list-container">

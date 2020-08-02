@@ -43,15 +43,12 @@
                 <a class="nav-item" target="_self" href="/">მთავარი</a>
 
                 <div class="dropdown">
-                    <a class="nav-item" target="_self" href="#">ქვიზები</a>
+                    <a class="nav-item" target="_self" href="../../DisplayQuizzes">ქვიზები</a>
                     <div class="dropdown-content">
                         <% if(user != null)%>
                             <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                         <a class="nav-item grayeble" target="_self" href="../../DisplayNewestQuizzes">უახლესი</a>
                         <a class="nav-item grayeble" target="_self" href="../../DisplayMostPopularQuizzes">პოპულარული</a>
-                        <a class="nav-item grayeble" target="_self" href="#">საუკეთესო</a>
-                        <a class="nav-item grayeble" target="_self" href="#">მარტივები</a>
-                        <a class="nav-item grayeble" target="_self" href="#">რთულები</a>
                     </div>
                 </div>
                 <div class="dropdown">
