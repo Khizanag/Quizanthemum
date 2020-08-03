@@ -104,6 +104,10 @@ public class QuestionEvent {
      * incorrect answer is graded as 0.
      */
     public void autoGradeTextAnswer() {
+        if(userAnswers.size() == 0) {
+            userScore = 0.0;
+            return;
+        }
         if(userAnswers.get(0).equals(question.getTextAnswer())) {
             userScore = question.getMaxScore();
         }
@@ -146,6 +150,26 @@ public class QuestionEvent {
         userScore = question.getMaxScore() * max(0, userAnswersBalance) / (realAnswers.size());
         isAlreadyGraded = true;
 
+    }
+
+    public void autoGradeMultiOpenAnswer() {
+        Set<String> userAnswerSet = new TreeSet<>();
+
+        for (int i = 0; i < userAnswers.size(); i++) {
+            userAnswerSet.add(userAnswers.get(i));
+        }
+        int userCorrectAnswers = 0;
+        Set<String> realAnswers = question.getMultiAnswers();
+        for (String ans : realAnswers) {
+            for (String userAns : userAnswerSet) {
+                if (ans.equals(userAns)) {
+                    userCorrectAnswers++;
+                }
+            }
+        }
+        userScore = question.getMaxScore() * userCorrectAnswers / (question.getStatementsCount());
+        System.out.println(userScore);
+        isAlreadyGraded = true;
     }
 
     /*

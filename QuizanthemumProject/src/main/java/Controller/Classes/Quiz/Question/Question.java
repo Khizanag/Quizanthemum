@@ -33,7 +33,7 @@ public final class Question {
     /* constructor */
 
     public Question(int type, boolean isAutoGraded, double maxScore, String headerStatement, String comment,
-                    String source, Date creationDate, int quizId, boolean isPictureQuestion, boolean isPictureAnswer,
+                    String source, Date creationDate, int quizID, boolean isPictureQuestion, boolean isPictureAnswer,
                     String textStatement, String pictureStatementURL, List<String> statements, List<String> answers) {
 
         this.type = type;

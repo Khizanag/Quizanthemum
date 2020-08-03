@@ -28,9 +28,9 @@ public class Quiz {
     private double maxScore;                            // maximum possible score
 
     /* Quiz constructor for creating Quiz object using database information, about already published quiz */
-    public Quiz(int id, String name, Category category, String description, String iconUrl, boolean mustShuffleQuestions, String comment,
-                User author, Date creationDate, List<Question> questions, int maxScore) {
-        this(id, name, category, description, iconUrl, mustShuffleQuestions, comment,  author, true);
+    public Quiz(int id, String name, Category category, String description, String iconUrl, boolean mustShuffleQuestions,
+                String comment, User author, Date creationDate, List<Question> questions, double maxScore) {
+        this(id, name, category, description, iconUrl, mustShuffleQuestions, comment,  author);
         this.creationDate = creationDate;
         this.questions = questions;
         this.maxScore = maxScore;
@@ -41,15 +41,17 @@ public class Quiz {
         while this quiz is not still published, and is not saved into database.
         Note: after entirely creating this object, it should be stored into database
      */
-    public Quiz(String name, Category category, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author){
-        this(DEFAULT_ID, name, category, description, iconUrl, mustShuffleQuestions, comment, author, true);
+    public Quiz(String name, Category category, String description, String iconUrl,
+                boolean mustShuffleQuestions, String comment, User author) {
+        this(DEFAULT_ID, name, category, description, iconUrl, mustShuffleQuestions, comment, author);
         this.questions = new ArrayList<>();
         this.maxScore = 0;
         this.creationDate = new Date();
     }
 
     /* helper constructor used by other public constructors */
-    private Quiz(int id, String name, Category category, String description, String iconUrl, boolean mustShuffleQuestions, String comment, User author, boolean isPrivate){
+    private Quiz(int id, String name, Category category, String description, String iconUrl,
+                 boolean mustShuffleQuestions, String comment, User author){
         this.id = id;
         this.name = name;
         this.category = category;
@@ -104,15 +106,7 @@ public class Quiz {
     }
 
     public void shuffleQuestions() {
-        System.out.println("before:");
-        for (Question q : questions) {
-            System.out.println(q.getTextStatement());
-        }
         Collections.shuffle(questions);
-        System.out.println("after:");
-        for (Question q : questions) {
-            System.out.println(q.getTextStatement());
-        }
     }
 
 }

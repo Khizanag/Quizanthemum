@@ -15,7 +15,9 @@ create table users(
                       email varchar(64) not null,
                       phone_number varchar(32),
                       birth_date date,
-                      registration_date date
+                      registration_date date,
+                      photo_url varchar(256),
+                      password_salt varchar(256)
 );
 
 # *******************************************  CATEGORIES  ******************************************
@@ -41,7 +43,9 @@ create table quizzes(
                         constraint foreign key (AUTHOR_ID)
                             references users(id) on update cascade on delete restrict,
                         CREATION_DATE date,
-                        MAX_SCORE smallint
+                        MAX_SCORE double,
+                        STARS_RATING_SUM int,
+                        NUM_RATERS int
 );
 
 
@@ -212,20 +216,33 @@ create table achievement_events(
                                    achieve_date date
 );
 
+# *********************************************  QUIZ_RATING_EVENTS  *********************************************
+
+create table quiz_rating_events(
+                                   id smallint primary key auto_increment,
+                                   user_id smallint not null,
+                                   constraint foreign key (user_id)
+                                       references users(id) on update cascade on delete restrict,
+                                   quiz_id smallint not null,
+                                   constraint foreign key (quiz_id)
+                                       references quizzes(id) on update cascade on delete restrict,
+                                   num_stars smallint not null
+);
 
 
 # ************************************************** DROP TABLES  *************************************************
 
-# drop table if exists question_events;
-# drop table if exists questions;
-# drop table if exists quiz_events;
-# drop table if exists categories;
-# drop table if exists quizzes;
-# drop table if exists friendships;
-# drop table if exists challenges;
-# drop table if exists achievement_events;
-# drop table if exists achievements;
-# drop table if exists users;
+drop table if exists question_events;
+drop table if exists questions;
+drop table if exists quiz_events;
+drop table if exists quizzes;
+drop table if exists friendships;
+drop table if exists challenges;
+drop table if exists achievement_events;
+drop table if exists achievements;
+drop table if exists users;
+drop table if exists categories;
+drop table if exists quiz_rating_events;
 
 
 
@@ -241,6 +258,7 @@ SELECT * FROM questions;
 SELECT * FROM quiz_events;
 SELECT * FROM quizzes;
 SELECT * FROM users;
+SELECT * FROM quiz_rating_events;
 
 
 # *********************************************** ADD ALL CATEGORIES   ***********************************************

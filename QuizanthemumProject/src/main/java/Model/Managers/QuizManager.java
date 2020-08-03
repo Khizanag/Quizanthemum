@@ -8,6 +8,7 @@ import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.User.User;
 import Model.DatabaseConnector;
+import Tools.Pair;
 
 import javax.xml.transform.Result;
 import java.sql.*;
@@ -18,6 +19,7 @@ import java.util.List;
 import static Configs.Config.*;
 import static Configs.QuizEventTableConfig.QUIZ_EVENTS_TABLE_NAME;
 import static Configs.QuizEventTableConfig.QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID;
+import static Configs.QuizRatingEventsConfig.*;
 
 public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
@@ -109,9 +111,10 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             User author = (User)userManager.getUser(authorID);
             Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_9_CREATION_DATE);
             List<Question> questions = getQuizQuestions(id);
-            int maxScore = set.getInt(QUIZ_TABLE_COLUMN_10_MAX_SCORE);
+            double maxScore = set.getDouble(QUIZ_TABLE_COLUMN_10_MAX_SCORE);
 
-            return new Quiz(id, name, category, description, iconUrl, mustShuffleQuestions, comment, author, creationDate, questions, maxScore);
+            return new Quiz(id, name, category, description, iconUrl, mustShuffleQuestions, comment, author,
+                    creationDate, questions, maxScore);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -160,6 +163,67 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             e.printStackTrace();
         }
         return DEFAULT_ID;
+    }
+
+    public boolean isRatedBy (int quizID, int userID) {
+        String query = "SELECT * FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID +
+                " AND " + QUIZ_TABLE_COLUMN_2_USER_ID + " = " + userID + ";\n";
+
+        try {
+            Statement selectionStatement = connection.createStatement();
+            ResultSet set = selectionStatement.executeQuery(query);
+            if(!set.next()){
+                set.close();
+                return true;
+            } else {
+                set.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Selection Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public int getQuizRating (int quizID) {
+        String selectionQuery = "SELECT SUM ( " + QUIZ_TABLE_COLUMN_4_NUM_STARS +
+                " ) AS ratingSum, COUNT ( * ) AS numRaters FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID + ";\n";
+
+        int average = -1;
+        try {
+            Statement selectionStatement = connection.createStatement();
+            ResultSet set = selectionStatement.executeQuery(selectionQuery);
+            if(!set.next()){
+                System.out.println("couldn't reach star rating in quiz");
+                return -1;
+            }
+            int ratingSum = set.getInt("ratingSum");
+            int numRaters = set.getInt("numRaters");
+            average = ratingSum / numRaters;
+            set.close();
+        } catch (SQLException e) {
+            System.out.println("Selection Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
+        return average;
+    }
+
+    public void rateQuiz (int userID, int quizID, int numStars){
+        System.out.println("rating quiz. num stars: " + numStars);
+        String query = "INSERT INTO " + QUIZ_RATING_EVENTS_TABLE_NAME + " VALUES (null, ?, ?, ?);\n";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, userID);
+            pstmt.setInt(2, quizID);
+            pstmt.setInt(3, numStars);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
     }
 
     public List<Quiz> getCategoryQuizzes(Category category) {
