@@ -63,7 +63,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
                 + "(SELECT SUM( " + QUIZ_RATING_EVENTS_TABLE_COLUMN_4_NUM_STARS
                 + " ) / COUNT(*) FROM " + QUIZ_RATING_EVENTS_TABLE_NAME + " as qre"
                 + " WHERE qre." + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = "
-                + QUIZ_TABLE_COLUMN_1_ID + ".quizID)" + " LIMIT " + numQuizzes + ";\n";
+                + "qs." + QUIZ_TABLE_COLUMN_1_ID + ")" + " LIMIT " + numQuizzes + ";\n";
         return getQuizzesByQuery(query);
     }
 
