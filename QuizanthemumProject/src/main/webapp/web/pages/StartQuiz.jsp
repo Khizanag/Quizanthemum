@@ -78,16 +78,16 @@
                     <div class="toHover">
                         <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
                             <ul class="raiting-icons" id="stars-holder">
-                                <% for(int j = 1; j <= 3; j++) { %>
+                                <% for(int j = 1; j <= quizManager.getQuizRating(quiz.getID()); j++) { %>
                                 <a class="fa fa-star" style="margin-right: 2px;"></a>
                                 <%}%>
-                                <% for(int j = 4; j <= 5; j++) { %>
+                                <% for(int j = quizManager.getQuizRating(quiz.getID())+1; j <= 5; j++) { %>
                                 <a class="fa fa-star-o" style="margin-right: 2px;"></a>
                                 <%}%>
                             </ul>
                         </div>
                     </div>
-                    <p class="onHover"> ქვიზის რეიტინგი: 3/5 </p>
+                    <p class="onHover"> <%=quizManager.getQuizRating(quiz.getID())%>/5</p>
                 </div>
             </div>
             <br>

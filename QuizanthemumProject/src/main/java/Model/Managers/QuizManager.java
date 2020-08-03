@@ -146,6 +146,16 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     public int insertQuiz(Quiz quiz){
         String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
+            System.out.println(quiz.getName());
+            System.out.println(quiz.getCategory().getID());
+            System.out.println(quiz.getDescription());
+            System.out.println(quiz.getIconUrl());
+            System.out.println(quiz.mustShuffleQuestions());
+            System.out.println(quiz.getComment());
+            System.out.println(quiz.getAuthor().getID());
+            System.out.println(new java.sql.Date(quiz.getCreationDate().getTime()));
+            System.out.println(quiz.getMaxScore());
+
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, quiz.getName());
             pstmt.setInt(2, quiz.getCategory().getID());
@@ -188,13 +198,14 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     }
 
     public int getQuizRating (int quizID) {
-        String selectionQuery = "SELECT SUM ( " + QUIZ_TABLE_COLUMN_4_NUM_STARS +
-                " ) AS ratingSum, COUNT ( * ) AS numRaters FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
+        String selectionQuery = "SELECT SUM( " + QUIZ_TABLE_COLUMN_4_NUM_STARS +
+                " ) AS ratingSum, COUNT( * ) AS numRaters FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
                 " WHERE " + QUIZ_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID + ";\n";
 
         int average = -1;
         try {
             Statement selectionStatement = connection.createStatement();
+            System.out.println(selectionQuery);
             ResultSet set = selectionStatement.executeQuery(selectionQuery);
             if(!set.next()){
                 System.out.println("couldn't reach star rating in quiz");
@@ -202,6 +213,10 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             }
             int ratingSum = set.getInt("ratingSum");
             int numRaters = set.getInt("numRaters");
+            if (numRaters == 0)  {
+                set.close();
+                return 0;
+            }
             average = ratingSum / numRaters;
             set.close();
         } catch (SQLException e) {

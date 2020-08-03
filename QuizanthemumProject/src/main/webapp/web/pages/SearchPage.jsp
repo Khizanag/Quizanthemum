@@ -57,6 +57,9 @@
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <%
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+        QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         List<User> users = (List<User>) request.getAttribute("users");
         List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
         String searchingFor = (String) request.getAttribute("search");
@@ -87,16 +90,16 @@
                             <div class="toHover">
                                 <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
                                     <ul class="raiting-icons" id="stars-holder">
-                                        <% for(int j = 1; j <= 3; j++) { %>
+                                        <% for(int j = 1; j <= quizManager.getQuizRating(currQuiz.getID()); j++) { %>
                                         <a class="fa fa-star" style="margin-right: 2px;"></a>
                                         <%}%>
-                                        <% for(int j = 4; j <= 5; j++) { %>
+                                        <% for(int j = quizManager.getQuizRating(currQuiz.getID())+1; j <= 5; j++) { %>
                                         <a class="fa fa-star-o" style="margin-right: 2px;"></a>
                                         <%}%>
                                     </ul>
                                 </div>
                             </div>
-                            <p class="onHover"> (3/5) </p>
+                            <p class="onHover"> <%=quizManager.getQuizRating(currQuiz.getID())%>/5</p>
                         </div>
                         <div class = "quiz-score"><%=currQuiz.getMaxScore()%></div>
                         <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
@@ -166,9 +169,9 @@
 <script>
     <% if(numQuizzes == numUsers && numQuizzes == 0) {%>
         setTimeout(function(){
-            let ans = confirm('Did you mean "Test"?');
+            let ans = confirm('Did you mean "a"?');
             if (ans) {
-                window.location.href = 'http://localhost:8080/SearchPage?search=Test'
+                window.location.href = 'http://localhost:8080/SearchPage?search=a'
             }
         }, 100);
     <%}%>
