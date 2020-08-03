@@ -32,8 +32,9 @@
         <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/CommenSectionInQuestionCreationPage.jsp"/>
 
-        <%--   HIDDEN VARIABLES     --%>
+    <%--   HIDDEN VARIABLES     --%>
         <input type="hidden" name="type" value="<%=FILL_BLANK%>">
         <input  type="hidden" name="num_statements" value="0">
         <input type="hidden" name="num_answers" value="0">

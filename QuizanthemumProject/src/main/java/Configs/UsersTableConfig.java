@@ -16,5 +16,7 @@ public interface    UsersTableConfig {
     String USERS_TABLE_COLUMN_10_PHONE_NUMBER = "phone_number";
     String USERS_TABLE_COLUMN_11_BIRTH_DATE = "birth_date";
     String USERS_TABLE_COLUMN_12_REGISTRATION_DATE = "registration_date";
+    String USERS_TABLE_COLUMN_13_PHOTO_URL = "photo_url";
+    String USERS_TABLE_COLUMN_14_PASSWORD_SALT = "password_salt";
 
 }

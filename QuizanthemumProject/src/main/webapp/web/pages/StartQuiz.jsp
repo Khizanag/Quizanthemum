@@ -90,6 +90,10 @@
                     <p class="onHover"> ქვიზის რეიტინგი: 3/5 </p>
                 </div>
             </div>
+            <br>
+            <label><b>practice mode</b></label>
+            <input class="checkbox" type="checkbox"
+                   name="practice_mode" id="practice_mode">
             <button class="button" type="submit"
                     style="margin-top: 10px">
                 ქვიზის დაწყება

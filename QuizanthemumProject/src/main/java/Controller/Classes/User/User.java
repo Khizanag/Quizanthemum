@@ -19,6 +19,9 @@ public class User {
     private String passwordHash;
     private String firstName;
     private String lastName;
+    // TODO
+    private String passwordSalt;
+    private String photoURL;
     private int role;
     private int quizzesPlayed;
     private int quizzesMade;
@@ -241,5 +244,14 @@ public class User {
                 ", challenges=" + challenges +
                 ", achievements=" + achievements +
                 '}';
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    // TODO get rid of public getter
+    public String getPasswordSalt() {
+        return passwordSalt;
     }
 }

@@ -67,6 +67,7 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         questionEvent.finishQuestionEvent();
         gradeQuestionEvent(questionEvent);
 
+
         quizEvent.setFilledQuestionEvent(questionEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
@@ -76,12 +77,14 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
             quizEvent.finishQuiz();
-            quizEvent.resetQuestionEventIterator();
-            int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
-            while (quizEvent.hasNextQuestionEvent()) {
-                QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
-                currQuestionEvent.setQuizEventId(quizEventId);
-                questionEventManager.setQuestionEvent(currQuestionEvent);
+            if(!quizEvent.isPracticeMode()){
+                quizEvent.resetQuestionEventIterator();
+                int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
+                while (quizEvent.hasNextQuestionEvent()) {
+                    QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
+                    currQuestionEvent.setQuizEventId(quizEventId);
+                    questionEventManager.setQuestionEvent(currQuestionEvent);
+                }
             }
             response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID());
         }
@@ -109,6 +112,8 @@ public class QuestionEventFinishedServlet extends HttpServlet {
     private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {
         switch (newQuestionEvent.getType()) {
             case MULTI_ANSWER:
+                newQuestionEvent.autoGradeMultiOpenAnswer();
+                break;
             case MULTI_CHOICE_MULTI_ANSWER:
                 newQuestionEvent.autoGradeMultiAnswer();
                 break;

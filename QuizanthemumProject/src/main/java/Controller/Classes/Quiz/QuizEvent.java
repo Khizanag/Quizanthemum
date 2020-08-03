@@ -22,14 +22,16 @@ public class QuizEvent {
     private int questionEventIdx;                               // keeps track of current question event
     private final List<QuestionEvent> questionEvents;           // keeps filled question events
     private double userTotalScore;                              // counts user's total score
+    private boolean practiceMode;
 
     /* constructor */
 
-    public QuizEvent(User user, Quiz quiz) {
+    public QuizEvent(User user, Quiz quiz, boolean practiceMode) {
         this.id = -1; // will be sat after insertion in database
         this.user = user;
         this.quiz = quiz;
         questionEvents = new ArrayList<>();
+        this.practiceMode = practiceMode;
     }
 
     // create from database
@@ -56,6 +58,8 @@ public class QuizEvent {
     public Quiz getQuiz() { return quiz; }
 
     public Date getStartDate() { return startDate; }
+
+    public boolean isPracticeMode() { return practiceMode; }
 
 
     /* public methods */

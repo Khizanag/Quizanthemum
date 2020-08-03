@@ -152,7 +152,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     public int insertUser(User user) {
-        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, user.getUsername());
@@ -166,6 +166,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             pstmt.setString(9, user.getMobileNumber());
             pstmt.setDate(10, new java.sql.Date(user.getBirthDate().getTime()));
             pstmt.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
+            pstmt.setString(12, user.getPhotoURL());
+            pstmt.setString(13, user.getPasswordSalt());
             pstmt.executeUpdate();
 
             return DatabaseConnector.getLastInsertID();
