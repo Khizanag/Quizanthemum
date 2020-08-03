@@ -56,6 +56,17 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
        return getQuizzesByQuery(query);
     }
 
+    public List<Quiz> getHighestRatedQuizzes(int numQuizzes) {
+        String query = "SELECT * "
+                + " FROM " + QUIZ_TABLE_NAME + " as qs"
+                + " ORDER BY "
+                + "(SELECT SUM( " + QUIZ_RATING_EVENTS_TABLE_COLUMN_4_NUM_STARS
+                + " ) / COUNT(*) FROM " + QUIZ_RATING_EVENTS_TABLE_NAME + " as qre"
+                + " WHERE qre." + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = "
+                + "qs." + QUIZ_TABLE_COLUMN_1_ID + ")" + " LIMIT " + numQuizzes + ";\n";
+        return getQuizzesByQuery(query);
+    }
+
     private List<Quiz> getQuizzesBy(int numQuizzes, String sorterColumnName){
         String query = "SELECT * FROM " + QUIZ_TABLE_NAME
                 + " ORDER BY " + sorterColumnName+ " DESC"
@@ -177,8 +188,8 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
     public boolean isRatedBy (int quizID, int userID) {
         String query = "SELECT * FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
-                " WHERE " + QUIZ_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID +
-                " AND " + QUIZ_TABLE_COLUMN_2_USER_ID + " = " + userID + ";\n";
+                " WHERE " + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID +
+                " AND " + QUIZ_RATING_EVENTS_TABLE_COLUMN_2_USER_ID + " = " + userID + ";\n";
 
         try {
             Statement selectionStatement = connection.createStatement();
@@ -197,11 +208,14 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         return false;
     }
 
-    public int getQuizRating (int quizID) {
-        String selectionQuery = "SELECT SUM( " + QUIZ_TABLE_COLUMN_4_NUM_STARS +
-                " ) AS ratingSum, COUNT( * ) AS numRaters FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
-                " WHERE " + QUIZ_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID + ";\n";
 
+//    public double getQuizRating (int quizID) {
+    public int getQuizRating (int quizID) {
+        String selectionQuery = "SELECT SUM( " + QUIZ_RATING_EVENTS_TABLE_COLUMN_4_NUM_STARS +
+                " ) AS ratingSum, COUNT( * ) AS numRaters FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID + ";\n";
+
+//        double average = -1;
         int average = -1;
         try {
             Statement selectionStatement = connection.createStatement();
@@ -211,12 +225,17 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
                 System.out.println("couldn't reach star rating in quiz");
                 return -1;
             }
+
+//            double ratingSum = 1.0 * set.getInt("ratingSum");
+//            double numRaters = 1.0 * set.getInt("numRaters");
             int ratingSum = set.getInt("ratingSum");
             int numRaters = set.getInt("numRaters");
+
             if (numRaters == 0)  {
                 set.close();
                 return 0;
             }
+
             average = ratingSum / numRaters;
             set.close();
         } catch (SQLException e) {
@@ -227,7 +246,6 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     }
 
     public void rateQuiz (int userID, int quizID, int numStars){
-        System.out.println("rating quiz. num stars: " + numStars);
         String query = "INSERT INTO " + QUIZ_RATING_EVENTS_TABLE_NAME + " VALUES (null, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);

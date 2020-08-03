@@ -132,27 +132,22 @@ public class QuestionEvent {
      * score depends on number of correct answers.
      */
     public void autoGradeMultiAnswer() {
-        Set<String> userAnswerSet = new TreeSet<>();
-
-        for (int i = 0; i < userAnswers.size(); i++) {
-            userAnswerSet.add(userAnswers.get(i));
-        }
-        int userCorrectAnswers = 0;
-        Set<String> realAnswers = question.getMultiAnswers();
-        for (String ans : realAnswers) {
-            if (userAnswerSet.contains(ans)) {
-                userCorrectAnswers++;
-            }
-        }
+        int userCorrectAnswers = gerCorrectMultiAnswersNum();
         int userWrongAnswers = userAnswers.size() - userCorrectAnswers;
         int userAnswersBalance = userCorrectAnswers - userWrongAnswers;
 
-        userScore = question.getMaxScore() * max(0, userAnswersBalance) / (realAnswers.size());
+        userScore = question.getMaxScore() * max(0, userAnswersBalance) / (question.getMultiAnswers().size());
         isAlreadyGraded = true;
 
     }
 
     public void autoGradeMultiOpenAnswer() {
+        userScore = question.getMaxScore() * gerCorrectMultiAnswersNum() / (question.getStatementsCount());
+        System.out.println(userScore);
+        isAlreadyGraded = true;
+    }
+
+    private int gerCorrectMultiAnswersNum() {
         Set<String> userAnswerSet = new TreeSet<>();
 
         for (int i = 0; i < userAnswers.size(); i++) {
@@ -167,9 +162,7 @@ public class QuestionEvent {
                 }
             }
         }
-        userScore = question.getMaxScore() * userCorrectAnswers / (question.getStatementsCount());
-        System.out.println(userScore);
-        isAlreadyGraded = true;
+        return userCorrectAnswers;
     }
 
     /*

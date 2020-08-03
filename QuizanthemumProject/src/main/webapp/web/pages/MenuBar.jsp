@@ -47,6 +47,7 @@
                     <div class="dropdown-content">
                         <a class="nav-item grayeble" target="_self" href="../../DisplayNewestQuizzes">უახლესი</a>
                         <a class="nav-item grayeble" target="_self" href="../../DisplayMostPopularQuizzes">პოპულარული</a>
+                        <a class="nav-item grayeble" target="_self" href="../../DisplayHighestRatedQuizzes">მაღალრეიტინგული</a>
                         <% if(user != null){ %>
                             <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                         <% } %>
