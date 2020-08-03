@@ -67,10 +67,11 @@
         <div class="container" style="position: relative;">
             <h3 class="section-header"> მოიძებნა შემდეგი ქვიზები:</h3>
             <div class="found-elems-container">
-            <% for(Quiz currQuiz : quizzes) {
+            <%  int numQuizzes = 0;
+                for(Quiz currQuiz : quizzes) {
                 String name = currQuiz.getName().toLowerCase();
                 String description = currQuiz.getDescription().toLowerCase();
-                if(name.contains(searchingFor) || description.contains(searchingFor)) { %>
+                if(name.contains(searchingFor) || description.contains(searchingFor)) { numQuizzes++;%>
                     <div class="top-quiz-list-item"
                          onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
 
@@ -102,6 +103,11 @@
                     </div>
                 <%}%>
             <%}%>
+            <% if(numQuizzes == 0) { %>
+                <p style="color: white; font-size: large; margin-left: 50px">
+                    ამ ინფორმაციის შემცველი ქვიზი არ მოიძებნა
+                </p>
+            <%}%>
             </div>
             <form id="to_display_start_quiz_form" action="/web/pages/StartQuiz.jsp" method="get">
                 <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
@@ -113,12 +119,13 @@
         <div class="container" style="position: relative;">
             <h3 class="section-header"> ნაპოვნი მომხმარებლები:</h3>
             <div class="found-elems-container">
-            <% for(User currUser : users) {
+            <%  int numUsers = 0;
+                for(User currUser : users) {
                 String firstName = currUser.getFirstName().toLowerCase();
                 String lastName = currUser.getLastName().toLowerCase();
                 String userName = currUser.getUsername().toLowerCase();
                 if(firstName.contains(searchingFor) || lastName.contains(searchingFor)
-                    || userName.contains(searchingFor)) { %>
+                    || userName.contains(searchingFor)) { numUsers++;%>
                     <div class="top-quiz-list-item"
                          onclick="redirectToProfile(<%=currUser.getID()%>)">
                         <img class= "quiz-list-small-image" src="awefqwefqwef"
@@ -141,6 +148,11 @@
                     </div>
                 <%}%>
             <%}%>
+            <% if(numUsers == 0) { %>
+                <p style="color: white; font-size: large; margin-left: 50px">
+                    ამ მონაცემების მქონე მომხმარებელი არ მოიძებნა
+                </p>
+            <%}%>
             </div>
             <form id="to_display_profile_form" action="/web/pages/profilePageLogged.jsp" method="get">
                 <input type="hidden" value="-1" id="to_display_profile_elem" name="user_id">
@@ -152,6 +164,14 @@
 </body>
 
 <script>
+    <% if(numQuizzes == numUsers && numQuizzes == 0) {%>
+        setTimeout(function(){
+            let ans = confirm('Did you mean "Test"?');
+            if (ans) {
+                window.location.href = 'http://localhost:8080/SearchPage?search=Test'
+            }
+        }, 100);
+    <%}%>
     function redirectToQuizStart(id){
         const inp=document.getElementById("currQuizId"+id);
         inp.value=id;

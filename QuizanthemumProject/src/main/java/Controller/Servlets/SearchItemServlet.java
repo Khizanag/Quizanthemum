@@ -33,8 +33,6 @@ public class SearchItemServlet extends HttpServlet {
 
 
         List<User> users = usersManager.getUsers();
-        System.out.println(users.size());
-        System.out.println(users.get(0));
         List<Quiz> quizzes = quizzesManager.getQuizzes(DEFAULT_NUM_QUEZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
         request.setAttribute("users", users);
