@@ -27,77 +27,81 @@
     <link rel="stylesheet" href="../styles/profilePage.css">
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/web/pages/js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
-    <script>
-        <%
-                ServletContext context = request.getServletContext();
-                ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
-                QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-                Quiz quiz = (Quiz) quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
-                QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
-                User user = (User)request.getServletContext().getAttribute("logedInUser");
-                int questionsNumber= quiz.getQuestionsCount();
+    <%
+            ServletContext context = request.getServletContext();
+            ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+            QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+            Quiz quiz = (Quiz) quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
+            QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
+            User user = (User)request.getServletContext().getAttribute("logedInUser");
+            int questionsNumber= quiz.getQuestionsCount();
 
-        %>
-
-        function gotoProfPage() {
-            <%quizManager.rateQuiz(user.getID(), quiz.getID(), 1);%>
-            window.location.href = "profilePageLogged.jsp";
+    %>
+    <%!
+        private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
+            if (x > 0) {
+                return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_FLOOR);
+            } else {
+                return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_CEILING);
+            }
         }
-
-        function openSearch() {
-            window.location.href = "SearchPage.jsp";
-        }
-
-    </script>
-
+    %>
 </head>
-
-<style>
-    .after {
-        display: none;
-    }
-
-</style>
 
 <body>
 <jsp:include page="/web/pages/Header.jsp"></jsp:include>
 <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-<main>
     <div class="quiz-summary-wrapper">
         <div class="quiz-container">
-            <div class="after" id="after">
+            <form class="quiz-container after" id="after" action="/GetRating" method="get">
                 <div class="quizz-main">
-                    <img class="quizz-img" src="<%=quiz.getIconUrl()%>"
-                         onerror="this.src='/web/images/common/Quiz1.jpg';">
                     <div class="quiz-description">
                         <%=quiz.getDescription()%>
                     </div>
+                    <img class="quizz-img" src="<%=quiz.getIconUrl()%>"
+                         onerror="this.src='/web/images/common/Quiz1.jpg';">
                 </div>
-                <div class="quiz-rating-section">
-                    <div class="container">
-                        <h2 class="rating-title"> ქვიზის შეფასება </h2>
-                        <div class="rating-icons-holder">
-                            <ul class="rating-icons">
-                                <a class="fa fa-star-o" id="1" onclick="grade(this)"></a>
-                                <a class="fa fa-star-o" id="2" onclick="grade(this)"></a>
-                                <a class="fa fa-star-o" id="3" onclick="grade(this)"></a>
-                                <a class="fa fa-star-o" id="4" onclick="grade(this)"></a>
-                                <a class="fa fa-star-o" id="5" onclick="grade(this)"></a>
-                            </ul>
+                <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
+                    <div class="quiz-rating-section">
+                        <div class="container">
+                            <h2 class="rating-title"> ქვიზის შეფასება </h2>
+                            <div class="rating-icons-holder">
+                                <ul class="rating-icons">
+                                    <a class="fa fa-star-o" id="1"
+                                       style="font-size: xx-large; margin-right: 5px"
+                                       onclick="grade(this)"></a>
+                                    <a class="fa fa-star-o" id="2"
+                                       style="font-size: xx-large; margin-right: 5px"
+                                       onclick="grade(this)"></a>
+                                    <a class="fa fa-star-o" id="3"
+                                       style="font-size: xx-large; margin-right: 5px"
+                                       onclick="grade(this)"></a>
+                                    <a class="fa fa-star-o" id="4"
+                                       style="font-size: xx-large; margin-right: 5px"
+                                       onclick="grade(this)"></a>
+                                    <a class="fa fa-star-o" id="5"
+                                       style="font-size: xx-large; margin-right: 5px"
+                                       onclick="grade(this)"></a>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button class="back-to-prof-page" id="back-to-prof-page-id" onclick="showGrading()">
-                    შეფასება
-                </button>
-                <input type="hidden" value="-1" id="stars_rating" name="stars_rating">
-            </div>
-            <div class="before" id="before">
+                    <input type="hidden" value="-1" id="stars_rating" name="stars_rating">
+                    <input type="hidden" value="<%=quiz.getID()%>" id="quiz_id" name="quiz_id">
+                    <input type="hidden" value="<%=user.getID()%>" id="user_id" name="user_id">
+                    <button class="back-to-prof-page"
+                            type="submit"
+                            style="margin-top: 10px">
+                        შეფასება
+                    </button>
+                <%}%>
+            </form>
 
+
+            <div class="before" id="before">
                 <div class="overall-quiz-details">
                     <p>Your Score: <%=truncateDecimal(quizEvent.getUserScore(), 2)%>
                         /<%=truncateDecimal(quiz.getMaxScore(), 2)%>
@@ -112,17 +116,15 @@
                             Question currQuest = qe.getQuestion();
                     %>
                     <div class="question">
-                        <h3>კითხვა <%=i + 1%>
-                        </h3>
-                        <br>
+                        <h3>კითხვა <%=i + 1%></h3>
                         <div class="question-text-statement">
                             <% if (currQuest.isPictureQuestion()) { %>
                             <img sr="<%=currQuest.getPictureStatementURL()%>" class="small-question-image">
                             <%}%>
-                            <p><%=currQuest.getTextStatement()%>
-                            </p>
+                            <p><%=currQuest.getTextStatement()%></p>
                         </div>
-                        <br>
+                        <p style="padding-top: 0"> ავტორის კომენტარი: <%=currQuest.getComment()%></p>
+                        <p style="padding-top: 0"> შეკითხვის ჭყარო: <%=currQuest.getSource()%></p>
                         <div class="answers">
                   <span>
                     <span>სწორი პასუხები:</span>
@@ -183,27 +185,25 @@
                             i++;
                         }
                     %>
-                    <button class="back-to-prof-page" id="go-to-grading" onclick="showGrading()">
+                    <button class="back-to-prof-page" onclick="showGrading()">
                         შეფასებაზე გადასვლა
                     </button>
                 </div>
             </div>
         </div>
-</main>
+    </div>
 <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 
 <script>
-    let score = parseint(document.getelementbyid("userscore-id"));
-
     function grade(elem) {
         for (let i = 1; i <= 5; i++) {
-            document.getelementbyid(i).classname = "fa fa-star-o";
+            document.getElementById(i).className = "fa fa-star-o";
         }
         for (let i = 1; i <= elem.id; i++) {
-            document.getelementbyid(i).classname = "fa fa-star";
+            document.getElementById(i).className = "fa fa-star";
         }
-        document.getelementbyid("stars_rating").value = elem.id;
+        document.getElementById("stars_rating").value = elem.id;
     }
 
     function showGrading() {
@@ -211,13 +211,7 @@
         document.getElementById("after").style.display = "flex";
     }
 
-</script>
-<%!
-    private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
-        if (x > 0) {
-            return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_FLOOR);
-        } else {
-            return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_CEILING);
-        }
+    function openSearch() {
+        window.location.href = "SearchPage.jsp";
     }
-%>
+</script>

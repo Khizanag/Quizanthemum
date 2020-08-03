@@ -25,6 +25,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
     .fa:hover {
         color: white;
@@ -35,12 +36,9 @@
     }
     .onHover {
         display: none;
-        position: absolute;
-        right: 30px;
-        bottom: 150px;
     }
     .toHover:hover + .onHover {
-        display: block;
+        display: flex;
         color: white;
     }
 
@@ -76,19 +74,21 @@
             <p style="color:white"> ავტორი: <%=quiz.getAuthor().getFirstName()%> <%=quiz.getAuthor().getLastName()%></p>
             <div class="quiz-date-and-rait-holder">
                 <p style=" margin-bottom: 0; color:white"> შექმნილია: <%=quiz.getCreationDate()%> </p>
-                <div class="toHover">
-                    <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
-                        <ul class="raiting-icons" id="stars-holder">
-                            <% for(int j = 1; j <= 3; j++) { %>
-                            <a class="fa fa-star" style="margin-right: 2px;"></a>
-                            <%}%>
-                            <% for(int j = 4; j <= 5; j++) { %>
-                            <a class="fa fa-star-o" style="margin-right: 2px;"></a>
-                            <%}%>
-                        </ul>
+                <div style="display: flex; align-items:center; flex-direction: column; margin-top: -30px">
+                    <div class="toHover">
+                        <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
+                            <ul class="raiting-icons" id="stars-holder">
+                                <% for(int j = 1; j <= quizManager.getQuizRating(quiz.getID()); j++) { %>
+                                <a class="fa fa-star" style="margin-right: 2px;"></a>
+                                <%}%>
+                                <% for(int j = quizManager.getQuizRating(quiz.getID())+1; j <= 5; j++) { %>
+                                <a class="fa fa-star-o" style="margin-right: 2px;"></a>
+                                <%}%>
+                            </ul>
+                        </div>
                     </div>
+                    <p class="onHover"> <%=quizManager.getQuizRating(quiz.getID())%>/5</p>
                 </div>
-                <p class="onHover"> ქვიზის რეიტინგი: 3/5 </p>
             </div>
             <br>
             <label><b>practice mode</b></label>
