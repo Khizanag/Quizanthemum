@@ -1,6 +1,9 @@
 package Model.Managers;
 
 import Configs.*;
+import Controller.Classes.OtherClasses.Category;
+import Controller.Classes.Quiz.Question.Question;
+import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.User.User;
 import Model.DatabaseConnector;
 
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Configs.Config.DEFAULT_ID;
+import static Configs.Config.*;
 import static Configs.QuizEventTableConfig.*;
 
 
@@ -183,4 +186,44 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return getUser(username).isCorrectPassword(password);
     }
 
+    private User buildUserFromResultSet(ResultSet set) {
+        try {
+            int id = set.getInt(USERS_TABLE_COLUMN_1_ID);
+            String username = set.getString(USERS_TABLE_COLUMN_2_USERNAME);
+            String passwordHash = set.getString(USERS_TABLE_COLUMN_3_PASSWORD_HASH);
+            String firstName = set.getString(USERS_TABLE_COLUMN_4_FIRST_NAME);
+            String lastName = set.getString(USERS_TABLE_COLUMN_5_LAST_NAME);
+            int role = set.getInt(USERS_TABLE_COLUMN_6_ROLE);
+            String city = set.getString(USERS_TABLE_COLUMN_7_CITY);
+            String country = set.getString(USERS_TABLE_COLUMN_8_COUNTRY);
+            String email = set.getString(USERS_TABLE_COLUMN_9_EMAIL);
+            String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
+            Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
+            Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
+            List<Integer> friendIDs = getUserFriends(id);
+
+            return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
+                    birthDate, registrationDate, friendIDs);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<User> getUsers() {
+        String query = "SELECT * FROM " + USERS_TABLE_NAME;
+        List<User> users = new ArrayList<>();
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                User newUser = buildUserFromResultSet(set);
+                users.add(newUser);
+            }
+            qStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+    }
 }

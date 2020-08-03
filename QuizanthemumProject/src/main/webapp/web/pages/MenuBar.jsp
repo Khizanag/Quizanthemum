@@ -69,10 +69,10 @@
                 <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
             </ul>
         </nav>
-        <div class="search-items">
+        <form class="search-items" action="/SearchPage" method="get">
             <input type="text" id="search-input" placeholder="რა გაინტერესებთ..." name="search">
-            <button type="submit" onClick="openSearch()"><i class="fa fa-search"></i></button>
-        </div>
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
     </div>
 </div>
 
@@ -81,4 +81,5 @@
         document.getElementById('chosen-category').value = ID;
         document.getElementById('categories-form').submit();
     }
+
 </script>
