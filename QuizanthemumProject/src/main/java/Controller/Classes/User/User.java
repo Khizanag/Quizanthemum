@@ -14,25 +14,27 @@ import static Configs.Config.DEFAULT_ID;
 
 public class User {
 
+    private static final String DEFAULT_PICTURE = "/web/images/common/defProfPic.jpg";
+
     private int id;
-    private String username;
+    private final String username;
     private String passwordHash;
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
     // TODO
     private String passwordSalt;
-    private String photoURL;
-    private int role;
-    private int quizzesPlayed;
-    private int quizzesMade;
-    private int challengesPlayed;
-    private int challengesWon;
-    private String city;
-    private String country;
-    private String phoneNumber;
-    private String email;
-    private Date birthDate;
-    private Date registrationDate;
+    private String pictureURL;
+    private final int role;
+    private final int quizzesPlayed;
+    private final int quizzesMade;
+    private final int challengesPlayed;
+    private final int challengesWon;
+    private final String city;
+    private final String country;
+    private final String phoneNumber;
+    private final String email;
+    private final Date birthDate;
+    private final Date registrationDate;
     private List<Integer> friendIDs;
     private List<QuizEvent> quizEvents;
     private List<Challenge> challenges;
@@ -41,27 +43,29 @@ public class User {
     // for creating object from DB
     public User(int id, String username, String passwordHash, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
-                Date birthDate, Date registrationDate, List<Integer> friendIDs) {
-        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate);
+                Date birthDate, Date registrationDate, String pictureURL, String passwordSalt, List<Integer> friendIDs) {
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, pictureURL);
         this.id = id;
         this.passwordHash = passwordHash;
+        this.passwordSalt = passwordSalt;
         this.friendIDs = friendIDs;
     }
 
     // for first time creating
-    public User(String username, String password, String firstName, String lastName,
+    public User(String username, String password, String passwordSalt, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
                 Date birthDate, Date registrationDate){
-        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate);
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, DEFAULT_PICTURE);
+        this.passwordSalt = passwordSalt;
         this.id = DEFAULT_ID;
-        this.passwordHash = hashFunction(password);
+        this.passwordHash = hashFunction(password + passwordSalt);
         this.friendIDs = new ArrayList<>();
     }
 
     // helper constructor used by other ones
     private User(String username, String firstName, String lastName,
                  int role, String  city, String county, String phoneNumber, String email,
-                 Date birthDate, Date registrationDate){
+                 Date birthDate, Date registrationDate, String pictureURL){
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,6 +76,7 @@ public class User {
         this.email = email;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
+        this.pictureURL = pictureURL;
         this.challengesPlayed = 0;
         this.challengesWon = 0;
         this.quizzesMade = 0;
@@ -194,7 +199,8 @@ public class User {
     }
 
     public boolean isCorrectPassword (String password) {
-        return passwordHash.equals(hashFunction(password));
+        String fullPassword = password + passwordSalt;
+        return passwordHash.equals(hashFunction(fullPassword));
     }
 
     public List<Challenge> getChallenges(){
@@ -247,7 +253,7 @@ public class User {
     }
 
     public String getPhotoURL() {
-        return photoURL;
+        return pictureURL;
     }
 
     // TODO get rid of public getter

@@ -11,6 +11,8 @@ import java.util.List;
 
 import static Configs.Config.DEFAULT_ID;
 import static Configs.QuizEventTableConfig.*;
+import static Configs.QuizRatingEventsConfig.QUIZ_RATING_EVENTS_TABLE_NAME;
+import static Configs.QuizTableConfig.QUIZ_TABLE_NAME;
 
 
 public class UsersManager implements UsersTableConfig, QuestionTableConfig,
@@ -19,6 +21,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     private final Connection connection;
     private Statement statement;
     private ManagersManager manager;
+    private String currentSalt;
 
     public UsersManager(ManagersManager manager){
         this.manager = manager;
@@ -60,10 +63,12 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
             Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
             Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
+            String pictureURL = set.getString(USERS_TABLE_COLUMN_13_PHOTO_URL);
+            String passwordSalt = set.getString(USERS_TABLE_COLUMN_14_PASSWORD_SALT);
             List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, friendIDs);
+                    birthDate, registrationDate, pictureURL, passwordSalt, friendIDs);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -148,6 +153,20 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return friendIDs;
     }
 
+    public void insertNewProfilePicture(int userID, String pictureURL) {
+        String query = "UPDATE " + QUIZ_TABLE_NAME + " SET " +
+                USERS_TABLE_COLUMN_13_PHOTO_URL + " = " + pictureURL +
+                " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
+    }
+
+
     public int insertUser(User user) {
         String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
@@ -164,7 +183,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             pstmt.setDate(10, new java.sql.Date(user.getBirthDate().getTime()));
             pstmt.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
             pstmt.setString(12, user.getPhotoURL());
-            pstmt.setString(13, user.getPasswordSalt());
+            pstmt.setString(13, currentSalt);
             pstmt.executeUpdate();
 
             return DatabaseConnector.getLastInsertID();
@@ -183,4 +202,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return getUser(username).isCorrectPassword(password);
     }
 
+    public void setCurrentSalt(String currentSalt) {
+        this.currentSalt = currentSalt;
+    }
 }

@@ -43,9 +43,7 @@ create table quizzes(
                         constraint foreign key (AUTHOR_ID)
                             references users(id) on update cascade on delete restrict,
                         CREATION_DATE date,
-                        MAX_SCORE double,
-                        STARS_RATING_SUM int,
-                        NUM_RATERS int
+                        MAX_SCORE double
 );
 
 
@@ -232,17 +230,17 @@ create table quiz_rating_events(
 
 # ************************************************** DROP TABLES  *************************************************
 
-drop table if exists question_events;
-drop table if exists questions;
-drop table if exists quiz_events;
-drop table if exists quizzes;
-drop table if exists friendships;
-drop table if exists challenges;
-drop table if exists achievement_events;
-drop table if exists achievements;
-drop table if exists users;
-drop table if exists categories;
-drop table if exists quiz_rating_events;
+# drop table if exists question_events;
+# drop table if exists questions;
+# drop table if exists quiz_events;
+# drop table if exists quizzes;
+# drop table if exists friendships;
+# drop table if exists challenges;
+# drop table if exists achievement_events;
+# drop table if exists achievements;
+# drop table if exists users;
+# drop table if exists categories;
+# drop table if exists quiz_rating_events;
 
 
 
@@ -260,6 +258,19 @@ SELECT * FROM quizzes;
 SELECT * FROM users;
 SELECT * FROM quiz_rating_events;
 
+
+# *********************************************** ADD ALL CATEGORIES   ***********************************************
+
+INSERT INTO categories VALUES (null, 'biology');
+INSERT INTO categories VALUES (null, 'geography');
+INSERT INTO categories VALUES (null, 'history');
+INSERT INTO categories VALUES (null, 'literature');
+INSERT INTO categories VALUES (null, 'maths');
+INSERT INTO categories VALUES (null, 'sport');
+INSERT INTO categories VALUES (null, 'physics');
+INSERT INTO categories VALUES (null, 'movies');
+INSERT INTO categories VALUES (null, 'chemistry');
+INSERT INTO categories VALUES (null, 'art');
 
 # *********************************************** ADD ALL CATEGORIES   ***********************************************
 
