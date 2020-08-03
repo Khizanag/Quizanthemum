@@ -110,6 +110,7 @@ html {
     padding-right: 12px;
     padding-left: 12px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .nav-item:hover {

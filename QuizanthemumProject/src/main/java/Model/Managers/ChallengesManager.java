@@ -6,6 +6,8 @@ import Model.DatabaseConnector;
 
 import javax.servlet.ServletContext;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChallengesManager implements ChallengesTableConfig {
 
@@ -46,8 +48,34 @@ public class ChallengesManager implements ChallengesTableConfig {
                 + " WHERE " + CHALLENGES_TABLE_COLUMN_1_ID + " = " + ID + ";";
         try {
             ResultSet resultSet = statement.executeQuery(query);
-            if(!resultSet.next())
-                throw new SQLException();
+            if(resultSet.next())
+                return buildChallenge(resultSet);
+        } catch (SQLException throwables) { }
+        return null;
+
+    }
+
+    public List<Challenge> getChallengesOf(int id){
+        String query = "SELECT * "
+                + " FROM " + CHALLENGES_TABLE_NAME
+                + " WHERE " + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID + " = " + id
+                + "         OR " + CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID + " = " + id
+                + ";\n";
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            List<Challenge> challenges = new ArrayList<>();
+            while(resultSet.next()){
+                challenges.add(buildChallenge(resultSet));
+            }
+            return challenges;
+        } catch (SQLException throwables){}
+        return null;
+    }
+
+    private Challenge buildChallenge(ResultSet resultSet){
+        try{
+            int ID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_1_ID);
             int challengerUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID);
             int challengedUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID);
             int challengerQuizEventID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_4_CHALLENGER_QUIZ_EVENT_ID);
