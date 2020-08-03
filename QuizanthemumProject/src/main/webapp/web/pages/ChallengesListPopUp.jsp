@@ -28,8 +28,8 @@
 <% if(user != null) {
     List<Challenge> challenges = challengesManager.getChallengesOf(user.getID());
     user.setChallenges(challenges);
-    List<Challenge> waitingChallengedChallenges = (user == null) ? null : user.getWaitingChallengedChallenges();
-    List<Challenge> waitingChallengerChallenges = (user == null) ? null : user.getWaitingChallengerChallenges();
+    List<Challenge> waitingChallengedChallenges = user.getWaitingChallengedChallenges();
+    List<Challenge> waitingChallengerChallenges = user.getWaitingChallengerChallenges();
 %>
 
     <div class="friends-list-popup" id="challenges-list-popup-id">
@@ -47,11 +47,12 @@
                     User challengerUser = challenge.getChallengerUser();
             %>
                 <div class = "friend-list-row">
-                <span class="nav-item" style="cursor: pointer;"><%=challengerUser.getUsername()%></span>
-                <div class = "friend-challenge-remove-btns">
-                    <button class="challenge-btn" id="challenge-btn-id-0_" onclick="acceptChallenge(this)" style="color: green">დათანხმება</button>
-                    <button class="remove-btn" id="remove-btn-id-1_" onclick="rejectChallenge(this)" style="color: red">უარყოფა</button>
-                </div>
+                    <span class="nav-item" style="cursor: pointer;"><%=challengerUser.getUsername()%></span>
+                    <span class="nav-item" style="cursor: pointer;" onclick="showQuizOfChallenge(this)" value="<%=challenge.getQuizID()%>">ქვიზი</span>
+                    <div class = "friend-challenge-remove-btns">
+                        <button class="challenge-btn" id="challenge-btn-id-0_" onclick="acceptChallenge(this)" style="color: green">დათანხმება</button>
+                        <button class="remove-btn" id="remove-btn-id-1_" onclick="rejectChallenge(this)" style="color: red">უარყოფა</button>
+                    </div>
             </div>
         <% } %>
 
@@ -101,5 +102,10 @@
         document.getElementById("abolish-my-challenge-form-challenge-id").value = btn.value;
         console.log("challenge-id" + btn.value);
         document.getElementById("abolish-my-challenge-form").submit();
+    }
+
+    function showQuizOfChallenge(challengeElem){
+        console.log('showQuizOfChallenge');
+        let challengeID = parseInt(challengeElem.value);
     }
 </script>

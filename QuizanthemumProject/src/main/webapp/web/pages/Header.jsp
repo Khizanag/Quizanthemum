@@ -20,6 +20,8 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
+<% response.setHeader("Content-Type", "text/xml; charset=UTF-8"); %>
+
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
 
 <jsp:include page="/web/pages/FriendsListPopup.jsp"/>

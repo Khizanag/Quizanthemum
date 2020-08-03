@@ -27,15 +27,18 @@ public class ChallengesManager implements ChallengesTableConfig {
 
     public ManagersManager getManager(){ return this.manager; }
 
-    public void insertChallenge(){
+    public void insertChallenge(Challenge challlenge){
         String query = "INSERT INTO " + CHALLENGES_TABLE_NAME
-                + " VALUES (" + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID
-                + ", " + CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID
-                + ", " + CHALLENGES_TABLE_COLUMN_4_CHALLENGER_QUIZ_EVENT_ID
-                + ", " + CHALLENGES_TABLE_COLUMN_5_CHALLENGED_QUIZ_EVENT_ID
-                + ", " + CHALLENGES_TABLE_COLUMN_6_IS_FINISHED
-                + ", " + CHALLENGES_TABLE_COLUMN_7_WINNER_USER_ID
-                + ", " + CHALLENGES_TABLE_COLUMN_8_CHALLENGING_DATE
+                + " VALUES (null"
+                + ", " + challlenge.getQuizID()
+                + ", " + challlenge.getChallengerUserID()
+                + ", " + challlenge.getChallengedUserID()
+                + ", " + challlenge.getChallengerQuizEventID()
+                + ", " + challlenge.getChallengedQuizEventID()
+                + ", " + challlenge.isFinished()
+                + ", " + challlenge.getWinnerUserID()
+                + ", " + challlenge.getChallengingDate()
+                + ", " + challlenge.getAcceptingDate()
                 + ")\n";
         try {
             statement.execute(query);
@@ -58,8 +61,8 @@ public class ChallengesManager implements ChallengesTableConfig {
     public List<Challenge> getChallengesOf(int id){
         String query = "SELECT * "
                 + " FROM " + CHALLENGES_TABLE_NAME
-                + " WHERE " + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID + " = " + id
-                + "         OR " + CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID + " = " + id
+                + " WHERE " + CHALLENGES_TABLE_COLUMN_3_CHALLENGER_USER_ID + " = " + id
+                + "         OR " + CHALLENGES_TABLE_COLUMN_4_CHALLENGED_USER_ID + " = " + id
                 + ";\n";
         try{
             Statement statement = connection.createStatement();
@@ -76,15 +79,16 @@ public class ChallengesManager implements ChallengesTableConfig {
     private Challenge buildChallenge(ResultSet resultSet){
         try{
             int ID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_1_ID);
-            int challengerUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID);
-            int challengedUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID);
-            int challengerQuizEventID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_4_CHALLENGER_QUIZ_EVENT_ID);
-            int challengedQuizEventID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_5_CHALLENGED_QUIZ_EVENT_ID);
-            boolean isFinished = resultSet.getBoolean(CHALLENGES_TABLE_COLUMN_6_IS_FINISHED);
-            int winnerUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_7_WINNER_USER_ID);
-            Date challengingDate = resultSet.getDate(CHALLENGES_TABLE_COLUMN_8_CHALLENGING_DATE);
-            Date acceptingDate = resultSet.getDate(CHALLENGES_TABLE_COLUMN_9_ACCEPTING_DATE);
-            return new Challenge(ID, challengerUserID, challengedUserID, challengerQuizEventID, challengedQuizEventID, isFinished, winnerUserID, challengingDate, acceptingDate, this);
+            int quizID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_2_QUIZ_ID);
+            int challengerUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_3_CHALLENGER_USER_ID);
+            int challengedUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_4_CHALLENGED_USER_ID);
+            int challengerQuizEventID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_5_CHALLENGER_QUIZ_EVENT_ID);
+            int challengedQuizEventID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_6_CHALLENGED_QUIZ_EVENT_ID);
+            boolean isFinished = resultSet.getBoolean(CHALLENGES_TABLE_COLUMN_7_IS_FINISHED);
+            int winnerUserID = resultSet.getInt(CHALLENGES_TABLE_COLUMN_8_WINNER_USER_ID);
+            Date challengingDate = resultSet.getDate(CHALLENGES_TABLE_COLUMN_9_CHALLENGING_DATE);
+            Date acceptingDate = resultSet.getDate(CHALLENGES_TABLE_COLUMN_10_ACCEPTING_DATE);
+            return new Challenge(ID, quizID, challengerUserID, challengedUserID, challengerQuizEventID, challengedQuizEventID, isFinished, winnerUserID, challengingDate, acceptingDate, this);
         } catch (SQLException throwables) { }
         return null;
     }

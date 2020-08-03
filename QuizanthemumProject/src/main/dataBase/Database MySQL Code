@@ -252,6 +252,7 @@ INSERT INTO categories VALUES (null, 'ლიტერატურა');
 INSERT INTO categories VALUES (null, 'მათემატიკა');
 INSERT INTO categories VALUES (null, 'სპორტი');
 INSERT INTO categories VALUES (null, 'ფიზიკა');
-INSERT INTO categories VALUES (null, 'ფილმები');
+INSERT INTO categories VALUES (null, 'კინემატოგრაფია');
 INSERT INTO categories VALUES (null, 'ქიმია');
 INSERT INTO categories VALUES (null, 'ხელოვნება');
+
