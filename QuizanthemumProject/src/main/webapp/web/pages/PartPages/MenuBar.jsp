@@ -49,7 +49,7 @@
                         <a class="nav-item grayeble" target="_self" href="/DisplayMostPopularQuizzes">პოპულარული</a>
                         <a class="nav-item grayeble" target="_self" href="/DisplayHighestRatedQuizzes">მაღალრეიტინგული</a>
                         <% if(user != null){ %>
-                            <a class="nav-item grayeble" target="_self" href="/CreateQuiz">ქვიზის შექმნა</a>
+                            <a class="nav-item grayeble" target="_self" href="/QuizCreation">ქვიზის შექმნა</a>
                         <% } %>
                     </div>
                 </div>

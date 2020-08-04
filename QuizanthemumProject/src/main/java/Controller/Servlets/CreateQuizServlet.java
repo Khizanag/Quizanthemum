@@ -19,14 +19,8 @@ import java.io.IOException;
 import static Configs.AttributesKeysConfig.CREATING_QUIZ_STR;
 import static Configs.Config.*;
 
-@WebServlet(name = "QuizCreationStartedServlet", urlPatterns = "/QuizCreationStarted")
-public class QuizCreationStartedServlet extends HttpServlet {
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        //Your code // TODO deletable???
-    }
+@WebServlet(name = "CreateQuizServlet", urlPatterns = "/CreateQuiz")
+public class CreateQuizServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,14 +33,14 @@ public class QuizCreationStartedServlet extends HttpServlet {
         CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
 
         String name = request.getParameter("quiz_name");
-        int categoryID = 1; //Integer.parseInt(request.getParameter("category")); // TODO
+        int categoryID = Integer.parseInt(request.getParameter("category"));
         Category category = categoriesManager.getCategory(categoryID);
         String description = request.getParameter("quiz_description");
         String iconUrl = request.getParameter("quiz_icon_url");
         String shuffleCheckboxValue = request.getParameter("quiz_must_shuffle");
         boolean mustShuffleQuestions = (shuffleCheckboxValue != null);
         String comment = request.getParameter("quiz_comment");
-        User author = (User) request.getServletContext().getAttribute("logedInUser");
+        User author = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
 
         Quiz newQuiz = new Quiz(name, category, description, iconUrl, mustShuffleQuestions, comment, author);
 
