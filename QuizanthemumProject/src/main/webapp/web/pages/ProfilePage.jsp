@@ -8,17 +8,16 @@
 <%@ page import="java.util.List" %>
 <%@ page import="static Configs.Config.*" %>
 <%@ page import="Model.Managers.UsersManager" %>
-
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="../styles/common.css">
-	<link rel="stylesheet" href="../styles/homePage.css">
-	<link rel="stylesheet" href="../styles/breakpoints.css">
-    <link rel="stylesheet" href="../styles/quizCreation.css">
-    <link rel="stylesheet" href="../styles/profilePage.css">
+	<link rel="stylesheet" href="web/styles/common.css">
+	<link rel="stylesheet" href="web/styles/homePage.css">
+	<link rel="stylesheet" href="web/styles/breakpoints.css">
+    <link rel="stylesheet" href="web/styles/quizCreation.css">
+    <link rel="stylesheet" href="web/styles/profilePage.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="/web/js/profileStuff.js"></script>
@@ -32,7 +31,6 @@
         int ID = Integer.parseInt(request.getParameter("id"));
         User user = usersManager.getUser(ID);
     %>
-
 </head>
 
 <body>
@@ -92,7 +90,8 @@
                 <div class="user-city"><%="ქალაქი: "+city %></div>
             </div>
             <div class = "profile-info">
-                <img class = "profile-picture-big" id="prof-pic-big-id"src = "../images/common/defProfPic.jpg" onerror="this.src='../images/common/defProfPic.jpg';">
+                <img class = "profile-picture-big" id="prof-pic-big-id"
+                     src = "web/images/common/defProfPic.jpg" onerror="this.src='../images/common/defProfPic.jpg';">
                 <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
                 <div class="profile-name"><%=user.getUsername()%></div>
                 <%
@@ -109,7 +108,8 @@
                 <div class="user-details"><%=status%></div>
             </div>
             <div class="profile-details-info">
-                <div class = "quizzes-played"><%="ნათამაშები ქვიზები: "+user.getQuizzesPlayed()%></div>
+<%--                <div class = "quizzes-played"><%="ნათამაშები ქვიზები: "+usersManager.getQuizzesPlayedCount(user.getID())%></div>--%>
+<%--                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: "+usersManager.getUserTotalPoints(user.getID())%></div>--%>
                 <div class =  "challenges-played"><%="ნათამაშები ჩელენჯები: "+user.getChallengesPlayed()%></div>
                 <div class="challenges-won"><%="მოგებული ჩელენჯები: "+user.getChallengesWon()%></div>
                 <%

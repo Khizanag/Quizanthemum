@@ -25,7 +25,6 @@ public class User {
     private String passwordSalt;
     private String pictureURL;
     private final int role;
-    private final int quizzesPlayed;
     private final int quizzesMade;
     private final int challengesPlayed;
     private final int challengesWon;
@@ -80,7 +79,6 @@ public class User {
         this.challengesPlayed = 0;
         this.challengesWon = 0;
         this.quizzesMade = 0;
-        this.quizzesPlayed = 0;
     }
 
     private String hashFunction(String password) {
@@ -132,8 +130,6 @@ public class User {
     }
 
     public int getRole(){ return role; }
-
-    public int getQuizzesPlayed(){ return quizzesPlayed; }
 
     public int getChallengesPlayed(){ return challengesPlayed; }
 

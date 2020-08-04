@@ -129,7 +129,7 @@
     </div>
     <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:1600px;height:560px;overflow:hidden;">
         <div style="background-color:#000000;">
-            <img data-u="image" style="opacity:0.8;" data-src="web/slider/img/px-back-view-boats-couple-2612852-1600.jpg" />
+            <img data-u="image" style="opacity:0.8;" data-src="web/slider/img/slider1.jpg" />
             <div data-ts="flat" data-p="1080" style="left:0px;top:0px;width:1600px;height:560px;position:absolute;">
                 <svg viewbox="0 0 600 400" data-ts="preserve-3d" width="600" height="400" data-tchd="jssor_1_msk_3" style="left:255px;top:0px;display:block;position:absolute;overflow:visible;">
                     <g mask="url(#jssor_1_msk_3)">
@@ -146,6 +146,25 @@
                 </svg>
             </div>
         </div>
+        <div style="background-color:#000000;">
+            <img data-u="image" style="opacity:0.8;" data-src="web/slider/img/slider2.png" />
+            <div data-ts="flat" data-p="1080" style="left:0px;top:0px;width:1600px;height:560px;position:absolute;">
+                <svg viewbox="0 0 600 400" data-ts="preserve-3d" width="600" height="400" data-tchd="jssor_1_msk_3" style="left:255px;top:0px;display:block;position:absolute;overflow:visible;">
+                    <g mask="url(#jssor_1_msk_3)">
+                        <path data-to="300px -180px" fill="none" stroke="rgba(250,251,252,0.5)" stroke-width="20" d="M410-350L410-10L190-10L190-350Z" x="190" y="-350" data-t="10" style="position:absolute;overflow:visible;"></path>
+                    </g>
+                </svg>
+                <svg viewbox="0 0 800 72" data-to="50% 50%" width="800" height="72" data-t="11" style="left:-800px;top:78px;display:block;position:absolute;font-family:'Roboto Condensed',sans-serif;font-size:84px;font-weight:900;overflow:visible;">
+                    <text fill="#fafbfc" text-anchor="middle" x="400" y="72">Quizanthemum
+                    </text>
+                </svg>
+                <svg viewbox="0 0 800 72" data-to="50% 50%" width="800" height="72" data-t="12" style="left:1600px;top:153px;display:block;position:absolute;font-family:'Roboto Condensed',sans-serif;font-size:60px;font-weight:900;overflow:visible;">
+                    <text fill="#fafbfc" text-anchor="middle" x="400" y="72">ENJOY OUR QUIZ PAGE
+                    </text>
+                </svg>
+            </div>
+        </div>
+
         <div style="background-color:#000000;">
             <img data-u="image" style="opacity:0.8;" data-src="web/slider/img/banner.jpg" />
             <div data-ts="flat" data-p="275" data-po="40% 50%" style="right:250px;top:40px;width:800px;height:300px;position:absolute;">
