@@ -11,7 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
-    <link rel="icon" type="image/png" href=/"web/images/common/icon.png"/>
+    <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/homePage.css">
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
@@ -19,8 +20,9 @@
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
     <link rel="stylesheet" href="/web/styles/scroll.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
-    <script src="/web/js/profileStuff.js"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/web/js/profileStuff.js"></script>
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
     <%
@@ -30,11 +32,11 @@
         List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
     %>
-    <jsp:include page="/web/pages/Header.jsp"/>
-    <jsp:include page="/web/pages/MenuBar.jsp"/>
 </head>
 
 <body>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <div class="slider"/>
 
@@ -84,6 +86,37 @@
     <jsp:include page="/web/pages/Footer.jsp"/>
 </body>
 
+
+
+<style>
+
+    .section-header {
+        padding: 20px;
+    }
+    h3 {
+        color: #f07237;
+        font-size: x-large;
+    }
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .onHover {
+        position: absolute;
+        right: 65px;
+        bottom: 0;
+        display: none;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
+</style>
+
 <script>
     $(document).ready(function(){
         $('.slider').load("web/slider/slider.jsp");
@@ -114,32 +147,3 @@
         form.submit();
     }
 </script>
-
-<style>
-
-    .section-header {
-        padding: 20px;
-    }
-    h3 {
-        color: #f07237;
-        font-size: x-large;
-    }
-    .fa:hover {
-        color: white;
-    }
-    .toHover {
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-    .onHover {
-        position: absolute;
-        right: 65px;
-        bottom: 0;
-        display: none;
-    }
-    .toHover:hover + .onHover {
-        display: block;
-        color: white;
-    }
-</style>

@@ -23,7 +23,6 @@ public class User {
     private String passwordHash;
     private final String firstName;
     private final String lastName;
-    // TODO
     private String passwordSalt;
     private String pictureURL;
     private final int role;
@@ -156,6 +155,12 @@ public class User {
     public Date getRegistrationDate() { return registrationDate; }
 
     public List<Challenge> getChallenges(){ return challenges; }
+
+
+
+    public void setID(int ID){
+        this.id = ID;
+    }
 
     public void setChallenges(List<Challenge> challenges){
         this.challenges = challenges;

@@ -55,6 +55,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             userManager.setCurrentSalt(salt);
             User newUser = new User(username, password, salt, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
             int ID = userManager.insertUser(newUser);
+            newUser.setID(ID);
 
             request.getServletContext().setAttribute(LOGGED_IN_USER, newUser);
             request.getServletContext().removeAttribute(errorMessage);
