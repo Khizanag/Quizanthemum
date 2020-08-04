@@ -47,9 +47,27 @@
         color: #f07237;
         font-size: x-large;
     }
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .onHover {
+        position: absolute;
+        right: 65px;
+        bottom: 0;
+        display: none;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
 </style>
 <body>
-<jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <div class="slider"></div>
@@ -68,16 +86,19 @@
                         <p class="quiz-small-description" style="width: 282px;">
                             <%=currQuiz.getDescription()%>
                         </p>
-                        <div class="raiting-icons-holder" style="position: absolute; bottom: 5px; color:white">
-                            <ul class="raiting-icons" id="stars-holder">
-                                <% for(int j = 1; j <= 3; j++) { %>
-                                <a class="fa fa-star" style="margin-right: 2px;"></a>
-                                <%}%>
-                                <% for(int j = 4; j <= 5; j++) { %>
-                                <a class="fa fa-star-o" style="margin-right: 2px;"></a>
-                                <%}%>
-                            </ul>
+                        <div class="toHover">
+                            <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
+                                <ul class="raiting-icons" id="stars-holder">
+                                    <% for(int j = 1; j <= quizManager.getQuizRating(currQuiz.getID()); j++) { %>
+                                    <a class="fa fa-star" style="margin-right: 2px;"></a>
+                                    <%}%>
+                                    <% for(int j = quizManager.getQuizRating(currQuiz.getID())+1; j <= 5; j++) { %>
+                                    <a class="fa fa-star-o" style="margin-right: 2px;"></a>
+                                    <%}%>
+                                </ul>
+                            </div>
                         </div>
+                        <p class="onHover"> <%=quizManager.getQuizRating(currQuiz.getID())%>/5</p>
                     </div>
                     <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
                 </div>
@@ -101,18 +122,17 @@
 
 <script>
     let indexLeft = 0;
-    let indexRight = 0;
+    let indexRight = 3;
     function scrlLeft() {
         if(indexLeft != 0) {
             console.log(indexLeft);
-            document.getElementById(indexLeft-1).style.display = 'block';
+            document.getElementById(indexLeft-1).style.display = 'flex';
             indexLeft--;
         }
     }
 
     function scrollRight(numElems) {
-        indexRight = numElems-1;
-        if(indexRight != indexLeft+2) {
+        if(indexRight != indexLeft+3 || numElems > 4) {
             document.getElementById(indexLeft).style.display = 'none';
             indexLeft++;
         }

@@ -22,14 +22,16 @@ public class QuizEvent {
     private int questionEventIdx;                               // keeps track of current question event
     private final List<QuestionEvent> questionEvents;           // keeps filled question events
     private double userTotalScore;                              // counts user's total score
+    private boolean practiceMode;
 
     /* constructor */
 
-    public QuizEvent(User user, Quiz quiz) {
+    public QuizEvent(User user, Quiz quiz, boolean isPracticeMode) {
         this.id = -1;
         this.user = user;
         this.quiz = quiz;
         this.questionEvents = new ArrayList<QuestionEvent>();
+        this.practiceMode = isPracticeMode;
     }
 
     // create from database
@@ -57,6 +59,8 @@ public class QuizEvent {
 
     public Date getStartDate() { return startDate; }
 
+    public boolean isPracticeMode() { return practiceMode; }
+
 
     /* public methods */
 
@@ -82,7 +86,7 @@ public class QuizEvent {
 
     // returns current question event to user to fill it
     public QuestionEvent getNextEmptyQuestionEvent() {
-        QuestionEvent currentQuestionEvent = new QuestionEvent(id, quiz.getQuestion(questionIdx), false, new Date());
+        QuestionEvent currentQuestionEvent = new QuestionEvent(quiz.getQuestion(questionIdx), false, new Date());
         questionIdx += 1;
         return currentQuestionEvent;
     }
@@ -108,5 +112,7 @@ public class QuizEvent {
         return id;
     }
 
-    // TODO modify. grading...
+    public void shuffleQuestions() {
+        quiz.shuffleQuestions();
+    }
 }

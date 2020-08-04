@@ -1,6 +1,9 @@
 package Model.Managers;
 
 import Configs.*;
+import Controller.Classes.OtherClasses.Category;
+import Controller.Classes.Quiz.Question.Question;
+import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.User.User;
 import Model.DatabaseConnector;
 
@@ -9,8 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Configs.Config.DEFAULT_ID;
+import static Configs.Config.*;
 import static Configs.QuizEventTableConfig.*;
+import static Configs.QuizRatingEventsConfig.QUIZ_RATING_EVENTS_TABLE_NAME;
+import static Configs.QuizTableConfig.QUIZ_TABLE_NAME;
 
 
 public class UsersManager implements UsersTableConfig, QuestionTableConfig,
@@ -19,6 +24,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     private final Connection connection;
     private Statement statement;
     private ManagersManager manager;
+    private String currentSalt;
 
     public UsersManager(ManagersManager manager){
         this.manager = manager;
@@ -60,10 +66,12 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
             Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
             Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
+            String pictureURL = set.getString(USERS_TABLE_COLUMN_13_PHOTO_URL);
+            String passwordSalt = set.getString(USERS_TABLE_COLUMN_14_PASSWORD_SALT);
             List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, friendIDs);
+                    birthDate, registrationDate, pictureURL, passwordSalt, friendIDs);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -136,7 +144,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
                 " WHERE " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + id +
                 ";\n";
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement newStatement = connection.createStatement();
+            ResultSet set = newStatement.executeQuery(query);
             while(set.next()){
                 int friendID = set.getInt(unionColumnName);
                 friendIDs.add(friendID);
@@ -147,8 +156,22 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return friendIDs;
     }
 
+    public void insertNewProfilePicture(int userID, String pictureURL) {
+        String query = "UPDATE " + QUIZ_TABLE_NAME + " SET " +
+                USERS_TABLE_COLUMN_13_PHOTO_URL + " = " + pictureURL +
+                " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
+    }
+
+
     public int insertUser(User user) {
-        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, user.getUsername());
@@ -162,6 +185,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             pstmt.setString(9, user.getMobileNumber());
             pstmt.setDate(10, new java.sql.Date(user.getBirthDate().getTime()));
             pstmt.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
+            pstmt.setString(12, user.getPhotoURL());
+            pstmt.setString(13, currentSalt);
             pstmt.executeUpdate();
 
             return DatabaseConnector.getLastInsertID();
@@ -180,4 +205,51 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return getUser(username).isCorrectPassword(password);
     }
 
+    public void setCurrentSalt(String currentSalt) {
+        this.currentSalt = currentSalt;
+    }
+
+    private User buildUserFromResultSet(ResultSet set) {
+        try {
+            int id = set.getInt(USERS_TABLE_COLUMN_1_ID);
+            String username = set.getString(USERS_TABLE_COLUMN_2_USERNAME);
+            String passwordHash = set.getString(USERS_TABLE_COLUMN_3_PASSWORD_HASH);
+            String firstName = set.getString(USERS_TABLE_COLUMN_4_FIRST_NAME);
+            String lastName = set.getString(USERS_TABLE_COLUMN_5_LAST_NAME);
+            int role = set.getInt(USERS_TABLE_COLUMN_6_ROLE);
+            String city = set.getString(USERS_TABLE_COLUMN_7_CITY);
+            String country = set.getString(USERS_TABLE_COLUMN_8_COUNTRY);
+            String email = set.getString(USERS_TABLE_COLUMN_9_EMAIL);
+            String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
+            Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
+            Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
+            String photoURL = set.getString(USERS_TABLE_COLUMN_13_PHOTO_URL);
+            String passwordSalt = set.getString(USERS_TABLE_COLUMN_14_PASSWORD_SALT);
+            List<Integer> friendIDs = getUserFriends(id);
+
+            return new User(id, username, passwordHash, firstName, lastName, role, city, country, mobileNumber, email,
+                    birthDate, registrationDate, photoURL, passwordSalt, friendIDs);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<User> getUsers() {
+        String query = "SELECT * FROM " + USERS_TABLE_NAME;
+        List<User> users = new ArrayList<>();
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                User newUser = buildUserFromResultSet(set);
+                users.add(newUser);
+            }
+            qStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+
+    }
 }

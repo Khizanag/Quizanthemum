@@ -92,39 +92,71 @@
         document.getElementById('photo-url').value = $('img')[0].getAttribute('src');
     };
 
-    function checkAndRedirect() {
-        let name = document.getElementById('question').value != '';
-        let description = document.getElementById('description').value != '';
-        if((name && description)) {
-            window.location.href = "/web/pages/AddingQuestions.jsp";
+    function addNextWrongAns() {
+        let arr = [];
+        let numWrongAnswers = parseInt(document.getElementById('num_statements_elem').value);
+        let prevId = numWrongAnswers - 1;
+        for(let i = 0 ;i <= prevId; i++) {
+            let str = 'statement_' + i;
+            let inVal = document.getElementsByName(str)[0].value;
+            arr.push(inVal);
+        }
+
+        let parent = document.getElementById('added-wrongs');
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" ' +
+            'name="statement_' + numWrongAnswers + '" id="wrong-answer" required>';
+        parent.innerHTML += toAdd;
+        document.getElementById('num_statements_elem').value = numWrongAnswers + 1;
+
+        for(let i = 0 ;i <= prevId; i++) {
+            let str = 'statement_' + i;
+            document.getElementsByName(str)[0].value = arr[i];
         }
     }
 
-    function addNextWrongAns() {
-        let parent = document.getElementById('added-wrongs');
-        let numWrongAnswers = parseInt(document.getElementById('num_statements_elem').value);
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" name="statement_' + numWrongAnswers + '" id="wrong-answer" required>';
-        parent.innerHTML += toAdd;
-        document.getElementById('num_statements_elem').value = numWrongAnswers + 1;
-    }
-
     function addNextCorrectAns() {
-        let parent = document.getElementById('added-correct');
+        let arr = [];
         let numCorrectAnswers = parseInt(document.getElementById('num_answers_elem').value);
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
+        let prevId = numCorrectAnswers - 1;
+        for(let i = 0 ;i <= prevId; i++) {
+            let str = 'answer_' + i;
+            let inVal = document.getElementsByName(str)[0].value;
+            arr.push(inVal);
+        }
+
+        let parent = document.getElementById('added-correct');
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი"' +
+            ' name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
         parent.innerHTML += toAdd;
         document.getElementById('num_answers_elem').value = numCorrectAnswers + 1;
+
+        for(let i = 0 ;i <= prevId; i++) {
+            let str = 'answer_' + i;
+            document.getElementsByName(str)[0].value = arr[i];
+        }
     }
 
     function multiOpenAnsAdder() {
-        let parent = document.getElementById('added-correct');
+        let arr = [];
         let numCorrectAnswers = parseInt(document.getElementById('num_answers_in_multi_opens_question').value);
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
+        let prevId = numCorrectAnswers;
+        for(let i = 0 ;i <= prevId; i++) {
+            let str = 'answer_' + i;
+            let inVal = document.getElementsByName(str)[0].value;
+            arr.push(inVal);
+        }
+
+        let parent = document.getElementById('added-correct');
+        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი" name="answer_'
+            + (numCorrectAnswers+1) + '" id="correct-answer" required>';
         parent.innerHTML += toAdd;
         document.getElementById('num_answers_in_multi_opens_question').value = numCorrectAnswers + 1;
+
+        for(let i = 0 ;i <= prevId; i++) {
+            let str = 'answer_' + i;
+            document.getElementsByName(str)[0].value = arr[i];
+        }
     }
-
-
 
     function addToFill() {
         let text = document.getElementById("toFill").value;
@@ -150,6 +182,14 @@
     function addNextMatching() {
         let parent = document.getElementById('matching-elems-container');
         let numAnswers = parseInt(document.getElementById('matching-num-answers-elem').value);
+        let prevId = numAnswers-1;
+        let arr = [];
+
+        for(let i = 0; i <= prevId; i++) {
+            let str = 'answer_' + i;
+            let inVal = document.getElementsByName(str)[0].value;
+            arr.push(inVal);
+        }
 
         let toAdd = `<div class="matchin-pair">
                             <input type="text" placeholder="რას ვაწყვილებთ"
@@ -164,8 +204,12 @@
                                    class="matching-elem" required>
                         </div>`;
         document.getElementById('matching-num-answers-elem').value = numAnswers + 2;
-
         parent.innerHTML += toAdd;
+
+        for(let i = 0 ; i <= prevId; i++) {
+            let str = 'answer_' + i;
+            document.getElementsByName(str)[0].value = arr[i];
+        }
     }
 
     function addAnswerInputs() {

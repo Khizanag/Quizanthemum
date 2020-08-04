@@ -30,7 +30,9 @@ create table users(
                       email varchar(64) not null,
                       phone_number varchar(32),
                       birth_date date,
-                      registration_date date
+                      registration_date date,
+                      photo_url varchar(256),
+                      password_salt varchar(256)
 );
 
 # *******************************************  CATEGORIES  ******************************************
@@ -56,7 +58,7 @@ create table quizzes(
                             constraint foreign key (AUTHOR_ID)
                             references users(id) on update cascade on delete restrict,
                         CREATION_DATE date,
-                        MAX_SCORE smallint
+                        MAX_SCORE double
 );
 
 
@@ -234,6 +236,18 @@ create table achievement_events(
                                    achieve_date date
 );
 
+# *********************************************  QUIZ_RATING_EVENTS  *********************************************
+
+create table quiz_rating_events(
+                                   id smallint primary key auto_increment,
+                                   user_id smallint not null,
+                                   constraint foreign key (user_id)
+                                       references users(id) on update cascade on delete restrict,
+                                   quiz_id smallint not null,
+                                   constraint foreign key (quiz_id)
+                                       references quizzes(id) on update cascade on delete restrict,
+                                   num_stars smallint not null
+);
 
 
 # *********************************************** ADD ALL CATEGORIES   ***********************************************
@@ -261,6 +275,19 @@ SELECT * FROM questions;
 SELECT * FROM quiz_events;
 SELECT * FROM quizzes;
 SELECT * FROM users;
+SELECT * FROM quiz_rating_events;
 
-# insert into challenges values(null, 1, 1, 2, );
 
+
+# *********************************************** ADD ALL CATEGORIES   ***********************************************
+
+INSERT INTO categories VALUES (null, 'ბიოლოგია');
+INSERT INTO categories VALUES (null, 'გეოგრაფია');
+INSERT INTO categories VALUES (null, 'ისტორია');
+INSERT INTO categories VALUES (null, 'ლიტერატურა');
+INSERT INTO categories VALUES (null, 'მათემატიკა');
+INSERT INTO categories VALUES (null, 'სპორტი');
+INSERT INTO categories VALUES (null, 'ფიზიკა');
+INSERT INTO categories VALUES (null, 'ფილმები');
+INSERT INTO categories VALUES (null, 'ქიმია');
+INSERT INTO categories VALUES (null, 'ხელოვნება');

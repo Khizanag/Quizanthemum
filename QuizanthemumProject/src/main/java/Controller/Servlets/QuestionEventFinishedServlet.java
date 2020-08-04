@@ -2,6 +2,8 @@ package Controller.Servlets;
 
 import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.QuizEvent;
+import Model.Managers.QuestionEventManager;
+import Model.Managers.QuizEventManager;
 import Tools.Pair;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.util.*;
 
 
+import static Configs.Config.QUESTION_EVENT_MANAGER_STR;
+import static Configs.Config.QUIZ_EVENT_MANAGER_STR;
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
 
 @WebServlet(name = "QuestionEventFinishedServlet", urlPatterns = "/QuestionEventFinished")
@@ -24,6 +28,8 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
+        QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
+        QuestionEventManager questionEventManager = (QuestionEventManager) request.getServletContext().getAttribute(QUESTION_EVENT_MANAGER_STR);
 
         QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");
         int questionNumber = (int) request.getServletContext().getAttribute("question_number");
@@ -31,7 +37,6 @@ public class QuestionEventFinishedServlet extends HttpServlet {
 
         int numAnswers = questionEvent.getNumUsersAnswers();
         int numStatements = questionEvent.getQuestion().getStatementsCount();
-        System.out.println("num ans: " + numAnswers);
         List<String> userAnswers = new ArrayList<>();
         List<String> matchingColors = new ArrayList<>();
 
@@ -58,17 +63,10 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             userAnswers = getUserMatchingAnswers(userAnswers, matchingColors);
         }
 
-        // TODO remove. useful for testing
-        System.out.println("_____");
-        for(int i = 0; i < userAnswers.size(); i++) {
-            System.out.println(userAnswers.get(i));
-        }
-        System.out.println("_____");
-
-
         questionEvent.setUserAnswers(userAnswers);
         questionEvent.finishQuestionEvent();
         gradeQuestionEvent(questionEvent);
+
 
         quizEvent.setFilledQuestionEvent(questionEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
@@ -78,7 +76,17 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             request.getServletContext().setAttribute("question_number", questionNumber+1);
             response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
-            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID()); // TODO valid address. end quiz
+            quizEvent.finishQuiz();
+            if(!quizEvent.isPracticeMode()){
+                quizEvent.resetQuestionEventIterator();
+                int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
+                while (quizEvent.hasNextQuestionEvent()) {
+                    QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
+                    currQuestionEvent.setQuizEventId(quizEventId);
+                    questionEventManager.setQuestionEvent(currQuestionEvent);
+                }
+            }
+            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID());
         }
 
         System.out.println("question event finished");
@@ -88,7 +96,9 @@ public class QuestionEventFinishedServlet extends HttpServlet {
         Map<String, String> map = new TreeMap<>();
         List<String> cleanedAnswers = new ArrayList<>();
         for(int i = 0; i < userAnswers.size(); i+=2) {
-            map.put(matchingColors.get(i), userAnswers.get(i));
+            if(!matchingColors.get(i).equals("")) {
+                map.put(matchingColors.get(i), userAnswers.get(i));
+            }
         }
         for(int i = 1; i < userAnswers.size(); i+=2) {
             if(map.containsKey(matchingColors.get(i))) {
@@ -102,6 +112,8 @@ public class QuestionEventFinishedServlet extends HttpServlet {
     private void gradeQuestionEvent(QuestionEvent newQuestionEvent) {
         switch (newQuestionEvent.getType()) {
             case MULTI_ANSWER:
+                newQuestionEvent.autoGradeMultiOpenAnswer();
+                break;
             case MULTI_CHOICE_MULTI_ANSWER:
                 newQuestionEvent.autoGradeMultiAnswer();
                 break;

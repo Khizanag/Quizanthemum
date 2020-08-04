@@ -1,12 +1,13 @@
 .quiz-summary-wrapper{
   width: 100%;
+  margin-top: 20px;
   background-color: #002e30;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .quiz-container{
-  width: 960px;
+  width: 1250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,10 +17,10 @@
 }
 .quizz-main{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  overflow: hidden;
-  margin:10px 10px 5px 5px;
-
 }
 .overall-quiz-details{
   font-size: 50px;
@@ -29,30 +30,27 @@
   margin-bottom: 20px;
 }
 .quizz-img{
-  width:520px;
-  height:460px;
-  margin-right: 20px  ;
+  width:100%;
+  margin-bottom: 20px;
 }
 .quiz-description{
   display: flex;
-  width:30%;
-  height: 400px;
+  justify-content: center;
+  min-height: 50px;
   text-align: center;
   font-weight: bold;
   align-items: center;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 15px;
+  font-size: xx-large;
   color:#f5e8b5;
   word-wrap: break-word;
 }
 
 .back-to-prof-page{
-    margin-top: auto;
+    margin-top: 10px;
     padding: 6px 10px;
     background: #f07237;
-    font-size: 18px;
-    width:200px;
-    height: 40px;
+    font-size: x-large;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -61,8 +59,8 @@
     margin-bottom: 10px;
     align-content: center;
     display: flex;
-  justify-content: center;
-  outline: none;
+    justify-content: center;
+    outline: none;
 }
 .back-to-prof-page {
   -webkit-transition: all 0.3s;
@@ -145,4 +143,44 @@
   flex-direction: column;
   align-content: center;
   align-items: center;
+}
+
+.question-text-statement{
+  display: flex;
+}
+.small-question-image{
+  width: 200px;
+  height: 180px;
+}
+
+/* rating part*/
+.quiz-rating-section {
+}
+.rating-title {
+  display: flex;
+  justify-content: center;
+}
+.rating-icons-holder {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+.rating-icons{
+  display: flex;
+  flex-direction: row;
+}
+.fa{
+  margin-right: 2px;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.after {
+  display: none;
+}
+
+.overall-quiz-details {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+  margin-bottom: 30px;
 }

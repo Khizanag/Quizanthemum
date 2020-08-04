@@ -51,7 +51,9 @@ public class RegistrationServlet extends HttpServlet implements Config {
             // 1900 is base year, month should be between [0-11]
             Date birthDate = new Date(year-1900, month-1, day);
             Date registrationDate = new Date();
-            User newUser = new User(username, password, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
+            String salt = generateSalt();
+            userManager.setCurrentSalt(salt);
+            User newUser = new User(username, password, salt, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
             int ID = userManager.insertUser(newUser);
 
             request.getServletContext().setAttribute("logedInUser", newUser);
@@ -67,4 +69,17 @@ public class RegistrationServlet extends HttpServlet implements Config {
             response.setHeader("Location", "http://localhost:8080/web/pages/Registration.jsp");
         }
     }
+
+    private String generateSalt() {
+        int n = PASSWORD_SALT_LENGTH;
+        String base = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
+
+        StringBuilder sb = new StringBuilder(n);
+        for (int i = 0; i < n; i++) {
+            int index = (int)(base.length() * Math.random());
+            sb.append(base.charAt(index));
+        }
+        return sb.toString();
+    }
+
 }

@@ -8,6 +8,7 @@ import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Quiz;
 import Controller.Classes.User.User;
 import Model.DatabaseConnector;
+import Tools.Pair;
 
 import javax.xml.transform.Result;
 import java.sql.*;
@@ -18,6 +19,7 @@ import java.util.List;
 import static Configs.Config.*;
 import static Configs.QuizEventTableConfig.QUIZ_EVENTS_TABLE_NAME;
 import static Configs.QuizEventTableConfig.QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID;
+import static Configs.QuizRatingEventsConfig.*;
 
 public class QuizManager implements QuizTableConfig, QuestionTableConfig {
 
@@ -52,6 +54,17 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
                + ";\n";
        ;
        return getQuizzesByQuery(query);
+    }
+
+    public List<Quiz> getHighestRatedQuizzes(int numQuizzes) {
+        String query = "SELECT * "
+                + " FROM " + QUIZ_TABLE_NAME + " as qs"
+                + " ORDER BY "
+                + "(SELECT SUM( " + QUIZ_RATING_EVENTS_TABLE_COLUMN_4_NUM_STARS
+                + " ) / COUNT(*) FROM " + QUIZ_RATING_EVENTS_TABLE_NAME + " as qre"
+                + " WHERE qre." + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = "
+                + "qs." + QUIZ_TABLE_COLUMN_1_ID + ")" + " LIMIT " + numQuizzes + ";\n";
+        return getQuizzesByQuery(query);
     }
 
     private List<Quiz> getQuizzesBy(int numQuizzes, String sorterColumnName){
@@ -109,9 +122,10 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             User author = (User)userManager.getUser(authorID);
             Date creationDate = set.getDate(QUIZ_TABLE_COLUMN_9_CREATION_DATE);
             List<Question> questions = getQuizQuestions(id);
-            int maxScore = set.getInt(QUIZ_TABLE_COLUMN_10_MAX_SCORE);
+            double maxScore = set.getDouble(QUIZ_TABLE_COLUMN_10_MAX_SCORE);
 
-            return new Quiz(id, name, category, description, iconUrl, mustShuffleQuestions, comment, author, creationDate, questions, maxScore);
+            return new Quiz(id, name, category, description, iconUrl, mustShuffleQuestions, comment, author,
+                    creationDate, questions, maxScore);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -125,13 +139,15 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
                 " WHERE " + QUESTION_TABLE_COLUMN_11_QUIZ_ID + " = " + id + ";\n";
 
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement newStatement = connection.createStatement();
+            ResultSet set = newStatement.executeQuery(query);
             QuestionManager questionManager = (QuestionManager)manager.getManager(QUESTION_MANAGER_STR);
             while(set.next()){
                 int questionID = set.getInt(QUESTION_TABLE_COLUMN_1_ID);
                 Question question = questionManager.getQuestion(questionID);
                 questions.add(question);
             }
+            set.close();
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
@@ -141,6 +157,16 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     public int insertQuiz(Quiz quiz){
         String query = "INSERT INTO " + QUIZ_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
+            System.out.println(quiz.getName());
+            System.out.println(quiz.getCategory().getID());
+            System.out.println(quiz.getDescription());
+            System.out.println(quiz.getIconUrl());
+            System.out.println(quiz.mustShuffleQuestions());
+            System.out.println(quiz.getComment());
+            System.out.println(quiz.getAuthor().getID());
+            System.out.println(new java.sql.Date(quiz.getCreationDate().getTime()));
+            System.out.println(quiz.getMaxScore());
+
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, quiz.getName());
             pstmt.setInt(2, quiz.getCategory().getID());
@@ -158,6 +184,79 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             e.printStackTrace();
         }
         return DEFAULT_ID;
+    }
+
+    public boolean isRatedBy (int quizID, int userID) {
+        String query = "SELECT * FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID +
+                " AND " + QUIZ_RATING_EVENTS_TABLE_COLUMN_2_USER_ID + " = " + userID + ";\n";
+
+        try {
+            Statement selectionStatement = connection.createStatement();
+            ResultSet set = selectionStatement.executeQuery(query);
+            if(!set.next()){
+                set.close();
+                return true;
+            } else {
+                set.close();
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Selection Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+//    public double getQuizRating (int quizID) {
+    public int getQuizRating (int quizID) {
+        String selectionQuery = "SELECT SUM( " + QUIZ_RATING_EVENTS_TABLE_COLUMN_4_NUM_STARS +
+                " ) AS ratingSum, COUNT( * ) AS numRaters FROM " + QUIZ_RATING_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = " + quizID + ";\n";
+
+//        double average = -1;
+        int average = -1;
+        try {
+            Statement selectionStatement = connection.createStatement();
+            System.out.println(selectionQuery);
+            ResultSet set = selectionStatement.executeQuery(selectionQuery);
+            if(!set.next()){
+                System.out.println("couldn't reach star rating in quiz");
+                return -1;
+            }
+
+//            double ratingSum = 1.0 * set.getInt("ratingSum");
+//            double numRaters = 1.0 * set.getInt("numRaters");
+            int ratingSum = set.getInt("ratingSum");
+            int numRaters = set.getInt("numRaters");
+
+            if (numRaters == 0)  {
+                set.close();
+                return 0;
+            }
+
+            average = ratingSum / numRaters;
+            set.close();
+        } catch (SQLException e) {
+            System.out.println("Selection Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
+        return average;
+    }
+
+    public void rateQuiz (int userID, int quizID, int numStars){
+        String query = "INSERT INTO " + QUIZ_RATING_EVENTS_TABLE_NAME + " VALUES (null, ?, ?, ?);\n";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, userID);
+            pstmt.setInt(2, quizID);
+            pstmt.setInt(3, numStars);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
     }
 
     public List<Quiz> getCategoryQuizzes(Category category) {

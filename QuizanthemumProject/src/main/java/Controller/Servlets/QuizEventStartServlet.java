@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 
 import static Configs.Config.*;
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
@@ -21,7 +22,6 @@ import static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_CHOICE;
 
 @WebServlet(name = "QuizEventStartServlet", urlPatterns = "/QuizEventStart")
 public class QuizEventStartServlet extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -32,12 +32,15 @@ public class QuizEventStartServlet extends HttpServlet {
 
         QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
-        User user = (User) request.getAttribute("quiz_event_start_user");
-
-        int quizID = Integer.parseInt(request.getParameter("quiz-id"));
+        User user = (User) request.getServletContext().getAttribute("logedInUser");
+        boolean practice_mode = (request.getParameter("practice_mode") != null);
+        int quizID = Integer.parseInt(request.getParameter("quiz_id"));
         Quiz quiz = quizManager.getQuiz(quizID);
 
-        QuizEvent quizEvent = new QuizEvent(user, quiz);
+        QuizEvent quizEvent = new QuizEvent(user, quiz, practice_mode);
+        if(quiz.mustShuffleQuestions()) {
+            quizEvent.shuffleQuestions();
+        }
         quizEvent.startQuiz();
 
         request.getServletContext().setAttribute("quiz_event", quizEvent);
@@ -49,8 +52,13 @@ public class QuizEventStartServlet extends HttpServlet {
             int type = nextQuestionEvent.getType();
             response.setHeader("Location", getNextQuestionLink(type));
         } else {
-            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp"); // TODO valid address. end quiz
+            quizEvent.finishQuiz();
+            if(!quizEvent.isPracticeMode()) {
+                quizEventManager.insertQuizEvent(quizEvent);
+            }
+            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp");
         }
+
     }
 
     private String getNextQuestionLink(int type) {
@@ -68,7 +76,7 @@ public class QuizEventStartServlet extends HttpServlet {
             case MULTI_CHOICE:
                 return "http://localhost:8080/web/pages/answerTypes/MultiChoiceAnswerPage.jsp";
             default:
-                return "http://localhost:8080/Error";
+                return "error";
         }
     }
 }

@@ -6,6 +6,7 @@
     <hr>
     <div class="input-items" id="input-items">
         <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
 
         <div class="matching-elems-secton">
             <div class="matching-elems-container" id="matching-elems-container">

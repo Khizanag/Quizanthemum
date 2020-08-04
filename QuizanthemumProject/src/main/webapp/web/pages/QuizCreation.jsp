@@ -58,7 +58,7 @@
 
                 <label><b>კითხვების თანმიმდევრობის აუტომატური გენერირება</b></label>
                 <input class="checkbox" type="checkbox"
-                       name="quiz_comment" id="quiz_comment" checked>
+                       name="quiz_must_shuffle" id="quiz_must_shuffle" checked>
             </div>
             <hr>
 

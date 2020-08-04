@@ -2,19 +2,17 @@ package Controller.Classes.Quiz.Question;
 
 import Tools.Pair;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import static Controller.Classes.Quiz.Question.QuestionTypes.*;
+import static java.lang.Integer.max;
 
 public class QuestionEvent {
 
     /* private variables */
 
     private int id;
-    private final int quizEventId;
+    private int quizEventId;
     private final Date startDate;       // question start date
     private Date endDate;               // question end date
     private boolean isAlreadyGraded;
@@ -25,8 +23,8 @@ public class QuestionEvent {
 
     /* constructor */
 
-    public QuestionEvent(int quizEventId, Question question, boolean isAlreadyGraded, Date startDate) {
-        this.quizEventId = quizEventId;
+    public QuestionEvent(Question question, boolean isAlreadyGraded, Date startDate) {
+        this.quizEventId = -1; // valid value will be set after quiz event insertion in database
         this.question = question;
         this.isAlreadyGraded = isAlreadyGraded;
         this.startDate = startDate;
@@ -37,8 +35,9 @@ public class QuestionEvent {
     public QuestionEvent(int id, int quizEventId, Question question, boolean isAlreadyGraded, Date startDate,
                          Date endDate, double userScore, List<String> userAnswers) {
 
-        this(quizEventId, question, isAlreadyGraded, startDate);
+        this(question, isAlreadyGraded, startDate);
         this.id = id;
+        this.quizEventId = quizEventId;
         this.endDate = endDate;
         this.userScore = userScore;
         this.userAnswers = userAnswers;
@@ -82,6 +81,14 @@ public class QuestionEvent {
         return  type;
     }
 
+    public Set<Pair<String>> getUserMatchingAnswers() {
+        Set<Pair<String>> userMatchingAnswerSet = new TreeSet<>();
+        for (int i = 0; i < userAnswers.size(); i+=2) {
+            userMatchingAnswerSet.add(new Pair<>(userAnswers.get(i), userAnswers.get(i+1)));
+        }
+        return userMatchingAnswerSet;
+    }
+
     /*
      * manually set user score.
      * used when question is not automatically graded
@@ -97,6 +104,10 @@ public class QuestionEvent {
      * incorrect answer is graded as 0.
      */
     public void autoGradeTextAnswer() {
+        if(userAnswers.size() == 0) {
+            userScore = 0.0;
+            return;
+        }
         if(userAnswers.get(0).equals(question.getTextAnswer())) {
             userScore = question.getMaxScore();
         }
@@ -105,8 +116,9 @@ public class QuestionEvent {
 
     public void autoGradeFillBlank() {
         int correctAnswersNum = 0;
+        List<String> realAnswers = question.getAnswers();
         for(int i = 0; i < userAnswers.size(); i++) {
-            if(userAnswers.get(i).equals(userAnswers.get(i))) {
+            if(userAnswers.get(i).equals(realAnswers.get(i))) {
                 correctAnswersNum++;
             }
         }
@@ -120,19 +132,37 @@ public class QuestionEvent {
      * score depends on number of correct answers.
      */
     public void autoGradeMultiAnswer() {
+        int userCorrectAnswers = gerCorrectMultiAnswersNum();
+        int userWrongAnswers = userAnswers.size() - userCorrectAnswers;
+        int userAnswersBalance = userCorrectAnswers - userWrongAnswers;
+
+        userScore = question.getMaxScore() * max(0, userAnswersBalance) / (question.getMultiAnswers().size());
+        isAlreadyGraded = true;
+
+    }
+
+    public void autoGradeMultiOpenAnswer() {
+        userScore = question.getMaxScore() * gerCorrectMultiAnswersNum() / (question.getStatementsCount());
+        System.out.println(userScore);
+        isAlreadyGraded = true;
+    }
+
+    private int gerCorrectMultiAnswersNum() {
         Set<String> userAnswerSet = new TreeSet<>();
+
         for (int i = 0; i < userAnswers.size(); i++) {
             userAnswerSet.add(userAnswers.get(i));
         }
-        int correctAnswersNum = 0;
-        for (String ans : question.getMultiAnswers()) {
-            if (userAnswerSet.contains(ans)) {
-                correctAnswersNum += 1;
+        int userCorrectAnswers = 0;
+        Set<String> realAnswers = question.getMultiAnswers();
+        for (String ans : realAnswers) {
+            for (String userAns : userAnswerSet) {
+                if (ans.equals(userAns)) {
+                    userCorrectAnswers++;
+                }
             }
         }
-        userScore = question.getMaxScore() * correctAnswersNum / question.getStatementsCount();
-        isAlreadyGraded = true;
-
+        return userCorrectAnswers;
     }
 
     /*
@@ -140,20 +170,25 @@ public class QuestionEvent {
      * score depends on number of correct matches.
      */
     public void autoGradeMatchingAnswer() {
-        Set<Pair<String>> userMatchingAnswerSet = new TreeSet<>();
-        for (int i = 0; i < question.getAnswersCount(); i+=2) {
-            userMatchingAnswerSet.add(new Pair<>(userAnswers.get(i), userAnswers.get(i+1)));
-        }
+        Set<Pair<String>> userMatchingAnswerSet = getUserMatchingAnswers();
+
         int correctAnswersNum = 0;
         int pairsNum = question.getAnswersCount() / 2;
+
         for(Pair<String> answer : question.getMatchingAnswers()) {
-            if (userMatchingAnswerSet.contains(answer)) {
-                correctAnswersNum += 1;
+            for(Pair<String> userAnswer : userMatchingAnswerSet) {
+                if(answer.equals(userAnswer)) {
+                    correctAnswersNum++;
+                }
             }
         }
         userScore = question.getMaxScore() * correctAnswersNum / pairsNum;
         isAlreadyGraded = true;
 
+    }
+
+    public void setQuizEventId (int quizEventId) {
+        this.quizEventId = quizEventId;
     }
 
     public Date getEndDate() {
