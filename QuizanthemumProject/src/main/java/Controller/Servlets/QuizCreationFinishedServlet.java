@@ -31,7 +31,6 @@ public class QuizCreationFinishedServlet extends HttpServlet {
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         QuestionManager questionManager = (QuestionManager) managersManager.getManager(QUESTION_MANAGER_STR);
         int ID = quizManager.insertQuiz(quiz);
-        System.out.println("quiz inserted into database");
         quiz.setID(ID);
 
         int numQuestions = quiz.getQuestionsCount();
@@ -47,7 +46,7 @@ public class QuizCreationFinishedServlet extends HttpServlet {
         context.setAttribute(LAST_CREATED_QUIZ, quiz);
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
-        response.setHeader("Location", "http://localhost:8080/web/pages/StartQuiz.jsp?quiz_id=" + ID);
+        response.setHeader("Location", "http://localhost:8080/Quiz?id=" + ID);
 
     }
 }

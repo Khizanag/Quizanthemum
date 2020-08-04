@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
     <link rel="stylesheet" href="/web/styles/startQuiz.css">
 
-    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 
 </head>
 
@@ -44,22 +44,23 @@
 
 </style>
 <body>
-    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
-    <% if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
-        <div style="text-align: center">
-            <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">ქვიზი წარმატებით შეიქმნა.</p>
-        </div>
-    <% request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
-    }%>
     <%
+        if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
+            <div style="text-align: center">
+                <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">ქვიზი წარმატებით შეიქმნა.</p>
+            </div>
+    <%
+            request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
+        }
         ServletContext context = request.getServletContext();
         ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-        Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
+        Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("id")));
     %>
-    <form class="start-quiz-section" action="../../../QuizEventStart" method ="get">
+    <form class="start-quiz-section" action="/QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">
                 <img src="<%=quiz.getIconUrl()%>" class="quiz-main-img" onerror="this.src='/web/images/common/Quiz1.jpg';">
@@ -94,8 +95,7 @@
             <label><b>practice mode</b></label>
             <input class="checkbox" type="checkbox"
                    name="practice_mode" id="practice_mode">
-            <button class="button" type="submit"
-                    style="margin-top: 10px">
+            <button class="button" type="submit" style="margin-top: 10px">
                 ქვიზის დაწყება
             </button>
         </div>

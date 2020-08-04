@@ -19,7 +19,7 @@
     <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
     <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 
-    <form id="creation-section" class="creation-section" action="../../QuizCreationStarted" method="get">
+    <form id="creation-section" class="creation-section" action="/StartQuizCreating" method="get">
         <div class="container bla">
             <h2>შექმენი შენი ქვიზი</h2>
             <p>ქვიზის შესაქმნელად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
@@ -67,7 +67,7 @@
         </div>
     </form>
 
-    <jsp:include page="/web/pages/PartPages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 
 <script>

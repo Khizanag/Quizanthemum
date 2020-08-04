@@ -166,6 +166,13 @@ public class User {
     }
 
 
+    /********** SETTER methods **********/
+
+    public void setID(int ID) {
+        this.id = ID;
+    }
+
+
     public List<Integer> getFriendIDs() {
         if(friendIDs == null){
         }
@@ -260,4 +267,5 @@ public class User {
     public String getPasswordSalt() {
         return passwordSalt;
     }
+
 }
