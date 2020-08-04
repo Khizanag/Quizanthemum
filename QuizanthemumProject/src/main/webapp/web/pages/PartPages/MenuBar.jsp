@@ -43,7 +43,7 @@
                 <a class="nav-item" target="_self" href="/">მთავარი</a>
 
                 <div class="dropdown">
-                    <a class="nav-item" target="_self" href="../../DisplayQuizzes">ქვიზები</a>
+                    <a class="nav-item" target="_self" href="/DisplayQuizzes">ქვიზები</a>
                     <div class="dropdown-content">
                         <a class="nav-item grayeble" target="_self" href="/DisplayNewestQuizzes">უახლესი</a>
                         <a class="nav-item grayeble" target="_self" href="/DisplayMostPopularQuizzes">პოპულარული</a>
@@ -65,7 +65,7 @@
                         </form>
                     </div>
                 </div>
-                <a class="nav-item" target="_self" href="/Blogs">ბლოგი</a>
+                <a class="nav-item" target="_self" href="/Blog">ბლოგი</a>
                 <a class="nav-item" target="_self" href="/Contact">კონტაქტი</a>
             </ul>
         </nav>
