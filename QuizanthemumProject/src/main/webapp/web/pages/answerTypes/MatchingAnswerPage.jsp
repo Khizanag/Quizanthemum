@@ -14,8 +14,8 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 
     <form class="add-question-section" id="matching-form" action="../../../QuestionEventFinished" method="get">
         <div class="container">
@@ -46,7 +46,7 @@
         </div>
     </form>
 
-    <jsp:include page="../Footer.jsp"></jsp:include>
+    <jsp:include page="../PartPages/Footer.jsp"></jsp:include>
 </body>
 
 <script>

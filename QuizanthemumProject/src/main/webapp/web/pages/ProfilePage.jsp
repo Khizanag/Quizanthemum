@@ -26,7 +26,8 @@
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
     <%
-        ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
         int ID = Integer.parseInt(request.getParameter("id"));
         User user = usersManager.getUser(ID);
@@ -36,11 +37,11 @@
 
 <body>
 
-    <jsp:include page="/web/pages/Header.jsp"/>
-    <jsp:include page="/web/pages/MenuBar.jsp"/>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
     <% if(user == null){ %>
-        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"/>
+        <jsp:include page="/web/pages/PartPages/YouShouldLogInPart.jsp"/>
     <% } else { %>
 
     <div class="change-image-popup" id="change-image">
@@ -125,8 +126,6 @@
 
     </div>
     <%
-        ServletContext context = request.getServletContext();
-        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
     %>
@@ -155,14 +154,14 @@
                 <%}%>
             </div>
         </div>
-        <form id="to_display_start_quiz_form" action="QuizSummaryPage.jsp" method="get">
-            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+        <form id="to_display_start_quiz_form" action="Quiz" method="get">
+            <input type="hidden" id="to_display_start_quiz_elem" name="id">
         </form>
     </main>
 
     <% } %>
 
-	<jsp:include page="/web/pages/Footer.jsp"/>
+	<jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 
 <script>

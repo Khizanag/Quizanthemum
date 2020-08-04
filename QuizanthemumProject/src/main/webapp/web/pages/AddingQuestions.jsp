@@ -15,8 +15,8 @@
 
 <body>
 
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 
     <div class="page-holder">
         <div class="container">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <jsp:include page="./Footer.jsp"></jsp:include>
+    <jsp:include page="PartPages/Footer.jsp"></jsp:include>
 </body>
 </html>
 

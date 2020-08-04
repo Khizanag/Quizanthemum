@@ -12,8 +12,8 @@
 
 <body style="padding:0px; margin:0px; font-family:arial,helvetica,sans-serif,verdana,'Open Sans'">
 
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 
     <form class="registration-section" action="../../Registration" method="get">
         <div class="container">
@@ -70,10 +70,10 @@
         </div>
 
         <div class="container signin">
-            <p>უკვე ხართ ამ გვერდის მომხმარებელი? <a href="SignIn.jsp">შედით თქვენს პროფილზე</a>.</p>
+            <p>უკვე ხართ ამ გვერდის მომხმარებელი? <a href="LogInPage.jsp">შედით თქვენს პროფილზე</a>.</p>
         </div>
     </form>
-    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"></jsp:include>
 </body>
 
 <script >

@@ -44,8 +44,8 @@
 
 </style>
 <body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 
     <% if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
         <div style="text-align: center">

@@ -16,7 +16,7 @@
         font-size: xx-large;">
             ამ გვერდზე წვდომისთვის, აუცილებელია
             <br>
-            <a href="/web/pages/SignIn.jsp"><button type="button" class="button">ავტორიზაცია</button></a>
+            <a href="/web/pages/LogInPage.jsp"><button type="button" class="button">ავტორიზაცია</button></a>
             <br>
         </h2>
     </div>

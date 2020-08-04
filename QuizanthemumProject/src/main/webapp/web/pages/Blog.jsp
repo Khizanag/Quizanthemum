@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="/web/styles/scroll.css">
 </head>
 <body>
-    <jsp:include page="/web/pages/Header.jsp"/>
-    <jsp:include page="/web/pages/MenuBar.jsp"/>
-    <jsp:include page="/web/pages/Footer.jsp"/>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 </html>

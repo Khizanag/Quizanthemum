@@ -35,8 +35,8 @@
     }
 </style>
 <body>
-<jsp:include page="/web/pages/Header.jsp"></jsp:include>
-<jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+<jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+<jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 <%
     ServletContext context = request.getServletContext();
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
@@ -93,7 +93,7 @@
         </form>
     </div>
 </div>
-<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+<jsp:include page="/web/pages/PartPages/Footer.jsp"></jsp:include>
 </body>
 
 <script>
