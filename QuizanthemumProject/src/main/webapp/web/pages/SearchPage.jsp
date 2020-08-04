@@ -20,41 +20,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<style>
-    .section-header {
-        padding: 20px;
-    }
-    h3 {
-        color: #f07237;
-        font-size: x-large;
-    }
-    .fa:hover {
-        color: white;
-    }
-    .toHover {
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-    .onHover {
-        position: absolute;
-        right: 0;
-        bottom: 15px;
-        display: none;
-    }
-    .toHover:hover + .onHover {
-        display: block;
-        color: white;
-    }
-    .found-elems-container {
-        display: flex;
-        flex-wrap: wrap;
-    }
-</style>
-
 <body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <%
         ServletContext context = request.getServletContext();
@@ -158,13 +126,45 @@
             <%}%>
             </div>
             <form id="to_display_profile_form" action="/web/pages/profilePageLogged.jsp" method="get">
-                <input type="hidden" value="-1" id="to_display_profile_elem" name="user_id">
+                <input type="hidden" value="-1" id="to_display_profile_elem" name="user-id">
             </form>
         </div>
     </div>
 
     <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
+
+<style>
+    .section-header {
+        padding: 20px;
+    }
+    h3 {
+        color: #f07237;
+        font-size: x-large;
+    }
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .onHover {
+        position: absolute;
+        right: 0;
+        bottom: 15px;
+        display: none;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
+    .found-elems-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
 
 <script>
     <% if(numQuizzes == numUsers && numQuizzes == 0) {%>
@@ -182,6 +182,7 @@
         document.getElementById("to_display_start_quiz_elem").value = id;
         form.submit();
     }
+
     function redirectToProfile(id){
         const inp=document.getElementById("currUser"+id);
         inp.value=id;

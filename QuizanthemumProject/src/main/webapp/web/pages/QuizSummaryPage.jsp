@@ -13,7 +13,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.FILL_BLANK" %>
 <%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.*" %>
-<%@ page import="Tools.Pair" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
+<%@ page import="Tools.Pair" %>
+<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>
+<%@ page import="static Configs.Config.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -30,13 +32,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
     <%
-            ServletContext context = request.getServletContext();
-            ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
-            QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-            Quiz quiz = (Quiz) quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
-            QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
-            User user = (User)request.getServletContext().getAttribute("logedInUser");
-            int questionsNumber= quiz.getQuestionsCount();
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+        QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+        QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
+        Quiz quiz = quizEvent.getQuiz();
+        User user = (User)request.getServletContext().getAttribute(LOGGED_IN_USER);
+        int questionsNumber= quiz.getQuestionsCount();
 
     %>
     <%!
@@ -51,12 +53,12 @@
 </head>
 
 <body>
-<jsp:include page="/web/pages/Header.jsp"></jsp:include>
-<jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+<jsp:include page="/web/pages/Header.jsp"/>
+<jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <div class="quiz-summary-wrapper">
         <div class="quiz-container">
-            <form class="quiz-container after" id="after" action="/GetRating" method="get">
+            <form class="quiz-container after" id="after" action="GetRating" method="get">
                 <div class="quizz-main">
                     <div class="quiz-description">
                         <%=quiz.getDescription()%>
@@ -192,7 +194,7 @@
             </div>
         </div>
     </div>
-<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+<jsp:include page="/web/pages/Footer.jsp"/>
 </body>
 
 <script>
