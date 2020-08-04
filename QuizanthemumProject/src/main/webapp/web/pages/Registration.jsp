@@ -45,6 +45,15 @@
                        value="2000-01-01" id="registration_birth_date"
                         min= "1980-01-01" max="2020-01-01">
                 </div>
+
+                <label><b>ქვეყანა</b></label>
+                <input type="text" placeholder="შეიყვანეთ ქვეყანა"
+                       name="registration_country" id="registration_country" required>
+
+                <label><b>ქალაქი</b></label>
+                <input type="text" placeholder="შეიყვანეთ ქალაქი"
+                       name="registration_city" id="registration_city" required>
+
                 <label><b>მომხმარებლის სახელი (USERNAME)</b></label>
                 <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი"
                        name="registration_username" id="registration_username" required>
@@ -52,6 +61,10 @@
                 <label><b>E-mail</b></label>
                 <input type="email" placeholder="შეიყვანეთ email" name="registration_email"
                        id="registration_email" required>
+
+                <label><b>მობილურის ნომერი</b></label>
+                <input type="tel" placeholder="შეიყვანეთ მობილურის ნომერი" name="registration_phone"
+                       id="registration_phone" required>
 
                 <label><b>პაროლი</b></label>
                 <input type="password" placeholder="შეიყვანეთ პაროლი"
