@@ -42,7 +42,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             String email = request.getParameter("registration_email");
             String city = request.getParameter("registration_city");
             String country = request.getParameter("registration_country");
-            String mobilePhone = request.getParameter("registration_phone_numer");
+            String mobilePhone = request.getParameter("registration_phone_number");
             String birthDateStr = request.getParameter("registration_birth_date");
             StringTokenizer strTok = new StringTokenizer(birthDateStr, "-");
             int year = Integer.parseInt(strTok.nextToken());
@@ -56,15 +56,15 @@ public class RegistrationServlet extends HttpServlet implements Config {
             User newUser = new User(username, password, salt, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
             int ID = userManager.insertUser(newUser);
 
-            request.getServletContext().setAttribute("logedInUser", newUser);
+            request.getServletContext().setAttribute(LOGGED_IN_USER, newUser);
             request.getServletContext().removeAttribute(errorMessage);
-            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", "" + ID));
-            response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", newUser.getPasswordHash()));
+            response.addCookie(new Cookie(LOGGED_IN_USER_ID, "" + ID));
+            response.addCookie(new Cookie(LOGGED_IN_USER_PASSWORD_HASH  , newUser.getPasswordHash()));
 
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/web/pages/profilePageLogged.jsp");
+            response.setHeader("Location", "http://localhost:8080/Profile?id=" + ID);
         } else {
-            request.getServletContext().setAttribute("errorMessage", errorMessage);
+            request.getServletContext().setAttribute(ERROR_MESSAGE, errorMessage);
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/web/pages/Registration.jsp");
         }

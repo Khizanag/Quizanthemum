@@ -24,9 +24,9 @@ public class LogOutServlet extends HttpServlet {
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 response.addCookie(new Cookie(cookie.getName(), "-1"));
-                if (cookie.getName().equals(LOGGED_IN_USER_ID_STR)) {
+                if (cookie.getName().equals(LOGGED_IN_USER_ID)) {
                     response.addCookie(new Cookie(cookie.getName(), "-1"));
-                } else if (cookie.getName().equals(LOGGED_IN_USER_PASSWORD_HASH_STR)) {
+                } else if (cookie.getName().equals(LOGGED_IN_USER_PASSWORD_HASH)) {
                     response.addCookie(new Cookie(cookie.getName(), "-1"));
                 }
             }

@@ -4,7 +4,8 @@
 <%@ page import="Controller.Classes.OtherClasses.Category" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="static Configs.Config.CATEGORIES_MANAGER_STR" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/27/20
@@ -20,15 +21,6 @@
 <link rel="stylesheet" href="/web/styles/MenuBar.css">
 
 <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
-<script>
-    function logout(){
-        const logoutForm = document.getElementById("logoutForm");
-        logoutForm.action="../../LogOut"
-        const currUrl = document.getElementById("currentUrl");
-        currUrl.value=window.location.href;
-        logoutForm.submit();
-    }
-</script>
 
 <%
     ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
@@ -67,7 +59,6 @@
                 </div>
                 <a class="nav-item" target="_self" href="/web/pages/Blog.jsp">ბლოგი</a>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
-                <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
             </ul>
         </nav>
         <form class="search-items" action="/SearchPage" method="get">
@@ -83,4 +74,12 @@
         document.getElementById('categories-form').submit();
     }
 
+    function logout(){
+        const logoutForm = document.getElementById("logoutForm");
+        logoutForm.action="/LogOut"
+        const currUrl = document.getElementById("currentUrl");
+        currUrl.value=window.location.href;
+        // use of currUrl
+        logoutForm.submit();
+    }
 </script>

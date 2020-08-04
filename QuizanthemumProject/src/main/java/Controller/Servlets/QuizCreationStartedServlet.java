@@ -35,10 +35,13 @@ public class QuizCreationStartedServlet extends HttpServlet {
 
     @Override
     protected synchronized void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        System.out.println("aadded");
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
 
         String name = request.getParameter("quiz_name");
+        System.out.println("name: " + name);
         int categoryID = 1; //Integer.parseInt(request.getParameter("category")); // TODO
         Category category = categoriesManager.getCategory(categoryID);
         String description = request.getParameter("quiz_description");

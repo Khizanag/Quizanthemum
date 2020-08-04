@@ -26,12 +26,12 @@ public class QuizEvent {
 
     /* constructor */
 
-    public QuizEvent(User user, Quiz quiz, boolean practiceMode) {
-        this.id = -1; // will be sat after insertion in database
+    public QuizEvent(User user, Quiz quiz, boolean isPracticeMode) {
+        this.id = -1;
         this.user = user;
         this.quiz = quiz;
-        questionEvents = new ArrayList<>();
-        this.practiceMode = practiceMode;
+        this.questionEvents = new ArrayList<QuestionEvent>();
+        this.practiceMode = isPracticeMode;
     }
 
     // create from database
