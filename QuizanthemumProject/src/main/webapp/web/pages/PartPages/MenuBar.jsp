@@ -65,7 +65,7 @@
                         </form>
                     </div>
                 </div>
-                <a class="nav-item" target="_self" href="//Blogs">ბლოგი</a>
+                <a class="nav-item" target="_self" href="/Blogs">ბლოგი</a>
                 <a class="nav-item" target="_self" href="/Contact">კონტაქტი</a>
             </ul>
         </nav>

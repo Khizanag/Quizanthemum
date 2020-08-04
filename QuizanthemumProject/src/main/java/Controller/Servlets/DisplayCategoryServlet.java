@@ -24,7 +24,6 @@ public class DisplayCategoryServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.printf("DisplayCategoryServlet");
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
         QuizManager quizzesManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
