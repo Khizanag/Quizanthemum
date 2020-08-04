@@ -1,3 +1,4 @@
+<%@ page import="static Configs.Config.ERROR_MESSAGE" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -9,17 +10,17 @@
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
 </head>
 <body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
 
-    <form class="sign-in-section" action="../../LogInServlet" method="get">
+    <form class="sign-in-section" action="/LogIn" method="get">
         <div class="container">
             <h2>შესვლა</h2>
             <p>გთხოვთ შეიყვანოთ მითითებული მონაცემები პროფილზე შესასვლელად.</p>
             <hr>
-            <% if(request.getServletContext().getAttribute("errorMessage") != null) { %>
+            <% if(request.getServletContext().getAttribute(ERROR_MESSAGE) != null) { %>
                     <p class="error_message"> ${errorMessage}</p>
-            <% request.removeAttribute("errorMessage");
+            <% request.removeAttribute(ERROR_MESSAGE);
                 } %>
 
             <div class="input-items">
@@ -38,5 +39,5 @@
         </div>
 
     </form>
-    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Footer.jsp"/>
 </body>

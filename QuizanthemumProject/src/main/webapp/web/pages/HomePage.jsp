@@ -11,8 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
-    <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href=/"web/images/common/icon.png"/>
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/homePage.css">
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
@@ -20,63 +19,30 @@
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
     <link rel="stylesheet" href="/web/styles/scroll.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
+    <script src="/web/js/profileStuff.js"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/web/js/profileStuff.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.slider').load("web/slider/slider.jsp");
-        });
-    </script>
-
-    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
-    <% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
-
+    <jsp:include page="/web/pages/LogedInHandler.jsp"/>
+    <%
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+        QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+        List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
+        User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+    %>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
 </head>
-<%
-    ServletContext context = request.getServletContext();
-    ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
-    QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-    List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
-%>
-<style>
-    .section-header {
-        padding: 20px;
-    }
-    h3 {
-        color: #f07237;
-        font-size: x-large;
-    }
-    .fa:hover {
-        color: white;
-    }
-    .toHover {
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-    .onHover {
-        position: absolute;
-        right: 65px;
-        bottom: 0;
-        display: none;
-    }
-    .toHover:hover + .onHover {
-        display: block;
-        color: white;
-    }
-</style>
-<body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
-    <div class="slider"></div>
+<body>
+
+    <div class="slider"/>
 
     <div class="just-added-section">
         <div class="container" style="position: relative; overflow: hidden">
             <h3 class="section-header">ბოლოს დამატებული ქვიზები</h3>
             <div class="scroll-block">
-                <% for(int i=0;i<topQuizzes.size();i++){ Quiz currQuiz = topQuizzes.get(i); %>
+                <% for(int i = 0; i < topQuizzes.size(); i++){ Quiz currQuiz = topQuizzes.get(i); %>
                 <div class="top-quiz-list-item" id="<%=i%>" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
                     <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
                     <div class= "quiz-list-small-description-block" style="position: relative">
@@ -110,17 +76,19 @@
             <div class="scroll-arrow rightarr" onclick="scrollRight(<%=topQuizzes.size()%>)">
                 <p style="color:white; font-size: xx-large"> > </p>
             </div>
-            <form id="to_display_start_quiz_form" action="/web/pages/QuizPage.jsp" method="get">
-                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+            <form id="to_display_start_quiz_form" action="Quiz" method="get">
+                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz-id">
             </form>
         </div>
     </div>
-
-
-    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Footer.jsp"/>
 </body>
 
 <script>
+    $(document).ready(function(){
+        $('.slider').load("web/slider/slider.jsp");
+    });
+
     let indexLeft = 0;
     let indexRight = 3;
     function scrlLeft() {
@@ -146,3 +114,32 @@
         form.submit();
     }
 </script>
+
+<style>
+
+    .section-header {
+        padding: 20px;
+    }
+    h3 {
+        color: #f07237;
+        font-size: x-large;
+    }
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .onHover {
+        position: absolute;
+        right: 65px;
+        bottom: 0;
+        display: none;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
+</style>

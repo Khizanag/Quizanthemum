@@ -133,35 +133,30 @@
     }
 
     function displayProfile(userID){
-        console.log("displayProfile");
         const form = document.getElementById('display-profile-form');
         document.getElementById('user-id-holder').value = userID;
         form.submit();
     }
 
     function displayQuiz(quizID){
-        console.log('displayQuiz');
         const form = document.getElementById('display-quiz-form');
         document.getElementById('quiz-id-holder').value = quizID;
         form.submit();
     }
 
     function acceptChallenge(challengeID){
-        console.log('acceptChallenge');
         const form = document.getElementById('accept-challenge-form');
         document.getElementById('challenge-id-holder-in-accept-form').value = challengeID;
         form.submit();
     }
 
     function rejectChallenge(challengeID){
-        console.log("rejectChallenge");
         const form = document.getElementById('reject-challenge-form');
         document.getElementById('challenge-id-holder-in-reject-form').value = challengeID;
         form.submit();
     }
 
     function  cancelChallenge(challengeID){
-        console.log("cancelChallenge");
         const form = document.getElementById('cancel-challenge-form');
         document.getElementById('challenge-id-holder-in-cancel-form').value = challengeID;
         form.submit();
