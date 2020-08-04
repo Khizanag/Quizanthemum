@@ -21,6 +21,7 @@ import static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_CHOICE;
 
 @WebServlet(name = "QuizEventStartServlet", urlPatterns = "/QuizEventStart")
 public class QuizEventStartServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -33,12 +34,10 @@ public class QuizEventStartServlet extends HttpServlet {
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
         User user = (User) request.getAttribute("quiz_event_start_user");
 
-        System.out.println("cocxali var");
-        int quizID = Integer.parseInt(request.getParameter("quiz_id"));
-        System.out.println("movkti");
+        int quizID = Integer.parseInt(request.getParameter("quiz-id"));
         Quiz quiz = quizManager.getQuiz(quizID);
 
-        QuizEvent quizEvent = new QuizEvent(quizEventManager.getNewQuizEventID(), user, quiz);
+        QuizEvent quizEvent = new QuizEvent(user, quiz);
         quizEvent.startQuiz();
 
         request.getServletContext().setAttribute("quiz_event", quizEvent);
@@ -52,7 +51,6 @@ public class QuizEventStartServlet extends HttpServlet {
         } else {
             response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp"); // TODO valid address. end quiz
         }
-
     }
 
     private String getNextQuestionLink(int type) {
@@ -70,7 +68,7 @@ public class QuizEventStartServlet extends HttpServlet {
             case MULTI_CHOICE:
                 return "http://localhost:8080/web/pages/answerTypes/MultiChoiceAnswerPage.jsp";
             default:
-                return "error";
+                return "http://localhost:8080/Error";
         }
     }
 }

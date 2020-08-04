@@ -19,6 +19,7 @@ import static Configs.Config.*;
 
 @WebServlet(name = "DisplayCategoryServlet", urlPatterns = "/DisplayCategory")
 public class DisplayCategoryServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

@@ -25,11 +25,11 @@ public class QuizEvent {
 
     /* constructor */
 
-    public QuizEvent(int id, User user, Quiz quiz) {
-        this.id = id;
+    public QuizEvent(User user, Quiz quiz) {
+        this.id = -1;
         this.user = user;
         this.quiz = quiz;
-        questionEvents = new ArrayList<QuestionEvent>();
+        this.questionEvents = new ArrayList<QuestionEvent>();
     }
 
     // create from database

@@ -17,19 +17,11 @@
     <link rel="stylesheet" href="/web/styles/startQuiz.css">
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
-
-</head>
-
-<style>
-    .quiz-date-and-rait-holder {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-</style>
-<body>
     <jsp:include page="/web/pages/Header.jsp"/>
     <jsp:include page="/web/pages/MenuBar.jsp"/>
+</head>
+
+<body>
 
     <% if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
         <div style="text-align: center">
@@ -43,7 +35,7 @@
         int ID = Integer.parseInt(request.getParameter("id"));
         Quiz quiz = quizManager.getQuiz(ID);
     %>
-    <form class="start-quiz-section" action="../../../QuizEventStart" method ="get">
+    <form class="start-quiz-section" action="/QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">
                 <img src="<%=quiz.getIconUrl()%>" class="quiz-main-img" onerror="this.src='/web/images/common/Quiz1.jpg';">
@@ -62,13 +54,24 @@
                 <p style=" margin-bottom: 0; color:white"> ქვიზის რეიტინგი: 4/5</p>
             </div>
 
-            <button class="button" type="submit"
-                    style="margin-top: 10px">
+            <button class="button" type="submit" style="margin-top: 10px">
                 ქვიზის დაწყება
             </button>
         </div>
-        <input type="hidden" value="<%=quiz.getID()%>" name="quiz_id">
+        <input type="hidden" value="<%=quiz.getID()%>" name="quiz-id">
     </form>
 
     <jsp:include page="/web/pages/Footer.jsp"/>
 </body>
+
+
+
+<%------------------------------ STYLE ------------------------------%>
+
+<style>
+    .quiz-date-and-rait-holder {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+</style>
