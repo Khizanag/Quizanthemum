@@ -7,6 +7,7 @@
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="Model.Managers.UsersManager" %>
 
 <head>
     <meta charset="UTF-8">
@@ -24,7 +25,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
-    <% User user = (User)request.getServletContext().getAttribute(LOGGED_IN_USER);%>
+    <%
+        ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
+        UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
+        int ID = Integer.parseInt(request.getParameter("id"));
+        User user = usersManager.getUser(ID);
+    %>
 
 </head>
 
@@ -32,7 +38,6 @@
 
     <jsp:include page="/web/pages/Header.jsp"/>
     <jsp:include page="/web/pages/MenuBar.jsp"/>
-    <jsp:include page="/web/pages/FriendsListPopup.jsp"/>
 
     <% if(user == null){ %>
         <jsp:include page="/web/pages/YouShouldLogInPart.jsp"/>
@@ -157,7 +162,7 @@
 
     <% } %>
 
-	<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+	<jsp:include page="/web/pages/Footer.jsp"/>
 </body>
 
 <script>

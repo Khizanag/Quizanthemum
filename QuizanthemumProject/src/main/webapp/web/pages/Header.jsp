@@ -1,5 +1,6 @@
 <%@ page import="Controller.Classes.User.User" %>
-<%@ page import="static Configs.Config.LOGGED_IN_USER" %><%--
+<%@ page import="static Configs.Config.LOGGED_IN_USER" %>
+<%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/27/20
@@ -18,10 +19,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/web/js/profileStuff.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
-
-<% request.setCharacterEncoding("UTF-8"); %>
 
 <% User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER); %>
 
@@ -50,7 +47,7 @@
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-    <a href="/web/pages/profilePageLogged.jsp">
+    <a href="/web/pages/ProfilePage.jsp">
         <i class="material-icons my-mat-icon">account_box</i>
         პროფილი
     </a>

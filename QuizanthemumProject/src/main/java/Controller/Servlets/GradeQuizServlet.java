@@ -43,7 +43,7 @@ public class GradeQuizServlet extends HttpServlet {
 
         quizzesManager.rateQuiz(userId, quizId, score);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/profilePageLogged.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/ProfilePage.jsp");
         dispatcher.forward(request, response);
     }
 }

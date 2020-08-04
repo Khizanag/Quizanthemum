@@ -4,7 +4,8 @@
 <%@ page import="Model.Managers.ManagersManager" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="Model.Managers.UsersManager" %>
-<%@ page import="static Configs.Config.USERS_MANAGER_STR" %><%--
+<%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
+    <%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 8/2/20

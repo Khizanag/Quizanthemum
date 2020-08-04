@@ -35,5 +35,5 @@ function redirectToQuiz(){
   window.location.href="QuizSummaryPage.jsp";
 }
 function redirectToProfPage(){
-  window.location.href="/web/pages/profilePageLogged.jsp";
+  window.location.href="../pages/ProfilePage.jsp";
 }

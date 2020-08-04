@@ -18,8 +18,6 @@ public class LogOutServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("LogOutServlet");
-
         Cookie[] cookies = request.getCookies();
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {

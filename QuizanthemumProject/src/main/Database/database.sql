@@ -43,6 +43,8 @@ insert into users values(null, 'gkhiz17', 'aded4da942a8cce63c63b69194d36b7d7f90e
 insert into users values(null, 'ishal17', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'Irakli', 'Shalibashvili', 3, 'Tbilisi', 'Georgia', 'ishal17@freeuni.edu.ge', '+995 598 101 151', SYSDATE(), SYSDATE(), 'https://scontent.ftbs5-2.fna.fbcdn.net/v/t1.0-9/83945758_3003050643061168_6610406129736351744_o.jpg?_nc_cat=103&_nc_sid=85a577&_nc_ohc=jEwsn-QJAFkAX-Zqz2a&_nc_ht=scontent.ftbs5-2.fna&oh=b769765b8129fe79c82e8863d51a30fd&oe=5F4FC022', 'X9NCmZs0cgzI7Mu');
 insert into users values(null, 'lkhiz17', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'Luka', 'Khizanishvili', 3, 'Tbilisi', 'Georgia', 'lkhiz17@freeuni.edu.ge', '+995 593 687 830', SYSDATE(), SYSDATE(), 'https://scontent.ftbs5-1.fna.fbcdn.net/v/t1.0-9/106636827_2576079655967505_9137159715524780313_o.jpg?_nc_cat=108&_nc_sid=85a577&_nc_ohc=Rtn8bAzCYvEAX8LYvvf&_nc_ht=scontent.ftbs5-1.fna&oh=5ff2309ea7bef0bc1af88ef4169ff770&oe=5F4DEB18', 'X9NCmZs0cgzI7Mu');
 
+INSERT INTO users VALUES(null, 'p', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'p', 'p', 2, 'p', 'p', 'p@p', null, SYSDATE(), SYSDATE(), null, 'X9NCmZs0cgzI7Mu');
+
 
 --  *******************************************  CATEGORIES  ******************************************
 CREATE TABLE categories(

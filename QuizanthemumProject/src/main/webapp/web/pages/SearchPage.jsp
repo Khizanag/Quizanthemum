@@ -157,7 +157,7 @@
                 </p>
             <%}%>
             </div>
-            <form id="to_display_profile_form" action="/web/pages/profilePageLogged.jsp" method="get">
+            <form id="to_display_profile_form" action="/web/pages/ProfilePage.jsp" method="get">
                 <input type="hidden" value="-1" id="to_display_profile_elem" name="user_id">
             </form>
         </div>
