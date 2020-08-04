@@ -49,7 +49,7 @@
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-    <a href="/web/pages/profilePageLogged.jsp">
+    <a href="/web/pages/ProfilePage.jsp">
         <i class="material-icons my-mat-icon">account_box</i>
         პროფილი
     </a>

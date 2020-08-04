@@ -37,38 +37,49 @@
         <div class="content">
             <div class="close-btn" onclick="popUpChallengesList()">&times;</div>
             <h1 style="color:orange">გამოწვევები</h1>
-
             <br>
             <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">მეტოქის მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
-            <br> <hr> <br>
+            <br>
+            <hr>
+            <br>
             <%
                 for(int i = 0; i < waitingChallengedChallenges.size(); i++){
                     Challenge challenge = waitingChallengedChallenges.get(i);
                     User challengerUser = challenge.getChallengerUser();
             %>
                 <div class = "friend-list-row">
-                    <span class="nav-item" style="cursor: pointer;"><%=challengerUser.getUsername()%></span>
-                    <span class="nav-item" style="cursor: pointer;" onclick="showQuizOfChallenge(this)" value="<%=challenge.getQuizID()%>">ქვიზი</span>
+                    <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=challengerUser.getID()%>)">
+                        <%=challengerUser.getUsername()%>
+                    </span>
+                    <span class="nav-item" style="cursor: pointer;" onclick="displayQuiz(<%=challenge.getQuizID()%>)">
+                        ქვიზი
+                    </span>
                     <div class = "friend-challenge-remove-btns">
-                        <button class="challenge-btn" id="challenge-btn-id-0_" onclick="acceptChallenge(this)" style="color: green">დათანხმება</button>
-                        <button class="remove-btn" id="remove-btn-id-1_" onclick="rejectChallenge(this)" style="color: red">უარყოფა</button>
+                        <button class="challenge-btn"  onclick="acceptChallenge(<%=challenge.getID()%>)" style="color: green">დათანხმება</button>
+                        <button class="remove-btn" onclick="rejectChallenge(<%=challenge.getID()%>)" style="color: red">უარყოფა</button>
                     </div>
             </div>
         <% } %>
-
-
-            <br> <br> <br> <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">ჩემს მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
-            <br> <hr> <br>
+            <br>
+            <hr>
+            <br>
             <%
                 for(int i = 0; i < waitingChallengerChallenges.size(); i++){
                     Challenge challenge = waitingChallengerChallenges.get(i);
-                    User challengerUser = challenge.getChallengedUser();
+                    User challengedUser = challenge.getChallengedUser();
             %>
             <div class = "friend-list-row">
-                <span class="nav-item" style="cursor: pointer;"><%=challengerUser.getUsername()%></span>
+                <span class="nav-item" style="cursor: pointer;"><%=challengedUser.getUsername()%></span>
+                <span class="nav-item" style="cursor: pointer;" onclick="displayQuiz(<%=challenge.getQuizID()%>)">
+                        ქვიზი
+                    </span>
                 <div class = "friend-challenge-remove-btns">
-                    <button class="remove-btn" value="<%=challenge.getID()%>" onclick="abolishMyChallenge(this)" style="color: red">გაუქმება</button>
+                    <button class="remove-btn" onclick="cancelChallenge(<%=challenge.getID()%>)" style="color: red">გაუქმება</button>
                 </div>
             </div>
             <% } %>
@@ -77,35 +88,71 @@
     </div>
 <% } %>
 
-<form id="abolish-my-challenge-form" action="RejectMyChallenge" method="get">
-    <input type="hidden" name="url" id="url-hidden-variable" value="TODO">
-    <input type="hidden" name="challenge-id" id="abolish-my-challenge-form-challenge-id" value="-1">
+
+
+<%-------------------------------- FORMS --------------------------------%>
+
+<form id="display-profile-form" action="Profile" method="get">
+    <input type="hidden" id="user-id-holder" name="id">
 </form>
+
+<form id="display-quiz-form" action="QuizOverview" method="get">
+    <input type="hidden"  id="quiz-id-holder" name="id">
+</form>
+
+<form id="accept-challenge-form" action="AcceptChallenge" method="get">
+    <input type="hidden" id="challenge-id-holder-in-accept-form" name="id">
+</form>
+
+<form id="reject-challenge-form" action="RejectChallenge" method="get">
+    <input type="hidden" id="challenge-id-holder-in-reject-form" name="id">
+</form>
+
+<form id="cancel-challenge-form" action="CancelChallenge" method="get">
+    <input type="hidden" id="challenge-id-holder-in-cancel-form" name="id">
+</form>
+
+
+
+<%-------------------------------- JAVASCRIPT --------------------------------%>
 
 <script>
     function popUpChallengesList(){
-        console.log("popUpChallengesList");
         document.getElementById("challenges-list-popup-id").classList.toggle("active");
     }
 
-    function acceptChallenge(btn){
-        console.log("acceptChallenge");
+    function displayProfile(userID){
+        console.log("displayProfile");
+        const form = document.getElementById('display-profile-form');
+        document.getElementById('user-id-holder').value = userID;
+        form.submit();
     }
 
-    function rejectChallenge(btn){
+    function displayQuiz(quizID){
+        console.log('displayQuiz');
+        const form = document.getElementById('display-quiz-form');
+        document.getElementById('quiz-id-holder').value = quizID;
+        form.submit();
+    }
+
+    function acceptChallenge(challengeID){
+        console.log('acceptChallenge');
+        const form = document.getElementById('accept-challenge-form');
+        document.getElementById('challenge-id-holder-in-accept-form').value = challengeID;
+        form.submit();
+    }
+
+    function rejectChallenge(challengeID){
         console.log("rejectChallenge");
+        const form = document.getElementById('reject-challenge-form');
+        document.getElementById('challenge-id-holder-in-reject-form').value = challengeID;
+        form.submit();
     }
 
-    function  abolishMyChallenge(btn){
-        console.log("abolishMyChallenge");
-        // document.getElementById("url-hidden-variable").value = ;
-        document.getElementById("abolish-my-challenge-form-challenge-id").value = btn.value;
-        console.log("challenge-id" + btn.value);
-        document.getElementById("abolish-my-challenge-form").submit();
-    }
-
-    function showQuizOfChallenge(challengeElem){
-        console.log('showQuizOfChallenge');
-        let challengeID = parseInt(challengeElem.value);
+    function  cancelChallenge(challengeID){
+        console.log("cancelChallenge");
+        const form = document.getElementById('cancel-challenge-form');
+        document.getElementById('challenge-id-holder-in-cancel-form').value = challengeID;
+        form.submit();
     }
 </script>

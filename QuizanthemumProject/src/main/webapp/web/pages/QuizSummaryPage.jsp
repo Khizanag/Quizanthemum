@@ -31,7 +31,7 @@
     %>
 
     function gotoProfPage() {
-      window.location.href="profilePageLogged.jsp";
+      window.location.href="ProfilePage.jsp";
     }
     function openSearch() {
       window.location.href = "SearchPage.jsp";

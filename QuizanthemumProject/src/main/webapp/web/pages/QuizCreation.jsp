@@ -18,7 +18,6 @@
 
 <body>
 
-    <% response.setHeader("Content-Type", "text/xml; charset=UTF-8"); %>
     <form id="creation-section" class="creation-section" action="../../QuizCreationStarted" method="get">
         <div class="container bla">
             <h2>შექმენი შენი ქვიზი</h2>
