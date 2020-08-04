@@ -45,11 +45,11 @@
                 <div class="dropdown">
                     <a class="nav-item" target="_self" href="../../DisplayQuizzes">ქვიზები</a>
                     <div class="dropdown-content">
-                        <a class="nav-item grayeble" target="_self" href="../../DisplayNewestQuizzes">უახლესი</a>
-                        <a class="nav-item grayeble" target="_self" href="../../DisplayMostPopularQuizzes">პოპულარული</a>
-                        <a class="nav-item grayeble" target="_self" href="../../DisplayHighestRatedQuizzes">მაღალრეიტინგული</a>
+                        <a class="nav-item grayeble" target="_self" href="/DisplayNewestQuizzes">უახლესი</a>
+                        <a class="nav-item grayeble" target="_self" href="/DisplayMostPopularQuizzes">პოპულარული</a>
+                        <a class="nav-item grayeble" target="_self" href="/DisplayHighestRatedQuizzes">მაღალრეიტინგული</a>
                         <% if(user != null){ %>
-                            <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
+                            <a class="nav-item grayeble" target="_self" href="/CreateQuiz">ქვიზის შექმნა</a>
                         <% } %>
                     </div>
                 </div>
@@ -65,9 +65,8 @@
                         </form>
                     </div>
                 </div>
-                <a class="nav-item" target="_self" href="/web/pages/Blog.jsp">ბლოგი</a>
-                <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
-                <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
+                <a class="nav-item" target="_self" href="//Blogs">ბლოგი</a>
+                <a class="nav-item" target="_self" href="/Contact">კონტაქტი</a>
             </ul>
         </nav>
         <form class="search-items" action="/SearchPage" method="get">
