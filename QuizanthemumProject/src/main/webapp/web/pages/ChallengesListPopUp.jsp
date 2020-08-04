@@ -92,7 +92,7 @@
 
 <%-------------------------------- FORMS --------------------------------%>
 
-<form id="display-profile-form" action="Profile" method="get">
+<form id="display-profile-form" action="../../Profile" method="get">
     <input type="hidden" id="user-id-holder" name="id">
 </form>
 

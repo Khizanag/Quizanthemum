@@ -49,7 +49,7 @@
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-    <a href="/web/pages/ProfilePage.jsp">
+    <a onclick="openMyProfilePage()">
         <i class="material-icons my-mat-icon">account_box</i>
         პროფილი
     </a>
@@ -74,8 +74,17 @@
 
 </div>
 
+<%-- FORMS --%>
+
+<form id="open-my-profile-page-form" action="/Profile" method="get">
+    <input type="hidden" name="id" value="<%=user.getID()%>">
+</form>
 
 <script>
+
+    function openMyProfilePage(){
+        document.getElementById('open-my-profile-page-form').submit();
+    }
 
     function openMainPage(){
         window.location.href = "/";

@@ -27,14 +27,14 @@ public class LogInServlet extends HttpServlet implements Config {
         User targetUser = usersManager.getUser(username);
 
         if(targetUser != null && targetUser.isCorrectPassword(password)){
-            request.getServletContext().setAttribute("logedInUser", targetUser);
-            context.removeAttribute("errorMessage");
-            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", ""+targetUser.getID()));
-            response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", targetUser.getPasswordHash()));
+            request.getServletContext().setAttribute(LOGGED_IN_USER, targetUser);
+            context.removeAttribute(ERROR_MESSAGE);
+            response.addCookie(new Cookie(LOGGED_IN_USER_ID, "" + targetUser.getID()));
+            response.addCookie(new Cookie(LOGGED_IN_USER_PASSWORD_HASH, targetUser.getPasswordHash()));
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/web/pages/profilePageLogged.jsp");
+            response.setHeader("Location", "http://localhost:8080/web/pages/ProfilePage.jsp");
         } else {
-            context.setAttribute("errorMessage", "მომხმარებლის სახელი ან პაროლი არასწორია. სცადეთ თავიდან.");
+            context.setAttribute(ERROR_MESSAGE, "მომხმარებლის სახელი ან პაროლი არასწორია. სცადეთ თავიდან.");
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/web/pages/SignIn.jsp");
         }

@@ -25,8 +25,11 @@ public interface Config {
     int DEFAULT_ID = -1;
     int DEFAULT_NUM_QUEZZES_TO_DISPLAY = 10;
 
-    String LOGGED_IN_USER_ID_STR = "Quizanthemum-loged-in-user-ID";
-    String LOGGED_IN_USER_PASSWORD_HASH_STR = "Quizanthemum-loged-in-user-password-hash";
+    String LOGGED_IN_USER = "logedInUser";
+    String ERROR_MESSAGE = "errorMessage";
+
+    String LOGGED_IN_USER_ID = "Quizanthemum-loged-in-user-ID";
+    String LOGGED_IN_USER_PASSWORD_HASH = "Quizanthemum-loged-in-user-password-hash";
     String LAST_CREATED_QUIZ = "quiz-that-was-created-lastly";
     String QUIZ_TO_DISPLAY = "quiz-that-should-be-displayed-in-quiz-start-page";
 
