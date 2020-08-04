@@ -90,7 +90,7 @@
         </div>
         <form id="to_display_start_quiz_form" action="Quiz" method="get">
             <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="id">
-        </form> 
+        </form>
     </div>
 </div>
 <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
