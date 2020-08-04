@@ -54,15 +54,15 @@ public class RegistrationServlet extends HttpServlet implements Config {
             String salt = generateSalt();
             userManager.setCurrentSalt(salt);
             User newUser = new User(username, password, salt, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
-            int ID = userManager.insertUser(newUser);
+            newUser.setID(userManager.insertUser(newUser));
 
             request.getServletContext().setAttribute("logedInUser", newUser);
             request.getServletContext().removeAttribute(errorMessage);
-            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", "" + ID));
+            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", "" + newUser.getID()));
             response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", newUser.getPasswordHash()));
 
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/web/pages/profilePageLogged.jsp");
+            response.setHeader("Location", "http://localhost:8080/Profile?id=" + newUser.getID());
         } else {
             request.getServletContext().setAttribute("errorMessage", errorMessage);
             response.setStatus(HttpServletResponse.SC_FOUND);//302
