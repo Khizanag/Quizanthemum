@@ -6,6 +6,7 @@
 <%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="java.util.List" %>
+<%@ page import="static Configs.Config.*" %>
 
 <head>
     <meta charset="UTF-8">
@@ -22,59 +23,19 @@
 	<script src="/web/js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
 
-    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
-    <% User user = (User)request.getServletContext().getAttribute("logedInUser");%>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"/>
+    <% User user = (User)request.getServletContext().getAttribute(LOGGED_IN_USER);%>
 
-    <script>
-
-        function openSearch() {
-			window.location.href = "SearchPage.jsp";
-		}
-
-        function changeImage(){
-            console.log('asd');
-            document.getElementById("change-image").classList.toggle("active");
-            document.getElementById('photo-url').value="";
-            document.getElementById('output').src="";
-        }
-        function previewImage(){
-		    const url=$("#image-url").val();
-            $("#preview-image").attr("src",url);
-        }
-        function  loadFile() {
-            var image = document.getElementById('output');
-            image.height = 300;
-            image.src = URL.createObjectURL(event.target.files[0]);
-            document.getElementById('photo-url').value = image.src;
-        }
-        function uploadImage(event) {
-            if(document.getElementById('photo-url').value != "") {
-                var image = document.getElementById('output');
-                image.height = 300;
-                image.src = document.getElementById('photo-url').value;
-            }
-        }
-        function submitPhoto(){
-            if(document.getElementById('photo-url').value != ""){
-                let image = document.getElementById("small-prof-pic-id");
-                image.src = document.getElementById('photo-url').value;
-                image = document.getElementById("prof-pic-big-id");
-                image.src = document.getElementById('photo-url').value;
-                changeImage();
-            }
-        }
-	</script>
 </head>
 
 <body>
 
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
-    <jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
+    <jsp:include page="/web/pages/FriendsListPopup.jsp"/>
 
-    <script>console.log("vnaxot nalia tu ara"); </script>
     <% if(user == null){ %>
-        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"></jsp:include>
+        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"/>
     <% } else { %>
 
     <div class="change-image-popup" id="change-image">
@@ -198,6 +159,7 @@
 
 	<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
+
 <script>
     function redirectToQuizStart(id){
         console.log(id);
@@ -207,5 +169,43 @@
         const form = document.getElementById("to_display_start_quiz_form");
         document.getElementById("to_display_start_quiz_elem").value = id;
         form.submit();
+    }
+
+
+    function openSearch() {
+        window.location.href = "SearchPage.jsp";
+    }
+
+    function changeImage(){
+        console.log('asd');
+        document.getElementById("change-image").classList.toggle("active");
+        document.getElementById('photo-url').value="";
+        document.getElementById('output').src="";
+    }
+    function previewImage(){
+        const url=$("#image-url").val();
+        $("#preview-image").attr("src",url);
+    }
+    function  loadFile() {
+        var image = document.getElementById('output');
+        image.height = 300;
+        image.src = URL.createObjectURL(event.target.files[0]);
+        document.getElementById('photo-url').value = image.src;
+    }
+    function uploadImage(event) {
+        if(document.getElementById('photo-url').value != "") {
+            var image = document.getElementById('output');
+            image.height = 300;
+            image.src = document.getElementById('photo-url').value;
+        }
+    }
+    function submitPhoto(){
+        if(document.getElementById('photo-url').value != ""){
+            let image = document.getElementById("small-prof-pic-id");
+            image.src = document.getElementById('photo-url').value;
+            image = document.getElementById("prof-pic-big-id");
+            image.src = document.getElementById('photo-url').value;
+            changeImage();
+        }
     }
 </script>

@@ -1,4 +1,5 @@
-<%@ page import="Controller.Classes.User.User" %><%--
+<%@ page import="Controller.Classes.User.User" %>
+<%@ page import="static Configs.Config.LOGGED_IN_USER" %><%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/27/20
@@ -18,9 +19,11 @@
 <script src="/web/js/profileStuff.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+
+
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
+<% User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER); %>
 
 <jsp:include page="/web/pages/FriendsListPopup.jsp"/>
 <jsp:include page="/web/pages/ChallengesListPopUp.jsp"/>
