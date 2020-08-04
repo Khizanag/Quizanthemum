@@ -1,4 +1,6 @@
-<%@ page import="Controller.Classes.User.User" %><%--
+<%@ page import="Controller.Classes.User.User" %>
+<%@ page import="static Configs.Config.LOGGED_IN_USER" %>
+<%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/27/20
@@ -18,11 +20,11 @@
 <script src="/web/js/profileStuff.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<% request.setCharacterEncoding("UTF-8"); %>
-
-<% response.setHeader("Content-Type", "text/xml; charset=UTF-8"); %>
-
-<% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
+<%
+    request.setCharacterEncoding("UTF-8");
+    response.setHeader("Content-Type", "text/xml; charset=UTF-8");
+    User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+%>
 
 <jsp:include page="/web/pages/FriendsListPopup.jsp"/>
 <jsp:include page="/web/pages/ChallengesListPopUp.jsp"/>
@@ -74,11 +76,17 @@
 
 </div>
 
-<%-- FORMS --%>
+
+
+<%------------------------------ FORMS ------------------------------%>
 
 <form id="open-my-profile-page-form" action="/Profile" method="get">
     <input type="hidden" name="id" value="<%=user.getID()%>">
 </form>
+
+
+
+<%------------------------------ SCRIPT ------------------------------%>
 
 <script>
 

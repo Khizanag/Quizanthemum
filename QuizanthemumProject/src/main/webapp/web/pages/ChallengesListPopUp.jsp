@@ -16,6 +16,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<link rel="icon" type="image/png" href="web/images/common/icon.png"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/web/styles/common.css">
+<%--<link rel="stylesheet" href="/web/styles/homePage.css">--%>
+<link rel="stylesheet" href="/web/styles/breakpoints.css">
+<%--<link rel="stylesheet" href="/web/styles/profilePage.css">--%>
+<%--<link rel="stylesheet" href="/web/styles/quizCreation.css">--%>
+<link rel="stylesheet" href="/web/styles/scroll.css">
+
 <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 
 <%
@@ -74,10 +83,12 @@
                     User challengedUser = challenge.getChallengedUser();
             %>
             <div class = "friend-list-row">
-                <span class="nav-item" style="cursor: pointer;"><%=challengedUser.getUsername()%></span>
+                <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=challengedUser.getID()%>)">
+                    <%=challengedUser.getUsername()%>
+                </span>
                 <span class="nav-item" style="cursor: pointer;" onclick="displayQuiz(<%=challenge.getQuizID()%>)">
                         ქვიზი
-                    </span>
+                </span>
                 <div class = "friend-challenge-remove-btns">
                     <button class="remove-btn" onclick="cancelChallenge(<%=challenge.getID()%>)" style="color: red">გაუქმება</button>
                 </div>
@@ -92,11 +103,11 @@
 
 <%-------------------------------- FORMS --------------------------------%>
 
-<form id="display-profile-form" action="../../Profile" method="get">
+<form id="display-profile-form" action="Profile" method="get">
     <input type="hidden" id="user-id-holder" name="id">
 </form>
 
-<form id="display-quiz-form" action="QuizOverview" method="get">
+<form id="display-quiz-form" action="Quiz" method="get">
     <input type="hidden"  id="quiz-id-holder" name="id">
 </form>
 

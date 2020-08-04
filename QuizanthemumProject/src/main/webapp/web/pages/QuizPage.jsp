@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
     <link rel="stylesheet" href="/web/styles/startQuiz.css">
 
-    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 
 </head>
 
@@ -28,20 +28,20 @@
     }
 </style>
 <body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <% if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
         <div style="text-align: center">
             <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">ქვიზი წარმატებით შეიქმნა.</p>
         </div>
     <% request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
-    }%>
-    <%
+    }
         ServletContext context = request.getServletContext();
         ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-        Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
+        int ID = Integer.parseInt(request.getParameter("id"));
+        Quiz quiz = quizManager.getQuiz(ID);
     %>
     <form class="start-quiz-section" action="../../../QuizEventStart" method ="get">
         <div class="container">
@@ -70,5 +70,5 @@
         <input type="hidden" value="<%=quiz.getID()%>" name="quiz_id">
     </form>
 
-    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Footer.jsp"/>
 </body>
