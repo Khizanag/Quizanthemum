@@ -53,8 +53,8 @@
 </style>
 
 <body>
-    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
     <%
         ServletContext context = request.getServletContext();
@@ -112,8 +112,8 @@
                 </p>
             <%}%>
             </div>
-            <form id="to_display_start_quiz_form" action="/web/pages/QuizPage.jsp" method="get">
-                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+            <form id="to_display_start_quiz_form" action="Quiz" method="get">
+                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="id">
             </form>
         </div>
     </div>
@@ -157,13 +157,13 @@
                 </p>
             <%}%>
             </div>
-            <form id="to_display_profile_form" action="/web/pages/ProfilePage.jsp" method="get">
-                <input type="hidden" value="-1" id="to_display_profile_elem" name="user_id">
+            <form id="to_display_profile_form" action="Profile" method="get">
+                <input type="hidden" value="-1" id="to_display_profile_elem" name="id">
             </form>
         </div>
     </div>
 
-    <jsp:include page="/web/pages/PartPages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 
 <script>
