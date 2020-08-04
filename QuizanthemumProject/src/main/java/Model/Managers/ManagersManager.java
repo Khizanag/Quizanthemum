@@ -13,7 +13,6 @@ public class ManagersManager {
 
     private ServletContext context;
     private Map<String, Object> managers;
-    private ManagersManager manager;
 
     public ManagersManager(ServletContext context){
         this.context = context;
@@ -71,8 +70,4 @@ public class ManagersManager {
     public Object getManager(String managerName){
         return managers.get(managerName);
     }
-
-//    public static ManagersManager getInstance(){
-//        return
-//    }
 }

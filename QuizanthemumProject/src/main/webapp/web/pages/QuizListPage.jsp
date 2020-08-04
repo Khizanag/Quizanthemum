@@ -35,8 +35,8 @@
     }
 </style>
 <body>
-<jsp:include page="/web/pages/Header.jsp"/>
-<jsp:include page="/web/pages/MenuBar.jsp"/>
+<jsp:include page="/web/pages/Header.jsp"></jsp:include>
+<jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 <%
     ServletContext context = request.getServletContext();
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
@@ -88,18 +88,20 @@
             <%}%>
             </div>
         </div>
-        <form id="to_display_start_quiz_form" action="/Quiz" method="get">
-            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="id">
+        <form id="to_display_start_quiz_form" action="/web/pages/StartQuiz.jsp" method="get">
+            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
         </form>
     </div>
 </div>
-<jsp:include page="/web/pages/Footer.jsp"/>
+<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 
 <script>
     function redirectToQuizStart(id){
+        console.log(id);
         const inp=document.getElementById("currQuizId"+id);
         inp.value=id;
+        console.log(inp);
         const form = document.getElementById("to_display_start_quiz_form");
         document.getElementById("to_display_start_quiz_elem").value = id;
         form.submit();

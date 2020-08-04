@@ -12,7 +12,6 @@ import java.sql.Date;
 public class Challenge implements Config {
 
     private int ID;
-    private int quizID;
     private boolean isFinished;
     private int winnerUserID;
     private final ChallengesManager manager;
@@ -31,10 +30,9 @@ public class Challenge implements Config {
     private QuizEvent challengedQuizEvent;
     private Date acceptingDate;
 
-    public Challenge(int ID, int quizID, int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
+    public Challenge(int ID, int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
                      boolean isFinished, int winnerUserID, Date challengingDate, Date acceptingDate, ChallengesManager manager){
         this.ID = ID;
-        this.quizID = quizID;
         this.challengerUserID = challengerUserID;
         this.challengedUserID = challengedUserID;
         this.challengerQuizEventID = challengerQuizEventID;
@@ -47,9 +45,9 @@ public class Challenge implements Config {
     }
 
     /* this constructor could be called immediately after user challenges someone and it is not accepted yet */
-    public Challenge(int quizID, int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
+    public Challenge(int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
                      Date challengingDate, ChallengesManager manager){
-        this(-1, quizID, challengerUserID, challengedUserID, challengerQuizEventID, challengedQuizEventID,
+        this(-1, challengerUserID, challengedUserID, challengerQuizEventID, challengedQuizEventID,
                 false, -1, challengingDate, null, manager);
     }
 
@@ -58,8 +56,6 @@ public class Challenge implements Config {
     public int getID() {
         return ID;
     }
-
-    public int getQuizID(){ return this.quizID; }
 
     public int getWinnerUserID() {
         return winnerUserID;

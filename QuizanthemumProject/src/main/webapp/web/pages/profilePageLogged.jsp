@@ -6,41 +6,75 @@
 <%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="java.util.List" %>
-<%@ page import="static Configs.Config.*" %>
-<%@ page import="Model.Managers.UsersManager" %>
-
-<%
-    ServletContext context = request.getServletContext();
-    ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
-    UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
-    int ID = Integer.parseInt(request.getParameter("id"));
-    User user = usersManager.getUser(ID);
-%>
 
 <head>
     <meta charset="UTF-8">
-    <title><%=user.getUsername()%></title>
+    <title> Quizanthemum </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/web/styles/common.css">
-	<link rel="stylesheet" href="/web/styles/homePage.css">
-	<link rel="stylesheet" href="/web/styles/breakpoints.css">
-    <link rel="stylesheet" href="/web/styles/quizCreation.css">
-    <link rel="stylesheet" href="/web/styles/profilePage.css">
+	<link rel="stylesheet" href="../styles/common.css">
+	<link rel="stylesheet" href="../styles/homePage.css">
+	<link rel="stylesheet" href="../styles/breakpoints.css">
+    <link rel="stylesheet" href="../styles/quizCreation.css">
+    <link rel="stylesheet" href="../styles/profilePage.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
-	<script src="/web/js/profileStuff.js"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/web/js/profileStuff.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
 
-    <jsp:include page="/web/pages/LogedInHandler.jsp"/>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
+    <% User user = (User)request.getServletContext().getAttribute("logedInUser");%>
+
+    <script>
+
+        function openSearch() {
+			window.location.href = "SearchPage.jsp";
+		}
+
+        function changeImage(){
+            console.log('asd');
+            document.getElementById("change-image").classList.toggle("active");
+            document.getElementById('photo-url').value="";
+            document.getElementById('output').src="";
+        }
+        function previewImage(){
+		    const url=$("#image-url").val();
+            $("#preview-image").attr("src",url);
+        }
+        function  loadFile() {
+            var image = document.getElementById('output');
+            image.height = 300;
+            image.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById('photo-url').value = image.src;
+        }
+        function uploadImage(event) {
+            if(document.getElementById('photo-url').value != "") {
+                var image = document.getElementById('output');
+                image.height = 300;
+                image.src = document.getElementById('photo-url').value;
+            }
+        }
+        function submitPhoto(){
+            if(document.getElementById('photo-url').value != ""){
+                let image = document.getElementById("small-prof-pic-id");
+                image.src = document.getElementById('photo-url').value;
+                image = document.getElementById("prof-pic-big-id");
+                image.src = document.getElementById('photo-url').value;
+                changeImage();
+            }
+        }
+	</script>
 </head>
 
 <body>
 
-    <jsp:include page="/web/pages/Header.jsp"/>
-    <jsp:include page="/web/pages/MenuBar.jsp"/>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
 
+    <script>console.log("vnaxot nalia tu ara"); </script>
     <% if(user == null){ %>
-        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"/>
+        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"></jsp:include>
     <% } else { %>
 
     <div class="change-image-popup" id="change-image">
@@ -75,7 +109,7 @@
                 <div class =  "user-email"><%="ელ-ფოსტა: "+user.getEmail()%></div>
                 <% String mobNum = user.getMobileNumber();
                     if(mobNum == null){
-                        mobNum = "***-***-***";
+                        mobNum = "*******";
                     }
                     String country = user.getCountry();
                     if(country == null) {
@@ -125,6 +159,8 @@
 
     </div>
     <%
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
     %>
@@ -153,58 +189,18 @@
                 <%}%>
             </div>
         </div>
-        <form id="to_display_start_quiz_form" action="Quiz" method="get">
-            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="id">
+        <form id="to_display_start_quiz_form" action="QuizSummaryPage.jsp" method="get">
+            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
         </form>
     </main>
 
     <% } %>
 
-	<jsp:include page="/web/pages/Footer.jsp"/>
+	<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
-
 <script>
-    function openSearch() {
-        window.location.href = "SearchPage.jsp";
-    }
-
-    function changeImage(){
-        document.getElementById("change-image").classList.toggle("active");
-        document.getElementById('photo-url').value="";
-        document.getElementById('output').src="";
-    }
-
-    function previewImage(){
-        const url=$("#image-url").val();
-        $("#preview-image").attr("src",url);
-    }
-
-    function  loadFile() {
-        var image = document.getElementById('output');
-        image.height = 300;
-        image.src = URL.createObjectURL(event.target.files[0]);
-        document.getElementById('photo-url').value = image.src;
-    }
-
-    function uploadImage(event) {
-        if(document.getElementById('photo-url').value != "") {
-            var image = document.getElementById('output');
-            image.height = 300;
-            image.src = document.getElementById('photo-url').value;
-        }
-    }
-
-    function submitPhoto(){
-        if(document.getElementById('photo-url').value != ""){
-            let image = document.getElementById("small-prof-pic-id");
-            image.src = document.getElementById('photo-url').value;
-            image = document.getElementById("prof-pic-big-id");
-            image.src = document.getElementById('photo-url').value;
-            changeImage();
-        }
-    }
-
     function redirectToQuizStart(id){
+        console.log(id);
         const inp=document.getElementById("currQuizId"+id);
         inp.value=id;
         console.log(inp);

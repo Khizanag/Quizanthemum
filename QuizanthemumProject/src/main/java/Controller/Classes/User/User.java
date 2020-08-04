@@ -2,7 +2,6 @@ package Controller.Classes.User;
 
 import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.QuizEvent;
-import Model.Managers.ChallengesManager;
 import Model.Managers.ManagersManager;
 
 import java.security.MessageDigest;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Configs.Config.CHALLENGE_MANAGER_STR;
 import static Configs.Config.DEFAULT_ID;
 
 public class User {
@@ -23,6 +21,7 @@ public class User {
     private String passwordHash;
     private final String firstName;
     private final String lastName;
+    // TODO
     private String passwordSalt;
     private String pictureURL;
     private final int role;
@@ -142,33 +141,33 @@ public class User {
 
     public int getChallengesWon(){ return challengesWon; }
 
-    public String getCity() { return city; }
-
-    public String getCountry() { return country; }
-
-    public String getMobileNumber() { return phoneNumber; }
-
-    public String getEmail() { return email; }
-
-    public Date getBirthDate() { return birthDate; }
-
-    public Date getRegistrationDate() { return registrationDate; }
-
-    public List<Challenge> getChallenges(){ return challenges; }
-
-
-
-    public void setID(int ID){
-        this.id = ID;
+    public String getCity() {
+        return city;
     }
 
-    public void setChallenges(List<Challenge> challenges){
-        this.challenges = challenges;
+    public String getCountry() {
+        return country;
     }
+
+    public String getMobileNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
 
     public List<Integer> getFriendIDs() {
         if(friendIDs == null){
-
         }
         return friendIDs;
     }
@@ -204,7 +203,12 @@ public class User {
         return passwordHash.equals(hashFunction(fullPassword));
     }
 
-
+    public List<Challenge> getChallenges(){
+        if(challenges == null){
+            challenges = new ArrayList<>();
+        }
+        return challenges;
+    }
 
     public List<Challenge> getWaitingChallengedChallenges() {
         List<Challenge> challenges = new ArrayList<>();

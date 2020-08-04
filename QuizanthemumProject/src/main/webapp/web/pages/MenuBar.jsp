@@ -4,9 +4,7 @@
 <%@ page import="Controller.Classes.OtherClasses.Category" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="static Configs.Config.CATEGORIES_MANAGER_STR" %>
-<%@ page import="java.util.List" %>
-<%@ page import="static Configs.Config.*" %>
-<%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/27/20
@@ -15,8 +13,24 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" type="image/png" href="../images/common/icon.png"/>
+<link rel="stylesheet" href="/web/styles/common.css">
+<link rel="stylesheet" href="/web/styles/breakpoints.css">
+<link rel="stylesheet" href="/web/styles/MenuBar.css">
+
+<% User user = (User) request.getServletContext().getAttribute("logedInUser"); %>
+<script>
+    function logout(){
+        const logoutForm = document.getElementById("logoutForm");
+        logoutForm.action="../../LogOut"
+        const currUrl = document.getElementById("currentUrl");
+        currUrl.value=window.location.href;
+        logoutForm.submit();
+    }
+</script>
+
 <%
-    User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
     ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
     CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
     List<Category> categories = categoriesManager.getCategories();
@@ -29,11 +43,11 @@
                 <a class="nav-item" target="_self" href="/">მთავარი</a>
 
                 <div class="dropdown">
-                    <a class="nav-item" target="_self" href="/DisplayQuizzes">ქვიზები</a>
+                    <a class="nav-item" target="_self" href="../../DisplayQuizzes">ქვიზები</a>
                     <div class="dropdown-content">
-                        <a class="nav-item grayeble" target="_self" href="/DisplayNewestQuizzes">უახლესი</a>
-                        <a class="nav-item grayeble" target="_self" href="/DisplayMostPopularQuizzes">პოპულარული</a>
-                        <a class="nav-item grayeble" target="_self" href="/DisplayHighestRatedQuizzes">მაღალრეიტინგული</a>
+                        <a class="nav-item grayeble" target="_self" href="../../DisplayNewestQuizzes">უახლესი</a>
+                        <a class="nav-item grayeble" target="_self" href="../../DisplayMostPopularQuizzes">პოპულარული</a>
+                        <a class="nav-item grayeble" target="_self" href="../../DisplayHighestRatedQuizzes">მაღალრეიტინგული</a>
                         <% if(user != null){ %>
                             <a class="nav-item grayeble" target="_self" href="/web/pages/QuizCreation.jsp">ქვიზის შექმნა</a>
                         <% } %>
@@ -53,6 +67,7 @@
                 </div>
                 <a class="nav-item" target="_self" href="/web/pages/Blog.jsp">ბლოგი</a>
                 <a class="nav-item" target="_self" href="/web/pages/Contact.jsp">კონტაქტი</a>
+                <a class="nav-item" target="_self" href="/web/pages/varskvlavebi.jsp">TEST</a>
             </ul>
         </nav>
         <form class="search-items" action="/SearchPage" method="get">
@@ -68,12 +83,4 @@
         document.getElementById('categories-form').submit();
     }
 
-    function logout(){
-        const logoutForm = document.getElementById("logoutForm");
-        logoutForm.action="/LogOut"
-        const currUrl = document.getElementById("currentUrl");
-        currUrl.value=window.location.href;
-        // use of currUrl
-        logoutForm.submit();
-    }
 </script>

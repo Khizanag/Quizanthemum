@@ -101,8 +101,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         List<Integer> challengeIDs = new ArrayList<>();
         String query = "SELECT " + CHALLENGES_TABLE_COLUMN_1_ID +
                 " FROM " + CHALLENGES_TABLE_NAME +
-                " WHERE " + CHALLENGES_TABLE_COLUMN_3_CHALLENGER_USER_ID + " = " + id +
-                " OR " + CHALLENGES_TABLE_COLUMN_4_CHALLENGED_USER_ID + " = " + id + ";\n";
+                " WHERE " + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID + " = " + id +
+                " OR " + CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){

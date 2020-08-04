@@ -59,7 +59,7 @@
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
     %>
-    <form class="start-quiz-section" action="/QuizEventStart" method ="get">
+    <form class="start-quiz-section" action="../../../QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">
                 <img src="<%=quiz.getIconUrl()%>" class="quiz-main-img" onerror="this.src='/web/images/common/Quiz1.jpg';">
@@ -99,6 +99,6 @@
                 ქვიზის დაწყება
             </button>
         </div>
-        <input type="hidden" value="<%=quiz.getID()%>" name="quiz-id">
+        <input type="hidden" value="<%=quiz.getID()%>" name="quiz_id">
     </form>
 </body>

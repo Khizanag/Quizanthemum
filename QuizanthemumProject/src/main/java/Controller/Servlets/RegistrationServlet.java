@@ -25,7 +25,6 @@ public class RegistrationServlet extends HttpServlet implements Config {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.printf("**********RegistrationServlet");
         UsersManager userManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
 
         String username = request.getParameter("registration_username");
@@ -34,6 +33,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
         if(!userManager.isUsernameFree(username)){
             errorMessage = "მომხმარებლის ეს სახელი (username) უკვე დაკავებულია სხვა მომხმარებლის მიერ. გთხოვთ, აარჩიოთ სხვა username.";
         }
+        System.out.println("doget in registration, before adding if");
 
         if(errorMessage.isEmpty()){ // there were no errors during registration
             String password = request.getParameter("registration_password");
@@ -42,7 +42,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             String email = request.getParameter("registration_email");
             String city = request.getParameter("registration_city");
             String country = request.getParameter("registration_country");
-            String mobilePhone = request.getParameter("registration_phone_number");
+            String mobilePhone = request.getParameter("registration_phone_numer");
             String birthDateStr = request.getParameter("registration_birth_date");
             StringTokenizer strTok = new StringTokenizer(birthDateStr, "-");
             int year = Integer.parseInt(strTok.nextToken());
@@ -55,17 +55,16 @@ public class RegistrationServlet extends HttpServlet implements Config {
             userManager.setCurrentSalt(salt);
             User newUser = new User(username, password, salt, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
             int ID = userManager.insertUser(newUser);
-            newUser.setID(ID);
 
-            request.getServletContext().setAttribute(LOGGED_IN_USER, newUser);
+            request.getServletContext().setAttribute("logedInUser", newUser);
             request.getServletContext().removeAttribute(errorMessage);
-            response.addCookie(new Cookie(LOGGED_IN_USER_ID, "" + ID));
-            response.addCookie(new Cookie(LOGGED_IN_USER_PASSWORD_HASH  , newUser.getPasswordHash()));
+            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", "" + ID));
+            response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", newUser.getPasswordHash()));
 
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/Profile?id=" + ID);
+            response.setHeader("Location", "http://localhost:8080/web/pages/profilePageLogged.jsp");
         } else {
-            request.getServletContext().setAttribute(ERROR_MESSAGE, errorMessage);
+            request.getServletContext().setAttribute("errorMessage", errorMessage);
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/web/pages/Registration.jsp");
         }

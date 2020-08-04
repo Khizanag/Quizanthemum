@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "LogInServlet", urlPatterns = "/LogIn")
+@WebServlet(name = "LogInServlet", urlPatterns = "/LogInServlet")
 public class LogInServlet extends HttpServlet implements Config {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -27,14 +27,14 @@ public class LogInServlet extends HttpServlet implements Config {
         User targetUser = usersManager.getUser(username);
 
         if(targetUser != null && targetUser.isCorrectPassword(password)){
-            request.getServletContext().setAttribute(LOGGED_IN_USER, targetUser);
-            context.removeAttribute(ERROR_MESSAGE);
-            response.addCookie(new Cookie(LOGGED_IN_USER_ID, "" + targetUser.getID()));
-            response.addCookie(new Cookie(LOGGED_IN_USER_PASSWORD_HASH, targetUser.getPasswordHash()));
+            request.getServletContext().setAttribute("logedInUser", targetUser);
+            context.removeAttribute("errorMessage");
+            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", ""+targetUser.getID()));
+            response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", targetUser.getPasswordHash()));
             response.setStatus(HttpServletResponse.SC_FOUND);//302
-            response.setHeader("Location", "http://localhost:8080/Profile?id=" + targetUser.getID());
+            response.setHeader("Location", "http://localhost:8080/web/pages/profilePageLogged.jsp");
         } else {
-            context.setAttribute(ERROR_MESSAGE, "მომხმარებლის სახელი ან პაროლი არასწორია. სცადეთ თავიდან.");
+            context.setAttribute("errorMessage", "მომხმარებლის სახელი ან პაროლი არასწორია. სცადეთ თავიდან.");
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/web/pages/SignIn.jsp");
         }

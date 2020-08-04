@@ -1,4 +1,3 @@
-<%@ page import="static Configs.Config.ERROR_MESSAGE" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
@@ -13,8 +12,8 @@
 
 <body style="padding:0px; margin:0px; font-family:arial,helvetica,sans-serif,verdana,'Open Sans'">
 
-    <jsp:include page="/web/pages/Header.jsp"/>
-    <jsp:include page="/web/pages/MenuBar.jsp"/>
+    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
 
     <form class="registration-section" action="../../Registration" method="get">
         <div class="container">
@@ -22,9 +21,9 @@
             <p>გთხოვთ შეავსოთ ფორმა პროფილის შესაქმნელად.</p>
             <hr>
             <%
-                if(request.getServletContext().getAttribute(ERROR_MESSAGE) != null) { %>
+                if(request.getServletContext().getAttribute("errorMessage") != null) { %>
                     <p class="error_message"> ${errorMessage}</p> <%
-                    request.removeAttribute(ERROR_MESSAGE);
+                    request.removeAttribute("errorMessage");
                 }
             %>
             <div class="input-items">
@@ -74,7 +73,7 @@
             <p>უკვე ხართ ამ გვერდის მომხმარებელი? <a href="SignIn.jsp">შედით თქვენს პროფილზე</a>.</p>
         </div>
     </form>
-    <jsp:include page="/web/pages/Footer.jsp"/>
+    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
 </body>
 
 <script >
@@ -89,6 +88,12 @@
         if(password != rep_pwd) {
             alert( "\n" + "პაროლი და განმეორებით შეყვანილი პაროლი არ ემთხვევა" + "\n" +
                    "\n" + "გთხოვთ გადაამოწმოთ შეყვანილი მონაცემები");
+            return;
+        }
+
+        if (f_name && l_name && username && email && password !== '') {
+            // window.location.href = "";
+            //TODO
         }
     }
 </script>
