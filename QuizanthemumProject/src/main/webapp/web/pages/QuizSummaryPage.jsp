@@ -13,7 +13,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.FILL_BLANK" %>
 <%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.*" %>
-<%@ page import="Tools.Pair" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
+<%@ page import="Tools.Pair" %>
+<%@ page import="static Configs.Config.*" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -33,11 +34,9 @@
             ServletContext context = request.getServletContext();
             ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
             QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-            Quiz quiz = (Quiz) quizManager.getQuiz(Integer.parseInt(request.getParameter("quiz_id")));
             QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
-            User user = (User)request.getServletContext().getAttribute("logedInUser");
-            int questionsNumber= quiz.getQuestionsCount();
-
+            Quiz quiz = quizEvent.getQuiz();
+            User user = (User)request.getServletContext().getAttribute(LOGGED_IN_USER);
     %>
     <%!
         private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
@@ -51,8 +50,8 @@
 </head>
 
 <body>
-<jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
-<jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
+<jsp:include page="/web/pages/PartPages/Header.jsp"/>
+<jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
     <div class="quiz-summary-wrapper">
         <div class="quiz-container">
@@ -178,7 +177,7 @@
                             }
                         %>
                     </div>
-                  </span>
+                            </span>
                         </div>
                     </div>
                     <%
@@ -192,7 +191,7 @@
             </div>
         </div>
     </div>
-<jsp:include page="/web/pages/PartPages/Footer.jsp"></jsp:include>
+<jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 
 <script>

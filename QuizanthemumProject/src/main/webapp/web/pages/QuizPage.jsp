@@ -47,13 +47,14 @@
     <jsp:include page="/web/pages/PartPages/Header.jsp"/>
     <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
-    <% if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
-        <div style="text-align: center">
-            <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">ქვიზი წარმატებით შეიქმნა.</p>
-        </div>
-    <% request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
-    }%>
     <%
+        if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
+            <div style="text-align: center">
+                <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">ქვიზი წარმატებით შეიქმნა.</p>
+            </div>
+    <%
+            request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
+        }
         ServletContext context = request.getServletContext();
         ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
@@ -94,8 +95,7 @@
             <label><b>practice mode</b></label>
             <input class="checkbox" type="checkbox"
                    name="practice_mode" id="practice_mode">
-            <button class="button" type="submit"
-                    style="margin-top: 10px">
+            <button class="button" type="submit" style="margin-top: 10px">
                 ქვიზის დაწყება
             </button>
         </div>
