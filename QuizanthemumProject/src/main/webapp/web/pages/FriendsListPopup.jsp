@@ -2,7 +2,8 @@
 <%@ page import="Model.Managers.UsersManager" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
-<%@ page import="Controller.Classes.User.User" %><%--
+<%@ page import="Controller.Classes.User.User" %>
+<%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/29/20
@@ -45,3 +46,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function popupfriendList(){
+        document.getElementById("friends-list-popup-id").classList.toggle("active");
+    }
+
+    function removeFriend(d){
+        $(d).parent().parent().remove();
+    }
+</script>

@@ -50,10 +50,10 @@
             }
         }
     %>
+    <jsp:include page="/web/pages/Header.jsp"/>
 </head>
 
 <body>
-<jsp:include page="/web/pages/Header.jsp"/>
 <jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <div class="quiz-summary-wrapper">

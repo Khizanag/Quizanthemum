@@ -13,16 +13,14 @@
     <title> Quizanthemum </title>
     <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/web/styles/common.css">
-    <link rel="stylesheet" href="/web/styles/homePage.css">
-    <link rel="stylesheet" href="/web/styles/breakpoints.css">
-    <link rel="stylesheet" href="/web/styles/profilePage.css">
-    <link rel="stylesheet" href="/web/styles/quizCreation.css">
-    <link rel="stylesheet" href="/web/styles/scroll.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/homePage.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/breakpoints.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/profilePage.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/quizCreation.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/scroll.css">
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/web/js/profileStuff.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
     <%
@@ -32,10 +30,10 @@
         List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
     %>
+    <jsp:include page="/web/pages/Header.jsp"/>
 </head>
 
 <body>
-    <jsp:include page="/web/pages/Header.jsp"/>
     <jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <div class="slider"/>
@@ -78,13 +76,14 @@
             <div class="scroll-arrow rightarr" onclick="scrollRight(<%=topQuizzes.size()%>)">
                 <p style="color:white; font-size: xx-large"> > </p>
             </div>
-            <form id="to_display_start_quiz_form" action="Quiz" method="get">
-                <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz-id">
-            </form>
         </div>
     </div>
     <jsp:include page="/web/pages/Footer.jsp"/>
 </body>
+
+<form id="to_display_start_quiz_form" action="Quiz" method="get">
+    <input type="hidden" id="to_display_start_quiz_elem" name="quiz-id">
+</form>
 
 
 

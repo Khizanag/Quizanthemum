@@ -16,14 +16,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="icon" type="image/png" href="web/images/common/icon.png"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/web/styles/common.css">
-<%--<link rel="stylesheet" href="/web/styles/homePage.css">--%>
-<link rel="stylesheet" href="/web/styles/breakpoints.css">
-<%--<link rel="stylesheet" href="/web/styles/profilePage.css">--%>
-<%--<link rel="stylesheet" href="/web/styles/quizCreation.css">--%>
-<link rel="stylesheet" href="/web/styles/scroll.css">
+<%--<link rel="icon" type="image/png" href="web/images/common/icon.png"/>--%>
+<%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--%>
+<%--<link rel="stylesheet" href="/web/styles/common.css">--%>
+<%--<link rel="stylesheet" href="/web/styles/breakpoints.css">--%>
+<%--<link rel="stylesheet" href="/web/styles/scroll.css">--%>
 
 <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 
@@ -31,14 +28,13 @@
     ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
     UsersManager usersManager = (UsersManager)mm.getManager(USERS_MANAGER_STR);
     ChallengesManager challengesManager = (ChallengesManager) mm.getManager(CHALLENGE_MANAGER_STR);
-    User user = (User) request.getServletContext().getAttribute("logedInUser");
-%>
+    User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
 
-<% if(user != null) {
-    List<Challenge> challenges = challengesManager.getChallengesOf(user.getID());
-    user.setChallenges(challenges);
-    List<Challenge> waitingChallengedChallenges = user.getWaitingChallengedChallenges();
-    List<Challenge> waitingChallengerChallenges = user.getWaitingChallengerChallenges();
+    if(user != null) {
+        List<Challenge> challenges = challengesManager.getChallengesOf(user.getID());
+        user.setChallenges(challenges);
+        List<Challenge> waitingChallengedChallenges = user.getWaitingChallengedChallenges();
+        List<Challenge> waitingChallengerChallenges = user.getWaitingChallengerChallenges();
 %>
 
     <div class="friends-list-popup" id="challenges-list-popup-id">
@@ -125,7 +121,7 @@
 
 
 
-<%-------------------------------- JAVASCRIPT --------------------------------%>
+<%------------------------------ SCRIPT ------------------------------%>
 
 <script>
     function popUpChallengesList(){

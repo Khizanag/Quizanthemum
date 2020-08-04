@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="/web/styles/profilePage.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
-	<script src="/web/js/profileStuff.js"/>
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 </head>

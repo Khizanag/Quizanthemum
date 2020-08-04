@@ -5,18 +5,17 @@
     <title> Adding Questions </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/quizCreation.css">
-    <link rel="stylesheet" href="../styles/breakpoints.css">
-    <link rel="stylesheet" href="../styles/rules.css">
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
+    <link rel="stylesheet" href="/web/styles/common.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
+    <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/rules.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"/>
 </head>
 
 <body>
 
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <div class="page-holder">
         <div class="container">
@@ -41,9 +40,12 @@
             </div>
         </div>
     </div>
-    <jsp:include page="./Footer.jsp"></jsp:include>
+    <jsp:include page="./Footer.jsp"/>
 </body>
 </html>
+
+
+<%------------------------------ SCRIPT ------------------------------%>
 
 <script language="JavaScript" type="text/javascript">
     function doIt() {

@@ -9,19 +9,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<link rel="icon" type="image/png" href="/web/images/common/icon.png"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<%--<link rel="icon" type="image/png" href="/web/images/common/icon.png"/>--%>
+<%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--%>
 <link rel="stylesheet" href="/web/styles/common.css">
 <link rel="stylesheet" href="/web/styles/homePage.css">
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 <link rel="stylesheet" href="/web/styles/scroll.css">
-
+<%----%>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
-<script src="/web/js/profileStuff.js"/>
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>--%>
 
 <%
     request.setCharacterEncoding("UTF-8");

@@ -10,6 +10,26 @@
     <link rel="stylesheet" href="/web/styles/profilePage.css">
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
 </head>
+
+<body>
+
+    <div class="quiz-rating-section">
+        <div class="container">
+            <h2> ქვიზის შეფასება </h2>
+            <div class="raiting-icons-holder">
+                <ul class="raiting-icons">
+                    <a class="fa fa-star-o" id="1" onclick="grade(this)"></a>
+                    <a class="fa fa-star-o" id="2" onclick="grade(this)"></a>
+                    <a class="fa fa-star-o" id="3" onclick="grade(this)"></a>
+                    <a class="fa fa-star-o" id="4" onclick="grade(this)"></a>
+                    <a class="fa fa-star-o" id="5" onclick="grade(this)"></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
 <style>
     .quiz-rating-section {
         width: 100%;
@@ -33,24 +53,6 @@
     }
 </style>
 
-<body>
-
-    <div class="quiz-rating-section">
-        <div class="container">
-            <h2> ქვიზის შეფასება </h2>
-            <div class="raiting-icons-holder">
-                <ul class="raiting-icons">
-                    <a class="fa fa-star-o" id="1" onclick="grade(this)"></a>
-                    <a class="fa fa-star-o" id="2" onclick="grade(this)"></a>
-                    <a class="fa fa-star-o" id="3" onclick="grade(this)"></a>
-                    <a class="fa fa-star-o" id="4" onclick="grade(this)"></a>
-                    <a class="fa fa-star-o" id="5" onclick="grade(this)"></a>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-</body>
 <script>
     function grade(elem) {
         for(let i = 1; i <= 5; i++) {
