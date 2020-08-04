@@ -1,3 +1,4 @@
+<%@ page import="static javax.servlet.RequestDispatcher.ERROR_MESSAGE" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
@@ -12,18 +13,18 @@
 
 <body style="padding:0px; margin:0px; font-family:arial,helvetica,sans-serif,verdana,'Open Sans'">
 
-    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
-    <form class="registration-section" action="../../Registration" method="get">
+    <form class="registration-section" action="/Registration" method="get">
         <div class="container">
             <h2>რეგისტრაცია</h2>
             <p>გთხოვთ შეავსოთ ფორმა პროფილის შესაქმნელად.</p>
             <hr>
             <%
-                if(request.getServletContext().getAttribute("errorMessage") != null) { %>
+                if(request.getServletContext().getAttribute(ERROR_MESSAGE) != null) { %>
                     <p class="error_message"> ${errorMessage}</p> <%
-                    request.removeAttribute("errorMessage");
+                    request.getServletContext().removeAttribute(ERROR_MESSAGE);
                 }
             %>
             <div class="input-items">

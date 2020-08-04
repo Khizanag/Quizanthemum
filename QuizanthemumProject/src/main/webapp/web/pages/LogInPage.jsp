@@ -18,10 +18,12 @@
             <h2>შესვლა</h2>
             <p>გთხოვთ შეიყვანოთ მითითებული მონაცემები პროფილზე შესასვლელად.</p>
             <hr>
-            <% if(request.getServletContext().getAttribute(ERROR_MESSAGE) != null) { %>
+            <%
+                if(request.getServletContext().getAttribute(ERROR_MESSAGE) != null) { %>
                     <p class="error_message"> ${errorMessage}</p>
-            <% request.removeAttribute(ERROR_MESSAGE);
-                } %>
+                    <% request.getServletContext().removeAttribute(ERROR_MESSAGE);
+                }
+            %>
 
             <div class="input-items">
                 <label><b>Username</b></label>
@@ -32,7 +34,7 @@
                 <input type="password" placeholder="შეიყვანეთ პაროლი"
                        name="log_in_password" id="log_in_password" required>
 
-                <p> არ გაქვს პროფილი? <a href="Registration.jsp">დარეგისტრირდი ახლავე</a>.</p>
+                <p> არ გაქვს პროფილი? <a href="RegistrationPage.jsp">დარეგისტრირდი ახლავე</a>.</p>
 
             </div>
             <button type="submit" class="button" >შესვლა</button>
