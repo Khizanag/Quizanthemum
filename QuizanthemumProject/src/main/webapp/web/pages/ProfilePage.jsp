@@ -9,38 +9,38 @@
 <%@ page import="static Configs.Config.*" %>
 <%@ page import="Model.Managers.UsersManager" %>
 
+<%
+    ServletContext context = request.getServletContext();
+    ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+    UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
+    int ID = Integer.parseInt(request.getParameter("id"));
+    User user = usersManager.getUser(ID);
+%>
+
 <head>
     <meta charset="UTF-8">
-    <title> Quizanthemum </title>
+    <title><%=user.getUsername()%></title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    	<link rel="stylesheet" href="../styles/common.css">
-	<link rel="stylesheet" href="../styles/homePage.css">
-	<link rel="stylesheet" href="../styles/breakpoints.css">
-    <link rel="stylesheet" href="../styles/quizCreation.css">
-    <link rel="stylesheet" href="../styles/profilePage.css">
+    <link rel="stylesheet" href="/web/styles/common.css">
+	<link rel="stylesheet" href="/web/styles/homePage.css">
+	<link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
+    <link rel="stylesheet" href="/web/styles/profilePage.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/web/js/profileStuff.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
+	<script src="/web/js/profileStuff.js"/>
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
-    <%
-        ServletContext context = request.getServletContext();
-        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
-        UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
-        int ID = Integer.parseInt(request.getParameter("id"));
-        User user = usersManager.getUser(ID);
-    %>
 </head>
 
 <body>
 
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
-    <jsp:include page="/web/pages/FriendsListPopup.jsp"></jsp:include>
+    <jsp:include page="/web/pages/Header.jsp"/>
+    <jsp:include page="/web/pages/MenuBar.jsp"/>
 
     <% if(user == null){ %>
-        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"></jsp:include>
+        <jsp:include page="/web/pages/YouShouldLogInPart.jsp"/>
     <% } else { %>
 
     <div class="change-image-popup" id="change-image">
@@ -153,14 +153,14 @@
                 <%}%>
             </div>
         </div>
-        <form id="to_display_start_quiz_form" action="QuizSummaryPage.jsp" method="get">
-            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="quiz_id">
+        <form id="to_display_start_quiz_form" action="Quiz" method="get">
+            <input type="hidden" value="-1" id="to_display_start_quiz_elem" name="id">
         </form>
     </main>
 
     <% } %>
 
-	<jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+	<jsp:include page="/web/pages/Footer.jsp"/>
 </body>
 
 <script>
@@ -205,7 +205,6 @@
     }
 
     function redirectToQuizStart(id){
-        console.log(id);
         const inp=document.getElementById("currQuizId"+id);
         inp.value=id;
         console.log(inp);

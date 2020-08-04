@@ -25,6 +25,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.printf("**********RegistrationServlet");
         UsersManager userManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
 
         String username = request.getParameter("registration_username");
@@ -33,7 +34,6 @@ public class RegistrationServlet extends HttpServlet implements Config {
         if(!userManager.isUsernameFree(username)){
             errorMessage = "მომხმარებლის ეს სახელი (username) უკვე დაკავებულია სხვა მომხმარებლის მიერ. გთხოვთ, აარჩიოთ სხვა username.";
         }
-        System.out.println("doget in registration, before adding if");
 
         if(errorMessage.isEmpty()){ // there were no errors during registration
             String password = request.getParameter("registration_password");

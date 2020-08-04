@@ -16,7 +16,7 @@
     <jsp:include page="/web/pages/Header.jsp"/>
     <jsp:include page="/web/pages/MenuBar.jsp"/>
 
-    <form class="registration-section" action="Registration" method="get">
+    <form class="registration-section" action="../../Registration" method="get">
         <div class="container">
             <h2>რეგისტრაცია</h2>
             <p>გთხოვთ შეავსოთ ფორმა პროფილის შესაქმნელად.</p>
@@ -89,12 +89,6 @@
         if(password != rep_pwd) {
             alert( "\n" + "პაროლი და განმეორებით შეყვანილი პაროლი არ ემთხვევა" + "\n" +
                    "\n" + "გთხოვთ გადაამოწმოთ შეყვანილი მონაცემები");
-            return;
-        }
-
-        if (f_name && l_name && username && email && password !== '') {
-            // window.location.href = "";
-            //TODO
         }
     }
 </script>
