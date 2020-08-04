@@ -8,7 +8,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="static Configs.Config.*" %>
 <%@ page import="Model.Managers.UsersManager" %>
-
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
@@ -32,7 +31,6 @@
         int ID = Integer.parseInt(request.getParameter("id"));
         User user = usersManager.getUser(ID);
     %>
-
 </head>
 
 <body>
@@ -110,7 +108,8 @@
                 <div class="user-details"><%=status%></div>
             </div>
             <div class="profile-details-info">
-                <div class = "quizzes-played"><%="ნათამაშები ქვიზები: "+user.getQuizzesPlayed()%></div>
+<%--                <div class = "quizzes-played"><%="ნათამაშები ქვიზები: "+usersManager.getQuizzesPlayedCount(user.getID())%></div>--%>
+<%--                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: "+usersManager.getUserTotalPoints(user.getID())%></div>--%>
                 <div class =  "challenges-played"><%="ნათამაშები ჩელენჯები: "+user.getChallengesPlayed()%></div>
                 <div class="challenges-won"><%="მოგებული ჩელენჯები: "+user.getChallengesWon()%></div>
                 <%

@@ -14,7 +14,6 @@
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
-    <link rel="stylesheet" href="/web/styles/search.css">
     <link rel="stylesheet" href="/web/styles/QuizzesPage.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -26,7 +25,7 @@
     }
     h3 {
         color: #f07237;
-        font-size: x-large;
+        font-size: xx-large;
     }
     .fa:hover {
         color: white;
@@ -38,8 +37,8 @@
     }
     .onHover {
         position: absolute;
-        right: 0;
-        bottom: 15px;
+        right: 40%;
+        bottom: 0px;
         display: none;
     }
     .toHover:hover + .onHover {
@@ -49,6 +48,12 @@
     .found-elems-container {
         display: flex;
         flex-wrap: wrap;
+    }
+    .top-quiz-list-item {
+        width: 376px;
+    }
+    .quiz-small-description {
+        font-size: x-small;
     }
 </style>
 
@@ -68,7 +73,7 @@
 
     <div class="found-quiz-section">
         <div class="container" style="position: relative;">
-            <h3 class="section-header"> მოიძებნა შემდეგი ქვიზები:</h3>
+            <h3 class="section-header"> ნაპოვნი ქვიზები:</h3>
             <div class="found-elems-container">
             <%  int numQuizzes = 0;
                 for(Quiz currQuiz : quizzes) {
@@ -84,11 +89,11 @@
                             <h3 class= "quiz-title" style="font-size: 16px">
                                 <%=currQuiz.getName()%>
                             </h3>
-                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                            <p class="quiz-small-description" style="overflow: hidden; height: 75px;">
                                 <%=currQuiz.getDescription()%>
                             </p>
                             <div class="toHover">
-                                <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
+                                <div class="raiting-icons-holder" style="margin-bottom: 0; color:white;">
                                     <ul class="raiting-icons" id="stars-holder">
                                         <% for(int j = 1; j <= quizManager.getQuizRating(currQuiz.getID()); j++) { %>
                                         <a class="fa fa-star" style="margin-right: 2px;"></a>
@@ -140,7 +145,7 @@
                             <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
                                 <%=currUser.getFirstName()%> <%=currUser.getLastName()%>
                             </p>
-                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                            <p class="quiz-small-description" style="overflow: hidden; height: 75px;">
                                 <%=currUser.getEmail()%>
                             </p>
                             <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">

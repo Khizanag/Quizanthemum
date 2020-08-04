@@ -1,12 +1,8 @@
 .scroll-block {
     display: flex;
-    height: 520px;
+    height: 500px;
 }
-h2{
-    padding-top: 10px;
-    color: #f07237;
-    font-size: xx-large;
-}
+
 .quiz-list-small-description-block{
     width:350px;
     height:100%;
