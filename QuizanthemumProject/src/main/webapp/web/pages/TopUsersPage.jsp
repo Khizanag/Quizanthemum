@@ -84,9 +84,6 @@
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
     List<User> topUsers = (List<User>) request.getAttribute("users");
-    if(topUsers == null) {
-        topUsers = usersManager.getTopUsersByFilter(DEFAULT_NUM_TOP_USERS_TO_DISPLAY, LOCATION_TYPE_NONE, "", false, -1, false);
-    }
     List<String> cities = usersManager.getCities();
     List<String> countries = usersManager.getCountries();
 %>
