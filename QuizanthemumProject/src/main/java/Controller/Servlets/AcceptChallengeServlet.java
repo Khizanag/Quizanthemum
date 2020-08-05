@@ -2,7 +2,6 @@ package Controller.Servlets;
 
 import Model.Managers.ChallengesManager;
 import Model.Managers.ManagersManager;
-import jdk.internal.org.objectweb.asm.tree.MultiANewArrayInsnNode;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +15,7 @@ import static Configs.Config.MANAGERS_MANAGER_STR;
 
 @WebServlet(name = "AcceptChallengeServlet", urlPatterns = "/AcceptChallenge")
 public class AcceptChallengeServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

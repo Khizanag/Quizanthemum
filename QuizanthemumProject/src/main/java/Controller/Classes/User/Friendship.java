@@ -10,16 +10,13 @@ public class Friendship {
     private int firstFriendID;
     private int secondFriendID;
     private Date makeFriendDate;
-    private boolean isAccepted;
     private FriendshipsManager manager;
 
-    public Friendship(int ID, int firstFriendID, int secondFriendID, Date makeFriendDate,
-                      boolean isAccepted, FriendshipsManager friendshipsManager){
+    public Friendship(int ID, int firstFriendID, int secondFriendID, Date makeFriendDate, FriendshipsManager friendshipsManager){
         this.ID = ID;
         this.firstFriendID = firstFriendID;
         this.secondFriendID = secondFriendID;
         this.makeFriendDate = makeFriendDate;
-        this.isAccepted = isAccepted;
         this.manager = friendshipsManager;
     }
 
@@ -39,9 +36,6 @@ public class Friendship {
         return makeFriendDate;
     }
 
-    public boolean isAccepted() {
-        return isAccepted;
-    }
 
     public FriendshipsManager getManager() {
         return manager;
@@ -57,11 +51,4 @@ public class Friendship {
         this.makeFriendDate = makeFriendDate;
     }
 
-    public void accept(){
-        this.isAccepted = true;
-    }
-
-    public void reject(){
-        this.isAccepted = false;
-    }
 }

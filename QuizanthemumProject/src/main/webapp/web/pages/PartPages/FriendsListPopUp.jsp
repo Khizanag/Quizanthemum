@@ -20,25 +20,51 @@
 <%
     ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
     FriendshipsManager friendshipsManager = (FriendshipsManager) mm.getManager(FRIENDSHIPS_MANAGER_STR);
+    UsersManager usersManager = (UsersManager) mm.getManager(USERS_MANAGER_STR);
     User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
-    if(user != null) {
-        List<User> friends = friendshipsManager.getFriendsOf(user.getID());
-    }
-%>
+    if(user != null) { %>
+        <div class="friends-list-popup" id="friends-list-popup-id">
+            <div class="overlay"></div>
+            <div class="content">
+                <div class="close-btn" onclick="popUpFriendsList()">&times;</div>
+                <h1 style="color:orange">მეგობრები</h1>
+                <br>
 
-<div class="friends-list-popup" id="friends-list-popup-id">
-    <div class="overlay"></div>
-    <div class="content">
-        <div class="close-btn" onclick="popUpFriendsList()">&times;</div>
-        <h1 style="color:orange">მეგობრები</h1>
-        <br>
+                <%
+                    for(int friendID : user.getFriendIDs()){
+                        User friend = usersManager.getUser(friendID); %>
+
+                        <div class = "friend-list-row">
+                            <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=friend.getID()%>)">
+                                <%=friend.getUsername()%>
+                            </span>
+                            <div class = "friend-challenge-remove-btns">
+                                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friend.getID()%>)" style="color: green">დათანხმება</button>
+                                <button class="remove-btn" onclick="rejectFriendRequest(<%=friend.getID()%>)" style="color: red">უარყოფა</button>
+                            </div>
+                        </div>
 
 
 
-    </div>
-</div>
+                    <% }
+                %>
+
+
+
+            </div>
+        </div>
+
+<% } %>
 
 <script>
+    function acceptFriendRequest(ID){
+        console.log('acceptFriendRequest');
+    }
+
+    function rejectFriendRequst(ID){
+        console.log('rejectFriendRequst');
+    }
+
     function popUpFriendsList(){
         console.log('popUpFriendsList in FriendsListPopUp.jsp');
         document.getElementById("friends-list-popup-id").classList.toggle("active");

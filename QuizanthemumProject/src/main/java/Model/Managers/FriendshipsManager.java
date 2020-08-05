@@ -26,7 +26,7 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
     public Friendship getFriendship(int ID){
         String query = "SELECT * "
                 + " FROM " + FRIENDSHIPS_TABLE_NAME
-                + " WHERE ID = " + ID + ";\n";
+                + " WHERE " + FRIENDSHIPS_TABLE_COLUMN_1_ID + " = " + ID + ";\n";
         try{
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
@@ -45,8 +45,7 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
             int firstFriendID = resultSet.getInt(FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID);
             int secondFriendID = resultSet.getInt(FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID);
             Date makeFriendDate = resultSet.getDate(FRIENDSHIPS_TABLE_COLUMN_4_MAKE_FRIEND_DATE);
-            boolean isAccepted = resultSet.getBoolean(FRIENDSHIPS_TABLE_COLUMN_5_IS_ACCEPTED);
-            return new Friendship(ID, firstFriendID, secondFriendID, makeFriendDate, isAccepted, this);
+            return new Friendship(ID, firstFriendID, secondFriendID, makeFriendDate, this);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -58,8 +57,7 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
                 + " VALUES(null"
                 + ", " + friendship.getFirstFriendID()
                 + ", " + friendship.getSecondFriendID()
-                + ", " + friendship.getMakeFriendDate()
-                + ", " + friendship.isAccepted();
+                + ", " + friendship.getMakeFriendDate();
         try{
             Statement statement = connection.createStatement();
             statement.execute(query);

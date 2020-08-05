@@ -25,12 +25,12 @@ public class RegistrationServlet extends HttpServlet implements Config {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UsersManager userManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
+        UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
 
         String username = request.getParameter("registration_username");
 
         String errorMessage = "";
-        if(!userManager.isUsernameFree(username)){
+        if(!usersManager.isUsernameFree(username)){
             errorMessage = "მომხმარებლის ეს სახელი (username) უკვე დაკავებულია სხვა მომხმარებლის მიერ. გთხოვთ, აარჩიოთ სხვა username.";
         }
         System.out.println("doget in registration, before adding if");
@@ -52,9 +52,9 @@ public class RegistrationServlet extends HttpServlet implements Config {
             Date birthDate = new Date(year-1900, month-1, day);
             Date registrationDate = new Date();
             String salt = generateSalt();
-            userManager.setCurrentSalt(salt);
-            User newUser = new User(username, password, salt, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate);
-            newUser.setID(userManager.insertUser(newUser));
+            usersManager.setCurrentSalt(salt);
+            User newUser = new User(username, password, salt, firstName, lastName, USER, city, country, mobilePhone, email, birthDate, registrationDate, usersManager);
+            newUser.setID(usersManager.insertUser(newUser));
 
             request.getServletContext().setAttribute("logedInUser", newUser);
             request.getServletContext().removeAttribute(errorMessage);

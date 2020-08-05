@@ -74,7 +74,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, pictureURL, passwordSalt, friendIDs);
+                    birthDate, registrationDate, pictureURL, passwordSalt, friendIDs, this);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -231,7 +231,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName, role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, photoURL, passwordSalt, friendIDs);
+                    birthDate, registrationDate, photoURL, passwordSalt, friendIDs, this);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
