@@ -40,18 +40,13 @@ public class QuizEventStartServlet extends HttpServlet {
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
-        boolean practice_mode = (request.getParameter("practice_mode") != null);
+        boolean practiceMode =  Boolean.parseBoolean(request.getParameter("practice-mode"));
+        System.out.println("practiceMode: " + practiceMode);
         String isChallengeStr = request.getParameter("is-challenge");
-        System.out.println("isChallengeStr: " + isChallengeStr);
         boolean isChallenge = Boolean.parseBoolean(isChallengeStr);
-        System.out.println("********* isChallenge : " + isChallenge);
         int challengedID = isChallenge ? Integer.parseInt(request.getParameter("challenged-id")) : DEFAULT_ID;
-        System.out.println("********* challengedID:" + challengedID);
         Challenge challenge = null;
 
-
-
-        System.out.println("********* practice mode : " + practice_mode);
         int quizID = Integer.parseInt(request.getParameter("quiz_id"));
         Quiz quiz = quizManager.getQuiz(quizID);
 
@@ -59,7 +54,7 @@ public class QuizEventStartServlet extends HttpServlet {
             challenge = new Challenge(quiz.getID(), user.getID(), challengedID, DEFAULT_ID, DEFAULT_ID, new Date(), challengesManager);
         }
 
-        QuizEvent quizEvent = new QuizEvent(user, quiz, practice_mode, challenge);
+        QuizEvent quizEvent = new QuizEvent(user, quiz, practiceMode, challenge);
         if(quiz.mustShuffleQuestions()) {
             quizEvent.shuffleQuestions();
         }

@@ -95,8 +95,8 @@
             </div>
             <br>
 
-            <label><b>Practice mode</b></label>
-            <input class="checkbox" type="checkbox"  name="practice_mode" id="practice_mode">
+            <label><b>ვარჯიშის რეჟიმი:</b></label>
+            <input class="checkbox" type="checkbox"  name="practice-mode" id="practice-mode-holder" onchange="changePracticeMoveValue()">
             <br>
 
             <% if(user != null){ %>
@@ -132,7 +132,12 @@
         }
     }
 
-    function changeFriendToChallenge(ID){
-        // document.getElementById('challenged-id-holder').value = ;
+    function changePracticeMoveValue(){
+        let elem = document.getElementById('practice-mode-holder');
+        if(elem.checked){
+            elem.value = 'true';
+        } else {
+            elem.value = 'false';
+        }
     }
 </script>
