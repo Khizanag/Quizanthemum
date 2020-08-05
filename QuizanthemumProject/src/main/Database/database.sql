@@ -33,7 +33,7 @@ create table users(
                       registration_date date,
                       photo_url varchar(256),
                       password_salt varchar(256)
-);
+)CHARSET=utf8;
 
 -- adding default users into database
 -- password for all users: p
@@ -50,7 +50,7 @@ INSERT INTO users VALUES(null, 'p', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 
 CREATE TABLE categories(
                            id int primary key auto_increment,
                            name varchar(64)
-);
+)CHARSET=utf8;
 
 
 INSERT INTO categories VALUES (null, 'ბიოლოგია');
@@ -74,7 +74,7 @@ create table quizzes(
                         constraint foreign key (CATEGORY_ID)
                             references categories(ID) on update cascade on delete restrict ,
                         DESCRIPTION text,
-                        ICON_URL varchar(512),
+                        ICON_URL varchar(256),
                         MUST_SHUFFLE_QUESTIONS boolean not null ,
                         COMMENT varchar(256),
                         AUTHOR_ID smallint,
@@ -82,7 +82,7 @@ create table quizzes(
                             references users(id) on update cascade on delete restrict,
                         CREATION_DATE date,
                         MAX_SCORE double
-);
+)CHARSET=utf8;
 
 
 
@@ -94,7 +94,7 @@ create table quiz_events(
                             user_id smallint not null,
                             start_date date,
                             finish_date date,
-                            total_score smallint,
+                            total_score double,
                             constraint foreign key (quiz_id)
                                 references quizzes(id) on update cascade on delete restrict,
                             constraint foreign key (user_id)
@@ -109,7 +109,7 @@ create table questions(
                           id smallint primary key auto_increment,
                           type smallint not null,
                           is_auto_graded boolean,
-                          max_score smallint,
+                          max_score double,
                           header_statement text,
                           text_statement text,
                           picture_statement_url varchar(256),
@@ -155,7 +155,7 @@ create table questions(
                           answer_13 varchar(64),
                           answer_14 varchar(64),
                           answer_15 varchar(64)
-);
+)CHARSET=utf8;
 
 
 
@@ -169,7 +169,7 @@ create table question_events(
                                 start_date date,
                                 end_date date,
                                 is_already_graded boolean,
-                                user_score smallint,
+                                user_score double,
                                 question_id smallint not null,
                                 constraint foreign key (question_id)
                                     references questions(id) on update cascade on delete restrict,
@@ -189,7 +189,7 @@ create table question_events(
                                 user_answer_13 varchar(64),
                                 user_answer_14 varchar(64),
                                 user_answer_15 varchar(64)
-);
+)CHARSET=utf8;
 
 
 
@@ -254,7 +254,7 @@ create table achievements(
                              title varchar(64),
                              description varchar(64),
                              icon_url varchar(256)
-);
+)CHARSET=utf8;
 
 
 
