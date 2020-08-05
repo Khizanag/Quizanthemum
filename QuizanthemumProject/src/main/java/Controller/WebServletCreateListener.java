@@ -17,6 +17,12 @@ public class WebServletCreateListener implements ServletContextListener, Config 
         ServletContext context = sce.getServletContext();
         ManagersManager managersManager = new ManagersManager(context);
         sce.getServletContext().setAttribute(MANAGERS_MANAGER_STR, managersManager);
+
+        buildCountriesDatabase();
+    }
+
+    private void buildCountriesDatabase() {
+
     }
 
     @Override

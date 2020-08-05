@@ -39,4 +39,7 @@ public interface Config {
 
     String LOGGED_IN_USER = "logedInUser";
 
+    String COUNTRIES_FILE_NAME = "/Users/gigakhizanishvili/Programming/GitHub/Quizanthemum/QuizanthemumProject/src/main/Database/countries.txt";
+
+
 }

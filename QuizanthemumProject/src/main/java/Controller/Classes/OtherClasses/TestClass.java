@@ -3,34 +3,29 @@ package Controller.Classes.OtherClasses;
 import Configs.LocalDatabaseConfig;
 
 import javax.ejb.Local;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 
 import static Configs.Config.*;
 
 public class TestClass implements LocalDatabaseConfig {
 
+    private static final String COUNTRIES_FILE_NAME = "/Users/gigakhizanishvili/Programming/GitHub/Quizanthemum/QuizanthemumProject/src/main/Database/countries.txt";
+
     public static void main(String[] args){
-        String s = "" + false;
-        System.out.printf(s);
-//        System.setProperty("jdbc.drivers", "sun.jdbc.odbc.JdbcodbcDriver");
-//        try {
-//            Connection connection = DriverManager.getConnection(URL+DATABASE_NAME, USERNAME, PASSWORD);
-//            CallableStatement cs = connection.prepareCall("call get_next_user_ID(?)");
-////            int ID = -1;
-////            cs.registerOutParameter(1, Types.INTEGER);
-////            String sql = "call get_next_user_ID()";
-//
-//            cs.execute();
-//
-//
-////            System.out.println("ID " + ID);
-////            int ID = rs.getInt("ID");
-//            int ID = cs.getInt(1);
-//            System.out.println("ID " + ID);
-////            cs.close();
-//            connection.close();
-//        } catch (SQLException unused) {
-//            System.out.println("SQLEcxeption: during creating connection in Connector");
-//        }
+//        String s = "" + false;
+//        System.out.printf(s);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(COUNTRIES_FILE_NAME));
+            String line = br.readLine();
+            System.out.println(line);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
