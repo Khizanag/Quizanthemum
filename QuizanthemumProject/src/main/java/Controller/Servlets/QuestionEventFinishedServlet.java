@@ -76,17 +76,7 @@ public class QuestionEventFinishedServlet extends HttpServlet {
             request.getServletContext().setAttribute("question_number", questionNumber+1);
             response.setHeader("Location", getNextQuestionLink(nextQuestionEvent.getType()));
         } else {
-            quizEvent.finishQuiz();
-            if(!quizEvent.isPracticeMode()){
-                quizEvent.resetQuestionEventIterator();
-                int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
-                while (quizEvent.hasNextQuestionEvent()) {
-                    QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
-                    currQuestionEvent.setQuizEventId(quizEventId);
-                    questionEventManager.setQuestionEvent(currQuestionEvent);
-                }
-            }
-            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp?quiz_id=" + quizEvent.getQuiz().getID());
+            response.setHeader("Location", "http://localhost:8080/QuizEventFinished");
         }
 
         System.out.println("question event finished");

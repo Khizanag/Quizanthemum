@@ -36,12 +36,12 @@
 
                         <div class = "friend-list-row">
                             <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=friend.getID()%>)">
-                                <%=friend.getUsername()%>
+                                <%=friend.getFirstName()%> <%=friend.getLastName()%> (<%=friend.getUsername()%>)
                             </span>
-                            <div class = "friend-challenge-remove-btns">
-                                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friend.getID()%>)" style="color: green">დათანხმება</button>
-                                <button class="remove-btn" onclick="rejectFriendRequest(<%=friend.getID()%>)" style="color: red">უარყოფა</button>
-                            </div>
+<%--                            <div class = "friend-challenge-remove-btns">--%>
+<%--                                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friend.getID()%>)" style="color: green">დათანხმება</button>--%>
+<%--                                <button class="remove-btn" onclick="rejectFriendRequest(<%=friend.getID()%>)" style="color: red">უარყოფა</button>--%>
+<%--                            </div>--%>
                         </div>
 
 

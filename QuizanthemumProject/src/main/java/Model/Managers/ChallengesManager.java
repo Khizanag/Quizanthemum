@@ -22,6 +22,7 @@ public class ChallengesManager implements ChallengesTableConfig {
     public ManagersManager getManager(){ return this.manager; }
 
     public void insertChallenge(Challenge challlenge){
+        java.sql.Date acceptingDate = (challlenge.getAcceptingDate() == null) ? null : new java.sql.Date(challlenge.getAcceptingDate().getTime());
         String query = "INSERT INTO " + CHALLENGES_TABLE_NAME
                 + " VALUES (null"
                 + ", " + challlenge.getQuizID()
@@ -31,14 +32,17 @@ public class ChallengesManager implements ChallengesTableConfig {
                 + ", " + challlenge.getChallengedQuizEventID()
                 + ", " + challlenge.isFinished()
                 + ", " + challlenge.getWinnerUserID()
-                + ", " + challlenge.getChallengingDate()
-                + ", " + challlenge.getAcceptingDate()
+                + ", " + "'" + new java.sql.Date(challlenge.getChallengingDate().getTime()) + "'"
+                + ", " + ((acceptingDate == null) ? null : "'" + acceptingDate + "'")
                 + ")\n";
+        System.out.println("insertChallenge Query: " + query);
         try {
             Statement statement = connection.createStatement();
             statement.execute(query);
             statement.close();
-        } catch (SQLException throwables) { }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public Challenge getChallenge(int ID) {
@@ -93,7 +97,10 @@ public class ChallengesManager implements ChallengesTableConfig {
         return null;
     }
 
-    public void acceptChallenge(int challengeID) {
-
+    public void commitChallengeAccept(Challenge challenge) {
+//        String query = "UPDATE " + CHALLENGES_TABLE_NAME
+//                + " SET "
+//                + "     " + CHALLE
     }
+
 }

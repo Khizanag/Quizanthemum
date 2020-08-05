@@ -1,8 +1,10 @@
 package Controller.Servlets;
 
+import Controller.Classes.OtherClasses.Challenge;
 import Model.Managers.ChallengesManager;
 import Model.Managers.ManagersManager;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +26,10 @@ public class AcceptChallengeServlet extends HttpServlet {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         int challengeID = Integer.parseInt(request.getParameter("challenge-id"));
-        challengesManager.acceptChallenge(challengeID);
+        Challenge challenge = challengesManager.getChallenge(challengeID);
+        request.setAttribute("is-challenge-accept", true);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Quiz?id=" + challenge.getQuizID());
+        dispatcher.forward(request, response);
     }
 }

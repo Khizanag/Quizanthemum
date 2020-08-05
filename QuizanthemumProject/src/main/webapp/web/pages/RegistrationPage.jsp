@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/logIn.css">
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
 
     <%
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
@@ -95,7 +96,7 @@
                        name="psw-repeat" id="psw-repeat" required>
             </div>
             <hr>
-            <p>ახალი პროგილის შქმნა გულისხმობს, რომ თქვენ ეთანხმებით ჩვენს
+            <p>ახალი პროგილის შექმნა გულისხმობს, რომ თქვენ ეთანხმებით ჩვენს
                 <a href="https://sites.google.com/site/lawdeepsearch/CivilCodeofGeorgia"
                    target="_blank">წესებსა და მოთხოვნებს</a>.
             </p>
