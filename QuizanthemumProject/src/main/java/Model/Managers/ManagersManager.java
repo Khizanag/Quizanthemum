@@ -34,6 +34,8 @@ public class ManagersManager {
         context.setAttribute(CATEGORIES_MANAGER_STR, categoriesManager);
         managers.put(CATEGORIES_MANAGER_STR, categoriesManager);
 
+        managers.put(COUNTRIES_MANAGER_STR, new CountriesManager(this));
+
         ChallengesManager challengesManager = new ChallengesManager(this);
         context.setAttribute(CHALLENGE_MANAGER_STR, challengesManager);
         managers.put(CHALLENGE_MANAGER_STR, challengesManager);

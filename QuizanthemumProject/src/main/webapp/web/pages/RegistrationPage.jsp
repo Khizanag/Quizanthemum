@@ -1,4 +1,12 @@
 <%@ page import="static javax.servlet.RequestDispatcher.ERROR_MESSAGE" %>
+<%@ page import="Controller.Classes.OtherClasses.Country" %>
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="Model.Managers.CategoriesManager" %>
+<%@ page import="java.util.List" %>
+<%@ page import="static Configs.Config.CATEGORIES_MANAGER_STR" %>
+<%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
+<%@ page import="Model.Managers.CountriesManager" %>
+<%@ page import="static Configs.Config.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
@@ -9,6 +17,12 @@
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/logIn.css">
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
+
+    <%
+        ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
+        CountriesManager countriesManager= (CountriesManager) managersManager.getManager(COUNTRIES_MANAGER_STR);
+        List<Country> countries = countriesManager.getCountries();
+    %>
 </head>
 
 <body style="padding:0px; margin:0px; font-family:arial,helvetica,sans-serif,verdana,'Open Sans'">
@@ -47,13 +61,18 @@
                         min= "1980-01-01" max="2020-01-01">
                 </div>
 
-                <label><b>ქვეყანა</b></label>
-                <input type="text" placeholder="შეიყვანეთ ქვეყანა"
-                       name="registration_country" id="registration_country" required>
+
+                <label for="registration_country"><b>შეიყვანეთ ქვეყანა</b></label>
+                <select class="drop-down" name="registration_country" id="registration_country" value="Georgia">
+                    <% for(Country country : countries){ %>
+                    <option value="<%=country.getName()%>"><%=country.getName()%></option>
+                    <% } %>
+                </select>
+
+                <label><br><br></label>
 
                 <label><b>ქალაქი</b></label>
-                <input type="text" placeholder="შეიყვანეთ ქალაქი"
-                       name="registration_city" id="registration_city" required>
+                <input type="text" placeholder="შეიყვანეთ ქალაქი" name="registration_city" id="registration_city" required>
 
                 <label><b>მომხმარებლის სახელი (USERNAME)</b></label>
                 <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი"
