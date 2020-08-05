@@ -28,7 +28,9 @@ public class DisplayTopUsersServlet extends HttpServlet {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
 
-        int locationType = Integer.parseInt(request.getParameter("location_type"));
+        String location_type = request.getParameter("location_type");
+        int locationType = LOCATION_TYPE_NONE;
+        if(location_type != null) locationType = Integer.parseInt(location_type);
         String location = "";
         String city = request.getParameter("city");
         if(locationType == LOCATION_TYPE_CITY) {
@@ -45,7 +47,9 @@ public class DisplayTopUsersServlet extends HttpServlet {
         String is_friend = request.getParameter("is_friend");
         boolean isFriend = (is_friend != null);
 
-        int userID = Integer.parseInt(request.getParameter("user_id"));
+        String user_id = request.getParameter("user_id");
+        int userID = -1;
+        if (user_id != null) userID = Integer.parseInt(user_id);
 
         String is_author = request.getParameter("is_author");
         boolean isAuthor = (is_author != null);
