@@ -36,6 +36,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         } catch (SQLException throwables) { }
     }
 
+    public ManagersManager getManager(){ return manager; }
+
     public User getUser(int id){
         String query = "SELECT *" +
                 " FROM " + USERS_TABLE_NAME +
@@ -73,7 +75,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, pictureURL, passwordSalt, friendIDs);
+                    birthDate, registrationDate, pictureURL, passwordSalt, friendIDs, this);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -103,8 +105,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         List<Integer> challengeIDs = new ArrayList<>();
         String query = "SELECT " + CHALLENGES_TABLE_COLUMN_1_ID +
                 " FROM " + CHALLENGES_TABLE_NAME +
-                " WHERE " + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID + " = " + id +
-                " OR " + CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID + " = " + id + ";\n";
+                " WHERE " + CHALLENGES_TABLE_COLUMN_3_CHALLENGER_USER_ID + " = " + id +
+                " OR " + CHALLENGES_TABLE_COLUMN_4_CHALLENGED_USER_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
@@ -230,7 +232,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName, role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, photoURL, passwordSalt, friendIDs);
+                    birthDate, registrationDate, photoURL, passwordSalt, friendIDs, this);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

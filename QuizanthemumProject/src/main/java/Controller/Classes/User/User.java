@@ -2,7 +2,9 @@ package Controller.Classes.User;
 
 import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.QuizEvent;
+import Model.Managers.FriendshipsManager;
 import Model.Managers.ManagersManager;
+import Model.Managers.UsersManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.DEFAULT_ID;
+import static Configs.Config.FRIENDSHIPS_MANAGER_STR;
+import static Configs.UserRoles.ADMINISTRATOR;
 
 public class User {
 
@@ -21,7 +25,6 @@ public class User {
     private String passwordHash;
     private final String firstName;
     private final String lastName;
-    // TODO
     private String passwordSalt;
     private String pictureURL;
     private final int role;
@@ -39,11 +42,13 @@ public class User {
     private List<Challenge> challenges;
     private List<Achievement> achievements;
 
+    private final UsersManager manager;
+
     // for creating object from DB
     public User(int id, String username, String passwordHash, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
-                Date birthDate, Date registrationDate, String pictureURL, String passwordSalt, List<Integer> friendIDs) {
-        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, pictureURL);
+                Date birthDate, Date registrationDate, String pictureURL, String passwordSalt, List<Integer> friendIDs, UsersManager manager) {
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, pictureURL, manager);
         this.id = id;
         this.passwordHash = passwordHash;
         this.passwordSalt = passwordSalt;
@@ -53,8 +58,8 @@ public class User {
     // for first time creating
     public User(String username, String password, String passwordSalt, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
-                Date birthDate, Date registrationDate){
-        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, DEFAULT_PICTURE);
+                Date birthDate, Date registrationDate, UsersManager manager){
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, DEFAULT_PICTURE, manager);
         this.passwordSalt = passwordSalt;
         this.id = DEFAULT_ID;
         this.passwordHash = hashFunction(password + passwordSalt);
@@ -64,7 +69,7 @@ public class User {
     // helper constructor used by other ones
     private User(String username, String firstName, String lastName,
                  int role, String  city, String county, String phoneNumber, String email,
-                 Date birthDate, Date registrationDate, String pictureURL){
+                 Date birthDate, Date registrationDate, String pictureURL, UsersManager manager){
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -79,6 +84,8 @@ public class User {
         this.challengesPlayed = 0;
         this.challengesWon = 0;
         this.quizzesMade = 0;
+
+        this.manager = manager;
     }
 
     private String hashFunction(String password) {
@@ -161,6 +168,21 @@ public class User {
         return registrationDate;
     }
 
+    public UsersManager getManager(){ return this.manager; }
+
+    boolean isAdministrator(){
+        return this.role == ADMINISTRATOR;
+    }
+
+    public List<Integer> getFriendIDs() {
+        if(friendIDs == null){
+            ManagersManager managersManager = manager.getManager();
+            FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
+            this.friendIDs = friendshipsManager.getFriendIDsOf(this.id);
+        }
+        return friendIDs;
+    }
+
 
     /********** SETTER methods **********/
 
@@ -168,15 +190,8 @@ public class User {
         this.id = ID;
     }
 
-
-    public List<Integer> getFriendIDs() {
-        if(friendIDs == null){
-        }
-        return friendIDs;
-    }
-
-    boolean isAdministrator(){
-        return false;
+    public void setChallenges(List<Challenge> challenges){
+        this.challenges = challenges;
     }
 
     void addFriend(int friendId){

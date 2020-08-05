@@ -35,29 +35,27 @@ public class QuizEventManager implements QuestionEventTableConfig {
 
     public QuizEvent getQuizEvent(int id) {
         String query = "SELECT * " +
-                "FROM " + QUIZ_EVENTS_TABLE_NAME +
+                " FROM " + QUIZ_EVENTS_TABLE_NAME +
                 " WHERE " + QUIZ_EVENT_TABLE_COLUMN_1_ID + " = " + id + ";\n";
 
         System.out.println("get quiz event");
         System.out.println(query); // TODO remove
         try {
-            Statement getStatement = connection.createStatement();
-            ResultSet set = getStatement.executeQuery(query);
-            if(!set.next()) {
-                return null;
+            ResultSet set = statement.executeQuery(query);
+            if(set.next()){
+                int quizId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID);
+                QuizManager quizManager = (QuizManager) manager.getManager(QUIZ_MANAGER_STR);
+                Quiz quiz = quizManager.getQuiz(quizId);
+                int userId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_3_USER_ID);
+                UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
+                User user = userManager.getUser(userId);
+                java.util.Date startDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_4_START_DATE);
+                java.util.Date finishDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE);
+                List<QuestionEvent> questionEvents = getQuestionEvents(id);
+                double userTotalScore = set.getDouble(QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE);
+                statement.close();
+                return new QuizEvent(id, user, quiz, startDate, finishDate, questionEvents, userTotalScore);
             }
-            int quizId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID);
-            QuizManager quizManager = (QuizManager) manager.getManager(QUIZ_MANAGER_STR);
-            Quiz quiz = quizManager.getQuiz(quizId);
-            int userId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_3_USER_ID);
-            UsersManager userManager = (UsersManager) manager.getManager(USERS_MANAGER_STR);
-            User user = userManager.getUser(userId);
-            java.util.Date startDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_4_START_DATE);
-            java.util.Date finishDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE);
-            List<QuestionEvent> questionEvents = getQuestionEvents(id);
-            double userTotalScore = set.getDouble(QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE);
-            getStatement.close();
-            return new QuizEvent(id, user, quiz, startDate, finishDate, questionEvents, userTotalScore);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
