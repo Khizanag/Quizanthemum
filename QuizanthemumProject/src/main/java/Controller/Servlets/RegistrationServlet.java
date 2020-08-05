@@ -42,7 +42,7 @@ public class RegistrationServlet extends HttpServlet implements Config {
             String email = request.getParameter("registration_email");
             String city = request.getParameter("registration_city");
             String country = request.getParameter("registration_country");
-            String mobilePhone = request.getParameter("registration_phone_numer");
+            String mobilePhone = request.getParameter("registration_phone");
             String birthDateStr = request.getParameter("registration_birth_date");
             StringTokenizer strTok = new StringTokenizer(birthDateStr, "-");
             int year = Integer.parseInt(strTok.nextToken());
