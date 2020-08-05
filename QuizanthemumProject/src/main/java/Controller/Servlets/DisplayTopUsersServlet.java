@@ -28,14 +28,30 @@ public class DisplayTopUsersServlet extends HttpServlet {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
 
-
         int locationType = Integer.parseInt(request.getParameter("location_type"));
-        String location = request.getParameter("location");
-        boolean isFriend = Boolean.parseBoolean(request.getParameter("is_friend"));
+        String location = "";
+        String city = request.getParameter("city");
+        if(locationType == LOCATION_TYPE_CITY) {
+            if(city.equals("empty")) locationType = LOCATION_TYPE_NONE;
+            location = city;
+        }
+
+        String country = request.getParameter("country");
+        if(locationType == LOCATION_TYPE_COUNTRY) {
+            if(country.equals("empty")) locationType = LOCATION_TYPE_NONE;
+            location = country;
+        }
+
+        String is_friend = request.getParameter("is_friend");
+        boolean isFriend = (is_friend != null);
+
         int userID = Integer.parseInt(request.getParameter("user_id"));
-        boolean isAuthor = Boolean.parseBoolean(request.getParameter("is_author"));
+
+        String is_author = request.getParameter("is_author");
+        boolean isAuthor = (is_author != null);
+
         List<User> users = usersManager.getTopUsersByFilter(DEFAULT_NUM_TOP_USERS_TO_DISPLAY, locationType, location,
-                                                                                            isFriend, userID, isAuthor);
+                isFriend, userID, isAuthor);
         request.setAttribute("users", users);
         request.setAttribute("title", "ტოპ მომხმარებლები");
 
