@@ -5,6 +5,7 @@ import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.QuizEvent;
 import Model.Managers.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class QuizEventFinishedServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("QuizEventFinishedServlet");
         ServletContext context = request.getServletContext();
         ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
@@ -34,8 +36,11 @@ public class QuizEventFinishedServlet extends HttpServlet {
         if (quizEvent.isPracticeMode())
             return;
 
+        System.out.println("practice mode was turned off");
+
         quizEvent.resetQuestionEventIterator();
         int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
+        System.out.println("quiz event inserted");
         while (quizEvent.hasNextQuestionEvent()) {
             QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();
             currQuestionEvent.setQuizEventId(quizEventId);
@@ -43,16 +48,22 @@ public class QuizEventFinishedServlet extends HttpServlet {
         }
 
         Challenge challenge = quizEvent.getChallenge();
-
+        System.out.println("some doing stuff of quiz finished finished");
         if(challenge != null){
+            System.out.println("challenge is not null");
             if(challenge.isAccepted()){ // is challengeD users event
+                System.out.println("is challenged users event");
                 challenge.setChallengedQuizEvent(quizEvent);
-                challengesManager.commitChallengedQuizPlay(challenge);
+                challenge.finish();
+                challengesManager.commitChallengeAccept(challenge);
             } else {    // is challengeR user's event
+                System.out.println("is challenger users quiz");
                 challenge.setChallengerQuizEvent(quizEvent);
                 challengesManager.insertChallenge(challenge);
             }
         }
 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizSummaryPage.jsp");
+        dispatcher.forward(request, response);
     }
 }

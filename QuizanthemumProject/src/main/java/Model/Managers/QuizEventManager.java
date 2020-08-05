@@ -19,16 +19,10 @@ public class QuizEventManager implements QuestionEventTableConfig {
 
     private ManagersManager manager;
     private Connection connection;
-    private Statement statement;
 
     public QuizEventManager(ManagersManager manager){
         this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
-        try {
-            statement = connection.createStatement();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     public ManagersManager getmanager(){ return this.manager; }
@@ -41,6 +35,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
 //        System.out.println("get quiz event");
 //        System.out.println(query); // TODO remove
         try {
+            Statement statement = connection.createStatement();
             ResultSet set = statement.executeQuery(query);
             if(set.next()){
                 int quizId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID);
@@ -68,6 +63,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
                 " FROM " + QUESTION_EVENTS_TABLE_NAME +
                 " WHERE " + QUESTION_EVENT_TABLE_COLUMN_2_QUIZ_EVENT_ID + " = " + id + ";\n";
         try {
+            Statement statement = connection.createStatement();
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
                 int questionEventID = set.getInt(QUESTION_EVENT_TABLE_COLUMN_1_ID);
@@ -106,7 +102,8 @@ public class QuizEventManager implements QuestionEventTableConfig {
         String query = "SELECT " + QUIZ_EVENT_TABLE_COLUMN_1_ID
                 + " FROM " + QUIZ_EVENTS_TABLE_NAME
                 + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID
-                + " ORDER BY " + QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE + " LIMIT " + numRows + ";\n";
+                + " ORDER BY " + QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE + " DESC "
+                + " LIMIT " + numRows + ";\n";
 
         List<QuizEvent> playedQuizzes = new ArrayList<>();
 

@@ -102,8 +102,8 @@
             <% if(user != null){ %>
 
                 <label for="challenged-id-holder"><b>გამოიწვიე მეგობარი:</b></label>
-                <input type="checkbox" class="checkbox" id="is-challenge-holder" name="is-challenge" onchange="changeFriendsDisplayForChallenges()">
-                <select id="challenged-id-holder" class="drop-down" name="challenged-id" style="display: none"> <%-- TODO right --%>
+                <input type="checkbox" class="checkbox" id="is-challenge-holder" name="is-challenge" onchange="changeFriendsDisplayForChallenges()" value="false">
+                <select id="challenged-id-holder" class="drop-down" name="challenged-id" style="display: none" value="PZDC"> <%-- TODO right --%>
                     <% for(int friendID : user.getFriendIDs()){
                         User friend = usersManager.getUser(friendID);%>
                     <option value="<%=friend.getID()%>"><%=friend.getFirstName()%> <%=friend.getLastName()%> (<%=friend.getUsername()%>)</option>
@@ -122,10 +122,17 @@
 
 <script>
     function changeFriendsDisplayForChallenges(){
+        let challengedIDHolder = document.getElementById('challenged-id-holder');
         if(document.getElementById('is-challenge-holder').checked){
-            document.getElementById('challenged-id-holder').style.display = 'flex';
+            challengedIDHolder.style.display = 'flex';
+            document.getElementById('is-challenge-holder').value = 'true';
         } else {
-            document.getElementById('challenged-id-holder').style.display = 'none';
+            challengedIDHolder.style.display = 'none';
+            document.getElementById('is-challenge-holder').value = 'false';
         }
+    }
+
+    function changeFriendToChallenge(ID){
+        // document.getElementById('challenged-id-holder').value = ;
     }
 </script>

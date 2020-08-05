@@ -111,9 +111,11 @@ public class Challenge implements Config {
 
     public QuizEvent getChallengedQuizEvent() {
         if(challengerQuizEvent == null) {
+            System.out.println("challengerQuizEvent is null in getChallengedQuizEvent");
             QuizEventManager quizEventManager = (QuizEventManager) manager.getManager().getManager(QUIZ_EVENT_MANAGER_STR);
             challengedQuizEvent = quizEventManager.getQuizEvent(challengedUserID);
         }
+        System.out.println("return challengedQuizEvent");
         return challengedQuizEvent;
     }
 
@@ -148,6 +150,8 @@ public class Challenge implements Config {
 
     public void finish(){
         this.isFinished = true;
+        getChallengerQuizEvent().getUserScore();
+        getChallengedQuizEvent().getUserScore();
         if(getChallengerQuizEvent().getUserScore() > getChallengedQuizEvent().getUserScore())
             this.winnerUserID = getChallengerUserID();
         else

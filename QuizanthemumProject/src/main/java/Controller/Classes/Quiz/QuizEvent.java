@@ -31,7 +31,7 @@ public class QuizEvent {
     /* constructor */
 
     public QuizEvent(User user, Quiz quiz, boolean isPracticeMode, Challenge challenge) {
-        this(DEFAULT_ID, user, quiz, null, null, null, 0, challenge);
+        this(DEFAULT_ID, user, quiz, null, null, new ArrayList<>(), 0, challenge);
     }
 
     // create from database
@@ -109,8 +109,6 @@ public class QuizEvent {
     // sets quiz status as finished
     public void finishQuiz() {
         finishDate = new Date();
-        if(challenge != null)
-            challenge.finish();
     }
 
     public int getId() {

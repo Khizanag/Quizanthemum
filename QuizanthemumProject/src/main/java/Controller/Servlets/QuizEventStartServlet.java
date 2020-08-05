@@ -41,8 +41,12 @@ public class QuizEventStartServlet extends HttpServlet {
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
         boolean practice_mode = (request.getParameter("practice_mode") != null);
-        boolean isChallenge = Boolean.parseBoolean(request.getParameter("is-challenge"));
-        int challengedID = isChallenge ? Integer.parseInt(request.getParameter("challenge-id")) : DEFAULT_ID;
+        String isChallengeStr = request.getParameter("is-challenge");
+        System.out.println("isChallengeStr: " + isChallengeStr);
+        boolean isChallenge = Boolean.parseBoolean(isChallengeStr);
+        System.out.println("********* isChallenge : " + isChallenge);
+        int challengedID = isChallenge ? Integer.parseInt(request.getParameter("challenged-id")) : DEFAULT_ID;
+        System.out.println("********* challengedID:" + challengedID);
         Challenge challenge = null;
 
 
@@ -64,17 +68,15 @@ public class QuizEventStartServlet extends HttpServlet {
         request.getServletContext().setAttribute("quiz_event", quizEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
+
             QuestionEvent nextQuestionEvent = quizEvent.getNextEmptyQuestionEvent();
             request.getServletContext().setAttribute("question_event", nextQuestionEvent);
             request.getServletContext().setAttribute("question_number", 1);
             int type = nextQuestionEvent.getType();
             response.setHeader("Location", getNextQuestionLink(type));
         } else {
-            quizEvent.finishQuiz();
-            if(!quizEvent.isPracticeMode()) {
-                quizEventManager.insertQuizEvent(quizEvent);
-            }
-            response.setHeader("Location", "http://localhost:8080/web/pages/QuizSummaryPage.jsp");
+            System.out.println("QuzEventStartedSertvelt -> 0 questions -> quizEventFinished");
+            response.setHeader("Location", "http://localhost:8080/QuizEventFinished");
         }
 
     }

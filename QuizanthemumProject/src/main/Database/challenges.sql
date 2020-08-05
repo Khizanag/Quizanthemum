@@ -21,4 +21,6 @@ create table challenges(
 
 SELECT * FROM challenges;
 
+DELETE FROM challenges WHERE true;
+
 INSERT INTO challenges VALUES(null, 1, 3, 1, null, null, false, -1, SYSDATE(), SYSDATE());
