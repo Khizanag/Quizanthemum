@@ -52,7 +52,7 @@ public class ManagersManager {
 
         QuizEventManager quizEventManager = new QuizEventManager(this);
         context.setAttribute(QUIZ_EVENT_MANAGER_STR, quizEventManager);
-        managers.put(QUESTION_EVENT_MANAGER_STR, quizEventManager);
+        managers.put(QUIZ_EVENT_MANAGER_STR, quizEventManager);
 
         QuizManager quizManager = new QuizManager(this);
         context.setAttribute(QUIZ_MANAGER_STR, quizManager);

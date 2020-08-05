@@ -1,23 +1,7 @@
 use quizanthemum_schema;
 
 
-# ************************************************** DROP TABLES  *************************************************
-
-drop table if exists question_events;
-drop table if exists questions;
-drop table if exists challenges;
-drop table if exists quiz_events;
-drop table if exists friendships;
-drop table if exists achievement_events;
-drop table if exists achievements;
-drop table if exists quiz_rating_events;
-drop table if exists quizzes;
-drop table if exists users;
-drop table if exists categories;
-
-
-
--- ****************************************  USERS  ****************************************
+# ****************************************  USERS  ****************************************
 create table users(
                       id smallint primary key AUTO_INCREMENT,
                       username varchar(64) unique key,
@@ -33,36 +17,13 @@ create table users(
                       registration_date date,
                       photo_url varchar(256),
                       password_salt varchar(256)
-);
+)CHARSET=utf8;
 
--- adding default users into database
--- password for all users: p
-insert into users values(null, 'dbera17', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'Dima', 'Beradze', 3, 'Tbilisi', 'Georgia', 'dbera17@freeuni.edu.ge', '+995 568 698 400', SYSDATE(), SYSDATE(), 'https://scontent.ftbs5-2.fna.fbcdn.net/v/t1.0-9/84261005_1604549699714581_1382890228796283856_o.jpg?_nc_cat=105&_nc_sid=85a577&_nc_ohc=gDwQBQ0iRb0AX93pSHW&_nc_ht=scontent.ftbs5-2.fna&oh=571aca1c7460bd77f9701cbd3bfd0c98&oe=5F4E4D02', 'X9NCmZs0cgzI7Mu');
-insert into users values(null, 'dgogi17', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'Davit', 'Goginashvili', 3, 'Tbilisi', 'Georgia', 'dgogi17@freeuni.edu.ge', '+995 598 322 837', SYSDATE(), SYSDATE(), 'https://scontent.ftbs5-2.fna.fbcdn.net/v/t1.0-9/67403386_2182458128546365_6922830099616104448_o.jpg?_nc_cat=111&_nc_sid=85a577&_nc_ohc=YD1s742rAvgAX-jPiZY&_nc_ht=scontent.ftbs5-2.fna&oh=9e2721bf0106fd4c5d13201cafe55c8e&oe=5F4F8523', 'X9NCmZs0cgzI7Mu');
-insert into users values(null, 'gkhiz17', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'Giga', 'Khizanishvili', 3, 'Tbilisi', 'Georgia',  'gkhiz17@freeuni.edu.ge', '+995577543346', SYSDATE(), SYSDATE(), 'https://scontent.ftbs5-1.fna.fbcdn.net/v/t1.0-9/116436394_906874563144396_7578097191367097934_o.jpg?_nc_cat=100&_nc_sid=85a577&_nc_ohc=cLtNBE9eBBcAX-u07cY&_nc_ht=scontent.ftbs5-1.fna&oh=56eaed90c7fa8b913693f41ca7b7c7ad&oe=5F4DDD00', 'X9NCmZs0cgzI7Mu');
-insert into users values(null, 'ishal17', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'Irakli', 'Shalibashvili', 3, 'Tbilisi', 'Georgia', 'ishal17@freeuni.edu.ge', '+995 598 101 151', SYSDATE(), SYSDATE(), 'https://scontent.ftbs5-2.fna.fbcdn.net/v/t1.0-9/83945758_3003050643061168_6610406129736351744_o.jpg?_nc_cat=103&_nc_sid=85a577&_nc_ohc=jEwsn-QJAFkAX-Zqz2a&_nc_ht=scontent.ftbs5-2.fna&oh=b769765b8129fe79c82e8863d51a30fd&oe=5F4FC022', 'X9NCmZs0cgzI7Mu');
-insert into users values(null, 'lkhiz17', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'Luka', 'Khizanishvili', 3, 'Tbilisi', 'Georgia', 'lkhiz17@freeuni.edu.ge', '+995 593 687 830', SYSDATE(), SYSDATE(), 'https://scontent.ftbs5-1.fna.fbcdn.net/v/t1.0-9/106636827_2576079655967505_9137159715524780313_o.jpg?_nc_cat=108&_nc_sid=85a577&_nc_ohc=Rtn8bAzCYvEAX8LYvvf&_nc_ht=scontent.ftbs5-1.fna&oh=5ff2309ea7bef0bc1af88ef4169ff770&oe=5F4DEB18', 'X9NCmZs0cgzI7Mu');
-
-INSERT INTO users VALUES(null, 'p', 'aded4da942a8cce63c63b69194d36b7d7f90eba2', 'p', 'p', 2, 'p', 'p', 'p@p', null, SYSDATE(), SYSDATE(), null, 'X9NCmZs0cgzI7Mu');
-
-
---  *******************************************  CATEGORIES  ******************************************
+# *******************************************  CATEGORIES  ******************************************
 CREATE TABLE categories(
                            id int primary key auto_increment,
                            name varchar(64)
-);
-
-
-INSERT INTO categories VALUES (null, 'ბიოლოგია');
-INSERT INTO categories VALUES (null, 'გეოგრაფია');
-INSERT INTO categories VALUES (null, 'ისტორია');
-INSERT INTO categories VALUES (null, 'ლიტერატურა');
-INSERT INTO categories VALUES (null, 'მათემატიკა');
-INSERT INTO categories VALUES (null, 'სპორტი');
-INSERT INTO categories VALUES (null, 'ფიზიკა');
-INSERT INTO categories VALUES (null, 'ფილმები');
-INSERT INTO categories VALUES (null, 'ქიმია');
-INSERT INTO categories VALUES (null, 'ხელოვნება');
+)CHARSET=utf8;
 
 
 # ************************************  QUIZZES  ***********************************
@@ -82,7 +43,7 @@ create table quizzes(
                             references users(id) on update cascade on delete restrict,
                         CREATION_DATE date,
                         MAX_SCORE double
-);
+)CHARSET=utf8;
 
 
 
@@ -94,7 +55,7 @@ create table quiz_events(
                             user_id smallint not null,
                             start_date date,
                             finish_date date,
-                            total_score smallint,
+                            total_score double,
                             constraint foreign key (quiz_id)
                                 references quizzes(id) on update cascade on delete restrict,
                             constraint foreign key (user_id)
@@ -109,7 +70,7 @@ create table questions(
                           id smallint primary key auto_increment,
                           type smallint not null,
                           is_auto_graded boolean,
-                          max_score smallint,
+                          max_score double,
                           header_statement text,
                           text_statement text,
                           picture_statement_url varchar(256),
@@ -155,7 +116,7 @@ create table questions(
                           answer_13 varchar(64),
                           answer_14 varchar(64),
                           answer_15 varchar(64)
-);
+)CHARSET=utf8;
 
 
 
@@ -169,7 +130,7 @@ create table question_events(
                                 start_date date,
                                 end_date date,
                                 is_already_graded boolean,
-                                user_score smallint,
+                                user_score double,
                                 question_id smallint not null,
                                 constraint foreign key (question_id)
                                     references questions(id) on update cascade on delete restrict,
@@ -189,7 +150,7 @@ create table question_events(
                                 user_answer_13 varchar(64),
                                 user_answer_14 varchar(64),
                                 user_answer_15 varchar(64)
-);
+)CHARSET=utf8;
 
 
 
@@ -235,7 +196,7 @@ create table achievements(
                              title varchar(64),
                              description varchar(64),
                              icon_url varchar(256)
-);
+)CHARSET=utf8;
 
 
 
@@ -266,7 +227,19 @@ create table quiz_rating_events(
 );
 
 
+# ************************************************** DROP TABLES  *************************************************
 
+drop table if exists question_events;
+drop table if exists questions;
+drop table if exists quiz_events;
+drop table if exists friendships;
+drop table if exists challenges;
+drop table if exists achievement_events;
+drop table if exists achievements;
+drop table if exists quiz_rating_events;
+drop table if exists quizzes;
+drop table if exists users;
+drop table if exists categories;
 # ***************************************************  FOR TESTING  **************************************************
 
 SELECT * FROM achievement_events;
@@ -280,3 +253,17 @@ SELECT * FROM quiz_events;
 SELECT * FROM quizzes;
 SELECT * FROM users;
 SELECT * FROM quiz_rating_events;
+
+
+# *********************************************** ADD ALL CATEGORIES   ***********************************************
+
+INSERT INTO categories VALUES (null, 'ბიოლოგია');
+INSERT INTO categories VALUES (null, 'გეოგრაფია');
+INSERT INTO categories VALUES (null, 'ისტორია');
+INSERT INTO categories VALUES (null, 'ლიტერატურა');
+INSERT INTO categories VALUES (null, 'მათემატიკა');
+INSERT INTO categories VALUES (null, 'სპორტი');
+INSERT INTO categories VALUES (null, 'ფიზიკა');
+INSERT INTO categories VALUES (null, 'ფილმები');
+INSERT INTO categories VALUES (null, 'ქიმია');
+INSERT INTO categories VALUES (null, 'ხელოვნება');

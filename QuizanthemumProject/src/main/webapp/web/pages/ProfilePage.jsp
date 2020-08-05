@@ -8,6 +8,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="static Configs.Config.*" %>
 <%@ page import="Model.Managers.UsersManager" %>
+<%@ page import="Model.Managers.QuizEventManager" %>
+<%@ page import="Controller.Classes.Quiz.QuizEvent" %>
 <head>
     <meta charset="UTF-8">
     <title> Quizanthemum </title>
@@ -108,10 +110,10 @@
                 <div class="user-details"><%=status%></div>
             </div>
             <div class="profile-details-info">
-                <div class = "quizzes-played"><%="ნათამაშები ქვიზები: "+usersManager.getQuizzesPlayedCount(user.getID())%></div>
-                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: "+usersManager.getUserTotalPoints(user.getID())%></div>
-                <div class =  "challenges-played"><%="ნათამაშები ჩელენჯები: "+user.getChallengesPlayed()%></div>
-                <div class="challenges-won"><%="მოგებული ჩელენჯები: "+user.getChallengesWon()%></div>
+                <div class = "quizzes-played"><%="ნათამაშები ქვიზები: " + usersManager.getQuizzesPlayedCount(user.getID())%></div>
+                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: " + usersManager.getUserTotalPoints(user.getID())%></div>
+                <div class =  "challenges-played"><%="ნათამაშები ჩელენჯები: " + user.getChallengesPlayed()%></div>
+                <div class="challenges-won"><%="მოგებული ჩელენჯები: " + user.getChallengesWon()%></div>
                 <%
                     if(role>1){
                         out.print("<div class='quizzes-made'> ");
@@ -126,8 +128,9 @@
 
     </div>
     <%
+        QuizEventManager quizEventManager = (QuizEventManager) managersManager.getManager(QUIZ_EVENT_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-        List<Quiz> topQuizzes = quizManager.getMostPopularQuizzes(10);
+        List<QuizEvent> topQuizEvents = quizEventManager.getQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
     %>
     <div class = "top-quizzes-banner">
         <div class="players-top-quizzes">
@@ -137,7 +140,8 @@
     <main class="main">
         <div class="top-quizzes-container">
             <div class= "top-quiz-items">
-                <% for(Quiz currQuiz:topQuizzes){ %>
+                <% for(QuizEvent currQuizEvent:topQuizEvents){ %>
+                    <%Quiz currQuiz = currQuizEvent.getQuiz();%>
                     <div class="top-quiz-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
                         <img class= "quiz-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
                         <div class= "quiz-small-description-block">
@@ -148,7 +152,7 @@
                                 <%=currQuiz.getDescription()%>
                             </p>
                         </div>
-                        <div class = "quiz-score"><%=currQuiz.getMaxScore()%></div>
+                        <div class = "quiz-score"><%=currQuizEvent.getUserScore()%> / <%=currQuiz.getMaxScore()%></div>
                         <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
                     </div>
                 <%}%>

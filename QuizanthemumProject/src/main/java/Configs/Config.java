@@ -23,7 +23,7 @@ public interface Config {
 
     /** Used when creating Object, before inserting into database */
     int DEFAULT_ID = -1;
-    int DEFAULT_NUM_QUEZZES_TO_DISPLAY = 10;
+    int DEFAULT_NUM_QUIZZES_TO_DISPLAY = 10;
     int DEFAULT_NUM_TOP_USERS_TO_DISPLAY = 10;
     int PASSWORD_SALT_LENGTH = 15;
     int LOCATION_TYPE_NONE = 0;

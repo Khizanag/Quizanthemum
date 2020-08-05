@@ -33,7 +33,7 @@ public class SearchItemServlet extends HttpServlet {
 
 
         List<User> users = usersManager.getUsers();
-        List<Quiz> quizzes = quizzesManager.getQuizzes(DEFAULT_NUM_QUEZZES_TO_DISPLAY);
+        List<Quiz> quizzes = quizzesManager.getQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
         request.setAttribute("users", users);
         request.setAttribute("search", request.getParameter("search"));
