@@ -13,16 +13,10 @@ public class ChallengesManager implements ChallengesTableConfig {
 
     private final ManagersManager manager;
     private final Connection connection;
-    private Statement statement;
 
     public ChallengesManager(ManagersManager manager){
         this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
-        try {
-            this.statement = connection.createStatement();
-        } catch (SQLException throwables) {
-            System.out.println("Error during creating statement in constructor of 'ChallengeManager'");
-        }
     }
 
     public ManagersManager getManager(){ return this.manager; }
@@ -41,18 +35,24 @@ public class ChallengesManager implements ChallengesTableConfig {
                 + ", " + challlenge.getAcceptingDate()
                 + ")\n";
         try {
+            Statement statement = connection.createStatement();
             statement.execute(query);
+            statement.close();
         } catch (SQLException throwables) { }
     }
 
     public Challenge getChallenge(int ID) {
-        String query = "SELECT *"
+        String query = "SELECT * "
                 + " FROM " + CHALLENGES_TABLE_NAME
                 + " WHERE " + CHALLENGES_TABLE_COLUMN_1_ID + " = " + ID + ";";
         try {
+            Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
-            if(resultSet.next())
-                return buildChallenge(resultSet);
+            if(resultSet.next()){
+                Challenge challenge =  buildChallenge(resultSet);
+            }
+            resultSet.close();
+            statement.close();
         } catch (SQLException throwables) { }
         return null;
 

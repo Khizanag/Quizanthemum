@@ -66,6 +66,8 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
             while(resultSet.next()){
                 requests.add(buildFriendRequest(resultSet));
             }
+            resultSet.close();
+            statement.close();
             return requests;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -86,6 +88,7 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
         try{
             Statement statement = connection.createStatement();
             statement.execute(query);
+            statement.close();
             return DatabaseConnector.getLastInsertID();
         } catch (SQLException throwables){
             throwables.printStackTrace();
