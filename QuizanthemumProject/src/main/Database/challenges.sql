@@ -18,3 +18,7 @@ create table challenges(
                            challenging_date date,
                            accepting_date date
 );
+
+SELECT * FROM challenges;
+
+INSERT INTO challenges VALUES(null, 1, 3, 1, null, null, false, -1, SYSDATE(), SYSDATE());

@@ -38,8 +38,8 @@ public class QuizEventManager implements QuestionEventTableConfig {
                 " FROM " + QUIZ_EVENTS_TABLE_NAME +
                 " WHERE " + QUIZ_EVENT_TABLE_COLUMN_1_ID + " = " + id + ";\n";
 
-        System.out.println("get quiz event");
-        System.out.println(query); // TODO remove
+//        System.out.println("get quiz event");
+//        System.out.println(query); // TODO remove
         try {
             ResultSet set = statement.executeQuery(query);
             if(set.next()){
@@ -54,7 +54,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
                 List<QuestionEvent> questionEvents = getQuestionEvents(id);
                 double userTotalScore = set.getDouble(QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE);
                 statement.close();
-                return new QuizEvent(id, user, quiz, startDate, finishDate, questionEvents, userTotalScore);
+                return new QuizEvent(id, user, quiz, startDate, finishDate, questionEvents, userTotalScore, null); // TODO not null
             }
         } catch (SQLException throwable) {
             throwable.printStackTrace();

@@ -4,20 +4,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
-    <title> Creating Quiz </title>
+    <title> ქვიზის შექმნა </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="/web/images/common/icon.png"/>
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
     <link rel="stylesheet" href="/web/styles/common.css">
 
-    <jsp:include page="/web/pages/LogedInHandler.jsp"></jsp:include>
+    <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 </head>
 
 <body>
 
-    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
     <form id="creation-section" class="creation-section" action="/StartQuizCreating" method="get">
         <div class="container bla">
@@ -57,7 +57,7 @@
                 <input type="text" placeholder="როგორ გსურთ მონაცემების კონსტრუირება"
                        name="description" id="description">
 
-                <label><b>კითხვების თანმიმდევრობის აუტომატური გენერირება</b></label>
+                <label><b>კითხვების თანმიმდევრობის ავტომატური გენერირება</b></label>
                 <input class="checkbox" type="checkbox"
                        name="quiz_must_shuffle" id="quiz_must_shuffle" checked>
             </div>

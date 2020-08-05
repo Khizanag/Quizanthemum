@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/logIn.css">
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
 
     <%
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);

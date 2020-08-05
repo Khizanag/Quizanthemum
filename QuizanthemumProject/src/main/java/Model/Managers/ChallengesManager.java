@@ -93,7 +93,11 @@ public class ChallengesManager implements ChallengesTableConfig {
         return null;
     }
 
-    public void acceptChallenge(int challengeID) {
+    public void commitChallengeAccept(int ID) {
+
+    }
+
+    public void commitChallengedQuizPlay(Challenge challenge){
 
     }
 }

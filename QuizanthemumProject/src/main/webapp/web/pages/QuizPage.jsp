@@ -58,7 +58,9 @@
         ServletContext context = request.getServletContext();
         ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+        UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
         Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("id")));
+        User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
     %>
     <form class="start-quiz-section" action="/QuizEventStart" method ="get">
         <div class="container">
@@ -92,9 +94,24 @@
                 </div>
             </div>
             <br>
-            <label><b>practice mode</b></label>
-            <input class="checkbox" type="checkbox"
-                   name="practice_mode" id="practice_mode">
+
+            <label><b>Practice mode</b></label>
+            <input class="checkbox" type="checkbox"  name="practice_mode" id="practice_mode">
+            <br>
+
+            <% if(user != null){ %>
+
+                <label for="challenged-id-holder"><b>გამოიწვიე მეგობარი:</b></label>
+                <input type="checkbox" class="checkbox" id="is-challenge-holder" name="is-challenge" onchange="changeFriendsDisplayForChallenges()">
+                <select id="challenged-id-holder" class="drop-down" name="challenged-id" style="display: none"> <%-- TODO right --%>
+                    <% for(int friendID : user.getFriendIDs()){
+                        User friend = usersManager.getUser(friendID);%>
+                    <option value="<%=friend.getID()%>"><%=friend.getFirstName()%> <%=friend.getLastName()%> (<%=friend.getUsername()%>)</option>
+                    <% } %>
+                </select>
+
+            <% } %>
+
             <button class="button" type="submit" style="margin-top: 10px">
                 ქვიზის დაწყება
             </button>
@@ -102,3 +119,13 @@
         <input type="hidden" value="<%=quiz.getID()%>" name="quiz_id">
     </form>
 </body>
+
+<script>
+    function changeFriendsDisplayForChallenges(){
+        if(document.getElementById('is-challenge-holder').checked){
+            document.getElementById('challenged-id-holder').style.display = 'flex';
+        } else {
+            document.getElementById('challenged-id-holder').style.display = 'none';
+        }
+    }
+</script>

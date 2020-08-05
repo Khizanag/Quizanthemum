@@ -24,6 +24,6 @@ public class AcceptChallengeServlet extends HttpServlet {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         int challengeID = Integer.parseInt(request.getParameter("challenge-id"));
-        challengesManager.acceptChallenge(challengeID);
+        challengesManager.commitChallengeAccept(challengeID);
     }
 }

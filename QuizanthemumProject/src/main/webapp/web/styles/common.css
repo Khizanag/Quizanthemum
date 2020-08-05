@@ -297,6 +297,17 @@ html {
     transition: margin-left .5s; /* If you want a transition effect */
     padding: 20px;
 }
+
+
+.drop-down{
+    width: 100%;
+    background: #f1f1f1;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+}
+
+
 /* FOOOTER */
 .footer-section {
     background-color: #02171a;
