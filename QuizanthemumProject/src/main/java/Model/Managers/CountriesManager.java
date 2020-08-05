@@ -26,9 +26,9 @@ public class CountriesManager implements CountriesTableConfig {
     public int insertCountry(Country country){
         String query = "INSERT INTO " + COUNTRIES_TABLE_NAME
                 + " VALUES(null"
-                + ", " + country.getName()
+                + ", '" + country.getName() + "'"
                 + ");";
-
+        System.out.println("Query in CountriesManager.insert() : " + query);
         try {
             Statement statement = connection.createStatement();
             statement.execute(query);

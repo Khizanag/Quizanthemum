@@ -7,6 +7,7 @@ public interface Config {
     String ACHIEVEMENTS_MANAGER_STR = "achievements_manager";
     String CATEGORIES_MANAGER_STR = "categories_manager";
     String CONNECTION_STR = "connection for database";
+    String COUNTRIES_MANAGER_STR = "countries-manager";
     String CHALLENGE_MANAGER_STR = "challenge manager";
     String FRIENDSHIPS_MANAGER_STR = "friendships_manager";
     String MANAGERS_MANAGER_STR = "managers_manager";
@@ -38,8 +39,6 @@ public interface Config {
 
 
     String LOGGED_IN_USER = "logedInUser";
-
-    String COUNTRIES_FILE_NAME = "/Users/gigakhizanishvili/Programming/GitHub/Quizanthemum/QuizanthemumProject/src/main/Database/countries.txt";
 
 
 }

@@ -246,6 +246,16 @@ create table challenges(
 );
 
 
+# *******************************************  COUNTRIES  ******************************************
+
+-- !!! while creating database, after creating countries table you should run CountriesLoader.java
+-- file from main/java/Tools, which inserts all counties
+
+create table countries(
+                          id int primary key auto_increment,
+                          name varchar(100) not null unique
+);
+
 
 # ***********************************************  ACHIEVEMENTS  ***********************************************
 
