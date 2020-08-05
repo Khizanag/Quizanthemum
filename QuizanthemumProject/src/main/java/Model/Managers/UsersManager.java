@@ -35,6 +35,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         } catch (SQLException throwables) { }
     }
 
+    public ManagersManager getManager(){ return manager; }
+
     public User getUser(int id){
         String query = "SELECT *" +
                 " FROM " + USERS_TABLE_NAME +

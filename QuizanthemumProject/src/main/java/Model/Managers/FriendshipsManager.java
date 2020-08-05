@@ -5,17 +5,18 @@ import Configs.FriendshipsTableConfig;
 import Controller.Classes.User.Friendship;
 import Model.DatabaseConnector;
 
-import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FriendshipsManager implements Config, FriendshipsTableConfig {
 
-    private ManagersManager manager;
-    private Connection connection;
+    private final ManagersManager manager;
+    private final Connection connection;
 
     public FriendshipsManager(ManagersManager manager){
         this.manager = manager;
@@ -25,15 +26,15 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
     public Friendship getFriendship(int ID){
         String query = "SELECT * "
                 + " FROM " + FRIENDSHIPS_TABLE_NAME
-                + " WHERE ID = " + ID;
+                + " WHERE ID = " + ID + ";\n";
         try{
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if(resultSet.next()){
                 return buildFriendship(resultSet);
             }
-        } catch (SQLException throwables){
-            throwables.printStackTrace();
+        } catch (SQLException throwable){
+            throwable.printStackTrace();
         }
         return null;
     }
@@ -69,4 +70,31 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
         return DEFAULT_ID;
     }
 
+    public List<Integer> getFriendIDsOf(int ID) {
+        String firstQuery = "SELECT " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID
+                + " FROM " + FRIENDSHIPS_TABLE_NAME
+                + " WHERE " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + ID;
+        String secondQuery = "SELECT " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID
+                + " FROM " + FRIENDSHIPS_TABLE_NAME
+                + " WHERE " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " = " + ID;
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(firstQuery);
+            List<Integer> friendIDs = new ArrayList<>();
+            while(resultSet.next()){
+                int friendID = resultSet.getInt(FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID);
+                friendIDs.add(friendID);
+            }
+
+            resultSet = statement.executeQuery(secondQuery);
+            while(resultSet.next()){
+                int friendID = resultSet.getInt(FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID);
+                friendIDs.add(friendID);
+            }
+            return friendIDs;
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 }
