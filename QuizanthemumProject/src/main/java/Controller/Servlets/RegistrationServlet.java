@@ -58,8 +58,8 @@ public class RegistrationServlet extends HttpServlet implements Config {
 
             request.getServletContext().setAttribute("logedInUser", newUser);
             request.getServletContext().removeAttribute(errorMessage);
-            response.addCookie(new Cookie("Quizanthemum-loged-in-user-ID", "" + newUser.getID()));
-            response.addCookie(new Cookie("Quizanthemum-loged-in-user-password-hash", newUser.getPasswordHash()));
+            response.addCookie(new Cookie(LOGGED_IN_USER_ID, "" + newUser.getID()));
+            response.addCookie(new Cookie(LOGGED_IN_USER_PASSWORD_HASH, newUser.getPasswordHash()));
 
             response.setStatus(HttpServletResponse.SC_FOUND);//302
             response.setHeader("Location", "http://localhost:8080/Profile?id=" + newUser.getID());
