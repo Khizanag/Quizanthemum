@@ -14,7 +14,8 @@ import java.util.List;
 
 import static Configs.Config.*;
 import static Configs.QuizEventTableConfig.*;
-import static Configs.QuizRatingEventsConfig.QUIZ_RATING_EVENTS_TABLE_NAME;
+import static Configs.QuizRatingEventsConfig.*;
+import static Configs.QuizTableConfig.QUIZ_TABLE_COLUMN_8_AUTHOR_ID;
 import static Configs.QuizTableConfig.QUIZ_TABLE_NAME;
 
 
@@ -252,4 +253,99 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return users;
 
     }
+
+    public List<User> getTopUsersByFilter(int numUsers, int locationType, String location, boolean isFriend, int userID, boolean isAuthor) {
+        String query = "SELECT * "
+                + " FROM " + USERS_TABLE_NAME + " as us";
+        boolean whereClauseExists = false;
+        if (locationType == LOCATION_TYPE_CITY) {
+            query += (" WHERE us.city = " + location);
+            whereClauseExists = true;
+        } else if (locationType == LOCATION_TYPE_COUNTRY) {
+            query += (" WHERE us.country = " + location);
+            whereClauseExists = true;
+        }
+        if (isFriend) {
+            if (whereClauseExists) {
+                query += " AND";
+            } else {
+                query += " WHERE";
+            }
+            query += (" us." + USERS_TABLE_COLUMN_1_ID
+                        + " IN (SELECT " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID
+                        + " FROM " + FRIENDSHIPS_TABLE_NAME + " WHERE "
+                        + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " = " + userID
+                        + "UNION"
+                        + "SELECT " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID
+                        + " FROM " + FRIENDSHIPS_TABLE_NAME + " WHERE "
+                        + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + userID + ")"); // are friends
+            whereClauseExists = true;
+        }
+        if (isAuthor) {
+            if (whereClauseExists) {
+                query += " AND";
+            } else {
+                query += " WHERE";
+            }
+            query += (" (SELECT COUNT(1) FROM " + QUIZ_TABLE_NAME
+                        + " WHERE " + QUIZ_TABLE_COLUMN_8_AUTHOR_ID + " = us." + USERS_TABLE_COLUMN_1_ID + ") > 0");
+            query += " ORDER BY (SELECT COUNT(1) FROM " + QUIZ_TABLE_NAME
+                                + " WHERE " + QUIZ_TABLE_COLUMN_8_AUTHOR_ID + " = us." + USERS_TABLE_COLUMN_1_ID + ")";
+        } else {
+            query += " ORDER BY (SELECT COUNT(1) FROM " + QUIZ_EVENTS_TABLE_NAME
+                               + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = us." + USERS_TABLE_COLUMN_1_ID + ")";
+        }
+        query += " LIMIT " + numUsers + ";\n";
+
+        System.out.println(query); // TODO remove
+        List<User> users = new ArrayList<>();
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                User newUser = buildUserFromResultSet(set);
+                users.add(newUser);
+            }
+            qStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+
+    }
+
+    public int getQuizzesPlayedCount(int userID) {
+        String query = "SELECT COUNT(1) AS num_quizzes FROM " + QUIZ_EVENTS_TABLE_NAME
+                    + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID;
+        int numQuizzesPlayed = 0;
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            if(!set.next()) {
+                return 0;
+            }
+            numQuizzesPlayed = set.getInt("num_quizzes");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return numQuizzesPlayed;
+    }
+
+    public int getUserTotalPoints(int userID) {
+        String query = "SELECT SUM(" + QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE + ") AS total_points FROM "
+                    + QUIZ_EVENTS_TABLE_NAME + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID;
+        int totalPoints = 0;
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            if(!set.next()) {
+                return 0;
+            }
+            totalPoints = set.getInt("total_points");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return totalPoints;
+    }
+
 }

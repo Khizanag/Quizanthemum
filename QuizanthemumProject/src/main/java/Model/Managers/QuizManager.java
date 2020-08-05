@@ -219,7 +219,6 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         int average = -1;
         try {
             Statement selectionStatement = connection.createStatement();
-            System.out.println(selectionQuery);
             ResultSet set = selectionStatement.executeQuery(selectionQuery);
             if(!set.next()){
                 System.out.println("couldn't reach star rating in quiz");
