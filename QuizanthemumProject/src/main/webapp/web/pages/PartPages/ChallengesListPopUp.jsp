@@ -32,13 +32,11 @@
     UsersManager usersManager = (UsersManager)mm.getManager(USERS_MANAGER_STR);
     ChallengesManager challengesManager = (ChallengesManager) mm.getManager(CHALLENGE_MANAGER_STR);
     User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
-%>
-
-<% if(user != null) {
-    List<Challenge> challenges = challengesManager.getChallengesOf(user.getID());
-    user.setChallenges(challenges);
-    List<Challenge> waitingChallengedChallenges = user.getWaitingChallengedChallenges();
-    List<Challenge> waitingChallengerChallenges = user.getWaitingChallengerChallenges();
+    if(user != null) {
+        List<Challenge> challenges = challengesManager.getChallengesOf(user.getID());
+        user.setChallenges(challenges);
+        List<Challenge> waitingChallengedChallenges = user.getWaitingChallengedChallenges();
+        List<Challenge> waitingChallengerChallenges = user.getWaitingChallengerChallenges();
 %>
 
 <div class="friends-list-popup" id="challenges-list-popup-id">
@@ -69,7 +67,6 @@
             </div>
         </div>
         <% } %>
-        <br>
         <br>
         <br>
         <br>

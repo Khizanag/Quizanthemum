@@ -203,7 +203,8 @@ create table friendships(
                             second_friend_id smallint,
                             constraint foreign key (second_friend_id)
                                 references users(id) on update cascade on delete restrict,
-                            make_friend_date date
+                            make_friend_date date,
+                            is_accepted boolean default false
 );
 
 

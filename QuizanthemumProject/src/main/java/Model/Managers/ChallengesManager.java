@@ -93,4 +93,7 @@ public class ChallengesManager implements ChallengesTableConfig {
         return null;
     }
 
+    public void acceptChallenge(int challengeID) {
+
+    }
 }

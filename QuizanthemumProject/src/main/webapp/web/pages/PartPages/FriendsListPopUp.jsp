@@ -4,6 +4,10 @@
 <%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
 <%@ page import="Controller.Classes.User.User" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="Model.Managers.ChallengesManager" %>
+<%@ page import="Controller.Classes.OtherClasses.Challenge" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Model.Managers.FriendshipsManager" %>
 <%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
@@ -14,37 +18,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-        ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
-        UsersManager usersManager = (UsersManager)mm.getManager(USERS_MANAGER_STR);
-        User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+    ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
+    FriendshipsManager friendshipsManager = (FriendshipsManager) mm.getManager(FRIENDSHIPS_MANAGER_STR);
+    User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+    if(user != null) {
+        List<User> friends = friendshipsManager.getFriendsOf(user.getID());
+    }
 %>
+
 <div class="friends-list-popup" id="friends-list-popup-id">
     <div class="overlay"></div>
     <div class="content">
         <div class="close-btn" onclick="popUpFriendsList()">&times;</div>
         <h1 style="color:orange">მეგობრები</h1>
         <br>
-        <div class = "friend-list-row">
-            <span>მეგობარი0</span>
-            <div class = "friend-challenge-remove-btns">
-                <button class="challenge-btn" id="challenge-btn-id-1" onclick="challengeFriend()">Challenge</button>
-                <button class="remove-btn" id="remove-btn-id-1" onclick="removeFriend(this)">Remove</button>
-            </div>
-        </div>
-        <div class = "friend-list-row">
-            <span>მეგობარი1</span>
-            <div class = "friend-challenge-remove-btns">
-                <button class="challenge-btn" id="challenge-btn-id-2" onclick="challengeFriend()">Challenge</button>
-                <button class="remove-btn" id="remove-btn-id-2" onclick="removeFriend(this)">Remove</button>
-            </div>
-        </div>
-        <div class = "friend-list-row">
-            <span>მეგობარი2</span>
-            <div class = "friend-challenge-remove-btns">
-                <button class="challenge-btn" id="challenge-btn-id-3" onclick="challengeFriend()">Challenge</button>
-                <button class="remove-btn" id="remove-btn-id-3" onclick="removeFriend(this)">Remove</button>
-            </div>
-        </div>
+
+
+
     </div>
 </div>
 
