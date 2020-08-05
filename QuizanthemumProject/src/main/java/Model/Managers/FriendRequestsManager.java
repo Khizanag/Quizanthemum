@@ -113,6 +113,17 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
     }
 
     public void commitFriendRequestReceive(FriendRequest request){
-
+        String query = "UPDATE " + FRIEND_REQUESTS_TABLE_NAME
+                + " SET "
+                + "         " + FRIEND_REQUESTS_TABLE_COLUMN_6_IS_RECEIVED + " = " + request.isReceived()
+                + "         " + FRIEND_REQUESTS_TABLE_COLUMN_7_IS_ACCEPTED + " = " + request.isAccepted()
+                + " WHERE " + FRIEND_REQUESTS_TABLE_COLUMN_1_ID + " = " + request.getID();
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            statement.close();
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
     }
 }
