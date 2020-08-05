@@ -28,7 +28,6 @@ public class CountriesManager implements CountriesTableConfig {
                 + " VALUES(null"
                 + ", '" + country.getName() + "'"
                 + ");";
-        System.out.println("Query in CountriesManager.insert() : " + query);
         try {
             Statement statement = connection.createStatement();
             statement.execute(query);

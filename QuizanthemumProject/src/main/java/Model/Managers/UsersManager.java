@@ -300,8 +300,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         }
         query += " LIMIT " + numUsers + ";\n";
 
-        System.out.println("get top users by filter"); // TODO remove
-        System.out.println(query); // TODO remove
+//        System.out.println("get top users by filter"); // TODO remove
+//        System.out.println(query); // TODO remove
         List<User> users = new ArrayList<>();
         try {
             Statement qStatement = connection.createStatement();
@@ -364,7 +364,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         String query = "SELECT DISTINCT( " + column
                 + " ) FROM " + USERS_TABLE_NAME + ";\n";
         List<String> locations = new ArrayList<>();
-        System.out.println("query: " + query);
+//        System.out.println("query: " + query);
         try {
             Statement qStatement = connection.createStatement();
             ResultSet set = qStatement.executeQuery(query);
