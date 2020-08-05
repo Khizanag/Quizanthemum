@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.QuizServlets;
 
 import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.Question.Question;
@@ -40,7 +40,7 @@ public class QuizEventStartServlet extends HttpServlet {
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
-        boolean practiceMode =  Boolean.parseBoolean(request.getParameter("practice-mode"));
+        boolean practiceMode =  request.getParameter("practice-mode") != null;
         System.out.println("practiceMode: " + practiceMode);
         String isChallengeStr = request.getParameter("is-challenge");
         boolean isChallenge = Boolean.parseBoolean(isChallengeStr);

@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.QuizServlets;
 
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Quiz;

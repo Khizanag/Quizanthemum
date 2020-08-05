@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.ChallengeServlets;
 
 import Controller.Classes.OtherClasses.Challenge;
 import Model.Managers.ChallengesManager;
@@ -15,8 +15,8 @@ import java.io.IOException;
 import static Configs.Config.CHALLENGE_MANAGER_STR;
 import static Configs.Config.MANAGERS_MANAGER_STR;
 
-@WebServlet(name = "AcceptChallengeServlet", urlPatterns = "/AcceptChallenge")
-public class AcceptChallengeServlet extends HttpServlet {
+@WebServlet(name = "AcceptChallengeServlet", urlPatterns = "/CancelChallenge")
+public class CancelChallengeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
