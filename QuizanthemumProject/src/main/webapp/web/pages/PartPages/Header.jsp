@@ -21,14 +21,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>
-<script src="/web/js/profileStuff.js"/>
 <%
-    request.setCharacterEncoding("UTF-8");
     response.setHeader("Content-Type", "text/xml; charset=UTF-8");
     User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
 %>
-<jsp:include page="/web/pages/PartPages/FriendsListPopup.jsp"/>
+
 <jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
+<jsp:include page="/web/pages/PartPages/FriendsListPopUp.jsp"/>
+<jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
+
 <header class= "header-section">
     <div class="container header">
         <div class="header-left" style="cursor: pointer;" onclick="openMainPage()">
@@ -47,6 +48,7 @@
         <% } %>
     </div>
 </header>
+
 <% if(user != null) { %>
 <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -54,7 +56,7 @@
         <i class="material-icons my-mat-icon">account_box</i>
         პროფილი
     </a>
-    <a  onclick="popupfriendList()" style="cursor:pointer;">
+    <a  onclick="popUpFriendsList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">people_outline</i>
         მეგობრები
     </a>
@@ -79,6 +81,7 @@
 
 
 <script>
+
     function openMyProfilePage(){
         document.getElementById('open-my-profile-page-form').submit();
     }
@@ -90,7 +93,7 @@
     }
     function openSearch() {
         window.localStorage.setItem('item', document.getElementById('search-input').value);
-        window.location.href = "SearchPage.jsp";
+        window.location.href = "/SearchPage.jsp";
     }
     function openSidebar() {
         document.getElementById("mySidebar").style.width = "300px";
@@ -103,4 +106,5 @@
         document.getElementById("mySidebar").style.marginLeft = "0";
         document.getElementById("mySidebar").style.border="";
     }
+
 </script>

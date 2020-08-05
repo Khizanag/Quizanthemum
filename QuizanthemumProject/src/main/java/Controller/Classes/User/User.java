@@ -172,6 +172,9 @@ public class User {
         this.id = ID;
     }
 
+    public void setChallenges(List<Challenge> challenges){
+        this.challenges = challenges;
+    }
 
     public List<Integer> getFriendIDs() {
         if(friendIDs == null){

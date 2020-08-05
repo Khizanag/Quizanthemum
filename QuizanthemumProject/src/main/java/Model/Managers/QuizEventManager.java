@@ -34,8 +34,8 @@ public class QuizEventManager implements QuestionEventTableConfig {
 
     public QuizEvent getQuizEvent(int id) {
         String query = "SELECT * " +
-                "FROM " + QUIZ_EVENTS_TABLE_NAME +
-                "WHERE " + QUIZ_EVENT_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+                " FROM " + QUIZ_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_EVENT_TABLE_COLUMN_1_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             int quizId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID);

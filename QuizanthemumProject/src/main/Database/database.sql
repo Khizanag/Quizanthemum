@@ -74,7 +74,7 @@ create table quizzes(
                         constraint foreign key (CATEGORY_ID)
                             references categories(ID) on update cascade on delete restrict ,
                         DESCRIPTION text,
-                        ICON_URL varchar(256),
+                        ICON_URL varchar(512),
                         MUST_SHUFFLE_QUESTIONS boolean not null ,
                         COMMENT varchar(256),
                         AUTHOR_ID smallint,
@@ -212,6 +212,9 @@ create table friendships(
 
 create table challenges(
                            id smallint primary key auto_increment,
+                           quiz_id smallint not null,
+                            constraint  foreign key (quiz_id)
+                                references quizzes(id) on update cascade on delete restrict,
                            challenger_user_id smallint not null,
                            constraint foreign key (challenger_user_id)
                                references users(id) on update cascade on delete restrict,
@@ -280,3 +283,5 @@ SELECT * FROM quiz_events;
 SELECT * FROM quizzes;
 SELECT * FROM users;
 SELECT * FROM quiz_rating_events;
+
+insert into challenges values(null, 1, 3, 4, null, null, false, -1, SYSDATE(), SYSDATE());

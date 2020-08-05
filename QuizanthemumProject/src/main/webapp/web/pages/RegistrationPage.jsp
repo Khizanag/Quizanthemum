@@ -74,7 +74,7 @@
             <p>უკვე ხართ ამ გვერდის მომხმარებელი? <a href="LogInPage.jsp">შედით თქვენს პროფილზე</a>.</p>
         </div>
     </form>
-    <jsp:include page="/web/pages/PartPages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 
 <script >
@@ -90,11 +90,6 @@
             alert( "\n" + "პაროლი და განმეორებით შეყვანილი პაროლი არ ემთხვევა" + "\n" +
                    "\n" + "გთხოვთ გადაამოწმოთ შეყვანილი მონაცემები");
             return;
-        }
-
-        if (f_name && l_name && username && email && password !== '') {
-            // window.location.href = "";
-            //TODO
         }
     }
 </script>

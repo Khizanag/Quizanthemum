@@ -2,7 +2,9 @@
 <%@ page import="Model.Managers.UsersManager" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
-<%@ page import="Controller.Classes.User.User" %><%--
+<%@ page import="Controller.Classes.User.User" %>
+<%@ page import="static Configs.Config.*" %>
+<%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
   Date: 7/29/20
@@ -14,12 +16,12 @@
 <%
         ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         UsersManager usersManager = (UsersManager)mm.getManager(USERS_MANAGER_STR);
-        User user = (User) request.getServletContext().getAttribute("logedInUser");
+        User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
 %>
 <div class="friends-list-popup" id="friends-list-popup-id">
     <div class="overlay"></div>
     <div class="content">
-        <div class="close-btn" onclick="popupfriendList()">&times;</div>
+        <div class="close-btn" onclick="popUpFriendsList()">&times;</div>
         <h1 style="color:orange">მეგობრები</h1>
         <br>
         <div class = "friend-list-row">
@@ -45,3 +47,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    function popUpFriendsList(){
+        console.log('popUpFriendsList in FriendsListPopUp.jsp');
+        document.getElementById("friends-list-popup-id").classList.toggle("active");
+    }
+</script>
