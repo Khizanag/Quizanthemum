@@ -65,7 +65,7 @@
                         </form>
                     </div>
                 </div>
-                <a class="nav-item" target="_self" href="/web/pages/TopUsersPage.jsp">ტოპ მომხმარებლები</a>
+                <a class="nav-item" target="_self" href="/DisplayTopUsers">ტოპ მომხმარებლები</a>
                 <a class="nav-item" target="_self" href="/Blog">ბლოგი</a>
                 <a class="nav-item" target="_self" href="/Contact">კონტაქტი</a>
             </ul>

@@ -261,10 +261,10 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
                 + " FROM " + USERS_TABLE_NAME + " as us";
         boolean whereClauseExists = false;
         if (locationType == LOCATION_TYPE_CITY) {
-            query += (" WHERE us.city = " + location);
+            query += (" WHERE us.city = '" + location +"'");
             whereClauseExists = true;
         } else if (locationType == LOCATION_TYPE_COUNTRY) {
-            query += (" WHERE us.country = " + location);
+            query += (" WHERE us.country = '" + location +"'");
             whereClauseExists = true;
         }
         if (isFriend) {
@@ -277,7 +277,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
                         + " IN (SELECT " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID
                         + " FROM " + FRIENDSHIPS_TABLE_NAME + " WHERE "
                         + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " = " + userID
-                        + "UNION"
+                        + " UNION "
                         + "SELECT " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID
                         + " FROM " + FRIENDSHIPS_TABLE_NAME + " WHERE "
                         + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + userID + ")"); // are friends
@@ -359,8 +359,9 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     private List<String> getLocationsByColumn(String column) {
         String query = "SELECT DISTINCT( " + column
-                + " ) FROM " + QUIZ_EVENTS_TABLE_NAME + ";\n";
+                + " ) FROM " + USERS_TABLE_NAME + ";\n";
         List<String> locations = new ArrayList<>();
+        System.out.println("query: " + query);
         try {
             Statement qStatement = connection.createStatement();
             ResultSet set = qStatement.executeQuery(query);

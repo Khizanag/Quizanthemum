@@ -1,8 +1,5 @@
-<%@ page import="Controller.Classes.Quiz.Quiz" %>
-<%@ page import="static Configs.Config.QUIZ_CREATING_NOW" %>
 <%@ page import="Model.Managers.ManagersManager" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
-<%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="static Configs.Config.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Controller.Classes.User.User" %>
@@ -47,14 +44,10 @@
         border: none;
         border-radius: 5px;
         margin-left: 10px;
-        position: absolute;
-        bottom: 0;
-        right: 100px;
     }
     b{
         color:#b3bdbe;
         font-family: "Comic Sans MS", cursive, sans-serif;
-        margin-bottom: 5px;
     }
     .input-items {
         margin-top: 10px;
@@ -62,19 +55,23 @@
         display: flex;
         flex-direction: row;
         position: relative;
+        vertical-align: middle;
+        border: 2px double #ff751a;;
     }
     .search-item {
         width: 20%;
         display: flex;
         flex-direction: column;
-        margin-left: 10px;
+        margin-left: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
     .drop-down {
         width: 100%;
         background: #f1f1f1;
         border-radius: 5px;
         padding: 15px;
-        margin: 5px 0 22px 0;
+        margin: 5px 0 0 0;
     }
 </style>
 
@@ -82,13 +79,13 @@
 <jsp:include page="/web/pages/PartPages/Header.jsp"/>
 <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 <%
-    User logedInUser = (User) request.getServletContext().getAttribute("logedInUser");
+    User loggedInUser = (User) request.getServletContext().getAttribute("logedInUser");
     ServletContext context = request.getServletContext();
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
-    List<User> topUsers = usersManager.getTopUsersByFilter(DEFAULT_NUM_TOP_USERS_TO_DISPLAY, LOCATION_TYPE_NONE, "", false, -1, false);
-//    List<String> cities = usersManager.getCities();
-//    List<String> countries = usersManager.getCities();
+    List<User> topUsers = (List<User>) request.getAttribute("users");
+    List<String> cities = usersManager.getCities();
+    List<String> countries = usersManager.getCountries();
 %>
 
 
@@ -97,34 +94,61 @@
         <h3 class="section-header"> საძიებო ფილტრი: </h3>
         <form style="margin-left: 20px" action="/DisplayTopUsers" method="get">
             <div class="input-items" id="input-items">
+                <%if(loggedInUser != null) {%>
+                <div class="search-item"
+                    style="flex-direction: row;
+                    justify-content: center;
+                    align-items: center">
+                    <label for="country" style="margin: 20px"><b> მოძებნე მეგობრებში </b></label>
+                    <input type="checkbox" name="is_friend">
+                </div>
+
+                <%}%>
+
+                <div class="search-item"
+                    style="flex-direction: row;
+                    justify-content: center;
+                    align-items: center">
+                    <label for="country" style="margin: 20px"><b> მოძებნე ავტორებში </b></label>
+                    <input type="checkbox" name="is_author">
+                </div>
+
                 <div class="search-item">
                     <label for="locationType"><b>აირჩიეთ ლოკაციის ტიპი</b></label>
                     <select onchange="getLocType(this)" class="drop-down"
-                            name="questions-type" id="locationType">
+                            id="locationType" name="location_type">
                         <option value="0">-</option>
                         <option value="1">ქალაქი</option>
                         <option value="2">ქვეყანა</option>
                     </select>
                 </div>
-                <div class="search-item" id="city"style="display: none">
+                <div class="search-item"id="city" style="display: none">
                     <label for="city"><b> ქალაქები </b></label>
-                    <select class="drop-down" name="questions-type">
-                        <option value="0">-</option>
-<%--                        <% for(int i = 1; i <= cities.size(); i++) {%>--%>
-<%--                            <option value="<%=i%>"><%=cities.get(i-1)%></option>--%>
-<%--                        <%}%>--%>
+                    <select class="drop-down" name="city">
+                        <option value="empty">-</option>
+                        <% for(int i = 1; i <= cities.size(); i++) {%>
+                            <option value="<%=cities.get(i-1)%>"><%=cities.get(i-1)%></option>
+                        <%}%>
                     </select>
                 </div>
-                <div class="search-item" id="country"style="display: none">
+                <div class="search-item"id="country"style="display: none">
                     <label for="country"><b> ქვეყნები </b></label>
-                    <select class="drop-down" name="questions-type">
-                        <option value="0">-</option>
-<%--                        <% for(int i = 1; i <= countries.size(); i++) {%>--%>
-<%--                            <option value="<%=i%>"><%=countries.get(i-1)%></option>--%>
-<%--                        <%}%>--%>
+                    <select class="drop-down" name="country">
+                        <option value="empty">-</option>
+                        <% for(int i = 1; i <= countries.size(); i++) {%>
+                            <option value="<%=countries.get(i-1)%>"><%=countries.get(i-1)%></option>
+                        <%}%>
                     </select>
                 </div>
-                <button type="submit" class="search-bth"><i class="fa fa-search"></i></button>
+                <input type="hidden" value="<%=loggedInUser.getID()%>" name="user_id">
+                <div class="search-item"
+                        style=" justify-content: center;
+                        position: absolute;
+                        right: 0;
+                        top: 19px;
+                        align-items: center">
+                    <button type="submit" class="search-bth"><i class="fa fa-search"></i></button>
+                </div>
             </div>
         </form>
     </div>
