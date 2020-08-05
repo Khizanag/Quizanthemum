@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static Configs.Config.CHALLENGE_MANAGER_STR;
-import static Configs.Config.MANAGERS_MANAGER_STR;
+import static Configs.Config.*;
 
 @WebServlet(name = "RejectChallengeServlet", urlPatterns = "/RejectChallenge")
 public class RejectChallengeServlet extends HttpServlet {
@@ -26,10 +25,10 @@ public class RejectChallengeServlet extends HttpServlet {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         int challengeID = Integer.parseInt(request.getParameter("id"));
-        Challenge challenge = challengesManager.getChallenge(challengeID);
-        request.setAttribute("is-challenge-accept", true);
+        challengesManager.deleteChallenge(challengeID);
+        request.getSession().setAttribute(DISPLAY_CHALLENGES, true);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Quiz?id=" + challenge.getQuizID());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/");
         dispatcher.forward(request, response);
     }
 }
