@@ -15,7 +15,7 @@ import java.io.IOException;
 import static Configs.Config.CHALLENGE_MANAGER_STR;
 import static Configs.Config.MANAGERS_MANAGER_STR;
 
-@WebServlet(name = "AcceptChallengeServlet", urlPatterns = "/RejectChallenge")
+@WebServlet(name = "RejectChallengeServlet", urlPatterns = "/RejectChallenge")
 public class RejectChallengeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class RejectChallengeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
-        int challengeID = Integer.parseInt(request.getParameter("challenge-id"));
+        int challengeID = Integer.parseInt(request.getParameter("id"));
         Challenge challenge = challengesManager.getChallenge(challengeID);
         request.setAttribute("is-challenge-accept", true);
 

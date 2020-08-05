@@ -76,7 +76,9 @@ public class ChallengesManager implements ChallengesTableConfig {
                 challenges.add(buildChallenge(resultSet));
             }
             return challenges;
-        } catch (SQLException throwables){}
+        } catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
         return null;
     }
 
@@ -103,4 +105,15 @@ public class ChallengesManager implements ChallengesTableConfig {
 //                + "     " + CHALLE
     }
 
+    public void deleteChallenge(int challengeID) {
+        String query = "DELETE FROM " + CHALLENGES_TABLE_NAME
+                + " WHERE " + CHALLENGES_TABLE_COLUMN_1_ID + " = " + challengeID;
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            statement.close();
+        } catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+    }
 }

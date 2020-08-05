@@ -39,6 +39,8 @@ public interface Config {
 
 
     String LOGGED_IN_USER = "logedInUser";
-
+    String DISPLAY_CHALLENGES = "display-challenges-list-pop-up-if-user-is-logged-in";
+    String DISPLAY_FRIENDS = "display-friends-popup-list-if-user-is-logged-in";
+    String DISPLAY_FRIEND_REQUESTS = "display-friend-requests-sent-by-other-to-me-and-by-me-to-others";
 
 }

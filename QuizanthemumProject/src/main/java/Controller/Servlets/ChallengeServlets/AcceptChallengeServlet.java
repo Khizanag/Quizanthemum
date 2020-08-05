@@ -25,7 +25,7 @@ public class AcceptChallengeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
-        int challengeID = Integer.parseInt(request.getParameter("challenge-id"));
+        int challengeID = Integer.parseInt(request.getParameter("id"));
         Challenge challenge = challengesManager.getChallenge(challengeID);
         request.setAttribute("is-challenge-accept", true);
 

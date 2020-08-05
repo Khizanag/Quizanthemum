@@ -1,5 +1,8 @@
 <%@ page import="Controller.Classes.User.User" %>
 <%@ page import="static Configs.Config.LOGGED_IN_USER" %>
+<%@ page import="static Configs.Config.DISPLAY_CHALLENGES" %>
+<%@ page import="static Configs.Config.*" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
@@ -7,6 +10,7 @@
   Time: 17:37
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <link rel="icon" type="image/png" href="/web/images/common/icon.png"/>
@@ -71,6 +75,25 @@
         </a>
         <input type="hidden" name="currentUrl" id="currentUrl"/>
     </form>
+
+    <% Boolean displayFriends = (Boolean) request.getSession().getAttribute(DISPLAY_FRIENDS);
+        if((displayFriends != null && displayFriends)){ %>
+            <script>popUpFriendsList();</script>
+            <% request.getSession().removeAttribute(DISPLAY_FRIENDS);
+    }%>
+
+    <% Boolean displayFriendRequests = (Boolean) request.getSession().getAttribute(DISPLAY_FRIEND_REQUESTS);
+        if((displayFriendRequests != null && displayFriendRequests)){ %>
+<%--            <script> popUpFriendRequestsList();</script>--%>
+            <% request.getSession().removeAttribute(DISPLAY_FRIEND_REQUESTS);
+    }%>
+
+    <% Boolean displayChallenges = (Boolean) request.getSession().getAttribute(DISPLAY_CHALLENGES);
+        if((displayChallenges != null && displayChallenges)){ %>
+        <script> popUpChallengesList();</script>
+        <% request.getSession().removeAttribute(DISPLAY_CHALLENGES);
+    }%>
+
 </div>
 
     <%------------------------------ FORMS ------------------------------%>

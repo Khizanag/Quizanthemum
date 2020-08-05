@@ -12,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static Configs.Config.CHALLENGE_MANAGER_STR;
-import static Configs.Config.MANAGERS_MANAGER_STR;
+import static Configs.Config.*;
 
-@WebServlet(name = "AcceptChallengeServlet", urlPatterns = "/CancelChallenge")
+@WebServlet(name = "CancelChallengeServlet", urlPatterns = "/CancelChallenge")
 public class CancelChallengeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,11 +24,13 @@ public class CancelChallengeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
-        int challengeID = Integer.parseInt(request.getParameter("challenge-id"));
-        Challenge challenge = challengesManager.getChallenge(challengeID);
-        request.setAttribute("is-challenge-accept", true);
+        int challengeID = Integer.parseInt(request.getParameter("id"));
+//        Challenge challenge = challengesManager.getChallenge(challengeID);
+        challengesManager.deleteChallenge(challengeID);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Quiz?id=" + challenge.getQuizID());
+        request.getSession().setAttribute(DISPLAY_CHALLENGES, true);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/");
         dispatcher.forward(request, response);
     }
 }
