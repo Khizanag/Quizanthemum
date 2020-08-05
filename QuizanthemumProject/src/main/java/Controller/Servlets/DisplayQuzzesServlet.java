@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static Configs.Config.*;
-import static Configs.Config.DEFAULT_NUM_QUEZZES_TO_DISPLAY;
+import static Configs.Config.DEFAULT_NUM_QUIZZES_TO_DISPLAY;
 
 @WebServlet(name = "DisplayQuzzesServlet", urlPatterns = "/DisplayQuizzes")
 public class DisplayQuzzesServlet extends HttpServlet {
@@ -28,7 +28,7 @@ public class DisplayQuzzesServlet extends HttpServlet {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         QuizManager quizzesManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
 
-        List<Quiz> quizzes = quizzesManager.getQuizzes(DEFAULT_NUM_QUEZZES_TO_DISPLAY);
+        List<Quiz> quizzes = quizzesManager.getQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
         request.setAttribute("title", "ქვიზები");
 

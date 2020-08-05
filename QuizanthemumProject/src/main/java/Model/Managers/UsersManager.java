@@ -4,6 +4,7 @@ import Configs.*;
 import Controller.Classes.OtherClasses.Category;
 import Controller.Classes.Quiz.Question.Question;
 import Controller.Classes.Quiz.Quiz;
+import Controller.Classes.Quiz.QuizEvent;
 import Controller.Classes.User.User;
 import Model.DatabaseConnector;
 
@@ -297,6 +298,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         }
         query += " LIMIT " + numUsers + ";\n";
 
+        System.out.println("get top users by filter"); // TODO remove
         System.out.println(query); // TODO remove
         List<User> users = new ArrayList<>();
         try {
@@ -331,16 +333,17 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return numQuizzesPlayed;
     }
 
-    public int getUserTotalPoints(int userID) {
-        String query = "SELECT SUM(" + QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE + ") AS total_points FROM "
+    public double getUserTotalPoints(int userID) {
+        String query = "SELECT SUM(" + QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE + ") AS user_total_points FROM "
                     + QUIZ_EVENTS_TABLE_NAME + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID;
-        int totalPoints = 0;
+        double totalPoints = 0;
         try {
             Statement qStatement = connection.createStatement();
             ResultSet set = qStatement.executeQuery(query);
             if(!set.next()) {
                 return 0;
             }
+            totalPoints = set.getDouble("user_total_points");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

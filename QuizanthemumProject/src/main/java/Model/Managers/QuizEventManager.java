@@ -13,6 +13,7 @@ import java.util.List;
 
 import static Configs.Config.*;
 import static Configs.QuizEventTableConfig.*;
+import static Configs.QuizRatingEventsConfig.QUIZ_RATING_EVENTS_TABLE_COLUMN_2_USER_ID;
 
 public class QuizEventManager implements QuestionEventTableConfig {
 
@@ -35,9 +36,16 @@ public class QuizEventManager implements QuestionEventTableConfig {
     public QuizEvent getQuizEvent(int id) {
         String query = "SELECT * " +
                 "FROM " + QUIZ_EVENTS_TABLE_NAME +
-                "WHERE " + QUIZ_EVENT_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+                " WHERE " + QUIZ_EVENT_TABLE_COLUMN_1_ID + " = " + id + ";\n";
+
+        System.out.println("get quiz event");
+        System.out.println(query); // TODO remove
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement getStatement = connection.createStatement();
+            ResultSet set = getStatement.executeQuery(query);
+            if(!set.next()) {
+                return null;
+            }
             int quizId = set.getInt(QUIZ_EVENT_TABLE_COLUMN_2_QUIZ_ID);
             QuizManager quizManager = (QuizManager) manager.getManager(QUIZ_MANAGER_STR);
             Quiz quiz = quizManager.getQuiz(quizId);
@@ -48,6 +56,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
             java.util.Date finishDate = set.getDate(QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE);
             List<QuestionEvent> questionEvents = getQuestionEvents(id);
             double userTotalScore = set.getDouble(QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE);
+            getStatement.close();
             return new QuizEvent(id, user, quiz, startDate, finishDate, questionEvents, userTotalScore);
         } catch (SQLException throwable) {
             throwable.printStackTrace();
@@ -58,8 +67,8 @@ public class QuizEventManager implements QuestionEventTableConfig {
     private List<QuestionEvent> getQuestionEvents(int id) {
         List<QuestionEvent> questionEvents = new ArrayList<>();
         String query = "SELECT " + QUESTION_EVENT_TABLE_COLUMN_1_ID +
-                "FROM " + QUESTION_EVENTS_TABLE_NAME +
-                "WHERE " + QUESTION_EVENT_TABLE_COLUMN_2_QUIZ_EVENT_ID + " = " + id + ";\n";
+                " FROM " + QUESTION_EVENTS_TABLE_NAME +
+                " WHERE " + QUESTION_EVENT_TABLE_COLUMN_2_QUIZ_EVENT_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
@@ -92,6 +101,30 @@ public class QuizEventManager implements QuestionEventTableConfig {
         }
         System.out.println("inserted quiz event.");
         return DEFAULT_ID;
+    }
+
+
+    public List<QuizEvent> getQuizzesPlayedBy(int userID, int numRows) {
+        String query = "SELECT " + QUIZ_EVENT_TABLE_COLUMN_1_ID
+                + " FROM " + QUIZ_EVENTS_TABLE_NAME
+                + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID
+                + " ORDER BY " + QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE + " LIMIT " + numRows + ";\n";
+
+        List<QuizEvent> playedQuizzes = new ArrayList<>();
+
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                int nextQuizEventID = set.getInt(QUIZ_EVENT_TABLE_COLUMN_1_ID);
+                playedQuizzes.add(getQuizEvent(nextQuizEventID));
+            }
+            qStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return playedQuizzes;
+
     }
 
 }

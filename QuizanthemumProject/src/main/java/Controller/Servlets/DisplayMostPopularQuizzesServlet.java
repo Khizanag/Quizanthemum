@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static Configs.Config.*;
-import static Configs.Config.DEFAULT_NUM_QUEZZES_TO_DISPLAY;
+import static Configs.Config.DEFAULT_NUM_QUIZZES_TO_DISPLAY;
 
 @WebServlet(name = "DisplayMostPopularQuizzesServlet", urlPatterns = "/DisplayMostPopularQuizzes")
 public class DisplayMostPopularQuizzesServlet extends HttpServlet {
@@ -28,7 +28,7 @@ public class DisplayMostPopularQuizzesServlet extends HttpServlet {
         CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
         QuizManager quizzesManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
 
-        List<Quiz> quizzes = quizzesManager.getMostPopularQuizzes(DEFAULT_NUM_QUEZZES_TO_DISPLAY);
+        List<Quiz> quizzes = quizzesManager.getMostPopularQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
         request.setAttribute("title", "ყველაზე პოპულარული ქვიზები");
 
