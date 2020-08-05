@@ -40,6 +40,7 @@ public class QuizEventFinishedServlet extends HttpServlet {
 
         quizEvent.resetQuestionEventIterator();
         int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
+        quizEvent.setID(quizEventId);
         System.out.println("quiz event inserted");
         while (quizEvent.hasNextQuestionEvent()) {
             QuestionEvent currQuestionEvent = quizEvent.getNextFilledQuestionEvent();

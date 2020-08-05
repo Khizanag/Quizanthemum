@@ -16,7 +16,7 @@ public class QuizEvent {
 
     /* private variables */
 
-    private final int id;
+    private int id;
     private final Quiz quiz;                                    // quiz that user is taking
     private final User user;                                    // user which is taking quiz
     private Date startDate;                                     // quiz starting date
@@ -63,6 +63,9 @@ public class QuizEvent {
     public boolean isPracticeMode() { return isPracticeMode; }
 
     public Challenge getChallenge(){ return this.challenge; }
+
+
+    public void setID(int ID){ this.id = ID; }
 
 
     /* public methods */

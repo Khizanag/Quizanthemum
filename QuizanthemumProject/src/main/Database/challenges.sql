@@ -19,8 +19,8 @@ create table challenges(
                            accepting_date date
 );
 
-SELECT * FROM challenges;
+INSERT INTO challenges VALUES(null, 1, 3, 1, null, null, false, -1, SYSDATE(), SYSDATE());
 
 DELETE FROM challenges WHERE true;
 
-INSERT INTO challenges VALUES(null, 1, 3, 1, null, null, false, -1, SYSDATE(), SYSDATE());
+SELECT * FROM challenges;
