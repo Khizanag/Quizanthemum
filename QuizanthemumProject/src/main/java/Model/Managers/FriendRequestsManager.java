@@ -84,7 +84,7 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
                 + ", " + request.getReceivingDate()
                 + ", " + request.isReceived()
                 + ", " + request.isAccepted()
-                ;
+                + ");";
         try{
             Statement statement = connection.createStatement();
             statement.execute(query);

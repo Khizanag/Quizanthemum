@@ -57,7 +57,8 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
                 + " VALUES(null"
                 + ", " + friendship.getFirstFriendID()
                 + ", " + friendship.getSecondFriendID()
-                + ", " + friendship.getMakeFriendDate();
+                + ", " + friendship.getMakeFriendDate()
+                + ");";
         try{
             Statement statement = connection.createStatement();
             statement.execute(query);

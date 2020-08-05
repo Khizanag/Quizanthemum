@@ -1,5 +1,7 @@
 package Controller.Classes.OtherClasses;
 
+import Model.Managers.CountriesManager;
+
 import static Configs.Config.DEFAULT_ID;
 
 public class Country {
@@ -12,6 +14,7 @@ public class Country {
     public Country(int ID, String name, CountriesManager manager){
         this.ID = ID;
         this.name = name;
+        this.manager = manager;
     }
 
     public Country(String name, CountriesManager manager){
