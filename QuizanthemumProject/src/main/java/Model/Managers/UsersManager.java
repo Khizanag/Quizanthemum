@@ -239,7 +239,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     public List<User> getUsers() {
-        String query = "SELECT * FROM " + USERS_TABLE_NAME;
+        String query = "SELECT * FROM " + USERS_TABLE_NAME + ";\n";
         List<User> users = new ArrayList<>();
         try {
             Statement qStatement = connection.createStatement();
@@ -318,7 +318,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     public int getQuizzesPlayedCount(int userID) {
         String query = "SELECT COUNT(1) AS num_quizzes FROM " + QUIZ_EVENTS_TABLE_NAME
-                    + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID;
+                    + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID + ";\n";
         int numQuizzesPlayed = 0;
         try {
             Statement qStatement = connection.createStatement();
@@ -343,11 +343,34 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             if(!set.next()) {
                 return 0;
             }
-            totalPoints = set.getInt("total_points");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return totalPoints;
+    }
+
+    public List<String> getCountries() {
+        return getLocationsByColumn(USERS_TABLE_COLUMN_8_COUNTRY);
+    }
+
+    public List<String> getCities() {
+        return getLocationsByColumn(USERS_TABLE_COLUMN_7_CITY);
+    }
+
+    private List<String> getLocationsByColumn(String column) {
+        String query = "SELECT DISTINCT( " + column
+                + " ) FROM " + QUIZ_EVENTS_TABLE_NAME + ";\n";
+        List<String> locations = new ArrayList<>();
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                locations.add(set.getString(column));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return locations;
     }
 
 }

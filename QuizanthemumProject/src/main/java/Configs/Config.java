@@ -26,6 +26,7 @@ public interface Config {
     int DEFAULT_NUM_QUEZZES_TO_DISPLAY = 10;
     int DEFAULT_NUM_TOP_USERS_TO_DISPLAY = 10;
     int PASSWORD_SALT_LENGTH = 15;
+    int LOCATION_TYPE_NONE = 0;
     int LOCATION_TYPE_CITY = 1;
     int LOCATION_TYPE_COUNTRY = 2;
 
