@@ -350,7 +350,7 @@
 
 .top-quiz-item {
   margin: 40px;
-  width: 550px;
+  width: 650px;
   height: 150px;
   display: flex;
   justify-content: space-around;
@@ -388,7 +388,7 @@
   margin-top: 5%;
 }
 .quiz-score{
-  width: 100px;
+  width: 160px;
   align-items: center;
   font-family: "Comic Sans MS", cursive, sans-serif;
   font-size: large;

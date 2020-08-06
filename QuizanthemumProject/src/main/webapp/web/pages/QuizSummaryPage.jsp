@@ -123,7 +123,7 @@
                             <p><%=currQuest.getTextStatement()%></p>
                         </div>
                         <p style="padding-top: 0"> ავტორის კომენტარი: <%=currQuest.getComment()%></p>
-                        <p style="padding-top: 0"> შეკითხვის ჭყარო: <%=currQuest.getSource()%></p>
+                        <p style="padding-top: 0"> შეკითხვის წყარო: <%=currQuest.getSource()%></p>
                         <div class="answers">
                   <span>
                     <span>სწორი პასუხები:</span>

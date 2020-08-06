@@ -335,6 +335,23 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return numQuizzesPlayed;
     }
 
+    public int getQuizzesMadeCount(int userID) {
+        String query = "SELECT COUNT(1) AS num_quizzes_made FROM " + QUIZ_TABLE_NAME
+                + " WHERE " + QUIZ_TABLE_COLUMN_8_AUTHOR_ID + " = " + userID + ";\n";
+        int numQuizzesMade = 0;
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            if(!set.next()) {
+                return 0;
+            }
+            numQuizzesMade = set.getInt("num_quizzes_made");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return numQuizzesMade;
+    }
+
     public double getUserTotalPoints(int userID) {
         String query = "SELECT SUM(" + QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE + ") AS user_total_points FROM "
                     + QUIZ_EVENTS_TABLE_NAME + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID;
