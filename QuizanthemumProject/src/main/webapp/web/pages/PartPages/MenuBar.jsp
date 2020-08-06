@@ -23,9 +23,9 @@
 <script>
     function logout(){
         const logoutForm = document.getElementById("logoutForm");
-        logoutForm.action="../../LogOut"
+        logoutForm.action = "LogOut"
         const currUrl = document.getElementById("currentUrl");
-        currUrl.value=window.location.href;
+        currUrl.value = window.location.href;
         logoutForm.submit();
     }
 </script>
