@@ -1,15 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Controller.Classes.User.User" %>
-<%@ page import="Model.Managers.ManagersManager" %>
-<%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="Controller.Classes.Quiz.Quiz" %>
 <%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static Configs.Config.*" %>
-<%@ page import="Model.Managers.UsersManager" %>
-<%@ page import="Model.Managers.QuizEventManager" %>
 <%@ page import="Controller.Classes.Quiz.QuizEvent" %>
+<%@ page import="Model.Managers.*" %>
 <head>
     <meta charset="UTF-8">
     <title> Users Profile </title>
@@ -129,8 +126,11 @@
     </div>
     <%
         QuizEventManager quizEventManager = (QuizEventManager) managersManager.getManager(QUIZ_EVENT_MANAGER_STR);
+        FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         List<QuizEvent> topQuizEvents = quizEventManager.getQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
+        User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+        if(loggedUser != null && friendshipsManager.areFriends(user.getID(), loggedUser));
     %>
     <div class = "top-quizzes-banner">
         <div class="players-top-quizzes">
@@ -178,7 +178,6 @@
         document.getElementById("to_display_start_quiz_elem").value = id;
         form.submit();
     }
-
 
     function openSearch() {
         window.location.href = "SearchPage.jsp";

@@ -96,4 +96,29 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
         }
         return null;
     }
+
+    public boolean areFriends(int id1, int id2){
+        String query = "SELECT * "
+                + " FROM " + FRIENDSHIPS_TABLE_NAME
+                + " WHERE (" + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + id1
+                + "                 AND " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " = " + id2
+                + "                 ) "
+                + "         OR (" + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + id2
+                + "                 AND " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " = " + id1
+                + "                 )"
+                + " )";
+        boolean areFriends = false;
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()){
+               areFriends = true;
+            }
+            resultSet.close();
+            statement.close();
+        } catch(SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return areFriends;
+    }
 }
