@@ -9,6 +9,7 @@ public interface Config {
     String CONNECTION_STR = "connection for database";
     String COUNTRIES_MANAGER_STR = "countries-manager";
     String CHALLENGE_MANAGER_STR = "challenge manager";
+    String FRIEND_REQUESTS_MANAGER_STR = "friend-requests-manager";
     String FRIENDSHIPS_MANAGER_STR = "friendships_manager";
     String MANAGERS_MANAGER_STR = "managers_manager";
     String QUESTION_EVENT_MANAGER_STR = "question_event_manager";

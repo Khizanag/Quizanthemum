@@ -40,6 +40,8 @@ public class ManagersManager {
         context.setAttribute(CHALLENGE_MANAGER_STR, challengesManager);
         managers.put(CHALLENGE_MANAGER_STR, challengesManager);
 
+        managers.put(FRIEND_REQUESTS_MANAGER_STR, new FriendRequestsManager(this));
+
         FriendshipsManager friendshipsManager = new FriendshipsManager(this);
         context.setAttribute(FRIENDSHIPS_MANAGER_STR, friendshipsManager);
         managers.put(FRIENDSHIPS_MANAGER_STR, friendshipsManager);
