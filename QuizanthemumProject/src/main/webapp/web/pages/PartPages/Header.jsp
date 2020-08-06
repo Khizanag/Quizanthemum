@@ -33,6 +33,7 @@
 <jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
 <jsp:include page="/web/pages/PartPages/FriendsListPopUp.jsp"/>
 <jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
+<jsp:include page="/web/pages/PartPages/FriendRequestsListPopUp.jsp"/>
 
 <header class= "header-section">
     <div class="container header">
@@ -64,8 +65,12 @@
         <i class="material-icons my-mat-icon">people_outline</i>
         მეგობრები
     </a>
+    <a  onclick="popUpFriendRequestsList()" style="cursor:pointer;">
+        <i class="material-icons my-mat-icon">person_add</i>
+        'ვიმეგობროთ'ები
+    </a>
     <a  onclick="popUpChallengesList()" style="cursor:pointer;">
-        <i class="material-icons my-mat-icon">vertical_align_center</i>
+        <i class="material-icons my-mat-icon">sports_mma</i>
         გამოწვევები
     </a>
     <form id="logoutForm">

@@ -22,7 +22,7 @@
 <%--<link rel="stylesheet" href="/web/styles/homePage.css">--%>
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 <%--<link rel="stylesheet" href="/web/styles/profilePage.css">--%>
-<%--<link rel="stylesheet" href="/web/styles/quizCreation.css">--%>
+<%--<linkა rel="stylesheet" href="/web/styles/quizCreation.css">--%>
 <link rel="stylesheet" href="/web/styles/scroll.css">
 
 <jsp:include page="/web/pages/LogedInHandler.jsp"/>
@@ -39,13 +39,13 @@
         List<Challenge> waitingChallengerChallenges = user.getWaitingChallengerChallenges();
 %>
 
-<div class="friends-list-popup" id="challenges-list-popup-id">
+<div class="friends-list-popup" id="friend-requests-list-popup-id">
     <div class="overlay"></div>
     <div class="content">
-        <div class="close-btn" onclick="popUpChallengesList()">&times;</div>
-        <h1 style="color:orange">გამოწვევები</h1>
+        <div class="close-btn" onclick="popUpFriendRequestsList()">&times;</div>
+        <h1 style="color:orange">'ვიმეგობროთ'ები</h1>
         <br>
-        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">მეტოქის მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
+        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">შემოთავაზებული 'ვიმეგობროთ'ები:</h2>
         <br>
         <hr>
         <br>
@@ -70,7 +70,7 @@
         <br>
         <br>
         <br>
-        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">ჩემს მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
+        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">ჩემს მიერ შეთავაზებული 'ვიმეგობროთ'ები:</h2>
         <br>
         <hr>
         <br>
@@ -100,64 +100,15 @@
 
 <%-------------------------------- FORMS --------------------------------%>
 
-<form id="display-profile-form" action="Profile" method="get">
-    <input type="hidden" id="user-id-holder" name="id">
-</form>
-
-<form id="display-quiz-form" action="Quiz" method="get">
-    <input type="hidden"  id="quiz-id-holder" name="id">
-</form>
-
-<form id="accept-challenge-form" action="AcceptChallenge" method="get">
-    <input type="hidden" id="challenge-id-holder-in-accept-form" name="id">
-</form>
-
-<form id="reject-challenge-form" action="RejectChallenge" method="get">
-    <input type="hidden" id="challenge-id-holder-in-reject-form" name="id">
-</form>
-
-<form id="cancel-challenge-form" action="CancelChallenge" method="get">
-    <input type="hidden" id="challenge-id-holder-in-cancel-form" name="id">
-</form>
-
 
 
 <%-------------------------------- JAVASCRIPT --------------------------------%>
 
 <script>
 
-    function popUpChallengesList(){
+    function popUpFriendRequestsList(){
         console.log('popUpChallengesList in popUpChallengesList.jsp');
-        document.getElementById("challenges-list-popup-id").classList.toggle("active");
+        document.getElementById("friend-requests-list-popup-id").classList.toggle("active");
     }
 
-    function displayProfile(userID){
-        const form = document.getElementById('display-profile-form');
-        document.getElementById('user-id-holder').value = userID;
-        form.submit();
-    }
-
-    function displayQuiz(quizID){
-        const form = document.getElementById('display-quiz-form');
-        document.getElementById('quiz-id-holder').value = quizID;
-        form.submit();
-    }
-
-    function acceptChallenge(challengeID){
-        const form = document.getElementById('accept-challenge-form');
-        document.getElementById('challenge-id-holder-in-accept-form').value = challengeID;
-        form.submit();
-    }
-
-    function rejectChallenge(challengeID){
-        const form = document.getElementById('reject-challenge-form');
-        document.getElementById('challenge-id-holder-in-reject-form').value = challengeID;
-        form.submit();
-    }
-
-    function  cancelChallenge(challengeID){
-        const form = document.getElementById('cancel-challenge-form');
-        document.getElementById('challenge-id-holder-in-cancel-form').value = challengeID;
-        form.submit();
-    }
 </script>
