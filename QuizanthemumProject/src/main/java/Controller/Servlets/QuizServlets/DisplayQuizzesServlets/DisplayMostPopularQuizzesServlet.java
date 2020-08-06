@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.QuizServlets.DisplayQuizzesServlets;
 
 import Controller.Classes.Quiz.Quiz;
 import Model.Managers.CategoriesManager;

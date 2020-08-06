@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.QuizServlets.DisplayQuizzesServlets;
 
 import Controller.Classes.Quiz.Quiz;
 import Model.Managers.CategoriesManager;
@@ -15,21 +15,22 @@ import java.io.IOException;
 import java.util.List;
 
 import static Configs.Config.*;
+import static Configs.Config.DEFAULT_NUM_QUIZZES_TO_DISPLAY;
 
-@WebServlet(name = "DisplayNewestQuizzesServlet", urlPatterns = "/DisplayNewestQuizzes")
-public class DisplayNewestQuizzesServlet extends HttpServlet {
+@WebServlet(name = "DisplayQuzzesServlet", urlPatterns = "/DisplayQuizzes")
+public class DisplayQuzzesServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
-        CategoriesManager categoriesManager = (CategoriesManager) managersManager.getManager(CATEGORIES_MANAGER_STR);
         QuizManager quizzesManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
 
-        List<Quiz> quizzes = quizzesManager.getNewestQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
+        List<Quiz> quizzes = quizzesManager.getQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
-        request.setAttribute("title", "უახლესი ქვიზები");
+        request.setAttribute("title", "ქვიზები");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizListPage.jsp");
         dispatcher.forward(request, response);
