@@ -7,6 +7,8 @@
 <%@ page import="static Configs.Config.USERS_MANAGER_STR" %>
 <%@ page import="Model.Managers.ChallengesManager" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="Model.Managers.FriendRequestsManager" %>
+<%@ page import="Controller.Classes.OtherClasses.FriendRequest" %>
 <%--
   Created by IntelliJ IDEA.
   User: gigakhizanishvili
@@ -30,13 +32,11 @@
 <%
     ManagersManager mm = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
     UsersManager usersManager = (UsersManager)mm.getManager(USERS_MANAGER_STR);
-    ChallengesManager challengesManager = (ChallengesManager) mm.getManager(CHALLENGE_MANAGER_STR);
+    FriendRequestsManager friendRequestsManager = (FriendRequestsManager) mm.getManager(FRIEND_REQUESTS_MANAGER_STR);
     User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
     if(user != null) {
-        List<Challenge> challenges = challengesManager.getChallengesOf(user.getID());
-        user.setChallenges(challenges);
-        List<Challenge> waitingChallengedChallenges = user.getWaitingChallengedChallenges();
-        List<Challenge> waitingChallengerChallenges = user.getWaitingChallengerChallenges();
+        List<FriendRequest> sentFriendRequests = friendRequestsManager.getWaitingSentFriendRequests(user.getID());
+        List<FriendRequest> receivedFriendRequests = friendRequestsManager.getWaitingReceivedFriendRequests(user.getID());
 %>
 
 <div class="friends-list-popup" id="friend-requests-list-popup-id">
@@ -50,20 +50,17 @@
         <hr>
         <br>
         <%
-            for(int i = 0; i < waitingChallengedChallenges.size(); i++){
-                Challenge challenge = waitingChallengedChallenges.get(i);
-                User challengerUser = challenge.getChallengerUser();
+            for(int i = 0; i < receivedFriendRequests.size(); i++){
+                FriendRequest friendRequest = receivedFriendRequests.get(i);
+                User userWhoSent = usersManager.getUser(friendRequest.getSenderID());
         %>
         <div class = "friend-list-row">
-                    <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=challengerUser.getID()%>)">
-                        <%=challengerUser.getUsername()%>
-                    </span>
-            <span class="nav-item" style="cursor: pointer;" onclick="displayQuiz(<%=challenge.getQuizID()%>)">
-                        ქვიზი
-                    </span>
+            <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=userWhoSent.getID()%>)">
+                <%=userWhoSent.getUsername()%>
+            </span>
             <div class = "friend-challenge-remove-btns">
-                <button class="challenge-btn"  onclick="acceptChallenge(<%=challenge.getID()%>)" style="color: green">დათანხმება</button>
-                <button class="remove-btn" onclick="rejectChallenge(<%=challenge.getID()%>)" style="color: red">უარყოფა</button>
+                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friendRequest.getID()%>)" style="color: green">დათანხმება</button>
+                <button class="remove-btn" onclick="rejectFriendRequest(<%=friendRequest.getID()%>)" style="color: red">უარყოფა</button>
             </div>
         </div>
         <% } %>
@@ -75,19 +72,16 @@
         <hr>
         <br>
         <%
-            for(int i = 0; i < waitingChallengerChallenges.size(); i++){
-                Challenge challenge = waitingChallengerChallenges.get(i);
-                User challengedUser = challenge.getChallengedUser();
+            for(int i = 0; i < sentFriendRequests.size(); i++){
+                FriendRequest friendRequest = sentFriendRequests.get(i);
+                User userWhoReceived = usersManager.getUser(friendRequest.getReceiverID());
         %>
         <div class = "friend-list-row">
-                <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=challengedUser.getID()%>)">
-                    <%=challengedUser.getUsername()%>
-                </span>
-            <span class="nav-item" style="cursor: pointer;" onclick="displayQuiz(<%=challenge.getQuizID()%>)">
-                        ქვიზი
+                <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=userWhoReceived.getID()%>)">
+                    <%=userWhoReceived.getUsername()%>
                 </span>
             <div class = "friend-challenge-remove-btns">
-                <button class="remove-btn" onclick="cancelChallenge(<%=challenge.getID()%>)" style="color: red">გაუქმება</button>
+                <button class="remove-btn" onclick="cancelChallenge(<%=friendRequest.getID()%>)" style="color: red">გაუქმება</button>
             </div>
         </div>
         <% } %>
@@ -110,5 +104,14 @@
         console.log('popUpChallengesList in popUpChallengesList.jsp');
         document.getElementById("friend-requests-list-popup-id").classList.toggle("active");
     }
+
+    function acceptFriendRequest(ID){
+        console.log('acceptFriendRequest');
+    }
+
+    function rejectFriendRequest(ID){
+        console.log('rejectFriendRequst');
+    }
+
 
 </script>
