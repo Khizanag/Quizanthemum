@@ -63,20 +63,19 @@
                 </div>
 
 
-                <label for="registration_country"><b>შეიყვანეთ ქვეყანა</b></label>
-                <select class="drop-down" name="registration_country" id="registration_country" value="Georgia">
+                <label for="registration_country"><b>ქვეყანა</b></label>
+                <input type="text" list="registration_country" placeholder="შეიყვანეთ ქვეყანა...">
+                <datalist class="drop-down" name="registration_country" id="registration_country" value="Georgia">
                     <% for(Country country : countries){ %>
-                    <option value="<%=country.getName()%>"><%=country.getName()%></option>
+                    <option value="<%=country.getName()%>"></option>
                     <% } %>
-                </select>
-
-                <label><br><br></label>
+                </datalist>
 
                 <label><b>ქალაქი</b></label>
-                <input type="text" placeholder="შეიყვანეთ ქალაქი" name="registration_city" id="registration_city" required>
+                <input type="text" placeholder="შეიყვანეთ ქალაქი..." name="registration_city" id="registration_city" required>
 
                 <label><b>მომხმარებლის სახელი (USERNAME)</b></label>
-                <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი"
+                <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი..."
                        name="registration_username" id="registration_username" required>
 
                 <label><b>E-mail</b></label>
@@ -84,7 +83,7 @@
                        id="registration_email" required>
 
                 <label><b>მობილურის ნომერი</b></label>
-                <input type="tel" placeholder="შეიყვანეთ მობილურის ნომერი" name="registration_phone"
+                <input type="tel" placeholder="შეიყვანეთ მობილურის ნომერი..." name="registration_phone"
                        id="registration_phone" required>
 
                 <label><b>პაროლი</b></label>

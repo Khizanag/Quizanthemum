@@ -1,28 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="Controller.Classes.User.User" %>
-<%@ page import="Model.Managers.ManagersManager" %>
-<%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="Controller.Classes.Quiz.Quiz" %>
 <%@ page import="static Configs.Config.QUIZ_MANAGER_STR" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static Configs.Config.*" %>
-<%@ page import="Model.Managers.UsersManager" %>
-<%@ page import="Model.Managers.QuizEventManager" %>
 <%@ page import="Controller.Classes.Quiz.QuizEvent" %>
+<%@ page import="Model.Managers.*" %>
 <head>
     <meta charset="UTF-8">
     <title> Users Profile </title>
     <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="web/styles/common.css">
-	<link rel="stylesheet" href="web/styles/homePage.css">
-	<link rel="stylesheet" href="web/styles/breakpoints.css">
-    <link rel="stylesheet" href="web/styles/quizCreation.css">
-    <link rel="stylesheet" href="web/styles/profilePage.css">
+    <link rel="stylesheet" href="/web/styles/common.css">
+    <link rel="stylesheet" href="/web/styles/homePage.css">
+    <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/profilePage.css">
+    <link rel="stylesheet" href="/web/styles/quizCreation.css">
+    <link rel="stylesheet" href="/web/styles/scroll.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="/web/js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
@@ -127,11 +124,24 @@
         </div>
 
     </div>
+
     <%
         QuizEventManager quizEventManager = (QuizEventManager) managersManager.getManager(QUIZ_EVENT_MANAGER_STR);
+        FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         List<QuizEvent> topQuizEvents = quizEventManager.getQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
-    %>
+        User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+        if(loggedUser != null && !friendshipsManager.areFriends(user.getID(), loggedUser.getID())){ %>
+    <div class="container">
+        <form id="add-friend-form" action="SendFriendRequest" method="get"  style="text-align: center;">
+            <input type="hidden" name="user-id" value="<%=user.getID()%>">
+            <input type="hidden" name="url" value="/Profile?id=<%=user.getID()%>">
+            <input type="submit" class="button finish" value="ვიმეგობროთ!" style="width: 80%">
+        </form>
+    </div>
+
+    <% } %>
+
     <div class = "top-quizzes-banner">
         <div class="players-top-quizzes">
             ნათამაშები ტოპ ქვიზები
@@ -178,7 +188,6 @@
         document.getElementById("to_display_start_quiz_elem").value = id;
         form.submit();
     }
-
 
     function openSearch() {
         window.location.href = "SearchPage.jsp";

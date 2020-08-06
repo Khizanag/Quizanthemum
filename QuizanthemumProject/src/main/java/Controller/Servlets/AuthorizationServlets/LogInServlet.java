@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.AuthorizationServlets;
 
 import Configs.Config;
 import Controller.Classes.User.User;

@@ -9,6 +9,7 @@ public interface Config {
     String CONNECTION_STR = "connection for database";
     String COUNTRIES_MANAGER_STR = "countries-manager";
     String CHALLENGE_MANAGER_STR = "challenge manager";
+    String FRIEND_REQUESTS_MANAGER_STR = "friend-requests-manager";
     String FRIENDSHIPS_MANAGER_STR = "friendships_manager";
     String MANAGERS_MANAGER_STR = "managers_manager";
     String QUESTION_EVENT_MANAGER_STR = "question_event_manager";
@@ -39,6 +40,8 @@ public interface Config {
 
 
     String LOGGED_IN_USER = "logedInUser";
-
+    String DISPLAY_CHALLENGES = "display-challenges-list-pop-up-if-user-is-logged-in";
+    String DISPLAY_FRIENDS = "display-friends-popup-list-if-user-is-logged-in";
+    String DISPLAY_FRIEND_REQUESTS = "display-friend-requests-sent-by-other-to-me-and-by-me-to-others";
 
 }

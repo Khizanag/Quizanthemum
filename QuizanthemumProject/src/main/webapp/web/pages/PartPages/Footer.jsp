@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
+
 <footer	class= "footer-section" style="position: relative; bottom: -60px; margin: auto;">
     <div class= "container">
         <div class= "footer-items">

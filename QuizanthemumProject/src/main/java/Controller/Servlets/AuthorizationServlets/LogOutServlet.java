@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.AuthorizationServlets;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

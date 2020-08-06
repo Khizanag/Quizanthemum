@@ -1,4 +1,4 @@
-package Controller.Servlets;
+package Controller.Servlets.QuizServlets;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

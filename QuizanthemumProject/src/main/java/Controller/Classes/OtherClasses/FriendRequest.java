@@ -20,6 +20,10 @@ public class FriendRequest {
 
     private FriendRequestsManager manager;
 
+    public FriendRequest(int senderID, int receiverID, FriendRequestsManager manager){
+        this(DEFAULT_ID, senderID, receiverID, new Date(), null, false, false, manager);
+    }
+
     public FriendRequest(int ID, int senderID, int receiverID, Date sendingDate, Date receivingDate,
                          boolean isReceived, boolean isAccepted, FriendRequestsManager manager){
         this.ID = ID;
