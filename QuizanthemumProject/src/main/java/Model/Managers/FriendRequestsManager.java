@@ -76,15 +76,18 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
     }
 
     public int insertFriendRequest(FriendRequest request){
-        String query = "INSERT INTO " + FRIEND_REQUESTS_TABLE_NAME
+        java.sql.Date receivingDate = request.getReceivingDate() ==  null ? null : new java.sql.Date(request.getReceivingDate().getTime());
+        String query =
+                    "INSERT INTO " + FRIEND_REQUESTS_TABLE_NAME
                 + " VALUES(null"
                 + ", " + request.getSenderID()
                 + ", " + request.getReceiverID()
-                + ", " + request.getSendingDate()
-                + ", " + request.getReceivingDate()
+                + ", " + "'" + new java.sql.Date(request.getSendingDate().getTime()) + "'"
+                + ", " + (receivingDate == null ? null : ("'" + receivingDate + "'"))
                 + ", " + request.isReceived()
                 + ", " + request.isAccepted()
                 + ");";
+        System.out.println("********QUERY : " + query);
         try{
             Statement statement = connection.createStatement();
             statement.execute(query);

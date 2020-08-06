@@ -133,8 +133,9 @@
         User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
         if(loggedUser != null && !friendshipsManager.areFriends(user.getID(), loggedUser.getID())){ %>
     <div class="container">
-        <form id="add-friend-form" action="SentFriendRequest" method="get"  style="text-align: center;">
+        <form id="add-friend-form" action="SendFriendRequest" method="get"  style="text-align: center;">
             <input type="hidden" name="user-id" value="<%=user.getID()%>">
+            <input type="hidden" name="url" value="/Profile?id=<%=user.getID()%>">
             <input type="submit" class="button finish" value="ვიმეგობროთ!" style="width: 80%">
         </form>
     </div>
