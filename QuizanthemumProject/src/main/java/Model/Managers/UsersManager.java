@@ -161,7 +161,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     public void insertNewProfilePicture(int userID, String pictureURL) {
-        String query = "UPDATE " + QUIZ_TABLE_NAME + " SET " +
+        String query = "UPDATE " + USERS_TABLE_NAME + " SET " +
                 USERS_TABLE_COLUMN_13_PHOTO_URL + " = " + pictureURL +
                 " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
         try {

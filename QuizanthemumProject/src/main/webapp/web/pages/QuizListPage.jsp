@@ -5,6 +5,7 @@
 <%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="static Configs.Config.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Collections" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -42,6 +43,7 @@
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
     List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
+    Collections.reverse(quizzes); // to be drawn in correct order
 %>
 <div class="quiz-list-holder">
     <div class="full-wrapper">

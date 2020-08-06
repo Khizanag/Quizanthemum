@@ -9,6 +9,7 @@
 <%@ page import="Model.Managers.*" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.math.BigDecimal" %>
 <head>
     <meta charset="UTF-8">
     <title> Users Profile </title>
@@ -32,6 +33,15 @@
         int ID = Integer.parseInt(request.getParameter("id"));
         User user = usersManager.getUser(ID);
         DecimalFormat df = new DecimalFormat("0.00");
+    %>
+    <%!
+        private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
+            if (x > 0) {
+                return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_FLOOR);
+            } else {
+                return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_CEILING);
+            }
+        }
     %>
 </head>
 
@@ -111,7 +121,7 @@
             </div>
             <div class="profile-details-info">
                 <div class = "quizzes-played"><%="ნათამაშები ქვიზები: " + usersManager.getQuizzesPlayedCount(user.getID())%></div>
-                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: " + usersManager.getUserTotalPoints(user.getID())%></div>
+                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: " + truncateDecimal(usersManager.getUserTotalPoints(user.getID()), 2)%></div>
                 <div class =  "challenges-played"><%="ნათამაშები ჩელენჯები: " + user.getChallengesPlayed()%></div>
                 <div class="challenges-won"><%="მოგებული ჩელენჯები: " + user.getChallengesWon()%></div>
                 <%
@@ -166,7 +176,8 @@
                                 <%=currQuiz.getDescription()%>
                             </p>
                         </div>
-                        <div class = "quiz-score"><%= df.format(currQuizEvent.getUserScore())%> / <%=df.format(currQuiz.getMaxScore())%></div>
+                        <div class = "quiz-score"><%= truncateDecimal(currQuizEvent.getUserScore(), 2)%>
+                                                    / <%=truncateDecimal((currQuiz.getMaxScore()), 2)%></div>
                         <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
                     </div>
                 <%}%>
@@ -198,7 +209,6 @@
     }
 
     function changeImage(){
-        console.log('asd');
         document.getElementById("change-image").classList.toggle("active");
         document.getElementById('photo-url').value="";
         document.getElementById('output').src="";
