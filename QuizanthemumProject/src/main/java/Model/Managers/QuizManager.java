@@ -40,7 +40,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     public ManagersManager getManager(){ return this.manager; }
 
     public List<Quiz> getNewestQuizzes(int numQuizzes){
-        return getQuizzesBy(numQuizzes, QUIZ_TABLE_COLUMN_9_CREATION_DATE);
+        return getQuizzesBy(numQuizzes, QUIZ_TABLE_COLUMN_9_CREATION_DATE, "DESC");
     }
 
     public List<Quiz> getMostPopularQuizzes(int numQuizzes) { // TODO TEST THIS
@@ -67,10 +67,10 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
         return getQuizzesByQuery(query);
     }
 
-    private List<Quiz> getQuizzesBy(int numQuizzes, String sorterColumnName){
+    private List<Quiz> getQuizzesBy(int numQuizzes, String sorterColumnName, String order){
         String query = "SELECT * FROM " + QUIZ_TABLE_NAME
-                + " ORDER BY " + sorterColumnName+ " DESC"
-                + "  LIMIT " + numQuizzes
+                + " ORDER BY " + sorterColumnName + " " + order
+                + " LIMIT " + numQuizzes
                 + ";\n";
         return getQuizzesByQuery(query);
     }

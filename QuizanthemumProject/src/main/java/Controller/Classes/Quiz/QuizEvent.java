@@ -32,6 +32,7 @@ public class QuizEvent {
 
     public QuizEvent(User user, Quiz quiz, boolean isPracticeMode, Challenge challenge) {
         this(DEFAULT_ID, user, quiz, null, null, new ArrayList<>(), 0, challenge);
+        this.isPracticeMode = isPracticeMode;
     }
 
     // create from database

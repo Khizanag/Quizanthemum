@@ -103,7 +103,7 @@
             <div class="before" id="before">
                 <div class="overall-quiz-details">
                     <p>Your Total Score: <%=truncateDecimal(quizEvent.getUserScore(), 2)%>
-                        /<%=truncateDecimal(quiz.getMaxScore(), 2)%>
+                        / <%=truncateDecimal(quiz.getMaxScore(), 2)%>
                     </p>
                 </div>
                 <div class="questions">
