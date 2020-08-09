@@ -1,0 +1,95 @@
+h2{
+    padding-top: 10px;
+    color: #f07237;
+    font-size: xx-large;
+}
+
+.full-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header-wrapper{
+    width: 960px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+.quiz-list-small-description-block{
+    width:350px;
+    height:100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
+    margin-left: 15px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.quiz-list-small-description-block h3{
+    margin-top: 5%;
+}
+.quiz-score{
+    width: 100px;
+    align-items: center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: large;
+    font-weight:bold;
+    color:rgb(255, 117, 26);
+}
+.quiz-list-small-description-block h3{
+    cursor: pointer;
+    color:wheat;
+}
+.quiz-small-description {
+    margin-top: 10px;
+}
+.quiz-list-small-description-block p{
+    color: white;
+}
+.top-quizzes-list-container{
+    width:1000px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.top-quiz-list-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.top-quiz-list-item {
+    margin: 20px;
+    width: 460px;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    align-items: center;
+    align-content: center;
+    transition: transform .2s;
+    border: 1px solid #ff751a;
+}
+.top-quiz-list-item:hover{
+    transform: scale(1.1);
+}
+
+.quiz-list-small-image{
+    margin-left: 5px;
+    width: 180px;
+    height:140px;
+}

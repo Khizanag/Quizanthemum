@@ -2,6 +2,9 @@ package Controller.Classes.User;
 
 import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.QuizEvent;
+import Model.Managers.FriendshipsManager;
+import Model.Managers.ManagersManager;
+import Model.Managers.UsersManager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,54 +13,63 @@ import java.util.Date;
 import java.util.List;
 
 import static Configs.Config.DEFAULT_ID;
+import static Configs.Config.FRIENDSHIPS_MANAGER_STR;
+import static Configs.UserRoles.ADMINISTRATOR;
 
 public class User {
 
+    private static final String DEFAULT_PICTURE = "/web/images/common/defProfPic.jpg";
+
     private int id;
-    private String username;
+    private final String username;
     private String passwordHash;
-    private String firstName;
-    private String lastName;
-    private int role;
-    private int quizzesPlayed;
-    private int quizzesMade;
-    private int challengesPlayed;
-    private int challengesWon;
-    private String city;
-    private String country;
-    private String phoneNumber;
-    private String email;
-    private Date birthDate;
-    private Date registrationDate;
+    private final String firstName;
+    private final String lastName;
+    private String passwordSalt;
+    private String pictureURL;
+    private final int role;
+    private final int quizzesMade;
+    private final int challengesPlayed;
+    private final int challengesWon;
+    private final String city;
+    private final String country;
+    private final String phoneNumber;
+    private final String email;
+    private final Date birthDate;
+    private final Date registrationDate;
     private List<Integer> friendIDs;
     private List<QuizEvent> quizEvents;
     private List<Challenge> challenges;
     private List<Achievement> achievements;
 
+    private final UsersManager manager;
+
     // for creating object from DB
     public User(int id, String username, String passwordHash, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
-                Date birthDate, Date registrationDate, List<Integer> friendIDs) {
-        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate);
+                Date birthDate, Date registrationDate, String pictureURL, String passwordSalt, List<Integer> friendIDs, UsersManager manager) {
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, pictureURL, manager);
         this.id = id;
         this.passwordHash = passwordHash;
+        this.passwordSalt = passwordSalt;
         this.friendIDs = friendIDs;
     }
 
     // for first time creating
-    public User(String username, String password, String firstName, String lastName,
+    public User(String username, String password, String passwordSalt, String firstName, String lastName,
                 int role, String  city, String county, String phoneNumber, String email,
-                Date birthDate, Date registrationDate){
-        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate);
+                Date birthDate, Date registrationDate, UsersManager manager){
+        this(username, firstName, lastName, role, city, county, phoneNumber, email, birthDate, registrationDate, DEFAULT_PICTURE, manager);
+        this.passwordSalt = passwordSalt;
         this.id = DEFAULT_ID;
-        this.passwordHash = hashFunction(password);
+        this.passwordHash = hashFunction(password + passwordSalt);
         this.friendIDs = new ArrayList<>();
     }
 
     // helper constructor used by other ones
     private User(String username, String firstName, String lastName,
                  int role, String  city, String county, String phoneNumber, String email,
-                 Date birthDate, Date registrationDate){
+                 Date birthDate, Date registrationDate, String pictureURL, UsersManager manager){
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -68,12 +80,13 @@ public class User {
         this.email = email;
         this.birthDate = birthDate;
         this.registrationDate = registrationDate;
-        this.challengesPlayed=0;
-        this.challengesWon=0;
-        this.quizzesMade=0;
-        this.quizzesPlayed=0;
-    }
+        this.pictureURL = pictureURL;
+        this.challengesPlayed = 0;
+        this.challengesWon = 0;
+        this.quizzesMade = 0;
 
+        this.manager = manager;
+    }
 
     private String hashFunction(String password) {
         MessageDigest md = null;
@@ -125,8 +138,6 @@ public class User {
 
     public int getRole(){ return role; }
 
-    public int getQuizzesPlayed(){ return quizzesPlayed; }
-
     public int getChallengesPlayed(){ return challengesPlayed; }
 
     public int getQuizzesMade(){ return quizzesMade; }
@@ -157,16 +168,30 @@ public class User {
         return registrationDate;
     }
 
+    public UsersManager getManager(){ return this.manager; }
+
+    boolean isAdministrator(){
+        return this.role == ADMINISTRATOR;
+    }
 
     public List<Integer> getFriendIDs() {
         if(friendIDs == null){
-            // TODO get ids from base
+            ManagersManager managersManager = manager.getManager();
+            FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
+            this.friendIDs = friendshipsManager.getFriendIDsOf(this.id);
         }
         return friendIDs;
     }
 
-    boolean isAdministrator(){
-        return false;
+
+    /********** SETTER methods **********/
+
+    public void setID(int ID) {
+        this.id = ID;
+    }
+
+    public void setChallenges(List<Challenge> challenges){
+        this.challenges = challenges;
     }
 
     void addFriend(int friendId){
@@ -192,7 +217,35 @@ public class User {
     }
 
     public boolean isCorrectPassword (String password) {
-        return passwordHash.equals(hashFunction(password));
+        String fullPassword = password + passwordSalt;
+        return passwordHash.equals(hashFunction(fullPassword));
+    }
+
+    public List<Challenge> getChallenges(){
+        if(challenges == null){
+            challenges = new ArrayList<>();
+        }
+        return challenges;
+    }
+
+    public List<Challenge> getWaitingChallengedChallenges() {
+        List<Challenge> challenges = new ArrayList<>();
+        for(Challenge challenge: getChallenges()){
+            if(!challenge.isFinished() && challenge.getChallengedUserID() == this.id){
+                challenges.add(challenge);
+            }
+        }
+        return challenges;
+    }
+
+    public List<Challenge> getWaitingChallengerChallenges(){
+        List<Challenge> challenges = new ArrayList<>();
+        for(Challenge challenge: getChallenges()){
+            if(!challenge.isFinished() && challenge.getChallengerUserID() == this.id){
+                challenges.add(challenge);
+            }
+        }
+        return challenges;
     }
 
     @Override
@@ -216,4 +269,14 @@ public class User {
                 ", achievements=" + achievements +
                 '}';
     }
+
+    public String getPhotoURL() {
+        return pictureURL;
+    }
+
+    // TODO get rid of public getter
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
 }

@@ -30,9 +30,17 @@ public class ManagersManager {
         context.setAttribute(ACHIEVEMENTS_MANAGER_STR, achievementsManager);
         managers.put(ACHIEVEMENTS_MANAGER_STR, achievementsManager);
 
+        CategoriesManager categoriesManager = new CategoriesManager(this);
+        context.setAttribute(CATEGORIES_MANAGER_STR, categoriesManager);
+        managers.put(CATEGORIES_MANAGER_STR, categoriesManager);
+
+        managers.put(COUNTRIES_MANAGER_STR, new CountriesManager(this));
+
         ChallengesManager challengesManager = new ChallengesManager(this);
         context.setAttribute(CHALLENGE_MANAGER_STR, challengesManager);
         managers.put(CHALLENGE_MANAGER_STR, challengesManager);
+
+        managers.put(FRIEND_REQUESTS_MANAGER_STR, new FriendRequestsManager(this));
 
         FriendshipsManager friendshipsManager = new FriendshipsManager(this);
         context.setAttribute(FRIENDSHIPS_MANAGER_STR, friendshipsManager);
@@ -48,7 +56,7 @@ public class ManagersManager {
 
         QuizEventManager quizEventManager = new QuizEventManager(this);
         context.setAttribute(QUIZ_EVENT_MANAGER_STR, quizEventManager);
-        managers.put(QUESTION_EVENT_MANAGER_STR, quizEventManager);
+        managers.put(QUIZ_EVENT_MANAGER_STR, quizEventManager);
 
         QuizManager quizManager = new QuizManager(this);
         context.setAttribute(QUIZ_MANAGER_STR, quizManager);
@@ -66,5 +74,4 @@ public class ManagersManager {
     public Object getManager(String managerName){
         return managers.get(managerName);
     }
-
 }

@@ -8,26 +8,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <meta charset="UTF-8">
-    <title> Quizanthemum </title>
-    <link rel="icon" type="image/png" href="../images/common/icon.png"/>
+    <title> Contacts </title>
+    <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../styles/common.css">
-    <link rel="stylesheet" href="../styles/homePage.css">
-    <link rel="stylesheet" href="../styles/breakpoints.css">
-    <link rel="stylesheet" href="../styles/quizzSummaryPage.css">
-    <link rel="stylesheet" href="../styles/profilePage.css">
-    <link rel="stylesheet" href="../styles/ContactPage.css">
+    <link rel="stylesheet" href="/web/styles/common.css">
+    <link rel="stylesheet" href="/web/styles/homePage.css">
+    <link rel="stylesheet" href="/web/styles/breakpoints.css">
+    <link rel="stylesheet" href="/web/styles/quizzSummaryPage.css">
+    <link rel="stylesheet" href="/web/styles/profilePage.css">
+    <link rel="stylesheet" href="/web/styles/ContactPage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../js/profileStuff.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <head>
     <title>Contact</title>
 </head>
 <body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
+
     <br><br>
     <div class="full-wrapper">
         <div class = "header-wrapper">
@@ -76,6 +78,6 @@
             </div>
         </div>
     </div>
-    <jsp:include page="/web/pages/Footer.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"></jsp:include>
 </body>
 </html>

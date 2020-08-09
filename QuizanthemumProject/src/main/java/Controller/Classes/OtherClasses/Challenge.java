@@ -7,11 +7,12 @@ import Model.Managers.ChallengesManager;
 import Model.Managers.QuizEventManager;
 import Model.Managers.UsersManager;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Challenge implements Config {
 
     private int ID;
+    private int quizID;
     private boolean isFinished;
     private int winnerUserID;
     private final ChallengesManager manager;
@@ -19,20 +20,21 @@ public class Challenge implements Config {
     // challenger info
     private final int challengerUserID;
     private User challengerUser;
-    private final int challengerQuizEventID;
+    private int challengerQuizEventID;
     private QuizEvent challengerQuizEvent;
     private final Date challengingDate;
 
     // challenged user info
     private final int challengedUserID;
-    private final int challengedQuizEventID;
+    private int challengedQuizEventID;
     private  User challengedUser;
     private QuizEvent challengedQuizEvent;
     private Date acceptingDate;
 
-    public Challenge(int ID, int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
+    public Challenge(int ID, int quizID, int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
                      boolean isFinished, int winnerUserID, Date challengingDate, Date acceptingDate, ChallengesManager manager){
         this.ID = ID;
+        this.quizID = quizID;
         this.challengerUserID = challengerUserID;
         this.challengedUserID = challengedUserID;
         this.challengerQuizEventID = challengerQuizEventID;
@@ -45,9 +47,9 @@ public class Challenge implements Config {
     }
 
     /* this constructor could be called immediately after user challenges someone and it is not accepted yet */
-    public Challenge(int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
+    public Challenge(int quizID, int challengerUserID, int challengedUserID, int challengerQuizEventID, int challengedQuizEventID,
                      Date challengingDate, ChallengesManager manager){
-        this(-1, challengerUserID, challengedUserID, challengerQuizEventID, challengedQuizEventID,
+        this(-1, quizID, challengerUserID, challengedUserID, challengerQuizEventID, challengedQuizEventID,
                 false, -1, challengingDate, null, manager);
     }
 
@@ -56,6 +58,8 @@ public class Challenge implements Config {
     public int getID() {
         return ID;
     }
+
+    public int getQuizID(){ return this.quizID; }
 
     public int getWinnerUserID() {
         return winnerUserID;
@@ -107,9 +111,11 @@ public class Challenge implements Config {
 
     public QuizEvent getChallengedQuizEvent() {
         if(challengerQuizEvent == null) {
+            System.out.println("challengerQuizEvent is null in getChallengedQuizEvent");
             QuizEventManager quizEventManager = (QuizEventManager) manager.getManager().getManager(QUIZ_EVENT_MANAGER_STR);
             challengedQuizEvent = quizEventManager.getQuizEvent(challengedUserID);
         }
+        System.out.println("return challengedQuizEvent");
         return challengedQuizEvent;
     }
 
@@ -125,11 +131,32 @@ public class Challenge implements Config {
         return isFinished;
     }
 
-    public void accept(Date acceptingDate){
-        this.isFinished = true;
-        this.acceptingDate = acceptingDate;
+    public boolean isAccepted(){ return this.acceptingDate != null; }
 
-        // TODO change in database
+
+    public void setChallengedQuizEvent(QuizEvent challengedQuizEvent) {
+        this.challengedQuizEvent = challengedQuizEvent;
+        this.challengedQuizEventID = challengedQuizEvent.getId();
+    }
+
+    public void setChallengerQuizEvent(QuizEvent challengerQuizEvent) {
+        this.challengerQuizEvent = challengerQuizEvent;
+        this.challengerQuizEventID = challengerQuizEvent.getId();
+    }
+
+    public void accept(){
+        this.acceptingDate = new Date();
+    }
+
+    public void finish(){
+        this.isFinished = true;
+        getChallengerQuizEvent().getUserScore();
+        getChallengedQuizEvent().getUserScore();
+        if(getChallengerQuizEvent().getUserScore() > getChallengedQuizEvent().getUserScore())
+            this.winnerUserID = getChallengerUserID();
+        else
+            this.winnerUserID = getChallengedUserID();
+
     }
 
     @Override

@@ -1,33 +1,14 @@
+<%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.MULTI_CHOICE_MULTI_ANSWER" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <form action="../../QuestionCreated" method="get">
     <hr>
     <div class="input-items" id="input-items">
-        <label for="question_statement"><b>შეკითხვა</b></label>
-        <input type="text" placeholder="შეიყვანეთ შეკითხვა" name="statement_text" id="question_statement" required>
+        <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
 
-        <label for="description"><b>ავტორის რჩევა</b></label>
-        <input type="text" placeholder="გთხოვთ შეუყვანოთ მითითება მომხმარებლისთვის"
-               name="description" id="description" required>
-
-        <label for="file"><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
-        <div class="upload-image-section">
-            <input type="file"  accept="image/*" name="image" id="file"
-                   onchange="loadFile(event)"
-                   style="display: none;"
-            >
-            <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
-            <div class="upload-image-container">
-                <label class="button upload" type="button"
-                       onclick="uploadImage(event)" id="url-button">
-                    შეიყვანეთ URL ასატვირთად
-                </label>
-                <input type="text" placeholder="ფოტოს URL"
-                       name="image_url" id="question_image_url">
-            </div>
-            <img id="output" width="100" />
-        </div>
-        <hr><p></p>
+            <hr><p></p>
 
         <label><b>სწორი პასუხი</b></label>
         <div id="correct-ans-div">
@@ -52,7 +33,7 @@
         <input type="number" placeholder="ქულა"
                id="question_point" name="max_score"
                min="1" max="16" required>
-    </div> <hr>
+        </div><hr>
 
         <label for="source"><b>წყარო</b></label>
         <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
@@ -63,10 +44,9 @@
                name="comment" id="comment">
 
         <%--   HIDDEN VARIABLES     --%>
-        <input type="hidden" name="type" value="5">
+        <input type="hidden" name="type" value="<%=MULTI_CHOICE_MULTI_ANSWER%>">
         <input  type="hidden" name="num_statements" value="1" id="num_statements_elem">
         <input type="hidden" name="num_answers" value="1" id="num_answers_elem">
 
     <button class="button addQuestion" type="submit">შემდეგი შეკითხვის დამატება</button>
-    <hr>
 </form>

@@ -1,6 +1,10 @@
 package Model.Managers;
 
 import Configs.*;
+import Controller.Classes.OtherClasses.Category;
+import Controller.Classes.Quiz.Question.Question;
+import Controller.Classes.Quiz.Quiz;
+import Controller.Classes.Quiz.QuizEvent;
 import Controller.Classes.User.User;
 import Model.DatabaseConnector;
 
@@ -9,8 +13,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static Configs.Config.DEFAULT_ID;
+import static Configs.Config.*;
 import static Configs.QuizEventTableConfig.*;
+import static Configs.QuizRatingEventsConfig.*;
+import static Configs.QuizTableConfig.QUIZ_TABLE_COLUMN_8_AUTHOR_ID;
+import static Configs.QuizTableConfig.QUIZ_TABLE_NAME;
 
 
 public class UsersManager implements UsersTableConfig, QuestionTableConfig,
@@ -19,6 +26,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     private final Connection connection;
     private Statement statement;
     private ManagersManager manager;
+    private String currentSalt;
 
     public UsersManager(ManagersManager manager){
         this.manager = manager;
@@ -27,6 +35,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             statement = connection.createStatement();
         } catch (SQLException throwables) { }
     }
+
+    public ManagersManager getManager(){ return manager; }
 
     public User getUser(int id){
         String query = "SELECT *" +
@@ -44,7 +54,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     private User getUserWithQuery(String query){
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
             if(!set.next())
                 return null;
             int id = set.getInt(USERS_TABLE_COLUMN_1_ID);
@@ -59,10 +70,12 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
             Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
             Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
+            String pictureURL = set.getString(USERS_TABLE_COLUMN_13_PHOTO_URL);
+            String passwordSalt = set.getString(USERS_TABLE_COLUMN_14_PASSWORD_SALT);
             List<Integer> friendIDs = getUserFriends(id);
 
             return new User(id, username, passwordHash, firstName, lastName,  role, city, country, mobileNumber, email,
-                    birthDate, registrationDate, friendIDs);
+                    birthDate, registrationDate, pictureURL, passwordSalt, friendIDs, this);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -92,8 +105,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         List<Integer> challengeIDs = new ArrayList<>();
         String query = "SELECT " + CHALLENGES_TABLE_COLUMN_1_ID +
                 " FROM " + CHALLENGES_TABLE_NAME +
-                " WHERE " + CHALLENGES_TABLE_COLUMN_2_CHALLENGER_USER_ID + " = " + id +
-                " OR " + CHALLENGES_TABLE_COLUMN_3_CHALLENGED_USER_ID + " = " + id + ";\n";
+                " WHERE " + CHALLENGES_TABLE_COLUMN_3_CHALLENGER_USER_ID + " = " + id +
+                " OR " + CHALLENGES_TABLE_COLUMN_4_CHALLENGED_USER_ID + " = " + id + ";\n";
         try {
             ResultSet set = statement.executeQuery(query);
             while(set.next()){
@@ -135,7 +148,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
                 " WHERE " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + id +
                 ";\n";
         try {
-            ResultSet set = statement.executeQuery(query);
+            Statement newStatement = connection.createStatement();
+            ResultSet set = newStatement.executeQuery(query);
             while(set.next()){
                 int friendID = set.getInt(unionColumnName);
                 friendIDs.add(friendID);
@@ -146,8 +160,22 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         return friendIDs;
     }
 
+    public void insertNewProfilePicture(int userID, String pictureURL) {
+        String query = "UPDATE " + USERS_TABLE_NAME + " SET " +
+                USERS_TABLE_COLUMN_13_PHOTO_URL + " = " + pictureURL +
+                " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
+        try {
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Insertion Error. Quiz Manager Class");
+            e.printStackTrace();
+        }
+    }
+
+
     public int insertUser(User user) {
-        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
+        String query = "INSERT INTO " + USERS_TABLE_NAME + " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);\n";
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, user.getUsername());
@@ -161,6 +189,8 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             pstmt.setString(9, user.getMobileNumber());
             pstmt.setDate(10, new java.sql.Date(user.getBirthDate().getTime()));
             pstmt.setDate(11, new java.sql.Date(user.getRegistrationDate().getTime()));
+            pstmt.setString(12, user.getPhotoURL());
+            pstmt.setString(13, currentSalt);
             pstmt.executeUpdate();
 
             return DatabaseConnector.getLastInsertID();
@@ -177,6 +207,191 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     public boolean isValidLoginAttempt(String username, String password) {
         return getUser(username).isCorrectPassword(password);
+    }
+
+    public void setCurrentSalt(String currentSalt) {
+        this.currentSalt = currentSalt;
+    }
+
+    private User buildUserFromResultSet(ResultSet set) {
+        try {
+            int id = set.getInt(USERS_TABLE_COLUMN_1_ID);
+            String username = set.getString(USERS_TABLE_COLUMN_2_USERNAME);
+            String passwordHash = set.getString(USERS_TABLE_COLUMN_3_PASSWORD_HASH);
+            String firstName = set.getString(USERS_TABLE_COLUMN_4_FIRST_NAME);
+            String lastName = set.getString(USERS_TABLE_COLUMN_5_LAST_NAME);
+            int role = set.getInt(USERS_TABLE_COLUMN_6_ROLE);
+            String city = set.getString(USERS_TABLE_COLUMN_7_CITY);
+            String country = set.getString(USERS_TABLE_COLUMN_8_COUNTRY);
+            String email = set.getString(USERS_TABLE_COLUMN_9_EMAIL);
+            String mobileNumber = set.getString(USERS_TABLE_COLUMN_10_PHONE_NUMBER);
+            Date birthDate = set.getDate(USERS_TABLE_COLUMN_11_BIRTH_DATE);
+            Date registrationDate = set.getDate(USERS_TABLE_COLUMN_12_REGISTRATION_DATE);
+            String photoURL = set.getString(USERS_TABLE_COLUMN_13_PHOTO_URL);
+            String passwordSalt = set.getString(USERS_TABLE_COLUMN_14_PASSWORD_SALT);
+            List<Integer> friendIDs = getUserFriends(id);
+
+            return new User(id, username, passwordHash, firstName, lastName, role, city, country, mobileNumber, email,
+                    birthDate, registrationDate, photoURL, passwordSalt, friendIDs, this);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<User> getUsers() {
+        String query = "SELECT * FROM " + USERS_TABLE_NAME + ";\n";
+        List<User> users = new ArrayList<>();
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                User newUser = buildUserFromResultSet(set);
+                users.add(newUser);
+            }
+            qStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+
+    }
+
+    public List<User> getTopUsersByFilter(int numUsers, int locationType, String location, boolean isFriend, int userID, boolean isAuthor) {
+        String query = "SELECT * "
+                + " FROM " + USERS_TABLE_NAME + " as us";
+        boolean whereClauseExists = false;
+        if (locationType == LOCATION_TYPE_CITY) {
+            query += (" WHERE us.city = '" + location +"'");
+            whereClauseExists = true;
+        } else if (locationType == LOCATION_TYPE_COUNTRY) {
+            query += (" WHERE us.country = '" + location +"'");
+            whereClauseExists = true;
+        }
+        if (isFriend) {
+            if (whereClauseExists) {
+                query += " AND";
+            } else {
+                query += " WHERE";
+            }
+            query += (" us." + USERS_TABLE_COLUMN_1_ID
+                        + " IN (SELECT " + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID
+                        + " FROM " + FRIENDSHIPS_TABLE_NAME + " WHERE "
+                        + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID + " = " + userID
+                        + " UNION "
+                        + "SELECT " + FRIENDSHIPS_TABLE_COLUMN_3_SECOND_FRIEND_ID
+                        + " FROM " + FRIENDSHIPS_TABLE_NAME + " WHERE "
+                        + FRIENDSHIPS_TABLE_COLUMN_2_FIRST_FRIEND_ID + " = " + userID + ")"); // are friends
+            whereClauseExists = true;
+        }
+        if (isAuthor) {
+            if (whereClauseExists) {
+                query += " AND";
+            } else {
+                query += " WHERE";
+            }
+            query += (" (SELECT COUNT(1) FROM " + QUIZ_TABLE_NAME
+                        + " WHERE " + QUIZ_TABLE_COLUMN_8_AUTHOR_ID + " = us." + USERS_TABLE_COLUMN_1_ID + ") > 0");
+            query += " ORDER BY (SELECT COUNT(1) FROM " + QUIZ_TABLE_NAME
+                                + " WHERE " + QUIZ_TABLE_COLUMN_8_AUTHOR_ID + " = us." + USERS_TABLE_COLUMN_1_ID + ")";
+        } else {
+            query += " ORDER BY (SELECT COUNT(1) FROM " + QUIZ_EVENTS_TABLE_NAME
+                               + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = us." + USERS_TABLE_COLUMN_1_ID + ")";
+        }
+        query += " LIMIT " + numUsers + ";\n";
+
+//        System.out.println("get top users by filter"); // TODO remove
+//        System.out.println(query); // TODO remove
+        List<User> users = new ArrayList<>();
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                User newUser = buildUserFromResultSet(set);
+                users.add(newUser);
+            }
+            qStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+
+    }
+
+    public int getQuizzesPlayedCount(int userID) {
+        String query = "SELECT COUNT(1) AS num_quizzes FROM " + QUIZ_EVENTS_TABLE_NAME
+                    + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID + ";\n";
+        int numQuizzesPlayed = 0;
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            if(!set.next()) {
+                return 0;
+            }
+            numQuizzesPlayed = set.getInt("num_quizzes");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return numQuizzesPlayed;
+    }
+
+    public int getQuizzesMadeCount(int userID) {
+        String query = "SELECT COUNT(1) AS num_quizzes_made FROM " + QUIZ_TABLE_NAME
+                + " WHERE " + QUIZ_TABLE_COLUMN_8_AUTHOR_ID + " = " + userID + ";\n";
+        int numQuizzesMade = 0;
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            if(!set.next()) {
+                return 0;
+            }
+            numQuizzesMade = set.getInt("num_quizzes_made");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return numQuizzesMade;
+    }
+
+    public double getUserTotalPoints(int userID) {
+        String query = "SELECT SUM(" + QUIZ_EVENT_TABLE_COLUMN_6_USER_TOTAL_SCORE + ") AS user_total_points FROM "
+                    + QUIZ_EVENTS_TABLE_NAME + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID;
+        double totalPoints = 0;
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            if(!set.next()) {
+                return 0;
+            }
+            totalPoints = set.getDouble("user_total_points");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return totalPoints;
+    }
+
+    public List<String> getCountries() {
+        return getLocationsByColumn(USERS_TABLE_COLUMN_8_COUNTRY);
+    }
+
+    public List<String> getCities() {
+        return getLocationsByColumn(USERS_TABLE_COLUMN_7_CITY);
+    }
+
+    private List<String> getLocationsByColumn(String column) {
+        String query = "SELECT DISTINCT( " + column
+                + " ) FROM " + USERS_TABLE_NAME + ";\n";
+        List<String> locations = new ArrayList<>();
+//        System.out.println("query: " + query);
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            while(set.next()) {
+                locations.add(set.getString(column));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return locations;
     }
 
 }

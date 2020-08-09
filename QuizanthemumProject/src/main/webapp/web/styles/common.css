@@ -3,16 +3,15 @@
     padding: 0;
     box-sizing: border-box;
 }
-html body {
+html {
     background-color: #002c2f;
     position: relative;
     height: 100% !important;
     /*min-height: 100%;*/
 }
 .container {
-     /*width: 1250px;*/
-    width: 960px;
-    min-height: 100% !important;
+     width: 1250px;
+    /*width: 960px;*/
     margin: auto;
 }
 
@@ -49,7 +48,7 @@ html body {
     display: flex;
     align-content: space-between;
     position: absolute;
-    right: 0px;
+    right: 0;
     width: auto;
     justify-content: center;
     align-items: center;
@@ -108,13 +107,19 @@ html body {
     color: #b3bdbe;
     font-size: 14px;
     font-weight: bold;
-    margin-right: 20px;
+    padding-right: 12px;
+    padding-left: 12px;
     text-decoration: none;
 }
 
 .nav-item:hover {
     color: #d48a33;
 }
+
+.grayeble:hover {
+    background-color: #777;
+}
+
 .manu {
     position: relative;
 }
@@ -169,10 +174,7 @@ html body {
     outline:none;
 }
 
-.button {
-
-}
-.button {
+.url-button{
     cursor: pointer;
     background-color: #f07237;
     color: white;
@@ -189,6 +191,28 @@ html body {
     position: relative;
     overflow: hidden;
     padding: 11px    ;
+}
+.url-button a{
+    color: rgba(51,51,51,1);
+    text-decoration: none;
+    display: block;
+}
+.button {
+    cursor: pointer;
+    background-color: #f07237;
+    color: white;
+    font-size: medium;
+    font-weight: 600;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    outline:none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .button a{
@@ -224,6 +248,64 @@ html body {
 }
 
 
+/* The sidebar menu */
+.sidebar {
+    height: 240px; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    right:0;
+    display: flex;
+    flex-direction: column;
+    background-color: #312450;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+    /*border: 1px dashed #f07237;*/
+
+}
+.sidebar a {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 12px;
+    color: orange;
+    display: block;
+    transition: 0.3s;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+
+}
+.my-mat-icon{
+
+    margin-right: 10px;
+}
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+    color: #f1f1f1;
+}
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+#header-section {
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 20px;
+}
+
+
+.drop-down{
+    width: 100%;
+    background: #f1f1f1;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+}
 
 
 /* FOOOTER */
@@ -254,5 +336,6 @@ html body {
 }
 
 .footer.rigth {
+    position: absolute;
     right: 5px;
 }

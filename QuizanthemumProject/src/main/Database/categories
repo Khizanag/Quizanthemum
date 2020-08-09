@@ -1,0 +1,17 @@
+CREATE TABLE categories(
+                           id int primary key auto_increment,
+                           name varchar(64)
+);
+
+-- insert default categories into database
+
+INSERT INTO categories VALUES (null, 'ბიოლოგია');
+INSERT INTO categories VALUES (null, 'გეოგრაფია');
+INSERT INTO categories VALUES (null, 'ისტორია');
+INSERT INTO categories VALUES (null, 'ლიტერატურა');
+INSERT INTO categories VALUES (null, 'მათემატიკა');
+INSERT INTO categories VALUES (null, 'სპორტი');
+INSERT INTO categories VALUES (null, 'ფიზიკა');
+INSERT INTO categories VALUES (null, 'ფილმები');
+INSERT INTO categories VALUES (null, 'ქიმია');
+INSERT INTO categories VALUES (null, 'ხელოვნება');

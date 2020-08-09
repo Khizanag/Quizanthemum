@@ -14,8 +14,8 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 
     <form class="add-question-section" id="matching-form" action="../../../QuestionEventFinished" method="get">
         <div class="container">
@@ -46,19 +46,13 @@
         </div>
     </form>
 
-    <jsp:include page="../Footer.jsp"></jsp:include>
+    <jsp:include page="../PartPages/Footer.jsp"></jsp:include>
 </body>
 
 <script>
 
-    function getRandomColor() {
-        let letters = '0123456789ABCDEF';
-        let color = '#33';
-        for (let i = 0; i < 4; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
+    let colors = ["#616A6B" , "#9B59B6", "#3498DB", "#17A589",
+                    "#D35400", "#F39C12", "#1B4F72", "#C0392B"];
 
     let numClick = 0;
     let prevId = 0;
@@ -78,14 +72,13 @@
         }
 
         if (numClick % 2 == 0 && id != prevId) {
-            color = getRandomColor();
+            color = colors.pop();
             document.getElementById(id).style.backgroundColor = color;
             document.getElementById("color" + id).value = color;
         } else {
             if (id % 2 != prevId % 2) {
                 document.getElementById(id).style.backgroundColor = color;
                 document.getElementById("color" + id).value = color;
-                color = getRandomColor();
             }
         }
         prevId = id;

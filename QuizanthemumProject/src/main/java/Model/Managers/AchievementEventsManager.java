@@ -16,14 +16,10 @@ public class AchievementEventsManager implements AchievementsTableConfig {
 
     private ManagersManager manager;
     private Connection connection;
-    private Statement statement;
 
     public AchievementEventsManager(ManagersManager manager){
         this.manager = manager;
         this.connection = DatabaseConnector.getInstance();
-        try {
-            statement = connection.createStatement();
-        } catch (SQLException unused) { }
     }
 
     public AchievementEvent getAchievement(int id){
@@ -31,11 +27,16 @@ public class AchievementEventsManager implements AchievementsTableConfig {
                 " FROM " + ACHIEVEMENT_EVENT_TABLE_NAME +
                 " WHERE " + ACHIEVEMENT_EVENT_TABLE_COLUMN_1_ID + " = " + id + ";";
         try {
+            Statement statement = connection.createStatement();
             ResultSet set = statement.executeQuery(query);
-            int achievementID = set.getInt(ACHIEVEMENT_EVENT_TABLE_COLUMN_2_ACHIEVEMENT_ID);
-            int userID = set.getInt(ACHIEVEMENT_EVENT_TABLE_COLUMN_3_USER_ID);
-            Date achieveDate = set.getDate(ACHIEVEMENT_EVENT_TABLE_COLUMN_4_ACHIEVE_DATE);
-            return new AchievementEvent(id, achievementID, userID, achieveDate);
+            if(set.next()){
+                int achievementID = set.getInt(ACHIEVEMENT_EVENT_TABLE_COLUMN_2_ACHIEVEMENT_ID);
+                int userID = set.getInt(ACHIEVEMENT_EVENT_TABLE_COLUMN_3_USER_ID);
+                Date achieveDate = set.getDate(ACHIEVEMENT_EVENT_TABLE_COLUMN_4_ACHIEVE_DATE);
+                set.close();
+                statement.close();
+                return new AchievementEvent(id, achievementID, userID, achieveDate);
+            }
         } catch (SQLException unused) { }
         return null;
     }
@@ -49,7 +50,9 @@ public class AchievementEventsManager implements AchievementsTableConfig {
                     achievementEvent.getAchieveDate() +
                 ");";
         try {
+            Statement statement = connection.createStatement();
             statement.execute(query);
+            statement.close();
         } catch (SQLException throwable) { }
     }
 

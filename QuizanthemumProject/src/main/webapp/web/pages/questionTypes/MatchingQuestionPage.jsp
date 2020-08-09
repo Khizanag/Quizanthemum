@@ -5,10 +5,8 @@
 
     <hr>
     <div class="input-items" id="input-items">
-
-        <label for="description"><b>მითითება</b></label>
-        <input type="text" placeholder="გთხოვთ შეიყვანოთ მითითება მომხმარებლისთვის"
-               name="description" id="description" required>
+        <jsp:include page="/web/pages/PartPages/QuestionStatementSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
 
         <div class="matching-elems-secton">
             <div class="matching-elems-container" id="matching-elems-container">
@@ -41,21 +39,10 @@
                 </button>
             </div>
         </div>
-      
-        <hr><div class="point-holder">
-        <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
-        <input type="number" placeholder="ქულა"
-               id="question_point" name="max_score"
-               min="1" max="16" required>
-        </div> <hr>
 
-        <label for="source"><b>წყარო</b></label>
-        <input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
-               name="source" id="source">
-
-        <label for="comment"><b>კომენტარი</b></label>
-        <input type="text" placeholder="სურვილისამებრ მიუთითეთ კომენტარი..."
-               name="comment" id="comment">
+        <jsp:include page="/web/pages/PartPages/PointHolderSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/SourceSectionInQuestionCreationPage.jsp"/>
+        <jsp:include page="/web/pages/PartPages/CommenSectionInQuestionCreationPage.jsp"/>
 
         <%--   HIDDEN VARIABLES     --%>
         <input type="hidden" name="type" value="<%=MATCHING%>">
@@ -71,6 +58,4 @@
             შემდეგი შეკითხვის დამატება
         </button>
     </div>
-    <hr>
-
 </form>

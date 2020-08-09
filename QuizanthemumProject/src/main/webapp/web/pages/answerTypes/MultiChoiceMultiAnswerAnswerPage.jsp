@@ -12,11 +12,15 @@
     <link rel="stylesheet" href="../../styles/breakpoints.css">
     <link rel="stylesheet" href="../../styles/answers.css">
 </head>
+<style>
+    .question-img {
+        width: 40%;
+        margin-top: 10px;
+    }
+</style>
 <body>
-
-
-    <jsp:include page="/web/pages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
 
     <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
         <div class="container">
@@ -24,6 +28,9 @@
             <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
             <%Question question = questionEvent.getQuestion();%>
             <%List<String> statements = question.getShuffledStatements();%>
+
+            <img src="<%=question.getPictureStatementURL()%>" class="question-img"
+                 onerror="this.style.display='none'">
             <p><%=question.getTextStatement()%></p>
             <p><%=question.getHeaderStatement()%></p>
             <hr>
@@ -38,5 +45,5 @@
         </div>
     </form>
 
-    <jsp:include page="../Footer.jsp"></jsp:include>
+    <jsp:include page="../PartPages/Footer.jsp"></jsp:include>
 </body>
