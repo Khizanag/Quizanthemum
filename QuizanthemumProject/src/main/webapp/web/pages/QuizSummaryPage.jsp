@@ -116,12 +116,14 @@
                     %>
                     <div class="question">
                         <h3>კითხვა <%=i + 1%></h3>
+                        <br>
                         <div class="question-text-statement">
                             <% if (currQuest.isPictureQuestion()) { %>
-                            <img sr="<%=currQuest.getPictureStatementURL()%>" class="small-question-image">
+                            <img src="<%=currQuest.getPictureStatementURL()%>" class="small-question-image">
                             <%}%>
-                            <p><%=currQuest.getTextStatement()%></p>
                         </div>
+                        <p><%=currQuest.getTextStatement()%></p>
+
                         <p style="padding-top: 0"> ავტორის კომენტარი: <%=currQuest.getComment()%></p>
                         <p style="padding-top: 0"> შეკითხვის წყარო: <%=currQuest.getSource()%></p>
                         <div class="answers">

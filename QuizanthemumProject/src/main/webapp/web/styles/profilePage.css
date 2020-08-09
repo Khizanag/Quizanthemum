@@ -74,7 +74,7 @@
 
 }
 .profile-cover-photo img{
-      width: 970px;
+      width: 1250px;
       height: 115px;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
@@ -327,14 +327,14 @@
 
 }
 .players-top-quizzes{
-  width:960px;
+  width:1250px;
   display:flex;
   justify-content: center;
   font-family: 'Noto Sans Georgian', sans-serif;
 }
 
 .top-quizzes-container{
-  width:960px;
+  width:1250px;
   display:flex;
   justify-content: center;
   align-items: center;
@@ -346,6 +346,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  flex-flow: wrap;
 }
 
 .top-quiz-item {
