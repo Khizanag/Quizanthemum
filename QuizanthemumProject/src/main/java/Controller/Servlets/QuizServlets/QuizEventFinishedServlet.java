@@ -33,10 +33,14 @@ public class QuizEventFinishedServlet extends HttpServlet {
         QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
 
         quizEvent.finishQuiz();
-        if (quizEvent.isPracticeMode())
-            return;
 
         System.out.println("practice mode was turned off");
+
+        if(quizEvent.isPracticeMode()) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizSummaryPage.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
 
         quizEvent.resetQuestionEventIterator();
         int quizEventId = quizEventManager.insertQuizEvent(quizEvent);
