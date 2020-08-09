@@ -40,7 +40,9 @@
     <div class="container manu">
         <nav class="nav">
             <ul class="nav-items">
-                <a class="nav-item" target="_self" href="/">მთავარი</a>
+                <a class="nav-item" target="_self" href="/" >
+                    მთავარი
+                </a>
 
                 <div class="dropdown">
                     <a class="nav-item" target="_self" href="/DisplayQuizzes">ქვიზები</a>
@@ -66,7 +68,7 @@
                     </div>
                 </div>
                 <a class="nav-item" target="_self" href="/DisplayTopUsers">ტოპ მომხმარებლები</a>
-                <a class="nav-item" target="_self" href="/Blog">ბლოგი</a>
+<%--                <a class="nav-item" target="_self" href="/Blog">ბლოგი</a>--%>
                 <a class="nav-item" target="_self" href="/Contact">კონტაქტი</a>
             </ul>
         </nav>

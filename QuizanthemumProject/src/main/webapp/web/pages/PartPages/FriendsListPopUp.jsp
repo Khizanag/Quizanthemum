@@ -57,14 +57,6 @@
 <% } %>
 
 <script>
-    function acceptFriendRequest(ID){
-        console.log('acceptFriendRequest');
-    }
-
-    function rejectFriendRequst(ID){
-        console.log('rejectFriendRequst');
-    }
-
     function popUpFriendsList(){
         console.log('popUpFriendsList in FriendsListPopUp.jsp');
         document.getElementById("friends-list-popup-id").classList.toggle("active");

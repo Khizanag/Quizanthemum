@@ -1,4 +1,4 @@
-<%@ page import="Controller.Classes.User.User" %>
+    <%@ page import="Controller.Classes.User.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Controller.Classes.OtherClasses.Challenge" %>
 <%@ page import="Model.Managers.ManagersManager" %>

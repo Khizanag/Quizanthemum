@@ -15,6 +15,6 @@ create table friend_requests(
                                is_accepted boolean not null
 );
 
-SELECT  * FROM friend_requests;
+SELECT * FROM friend_requests;
 
 DROP table friend_requests;
