@@ -179,7 +179,6 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
         String query = "SELECT " + USERS_TABLE_COLUMN_13_PHOTO_URL + " FROM " +
                 USERS_TABLE_NAME + " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
 
-        System.out.println(query);
         String url;
         try {
             ResultSet set = statement.executeQuery(query);

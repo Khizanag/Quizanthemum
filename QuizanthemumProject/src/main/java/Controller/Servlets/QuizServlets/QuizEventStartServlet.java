@@ -70,7 +70,7 @@ public class QuizEventStartServlet extends HttpServlet {
             int type = nextQuestionEvent.getType();
             response.setHeader("Location", getNextQuestionLink(type));
         } else {
-            System.out.println("QuzEventStartedSertvelt -> 0 questions -> quizEventFinished");
+//            System.out.println("QuzEventStartedSertvelt -> 0 questions -> quizEventFinished");
             response.setHeader("Location", "http://localhost:8080/QuizEventFinished");
         }
 
