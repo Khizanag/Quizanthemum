@@ -27,8 +27,8 @@
     <title>Contact</title>
 </head>
 <body>
-    <jsp:include page="/web/pages/PartPages/Header.jsp"></jsp:include>
-    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"></jsp:include>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
     <br><br>
     <div class="full-wrapper">
@@ -40,11 +40,12 @@
         <div class = "form-content-wrapper">
             <div class = "main-container">
                 <div class="form-content ">
-                    <form id="contact" action="../../SendContactMailServlet" class="contact-form">
-                        <input class="inp-text" type="text" placeholder="სახელი" tabindex="1" required autofocus>
-                        <input class="inp-text" type="email" placeholder="მეილის მისამართი" tabindex="2" required >
-                        <input class="inp-text" type="text" placeholder="მობილურის ნომერი(არა აუცილებელი)" tabindex="3">
-                        <textarea class="big-inp-text"placeholder="აკრიფე ტექსტი" tabindex="4" required></textarea>
+                    <form id="contact" action="/SendContactMail" class="contact-form">
+                        <input class="inp-text" type="text" placeholder="სახელი" name="name" tabindex="1" required autofocus>
+<%--                        <input class="inp-text" type="email" placeholder="მეილის მისამართი" name="mail" tabindex="2" required >--%>
+                        <input class="inp-text" type="text" placeholder="თემა..." name="subject" tabindex="2" required >
+                        <input class="inp-text" type="text" placeholder="მობილურის ნომერი(არა აუცილებელი)" name="mobile" tabindex="3">
+                        <textarea class="big-inp-text"placeholder="აკრიფე ტექსტი" name="body" tabindex="4" required></textarea>
                         <button class="submit-btn" name="submit" type="submit" id="contact-submit" data-submit="...Sending">გაგზავნა</button>
                     </form>
 
@@ -65,12 +66,11 @@
                     <span class="info-row">
                         ჩვენს შესახებ:
                         <div class ="about-us-text">
-                            <p >
-                                ჩვენ ვართ ხუთკაციანი დეველოპერული ჯგუფი , რომელთა მიზანიცაა ქართულ ბაზარზე
-                                დანერგონ ხარისხიანი პლატფორმა ქვიზების მოყვარულთათვის. <strong>Quzianthemum</strong> _ს დიდი ისტორია აქვს
-                                უკან , რომელიც დაწერილია უძილო ღამეებით და დატვირთული დღეებით , იმისათვის რომ , თქვენამდე მოგვეტანა
-                                ხარისხიანი , ესთეტიკური პროდუქტი , სადაც შეძლებთ ითამაშოთ უცხო ქვიზები , თქვენ თვითონ შექმნათ თქვენი სასურველი ქვიზი და ...
-
+                            <p>
+                                ჩვენ ვართ ხუთკაციანი დეველოპერული ჯგუფი, რომელთა მიზანიცაა ქართულ ბაზარზე
+                                დანერგონ ხარისხიანი პლატფორმა ქვიზების მოყვარულთათვის. <strong>Quzianthemum</strong>-ს დიდი ისტორია აქვს
+                                უკან, რომელიც დაწერილია უძილო ღამეებით და დატვირთული დღეებით, იმისათვის რომ, თქვენამდე მოგვეტანა
+                                ხარისხიანი, ესთეტიკური პროდუქტი, სადაც შეძლებთ ითამაშოთ უცხო ქვიზები, თქვენ თვითონ შექმნათ თქვენი სასურველი ქვიზი და...
                             </p>
                         </div>
                     </span>

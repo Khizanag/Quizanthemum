@@ -42,13 +42,13 @@
                            onchange="loadFile(event)"
                            style="display: none;"
                     >
-                    <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
+<%--                    <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>--%>
                     <div class="upload-image-container">
+                        <input type="text" placeholder="ფოტოს URL" name="quiz_icon_url" id="quiz_icon_url" required>
                         <label class="url-button upload" type="button"
                                onclick="uploadImage(event)" id="question_image_url">
-                            შეიყვანეთ URL ასატვირთად
+                            ატვირთვა
                         </label>
-                        <input type="text" placeholder="ფოტოს URL" name="quiz_icon_url" id="quiz_icon_url" required>
                     </div>
                     <img id="output" width="100" />
                 </div>
