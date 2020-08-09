@@ -309,5 +309,7 @@ SELECT * FROM quiz_events;
 SELECT * FROM quizzes;
 SELECT * FROM users;
 SELECT * FROM quiz_rating_events;
+SELECT * FROM countries;
+SELECT * FROM friend_request;
 
 # insert into challenges values(null, 1, 3, 4, null, null, false, -1, SYSDATE(), SYSDATE());
