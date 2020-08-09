@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Users Profile </title>
-    <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
+    <link rel="icon" type="image/png" href="/web/images/common/icon.png"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/homePage.css">
@@ -103,7 +103,8 @@
             </div>
             <div class = "profile-info">
                 <img class = "profile-picture-big" id="prof-pic-big-id"
-                     src = "web/images/common/defProfPic.jpg" onerror="this.src='../images/common/defProfPic.jpg';">
+                     src = "<%=usersManager.getProfilePicture(user.getID())%>"
+                     onerror="this.src='/web/images/common/defProfPic.jpg';">
                 <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
                 <div class="profile-name"><%=user.getUsername()%></div>
                 <%
@@ -209,6 +210,8 @@
     }
 
     function changeImage(){
+<%--        <% usersManager.insertNewProfilePicture(user.getID(), user.getPhotoURL()); %>--%>
+
         document.getElementById("change-image").classList.toggle("active");
         document.getElementById('photo-url').value="";
         document.getElementById('output').src="";
