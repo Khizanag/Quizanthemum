@@ -181,9 +181,9 @@
         <div class="top-quiz-items">
             <% for (QuizEvent currQuizEvent : topQuizEvents) { %>
             <%Quiz currQuiz = currQuizEvent.getQuiz();%>
-            <div class="top-quiz-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
+            <div class="top-quiz-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)" style="width: 545px;">
                 <img class="quiz-small-image" src="<%=currQuiz.getIconUrl()%>"
-                     onerror="this.src='/web/images/common/Quiz1.jpg';">
+                     onerror="this.src='/web/images/common/Quiz1.jpg';" style="padding-left: 10px;">
                 <div class="quiz-small-description-block">
                     <h3 class="quiz-title">
                         <%=currQuiz.getName()%>
