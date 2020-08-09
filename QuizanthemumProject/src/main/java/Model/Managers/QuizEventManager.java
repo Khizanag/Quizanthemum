@@ -98,7 +98,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
     }
 
 
-    public List<QuizEvent> getQuizzesPlayedBy(int userID, int numRows) {
+    public List<QuizEvent> getLatestQuizzesPlayedBy(int userID, int numRows) {
         String query = "SELECT " + QUIZ_EVENT_TABLE_COLUMN_1_ID
                 + " FROM " + QUIZ_EVENTS_TABLE_NAME
                 + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID
@@ -106,7 +106,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
                 + " LIMIT " + numRows + ";\n";
 
         List<QuizEvent> playedQuizzes = new ArrayList<>();
-
+        System.out.println(query);
         try {
             Statement qStatement = connection.createStatement();
             ResultSet set = qStatement.executeQuery(query);
