@@ -161,7 +161,7 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
     }
 
     public void insertNewProfilePicture(int userID, String pictureURL) {
-        String query = "UPDATE " + QUIZ_TABLE_NAME + " SET " +
+        String query = "UPDATE " + USERS_TABLE_NAME + " SET " +
                 USERS_TABLE_COLUMN_13_PHOTO_URL + " = " + pictureURL +
                 " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
         try {
@@ -333,6 +333,23 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             throwables.printStackTrace();
         }
         return numQuizzesPlayed;
+    }
+
+    public int getQuizzesMadeCount(int userID) {
+        String query = "SELECT COUNT(1) AS num_quizzes_made FROM " + QUIZ_TABLE_NAME
+                + " WHERE " + QUIZ_TABLE_COLUMN_8_AUTHOR_ID + " = " + userID + ";\n";
+        int numQuizzesMade = 0;
+        try {
+            Statement qStatement = connection.createStatement();
+            ResultSet set = qStatement.executeQuery(query);
+            if(!set.next()) {
+                return 0;
+            }
+            numQuizzesMade = set.getInt("num_quizzes_made");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return numQuizzesMade;
     }
 
     public double getUserTotalPoints(int userID) {

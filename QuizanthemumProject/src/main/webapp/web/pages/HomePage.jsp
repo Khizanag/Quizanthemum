@@ -7,6 +7,7 @@
 <%@ page import="Model.Managers.ManagersManager" %>
 <%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="java.util.Collections" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -37,8 +38,11 @@
     ServletContext context = request.getServletContext();
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
-    List<Quiz> highestRated = quizManager.getHighestRatedQuizzes(10);
-    List<Quiz> mostPopular = quizManager.getMostPopularQuizzes(10);
+    List<Quiz> highestRated = quizManager.getHighestRatedQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
+    List<Quiz> mostPopular = quizManager.getMostPopularQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
+    Collections.reverse(highestRated); // to draw in correct order
+    Collections.reverse(mostPopular); // to draw in correct order
+
 %>
 <style>
     .section-header {

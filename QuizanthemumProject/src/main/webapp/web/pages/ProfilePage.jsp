@@ -7,6 +7,9 @@
 <%@ page import="static Configs.Config.*" %>
 <%@ page import="Controller.Classes.Quiz.QuizEvent" %>
 <%@ page import="Model.Managers.*" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.math.BigDecimal" %>
 <head>
     <meta charset="UTF-8">
     <title> Users Profile </title>
@@ -29,6 +32,16 @@
         UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
         int ID = Integer.parseInt(request.getParameter("id"));
         User user = usersManager.getUser(ID);
+        DecimalFormat df = new DecimalFormat("0.00");
+    %>
+    <%!
+        private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
+            if (x > 0) {
+                return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_FLOOR);
+            } else {
+                return new BigDecimal(String.valueOf(x)).setScale(numberofDecimals, BigDecimal.ROUND_CEILING);
+            }
+        }
     %>
 </head>
 
@@ -108,14 +121,14 @@
             </div>
             <div class="profile-details-info">
                 <div class = "quizzes-played"><%="ნათამაშები ქვიზები: " + usersManager.getQuizzesPlayedCount(user.getID())%></div>
-                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: " + usersManager.getUserTotalPoints(user.getID())%></div>
+                <div class = "quizzes-played"><%="ჯამში დაგროვებული ქულა: " + truncateDecimal(usersManager.getUserTotalPoints(user.getID()), 2)%></div>
                 <div class =  "challenges-played"><%="ნათამაშები ჩელენჯები: " + user.getChallengesPlayed()%></div>
                 <div class="challenges-won"><%="მოგებული ჩელენჯები: " + user.getChallengesWon()%></div>
                 <%
                     if(role>1){
                         out.print("<div class='quizzes-made'> ");
                         out.print("შედგენილი ქვიზები: ");
-                        out.print(user.getQuizzesMade());
+                        out.print(usersManager.getQuizzesMadeCount(user.getID()));
                         out.print("</div>");
                     }
                 %>
@@ -130,6 +143,7 @@
         FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
         QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
         List<QuizEvent> topQuizEvents = quizEventManager.getQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
+        Collections.reverse(topQuizEvents); // to draw in correct order
         User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
         if(loggedUser != null && !friendshipsManager.areFriends(user.getID(), loggedUser.getID())){ %>
     <div class="container">
@@ -162,7 +176,8 @@
                                 <%=currQuiz.getDescription()%>
                             </p>
                         </div>
-                        <div class = "quiz-score"><%=currQuizEvent.getUserScore()%> / <%=currQuiz.getMaxScore()%></div>
+                        <div class = "quiz-score"><%= truncateDecimal(currQuizEvent.getUserScore(), 2)%>
+                                                    / <%=truncateDecimal((currQuiz.getMaxScore()), 2)%></div>
                         <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
                     </div>
                 <%}%>
@@ -194,7 +209,6 @@
     }
 
     function changeImage(){
-        console.log('asd');
         document.getElementById("change-image").classList.toggle("active");
         document.getElementById('photo-url').value="";
         document.getElementById('output').src="";

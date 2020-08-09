@@ -170,8 +170,8 @@
         let text = document.getElementById("fillWith").value;
         let prev = document.getElementById("fill-question").value;
         if(text === '') return;
-        document.getElementById("fill-question").innerText = prev + '{(<_' + text + '_>)}';
-        document.getElementById("statement_text_elem_in_match").value = prev + '{(<_' + text + '_>)}';
+        document.getElementById("fill-question").innerText = prev + ' {(<_' + text + '_>)}';
+        document.getElementById("statement_text_elem_in_match").value = prev + ' {(<_' + text + '_>)}';
         document.getElementById("fillWith").value = '';
     }
 
