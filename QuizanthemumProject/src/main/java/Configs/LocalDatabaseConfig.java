@@ -9,7 +9,7 @@ public interface LocalDatabaseConfig {
     String PASSWORD = "paroli12345678";
     String DATABASE_NAME = "quizanthemum_schema";
 
-//    // dbera
+//    // dbera6
 //    String USERNAME = "dima";
 //    String PASSWORD = "DimaDima_123";
 //    String DATABASE_NAME = "demodb";

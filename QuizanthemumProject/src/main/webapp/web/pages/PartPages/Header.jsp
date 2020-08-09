@@ -2,6 +2,7 @@
 <%@ page import="static Configs.Config.LOGGED_IN_USER" %>
 <%@ page import="static Configs.Config.DISPLAY_CHALLENGES" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="Model.Managers.UsersManager" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -28,6 +29,7 @@
 <%
     response.setHeader("Content-Type", "text/xml; charset=UTF-8");
     User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
 %>
 
 <jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
@@ -47,7 +49,9 @@
         </ul>
         <% } else { %>
         <ul class="header-right">
-            <img class = "profile-picture right-menu" id="small-prof-pic-id" src="" onerror="this.src='/web/images/common/defProfPic.jpg';" href=""onclick="openSidebar()">
+            <img class = "profile-picture right-menu" id="small-prof-pic-id"
+                 src = "<%=usersManager.getProfilePicture(user.getID())%>"
+                onerror="this.src='/web/images/common/defProfPic.jpg';" href=""onclick="openSidebar()">
             <span class = "profile-name-text" onclick="openSidebar()"><%=user.getUsername()%></span>
         </ul>
         <% } %>

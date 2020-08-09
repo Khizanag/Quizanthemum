@@ -28,7 +28,7 @@
                 <label for="questions-type"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
                 <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
                     <option value="0">-</option>
-                    <option value="1">ღია პასუხიანი</option>
+<%--                    <option value="1">ღია პასუხიანი</option>--%>
                     <option value="2">გამოტოვებების შევსება</option>
                     <option value="3">სტანდარტული ტესტური კითხვა</option>
                     <option value="4">ღია მრავალპასუხიანი</option>

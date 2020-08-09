@@ -162,8 +162,10 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
 
     public void insertNewProfilePicture(int userID, String pictureURL) {
         String query = "UPDATE " + USERS_TABLE_NAME + " SET " +
-                USERS_TABLE_COLUMN_13_PHOTO_URL + " = " + pictureURL +
+                USERS_TABLE_COLUMN_13_PHOTO_URL + " = '" + pictureURL + "'" +
                 " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
+
+        System.out.println(query);
         try {
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.executeUpdate();
@@ -171,6 +173,25 @@ public class UsersManager implements UsersTableConfig, QuestionTableConfig,
             System.out.println("Insertion Error. Quiz Manager Class");
             e.printStackTrace();
         }
+    }
+
+    public String getProfilePicture(int userID) {
+        String query = "SELECT " + USERS_TABLE_COLUMN_13_PHOTO_URL + " FROM " +
+                USERS_TABLE_NAME + " WHERE " + USERS_TABLE_COLUMN_1_ID + " = " + userID + ";\n";
+
+        String url;
+        try {
+            ResultSet set = statement.executeQuery(query);
+            if(!set.next()) {
+                return "";
+            }
+                url = set.getString(USERS_TABLE_COLUMN_13_PHOTO_URL);
+                return url;
+            } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return "";
     }
 
 
