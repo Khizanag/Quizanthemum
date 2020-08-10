@@ -8,7 +8,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Top Users </title>
+    <title> User's Filter </title>
     <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
@@ -181,6 +181,11 @@
 <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 
+
+<form id="display-profile-form" action="/Profile" method="get">
+    <input id="profile-id-holder" name="id">
+</form>
+
 <script>
 
     function redirectToQuizStart(id){
@@ -190,11 +195,10 @@
         document.getElementById("to_display_start_quiz_elem").value = id;
         form.submit();
     }
+
     function redirectToProfile(id){
-        const inp=document.getElementById("currUser"+id);
-        inp.value=id;
-        const form = document.getElementById("to_display_profile_form");
-        document.getElementById("to_display_profile_elem").value = id;
+        const form = document.getElementById("display-profile-form");
+        document.getElementById("profile-id-holder").value = id;
         form.submit();
     }
 
