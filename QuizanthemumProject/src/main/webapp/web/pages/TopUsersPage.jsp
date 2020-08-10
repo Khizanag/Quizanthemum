@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/QuizzesPage.css">
+    <link rel="stylesheet" href="/web/styles/UserBlock.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -28,12 +29,6 @@
     .found-elems-container {
         display: flex;
         flex-wrap: wrap;
-    }
-    .top-quiz-list-item {
-        width: 376px;
-    }
-    .quiz-small-description {
-        font-size: x-small;
     }
     .search-bth {
         cursor: pointer;
@@ -159,21 +154,21 @@
         <h3 class="section-header"> ნაპოვნი მომხმარებლები:</h3>
         <div class="found-elems-container">
             <% for(User currUser : topUsers) { %>
-            <div class="top-quiz-list-item"
+            <div class="found-user"
                  onclick="redirectToProfile(<%=currUser.getID()%>)">
-                <img class= "quiz-list-small-image" src="awefqwefqwef"
-                     onerror="this.src='/web/images/common/defProfPic.jpg';">
-                <div class= "quiz-list-small-description-block" style="position: relative">
-                    <h3 class= "quiz-title" style="font-size: 16px">
+                <img class= "found-user-small-image" src="<%=currUser.getPhotoURL()%>"
+                     onerror="this.src='/web/images/common/defProfPic.jpg';" style="margin-left: 0">
+                <div class= "found-user-small-description-block" style="position: relative">
+                    <h3 class= "found-user-title" style="font-size: 16px">
                         <%=currUser.getUsername()%>
                     </h3>
-                    <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                    <p class="found-user-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
                         <%=currUser.getFirstName()%> <%=currUser.getLastName()%>
                     </p>
-                    <p class="quiz-small-description" style="overflow: hidden; height: 75px;">
+                    <p class="found-user-small-description" style="overflow: hidden; height: 75px;">
                         <%=currUser.getEmail()%>
                     </p>
-                    <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                    <p class="found-user-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
                         <%=currUser.getBirthDate()%>
                     </p>
                 </div>
