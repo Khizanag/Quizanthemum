@@ -15,3 +15,5 @@ INSERT INTO categories VALUES (null, 'Literature');
 INSERT INTO categories VALUES (null, 'Films');
 INSERT INTO categories VALUES (null, 'Art');
 INSERT INTO categories VALUES (null, 'Sports');
+
+

@@ -39,7 +39,7 @@
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
     List<Quiz> highestRated = quizManager.getHighestRatedQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
     List<Quiz> mostPopular = quizManager.getMostPopularQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
-    Collections.reverse(highestRated); // to draw in correct order
+//    Collections.reverse(highestRated); // to draw in correct order
     Collections.reverse(mostPopular); // to draw in correct order
 
 %>
@@ -52,7 +52,7 @@
 
     <div class="highest-rated-section">
         <div class="container" style="position: relative; overflow: hidden">
-            <h3 class="section-header">Highest Rating Quizzes</h3>
+            <h3 class="section-header">Highest Rated Quizzes</h3>
             <div class="scroll-block">
                 <% for(int i=0;i<highestRated.size();i++){ Quiz currQuiz = highestRated.get(i); %>
                 <div class="top-quiz-list-item" id="top_<%=i%>" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
