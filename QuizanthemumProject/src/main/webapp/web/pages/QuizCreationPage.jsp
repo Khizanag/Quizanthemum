@@ -21,7 +21,7 @@
 
     <form id="creation-section" class="creation-section" action="/StartQuizCreating" method="get">
         <div class="container bla">
-            <h2>Create Your Quiz</h2>
+            <h2 style="font-family: Helvetica">Create Your Quiz</h2>
             <p>Please fill given fields to create Quiz.</p>
             <hr>
 
