@@ -190,6 +190,7 @@
     h3 {
         color: #f07237;
         font-size: xx-large;
+        font-family: Helvetica;
     }
     .fa:hover {
         color: white;

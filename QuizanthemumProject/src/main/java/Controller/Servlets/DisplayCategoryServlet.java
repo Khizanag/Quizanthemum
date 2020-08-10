@@ -32,7 +32,8 @@ public class DisplayCategoryServlet extends HttpServlet {
         List<Quiz> quizzes = quizzesManager.getCategoryQuizzes(category);
 
         request.setAttribute("quizzes", quizzes);
-        request.setAttribute("title", "წარმოდგენილია ქვიზები კატეგორიიდან: " + category.getName());
+        request.setAttribute("title", category.getName() + " Quizzes");
+
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizListPage.jsp");
         dispatcher.forward(request, response);

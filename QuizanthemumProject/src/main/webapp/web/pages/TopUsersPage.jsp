@@ -25,6 +25,7 @@
     h3 {
         color: #f07237;
         font-size: xx-large;
+        font-family: Helvetica;
     }
     .found-elems-container {
         display: flex;
@@ -86,7 +87,7 @@
 
 <div class="search-inputs-section">
     <div class="container" style="position: relative;">
-        <h3 class="section-header"> Search Filter: </h3>
+        <h3 class="section-header"> Search Filter</h3>
         <form style="margin-left: 20px" action="/DisplayTopUsers" method="get">
             <div class="input-items" id="input-items">
                 <%if(loggedInUser != null) {%>

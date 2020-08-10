@@ -51,9 +51,9 @@
                 <%
                     String title = (String) request.getAttribute("title");
                     if(title != null) { %>
-                    <h2> <%=title%> </h2>
+                    <h2 style="font-family: Helvetica"> <%=title%> </h2>
                 <% } else { %>
-                    <h2>Quizzes</h2>
+                    <h2 style="font-family: Helvetica">Quizzes</h2>
                 <% } %>
             </div>
         </div>

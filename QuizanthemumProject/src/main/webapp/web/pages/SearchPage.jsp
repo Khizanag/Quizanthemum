@@ -27,6 +27,7 @@
     h3 {
         color: #f07237;
         font-size: xx-large;
+        font-family: Helvetica;
     }
     .fa:hover {
         color: white;
@@ -120,7 +121,7 @@
 
     <div class="found-quiz-section">
         <div class="container" style="position: relative;">
-            <h3 class="section-header"> Found users:</h3>
+            <h3 class="section-header"> Found Users:</h3>
             <div class="found-elems-container">
             <%  int numUsers = 0;
                 for(User currUser : users) {
