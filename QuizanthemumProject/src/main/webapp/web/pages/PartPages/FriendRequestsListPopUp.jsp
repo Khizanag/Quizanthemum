@@ -42,9 +42,9 @@
     <div class="overlay"></div>
     <div class="content">
         <div class="close-btn" onclick="popUpFriendRequestsList()">&times;</div>
-        <h1 style="color:orange">'ვიმეგობროთ'ები</h1>
+        <h1 style="color:orange">Friend Requests</h1>
         <br>
-        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">შემოთავაზებული 'ვიმეგობროთ'ები:</h2>
+        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">Requests Sent to Me:</h2>
         <br>
         <hr>
         <br>
@@ -54,19 +54,19 @@
                 User userWhoSent = usersManager.getUser(friendRequest.getSenderID());
         %>
         <div class = "friend-list-row">
-            <span class="nav-item" style="cursor: pointer;" onclick="displayProfile(<%=userWhoSent.getID()%>)">
+            <span class="nav-item"  style="cursor: pointer;" onclick="displayProfile(<%=userWhoSent.getID()%>)">
                 <%=userWhoSent.getUsername()%>
             </span>
             <div class = "friend-challenge-remove-btns">
-                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friendRequest.getID()%>)" style="color: green">დათანხმება</button>
-                <button class="remove-btn" onclick="rejectFriendRequest(<%=friendRequest.getID()%>)" style="color: red">უარყოფა</button>
+                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friendRequest.getID()%>,this)" style="color: green">Accept</button>
+                <button class="remove-btn" onclick="rejectFriendRequest(<%=friendRequest.getID()%>,this)" style="color: red">Reject</button>
             </div>
         </div>
         <% } %>
         <br>
         <br>
         <br>
-        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">ჩემს მიერ შეთავაზებული 'ვიმეგობროთ'ები:</h2>
+        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">My Sent friend requests:</h2>
         <br>
         <hr>
         <br>
@@ -80,7 +80,7 @@
                     <%=userWhoReceived.getUsername()%>
                 </span>
             <div class = "friend-challenge-remove-btns">
-                <button class="remove-btn" onclick="cancelChallenge(<%=friendRequest.getID()%>)" style="color: red">გაუქმება</button>
+                <button class="remove-btn" onclick="cancelChallenge(<%=friendRequest.getID()%>,this)" style="color: red">Cancel</button>
             </div>
         </div>
         <% } %>
@@ -104,12 +104,19 @@
         document.getElementById("friend-requests-list-popup-id").classList.toggle("active");
     }
 
-    function acceptFriendRequest(ID){
+    function acceptFriendRequest(ID,ob){
         console.log('acceptFriendRequest');
+        $(ob).parent().parent().remove();
+
     }
 
-    function rejectFriendRequest(ID){
+    function rejectFriendRequest(ID,ob){
         console.log('rejectFriendRequst');
+        $(ob).parent().parent().remove();
+
+    }
+    function cancelChallenge(ID,ob){
+        $(ob).parent().parent().remove();
     }
 
 

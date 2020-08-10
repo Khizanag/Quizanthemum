@@ -15,6 +15,6 @@
         <input  type="hidden" name="num_statements" value="0">
         <input type="hidden" name="num_answers" value="0">
 
-        <button class="button addQuestion" type="submit"> შემდეგი შეკითხვის დამატება </button>
+        <button class="button addQuestion" type="submit"> Add Next Question </button>
     </div>
 </form>

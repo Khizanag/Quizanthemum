@@ -50,7 +50,7 @@
     <%
         if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
             <div style="text-align: center">
-                <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">ქვიზი წარმატებით შეიქმნა.</p>
+                <p style="color: orange; font-weight: bold; font-style: italic; font-size: large">Quiz Created Successfully.</p>
             </div>
     <%
             request.getServletContext().removeAttribute("quiz-that-was-created-lastly");
@@ -74,9 +74,9 @@
                 </div>
             </div>
 
-            <p style="color:white"> ავტორი: <%=quiz.getAuthor().getFirstName()%> <%=quiz.getAuthor().getLastName()%></p>
+            <p style="color:white"> Author: <%=quiz.getAuthor().getFirstName()%> <%=quiz.getAuthor().getLastName()%></p>
             <div class="quiz-date-and-rait-holder">
-                <p style=" margin-bottom: 0; color:white"> შექმნილია: <%=quiz.getCreationDate()%> </p>
+                <p style=" margin-bottom: 0; color:white"> Created on : <%=quiz.getCreationDate()%> </p>
                 <div style="display: flex; align-items:center; flex-direction: column; margin-top: -30px">
                     <div class="toHover">
                         <div class="raiting-icons-holder" style="margin-bottom: 0; color:white">
@@ -95,13 +95,13 @@
             </div>
             <br>
 
-            <label><b>ვარჯიშის რეჟიმი:</b></label>
+            <label><b>Gym Mode:</b></label>
             <input class="checkbox" type="checkbox"  name="practice-mode" id="practice-mode-holder" onchange="changePracticeMoveValue()">
             <br>
 
             <% if(user != null){ %>
 
-                <label for="challenged-id-holder"><b>გამოიწვიე მეგობარი:</b></label>
+                <label for="challenged-id-holder"><b>Challenge Friend:</b></label>
                 <input type="checkbox" class="checkbox" id="is-challenge-holder" name="is-challenge" onchange="changeFriendsDisplayForChallenges()" value="false">
                 <select id="challenged-id-holder" class="drop-down" name="challenged-id" style="display: none" value="PZDC"> <%-- TODO right --%>
                     <% for(int friendID : user.getFriendIDs()){
@@ -113,11 +113,13 @@
             <% } %>
 
             <button class="button" type="submit" style="margin-top: 10px">
-                ქვიზის დაწყება
+                Start Quiz
             </button>
         </div>
         <input type="hidden" value="<%=quiz.getID()%>" name="quiz_id">
     </form>
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
+
 </body>
 
 <script>

@@ -58,19 +58,19 @@
     <div class="content">
         <form method="get" action="/ChangeProfilePicture">
             <div class="close-btn" onclick="changeImage()">&times;</div>
-            <h2 style="color:white">ატვირთე ფოტო</h2>
+            <h2 style="color:white">upload image</h2>
             <br>
             <div class="upload-image-section-cl">
                 <input type="file" accept="image/*" name="image" id="file"
                        onchange="loadFile(event)"
                        style="display: none;"
                 >
-                <label class="button upload upl-btn" type="button" for="file">ატვირთე ფოტო</label>
+                <label class="button upload upl-btn" type="button" for="file">upload image</label>
                 <label class="button upload" type="button"
                        onclick="uploadImage(event)" id="url-button" style="width:300px">
-                    ან შეიყვანეთ ლინკი ასატვირთად
+                    or enter photo url
                 </label>
-                <input type="text" placeholder="ფოტოს URL" name="photo-url" id="photo-url" required style="width:200px">
+                <input type="text" placeholder="Image URL" name="photo-url" id="photo-url" required style="width:200px">
                 <img id="output" src="" style="width:300px;height:220px;margin-top: 5px;">
                 <input class="button upload upl-btn" type="submit">Submit</input>
             </div>
@@ -81,11 +81,11 @@
 <div class="profile-info-wrapper">
     <div class="profile-info-container">
         <div class="profile-details-info">
-            <div class="user-first-name"><%="სახელი: " + user.getFirstName()%>
+            <div class="user-first-name"><%="First Name: " + user.getFirstName()%>
             </div>
-            <div class="user-last-name"><%="გვარი: " + user.getLastName()%>
+            <div class="user-last-name"><%="Last Name: " + user.getLastName()%>
             </div>
-            <div class="user-email"><%="ელ-ფოსტა: " + user.getEmail()%>
+            <div class="user-email"><%="e-mail: " + user.getEmail()%>
             </div>
             <% String mobNum = user.getMobileNumber();
                 if (mobNum == null) {
@@ -100,11 +100,11 @@
                     city = "Unknown";
                 }
             %>
-            <div class="user-mobile"><%="მობ.ნომერი: " + mobNum%>
+            <div class="user-mobile"><%="phone number: " + mobNum%>
             </div>
-            <div class="user-country"><%="ქვეყანა: " + country%>
+            <div class="user-country"><%="Country: " + country%>
             </div>
-            <div class="user-city"><%="ქალაქი: " + city %>
+            <div class="user-city"><%="City: " + city %>
             </div>
         </div>
         <div class="profile-info">
@@ -118,34 +118,34 @@
                 int role = user.getRole();
                 String status = "";
                 if (role == 1) {
-                    status = "მომხმარებელი";
+                    status = "User";
                 } else if (role == 2) {
-                    status = "მოდერატორი";
+                    status = "Moderator";
                 } else if (role == 3) {
-                    status = "ადმინისტრატორი";
+                    status = "Admin";
                 }
             %>
             <div class="user-details"><%=status%>
             </div>
         </div>
         <div class="profile-details-info">
-            <div class="quizzes-played"><%="ნათამაშები ქვიზები: " + usersManager.getQuizzesPlayedCount(user.getID())%>
+            <div class="quizzes-played"><%="Played quizzes: " + usersManager.getQuizzesPlayedCount(user.getID())%>
             </div>
-            <div class="quizzes-played"><%="ჯამში დაგროვებული ქულა: " + truncateDecimal(usersManager.getUserTotalPoints(user.getID()), 2)%>
+            <div class="quizzes-played"><%="Total User Score: " + truncateDecimal(usersManager.getUserTotalPoints(user.getID()), 2)%>
             </div>
-            <div class="challenges-played"><%="ნათამაშები ჩელენჯები: " + user.getChallengesPlayed()%>
+            <div class="challenges-played"><%="Played Challenges: " + user.getChallengesPlayed()%>
             </div>
-            <div class="challenges-won"><%="მოგებული ჩელენჯები: " + user.getChallengesWon()%>
+            <div class="challenges-won"><%="Won Challenges: " + user.getChallengesWon()%>
             </div>
             <%
                 if (role > 1) {
                     out.print("<div class='quizzes-made'> ");
-                    out.print("შედგენილი ქვიზები: ");
+                    out.print("My made Quizzes: ");
                     out.print(usersManager.getQuizzesMadeCount(user.getID()));
                     out.print("</div>");
                 }
             %>
-            <div class="Creation-date"><%="პროფილის შექმნის თარიღი: <br><br>" + user.getRegistrationDate()%>
+            <div class="Creation-date"><%="Profile Creation Date: <br><br>" + user.getRegistrationDate()%>
             </div>
         </div>
     </div>
@@ -164,7 +164,7 @@
     <form id="add-friend-form" action="SendFriendRequest" method="get" style="text-align: center;">
         <input type="hidden" name="user-id" value="<%=user.getID()%>">
         <input type="hidden" name="url" value="/Profile?id=<%=user.getID()%>">
-        <input type="submit" class="button finish" value="ვიმეგობროთ!" style="width: 80%">
+        <input type="submit" class="button finish" value="Lets be friends!" style="width: 80%">
     </form>
 </div>
 
@@ -172,7 +172,7 @@
 
 <div class="top-quizzes-banner">
     <div class="players-top-quizzes">
-        ნათამაშები ტოპ ქვიზები
+        My Top Played Quizzess
     </div>
 </div>
 <main class="main">

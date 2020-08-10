@@ -86,7 +86,7 @@
 
 <div class="search-inputs-section">
     <div class="container" style="position: relative;">
-        <h3 class="section-header"> საძიებო ფილტრი: </h3>
+        <h3 class="section-header"> Search Filter: </h3>
         <form style="margin-left: 20px" action="/DisplayTopUsers" method="get">
             <div class="input-items" id="input-items">
                 <%if(loggedInUser != null) {%>
@@ -94,7 +94,7 @@
                     style="flex-direction: row;
                     justify-content: center;
                     align-items: center">
-                    <label for="country" style="margin: 20px"><b> მოძებნე მეგობრებში </b></label>
+                    <label for="country" style="margin: 20px"><b> Search in your friends </b></label>
                     <input type="checkbox" name="is_friend">
                 </div>
 
@@ -104,21 +104,21 @@
                     style="flex-direction: row;
                     justify-content: center;
                     align-items: center">
-                    <label for="country" style="margin: 20px"><b> მოძებნე ავტორებში </b></label>
+                    <label for="country" style="margin: 20px"><b> search in Authors </b></label>
                     <input type="checkbox" name="is_author">
                 </div>
 
                 <div class="search-item">
-                    <label for="locationType"><b>აირჩიეთ ლოკაციის ტიპი</b></label>
+                    <label for="locationType"><b>Choose location type</b></label>
                     <select onchange="getLocType(this)" class="drop-down"
                             id="locationType" name="location_type">
                         <option value="0">-</option>
-                        <option value="1">ქალაქი</option>
-                        <option value="2">ქვეყანა</option>
+                        <option value="1">City</option>
+                        <option value="2">Country</option>
                     </select>
                 </div>
                 <div class="search-item"id="city" style="display: none">
-                    <label for="city"><b> ქალაქები </b></label>
+                    <label for="city"><b> Cities </b></label>
                     <select class="drop-down" name="city">
                         <option value="empty">-</option>
                         <% for(int i = 1; i <= cities.size(); i++) {%>
@@ -127,7 +127,7 @@
                     </select>
                 </div>
                 <div class="search-item"id="country"style="display: none">
-                    <label for="country"><b> ქვეყნები </b></label>
+                    <label for="country"><b> Countries</b></label>
                     <select class="drop-down" name="country">
                         <option value="empty">-</option>
                         <% for(int i = 1; i <= countries.size(); i++) {%>
@@ -151,7 +151,7 @@
 
 <div class="found-users-section">
     <div class="container" style="position: relative;">
-        <h3 class="section-header"> ნაპოვნი მომხმარებლები:</h3>
+        <h3 class="section-header"> Found Users:</h3>
         <div class="found-elems-container">
             <% for(User currUser : topUsers) { %>
             <div class="found-user"

@@ -27,7 +27,7 @@
             <div class="overlay"></div>
             <div class="content">
                 <div class="close-btn" onclick="popUpFriendsList()">&times;</div>
-                <h1 style="color:orange">მეგობრები</h1>
+                <h1 style="color:orange">Friends</h1>
                 <br>
 
                 <%
@@ -39,8 +39,8 @@
                                 <%=friend.getFirstName()%> <%=friend.getLastName()%> (<%=friend.getUsername()%>)
                             </span>
 <%--                            <div class = "friend-challenge-remove-btns">--%>
-<%--                                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friend.getID()%>)" style="color: green">დათანხმება</button>--%>
-<%--                                <button class="remove-btn" onclick="rejectFriendRequest(<%=friend.getID()%>)" style="color: red">უარყოფა</button>--%>
+<%--                                <button class="challenge-btn"  onclick="acceptFriendRequest(<%=friend.getID()%>.this)" style="color: green">Accept</button>--%>
+<%--                                <button class="remove-btn" onclick="rejectFriendRequest(<%=friend.getID()%>,this)" style="color: red">Reject</button>--%>
 <%--                            </div>--%>
                         </div>
 
@@ -60,5 +60,13 @@
     function popUpFriendsList(){
         console.log('popUpFriendsList in FriendsListPopUp.jsp');
         document.getElementById("friends-list-popup-id").classList.toggle("active");
+    }
+    function acceptFriendRequest(id,ob){
+        //todo
+        $(ob).parent().parent().remove();
+    }
+    function rejectFriendRequest(id,ob){
+        //todo
+        $(ob).parent().parent().remove();
     }
 </script>

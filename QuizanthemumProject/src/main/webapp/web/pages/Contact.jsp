@@ -34,43 +34,43 @@
     <div class="full-wrapper">
         <div class = "header-wrapper">
                 <div class = "content-header-container">
-                    <h2>დატოვე მონაცემები, ჩვენ დაგიკავშირდებით</h2>
+                    <h2>Leave Your info , We will contact you</h2>
                 </div>
         </div>
         <div class = "form-content-wrapper">
             <div class = "main-container">
                 <div class="form-content ">
                     <form id="contact" action="/SendContactMail" class="contact-form">
-                        <input class="inp-text" type="text" placeholder="სახელი" name="name" tabindex="1" required autofocus>
+                        <input class="inp-text" type="text" placeholder="name" name="name" tabindex="1" required autofocus>
 <%--                        <input class="inp-text" type="email" placeholder="მეილის მისამართი" name="mail" tabindex="2" required >--%>
-                        <input class="inp-text" type="text" placeholder="თემა..." name="subject" tabindex="2" required >
-                        <input class="inp-text" type="text" placeholder="მობილურის ნომერი(არა აუცილებელი)" name="mobile" tabindex="3">
-                        <textarea class="big-inp-text"placeholder="აკრიფე ტექსტი" name="body" tabindex="4" required></textarea>
-                        <button class="submit-btn" name="submit" type="submit" id="contact-submit" data-submit="...Sending">გაგზავნა</button>
+                        <input class="inp-text" type="text" placeholder="subject..." name="subject" tabindex="2" required >
+                        <input class="inp-text" type="text" placeholder="Phone number(optional)" name="mobile" tabindex="3">
+                        <textarea class="big-inp-text"placeholder="enter text" name="body" tabindex="4" required></textarea>
+                        <button class="submit-btn" name="submit" type="submit" id="contact-submit" data-submit="...Sending">Send</button>
                     </form>
 
                 </div>
                 <div class="info-content">
                     <span class="info-row">
                         <i class="material-icons">place</i>
-                        <span>მისამართი: თავისუფალი უნივერსიტეტი</span>
+                        <span>address: Free University</span>
                     </span>
                     <span class="info-row">
                         <i class="material-icons">local_phone</i>
-                        <span>ტელ: +995598322837</span>
+                        <span>phone: +995598322837</span>
                     </span>
                     <span class="info-row">
                         <i class="material-icons">local_post_office</i>
-                        <span>ელ-ფოსტა: quizanthemumTeam@gmail.com</span>
+                        <span>e-mail: quizanthemumTeam@gmail.com</span>
                     </span>
                     <span class="info-row">
-                        ჩვენს შესახებ:
+                        About Us:
                         <div class ="about-us-text">
                             <p>
-                                ჩვენ ვართ ხუთკაციანი დეველოპერული ჯგუფი, რომელთა მიზანიცაა ქართულ ბაზარზე
-                                დანერგონ ხარისხიანი პლატფორმა ქვიზების მოყვარულთათვის. <strong>Quzianthemum</strong>-ს დიდი ისტორია აქვს
-                                უკან, რომელიც დაწერილია უძილო ღამეებით და დატვირთული დღეებით, იმისათვის რომ, თქვენამდე მოგვეტანა
-                                ხარისხიანი, ესთეტიკური პროდუქტი, სადაც შეძლებთ ითამაშოთ უცხო ქვიზები, თქვენ თვითონ შექმნათ თქვენი სასურველი ქვიზი და...
+                                We are fiveMan development group, whose aim is to
+                                provide quality quizz platform for quiz lovers. <strong><span style="color:#f07237">Quizanthemum</span></strong> has big history .
+                                To achive our aim , we have worked hard . The Sleepless nights , the tensions , the sweat and
+                                the unbroken will to deliver the quality product is what we have been through . But ALL OF IT WAS WORTH IT.
                             </p>
                         </div>
                     </span>

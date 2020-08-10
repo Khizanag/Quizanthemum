@@ -5,26 +5,26 @@
 
         <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
 
-        <label><b>შეყვანილი ტექსტის მიმდინარე მდგომარეობა</b></label>
+        <label><b>Entered Text`s current state</b></label>
         <textarea class="entered-text" id="fill-question"disabled></textarea>
 
         <div class="fill-items-cont">
             <div class="main-text-cont">
-                <label><b>შეიყვანეთ ტექსტი</b></label>
+                <label><b>Enter Text</b></label>
                 <textarea class="toFill-text" id="toFill"></textarea>
                 <button type="button"
                         class="button"
                         onclick="addToFill()">
-                    დაამატე ტექსტი
+                    Add Text
                 </button>
             </div>
             <div class="correct-ans-cont">
-                <label><b>შეიყვანეთ გამოტოვებული სიტყვა</b></label>
+                <label><b>Enter missing word</b></label>
                 <textarea class="fillWith-text" id="fillWith"></textarea>
                 <button type="button"
                         class="button"
                         onclick="addFillWith()">
-                    დაამატე გამოტოვებული სიტყვა
+                    Add missing word
                 </button>
             </div>
         </div>
@@ -42,7 +42,7 @@
         <input type="hidden" name="statement_text" value="" id="statement_text_elem_in_match">
 
         <button class="button addQuestion" type="submit">
-            შემდეგი შეკითხვის დამატება
+            Add Next Question
         </button>
     </div>
 </form>

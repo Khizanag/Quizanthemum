@@ -66,7 +66,7 @@
                 <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
                     <div class="quiz-rating-section">
                         <div class="container">
-                            <h2 class="rating-title"> ქვიზის შეფასება </h2>
+                            <h2 class="rating-title"> Rate Quiz </h2>
                             <div class="rating-icons-holder">
                                 <ul class="rating-icons">
                                     <a class="fa fa-star-o" id="1"
@@ -94,7 +94,7 @@
                     <button class="back-to-prof-page"
                             type="submit"
                             style="margin-top: 10px">
-                        შეფასება
+                        Rating
                     </button>
                 <%}%>
             </form>
@@ -115,7 +115,7 @@
                             Question currQuest = qe.getQuestion();
                     %>
                     <div class="question">
-                        <h3>კითხვა <%=i + 1%></h3>
+                        <h3>Question <%=i + 1%></h3>
                         <br>
                         <div class="question-text-statement">
                             <% if (currQuest.isPictureQuestion()) { %>
@@ -124,18 +124,18 @@
                         </div>
                         <p><%=currQuest.getTextStatement()%></p>
 
-                        <p style="padding-top: 0"> ავტორის კომენტარი: <%=currQuest.getComment()%></p>
-                        <p style="padding-top: 0"> შეკითხვის წყარო: <%=currQuest.getSource()%></p>
+                        <p style="padding-top: 0"> author comment: <%=currQuest.getComment()%></p>
+                        <p style="padding-top: 0"> Question Source: <%=currQuest.getSource()%></p>
                         <div class="answers">
                   <span>
-                    <span>სწორი პასუხები:</span>
+                    <span>Correct answers:</span>
                     <div class="correct-answers">
                       <%
                           int type = currQuest.getType();
                           String correctAnswer = "";
                           if (type == STANDARD) {
                       %>
-                      <p>No right ans</p>
+                      <p>No Correct ans</p>
                         <%
                             } else if (type == MATCHING) {
                                 Set<Pair<String>> ansPairs = currQuest.getMatchingAnswers();
@@ -157,7 +157,7 @@
                     </div>
                   </span>
                             <span>
-                    <span>თქვენი პასუხები: </span>
+                    <span>Your Answers: </span>
                     <div class="user-answers">
                         <%
                             if (type == MATCHING) {
@@ -189,7 +189,7 @@
                         }
                     %>
                     <button class="back-to-prof-page" onclick="showGrading()">
-                        შეფასებაზე გადასვლა
+                        Go to Rating
                     </button>
                 </div>
             </div>

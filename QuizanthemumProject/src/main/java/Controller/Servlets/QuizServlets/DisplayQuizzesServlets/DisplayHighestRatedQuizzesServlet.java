@@ -30,7 +30,7 @@ public class DisplayHighestRatedQuizzesServlet extends HttpServlet {
 
         List<Quiz> quizzes = quizzesManager.getHighestRatedQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
-        request.setAttribute("title", "ყველაზე მაღალრეიტინგული ქვიზები");
+        request.setAttribute("title", "Highest Rated Quizzes");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizListPage.jsp");
         dispatcher.forward(request, response);

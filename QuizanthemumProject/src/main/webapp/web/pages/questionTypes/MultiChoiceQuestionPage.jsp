@@ -8,14 +8,14 @@
         <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
         <hr><p></p>
-        <label for="correct-answer"><b>სწორი პასუხი</b></label>
-        <input type="text" placeholder="გთხოვთ შეიყვანოთ სწორი პასუხი"
+        <label for="correct-answer"><b>Correct Answer</b></label>
+        <input type="text" placeholder="Please Enter Correct Answer"
                name="answer_0" id="correct-answer" style="width: 100%" required>
 
-        <label for="wrong-answer"><b>სავარაუდო(არასწორი) პასუხი</b></label>
+        <label for="wrong-answer"><b>Possible(wrong) answer</b></label>
         <div id="wrong-ans-div">
             <div id="added-wrongs">
-                <input type="text"  placeholder="გთხოვთ შეიყვანოთ სავარაუდო პასუხი"
+                <input type="text"  placeholder="Please enter possible answer"
                        name="statement_0" id="wrong-answer" required>
             </div>
             <button type="button" id="add-wrong-ans-btn" class="button" onclick="addNextWrongAns()"> + </button>
@@ -36,6 +36,6 @@
 
     <button class="button addQuestion"
             type="submit">
-        შემდეგი შეკითხვის დამატება
+        Add Next Question
     </button>
 </form>

@@ -5,13 +5,13 @@ CREATE TABLE categories(
 
 -- insert default categories into database
 
-INSERT INTO categories VALUES (null, 'ბიოლოგია');
-INSERT INTO categories VALUES (null, 'გეოგრაფია');
-INSERT INTO categories VALUES (null, 'ისტორია');
-INSERT INTO categories VALUES (null, 'ლიტერატურა');
-INSERT INTO categories VALUES (null, 'მათემატიკა');
-INSERT INTO categories VALUES (null, 'სპორტი');
-INSERT INTO categories VALUES (null, 'ფიზიკა');
-INSERT INTO categories VALUES (null, 'ფილმები');
-INSERT INTO categories VALUES (null, 'ქიმია');
-INSERT INTO categories VALUES (null, 'ხელოვნება');
+INSERT INTO categories VALUES (null, 'Biology');
+INSERT INTO categories VALUES (null, 'Chemistry');
+INSERT INTO categories VALUES (null, 'Physics');
+INSERT INTO categories VALUES (null, 'Mathematics');
+INSERT INTO categories VALUES (null, 'Georgraphy');
+INSERT INTO categories VALUES (null, 'History');
+INSERT INTO categories VALUES (null, 'Literature');
+INSERT INTO categories VALUES (null, 'Films');
+INSERT INTO categories VALUES (null, 'Art');
+INSERT INTO categories VALUES (null, 'Sports');
