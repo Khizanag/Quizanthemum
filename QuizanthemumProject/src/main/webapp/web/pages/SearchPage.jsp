@@ -80,7 +80,7 @@
                          onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
 
                         <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>"
-                             onerror="this.src='/web/images/common/Quiz1.jpg';" style="margin-left: 0">
+                             onerror="this.src='/web/images/common/Quiz1.jpg';" style="margin-left: 4px">
                         <div class= "quiz-list-small-description-block" style="position: relative">
                             <h3 class= "quiz-title" style="font-size: 16px">
                                 <%=currQuiz.getName()%>

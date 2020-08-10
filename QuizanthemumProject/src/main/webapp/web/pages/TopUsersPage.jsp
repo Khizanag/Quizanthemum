@@ -97,7 +97,7 @@
                     <label for="country" style="margin: 20px"><b> Search in your friends </b></label>
                     <input type="checkbox" name="is_friend">
                 </div>
-
+                <input type="hidden" value="<%=loggedInUser.getID()%>" name="user_id">
                 <%}%>
 
                 <div class="search-item"
@@ -135,7 +135,6 @@
                         <%}%>
                     </select>
                 </div>
-                <input type="hidden" value="<%=loggedInUser.getID()%>" name="user_id">
                 <div class="search-item"
                         style=" justify-content: center;
                         position: absolute;
