@@ -92,7 +92,7 @@
 
 
 <%-------------------------------- FORMS --------------------------------%>
-<form id="cancel-friend-request-form" action="/CancelFriendRequest"
+<form id="cancel-friend-request-form" action="/CancelFriendRequest"></form>
 
 
 <%-------------------------------- JAVASCRIPT --------------------------------%>

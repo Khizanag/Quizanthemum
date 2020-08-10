@@ -188,9 +188,15 @@
                             i++;
                         }
                     %>
+                    <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
                     <button class="back-to-prof-page" onclick="showGrading()">
                         Go to Rating
                     </button>
+                    <% } else { %>
+                    <button class="back-to-prof-page" onclick="GoToHomepage()">
+                        Finish
+                    </button>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -216,5 +222,9 @@
 
     function openSearch() {
         window.location.href = "SearchPage.jsp";
+    }
+
+    function GoToHomepage() {
+        window.location.href = "/web/pages/HomePage.jsp"
     }
 </script>

@@ -21,7 +21,7 @@ public class SendContactMailServlet extends HttpServlet {
         String mobile = request.getParameter("mobile");
         String body = request.getParameter("body");
 
-        body = "Name: " + name + "\n" + "Mobile: " + mobile + "\n" + body;
+        body = "Name: " + name + ". Mobile: " + mobile + ". " + body;
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", "https://mail.google.com/mail/?view=cm&fs=1&to=quizanthemum@gmail.com&su=" + subject + "&body=" + body);

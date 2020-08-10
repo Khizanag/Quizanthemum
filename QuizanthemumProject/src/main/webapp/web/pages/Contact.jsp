@@ -68,9 +68,9 @@
                         <div class ="about-us-text">
                             <p>
                                 We are fiveMan development group, whose aim is to
-                                provide quality quizz platform for quiz lovers. <strong><span style="color:#f07237">Quizanthemum</span></strong> has big history .
-                                To achive our aim , we have worked hard . The Sleepless nights , the tensions , the sweat and
-                                the unbroken will to deliver the quality product is what we have been through . But ALL OF IT WAS WORTH IT.
+                                provide quality quiz platform for quiz lovers. <strong><span style="color:#f07237">Quizanthemum</span></strong> has big history.
+                                To achieve our aim we have worked hard. The Sleepless nights, the tensions, the sweat and
+                                the unbroken will to deliver the quality product is what we have been through. But ALL OF IT WAS WORTH IT.
                             </p>
                         </div>
                     </span>
