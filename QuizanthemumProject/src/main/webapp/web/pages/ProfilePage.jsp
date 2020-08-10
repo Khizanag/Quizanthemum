@@ -159,7 +159,6 @@
     FriendRequestsManager friendRequestsManager = (FriendRequestsManager) managersManager.getManager(FRIEND_REQUESTS_MANAGER_STR);
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
     List<QuizEvent> topQuizEvents = quizEventManager.getLatestQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
-    Collections.reverse(topQuizEvents); // to draw in correct order
     User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
     if (loggedUser != null
             && loggedUser.getID() != user.getID()

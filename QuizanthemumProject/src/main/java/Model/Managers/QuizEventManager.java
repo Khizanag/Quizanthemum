@@ -122,4 +122,23 @@ public class QuizEventManager implements QuestionEventTableConfig {
 
     }
 
+    public int getNumQuizzesPlayedBy(int userID) {
+        int numQuizzes = 0;
+        String query = "SELECT COUNT(*) AS num_quizzes" +
+                " FROM " + QUIZ_EVENTS_TABLE_NAME +
+                " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID + ";\n";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet set = statement.executeQuery(query);
+            if(!set.next()){
+                return 0;
+            }
+            numQuizzes = set.getInt("num_quizzes");
+            set.close();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return numQuizzes;
+    }
+
 }

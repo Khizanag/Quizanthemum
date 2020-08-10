@@ -3,6 +3,7 @@ package Controller.Servlets.QuizServlets;
 import Controller.Classes.OtherClasses.Challenge;
 import Controller.Classes.Quiz.Question.QuestionEvent;
 import Controller.Classes.Quiz.QuizEvent;
+import Controller.Classes.User.AchievementEvent;
 import Model.Managers.*;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
+import static Configs.AchievementTypes.*;
 import static Configs.Config.*;
 
 @WebServlet(name = "QuizEventFinishedServlet", urlPatterns = "/QuizEventFinished")
@@ -28,7 +31,7 @@ public class QuizEventFinishedServlet extends HttpServlet {
         ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         QuizEventManager quizEventManager = (QuizEventManager) request.getServletContext().getAttribute(QUIZ_EVENT_MANAGER_STR);
-        QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
+        UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
         QuestionEventManager questionEventManager = (QuestionEventManager) request.getServletContext().getAttribute(QUESTION_EVENT_MANAGER_STR);
         QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
 
@@ -52,6 +55,8 @@ public class QuizEventFinishedServlet extends HttpServlet {
             questionEventManager.setQuestionEvent(currQuestionEvent);
         }
 
+        addAchievement(quizEvent.getUser().getID(), usersManager, managersManager);
+
         Challenge challenge = quizEvent.getChallenge();
         System.out.println("some doing stuff of quiz finished finished");
         if(challenge != null){
@@ -70,5 +75,27 @@ public class QuizEventFinishedServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizSummaryPage.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void addAchievement(int userID, UsersManager usersManager, ManagersManager managersManager) {
+        AchievementEventsManager achievementEventsManager = (AchievementEventsManager) managersManager.getManager(ACHIEVEMENT_EVENTS_MANAGER_STR);
+        int numQuizzesDone = usersManager.getQuizzesPlayedCount(userID);
+        AchievementEvent newAchievementEvent;
+        switch (numQuizzesDone) {
+            case 5:
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_BRONZE, userID, new Date());
+                break;
+            case 15:
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_SILVER, userID, new Date());
+                break;
+            case 30:
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_GOLD, userID, new Date());
+                break;
+            default:
+                return;
+        }
+
+        achievementEventsManager.insertAchievementEvent(newAchievementEvent);
+
     }
 }
