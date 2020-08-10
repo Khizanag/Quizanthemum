@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
     <link rel="stylesheet" href="/web/styles/profilePage.css">
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
-    <link rel="stylesheet" href="/web/styles/scroll.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">

@@ -25,7 +25,6 @@
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 <%--<link rel="stylesheet" href="/web/styles/profilePage.css">--%>
 <%--<linkა rel="stylesheet" href="/web/styles/quizCreation.css">--%>
-<link rel="stylesheet" href="/web/styles/scroll.css">
 
 <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 
