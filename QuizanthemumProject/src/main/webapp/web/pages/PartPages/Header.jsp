@@ -45,7 +45,7 @@
         </div>
         <% if(user == null){ %>
         <ul class="header-right">
-            <button class="log-in-button button logIn" onclick="openRegistration()" style="margin-top: 0;">შესვლა</button>
+            <button class="log-in-button button logIn" onclick="openRegistration()" style="margin-top: 0;">Login</button>
         </ul>
         <% } else { %>
         <ul class="header-right">
@@ -63,24 +63,24 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a onclick="openMyProfilePage()">
         <i class="material-icons my-mat-icon">account_box</i>
-        პროფილი
+        Profile
     </a>
     <a  onclick="popUpFriendsList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">people_outline</i>
-        მეგობრები
+        Friends
     </a>
     <a  onclick="popUpFriendRequestsList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">person_add</i>
-        'ვიმეგობროთ'ები
+        Friend Requests
     </a>
     <a  onclick="popUpChallengesList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">sports_mma</i>
-        გამოწვევები
+        Challenges
     </a>
     <form id="logoutForm">
         <a onclick="logout()" style="cursor:pointer;">
             <i class="material-icons my-mat-icon">arrow_back</i>
-            გასვლა
+            Log out
         </a>
         <input type="hidden" name="currentUrl" id="currentUrl"/>
     </form>

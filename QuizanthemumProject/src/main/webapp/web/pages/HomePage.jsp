@@ -79,7 +79,7 @@
 
     <div class="highest-rated-section">
         <div class="container" style="position: relative; overflow: hidden">
-            <h3 class="section-header">მაღალ რეიტინგული ქვიზები</h3>
+            <h3 class="section-header">Highest Rating Quizzes</h3>
             <div class="scroll-block">
                 <% for(int i=0;i<highestRated.size();i++){ Quiz currQuiz = highestRated.get(i); %>
                 <div class="top-quiz-list-item" id="top_<%=i%>" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
@@ -120,7 +120,7 @@
 
     <div class="just-added-section">
         <div class="container" style="position: relative; overflow: hidden">
-            <h3 class="section-header">პოპულარული ქვიზები</h3>
+            <h3 class="section-header">Popular Quizzes</h3>
             <div class="scroll-block">
                 <% for(int i=0;i<mostPopular.size();i++){ Quiz currQuiz = mostPopular.get(i); %>
                 <div class="top-quiz-list-item" id="popular_<%=i%>" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">

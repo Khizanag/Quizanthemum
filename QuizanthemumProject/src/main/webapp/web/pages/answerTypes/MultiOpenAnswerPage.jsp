@@ -18,7 +18,7 @@
 
 <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
-        <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
+        <h2>Question #<%=request.getServletContext().getAttribute("question_number")%></h2>
         <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
         <%Question question = questionEvent.getQuestion();%>
         <img src="<%=question.getPictureStatementURL()%>" class="question-img"
@@ -27,16 +27,16 @@
         <p><%=question.getHeaderStatement()%></p>
         <hr>
         <div class="input-items" id="input-items">
-            <label><b> შეიყვანეთ <%=question.getStatementsCount()%> პასუხი </b></label>
+            <label><b> Enter <%=question.getStatementsCount()%> Answer </b></label>
             <div style="display: flex; flex-direction: column; margin-top: 10px">
             <% for(int i = 0; i < question.getStatementsCount(); i ++) {%>
                 <input style="width: 50%" type="text" id="<%=i%>"
                        name="question_event_answer_<%=i%>"
-                       placeholder="შეიყვანეთ პასუხი N <%=i+1%>">
+                       placeholder="Enter Answer N <%=i+1%>">
             <% } %>
             </div>
         </div><hr>
-        <button class="button" type="submit"> პასუხის დადასტურება </button>
+        <button class="button" type="submit"> Submit Answer </button>
     </div>
 </form>
 

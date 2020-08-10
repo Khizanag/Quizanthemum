@@ -10,26 +10,26 @@
 
         <div class="matching-elems-secton">
             <div class="matching-elems-container" id="matching-elems-container">
-                <label for="matching-elem-0"><b>მეზობელ ველებში შეიყვანეთ წყვილი</b></label> <%-- TODO answer_0 ? --%>
+                <label for="matching-elem-0"><b>Enter Matchings side by side</b></label> <%-- TODO answer_0 ? --%>
                 <div class="matchin-pair">
-                    <input type="text" placeholder="რას ვაწყვილებთ"
+                    <input type="text" placeholder="Premise"
                            name="answer_0" id="matching-elem-0" class="matching-elem" required>
                     <div class="arrow-container">
                         <i class="arrow arr-right"></i>
                         <i class="arrow arr-left"></i>
                     </div>
-                    <input type="text" placeholder="რასთან ვაწყვილებთ"
+                    <input type="text" placeholder="Response"
                            name="answer_1" id="answer_1" class="matching-elem" required>
                 </div>
 
                 <div class="matchin-pair">
-                    <input type="text" placeholder="რას ვაწყვილებთ"
+                    <input type="text" placeholder="Premise"
                            name="answer_2" id="answer_2" class="matching-elem" required>
                     <div class="arrow-container">
                         <i class="arrow arr-right"></i>
                         <i class="arrow arr-left"></i>
                     </div>
-                    <input type="text" placeholder="რასთან ვაწყვილებთ"
+                    <input type="text" placeholder="Response"
                            name="answer_3" id="answer_3" class="matching-elem" required>
                 </div>
                 <button type="button"
@@ -55,7 +55,7 @@
         <button class="button addQuestion"
                 type="submit"
                 onclick="checkAndRedirect()">
-            შემდეგი შეკითხვის დამატება
+            Add Next Question
         </button>
     </div>
 </form>

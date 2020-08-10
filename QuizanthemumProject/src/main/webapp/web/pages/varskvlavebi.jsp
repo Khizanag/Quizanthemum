@@ -37,7 +37,7 @@
 
     <div class="quiz-rating-section">
         <div class="container">
-            <h2> ქვიზის შეფასება </h2>
+            <h2> Rate Quizz </h2>
             <div class="raiting-icons-holder">
                 <ul class="raiting-icons">
                     <a class="fa fa-star-o" id="1" onclick="grade(this)"></a>

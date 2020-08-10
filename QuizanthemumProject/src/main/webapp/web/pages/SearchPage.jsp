@@ -73,7 +73,7 @@
 
     <div class="found-quiz-section">
         <div class="container" style="position: relative;">
-            <h3 class="section-header"> ნაპოვნი ქვიზები:</h3>
+            <h3 class="section-header"> Found Quizzes:</h3>
             <div class="found-elems-container">
             <%  int numQuizzes = 0;
                 for(Quiz currQuiz : quizzes) {
@@ -113,7 +113,7 @@
             <%}%>
             <% if(numQuizzes == 0) { %>
                 <p style="color: white; font-size: large; margin-left: 50px">
-                    ამ ინფორმაციის შემცველი ქვიზი არ მოიძებნა
+                    No quizzes found with given information
                 </p>
             <%}%>
             </div>
@@ -125,7 +125,7 @@
 
     <div class="found-quiz-section">
         <div class="container" style="position: relative;">
-            <h3 class="section-header"> ნაპოვნი მომხმარებლები:</h3>
+            <h3 class="section-header"> Found users:</h3>
             <div class="found-elems-container">
             <%  int numUsers = 0;
                 for(User currUser : users) {
@@ -158,7 +158,7 @@
             <%}%>
             <% if(numUsers == 0) { %>
                 <p style="color: white; font-size: large; margin-left: 50px">
-                    ამ მონაცემების მქონე მომხმარებელი არ მოიძებნა
+                    No user found with given information
                 </p>
             <%}%>
             </div>

@@ -15,8 +15,8 @@
 
     <form class="sign-in-section" action="/LogIn" method="get">
         <div class="container">
-            <h2>შესვლა</h2>
-            <p>გთხოვთ შეიყვანოთ მითითებული მონაცემები პროფილზე შესასვლელად.</p>
+            <h2>Log In</h2>
+            <p>Please enter Username and Password to Login</p>
             <hr>
             <%
                 if(request.getServletContext().getAttribute(ERROR_MESSAGE) != null) { %>
@@ -27,17 +27,17 @@
 
             <div class="input-items">
                 <label><b>Username</b></label>
-                <input type="text" placeholder="შეიყვანეთ username"
+                <input type="text" placeholder="Enter username"
                        name="log_in_username" id="log_in_username" required>
 
-                <label><b>პაროლი</b></label>
-                <input type="password" placeholder="შეიყვანეთ პაროლი"
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password"
                        name="log_in_password" id="log_in_password" required>
 
-                <p> არ გაქვს პროფილი? <a href="RegistrationPage.jsp">დარეგისტრირდი ახლავე</a>.</p>
+                <p> Don`t have an account? <a href="RegistrationPage.jsp">Register now</a>.</p>
 
             </div>
-            <button type="submit" class="button" >შესვლა</button>
+            <button type="submit" class="button" >Login</button>
         </div>
 
     </form>

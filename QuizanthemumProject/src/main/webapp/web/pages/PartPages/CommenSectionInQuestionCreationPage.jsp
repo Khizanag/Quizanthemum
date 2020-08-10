@@ -7,6 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<label for="comment"><b>კომენტარი</b></label>
-<input type="text" placeholder="სურვილისამებრ მიუთითეთ კომენტარი..."
+<label for="comment"><b>Comment</b></label>
+<input type="text" placeholder="Add comment(Optional)..."
        name="comment" id="comment">

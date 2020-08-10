@@ -29,7 +29,7 @@ public class DisplayNewestQuizzesServlet extends HttpServlet {
 
         List<Quiz> quizzes = quizzesManager.getNewestQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
-        request.setAttribute("title", "უახლესი ქვიზები");
+        request.setAttribute("title", "Newest Quizzes");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizListPage.jsp");
         dispatcher.forward(request, response);

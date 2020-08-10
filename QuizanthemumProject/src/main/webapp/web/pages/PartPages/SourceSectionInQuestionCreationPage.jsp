@@ -7,6 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<label for="source"><b>წყარო</b></label>
-<input type="text" placeholder="მიუთითეთ წყარო, რომელიც გამოიყენეთ კითხვის მომზადებისას..."
+<label for="source"><b>Source</b></label>
+<input type="text" placeholder="Add sources used for creating this question..."
        name="source" id="source">

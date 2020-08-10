@@ -54,7 +54,7 @@
                     if(title != null) { %>
                     <h2> <%=title%> </h2>
                 <% } else { %>
-                    <h2>ქვიზები</h2>
+                    <h2>Quizzes</h2>
                 <% } %>
             </div>
         </div>

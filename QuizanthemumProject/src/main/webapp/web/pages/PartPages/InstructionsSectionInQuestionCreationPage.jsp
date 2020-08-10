@@ -7,6 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<label for="description"><b>მითითება</b></label>
-<input type="text" placeholder="გთხოვთ შეიყვანოთ მითითება მომხმარებლისთვის"
+<label for="description"><b>Instructions</b></label>
+<input type="text" placeholder="Please enter instructions for player"
        name="description" id="description" required>
