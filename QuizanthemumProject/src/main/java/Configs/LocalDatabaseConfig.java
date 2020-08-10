@@ -22,8 +22,8 @@ public interface LocalDatabaseConfig {
 
 
 //     dgogi
-    String USERNAME = "root";
-    String PASSWORD = "Pass_word1";
-    String DATABASE_NAME = "quizanthemum_schema";
+//    String USERNAME = "root";
+//    String PASSWORD = "Pass_word1";
+//    String DATABASE_NAME = "quizanthemum_schema";
 
 }

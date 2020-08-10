@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <hr>
-<div class="point-holder">
+<div class="point-holder" style="display: flex; flex-direction: column">
     <label for="question_point"><b>Add Score from 0 to 16</b></label>
     <input type="number" placeholder="Score"
            id="question_point" name="max_score"

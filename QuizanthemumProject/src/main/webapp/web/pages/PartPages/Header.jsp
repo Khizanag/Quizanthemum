@@ -130,6 +130,7 @@
     }
     function openSidebar() {
         document.getElementById("mySidebar").style.width = "300px";
+        document.getElementById("mySidebar").style.height = "280px";
         document.getElementById("mySidebar").style.marginLeft="150px";
         document.getElementById("mySidebar").style.border="1px dashed #f07237";
     }
