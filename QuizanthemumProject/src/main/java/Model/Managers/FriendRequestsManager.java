@@ -129,4 +129,27 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
             throwables.printStackTrace();
         }
     }
+
+    public boolean isFriendRequestSent(int fromUserID, int toUserID){
+        String query =
+                    "SELECT COUNT(1) "
+                + " FROM " + FRIEND_REQUESTS_TABLE_NAME
+                + " WHERE " + FRIEND_REQUESTS_TABLE_COLUMN_2_SENDER_ID + " = " + fromUserID
+                + "         AND " + FRIEND_REQUESTS_TABLE_COLUMN_3_RECEIVER_ID + " = " + toUserID;
+        boolean toReturn = false
+                ;
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()){
+                int count = resultSet.getInt(1);
+                toReturn = (count > 0);
+            }
+            resultSet.close();
+            statement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return toReturn;
+    }
 }

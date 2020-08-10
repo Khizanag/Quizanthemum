@@ -93,7 +93,7 @@
 
     <% Boolean displayFriendRequests = (Boolean) request.getSession().getAttribute(DISPLAY_FRIEND_REQUESTS);
         if((displayFriendRequests != null && displayFriendRequests)){ %>
-<%--            <script> popUpFriendRequestsList();</script>--%>
+            <script> popUpFriendRequestsList();</script>
             <% request.getSession().removeAttribute(DISPLAY_FRIEND_REQUESTS);
     }%>
 

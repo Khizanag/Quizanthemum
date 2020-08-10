@@ -92,7 +92,7 @@
 
 
 <%-------------------------------- FORMS --------------------------------%>
-
+<form id="cancel-friend-request-form" action="/CancelFriendRequest"
 
 
 <%-------------------------------- JAVASCRIPT --------------------------------%>
@@ -117,6 +117,13 @@
     }
     function cancelChallenge(ID,ob){
         $(ob).parent().parent().remove();
+    }
+
+    function cancelFriendRequest(ID){
+        console.log('cancelFriendRequest');
+        const form = document.getElementById('cancel-friend-request-form');
+
+        form.submit();
     }
 
 
