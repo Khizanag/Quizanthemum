@@ -56,7 +56,7 @@ INSERT INTO categories VALUES (null, 'Biology');
 INSERT INTO categories VALUES (null, 'Chemistry');
 INSERT INTO categories VALUES (null, 'Physics');
 INSERT INTO categories VALUES (null, 'Mathematics');
-INSERT INTO categories VALUES (null, 'Georgraphy');
+INSERT INTO categories VALUES (null, 'Geography');
 INSERT INTO categories VALUES (null, 'History');
 INSERT INTO categories VALUES (null, 'Literature');
 INSERT INTO categories VALUES (null, 'Films');
