@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
-    <title> ქვიზის შექმნა </title>
+    <title> Quiz Creation </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/png" href="/web/images/common/icon.png"/>
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
@@ -44,7 +44,7 @@
                     >
 <%--                    <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>--%>
                     <div class="upload-image-container">
-                        <input type="text" placeholder="ფოტოს URL" name="quiz_icon_url" id="quiz_icon_url" required>
+                        <input type="text" placeholder="Photo URL" name="quiz_icon_url" id="quiz_icon_url" required>
                         <label class="url-button upload" type="button"
                                onclick="uploadImage(event)" id="question_image_url">
                             upload
