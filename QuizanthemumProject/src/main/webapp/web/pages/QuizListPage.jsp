@@ -42,7 +42,7 @@
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
     List<Quiz> quizzes = (List<Quiz>) request.getAttribute("quizzes");
-    Collections.reverse(quizzes); // to be drawn in correct order
+//    Collections.reverse(quizzes); // to be drawn in correct order
 %>
 <div class="quiz-list-holder">
     <div class="full-wrapper">

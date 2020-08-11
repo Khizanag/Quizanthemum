@@ -40,7 +40,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     public ManagersManager getManager(){ return this.manager; }
 
     public List<Quiz> getNewestQuizzes(int numQuizzes){
-        return getQuizzesBy(numQuizzes, QUIZ_TABLE_COLUMN_9_CREATION_DATE, "ASC");
+        return getQuizzesBy(numQuizzes, QUIZ_TABLE_COLUMN_9_CREATION_DATE, "DESC");
     }
 
     public List<Quiz> getMostPopularQuizzes(int numQuizzes) { // TODO TEST THIS
