@@ -80,22 +80,22 @@ public class QuizEventFinishedServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private int addAchievement(int writerID, UsersManager usersManager, ManagersManager managersManager) {
+    private int addAchievement(int userID, UsersManager usersManager, ManagersManager managersManager) {
         AchievementEventsManager achievementEventsManager = (AchievementEventsManager) managersManager.getManager(ACHIEVEMENT_EVENTS_MANAGER_STR);
-        int numQuizzesCreated = usersManager.getQuizzesMadeCount(writerID);
+        int numQuizzesPlayed = usersManager.getQuizzesPlayedCount(userID);
         AchievementEvent newAchievementEvent;
         int toReturn = -1;
-        switch (numQuizzesCreated) {
-            case 3:
-                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_BRONZE, writerID, new Date());
+        switch (numQuizzesPlayed) {
+            case 5:
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_BRONZE, userID, new Date());
                 toReturn = QUIZ_MASTER_BRONZE;
                 break;
             case 15:
-                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_SILVER, writerID, new Date());
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_SILVER, userID, new Date());
                 toReturn = QUIZ_MASTER_SILVER;
                 break;
             case 30:
-                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_GOLD, writerID, new Date());
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_GOLD, userID, new Date());
                 toReturn = QUIZ_MASTER_GOLD;
                 break;
             default:

@@ -49,7 +49,7 @@
                     <div class="dropdown-content">
                         <a class="nav-item grayeble" target="_self" href="/DisplayNewestQuizzes">Newest</a>
                         <a class="nav-item grayeble" target="_self" href="/DisplayMostPopularQuizzes">Popular</a>
-                        <a class="nav-item grayeble" target="_self" href="/DisplayHighestRatedQuizzes">Highest Rating</a>
+                        <a class="nav-item grayeble" target="_self" href="/DisplayHighestRatedQuizzes">Highest Rated</a>
                         <% if(user != null){ %>
                             <a class="nav-item grayeble" target="_self" href="/QuizCreation">Create Quizz</a>
                         <% } %>
