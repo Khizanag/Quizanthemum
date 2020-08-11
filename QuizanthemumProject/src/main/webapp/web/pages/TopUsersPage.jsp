@@ -72,133 +72,135 @@
 </style>
 
 <body>
-<jsp:include page="/web/pages/PartPages/Header.jsp"/>
-<jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
-<%
-    User loggedInUser = (User) request.getServletContext().getAttribute("logedInUser");
-    ServletContext context = request.getServletContext();
-    ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
-    UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
-    List<User> topUsers = (List<User>) request.getAttribute("users");
-    List<String> cities = usersManager.getCities();
-    List<String> countries = usersManager.getCountries();
-%>
+    <jsp:include page="/web/pages/PartPages/Header.jsp"/>
+    <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
+    <%
+        User loggedInUser = (User) request.getServletContext().getAttribute("logedInUser");
+        ServletContext context = request.getServletContext();
+        ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+        UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
+        List<User> topUsers = (List<User>) request.getAttribute("users");
+        List<String> cities = usersManager.getCities();
+        List<String> countries = usersManager.getCountries();
+    %>
 
-
-<div class="search-inputs-section">
-    <div class="container" style="position: relative;">
-        <h3 class="section-header"> Search Filter</h3>
-        <form style="margin-left: 20px" action="/DisplayTopUsers" method="get">
-            <div class="input-items" id="input-items">
-                <%if(loggedInUser != null) {%>
-                <div class="search-item"
-                    style="flex-direction: row;
-                    justify-content: center;
-                    align-items: center">
-                    <label for="country" style="margin: 20px"><b> Search in your friends </b></label>
-                    <input type="checkbox" name="is_friend">
-                </div>
-                <input type="hidden" value="<%=loggedInUser.getID()%>" name="user_id">
-                <%}%>
-
-                <div class="search-item"
-                    style="flex-direction: row;
-                    justify-content: center;
-                    align-items: center">
-                    <label for="country" style="margin: 20px"><b> search in Authors </b></label>
-                    <input type="checkbox" name="is_author">
-                </div>
-
-                <div class="search-item">
-                    <label for="locationType"><b>Choose location type</b></label>
-                    <select onchange="getLocType(this)" class="drop-down"
-                            id="locationType" name="location_type">
-                        <option value="0">-</option>
-                        <option value="1">City</option>
-                        <option value="2">Country</option>
-                    </select>
-                </div>
-                <div class="search-item"id="city" style="display: none">
-                    <label for="city"><b> Cities </b></label>
-                    <select class="drop-down" name="city">
-                        <option value="empty">-</option>
-                        <% for(int i = 1; i <= cities.size(); i++) {%>
-                            <option value="<%=cities.get(i-1)%>"><%=cities.get(i-1)%></option>
-                        <%}%>
-                    </select>
-                </div>
-                <div class="search-item"id="country"style="display: none">
-                    <label for="country"><b> Countries</b></label>
-                    <select class="drop-down" name="country">
-                        <option value="empty">-</option>
-                        <% for(int i = 1; i <= countries.size(); i++) {%>
-                            <option value="<%=countries.get(i-1)%>"><%=countries.get(i-1)%></option>
-                        <%}%>
-                    </select>
-                </div>
-                <div class="search-item"
-                        style=" justify-content: center;
-                        position: absolute;
-                        right: 0;
-                        top: 19px;
+    <div class="search-inputs-section">
+        <div class="container" style="position: relative;">
+            <h3 class="section-header"> Search Filter</h3>
+            <form style="margin-left: 20px" action="/DisplayTopUsers" method="get">
+                <div class="input-items" id="input-items">
+                    <%if(loggedInUser != null) {%>
+                    <div class="search-item"
+                        style="flex-direction: row;
+                        justify-content: center;
                         align-items: center">
-                    <button type="submit" class="search-bth"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
+                        <label for="country" style="margin: 20px"><b> Search in your friends </b></label>
+                        <input type="checkbox" name="is_friend">
+                    </div>
+                    <input type="hidden" value="<%=loggedInUser.getID()%>" name="user_id">
+                    <%}%>
 
-<div class="found-users-section">
-    <div class="container" style="position: relative;">
-        <h3 class="section-header"> Found Users:</h3>
-        <div class="found-elems-container">
-            <% for(User currUser : topUsers) { %>
-            <div class="found-user"
-                 onclick="redirectToProfile(<%=currUser.getID()%>)">
-                <img class= "found-user-small-image" src="<%=currUser.getPhotoURL()%>"
-                     onerror="this.src='/web/images/common/defProfPic.jpg';" style="margin-left: 0">
-                <div class= "found-user-small-description-block" style="position: relative">
-                    <h3 class= "found-user-title" style="font-size: 16px">
-                        <%=currUser.getUsername()%>
-                    </h3>
-                    <p class="found-user-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
-                        <%=currUser.getFirstName()%> <%=currUser.getLastName()%>
-                    </p>
-                    <p class="found-user-small-description" style="overflow: hidden; height: 75px;">
-                        <%=currUser.getEmail()%>
-                    </p>
-                    <p class="found-user-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
-                        <%=currUser.getBirthDate()%>
-                    </p>
+                    <div class="search-item"
+                        style="flex-direction: row;
+                        justify-content: center;
+                        align-items: center">
+                        <label for="country" style="margin: 20px"><b> search in Authors </b></label>
+                        <input type="checkbox" name="is_author">
+                    </div>
+
+                    <div class="search-item">
+                        <label for="locationType"><b>Choose location type</b></label>
+                        <select onchange="getLocType(this)" class="drop-down"
+                                id="locationType" name="location_type">
+                            <option value="0">-</option>
+                            <option value="1">City</option>
+                            <option value="2">Country</option>
+                        </select>
+                    </div>
+                    <div class="search-item"id="city" style="display: none">
+                        <label for="city"><b> Cities </b></label>
+                        <select class="drop-down" name="city">
+                            <option value="empty">-</option>
+                            <% for(int i = 1; i <= cities.size(); i++) {%>
+                                <option value="<%=cities.get(i-1)%>"><%=cities.get(i-1)%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="search-item"id="country"style="display: none">
+                        <label for="country"><b> Countries</b></label>
+                        <select class="drop-down" name="country">
+                            <option value="empty">-</option>
+                            <% for(int i = 1; i <= countries.size(); i++) {%>
+                                <option value="<%=countries.get(i-1)%>"><%=countries.get(i-1)%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="search-item"
+                            style=" justify-content: center;
+                            position: absolute;
+                            right: 0;
+                            top: 19px;
+                            align-items: center">
+                        <button type="submit" class="search-bth"><i class="fa fa-search"></i></button>
+                    </div>
                 </div>
-            </div>
-            <%}%>
+            </form>
         </div>
     </div>
-</div>
 
-<jsp:include page="/web/pages/PartPages/Footer.jsp"/>
+    <div class="found-users-section">
+        <div class="container" style="position: relative;">
+            <h3 class="section-header"> Found Users:</h3>
+            <div class="found-elems-container">
+                <% for(User currUser : topUsers) { %>
+                    <div class="found-user" onclick="redirectToProfile(<%=currUser.getID()%>)">
+                        <img class= "found-user-small-image" src="<%=currUser.getPhotoURL()%>"
+                             onerror="this.src='/web/images/common/defProfPic.jpg';" style="margin-left: 0">
+                        <div class= "found-user-small-description-block" style="position: relative">
+                            <h3 class= "found-user-title" style="font-size: 16px">
+                                <%=currUser.getUsername()%>
+                            </h3>
+                            <p class="found-user-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                                <%=currUser.getFirstName()%> <%=currUser.getLastName()%>
+                            </p>
+                            <p class="found-user-small-description" style="overflow: hidden; height: 75px;">
+                                <%=currUser.getEmail()%>
+                            </p>
+                            <p class="found-user-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                                <%=currUser.getBirthDate()%>
+                            </p>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 
 
-<form id="display-profile-form" action="/Profile" method="get">
-    <input id="profile-id-holder" name="id">
+<form id="display-profile-form-in-top-users" action="/Profile" method="get">
+    <input id="profile-id-holder-in-top-users" name="id" value="-1">
 </form>
 
 <script>
 
-    function redirectToQuizStart(id){
-        const inp=document.getElementById("currQuizId"+id);
-        inp.value=id;
+    function redirectToQuizStart(ID){
+        const inp=document.getElementById("currQuizId"+ID);
+        inp.value=ID;
         const form = document.getElementById("to_display_start_quiz_form");
-        document.getElementById("to_display_start_quiz_elem").value = id;
+        document.getElementById("to_display_start_quiz_elem").value = ID;
         form.submit();
     }
 
-    function redirectToProfile(id){
-        const form = document.getElementById("display-profile-form");
-        document.getElementById("profile-id-holder").value = id;
+    function redirectToProfile(ID){
+        console.log('redirectToProfile');
+        console.log('   ->  id = ' + ID);
+        let form = document.getElementById("display-profile-form-in-top-users");
+        document.getElementById("profile-id-holder-in-top-users").value = ID;
+        console.log('   ->  document.getElementById("profile-id-holder-in-top-users").value = ' + document.getElementById("profile-id-holder-in-top-users").value);
+        console.log('   ->  redirectToProfile finished')
         form.submit();
     }
 

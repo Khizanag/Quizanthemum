@@ -32,10 +32,10 @@
     UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
 %>
 
-<jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
+<%--<jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>--%>
 <jsp:include page="/web/pages/PartPages/FriendsListPopUp.jsp"/>
 <jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
-<jsp:include page="/web/pages/PartPages/FriendRequestsListPopUp.jsp"/>
+<%--<jsp:include page="/web/pages/PartPages/FriendRequestsListPopUp.jsp"/>--%>
 
 <header class= "header-section">
     <div class="container header">
