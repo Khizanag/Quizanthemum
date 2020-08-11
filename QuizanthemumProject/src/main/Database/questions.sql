@@ -124,7 +124,7 @@ insert into questions values (null, 3, true, 1, 'choose one', 'Which of these le
 
 -- music
 
-insert into questions values (null, 3, true, 4, '', 'which of this songs belong to Beatles?', 'https://townsquare.media/site/295/files/2019/09/RS321_AbbeyRoad_cover.jpg', '', '',
+insert into questions values (null, 5, true, 4, 'choose multiple answers', 'which of this songs belong to Beatles?', 'https://townsquare.media/site/295/files/2019/09/RS321_AbbeyRoad_cover.jpg', '', '',
                               sysdate(), 6, false, 10, 'let it be', 'bohemian raphsody', 'yellow submarine', 'knocking on heavens door','lose yourself', 'stairway to heaven', 'highway to hell', 'billie jean', 'hey jude', 'michelle', null,
                               null, null, null, null, null, false, 4, 'let it be','yellow submarine', 'hey jude', 'michelle', null, null, null, null, null, null, null, null, null, null, null, null);
 
@@ -146,3 +146,11 @@ insert into questions values (null, 3, true, 1, 'choose one', 'Who flew very clo
 insert into questions values (null, 3, true, 1, 'choose one', 'Which island were minotaur and his labirynth on', null, '', '',
                               sysdate(), 7, false, 4, 'Crete', 'Isos', 'Santorini', 'Sardinia',null, null, null, null, null, null, null,
                               null, null, null, null, null, false, 1, 'Crete',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+-- NBA teams
+insert into questions values(null, 4, true, 5, '',
+                            'name Nba East Conference teams (correct : Lakers, wrong : Los Angeles Lakers)', null, '', '',
+                             sysdate(), 9, null, 5, null, null, null, null, null, null, null, null, null, null,
+                             null, null, null, null, null, null, null, 15, 'Raptors', 'Bucks', 'Celtics', 'Pacers',
+                             'Heat', 'Bulls', 'Hornets', 'Nets', 'Knicks', 'Magic',
+                             'Cavaliers', 'Hawks', '76ers', 'Wizards', 'Pistons', null);

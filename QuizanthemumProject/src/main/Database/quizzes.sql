@@ -41,3 +41,8 @@ insert into quizzes values(null, 'Mythology quiz', 34, 'check how you remember m
                            '',
                            false, 'quiz for mythology lovers', '1', sysdate(), 4);
 
+insert into quizzes values (null, 'NBA quiz', 32, 'check how you know NBA teams',
+                            'https://theundefeated.com/wp-content/uploads/2017/06/nbalogo.jpg?w=1400',
+                            false, 'quiz fow NBA geeks',
+                            '1', sysdate(), 2);
+
