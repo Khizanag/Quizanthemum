@@ -159,3 +159,12 @@ insert into questions values(null, 4, true, 5, '',
 insert into questions values(null, 2, true, 5, '', 'guess the missed numbers', null,
                              '', '', sysdate(), 10, false, 6, '1', '2', '5', '13', '34', '89', null, null,
                              null, null, null, null, null, null, null, null, false, 5, '1', '3', '8', '21', '55', null, null, null, null, null, null, null, null, null, null, null)
+
+-- nba matching
+insert into questions values (null, 6, true, 8, '',
+                              'match nba player to his team', null, '', '',
+                              sysdate(), 11, null, 8, 'Kevin Knox', 'Kevin Durant', 'John Wall',
+                              'Eric Gordon', 'Goga Bitadze', 'Jason Tatum', 'Jimmy Butler', 'Kyle Lowry',
+                              null, null, null, null, null, null, null, null, false, 8, 'Knicks', 'Nets', 'Wizards',
+                              'Magic',  'Pacers','Celtics', 'Bulls', 'Raptors',
+                              null, null,  null, null,  null, null,  null, null);
