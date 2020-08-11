@@ -7,7 +7,7 @@
         <jsp:include page="/web/pages/PartPages/InstructionsSectionInQuestionCreationPage.jsp"/>
         <jsp:include page="/web/pages/PartPages/PhotoSectionInQuestionCreationPage.jsp"/>
 
-        <div class="num-holder">
+        <div class="num-holder" style="display: flex; flex-direction: column;">
             <label for="num"><b>Enter desired amount of answers</b></label>
             <input type="number" placeholder="Answers Amount"
                    id="num" name="num_statements"

@@ -210,8 +210,8 @@
 <main class="main">
     <div class="top-quizzes-container">
         <div class="top-quiz-items">
+            <%System.out.println("zoma :" + achievements.size());%>
             <% for (AchievementEvent achievementEvent : achievements) { %>
-                <%System.out.println("zoma :" + achievements.size());%>
                 <%int currAchievementID = achievementEvent.getAchievementID();%>
                 <%Achievement currAchievement = achievementsManager.getAchievement(currAchievementID);%>
                 <div class="top-quiz-item" style="width: 545px;">

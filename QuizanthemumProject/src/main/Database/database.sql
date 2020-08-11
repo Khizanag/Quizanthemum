@@ -12,6 +12,7 @@ drop table if exists achievement_events;
 drop table if exists achievements;
 drop table if exists quiz_rating_events;
 drop table if exists quizzes;
+drop table if exists  friend_requests;
 drop table if exists users;
 drop table if exists categories;
 
@@ -220,6 +221,8 @@ create table friend_request(
     is_received boolean not null,
     is_accepted boolean not null
 );
+
+drop table friend_request;
 
 
 
