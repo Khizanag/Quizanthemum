@@ -47,7 +47,6 @@
 <body>
     <jsp:include page="/web/pages/PartPages/Header.jsp"/>
     <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
-    <jsp:include page="/web/pages/PartPages/AchivementPopUp.jsp"/>
 
     <%
         if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
@@ -65,12 +64,6 @@
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
         int achievementType = (Integer) request.getServletContext().getAttribute("achievementType");
     %>
-
-    <%if(achievementType != NO_ACHIEVEMENT) {%>
-        <script>
-            document.getElementById("achievement-popup-id").classList.toggle("active");
-        </script>
-    <%}%>
 
     <form class="start-quiz-section" action="/QuizEventStart" method ="get">
         <div class="container">

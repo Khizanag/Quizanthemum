@@ -149,7 +149,7 @@
             <%
                 if (role > 1) {
                     out.print("<div class='quizzes-made'> ");
-                    out.print("My made Quizzes: ");
+                    out.print("Created Quizzes: ");
                     out.print(usersManager.getQuizzesMadeCount(user.getID()));
                     out.print("</div>");
                 }
