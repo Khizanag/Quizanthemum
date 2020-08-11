@@ -10,3 +10,6 @@ create table achievement_events(
                                        references users(id) on update cascade on delete restrict,
                                    achieve_date date
 );
+
+-- default achievement_events
+insert into achievement_events values(null, 4, 1, sysdate());
