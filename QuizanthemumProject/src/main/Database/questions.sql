@@ -154,3 +154,8 @@ insert into questions values(null, 4, true, 5, '',
                              null, null, null, null, null, null, null, 15, 'Raptors', 'Bucks', 'Celtics', 'Pacers',
                              'Heat', 'Bulls', 'Hornets', 'Nets', 'Knicks', 'Magic',
                              'Cavaliers', 'Hawks', '76ers', 'Wizards', 'Pistons', null);
+
+-- math
+insert into questions values(null, 2, true, 5, '', 'guess the missed numbers', null,
+                             '', '', sysdate(), 10, false, 6, '1', '2', '5', '13', '34', '89', null, null,
+                             null, null, null, null, null, null, null, null, false, 5, '1', '3', '8', '21', '55', null, null, null, null, null, null, null, null, null, null, null)

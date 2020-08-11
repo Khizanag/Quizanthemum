@@ -46,3 +46,9 @@ insert into quizzes values (null, 'NBA quiz', 32, 'check how you know NBA teams'
                             false, 'quiz fow NBA geeks',
                             '1', sysdate(), 2);
 
+insert into quizzes values (null, 'math quiz', 26, 'check your logic', null,
+                            false, 'quiz for math lovers',
+                            '1', sysdate(), 4);
+
+
+
