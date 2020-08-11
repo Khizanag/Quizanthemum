@@ -10,15 +10,15 @@ public interface LocalDatabaseConfig {
 //    String DATABASE_NAME = "quizanthemum_schema";
 
 //    // dbera
-//    String USERNAME = "dima";
-//    String PASSWORD = "DimaDima_123";
-//    String DATABASE_NAME = "demodb";
+    String USERNAME = "dima";
+    String PASSWORD = "DimaDima_123";
+    String DATABASE_NAME = "demodb";
 
 
 //    // ishal
-    String USERNAME = "root";
-    String PASSWORD = "root";
-    String DATABASE_NAME = "quizanthemum";
+//    String USERNAME = "root";
+//    String PASSWORD = "root";
+//    String DATABASE_NAME = "quizanthemum";
 
 
 //     dgogi

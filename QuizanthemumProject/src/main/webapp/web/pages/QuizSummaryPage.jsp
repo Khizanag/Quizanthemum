@@ -15,7 +15,8 @@
 <%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.*" %>
 <%@ page import="Tools.Pair" %>
 <%@ page import="static Configs.AchievementTypes.NO_ACHIEVEMENT" %>
-<%@ page import="static Configs.Config.*" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
+<%@ page import="static Configs.Config.*" %>
+<%@ page import="Model.Managers.UsersManager" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -38,7 +39,7 @@
             QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
             Quiz quiz = quizEvent.getQuiz();
             User user = (User)request.getServletContext().getAttribute(LOGGED_IN_USER);
-            int achievementType = (Integer) request.getServletContext().getAttribute("achievementType");
+            UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
     %>
     <%!
         private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
@@ -54,12 +55,6 @@
 <body>
 <jsp:include page="/web/pages/PartPages/Header.jsp"/>
 <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
-
-    <%if(achievementType != NO_ACHIEVEMENT) {%>
-        <script>
-            document.getElementById("achievement-popup-id").classList.toggle("active");
-        </script>
-    <%}%>
 
     <div class="quiz-summary-wrapper">
         <div class="quiz-container">
@@ -196,15 +191,31 @@
                             i++;
                         }
                     %>
-                    <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
-                    <button class="back-to-prof-page" onclick="showGrading()">
-                        Go to Rating
-                    </button>
-                    <% } else { %>
-                    <button class="back-to-prof-page" onclick="GoToHomepage()">
-                        Finish
-                    </button>
-                    <% } %>
+
+                    <%  int numAchievemets = usersManager.getQuizzesPlayedCount(user.getID());
+                        if (numAchievemets == 5 || numAchievemets == 15 || numAchievemets == 30) { %>
+                            <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
+                            <button class="back-to-prof-page" onclick="AlertshowGrading()">
+                                Go to Rating
+                            </button>
+                            <% } else { %>
+                            <button class="back-to-prof-page" onclick="AlertGoToHomepage()">
+                                Finish
+                            </button>
+                            <% } %>
+                    <%} else {%>
+                        <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
+                        <button class="back-to-prof-page" onclick="showGrading()">
+                            Go to Rating
+                        </button>
+                        <% } else { %>
+                        <button class="back-to-prof-page" onclick="GoToHomepage()">
+                            Finish
+                        </button>
+                        <% } %>
+                    <%}%>
+
+
                 </div>
             </div>
         </div>
@@ -223,16 +234,29 @@
         document.getElementById("stars_rating").value = elem.id;
     }
 
+    function openSearch() {
+        window.location.href = "SearchPage.jsp";
+    }
+
     function showGrading() {
         document.getElementById("before").style.display = "none";
         document.getElementById("after").style.display = "flex";
     }
 
-    function openSearch() {
-        window.location.href = "SearchPage.jsp";
+    function GoToHomepage() {
+        window.location.href = "/web/pages/HomePage.jsp"
     }
 
-    function GoToHomepage() {
+    function AlertshowGrading() {
+        alert("New Achievement Unlocked\n\n" +
+            "Check Profile To See Achievement");
+        document.getElementById("before").style.display = "none";
+        document.getElementById("after").style.display = "flex";
+    }
+
+    function AlertGoToHomepage() {
+        alert("New Achievement Unlocked\n\n" +
+            "Check Profile To See Achievement");
         window.location.href = "/web/pages/HomePage.jsp"
     }
 </script>

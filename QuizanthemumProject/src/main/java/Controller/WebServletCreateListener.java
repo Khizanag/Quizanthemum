@@ -23,6 +23,7 @@ public class WebServletCreateListener implements ServletContextListener, Config 
         ServletContext context = sce.getServletContext();
         ManagersManager managersManager = new ManagersManager(context);
         sce.getServletContext().setAttribute(MANAGERS_MANAGER_STR, managersManager);
+        sce.getServletContext().setAttribute("achievementType", -1);
     }
 
     @Override
