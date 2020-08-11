@@ -161,90 +161,78 @@
 
 </div>
 
-<%
-    QuizEventManager quizEventManager = (QuizEventManager) managersManager.getManager(QUIZ_EVENT_MANAGER_STR);
-    FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
-    FriendRequestsManager friendRequestsManager = (FriendRequestsManager) managersManager.getManager(FRIEND_REQUESTS_MANAGER_STR);
-    AchievementsManager achievementsManager = (AchievementsManager) managersManager.getManager(ACHIEVEMENTS_MANAGER_STR);
-    AchievementEventsManager achievementEventsManager = (AchievementEventsManager) managersManager.getManager(ACHIEVEMENT_EVENTS_MANAGER_STR);
-    List<QuizEvent> topQuizEvents = quizEventManager.getLatestQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
-    List<AchievementEvent> achievements = achievementEventsManager.getUserAchievements(user.getID());
-    User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
-    if (loggedUser != null
-            && loggedUser.getID() != user.getID()
-            && !friendshipsManager.areFriends(user.getID(), loggedUser.getID())
-            && !friendRequestsManager.isFriendRequestSent(loggedUser.getID(), user.getID())) { %>
+    <%
+        QuizEventManager quizEventManager = (QuizEventManager) managersManager.getManager(QUIZ_EVENT_MANAGER_STR);
+        FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
+        FriendRequestsManager friendRequestsManager = (FriendRequestsManager) managersManager.getManager(FRIEND_REQUESTS_MANAGER_STR);
+        QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+        List<QuizEvent> topQuizEvents = quizEventManager.getLatestQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
+        User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+        System.out.println("loggedUserID : "+ loggedUser.getID());
+        System.out.println("userID : " + user.getID());
+        if (loggedUser != null
+                && loggedUser.getID() != user.getID()
+                && !friendshipsManager.areFriends(user.getID(), loggedUser.getID())
+                && !friendRequestsManager.isWaitingFriendRequestSent(loggedUser.getID(), user.getID())
+                && !friendRequestsManager.isWaitingFriendRequestSent(user.getID(), loggedUser.getID())) { %>
 
-<div class="container">
-    <form id="add-friend-form" action="SendFriendRequest" method="get" style="text-align: center;">
-        <input type="hidden" name="user-id" value="<%=user.getID()%>">
-        <input type="hidden" name="url" value="/Profile?id=<%=user.getID()%>">
-        <input type="submit" class="button finish" value="ვიმეგობროთ!" style="width: 80%">
-    </form>
-</div>
-
-<% } %>
-
-<div class="top-quizzes-banner">
-    <div class="players-top-quizzes">
-        My Achievements
-    </div>
-</div>
-<main class="main">
-    <div class="top-quizzes-container">
-        <div class="top-quiz-items">
-            <% for (AchievementEvent achievementEvent : achievements) { %>
-                <%int currAchievementID = achievementEvent.getAchievementID();%>
-                <%Achievement currAchievement = achievementsManager.getAchievement(currAchievementID);%>
-            <div class="top-quiz-item" style="width: 545px;">
-                <img class="quiz-small-image" src="<%=currAchievement.getIconURL()%>"
-                     onerror="this.src='/web/images/common/Quiz1.jpg';" style="padding-left: 10px;">
-                <div class="quiz-small-description-block">
-                    <h3 class="quiz-title">
-                        <%=currAchievement.getTitle()%>
-                    </h3><br>
-                    <p class="quiz-small-description">
-                        <%=currAchievement.getDescription()%>
-                    </p>
-                </div>
+            <div class="container">
+                <form id="add-friend-form" action="SendFriendRequest" method="get" style="text-align: center;">
+                    <input type="hidden" name="user-id" value="<%=user.getID()%>">
+                    <input type="hidden" name="url" value="/Profile?id=<%=user.getID()%>">
+                    <input type="submit" class="button finish" value="ვიმეგობროთ!" style="width: 80%">
+                </form>
             </div>
-            <%}%>
+
+    <% } else if(user != null
+                    && loggedUser != null
+                    && loggedUser.getID() != user.getID()
+                    && friendRequestsManager.isWaitingFriendRequestSent(user.getID(), loggedUser.getID())) {
+            System.out.println("pzdc");
+            FriendRequest friendRequest = friendRequestsManager.getFriendRequest(loggedUser.getID(), user.getID()); %>
+        <div class="container">
+            <form id="accept-friend-request-form-in-profile-page" action="/AcceptFriendRequest" method="get" style="text-align: center;">
+                <input type="hidden" name="friend-request-id" value="<%=friendRequest.getID()%>">
+                <input type="submit" class="button finish" value="დაე, ვიმეგობროთ!" style="width: 80%">
+            </form>
+        </div>
+
+    <% } %>
+
+    <div class="top-quizzes-banner">
+        <div class="players-top-quizzes">
+            My Top Played Quizzes
         </div>
     </div>
-</main>
-<div class="top-quizzes-banner">
-    <div class="players-top-quizzes">
-        My Top Played Quizzess
-    </div>
-</div>
-<main class="main">
-    <div class="top-quizzes-container">
-        <div class="top-quiz-items">
-            <% for (QuizEvent currQuizEvent : topQuizEvents) { %>
-            <%Quiz currQuiz = currQuizEvent.getQuiz();%>
-            <div class="top-quiz-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)" style="width: 545px;">
-                <img class="quiz-small-image" src="<%=currQuiz.getIconUrl()%>"
-                     onerror="this.src='/web/images/common/Quiz1.jpg';" style="padding-left: 10px;">
-                <div class="quiz-small-description-block">
-                    <h3 class="quiz-title">
-                        <%=currQuiz.getName()%>
-                    </h3><br>
-                    <p class="quiz-small-description">
-                        <%=currQuiz.getDescription()%>
-                    </p>
+
+    <main class="main">
+        <div class="top-quizzes-container">
+            <div class="top-quiz-items">
+                <% for (QuizEvent currQuizEvent : topQuizEvents) { %>
+                <%Quiz currQuiz = currQuizEvent.getQuiz();%>
+                <div class="top-quiz-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)" style="width: 545px;">
+                    <img class="quiz-small-image" src="<%=currQuiz.getIconUrl()%>"
+                         onerror="this.src='/web/images/common/Quiz1.jpg';" style="padding-left: 10px;">
+                    <div class="quiz-small-description-block">
+                        <h3 class="quiz-title">
+                            <%=currQuiz.getName()%>
+                        </h3><br>
+                        <p class="quiz-small-description">
+                            <%=currQuiz.getDescription()%>
+                        </p>
+                    </div>
+                    <div class="quiz-score"><%= truncateDecimal(currQuizEvent.getUserScore(), 2)%>
+                        / <%=truncateDecimal((currQuiz.getMaxScore()), 2)%>
+                    </div>
+                    <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
                 </div>
-                <div class="quiz-score"><%= truncateDecimal(currQuizEvent.getUserScore(), 2)%>
-                    / <%=truncateDecimal((currQuiz.getMaxScore()), 2)%>
-                </div>
-                <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
+                <%}%>
             </div>
-            <%}%>
         </div>
-    </div>
-    <form id="to_display_start_quiz_form" action="Quiz" method="get">
-        <input type="hidden" id="to_display_start_quiz_elem" name="id">
-    </form>
-</main>
+        <form id="to_display_start_quiz_form" action="Quiz" method="get">
+            <input type="hidden" id="to_display_start_quiz_elem" name="id">
+        </form>
+    </main>
 
 <% } %>
 

@@ -42,6 +42,27 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
         return null;
     }
 
+    public FriendRequest getFriendRequest(int senderID, int receiverID){
+        String query =
+                    "SELECT * "
+                + " FROM " + FRIEND_REQUESTS_TABLE_NAME
+                + " WHERE (" + FRIEND_REQUESTS_TABLE_COLUMN_2_SENDER_ID + " = " + senderID
+                + "             AND " + FRIEND_REQUESTS_TABLE_COLUMN_3_RECEIVER_ID  + " = " + receiverID + ")"
+                + "         OR (" + FRIEND_REQUESTS_TABLE_COLUMN_2_SENDER_ID + " = " + receiverID
+                + "             AND " + FRIEND_REQUESTS_TABLE_COLUMN_3_RECEIVER_ID + " = " + senderID + ")"
+                + " LIMIT 1";
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()){
+                return buildFriendRequest(resultSet);
+            }
+        } catch (SQLException throwable){
+            throwable.printStackTrace();
+        }
+        return null;
+    }
+
     private FriendRequest buildFriendRequest(ResultSet resultSet){
         try {
            int ID = resultSet.getInt(FRIEND_REQUESTS_TABLE_COLUMN_1_ID);
@@ -118,11 +139,12 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
     public void commitFriendRequestReceive(FriendRequest request){
         String query = "UPDATE " + FRIEND_REQUESTS_TABLE_NAME
                 + " SET "
-                + "         " + FRIEND_REQUESTS_TABLE_COLUMN_6_IS_RECEIVED + " = " + request.isReceived()
+                + "         " + FRIEND_REQUESTS_TABLE_COLUMN_6_IS_RECEIVED + " = " + request.isReceived() + ", "
                 + "         " + FRIEND_REQUESTS_TABLE_COLUMN_7_IS_ACCEPTED + " = " + request.isAccepted()
                 + " WHERE " + FRIEND_REQUESTS_TABLE_COLUMN_1_ID + " = " + request.getID();
         try{
             Statement statement = connection.createStatement();
+            System.out.println("commitFriendRequestReceive: query: \n " + query);
             statement.execute(query);
             statement.close();
         } catch(SQLException throwables){
@@ -130,12 +152,15 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
         }
     }
 
-    public boolean isFriendRequestSent(int fromUserID, int toUserID){
+    public boolean isWaitingFriendRequestSent(int fromUserID, int toUserID){
+        System.out.println("from: "+ fromUserID);
+        System.out.println("to: " + toUserID);
         String query =
                     "SELECT COUNT(1) "
                 + " FROM " + FRIEND_REQUESTS_TABLE_NAME
                 + " WHERE " + FRIEND_REQUESTS_TABLE_COLUMN_2_SENDER_ID + " = " + fromUserID
-                + "         AND " + FRIEND_REQUESTS_TABLE_COLUMN_3_RECEIVER_ID + " = " + toUserID;
+                + "         AND " + FRIEND_REQUESTS_TABLE_COLUMN_3_RECEIVER_ID + " = " + toUserID
+                + "         AND " + FRIEND_REQUESTS_TABLE_COLUMN_6_IS_RECEIVED + " = false";
         boolean toReturn = false
                 ;
         try{
@@ -150,6 +175,7 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        System.out.println("******** isWaiting: " + toReturn);
         return toReturn;
     }
 }
