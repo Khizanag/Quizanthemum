@@ -16,9 +16,9 @@ public interface LocalDatabaseConfig {
 
 
 //    // ishal
-    String USERNAME = "shaliba";
-    String PASSWORD = "Shaliba-1";
-    String DATABASE_NAME = "demodb";
+    String USERNAME = "root";
+    String PASSWORD = "root";
+    String DATABASE_NAME = "quizanthemum";
 
 
 //     dgogi
