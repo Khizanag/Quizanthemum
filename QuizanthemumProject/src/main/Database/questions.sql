@@ -68,7 +68,6 @@ insert into questions values (null, 3, true, 1, 'choose one', 'Moscow is capital
                               null, null, null, null, null, null, null, null);
 
 insert into questions values (null, 3, true, 1, 'choose one', 'Washington D.C. is capital city of ...', null, '', '', sysdate(), 1, false, 4, 'UK', 'Georgia',
-
                               'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'USA', null, null, null, null, null, null, null,
                               null, null, null, null, null, null, null, null);
 
@@ -150,8 +149,8 @@ insert into questions values (null, 3, true, 1, 'choose one', 'Which island were
 -- NBA teams
 insert into questions values(null, 4, true, 5, '',
                             'name Nba East Conference teams (correct : Lakers, wrong : Los Angeles Lakers)', null, '', '',
-                             sysdate(), 9, null, 5, null, null, null, null, null, null, null, null, null, null,
-                             null, null, null, null, null, null, null, 15, 'Raptors', 'Bucks', 'Celtics', 'Pacers',
+                             sysdate(), 9, false, 5, null, null, null, null, null, null, null, null, null, null,
+                             null, null, null, null, null, null, false, 15, 'Raptors', 'Bucks', 'Celtics', 'Pacers',
                              'Heat', 'Bulls', 'Hornets', 'Nets', 'Knicks', 'Magic',
                              'Cavaliers', 'Hawks', '76ers', 'Wizards', 'Pistons', null);
 
@@ -163,8 +162,9 @@ insert into questions values(null, 2, true, 5, '', 'guess the missed numbers', n
 -- nba matching
 insert into questions values (null, 6, true, 8, '',
                               'match nba player to his team', null, '', '',
-                              sysdate(), 11, null, 8, 'Kevin Knox', 'Kevin Durant', 'John Wall',
-                              'Eric Gordon', 'Goga Bitadze', 'Jason Tatum', 'Jimmy Butler', 'Kyle Lowry',
-                              null, null, null, null, null, null, null, null, false, 8, 'Knicks', 'Nets', 'Wizards',
-                              'Magic',  'Pacers','Celtics', 'Bulls', 'Raptors',
-                              null, null,  null, null,  null, null,  null, null);
+                              sysdate(), 11, false, 16, 'Kevin Knox', 'Knicks', 'Kevin Durant', 'Nets', 'John Wall', 'Wizards',
+                              'Eric Gordon', 'Magic', 'Goga Bitadze', 'Pacers', 'Jason Tatum', 'Celtics',
+                              'Jimmy Butler', 'Bulls', 'Kyle Lowry', 'Raptors',
+                               false, 16, 'Kevin Knox', 'Knicks', 'Kevin Durant', 'Nets', 'John Wall', 'Wizards',
+                              'Eric Gordon', 'Magic', 'Goga Bitadze', 'Pacers', 'Jason Tatum', 'Celtics',
+                              'Jimmy Butler', 'Bulls', 'Kyle Lowry', 'Raptors');
