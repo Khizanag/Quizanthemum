@@ -80,7 +80,7 @@
                     <%=userWhoReceived.getUsername()%>
                 </span>
             <div class = "friend-challenge-remove-btns">
-                <button class="remove-btn" onclick="cancelChallenge(<%=friendRequest.getID()%>,this)" style="color: red">Cancel</button>
+                <button class="remove-btn" onclick="cancelFriendRequest(<%=friendRequest.getID()%>,this)" style="color: red">Cancel</button>
             </div>
         </div>
         <% } %>
@@ -100,7 +100,7 @@
     <input type="hidden" id="friend-request-id-holder-in-reject-friend-request-form" name="friend-request-id" value="-1">
 </form>
 
-<form id="cancel-friend-request-form" action="/CancelFriendRequest">
+<form id="cancel-friend-request-form-in-popup-list" action="/CancelFriendRequest">
     <input type="hidden" id="friend-request-id-holder-in-cancel-friend-request-form" name="friend-request-id" value="-1">
 </form>
 
@@ -133,13 +133,13 @@
 
     }
 
-    function cancelFriendRequest(ID){
+    function cancelFriendRequest(ID,ob){
         console.log('cancelFriendRequest');
 
         document.getElementById('friend-request-id-holder-in-cancel-friend-request-form').value = ID;
         document.getElementById('cancel-friend-request-form-in-popup-list').submit();
+        $(ob).parent().parent().remove();
 
-        form.submit();
     }
 
 
