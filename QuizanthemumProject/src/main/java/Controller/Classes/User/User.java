@@ -175,12 +175,9 @@ public class User {
     }
 
     public List<Integer> getFriendIDs() {
-        if(friendIDs == null){
-            ManagersManager managersManager = manager.getManager();
-            FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
-            this.friendIDs = friendshipsManager.getFriendIDsOf(this.id);
-        }
-        return friendIDs;
+        ManagersManager managersManager = manager.getManager();
+        FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
+            return friendshipsManager.getFriendIDsOf(this.id);
     }
 
 

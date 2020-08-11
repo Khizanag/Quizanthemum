@@ -16,6 +16,8 @@ create table users(
                       password_salt varchar(256)
 );
 
+SELECT * FROM users;
+
 delete from users where true;
 
 -- adding default users into database

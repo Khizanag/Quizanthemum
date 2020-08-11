@@ -92,7 +92,17 @@
 
 
 <%-------------------------------- FORMS --------------------------------%>
-<form id="cancel-friend-request-form" action="/CancelFriendRequest"></form>
+<form id="accept-friend-request-form-in-popup-list" action="/AcceptFriendRequest">
+    <input type="hidden" id="friend-request-id-holder-in-accept-friend-request-form" name="friend-request-id" value="-1">
+</form>
+
+<form id="reject-friend-request-form-in-popup-list" action="/RejectFriendRequest">
+    <input type="hidden" id="friend-request-id-holder-in-reject-friend-request-form" name="friend-request-id" value="-1">
+</form>
+
+<form id="cancel-friend-request-form" action="/CancelFriendRequest">
+    <input type="hidden" id="friend-request-id-holder-in-cancel-friend-request-form" name="friend-request-id" value="-1">
+</form>
 
 
 <%-------------------------------- JAVASCRIPT --------------------------------%>
@@ -106,22 +116,28 @@
 
     function acceptFriendRequest(ID,ob){
         console.log('acceptFriendRequest');
-        $(ob).parent().parent().remove();
 
+        document.getElementById('friend-request-id-holder-in-accept-friend-request-form').value = ID;
+        document.getElementById('accept-friend-request-form-in-popup-list').submit();
+
+        $(ob).parent().parent().remove();
     }
 
     function rejectFriendRequest(ID,ob){
         console.log('rejectFriendRequst');
+
+        document.getElementById('friend-request-id-holder-in-reject-friend-request-form').value = ID;
+        document.getElementById('reject-friend-request-form-in-popup-list').submit();
+
         $(ob).parent().parent().remove();
 
-    }
-    function cancelChallenge(ID,ob){
-        $(ob).parent().parent().remove();
     }
 
     function cancelFriendRequest(ID){
         console.log('cancelFriendRequest');
-        const form = document.getElementById('cancel-friend-request-form');
+
+        document.getElementById('friend-request-id-holder-in-cancel-friend-request-form').value = ID;
+        document.getElementById('cancel-friend-request-form-in-popup-list').submit();
 
         form.submit();
     }
