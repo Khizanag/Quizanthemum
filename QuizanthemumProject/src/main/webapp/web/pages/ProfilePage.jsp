@@ -11,6 +11,8 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="Controller.Classes.OtherClasses.FriendRequest" %>
+<%@ page import="Controller.Classes.User.AchievementEvent" %>
+<%@ page import="Controller.Classes.User.Achievement" %>
 <head>
     <meta charset="UTF-8">
     <title> Users Profile </title>
@@ -54,104 +56,104 @@
 <jsp:include page="/web/pages/PartPages/YouShouldLogInPart.jsp"/>
 <% } else { %>
 
-    <div class="change-image-popup" id="change-image">
-        <div class="overlay"></div>
-        <div class="content">
-            <form method="get" action="/ChangeProfilePicture">
-                <div class="close-btn" onclick="changeImage()">&times;</div>
-                <h2 style="color:white">upload image</h2>
-                <br>
-                <div class="upload-image-section-cl">
-                    <input type="file" accept="image/*" name="image" id="file"
-                           onchange="loadFile(event)"
-                           style="display: none;"
-                    >
-                    <label class="button upload upl-btn" type="button" for="file">upload image</label>
-                    <label class="button upload" type="button"
-                           onclick="uploadImage(event)" id="url-button" style="width:300px">
-                        or enter photo url
-                    </label>
-                    <input type="text" placeholder="Image URL" name="photo-url" id="photo-url" required style="width:200px">
-                    <img id="output" src="" style="width:300px;height:220px;margin-top: 5px;">
-                    <input class="button upload upl-btn" type="submit">Submit</input>
-                </div>
-            </form>
+<div class="change-image-popup" id="change-image">
+    <div class="overlay"></div>
+    <div class="content">
+        <form method="get" action="/ChangeProfilePicture">
+            <div class="close-btn" onclick="changeImage()">&times;</div>
+            <h2 style="color:white">Upload Image</h2>
+            <br>
+            <div class="upload-image-section-cl">
+                <input type="file" accept="image/*" name="image" id="file"
+                       onchange="loadFile(event)"
+                       style="display: none;"
+                >
+                <%--                <label class="button upload upl-btn" type="button" for="file">upload image</label>--%>
+                <input type="text" placeholder="Image URL" name="photo-url" id="photo-url" required style="width:100%">
+                <label class="button upload" type="button"
+                       onclick="uploadImage(event)" id="url-button" style="width:100%">
+                    Upload
+                </label>
+                <img id="output" src="" style="width:100%;height:100%;margin-top: 5px;">
+                <input class="button upload upl-btn" type="submit"></input>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="profile-info-wrapper">
+    <div class="profile-info-container">
+        <div class="profile-details-info">
+            <div class="user-first-name"><%="First Name: " + user.getFirstName()%>
+            </div>
+            <div class="user-last-name"><%="Last Name: " + user.getLastName()%>
+            </div>
+            <div class="user-email"><%="Email: " + user.getEmail()%>
+            </div>
+            <% String mobNum = user.getMobileNumber();
+                if (mobNum == null) {
+                    mobNum = "*******";
+                }
+                String country = user.getCountry();
+                if (country == null) {
+                    country = "Unknown";
+                }
+                String city = user.getCity();
+                if (city == null) {
+                    city = "Unknown";
+                }
+            %>
+            <div class="user-mobile"><%="Phone number: " + mobNum%>
+            </div>
+            <div class="user-country"><%="Country: " + country%>
+            </div>
+            <div class="user-city"><%="City: " + city %>
+            </div>
+        </div>
+        <div class="profile-info">
+            <img class="profile-picture-big" id="prof-pic-big-id"
+                 src="<%=usersManager.getProfilePicture(user.getID())%>"
+                 onerror="this.src='/web/images/common/defProfPic.jpg';">
+            <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
+            <div class="profile-name"><%=user.getUsername()%>
+            </div>
+            <%
+                int role = user.getRole();
+                String status = "";
+                if (role == 1) {
+                    status = "User";
+                } else if (role == 2) {
+                    status = "Moderator";
+                } else if (role == 3) {
+                    status = "Admin";
+                }
+            %>
+            <div class="user-details"><%=status%>
+            </div>
+        </div>
+        <div class="profile-details-info">
+            <div class="quizzes-played"><%="Played quizzes: " + usersManager.getQuizzesPlayedCount(user.getID())%>
+            </div>
+            <div class="quizzes-played"><%="Total User Score: " + truncateDecimal(usersManager.getUserTotalPoints(user.getID()), 2)%>
+            </div>
+            <div class="challenges-played"><%="Played Challenges: " + user.getChallengesPlayed()%>
+            </div>
+            <div class="challenges-won"><%="Won Challenges: " + user.getChallengesWon()%>
+            </div>
+            <%
+                if (role > 1) {
+                    out.print("<div class='quizzes-made'> ");
+                    out.print("My made Quizzes: ");
+                    out.print(usersManager.getQuizzesMadeCount(user.getID()));
+                    out.print("</div>");
+                }
+            %>
+            <div class="Creation-date"><%="Profile Creation Date: <br><br>" + user.getRegistrationDate()%>
+            </div>
         </div>
     </div>
 
-    <div class="profile-info-wrapper">
-        <div class="profile-info-container">
-            <div class="profile-details-info">
-                <div class="user-first-name"><%="First Name: " + user.getFirstName()%>
-                </div>
-                <div class="user-last-name"><%="Last Name: " + user.getLastName()%>
-                </div>
-                <div class="user-email"><%="Email: " + user.getEmail()%>
-                </div>
-                <% String mobNum = user.getMobileNumber();
-                    if (mobNum == null) {
-                        mobNum = "*******";
-                    }
-                    String country = user.getCountry();
-                    if (country == null) {
-                        country = "Unknown";
-                    }
-                    String city = user.getCity();
-                    if (city == null) {
-                        city = "Unknown";
-                    }
-                %>
-                <div class="user-mobile"><%="Phone number: " + mobNum%>
-                </div>
-                <div class="user-country"><%="Country: " + country%>
-                </div>
-                <div class="user-city"><%="City: " + city %>
-                </div>
-            </div>
-            <div class="profile-info">
-                <img class="profile-picture-big" id="prof-pic-big-id"
-                     src="<%=usersManager.getProfilePicture(user.getID())%>"
-                     onerror="this.src='/web/images/common/defProfPic.jpg';">
-                <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
-                <div class="profile-name"><%=user.getUsername()%>
-                </div>
-                <%
-                    int role = user.getRole();
-                    String status = "";
-                    if (role == 1) {
-                        status = "User";
-                    } else if (role == 2) {
-                        status = "Moderator";
-                    } else if (role == 3) {
-                        status = "Admin";
-                    }
-                %>
-                <div class="user-details"><%=status%>
-                </div>
-            </div>
-            <div class="profile-details-info">
-                <div class="quizzes-played"><%="Played quizzes: " + usersManager.getQuizzesPlayedCount(user.getID())%>
-                </div>
-                <div class="quizzes-played"><%="Total User Score: " + truncateDecimal(usersManager.getUserTotalPoints(user.getID()), 2)%>
-                </div>
-                <div class="challenges-played"><%="Played Challenges: " + user.getChallengesPlayed()%>
-                </div>
-                <div class="challenges-won"><%="Won Challenges: " + user.getChallengesWon()%>
-                </div>
-                <%
-                    if (role > 1) {
-                        out.print("<div class='quizzes-made'> ");
-                        out.print("My made Quizzes: ");
-                        out.print(usersManager.getQuizzesMadeCount(user.getID()));
-                        out.print("</div>");
-                    }
-                %>
-                <div class="Creation-date"><%="Profile Creation Date: <br><br>" + user.getRegistrationDate()%>
-                </div>
-            </div>
-        </div>
-
-    </div>
+</div>
 
     <%
         QuizEventManager quizEventManager = (QuizEventManager) managersManager.getManager(QUIZ_EVENT_MANAGER_STR);
