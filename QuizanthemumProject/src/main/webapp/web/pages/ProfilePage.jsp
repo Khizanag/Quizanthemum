@@ -59,21 +59,21 @@
     <div class="content">
         <form method="get" action="/ChangeProfilePicture">
             <div class="close-btn" onclick="changeImage()">&times;</div>
-            <h2 style="color:white">upload image</h2>
+            <h2 style="color:white">Upload Image</h2>
             <br>
             <div class="upload-image-section-cl">
                 <input type="file" accept="image/*" name="image" id="file"
                        onchange="loadFile(event)"
                        style="display: none;"
                 >
-                <label class="button upload upl-btn" type="button" for="file">upload image</label>
+<%--                <label class="button upload upl-btn" type="button" for="file">upload image</label>--%>
+                <input type="text" placeholder="Image URL" name="photo-url" id="photo-url" required style="width:100%">
                 <label class="button upload" type="button"
-                       onclick="uploadImage(event)" id="url-button" style="width:300px">
-                    or enter photo url
+                       onclick="uploadImage(event)" id="url-button" style="width:100%">
+                    Upload
                 </label>
-                <input type="text" placeholder="Image URL" name="photo-url" id="photo-url" required style="width:200px">
-                <img id="output" src="" style="width:300px;height:220px;margin-top: 5px;">
-                <input class="button upload upl-btn" type="submit">Submit</input>
+                <img id="output" src="" style="width:100%;height:100%;margin-top: 5px;">
+                <input class="button upload upl-btn" type="submit"></input>
             </div>
         </form>
     </div>
