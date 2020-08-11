@@ -73,29 +73,37 @@ public class QuizEventFinishedServlet extends HttpServlet {
             }
         }
 
+        int achievementType = addAchievement(quizEvent.getQuiz().getAuthor().getID(), usersManager, managersManager);
+        context.setAttribute("achievementType", achievementType);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizSummaryPage.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void addAchievement(int userID, UsersManager usersManager, ManagersManager managersManager) {
+    private int addAchievement(int writerID, UsersManager usersManager, ManagersManager managersManager) {
         AchievementEventsManager achievementEventsManager = (AchievementEventsManager) managersManager.getManager(ACHIEVEMENT_EVENTS_MANAGER_STR);
-        int numQuizzesDone = usersManager.getQuizzesPlayedCount(userID);
+        int numQuizzesCreated = usersManager.getQuizzesMadeCount(writerID);
         AchievementEvent newAchievementEvent;
-        switch (numQuizzesDone) {
-            case 5:
-                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_BRONZE, userID, new Date());
+        int toReturn = -1;
+        switch (numQuizzesCreated) {
+            case 3:
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_BRONZE, writerID, new Date());
+                toReturn = QUIZ_MASTER_BRONZE;
                 break;
             case 15:
-                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_SILVER, userID, new Date());
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_SILVER, writerID, new Date());
+                toReturn = QUIZ_MASTER_SILVER;
                 break;
             case 30:
-                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_GOLD, userID, new Date());
+                newAchievementEvent = new AchievementEvent(-1, QUIZ_MASTER_GOLD, writerID, new Date());
+                toReturn = QUIZ_MASTER_GOLD;
                 break;
             default:
-                return;
+                return NO_ACHIEVEMENT;
         }
-
         achievementEventsManager.insertAchievementEvent(newAchievementEvent);
-
+        return toReturn;
     }
+
+
 }

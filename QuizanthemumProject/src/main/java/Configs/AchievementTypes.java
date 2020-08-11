@@ -8,4 +8,5 @@ public interface AchievementTypes {
     int KNOWLEDGE_SPREADER_BRONZE = 4;
     int KNOWLEDGE_SPREADER_SILVER = 5;
     int KNOWLEDGE_SPREADER_GOLD = 6;
+    int NO_ACHIEVEMENT = -1;
 }

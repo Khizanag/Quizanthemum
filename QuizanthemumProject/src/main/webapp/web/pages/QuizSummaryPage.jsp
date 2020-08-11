@@ -14,6 +14,7 @@
 <%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.FILL_BLANK" %>
 <%@ page import="static Controller.Classes.Quiz.Question.QuestionTypes.*" %>
 <%@ page import="Tools.Pair" %>
+<%@ page import="static Configs.AchievementTypes.NO_ACHIEVEMENT" %>
 <%@ page import="static Configs.Config.*" %><%--<%@ page import="static Configs.Config.LAST_CREATED_QUIZ" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
@@ -37,6 +38,7 @@
             QuizEvent quizEvent = (QuizEvent) request.getServletContext().getAttribute("quiz_event");
             Quiz quiz = quizEvent.getQuiz();
             User user = (User)request.getServletContext().getAttribute(LOGGED_IN_USER);
+            int achievementType = (Integer) request.getServletContext().getAttribute("achievementType");
     %>
     <%!
         private static BigDecimal truncateDecimal(double x, int numberofDecimals) {
@@ -52,6 +54,12 @@
 <body>
 <jsp:include page="/web/pages/PartPages/Header.jsp"/>
 <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
+
+    <%if(achievementType != NO_ACHIEVEMENT) {%>
+        <script>
+            document.getElementById("achievement-popup-id").classList.toggle("active");
+        </script>
+    <%}%>
 
     <div class="quiz-summary-wrapper">
         <div class="quiz-container">
