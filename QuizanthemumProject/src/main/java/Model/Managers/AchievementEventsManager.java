@@ -33,7 +33,6 @@ public class AchievementEventsManager implements AchievementsTableConfig {
                 int achievementEventID = set.getInt(ACHIEVEMENT_EVENT_TABLE_COLUMN_1_ID);
                 int achievementID = set.getInt(ACHIEVEMENT_EVENT_TABLE_COLUMN_2_ACHIEVEMENT_ID);
                 Date achieveDate = set.getDate(ACHIEVEMENT_EVENT_TABLE_COLUMN_4_ACHIEVE_DATE);
-                statement.close();
                 achievementEvents.add(new AchievementEvent(achievementEventID, achievementID, userID, achieveDate));
             }
             set.close();
