@@ -59,7 +59,7 @@
     <div class="content">
         <form method="get" action="/ChangeProfilePicture">
             <div class="close-btn" onclick="changeImage()">&times;</div>
-            <h2 style="color:white">upload image</h2>
+            <h2 style="color:white">Upload Image</h2>
             <br>
             <div class="upload-image-section-cl">
                 <input type="file" accept="image/*" name="image" id="file"
