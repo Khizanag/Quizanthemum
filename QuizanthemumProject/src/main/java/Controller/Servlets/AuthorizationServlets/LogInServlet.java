@@ -23,7 +23,7 @@ public class LogInServlet extends HttpServlet implements Config {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("LogInServlet");
-        ServletContext context = request.getServletContext();
+        ServletContext context = request.getSession().getServletContext();
         String username = request.getParameter("log_in_username");
         String password = request.getParameter("log_in_password");
         UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
