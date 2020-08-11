@@ -11,6 +11,8 @@
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="Controller.Classes.OtherClasses.FriendRequest" %>
+<%@ page import="Controller.Classes.User.AchievementEvent" %>
+<%@ page import="Controller.Classes.User.Achievement" %>
 <head>
     <meta charset="UTF-8">
     <title> Users Profile </title>
@@ -66,7 +68,7 @@
                        onchange="loadFile(event)"
                        style="display: none;"
                 >
-<%--                <label class="button upload upl-btn" type="button" for="file">upload image</label>--%>
+                <%--                <label class="button upload upl-btn" type="button" for="file">upload image</label>--%>
                 <input type="text" placeholder="Image URL" name="photo-url" id="photo-url" required style="width:100%">
                 <label class="button upload" type="button"
                        onclick="uploadImage(event)" id="url-button" style="width:100%">
@@ -157,24 +159,53 @@
     QuizEventManager quizEventManager = (QuizEventManager) managersManager.getManager(QUIZ_EVENT_MANAGER_STR);
     FriendshipsManager friendshipsManager = (FriendshipsManager) managersManager.getManager(FRIENDSHIPS_MANAGER_STR);
     FriendRequestsManager friendRequestsManager = (FriendRequestsManager) managersManager.getManager(FRIEND_REQUESTS_MANAGER_STR);
-    QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
+    AchievementsManager achievementsManager = (AchievementsManager) managersManager.getManager(ACHIEVEMENTS_MANAGER_STR);
+    AchievementEventsManager achievementEventsManager = (AchievementEventsManager) managersManager.getManager(ACHIEVEMENT_EVENTS_MANAGER_STR);
     List<QuizEvent> topQuizEvents = quizEventManager.getLatestQuizzesPlayedBy(user.getID(), DEFAULT_NUM_QUIZZES_TO_DISPLAY);
+    List<AchievementEvent> achievements = achievementEventsManager.getUserAchievements(user.getID());
     User loggedUser = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
     if (loggedUser != null
             && loggedUser.getID() != user.getID()
             && !friendshipsManager.areFriends(user.getID(), loggedUser.getID())
             && !friendRequestsManager.isFriendRequestSent(loggedUser.getID(), user.getID())) { %>
 
-        <div class="container">
-            <form id="add-friend-form" action="SendFriendRequest" method="get" style="text-align: center;">
-                <input type="hidden" name="user-id" value="<%=user.getID()%>">
-                <input type="hidden" name="url" value="/Profile?id=<%=user.getID()%>">
-                <input type="submit" class="button finish" value="ვიმეგობროთ!" style="width: 80%">
-            </form>
-        </div>
+<div class="container">
+    <form id="add-friend-form" action="SendFriendRequest" method="get" style="text-align: center;">
+        <input type="hidden" name="user-id" value="<%=user.getID()%>">
+        <input type="hidden" name="url" value="/Profile?id=<%=user.getID()%>">
+        <input type="submit" class="button finish" value="ვიმეგობროთ!" style="width: 80%">
+    </form>
+</div>
 
 <% } %>
 
+<div class="top-quizzes-banner">
+    <div class="players-top-quizzes">
+        My Achievements
+    </div>
+</div>
+<main class="main">
+    <div class="top-quizzes-container">
+        <div class="top-quiz-items">
+            <% for (AchievementEvent achievementEvent : achievements) { %>
+                <%int currAchievementID = achievementEvent.getAchievementID();%>
+                <%Achievement currAchievement = achievementsManager.getAchievement(currAchievementID);%>
+            <div class="top-quiz-item" style="width: 545px;">
+                <img class="quiz-small-image" src="<%=currAchievement.getIconURL()%>"
+                     onerror="this.src='/web/images/common/Quiz1.jpg';" style="padding-left: 10px;">
+                <div class="quiz-small-description-block">
+                    <h3 class="quiz-title">
+                        <%=currAchievement.getTitle()%>
+                    </h3><br>
+                    <p class="quiz-small-description">
+                        <%=currAchievement.getDescription()%>
+                    </p>
+                </div>
+            </div>
+            <%}%>
+        </div>
+    </div>
+</main>
 <div class="top-quizzes-banner">
     <div class="players-top-quizzes">
         My Top Played Quizzess
