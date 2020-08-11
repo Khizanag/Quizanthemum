@@ -53,11 +53,12 @@ public class FriendshipsManager implements Config, FriendshipsTableConfig {
     }
 
     public int insertFriendship(Friendship friendship){
+        String makeFriendDateStr = friendship.getMakeFriendDate() == null ? "null" : "\"" + new java.sql.Date(friendship.getMakeFriendDate().getTime()) + "\"";
         String query = "INSERT INTO " + FRIENDSHIPS_TABLE_NAME
                 + " VALUES(null"
                 + ", " + friendship.getFirstFriendID()
                 + ", " + friendship.getSecondFriendID()
-                + ", " + friendship.getMakeFriendDate()
+                + ", " + makeFriendDateStr
                 + ");";
         try{
             Statement statement = connection.createStatement();
