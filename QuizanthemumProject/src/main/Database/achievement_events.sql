@@ -13,3 +13,4 @@ create table achievement_events(
 
 -- default achievement_events
 insert into achievement_events values(null, 4, 1, sysdate());
+

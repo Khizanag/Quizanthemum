@@ -17,4 +17,6 @@ create table friend_requests(
 
 SELECT * FROM friend_requests;
 
+DELETE FROM friend_requests WHERE  true;
+
 DROP table friend_requests;

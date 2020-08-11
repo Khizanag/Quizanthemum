@@ -15,6 +15,7 @@ create table quizzes(
                         MAX_SCORE double
 )CHARSET=utf8;
 
+
 -- default quizzes(category_id and author_id must be written manually!!!)
 insert into quizzes values (null, 'Geography quiz', 27, 'Check how you know capital cities', null, false, 'This quiz is easy one',
                             '1', sysdate(), 4);

@@ -5,6 +5,7 @@
 <%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="Model.Managers.ManagersManager" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="static Configs.AchievementTypes.NO_ACHIEVEMENT" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -61,7 +62,9 @@
         UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
         Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("id")));
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+        int achievementType = (Integer) request.getServletContext().getAttribute("achievementType");
     %>
+
     <form class="start-quiz-section" action="/QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">
