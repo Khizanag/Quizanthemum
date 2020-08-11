@@ -15,16 +15,29 @@ create table quizzes(
                         MAX_SCORE double
 )CHARSET=utf8;
 
--- default quizzes
-insert into quizzes values (null, 'Geography quiz', 2, 'Check how you know capital cities', null, false, 'This quiz is easy one',
+-- default quizzes(category_id and author_id must be written manually!!!)
+insert into quizzes values (null, 'Geography quiz', 27, 'Check how you know capital cities', null, false, 'This quiz is easy one',
                             '1', sysdate(), 4);
 
-insert into quizzes values (null, 'NBA quiz', 6, 'check how you recognize NBA players',
+insert into quizzes values (null, 'NBA quiz', 32, 'check how you recognize NBA players',
                             'https://theundefeated.com/wp-content/uploads/2017/06/nbalogo.jpg?w=1400',
                             false, 'this quiz is easy one',
                             '1', sysdate(), 2);
 
-insert into quizzes values (null, 'Football quiz', 6, 'check how you football history',
+insert into quizzes values (null, 'Football quiz', 32, 'check how you football history',
                             'https://previews.123rf.com/images/wannen19/wannen191809/wannen19180900002/108328455-football-logo-designs.jpg',
                             false, 'this quiz is easy one',
                             '1', sysdate(), 4);
+
+insert into quizzes values (null, 'Barcelona quiz', 32, 'check how you know FC Bacelona history',
+                            'https://images-na.ssl-images-amazon.com/images/I/61tyTfiqc7L._SL1500_.jpg',
+                            false, 'quiz for Barca fans', '1', sysdate(), 4);
+
+insert into quizzes values(null, 'Musical quiz', 33, 'check how good you are at music hits',
+                           'https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/06/music-logo-design.jpg',
+                           false, 'quiz for music fans', '1', sysdate(), 4);
+
+insert into quizzes values(null, 'Mythology quiz', 34, 'check how you remember mythology',
+                           '',
+                           false, 'quiz for mythology lovers', '1', sysdate(), 4);
+

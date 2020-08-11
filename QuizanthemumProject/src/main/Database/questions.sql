@@ -52,52 +52,97 @@ create table questions(
                           answer_15 varchar(64)
 )CHARSET=utf8;
 
--- default questions
+-- default questions(quiz_id must be written manually!!!)
 
---
-insert into questions values (null, 3, true, 1, 'choose one', 'London is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+-- geography
+insert into questions values (null, 3, true, 1, 'choose one', 'London is capital city of ...', null, '', '', sysdate(), 2, false, 4, 'UK', 'Georgia',
                               'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'UK', null, null, null, null, null, null, null,
                               null, null, null, null, null, null, null, null);
 
-insert into questions values (null, 3, true, 1, 'choose one', 'tbilisi is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+insert into questions values (null, 3, true, 1, 'choose one', 'tbilisi is capital city of ...', null, '', '', sysdate(), 2, false, 4, 'UK', 'Georgia',
                               'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'Georgia', null, null, null, null, null, null, null,
                               null, null, null, null, null, null, null, null);
 
-insert into questions values (null, 3, true, 1, 'choose one', 'Moscow is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+insert into questions values (null, 3, true, 1, 'choose one', 'Moscow is capital city of ...', null, '', '', sysdate(), 2, false, 4, 'UK', 'Georgia',
                               'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'Russia', null, null, null, null, null, null, null,
                               null, null, null, null, null, null, null, null);
 
-insert into questions values (null, 3, true, 1, 'choose one', 'Washington D.C. is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+insert into questions values (null, 3, true, 1, 'choose one', 'Washington D.C. is capital city of ...', null, '', '', sysdate(), 2, false, 4, 'UK', 'Georgia',
                               'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'USA', null, null, null, null, null, null, null,
                               null, null, null, null, null, null, null, null);
 
+-- NBA
 insert into questions values (null, 3, true, 1, 'choose one', 'which NBA player is this',
                               'https://static01.nyt.com/images/2020/06/10/us/politics/10lebron-voters/merlin_164934105_7183e555-c1e0-4248-aba9-fc36ba5f9dc7-superJumbo.jpg?quality=90&auto=webp',
-                              '', '', sysdate(), 5, true, 2, 'LeBron James', 'Kevin Durant', 'Russell WestBrook', 'Stephen Curry', null, null, null,
+                              '', '', sysdate(), 3, true, 2, 'LeBron James', 'Kevin Durant', 'Russell WestBrook', 'Stephen Curry', null, null, null,
                               null, null, null, null, null, null, null, null, null, false, 1, 'LeBron James', null, null, null, null, null, null, null, null, null, null, null, null, null,
                               null, null);
 
 insert into questions values (null, 3, true, 1, 'choose one', 'which NBA player is this',
                               'https://davihundotcom.files.wordpress.com/2016/07/durant-a-warroir.jpg',
-                              '', '', sysdate(), 5, true, 2, 'LeBron James', 'Kevin Durant', 'Russell WestBrook', 'Stephen Curry', null, null, null,
+                              '', '', sysdate(), 3, true, 2, 'LeBron James', 'Kevin Durant', 'Russell WestBrook', 'Stephen Curry', null, null, null,
                               null, null, null, null, null, null, null, null, null, false, 1, 'Kevin Durant', null, null, null, null, null, null, null, null, null, null, null, null, null,
                               null, null);
 
-insert into questions values (null, 3, true, 1, 'choose one', 'Who won FIFA world cup in 2018?', null, '', '', sysdate(), 6, false, 4, 'England',
+
+-- football
+insert into questions values (null, 3, true, 1, 'choose one', 'Who won FIFA world cup in 2018?', null, '', '', sysdate(), 4, false, 4, 'England',
                               'France', 'Germany', 'Brazil', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'France', null, null, null, null,
                               null, null, null, null, null, null, null, null, null, null, null);
 
 insert into questions values (null, 3, true, 1, 'choose one', 'Which player is this?',
                               'https://i.pinimg.com/originals/db/6e/48/db6e485386653b3b1ea3b6fbf5dfcf33.jpg',
-                              '', '', sysdate(), 6, true, 4, 'Leonel Messi', 'Ronaldinho', 'David Backham', 'Andres Iniesta', null, null, null, null, null,
+                              '', '', sysdate(), 4, true, 4, 'Leonel Messi', 'Ronaldinho', 'David Backham', 'Andres Iniesta', null, null, null, null, null,
                               null, null, null, null, null, null, null, false, 1, 'Ronaldinho', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 insert into questions values (null, 3, true, 1, 'choose one', 'Who scored the only goal in FIFA World Cup 2010 Final game:', null, '', '',
-                              sysdate(), 6, false, 4, 'Leonel Messi', 'Ronaldinho', 'David Backham', 'Andres Iniesta',null, null, null, null, null, null, null,
+                              sysdate(), 4, false, 4, 'Leonel Messi', 'Ronaldinho', 'David Backham', 'Andres Iniesta',null, null, null, null, null, null, null,
                               null, null, null, null, null, false, 1, 'Andres Iniesta',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 insert into questions values (null, 3, true, 1, 'choose one', 'Which Premier League team is this?',
                               'https://s.hs-data.com/bilder/teamfotos/640x360/544.jpg',
-                              '', '', sysdate(), 6, true, 4, 'Chelsea', 'Everton', 'Liverpool', 'Manchester United', null, null, null,
+                              '', '', sysdate(), 4, true, 4, 'Chelsea', 'Everton', 'Liverpool', 'Manchester United', null, null, null,
                               null, null, null, null, null, null, null, null, null, false, 1, 'Chelsea', null, null, null, null, null, null, null, null, null, null, null, null, null,
                               null, null);
+
+-- barcelona
+insert into questions values (null, 3, true, 1, 'choose one', 'which legendary barcelona player was called "flying dutchman"', null, '', '',
+                              sysdate(), 5, false, 4, 'Rivaldo', 'Ronaldinho', 'Johan Cruyff', 'Pep Guardiola',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, 'Johan Cruyff',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'What year did Barca won champions league for the first time?', null, '', '',
+                              sysdate(), 5, false, 4, '1992', '1994', '1995', '1996',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, '1992',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'How many champions league titles did Pep Guardiola won with Barca when he was the coach', null, '', '',
+                              sysdate(), 5, false, 4, '1', '2', '3', '4',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, '2',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Which of these legendary coaches have not been coaching Barcelona?', null, '', '',
+                              sysdate(), 5, false, 4, 'Frank Rijkaard', 'Louis Van Gaal', 'Rinus Michels', 'Jose Mourinho',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, 'Jose Mourinho',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+-- music
+
+insert into questions values (null, 3, true, 4, '', 'which of this songs belong to Beatles?', 'https://townsquare.media/site/295/files/2019/09/RS321_AbbeyRoad_cover.jpg', '', '',
+                              sysdate(), 6, false, 10, 'let it be', 'bohemian raphsody', 'yellow submarine', 'knocking on heavens door','lose yourself', 'stairway to heaven', 'highway to hell', 'billie jean', 'hey jude', 'michelle', null,
+                              null, null, null, null, null, false, 4, 'let it be','yellow submarine', 'hey jude', 'michelle', null, null, null, null, null, null, null, null, null, null, null, null);
+
+
+-- mythology
+
+insert into questions values (null, 3, true, 1, 'choose one', 'HOw many tasks did hercules have to complete?', null, '', '',
+                              sysdate(), 7, false, 4, '8', '10', '12', '14',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, '12',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Who is the equivalent for roman Neptune in greek?', null, '', '',
+                              sysdate(), 7, false, 4, 'Zeus', 'Hermes', 'Helios', 'Poseidon',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, 'Poseidon',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Who flew very close to the sun and died?', null, '', '',
+                              sysdate(), 7, false, 4, 'Icarus', 'Dedalos', 'Zeus', 'Pan',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, 'Icarus',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Which island were minotaur and his labirynth on', null, '', '',
+                              sysdate(), 7, false, 4, 'Crete', 'Isos', 'Santorini', 'Sardinia',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, 'Crete',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
