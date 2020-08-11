@@ -7,5 +7,5 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<label for="statement_text"><b>შეკითხვა</b></label>
-<input type="text" placeholder="შეიყვანეთ შეკითხვა" name="statement_text" id="statement_text" required>
+<label for="statement_text"><b>Question</b></label>
+<input type="text" placeholder="Enter Question" name="statement_text" id="statement_text" required>

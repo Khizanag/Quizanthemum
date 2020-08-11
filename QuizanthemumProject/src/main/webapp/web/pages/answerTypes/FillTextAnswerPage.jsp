@@ -21,7 +21,7 @@
 
 <form class="add-question-section" action="../../../QuestionEventFinished" method="get">
     <div class="container">
-        <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
+        <h2>Question #<%=request.getServletContext().getAttribute("question_number")%></h2>
         <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
         <%Question question = questionEvent.getQuestion();%>
         <%List<String> statements = question.getStatements();%>
@@ -41,7 +41,7 @@
             </p>
             </div>
         </div><hr>
-        <button class="button" type="submit"> პასუხის დადასტურება </button>
+        <button class="button" type="submit"> Submit Answer </button>
     </div>
 </form>
     <jsp:include page="../PartPages/Footer.jsp"></jsp:include>

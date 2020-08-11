@@ -18,7 +18,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
-    <title> Quizanthemum </title>
+    <title> Quiz Summary </title>
     <link rel="icon" type="image/png" href="../images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
@@ -66,7 +66,7 @@
                 <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
                     <div class="quiz-rating-section">
                         <div class="container">
-                            <h2 class="rating-title"> ქვიზის შეფასება </h2>
+                            <h2 class="rating-title"> Rate Quiz </h2>
                             <div class="rating-icons-holder">
                                 <ul class="rating-icons">
                                     <a class="fa fa-star-o" id="1"
@@ -94,7 +94,7 @@
                     <button class="back-to-prof-page"
                             type="submit"
                             style="margin-top: 10px">
-                        შეფასება
+                        Rating
                     </button>
                 <%}%>
             </form>
@@ -103,7 +103,7 @@
             <div class="before" id="before">
                 <div class="overall-quiz-details">
                     <p>Your Total Score: <%=truncateDecimal(quizEvent.getUserScore(), 2)%>
-                        /<%=truncateDecimal(quiz.getMaxScore(), 2)%>
+                        / <%=truncateDecimal(quiz.getMaxScore(), 2)%>
                     </p>
                 </div>
                 <div class="questions">
@@ -115,25 +115,27 @@
                             Question currQuest = qe.getQuestion();
                     %>
                     <div class="question">
-                        <h3>კითხვა <%=i + 1%></h3>
+                        <h3>Question <%=i + 1%></h3>
+                        <br>
                         <div class="question-text-statement">
                             <% if (currQuest.isPictureQuestion()) { %>
-                            <img sr="<%=currQuest.getPictureStatementURL()%>" class="small-question-image">
+                            <img src="<%=currQuest.getPictureStatementURL()%>" class="small-question-image">
                             <%}%>
-                            <p><%=currQuest.getTextStatement()%></p>
                         </div>
-                        <p style="padding-top: 0"> ავტორის კომენტარი: <%=currQuest.getComment()%></p>
-                        <p style="padding-top: 0"> შეკითხვის წყარო: <%=currQuest.getSource()%></p>
+                        <p><%=currQuest.getTextStatement()%></p>
+
+                        <p style="padding-top: 0"> author comment: <%=currQuest.getComment()%></p>
+                        <p style="padding-top: 0"> Question Source: <%=currQuest.getSource()%></p>
                         <div class="answers">
                   <span>
-                    <span>სწორი პასუხები:</span>
+                    <span>Correct answers:</span>
                     <div class="correct-answers">
                       <%
                           int type = currQuest.getType();
                           String correctAnswer = "";
                           if (type == STANDARD) {
                       %>
-                      <p>No right ans</p>
+                      <p>No Correct ans</p>
                         <%
                             } else if (type == MATCHING) {
                                 Set<Pair<String>> ansPairs = currQuest.getMatchingAnswers();
@@ -155,7 +157,7 @@
                     </div>
                   </span>
                             <span>
-                    <span>თქვენი პასუხები: </span>
+                    <span>Your Answers: </span>
                     <div class="user-answers">
                         <%
                             if (type == MATCHING) {
@@ -186,9 +188,15 @@
                             i++;
                         }
                     %>
+                    <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
                     <button class="back-to-prof-page" onclick="showGrading()">
-                        შეფასებაზე გადასვლა
+                        Go to Rating
                     </button>
+                    <% } else { %>
+                    <button class="back-to-prof-page" onclick="GoToHomepage()">
+                        Finish
+                    </button>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -214,5 +222,9 @@
 
     function openSearch() {
         window.location.href = "SearchPage.jsp";
+    }
+
+    function GoToHomepage() {
+        window.location.href = "/web/pages/HomePage.jsp"
     }
 </script>

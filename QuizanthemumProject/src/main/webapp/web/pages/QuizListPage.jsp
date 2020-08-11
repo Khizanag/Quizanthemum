@@ -1,5 +1,4 @@
 <%@ page import="Controller.Classes.Quiz.Quiz" %>
-<%@ page import="static Configs.Config.QUIZ_CREATING_NOW" %>
 <%@ page import="Model.Managers.ManagersManager" %>
 <%@ page import="static Configs.Config.MANAGERS_MANAGER_STR" %>
 <%@ page import="Model.Managers.QuizManager" %>
@@ -52,9 +51,9 @@
                 <%
                     String title = (String) request.getAttribute("title");
                     if(title != null) { %>
-                    <h2> <%=title%> </h2>
+                    <h2 style="font-family: Helvetica"> <%=title%> </h2>
                 <% } else { %>
-                    <h2>ქვიზები</h2>
+                    <h2 style="font-family: Helvetica">Quizzes</h2>
                 <% } %>
             </div>
         </div>
@@ -62,7 +61,9 @@
             <div class= "top-quiz-list-items">
             <% for(Quiz currQuiz: quizzes){ %>
                 <div class="top-quiz-list-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
-                        <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>" onerror="this.src='/web/images/common/Quiz1.jpg';">
+                        <img style="margin-left: 5" class= "quiz-list-small-image"
+                             src="<%=currQuiz.getIconUrl()%>"
+                             onerror="this.src='/web/images/common/Quiz1.jpg';">
                         <div class= "quiz-list-small-description-block" style="position: relative">
                             <h3 class= "quiz-title" style="font-size: 16px">
                                 <%=currQuiz.getName()%>

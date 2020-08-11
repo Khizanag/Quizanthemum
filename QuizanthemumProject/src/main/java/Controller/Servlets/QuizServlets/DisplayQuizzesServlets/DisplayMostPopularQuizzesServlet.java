@@ -30,7 +30,7 @@ public class DisplayMostPopularQuizzesServlet extends HttpServlet {
 
         List<Quiz> quizzes = quizzesManager.getMostPopularQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
         request.setAttribute("quizzes", quizzes);
-        request.setAttribute("title", "ყველაზე პოპულარული ქვიზები");
+        request.setAttribute("title", "Most Popular Quizzes");
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizListPage.jsp");
         dispatcher.forward(request, response);

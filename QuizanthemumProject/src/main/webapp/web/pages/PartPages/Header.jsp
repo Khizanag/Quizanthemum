@@ -2,6 +2,7 @@
 <%@ page import="static Configs.Config.LOGGED_IN_USER" %>
 <%@ page import="static Configs.Config.DISPLAY_CHALLENGES" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="Model.Managers.UsersManager" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -28,11 +29,13 @@
 <%
     response.setHeader("Content-Type", "text/xml; charset=UTF-8");
     User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+    UsersManager usersManager = (UsersManager) request.getServletContext().getAttribute(USERS_MANAGER_STR);
 %>
 
-<jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
+<%--<jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>--%>
 <jsp:include page="/web/pages/PartPages/FriendsListPopUp.jsp"/>
 <jsp:include page="/web/pages/PartPages/ChallengesListPopUp.jsp"/>
+<%--<jsp:include page="/web/pages/PartPages/FriendRequestsListPopUp.jsp"/>--%>
 
 <header class= "header-section">
     <div class="container header">
@@ -42,11 +45,13 @@
         </div>
         <% if(user == null){ %>
         <ul class="header-right">
-            <button class="log-in-button button logIn" onclick="openRegistration()" style="margin-top: 0;">შესვლა</button>
+            <button class="log-in-button button logIn" onclick="openRegistration()" style="margin-top: 0;">Login</button>
         </ul>
         <% } else { %>
         <ul class="header-right">
-            <img class = "profile-picture right-menu" id="small-prof-pic-id" src="" onerror="this.src='/web/images/common/defProfPic.jpg';" href=""onclick="openSidebar()">
+            <img class = "profile-picture right-menu" id="small-prof-pic-id"
+                 src = "<%=usersManager.getProfilePicture(user.getID())%>"
+                onerror="this.src='/web/images/common/defProfPic.jpg';" href=""onclick="openSidebar()">
             <span class = "profile-name-text" onclick="openSidebar()"><%=user.getUsername()%></span>
         </ul>
         <% } %>
@@ -58,20 +63,24 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a onclick="openMyProfilePage()">
         <i class="material-icons my-mat-icon">account_box</i>
-        პროფილი
+        Profile
     </a>
     <a  onclick="popUpFriendsList()" style="cursor:pointer;">
         <i class="material-icons my-mat-icon">people_outline</i>
-        მეგობრები
+        Friends
+    </a>
+    <a  onclick="popUpFriendRequestsList()" style="cursor:pointer;">
+        <i class="material-icons my-mat-icon">person_add</i>
+        Friend Requests
     </a>
     <a  onclick="popUpChallengesList()" style="cursor:pointer;">
-        <i class="material-icons my-mat-icon">vertical_align_center</i>
-        გამოწვევები
+        <i class="material-icons my-mat-icon">sports_mma</i>
+        Challenges
     </a>
     <form id="logoutForm">
         <a onclick="logout()" style="cursor:pointer;">
             <i class="material-icons my-mat-icon">arrow_back</i>
-            გასვლა
+            Log out
         </a>
         <input type="hidden" name="currentUrl" id="currentUrl"/>
     </form>
@@ -84,7 +93,7 @@
 
     <% Boolean displayFriendRequests = (Boolean) request.getSession().getAttribute(DISPLAY_FRIEND_REQUESTS);
         if((displayFriendRequests != null && displayFriendRequests)){ %>
-<%--            <script> popUpFriendRequestsList();</script>--%>
+            <script> popUpFriendRequestsList();</script>
             <% request.getSession().removeAttribute(DISPLAY_FRIEND_REQUESTS);
     }%>
 
@@ -121,6 +130,7 @@
     }
     function openSidebar() {
         document.getElementById("mySidebar").style.width = "300px";
+        document.getElementById("mySidebar").style.height = "280px";
         document.getElementById("mySidebar").style.marginLeft="150px";
         document.getElementById("mySidebar").style.border="1px dashed #f07237";
     }

@@ -40,21 +40,23 @@
     <div class="container manu">
         <nav class="nav">
             <ul class="nav-items">
-                <a class="nav-item" target="_self" href="/">მთავარი</a>
+                <a class="nav-item" target="_self" href="/" >
+                    Home
+                </a>
 
                 <div class="dropdown">
-                    <a class="nav-item" target="_self" href="/DisplayQuizzes">ქვიზები</a>
+                    <a class="nav-item" target="_self" href="/DisplayQuizzes">Quizzes</a>
                     <div class="dropdown-content">
-                        <a class="nav-item grayeble" target="_self" href="/DisplayNewestQuizzes">უახლესი</a>
-                        <a class="nav-item grayeble" target="_self" href="/DisplayMostPopularQuizzes">პოპულარული</a>
-                        <a class="nav-item grayeble" target="_self" href="/DisplayHighestRatedQuizzes">მაღალრეიტინგული</a>
+                        <a class="nav-item grayeble" target="_self" href="/DisplayNewestQuizzes">Newest</a>
+                        <a class="nav-item grayeble" target="_self" href="/DisplayMostPopularQuizzes">Popular</a>
+                        <a class="nav-item grayeble" target="_self" href="/DisplayHighestRatedQuizzes">Highest Rating</a>
                         <% if(user != null){ %>
-                            <a class="nav-item grayeble" target="_self" href="/QuizCreation">ქვიზის შექმნა</a>
+                            <a class="nav-item grayeble" target="_self" href="/QuizCreation">Create Quizz</a>
                         <% } %>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <a class="nav-item" target="_self" href="#">კატეგორიები</a>
+                    <a class="nav-item" target="_self" href="#">Categories</a>
                     <div class="dropdown-content">
                         <% for(Category category : categories){ %>
                             <a class="nav-item grayeble" target="_self" href="#" value="<%=category.getID()%>"onclick="displayCategoryFromMenuBar(<%=category.getID()%>)"><%=category.getName()%></a>
@@ -65,14 +67,14 @@
                         </form>
                     </div>
                 </div>
-                <a class="nav-item" target="_self" href="/DisplayTopUsers">ტოპ მომხმარებლები</a>
-                <a class="nav-item" target="_self" href="/Blog">ბლოგი</a>
-                <a class="nav-item" target="_self" href="/Contact">კონტაქტი</a>
+                <a class="nav-item" target="_self" href="/DisplayTopUsers">Top Users</a>
+<%--                <a class="nav-item" target="_self" href="/Blog">Blog</a>--%>
+                <a class="nav-item" target="_self" href="/Contact">Contact</a>
             </ul>
         </nav>
         <form class="search-items" action="/SearchPage" method="get">
-            <input type="text" id="search-input" placeholder="რა გაინტერესებთ..." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <input type="text" id="search-input" placeholder="Search..." name="search">
+            <button type="submit" style="cursor: pointer"><i class="fa fa-search"></i></button>
         </form>
     </div>
 </div>

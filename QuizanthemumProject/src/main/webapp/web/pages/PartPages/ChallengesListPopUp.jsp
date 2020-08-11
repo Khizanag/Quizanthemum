@@ -1,4 +1,4 @@
-<%@ page import="Controller.Classes.User.User" %>
+    <%@ page import="Controller.Classes.User.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Controller.Classes.OtherClasses.Challenge" %>
 <%@ page import="Model.Managers.ManagersManager" %>
@@ -23,7 +23,6 @@
 <link rel="stylesheet" href="/web/styles/breakpoints.css">
 <%--<link rel="stylesheet" href="/web/styles/profilePage.css">--%>
 <%--<link rel="stylesheet" href="/web/styles/quizCreation.css">--%>
-<link rel="stylesheet" href="/web/styles/scroll.css">
 
 <jsp:include page="/web/pages/LogedInHandler.jsp"/>
 
@@ -43,9 +42,9 @@
     <div class="overlay"></div>
     <div class="content">
         <div class="close-btn" onclick="popUpChallengesList()">&times;</div>
-        <h1 style="color:orange">გამოწვევები</h1>
+        <h1 style="color:orange">Challenges</h1>
         <br>
-        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">მეტოქის მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
+        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">Challenges Waiting for me :</h2>
         <br>
         <hr>
         <br>
@@ -59,18 +58,18 @@
                         <%=challengerUser.getUsername()%>
                     </span>
             <span class="nav-item" style="cursor: pointer;" onclick="displayQuiz(<%=challenge.getQuizID()%>)">
-                        ქვიზი
+                        Quizz
                     </span>
             <div class = "friend-challenge-remove-btns">
-                <button class="challenge-btn"  onclick="acceptChallenge(<%=challenge.getID()%>)" style="color: green">დათანხმება</button>
-                <button class="remove-btn" onclick="rejectChallenge(<%=challenge.getID()%>)" style="color: red">უარყოფა</button>
+                <button class="challenge-btn"  onclick="acceptChallenge(<%=challenge.getID()%>)" style="color: green">Accept</button>
+                <button class="remove-btn" onclick="rejectChallenge(<%=challenge.getID()%>)" style="color: red">Reject</button>
             </div>
         </div>
         <% } %>
         <br>
         <br>
         <br>
-        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">ჩემს მიერ შექმნილი მომლოდინე გამოწვევები:</h2>
+        <h2 style="font-size: medium; padding: 5px; padding-top: 10px;">Awaiting challenges created by Me:</h2>
         <br>
         <hr>
         <br>
@@ -84,10 +83,10 @@
                     <%=challengedUser.getUsername()%>
                 </span>
             <span class="nav-item" style="cursor: pointer;" onclick="displayQuiz(<%=challenge.getQuizID()%>)">
-                        ქვიზი
+                        Quizz
                 </span>
             <div class = "friend-challenge-remove-btns">
-                <button class="remove-btn" onclick="cancelChallenge(<%=challenge.getID()%>)" style="color: red">გაუქმება</button>
+                <button class="remove-btn" onclick="cancelChallenge(<%=challenge.getID()%>)" style="color: red">Cancel</button>
             </div>
         </div>
         <% } %>

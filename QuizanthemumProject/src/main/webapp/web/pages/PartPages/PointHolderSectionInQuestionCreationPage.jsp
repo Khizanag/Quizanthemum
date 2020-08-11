@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <hr>
-<div class="point-holder">
-    <label for="question_point"><b>მიანიჭეთ შეკითხვას ქულა 0-დან 16-მდე</b></label>
-    <input type="number" placeholder="ქულა"
+<div class="point-holder" style="display: flex; flex-direction: column">
+    <label for="question_point"><b>Add Score from 0 to 16</b></label>
+    <input type="number" placeholder="Score"
            id="question_point" name="max_score"
            min="1" max="16" required>
 </div>

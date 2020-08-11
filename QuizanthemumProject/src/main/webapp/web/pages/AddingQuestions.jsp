@@ -20,24 +20,24 @@
 
     <div class="page-holder">
         <div class="container">
-            <h2>შეკითხვა</h2>
-            <p>შეკითხვის დასამატებლად შეავსეთ ქვემოთ მოყვანილი ველები.</p>
+            <h2>Question</h2>
+            <p>Please fill given fields to create Question.</p>
             <hr>
 
             <div class="input-items" id="input-items">
-                <label for="questions-type"><b>აირჩიეთ შეკითხვის ტიპი</b></label>
+                <label for="questions-type"><b>Select Question Type</b></label>
                 <select onchange="doIt()" class="drop-down" name="questions-type" id="questions-type">
                     <option value="0">-</option>
-                    <option value="1">ღია პასუხიანი</option>
-                    <option value="2">გამოტოვებების შევსება</option>
-                    <option value="3">სტანდარტული ტესტური კითხვა</option>
-                    <option value="4">ღია მრავალპასუხიანი</option>
-                    <option value="5">ტესტური კითხვა რამდენიმე სწორი პასუხით</option>
-                    <option value="6">დასაწყვილებელი</option>
+<%--                    <option value="1">ღია პასუხიანი</option>--%>
+                    <option value="2">Fill blank</option>
+                    <option value="3">Standart Test Question</option>
+                    <option value="4">Fill multiple blank</option>
+                    <option value="5">Test Question with multiple answers</option>
+                    <option value="6">Matching</option>
                 </select>
                 <div id="current-question-type"></div>
                 <button class="button finish" type="button" id="submit-button-id"
-                       onclick="redirectToQuizFinishedPage()">დასრულება</button>
+                       onclick="redirectToQuizFinishedPage()">End Creation</button>
             </div>
         </div>
     </div>
@@ -192,14 +192,14 @@
         }
 
         let toAdd = `<div class="matchin-pair">
-                            <input type="text" placeholder="რას ვაწყვილებთ"
+                            <input type="text" placeholder="Premise"
                                    name="answer_` + numAnswers + `" id="` + numAnswers + `"
                                    class="matching-elem" required>
                             <div class="arrow-container">
                                 <i class="arrow arr-right"></i>
                                 <i class="arrow arr-left"></i>
                             </div>
-                            <input type="text" placeholder="რასთან ვაწყვილებთ"
+                            <input type="text" placeholder="Responce"
                                    name="answer_`+ (numAnswers+1) +`" id="` + (numAnswers+1) + `"
                                    class="matching-elem" required>
                         </div>`;

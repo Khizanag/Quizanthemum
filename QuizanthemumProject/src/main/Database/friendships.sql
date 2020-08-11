@@ -14,3 +14,5 @@ create table friendships(
 SELECT * FROM friendships;
 
 INSERT INTO friendships VALUES(null, 7, 3, SYSDATE());
+
+DELETE FROM friendships WHERE true;

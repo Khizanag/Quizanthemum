@@ -14,10 +14,11 @@
         <h2 style="margin-top: -300px;
         color: #f07237;
         font-size: xx-large;">
-            ამ გვერდზე წვდომისთვის, აუცილებელია
+            You have to
             <br>
-            <a href="/web/pages/LogInPage.jsp"><button type="button" class="button">ავტორიზაცია</button></a>
+            <a href="/web/pages/LogInPage.jsp"><button type="button" class="button">AUTHORIZE </button></a>
             <br>
+            to access this page
         </h2>
     </div>
 </div>

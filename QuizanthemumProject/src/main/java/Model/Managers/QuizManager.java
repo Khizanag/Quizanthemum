@@ -40,7 +40,7 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
     public ManagersManager getManager(){ return this.manager; }
 
     public List<Quiz> getNewestQuizzes(int numQuizzes){
-        return getQuizzesBy(numQuizzes, QUIZ_TABLE_COLUMN_9_CREATION_DATE);
+        return getQuizzesBy(numQuizzes, QUIZ_TABLE_COLUMN_9_CREATION_DATE, "ASC");
     }
 
     public List<Quiz> getMostPopularQuizzes(int numQuizzes) { // TODO TEST THIS
@@ -63,14 +63,14 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
                 + "(SELECT SUM( " + QUIZ_RATING_EVENTS_TABLE_COLUMN_4_NUM_STARS
                 + " ) / COUNT(*) FROM " + QUIZ_RATING_EVENTS_TABLE_NAME + " as qre"
                 + " WHERE qre." + QUIZ_RATING_EVENTS_TABLE_COLUMN_3_QUIZ_ID + " = "
-                + "qs." + QUIZ_TABLE_COLUMN_1_ID + ")" + " LIMIT " + numQuizzes + ";\n";
+                + "qs." + QUIZ_TABLE_COLUMN_1_ID + ") DESC" + " LIMIT " + numQuizzes + ";\n";
         return getQuizzesByQuery(query);
     }
 
-    private List<Quiz> getQuizzesBy(int numQuizzes, String sorterColumnName){
+    private List<Quiz> getQuizzesBy(int numQuizzes, String sorterColumnName, String order){
         String query = "SELECT * FROM " + QUIZ_TABLE_NAME
-                + " ORDER BY " + sorterColumnName+ " DESC"
-                + "  LIMIT " + numQuizzes
+                + " ORDER BY " + sorterColumnName + " " + order
+                + " LIMIT " + numQuizzes
                 + ";\n";
         return getQuizzesByQuery(query);
     }
@@ -196,10 +196,10 @@ public class QuizManager implements QuizTableConfig, QuestionTableConfig {
             ResultSet set = selectionStatement.executeQuery(query);
             if(!set.next()){
                 set.close();
-                return true;
+                return false;
             } else {
                 set.close();
-                return false;
+                return true;
             }
         } catch (SQLException e) {
             System.out.println("Selection Error. Quiz Manager Class");

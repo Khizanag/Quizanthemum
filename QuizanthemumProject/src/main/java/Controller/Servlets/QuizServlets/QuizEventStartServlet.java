@@ -40,7 +40,7 @@ public class QuizEventStartServlet extends HttpServlet {
         QuizManager quizManager = (QuizManager) request.getServletContext().getAttribute(QUIZ_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
-        boolean practiceMode =  request.getParameter("practice-mode") != null;
+        boolean practiceMode = (request.getParameter("practice-mode") != null);
         System.out.println("practiceMode: " + practiceMode);
         String isChallengeStr = request.getParameter("is-challenge");
         boolean isChallenge = Boolean.parseBoolean(isChallengeStr);
@@ -70,7 +70,7 @@ public class QuizEventStartServlet extends HttpServlet {
             int type = nextQuestionEvent.getType();
             response.setHeader("Location", getNextQuestionLink(type));
         } else {
-            System.out.println("QuzEventStartedSertvelt -> 0 questions -> quizEventFinished");
+//            System.out.println("QuzEventStartedSertvelt -> 0 questions -> quizEventFinished");
             response.setHeader("Location", "http://localhost:8080/QuizEventFinished");
         }
 

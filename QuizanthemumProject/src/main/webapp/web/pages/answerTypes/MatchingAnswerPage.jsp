@@ -19,7 +19,7 @@
 
     <form class="add-question-section" id="matching-form" action="../../../QuestionEventFinished" method="get">
         <div class="container">
-            <h2>შეკითხვა #<%=request.getServletContext().getAttribute("question_number")%></h2>
+            <h2>Question #<%=request.getServletContext().getAttribute("question_number")%></h2>
             <%QuestionEvent questionEvent = (QuestionEvent) request.getServletContext().getAttribute("question_event");%>
             <%Question question = questionEvent.getQuestion();%>
             <%List<String> left = question.getMatchingLeft();%>
@@ -41,7 +41,7 @@
                     <% } %>
                 </div>
             </div><hr>
-            <button class="button" type="submit"> პასუხის დადასტურება </button>
+            <button class="button" type="submit"> Submit Answer </button>
             <input type="hidden" name="answers" id="answers">
         </div>
     </form>

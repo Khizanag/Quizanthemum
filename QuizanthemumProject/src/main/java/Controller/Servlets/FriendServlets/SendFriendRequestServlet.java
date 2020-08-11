@@ -37,6 +37,5 @@ public class SendFriendRequestServlet extends HttpServlet {
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", url);
-
     }
 }

@@ -11,10 +11,11 @@
 <head>
     <meta charset="UTF-8">
     <title> Search </title>
-    <link rel="icon" type="image/png" href="../images/common/icon.png"/>
+    <link rel="icon" type="image/png" href="web/images/common/icon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/web/styles/common.css">
     <link rel="stylesheet" href="/web/styles/QuizzesPage.css">
+    <link rel="stylesheet" href="/web/styles/UserBlock.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -26,25 +27,21 @@
     h3 {
         color: #f07237;
         font-size: xx-large;
+        font-family: Helvetica;
     }
     .fa:hover {
         color: white;
     }
+    .quiz-list-small-description-block {
+        position: relative;
+    }
     .toHover {
         display: flex;
         align-items: center;
-        position: relative;
-    }
-    .onHover {
         position: absolute;
-        right: 40%;
-        bottom: 0px;
-        display: none;
+        bottom: 0;
     }
-    .toHover:hover + .onHover {
-        display: block;
-        color: white;
-    }
+
     .found-elems-container {
         display: flex;
         flex-wrap: wrap;
@@ -73,7 +70,7 @@
 
     <div class="found-quiz-section">
         <div class="container" style="position: relative;">
-            <h3 class="section-header"> ნაპოვნი ქვიზები:</h3>
+            <h3 class="section-header"> Found Quizzes:</h3>
             <div class="found-elems-container">
             <%  int numQuizzes = 0;
                 for(Quiz currQuiz : quizzes) {
@@ -84,7 +81,7 @@
                          onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
 
                         <img class= "quiz-list-small-image" src="<%=currQuiz.getIconUrl()%>"
-                             onerror="this.src='/web/images/common/Quiz1.jpg';">
+                             onerror="this.src='/web/images/common/Quiz1.jpg';" style="margin-left: 4px">
                         <div class= "quiz-list-small-description-block" style="position: relative">
                             <h3 class= "quiz-title" style="font-size: 16px">
                                 <%=currQuiz.getName()%>
@@ -104,7 +101,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            <p class="onHover"> <%=quizManager.getQuizRating(currQuiz.getID())%>/5</p>
                         </div>
                         <div class = "quiz-score"><%=currQuiz.getMaxScore()%></div>
                         <input type="hidden" name="quiz_event_quiz_id" id="currQuizId<%=currQuiz.getID()%>"/>
@@ -113,7 +109,7 @@
             <%}%>
             <% if(numQuizzes == 0) { %>
                 <p style="color: white; font-size: large; margin-left: 50px">
-                    ამ ინფორმაციის შემცველი ქვიზი არ მოიძებნა
+                    No quizzes found with given information
                 </p>
             <%}%>
             </div>
@@ -125,7 +121,7 @@
 
     <div class="found-quiz-section">
         <div class="container" style="position: relative;">
-            <h3 class="section-header"> ნაპოვნი მომხმარებლები:</h3>
+            <h3 class="section-header"> Found Users:</h3>
             <div class="found-elems-container">
             <%  int numUsers = 0;
                 for(User currUser : users) {
@@ -134,21 +130,21 @@
                 String userName = currUser.getUsername().toLowerCase();
                 if(firstName.contains(searchingFor) || lastName.contains(searchingFor)
                     || userName.contains(searchingFor)) { numUsers++;%>
-                    <div class="top-quiz-list-item"
+                    <div class="found-user"
                          onclick="redirectToProfile(<%=currUser.getID()%>)">
-                        <img class= "quiz-list-small-image" src="awefqwefqwef"
-                             onerror="this.src='/web/images/common/defProfPic.jpg';">
-                        <div class= "quiz-list-small-description-block" style="position: relative">
+                        <img class= "found-user-small-image" src="<%=currUser.getPhotoURL()%>"
+                             onerror="this.src='/web/images/common/defProfPic.jpg';" style="margin-left: 0">
+                        <div class= "found-user-small-description-block" style="position: relative">
                             <h3 class= "quiz-title" style="font-size: 16px">
                                 <%=currUser.getUsername()%>
                             </h3>
-                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                            <p class="found-user-description" style="overflow: hidden; height: 75px; font-size: 14px">
                                 <%=currUser.getFirstName()%> <%=currUser.getLastName()%>
                             </p>
-                            <p class="quiz-small-description" style="overflow: hidden; height: 75px;">
+                            <p class="found-user-description" style="overflow: hidden; height: 75px;">
                                 <%=currUser.getEmail()%>
                             </p>
-                            <p class="quiz-small-description" style="overflow: hidden; height: 75px; font-size: 14px">
+                            <p class="found-user-description" style="overflow: hidden; height: 75px; font-size: 14px">
                                 <%=currUser.getBirthDate()%>
                             </p>
                         </div>
@@ -158,7 +154,7 @@
             <%}%>
             <% if(numUsers == 0) { %>
                 <p style="color: white; font-size: large; margin-left: 50px">
-                    ამ მონაცემების მქონე მომხმარებელი არ მოიძებნა
+                    No user found with given information
                 </p>
             <%}%>
             </div>

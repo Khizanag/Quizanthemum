@@ -7,20 +7,20 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<label for="file"><b>სურვილისამებრ შეიყვანეთ ფოტო</b></label>
+<br>
+<label for="file"><b>Add photo (optional)</b></label>
 <div class="upload-image-section">
     <input type="file"  accept="image/*" name="image" id="file"
            onchange="loadFile(event)"
            style="display: none;"
     >
-    <label class="button upload" type="button" for="file">ატვირთე ფოტო</label>
     <div class="upload-image-container">
+        <input type="text" placeholder="Photo URL"
+               name="image_url" id="photo-url">
         <label class="url-button upload" type="button"
                onclick="uploadImage(event)" id="url-button">
-            შეიყვანეთ URL ასატვირთად
+            Upload
         </label>
-        <input type="text" placeholder="ფოტოს URL"
-               name="image_url" id="photo-url">
     </div>
     <img id="output" width="100" />
 </div>

@@ -8,4 +8,5 @@ public interface AchievementsTableConfig {
     String ACHIEVEMENT_TABLE_COLUMN_2_TITLE = "title";
     String ACHIEVEMENT_TABLE_COLUMN_3_DESCRIPTION = "description";
     String ACHIEVEMENT_TABLE_COLUMN_4_ICON_URL = "icon_url";
+
 }

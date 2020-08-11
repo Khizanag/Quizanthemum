@@ -31,10 +31,10 @@
     <jsp:include page="/web/pages/PartPages/Header.jsp"/>
     <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
 
-    <form class="registration-section" action="/Registration" method="get">
+    <form class="registration-section" action="/Registration" method="GET">
         <div class="container">
-            <h2>რეგისტრაცია</h2>
-            <p>გთხოვთ შეავსოთ ფორმა პროფილის შესაქმნელად.</p>
+            <h2>Registration</h2>
+            <p>Please fill in given fields to register.</p>
             <hr>
             <%
                 if(request.getServletContext().getAttribute(ERROR_MESSAGE) != null) { %>
@@ -45,65 +45,65 @@
             <div class="input-items">
 
                 <div class="input-item">
-                    <label><b>სახელი</b></label>
-                    <input type="text" placeholder="შეიყვანეთ თქვენი სახელი"
+                    <label><b>First Name</b></label>
+                    <input type="text" placeholder="Enter your name"
                            name="registration_first_name" id="registration_first_name" required
                     >
-                    <label><b>გვარი</b></label>
-                    <input type="text" placeholder="შეიყვანეთ თქვენი გვარი"
+                    <label><b>Last Name</b></label>
+                    <input type="text" placeholder="Enter your last name"
                            name="registration_last_name" id="registration_last_name" required
                     >
                 </div>
 
                 <div class="input-item" style="width: 30%">
-                <label><b>დაბადების თარიღი</b></label>
+                <label><b>Birth Date</b></label>
                 <input type="date" name="registration_birth_date"
                        value="2000-01-01" id="registration_birth_date"
                         min= "1980-01-01" max="2020-01-01">
                 </div>
 
 
-                <label for="registration_country"><b>ქვეყანა</b></label>
-                <input type="text" list="registration_country" placeholder="შეიყვანეთ ქვეყანა...">
+                <label for="registration_country"><b>Country</b></label>
+                <input type="text" list="registration_country" placeholder="Enter your Country...">
                 <datalist class="drop-down" name="registration_country" id="registration_country" value="Georgia">
                     <% for(Country country : countries){ %>
                     <option value="<%=country.getName()%>"></option>
                     <% } %>
                 </datalist>
 
-                <label><b>ქალაქი</b></label>
-                <input type="text" placeholder="შეიყვანეთ ქალაქი..." name="registration_city" id="registration_city" required>
+                <label><b>City</b></label>
+                <input type="text" placeholder="Enter your City..." name="registration_city" id="registration_city" required>
 
-                <label><b>მომხმარებლის სახელი (USERNAME)</b></label>
-                <input type="text" placeholder="შეიყვანეთ თქვენი მომხმარებლის სახელი..."
+                <label><b>USERNAME</b></label>
+                <input type="text" placeholder="Enter  your username..."
                        name="registration_username" id="registration_username" required>
 
                 <label><b>E-mail</b></label>
-                <input type="email" placeholder="შეიყვანეთ email" name="registration_email"
+                <input type="email" placeholder="Enter email" name="registration_email"
                        id="registration_email" required>
 
-                <label><b>მობილურის ნომერი</b></label>
-                <input type="tel" placeholder="შეიყვანეთ მობილურის ნომერი..." name="registration_phone"
+                <label><b>Phone Number</b></label>
+                <input type="tel" placeholder="Enter your phone number..." name="registration_phone"
                        id="registration_phone" required>
 
-                <label><b>პაროლი</b></label>
-                <input type="password" placeholder="შეიყვანეთ პაროლი"
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password"
                        name="registration_password" id="registration_password" required>
 
-                <label for="psw-repeat"><b>გაიმეორეთ პაროლი</b></label>
-                <input type="password" placeholder="გთხოვთ თავიდან შეიყვანოთ პაროლი"
+                <label for="psw-repeat"><b>Repeat Password</b></label>
+                <input type="password" placeholder="Please Enter Password Again"
                        name="psw-repeat" id="psw-repeat" required>
             </div>
             <hr>
-            <p>ახალი პროგილის შექმნა გულისხმობს, რომ თქვენ ეთანხმებით ჩვენს
+            <p>Create new profile means that you agree to our Terms&Conditions
                 <a href="https://sites.google.com/site/lawdeepsearch/CivilCodeofGeorgia"
-                   target="_blank">წესებსა და მოთხოვნებს</a>.
+                   target="_blank">Terms&Conditions</a>.
             </p>
-            <button type="submit" class="button" onclick="checkAndRedirect()">რეგისტრაცია</button>
+            <button type="submit" class="button" onclick="checkAndRedirect()">Register</button>
         </div>
 
         <div class="container signin">
-            <p>უკვე ხართ ამ გვერდის მომხმარებელი? <a href="LogInPage.jsp">შედით თქვენს პროფილზე</a>.</p>
+            <p>Already have an account? <a href="LogInPage.jsp">Login</a>.</p>
         </div>
     </form>
     <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
@@ -119,8 +119,8 @@
         let rep_pwd = document.getElementById("psw-repeat").value;
 
         if(password != rep_pwd) {
-            alert( "\n" + "პაროლი და განმეორებით შეყვანილი პაროლი არ ემთხვევა" + "\n" +
-                   "\n" + "გთხოვთ გადაამოწმოთ შეყვანილი მონაცემები");
+            alert( "\n" + "Passwords Do not match" + "\n" +
+                   "\n" + "Please make sure they are identical");
             return;
         }
     }

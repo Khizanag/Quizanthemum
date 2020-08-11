@@ -51,3 +51,53 @@ create table questions(
                           answer_14 varchar(64),
                           answer_15 varchar(64)
 )CHARSET=utf8;
+
+-- default questions
+
+--
+insert into questions values (null, 3, true, 1, 'choose one', 'London is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+                              'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'UK', null, null, null, null, null, null, null,
+                              null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'tbilisi is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+                              'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'Georgia', null, null, null, null, null, null, null,
+                              null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Moscow is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+                              'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'Russia', null, null, null, null, null, null, null,
+                              null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Washington D.C. is capital city of ...', null, '', '', sysdate(), 4, false, 4, 'UK', 'Georgia',
+                              'USA', 'Russia', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'USA', null, null, null, null, null, null, null,
+                              null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'which NBA player is this',
+                              'https://static01.nyt.com/images/2020/06/10/us/politics/10lebron-voters/merlin_164934105_7183e555-c1e0-4248-aba9-fc36ba5f9dc7-superJumbo.jpg?quality=90&auto=webp',
+                              '', '', sysdate(), 5, true, 2, 'LeBron James', 'Kevin Durant', 'Russell WestBrook', 'Stephen Curry', null, null, null,
+                              null, null, null, null, null, null, null, null, null, false, 1, 'LeBron James', null, null, null, null, null, null, null, null, null, null, null, null, null,
+                              null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'which NBA player is this',
+                              'https://davihundotcom.files.wordpress.com/2016/07/durant-a-warroir.jpg',
+                              '', '', sysdate(), 5, true, 2, 'LeBron James', 'Kevin Durant', 'Russell WestBrook', 'Stephen Curry', null, null, null,
+                              null, null, null, null, null, null, null, null, null, false, 1, 'Kevin Durant', null, null, null, null, null, null, null, null, null, null, null, null, null,
+                              null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Who won FIFA world cup in 2018?', null, '', '', sysdate(), 6, false, 4, 'England',
+                              'France', 'Germany', 'Brazil', null, null, null, null, null, null, null, null, null, null, null, null, false, 1, 'France', null, null, null, null,
+                              null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Which player is this?',
+                              'https://i.pinimg.com/originals/db/6e/48/db6e485386653b3b1ea3b6fbf5dfcf33.jpg',
+                              '', '', sysdate(), 6, true, 4, 'Leonel Messi', 'Ronaldinho', 'David Backham', 'Andres Iniesta', null, null, null, null, null,
+                              null, null, null, null, null, null, null, false, 1, 'Ronaldinho', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Who scored the only goal in FIFA World Cup 2010 Final game:', null, '', '',
+                              sysdate(), 6, false, 4, 'Leonel Messi', 'Ronaldinho', 'David Backham', 'Andres Iniesta',null, null, null, null, null, null, null,
+                              null, null, null, null, null, false, 1, 'Andres Iniesta',null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+
+insert into questions values (null, 3, true, 1, 'choose one', 'Which Premier League team is this?',
+                              'https://s.hs-data.com/bilder/teamfotos/640x360/544.jpg',
+                              '', '', sysdate(), 6, true, 4, 'Chelsea', 'Everton', 'Liverpool', 'Manchester United', null, null, null,
+                              null, null, null, null, null, null, null, null, null, false, 1, 'Chelsea', null, null, null, null, null, null, null, null, null, null, null, null, null,
+                              null, null);

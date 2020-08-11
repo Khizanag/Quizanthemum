@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="/web/styles/breakpoints.css">
     <link rel="stylesheet" href="/web/styles/profilePage.css">
     <link rel="stylesheet" href="/web/styles/quizCreation.css">
-    <link rel="stylesheet" href="/web/styles/scroll.css">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -40,37 +39,11 @@
     QuizManager quizManager = (QuizManager) managersManager.getManager(QUIZ_MANAGER_STR);
     List<Quiz> highestRated = quizManager.getHighestRatedQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
     List<Quiz> mostPopular = quizManager.getMostPopularQuizzes(DEFAULT_NUM_QUIZZES_TO_DISPLAY);
-    Collections.reverse(highestRated); // to draw in correct order
+//    Collections.reverse(highestRated); // to draw in correct order
     Collections.reverse(mostPopular); // to draw in correct order
 
 %>
-<style>
-    .section-header {
-        padding: 20px;
-    }
-    h3 {
-        color: #f07237;
-        font-size: xx-large;
-    }
-    .fa:hover {
-        color: white;
-    }
-    .toHover {
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-    .onHover {
-        position: absolute;
-        right: 65px;
-        bottom: 0;
-        display: none;
-    }
-    .toHover:hover + .onHover {
-        display: block;
-        color: white;
-    }
-</style>
+
 <body>
     <jsp:include page="/web/pages/PartPages/Header.jsp"/>
     <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
@@ -79,7 +52,7 @@
 
     <div class="highest-rated-section">
         <div class="container" style="position: relative; overflow: hidden">
-            <h3 class="section-header">მაღალ რეიტინგული ქვიზები</h3>
+            <h3 class="section-header">Highest Rated Quizzes</h3>
             <div class="scroll-block">
                 <% for(int i=0;i<highestRated.size();i++){ Quiz currQuiz = highestRated.get(i); %>
                 <div class="top-quiz-list-item" id="top_<%=i%>" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
@@ -120,7 +93,7 @@
 
     <div class="just-added-section">
         <div class="container" style="position: relative; overflow: hidden">
-            <h3 class="section-header">პოპულარული ქვიზები</h3>
+            <h3 class="section-header">Popular Quizzes</h3>
             <div class="scroll-block">
                 <% for(int i=0;i<mostPopular.size();i++){ Quiz currQuiz = mostPopular.get(i); %>
                 <div class="top-quiz-list-item" id="popular_<%=i%>" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
@@ -178,7 +151,7 @@
 
     function scrollRightTop(numElems) {
         topRight = numElems-1;
-        if(topRight != topLeft+3) {
+        if(topRight != topLeft+3 && numElems > 4) {
             document.getElementById('top_' + topLeft).style.display = 'none';
             topLeft++;
         }
@@ -195,7 +168,7 @@
 
     function scrollRightJustAdded(numElems) {
         popularRight = numElems-1;
-        if(popularRight != popularLeft+3) {
+        if(popularRight != popularLeft+3 && numElems > 4) {
             document.getElementById('popular_' + popularLeft).style.display = 'none';
             popularLeft++;
         }
@@ -209,3 +182,104 @@
         form.submit();
     }
 </script>
+
+<style>
+    .section-header {
+        padding: 20px;
+    }
+    h3 {
+        color: #f07237;
+        font-size: xx-large;
+        font-family: Helvetica;
+    }
+    .fa:hover {
+        color: white;
+    }
+    .toHover {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    .onHover {
+        position: absolute;
+        right: 65px;
+        bottom: 0;
+        display: none;
+    }
+    .toHover:hover + .onHover {
+        display: block;
+        color: white;
+    }
+    .scroll-block {
+        display: flex;
+        height: 500px;
+    }
+
+    .quiz-list-small-description-block{
+        width:350px;
+        height:100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+        overflow: hidden;
+        margin-left: 15px;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+    .quiz-list-small-description-block h3{
+        margin-top: 5%;
+    }
+    .quiz-list-small-description-block h3{
+        cursor: pointer;
+        color:wheat;
+    }
+    .quiz-small-description {
+        margin-top: 5px;
+        overflow: hidden;
+        height: 90px;
+        font-size: 14px;
+    }
+    .quiz-list-small-description-block p{
+        color: white;
+    }
+    .top-quiz-list-item {
+        margin: 15px;
+        width: 282px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        cursor: pointer;
+        align-items: center;
+        align-content: center;
+        transition: transform .2s;
+        border: 1px solid #ff751a;
+    }
+    .top-quiz-list-item:hover{
+        transform: scale(1.1);
+    }
+
+    .quiz-list-small-image{
+        width: 100%;
+        height: 60%;
+    }
+
+    .scroll-arrow {
+        text-align: center;
+        width: 60px;
+        cursor: pointer;
+        background-color: #f07237;
+        position: absolute;
+        border-radius: 50%;
+        border: none;
+    }
+    .leftarr {
+        left: 0;
+        top: 45%;
+    }
+    .rightarr {
+        right: 0;
+        top: 45%;
+    }
+</style>

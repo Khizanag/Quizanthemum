@@ -123,7 +123,7 @@ public class QuestionEvent {
             }
         }
         isAlreadyGraded = true;
-        userScore = question.getMaxScore() * correctAnswersNum / question.getStatementsCount();
+        userScore = question.getMaxScore() * correctAnswersNum / question.getAnswersCount();
 
     }
 
