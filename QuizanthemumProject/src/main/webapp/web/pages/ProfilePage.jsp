@@ -29,6 +29,7 @@
 
     <jsp:include page="/web/pages/LogedInHandler.jsp"/>
     <%
+        User loggedInUser = (User) request.getServletContext().getAttribute("logedInUser");
         ServletContext context = request.getServletContext();
         ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
         UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
@@ -68,7 +69,6 @@
                        onchange="loadFile(event)"
                        style="display: none;"
                 >
-                <%--                <label class="button upload upl-btn" type="button" for="file">upload image</label>--%>
                 <input type="text" placeholder="Image URL" name="photo-url" id="photo-url" required style="width:100%">
                 <label class="button upload" type="button"
                        onclick="uploadImage(event)" id="url-button" style="width:100%">
@@ -111,10 +111,16 @@
             </div>
         </div>
         <div class="profile-info">
-            <img class="profile-picture-big" id="prof-pic-big-id"
+            <%if(loggedInUser.getID() == user.getID()) {%>
+                <img class="profile-picture-big" id="prof-pic-big-id"
                  src="<%=usersManager.getProfilePicture(user.getID())%>"
                  onerror="this.src='/web/images/common/defProfPic.jpg';">
-            <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
+                <button class="changeImageHoverBtn" onclick="changeImage()">change image</button>
+            <%} else {%>
+                <img src="<%=usersManager.getProfilePicture(user.getID())%>"
+                     onerror="this.src='/web/images/common/defProfPic.jpg';"
+                     style="width: 250px; height: 250px; border-radius: 50%">
+            <%}%>
             <div class="profile-name"><%=user.getUsername()%>
             </div>
             <%

@@ -5,6 +5,7 @@
 <%@ page import="Model.Managers.QuizManager" %>
 <%@ page import="Model.Managers.ManagersManager" %>
 <%@ page import="static Configs.Config.*" %>
+<%@ page import="static Configs.AchievementTypes.NO_ACHIEVEMENT" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="UTF-8">
@@ -46,6 +47,7 @@
 <body>
     <jsp:include page="/web/pages/PartPages/Header.jsp"/>
     <jsp:include page="/web/pages/PartPages/MenuBar.jsp"/>
+    <jsp:include page="/web/pages/PartPages/AchivementPopUp.jsp"/>
 
     <%
         if(request.getServletContext().getAttribute("quiz-that-was-created-lastly") != null){ %>
@@ -61,7 +63,15 @@
         UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
         Quiz quiz = quizManager.getQuiz(Integer.parseInt(request.getParameter("id")));
         User user = (User) request.getServletContext().getAttribute(LOGGED_IN_USER);
+        int achievementType = (Integer) request.getServletContext().getAttribute("achievementType");
     %>
+
+    <%if(achievementType != NO_ACHIEVEMENT) {%>
+        <script>
+            document.getElementById("achievement-popup-id").classList.toggle("active");
+        </script>
+    <%}%>
+
     <form class="start-quiz-section" action="/QuizEventStart" method ="get">
         <div class="container">
             <div class="start-quiz-holder">

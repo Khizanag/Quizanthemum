@@ -29,7 +29,6 @@
                 <div class="close-btn" onclick="popUpFriendsList()">&times;</div>
                 <h1 style="color:orange">Friends</h1>
                 <br>
-
                 <%
                     for(int friendID : user.getFriendIDs()){
                         User friend = usersManager.getUser(friendID); %>
@@ -43,14 +42,8 @@
 <%--                                <button class="remove-btn" onclick="rejectFriendRequest(<%=friend.getID()%>,this)" style="color: red">Reject</button>--%>
 <%--                            </div>--%>
                         </div>
-
-
-
                     <% }
                 %>
-
-
-
             </div>
         </div>
 

@@ -1,6 +1,7 @@
 package Controller.Servlets.QuizServlets;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,9 @@ public class QuizServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext context = request.getServletContext();
+        int type = -1;
+        context.setAttribute("achievementType", type);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/web/pages/QuizPage.jsp");
         dispatcher.forward(request, response);
     }

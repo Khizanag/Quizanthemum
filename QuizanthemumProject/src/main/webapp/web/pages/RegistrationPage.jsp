@@ -26,6 +26,21 @@
     %>
 </head>
 
+<style>
+    .input-item {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    .combo-item {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        margin-right: 20px;
+    }
+
+</style>
+
 <body style="padding:0px; margin:0px; font-family:arial,helvetica,sans-serif,verdana,'Open Sans'">
 
     <jsp:include page="/web/pages/PartPages/Header.jsp"/>
@@ -43,56 +58,76 @@
                 }
             %>
             <div class="input-items">
+                <div class="input-item">
+                    <div class="combo-item">
+                        <label><b>First Name</b></label>
+                        <input type="text" placeholder="Enter your name"
+                               name="registration_first_name" id="registration_first_name" required>
+                    </div>
+
+                    <div class="combo-item">
+                        <label><b>Last Name</b></label>
+                        <input type="text" placeholder="Enter your last name"
+                               name="registration_last_name" id="registration_last_name" required>
+                    </div>
+                </div>
+
+                <div style="width: 30%">
+                    <label><b>Birth Date</b></label>
+                    <input type="date" name="registration_birth_date"
+                           value="2000-01-01" id="registration_birth_date"
+                            min= "1980-01-01" max="2020-01-01">
+                </div>
 
                 <div class="input-item">
-                    <label><b>First Name</b></label>
-                    <input type="text" placeholder="Enter your name"
-                           name="registration_first_name" id="registration_first_name" required
-                    >
-                    <label><b>Last Name</b></label>
-                    <input type="text" placeholder="Enter your last name"
-                           name="registration_last_name" id="registration_last_name" required
-                    >
+                    <div class="combo-item">
+                        <label for="registration_country"><b>Country</b></label>
+                        <input type="text" list="registration_country" placeholder="Enter your Country...">
+                        <datalist class="drop-down" name="registration_country" id="registration_country" value="Georgia">
+                            <% for(Country country : countries){ %>
+                            <option value="<%=country.getName()%>"></option>
+                            <% } %>
+                        </datalist>
+                    </div>
+
+                    <div class="combo-item">
+                        <label><b>City</b></label>
+                        <input type="text" placeholder="Enter your City..." name="registration_city" id="registration_city" required>
+                    </div>
                 </div>
 
-                <div class="input-item" style="width: 30%">
-                <label><b>Birth Date</b></label>
-                <input type="date" name="registration_birth_date"
-                       value="2000-01-01" id="registration_birth_date"
-                        min= "1980-01-01" max="2020-01-01">
+                <div class="input-item">
+                    <div class="combo-item">
+                        <label><b>USERNAME</b></label>
+                        <input type="text" placeholder="Enter  your username..."
+                               name="registration_username" id="registration_username" required>
+                    </div>
+
+                    <div class="combo-item">
+                        <label><b>E-mail</b></label>
+                        <input type="email" placeholder="Enter email" name="registration_email"
+                               id="registration_email" required>
+                    </div>
                 </div>
 
+                <div class="combo-item" style="width: 82%">
+                    <label><b>Phone Number</b></label>
+                    <input type="tel" placeholder="Enter your phone number..." name="registration_phone"
+                           id="registration_phone" required>
+                </div>
+                <div class="input-item">
+                    <div class="combo-item">
+                        <label><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password"
+                               name="registration_password" id="registration_password" required>
+                    </div>
 
-                <label for="registration_country"><b>Country</b></label>
-                <input type="text" list="registration_country" placeholder="Enter your Country...">
-                <datalist class="drop-down" name="registration_country" id="registration_country" value="Georgia">
-                    <% for(Country country : countries){ %>
-                    <option value="<%=country.getName()%>"></option>
-                    <% } %>
-                </datalist>
-
-                <label><b>City</b></label>
-                <input type="text" placeholder="Enter your City..." name="registration_city" id="registration_city" required>
-
-                <label><b>USERNAME</b></label>
-                <input type="text" placeholder="Enter  your username..."
-                       name="registration_username" id="registration_username" required>
-
-                <label><b>E-mail</b></label>
-                <input type="email" placeholder="Enter email" name="registration_email"
-                       id="registration_email" required>
-
-                <label><b>Phone Number</b></label>
-                <input type="tel" placeholder="Enter your phone number..." name="registration_phone"
-                       id="registration_phone" required>
-
-                <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password"
-                       name="registration_password" id="registration_password" required>
-
-                <label for="psw-repeat"><b>Repeat Password</b></label>
-                <input type="password" placeholder="Please Enter Password Again"
-                       name="psw-repeat" id="psw-repeat" required>
+                    <div class="combo-item">
+                        <label for="psw-repeat"><b>Repeat Password</b></label>
+                        <input type="password" placeholder="Please Enter Password Again"
+                               name="psw-repeat" id="psw-repeat" required>
+                    </div>
+                </div>
             </div>
             <hr>
             <p>Create new profile means that you agree to our Terms&Conditions

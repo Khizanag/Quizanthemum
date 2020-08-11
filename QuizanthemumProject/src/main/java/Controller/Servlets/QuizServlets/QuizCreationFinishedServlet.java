@@ -43,35 +43,41 @@ public class QuizCreationFinishedServlet extends HttpServlet {
         }
 
         quiz.finishCreatingQuiz();
-        addAchievement(quiz.getAuthor().getID(), usersManager, managersManager);
 
         context.removeAttribute(QUIZ_CREATING_NOW);
 
         context.setAttribute(LAST_CREATED_QUIZ, quiz);
+
+        int achievementType = addAchievement(quiz.getAuthor().getID(), usersManager, managersManager);
+        context.setAttribute("achievementType", achievementType);
 
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         response.setHeader("Location", "http://localhost:8080/Quiz?id=" + ID);
 
     }
 
-    private void addAchievement(int writerID, UsersManager usersManager, ManagersManager managersManager) {
+    private int addAchievement(int writerID, UsersManager usersManager, ManagersManager managersManager) {
         AchievementEventsManager achievementEventsManager = (AchievementEventsManager) managersManager.getManager(ACHIEVEMENT_EVENTS_MANAGER_STR);
         int numQuizzesCreated = usersManager.getQuizzesMadeCount(writerID);
         AchievementEvent newAchievementEvent;
+        int toReturn = -1;
         switch (numQuizzesCreated) {
             case 5:
                 newAchievementEvent = new AchievementEvent(-1, KNOWLEDGE_SPREADER_BRONZE, writerID, new Date());
+                toReturn = KNOWLEDGE_SPREADER_BRONZE;
                 break;
             case 15:
                 newAchievementEvent = new AchievementEvent(-1, KNOWLEDGE_SPREADER_SILVER, writerID, new Date());
+                toReturn = KNOWLEDGE_SPREADER_SILVER;
                 break;
             case 30:
                 newAchievementEvent = new AchievementEvent(-1, KNOWLEDGE_SPREADER_GOLD, writerID, new Date());
+                toReturn = KNOWLEDGE_SPREADER_GOLD;
                 break;
             default:
-                return;
+                return NO_ACHIEVEMENT;
         }
-
         achievementEventsManager.insertAchievementEvent(newAchievementEvent);
+        return toReturn;
     }
 }
