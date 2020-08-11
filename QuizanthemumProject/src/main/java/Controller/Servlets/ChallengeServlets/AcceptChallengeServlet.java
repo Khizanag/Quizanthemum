@@ -25,11 +25,14 @@ public class AcceptChallengeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ManagersManager managersManager = (ManagersManager) request.getServletContext().getAttribute(MANAGERS_MANAGER_STR);
         ChallengesManager challengesManager = (ChallengesManager) managersManager.getManager(CHALLENGE_MANAGER_STR);
+        System.out.println("id = " + request.getParameter("id"));
         int challengeID = Integer.parseInt(request.getParameter("id"));
         Challenge challenge = challengesManager.getChallenge(challengeID);
-        request.setAttribute("is-challenge-accept", true);
+        request.getSession().setAttribute("challenge-id", challengeID);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/Quiz?id=" + challenge.getQuizID());
-        dispatcher.forward(request, response);
+//        request.setAttribute("challenge-id", challengeID);
+
+        response.setStatus(HttpServletResponse.SC_FOUND);//302
+        response.setHeader("Location", "http://localhost:8080/Quiz?id=" + challenge.getQuizID());
     }
 }

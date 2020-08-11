@@ -197,6 +197,11 @@
                         }
                     %>
                     <% if(!quizManager.isRatedBy(quiz.getID(), user.getID()) && !quizEvent.isPracticeMode()){%>
+                    <% if(quizEvent.getChallenge() != null && quizEvent.getChallenge().getWinnerUserID() == user.getID()){ %>
+                        <h2>Congragulations, you have won the challenge against <%=quizEvent.getChallenge().getChallengerUser().getUsername()%></h2>
+                    <% } else { %>
+                        <h2>Unfortunately, you have lost the challenge against <%=quizEvent.getChallenge().getChallengerUser().getUsername()%></h2>
+                    <% } %>
                     <button class="back-to-prof-page" onclick="showGrading()">
                         Go to Rating
                     </button>
@@ -209,6 +214,7 @@
             </div>
         </div>
     </div>
+
 <jsp:include page="/web/pages/PartPages/Footer.jsp"/>
 </body>
 

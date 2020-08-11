@@ -104,18 +104,19 @@ public class Challenge implements Config {
     public QuizEvent getChallengerQuizEvent() {
         if(challengerQuizEvent == null) {
             QuizEventManager quizEventManager = (QuizEventManager) manager.getManager().getManager(QUIZ_EVENT_MANAGER_STR);
-            challengerQuizEvent = quizEventManager.getQuizEvent(challengerUserID);
+//            System.out.println("challengerUserID : " + challengerUserID);
+            challengerQuizEvent = quizEventManager.getQuizEvent(challengerQuizEventID);
         }
         return challengerQuizEvent;
     }
 
     public QuizEvent getChallengedQuizEvent() {
-        if(challengerQuizEvent == null) {
-            System.out.println("challengerQuizEvent is null in getChallengedQuizEvent");
+        if(challengedQuizEvent == null) {
+//            System.out.println("challengedQuizEvent is null in getChallengedQuizEvent");
             QuizEventManager quizEventManager = (QuizEventManager) manager.getManager().getManager(QUIZ_EVENT_MANAGER_STR);
-            challengedQuizEvent = quizEventManager.getQuizEvent(challengedUserID);
+            challengedQuizEvent = quizEventManager.getQuizEvent(challengedQuizEventID);
         }
-        System.out.println("return challengedQuizEvent");
+//        System.out.println("return challengedQuizEvent");
         return challengedQuizEvent;
     }
 

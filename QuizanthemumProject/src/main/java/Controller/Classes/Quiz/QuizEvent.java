@@ -68,6 +68,10 @@ public class QuizEvent {
 
     public void setID(int ID){ this.id = ID; }
 
+    public void setChallenge(Challenge challenge){
+        this.challenge = challenge;
+    }
+
 
     /* public methods */
 

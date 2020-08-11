@@ -59,7 +59,18 @@ public class QuizEventStartServlet extends HttpServlet {
             quizEvent.shuffleQuestions();
         }
         quizEvent.startQuiz();
+        int challengeID = DEFAULT_ID;
+        if(request.getSession().getAttribute("challenge-id") != null)
+            challengeID = (int) request.getSession().getAttribute("challenge-id");
+        request.getSession().removeAttribute("challenge-id");
 
+        System.out.println("challenge id " + challengeID);
+
+        if(challengeID != DEFAULT_ID){
+            challenge = challengesManager.getChallenge(challengeID);
+            challenge.accept();
+            quizEvent.setChallenge(challenge);
+        }
         request.getServletContext().setAttribute("quiz_event", quizEvent);
         response.setStatus(HttpServletResponse.SC_FOUND);//302
         if (quizEvent.hasNextQuestion()) {
@@ -70,7 +81,6 @@ public class QuizEventStartServlet extends HttpServlet {
             int type = nextQuestionEvent.getType();
             response.setHeader("Location", getNextQuestionLink(type));
         } else {
-//            System.out.println("QuzEventStartedSertvelt -> 0 questions -> quizEventFinished");
             response.setHeader("Location", "http://localhost:8080/QuizEventFinished");
         }
 

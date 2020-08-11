@@ -188,7 +188,7 @@
                     && loggedUser != null
                     && loggedUser.getID() != user.getID()
                     && friendRequestsManager.isWaitingFriendRequestSent(user.getID(), loggedUser.getID())) {
-            System.out.println("pzdc");
+//            System.out.println("pzdc");
             FriendRequest friendRequest = friendRequestsManager.getFriendRequest(loggedUser.getID(), user.getID()); %>
         <div class="container">
             <form id="accept-friend-request-form-in-profile-page" action="/AcceptFriendRequest" method="get" style="text-align: center;">
