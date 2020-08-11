@@ -34,6 +34,7 @@
     ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
     AchievementsManager achievementsManager = (AchievementsManager) managersManager.getManager(ACHIEVEMENTS_MANAGER_STR);
 
+
     int achievementType = (Integer) context.getAttribute("achievementType");
     Achievement currAchievement = achievementsManager.getAchievement(achievementType);
 %>

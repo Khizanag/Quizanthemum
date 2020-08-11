@@ -61,7 +61,7 @@
             <div class= "top-quiz-list-items">
             <% for(Quiz currQuiz: quizzes){ %>
                 <div class="top-quiz-list-item" onclick="redirectToQuizStart(<%=currQuiz.getID()%>)">
-                        <img style="margin-left: 5" class= "quiz-list-small-image"
+                        <img style="margin-left: 5px" class= "quiz-list-small-image"
                              src="<%=currQuiz.getIconUrl()%>"
                              onerror="this.src='/web/images/common/Quiz1.jpg';">
                         <div class= "quiz-list-small-description-block" style="position: relative">
