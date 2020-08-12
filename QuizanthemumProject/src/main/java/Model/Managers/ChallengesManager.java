@@ -46,19 +46,25 @@ public class ChallengesManager implements ChallengesTableConfig {
     }
 
     public Challenge getChallenge(int ID) {
-        String query = "SELECT * "
+        String query = "SELECT *  "
                 + " FROM " + CHALLENGES_TABLE_NAME
                 + " WHERE " + CHALLENGES_TABLE_COLUMN_1_ID + " = " + ID + ";";
+        System.out.println("CHALLENGE QUERY : " + query);
+        Challenge challenge = null;
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if(resultSet.next()){
-                Challenge challenge =  buildChallenge(resultSet);
+                 challenge =  buildChallenge(resultSet);
             }
             resultSet.close();
             statement.close();
-        } catch (SQLException throwables) { }
-        return null;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if(challenge == null)
+            System.out.println("challenge is null in manager");
+        return challenge;
 
     }
 
@@ -100,9 +106,20 @@ public class ChallengesManager implements ChallengesTableConfig {
     }
 
     public void commitChallengeAccept(Challenge challenge) {
-//        String query = "UPDATE " + CHALLENGES_TABLE_NAME
-//                + " SET "
-//                + "     " + CHALLE
+        System.out.println("commitChallengeAccept");
+        String query = "UPDATE " + CHALLENGES_TABLE_NAME
+                + " SET "
+                + "     " + CHALLENGES_TABLE_COLUMN_7_IS_FINISHED + " = true"
+                + ",     " + CHALLENGES_TABLE_COLUMN_8_WINNER_USER_ID + " = " + challenge.getWinnerUserID()
+                + " WHERE " + CHALLENGES_TABLE_COLUMN_1_ID + " = " + challenge.getID();
+        System.out.println("!!!query : " + query);
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            statement.close();
+        } catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
     }
 
     public void deleteChallenge(int challengeID) {

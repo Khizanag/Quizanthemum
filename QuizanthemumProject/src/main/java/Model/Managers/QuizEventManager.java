@@ -102,7 +102,7 @@ public class QuizEventManager implements QuestionEventTableConfig {
         String query = "SELECT " + QUIZ_EVENT_TABLE_COLUMN_1_ID
                 + " FROM " + QUIZ_EVENTS_TABLE_NAME
                 + " WHERE " + QUIZ_EVENT_TABLE_COLUMN_3_USER_ID + " = " + userID
-                + " ORDER BY " + QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE + " DESC "
+                + " ORDER BY " + QUIZ_EVENT_TABLE_COLUMN_5_FINISH_DATE + " ASC  "
                 + " LIMIT " + numRows + ";\n";
 
         List<QuizEvent> playedQuizzes = new ArrayList<>();

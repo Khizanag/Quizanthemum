@@ -3,7 +3,13 @@ CREATE TABLE categories(
                            name varchar(64)
 );
 
+select * from categories;
+
 -- insert default categories into database
+
+select* from categories;
+
+DELETE FROM categories where true;
 
 INSERT INTO categories VALUES (null, 'Biology');
 

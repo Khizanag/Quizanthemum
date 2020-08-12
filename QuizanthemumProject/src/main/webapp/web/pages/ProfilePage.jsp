@@ -187,19 +187,18 @@
     </form>
 </div>
 
-<% } else if (user != null
-        && loggedUser != null
-        && loggedUser.getID() != user.getID()
-        && friendRequestsManager.isWaitingFriendRequestSent(user.getID(), loggedUser.getID())) {
-    System.out.println("pzdc");
-    FriendRequest friendRequest = friendRequestsManager.getFriendRequest(loggedUser.getID(), user.getID()); %>
-<div class="container">
-    <form id="accept-friend-request-form-in-profile-page" action="/AcceptFriendRequest" method="get"
-          style="text-align: center;">
-        <input type="hidden" name="friend-request-id" value="<%=friendRequest.getID()%>">
-        <input type="submit" class="button finish" value="დაე, ვიმეგობროთ!" style="width: 80%">
-    </form>
-</div>
+    <% } else if(user != null
+                    && loggedUser != null
+                    && loggedUser.getID() != user.getID()
+                    && friendRequestsManager.isWaitingFriendRequestSent(user.getID(), loggedUser.getID())) {
+//            System.out.println("pzdc");
+            FriendRequest friendRequest = friendRequestsManager.getFriendRequest(loggedUser.getID(), user.getID()); %>
+        <div class="container">
+            <form id="accept-friend-request-form-in-profile-page" action="/AcceptFriendRequest" method="get" style="text-align: center;">
+                <input type="hidden" name="friend-request-id" value="<%=friendRequest.getID()%>">
+                <input type="submit" class="button finish" value="დაე, ვიმეგობროთ!" style="width: 80%">
+            </form>
+        </div>
 
 <% } %>
 
@@ -211,8 +210,8 @@
 <main class="main">
     <div class="top-quizzes-container">
         <div class="top-quiz-items">
+            <%System.out.println("zoma :" + achievements.size());%>
             <% for (AchievementEvent achievementEvent : achievements) { %>
-                <%System.out.println("zoma :" + achievements.size());%>
                 <%int currAchievementID = achievementEvent.getAchievementID();%>
                 <%Achievement currAchievement = achievementsManager.getAchievement(currAchievementID);%>
                 <div class="top-quiz-item" style="width: 545px;">

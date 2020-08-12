@@ -5,9 +5,9 @@ public interface LocalDatabaseConfig {
     String URL = "jdbc:mysql://localhost:3306/";
 
     //     gkhiz
-//    String USERNAME = "root";
-//    String PASSWORD = "paroli12345678";
-//    String DATABASE_NAME = "quizanthemum_schema";
+    String USERNAME = "root";
+    String PASSWORD = "paroli12345678";
+    String DATABASE_NAME = "quizanthemum_schema";
 
 //    // dbera
 //    String USERNAME = "dima";

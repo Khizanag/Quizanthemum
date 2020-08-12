@@ -12,3 +12,8 @@ create table quiz_events(
                             constraint foreign key (user_id)
                                 references users(id) on update cascade on delete restrict
 );
+
+select * from quiz_events;
+
+delete from question_events where quiz_event_id between 5 AND 8;
+delete from quiz_events where id between 5 AND 8;

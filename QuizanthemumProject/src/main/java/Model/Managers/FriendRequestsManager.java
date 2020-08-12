@@ -175,7 +175,17 @@ public class FriendRequestsManager implements Config, FriendRequestsTableConfig 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        System.out.println("******** isWaiting: " + toReturn);
         return toReturn;
+    }
+
+    public void cancelRequest(int id) {
+        String query = "DELETE FROM " + FRIEND_REQUESTS_TABLE_NAME + " WHERE " + FRIEND_REQUESTS_TABLE_COLUMN_1_ID + " = " + id;
+        try{
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            statement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
