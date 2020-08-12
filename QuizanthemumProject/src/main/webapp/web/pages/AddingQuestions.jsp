@@ -1,3 +1,7 @@
+<%@ page import="Model.Managers.ManagersManager" %>
+<%@ page import="static Configs.Config.*" %>
+<%@ page import="Model.Managers.UsersManager" %>
+<%@ page import="Controller.Classes.User.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="ka">
 <head>
@@ -12,6 +16,13 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 </head>
+
+<%
+    ServletContext context = request.getServletContext();
+    ManagersManager managersManager = (ManagersManager) context.getAttribute(MANAGERS_MANAGER_STR);
+    UsersManager usersManager = (UsersManager) managersManager.getManager(USERS_MANAGER_STR);
+    User loggedInUser = (User) request.getServletContext().getAttribute("logedInUser");
+%>
 
 <body>
 
@@ -36,8 +47,14 @@
                     <option value="6">Matching</option>
                 </select>
                 <div id="current-question-type"></div>
-                <button class="button finish" type="button" id="submit-button-id"
-                       onclick="redirectToQuizFinishedPage()">End Creation</button>
+                <%  int numAchievemets = usersManager.getQuizzesMadeCount(loggedInUser.getID()) + 1;
+                if (numAchievemets == 5 || numAchievemets == 15 || numAchievemets == 30) { %>
+                    <button class="button finish" type="button" id="submit-button-id"
+                           onclick="AlertANDredirectToQuizFinishedPage()">End Creation</button>
+                <%} else {%>
+                    <button class="button finish" type="button" id="submit-button-id"
+                            onclick="redirectToQuizFinishedPage()">End Creation</button>
+                <%}%>
             </div>
         </div>
     </div>
@@ -103,7 +120,7 @@
         }
 
         let parent = document.getElementById('added-wrongs');
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ სავარაუდო პასუხი" ' +
+        let toAdd = '<input type="text"  placeholder="Enter next answer" ' +
             'name="statement_' + numWrongAnswers + '" id="wrong-answer" required>';
         parent.innerHTML += toAdd;
         document.getElementById('num_statements_elem').value = numWrongAnswers + 1;
@@ -125,7 +142,7 @@
         }
 
         let parent = document.getElementById('added-correct');
-        let toAdd = '<input type="text"  placeholder="გთხოვთ შეუყვანოთ მორიგი სწორი პასუხი"' +
+        let toAdd = '<input type="text"  placeholder="Enter Next Correct Answer"' +
             ' name="answer_' + numCorrectAnswers + '" id="correct-answer" required>';
         parent.innerHTML += toAdd;
         document.getElementById('num_answers_elem').value = numCorrectAnswers + 1;
@@ -175,7 +192,13 @@
         document.getElementById("fillWith").value = '';
     }
 
-    function redirectToQuizFinishedPage(){
+    function redirectToQuizFinishedPage() {
+        window.location.href = "/QuizCreationFinished";
+    }
+
+    function AlertANDredirectToQuizFinishedPage() {
+        alert("New Achievement Unloced\n\n" +
+            "Check Profile To See Achievement");
         window.location.href = "/QuizCreationFinished";
     }
 
