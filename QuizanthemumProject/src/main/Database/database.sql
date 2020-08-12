@@ -206,6 +206,8 @@ create table friendships(
                             make_friend_date date
 );
 
+
+
 -- ****************************************** FRIEND_REQUESTS ******************************************
 
 create table friend_request(
@@ -221,9 +223,6 @@ create table friend_request(
     is_received boolean not null,
     is_accepted boolean not null
 );
-
-drop table friend_request;
-
 
 
 # *******************************************  CHALLENGES  ******************************************

@@ -14,7 +14,6 @@ create table achievement_events(
 -- default achievement_events
 select * from achievement_events;
 
-delete FROM achievement_events where true;
-
 insert into achievement_events values(null, 1, 3, sysdate());
 
+delete FROM achievement_events where true;
